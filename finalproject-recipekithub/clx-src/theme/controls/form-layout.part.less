@@ -1,25 +1,38 @@
-@import "../settings.part.less";
+@import "../custom-settings.part.less";
 
+/**********************************
+ 폼 레이아웃
+ **********************************/
+ 
 /* 컬럼 음영 스타일 */
 .cl-formlayout-column-shade {
+	background-color: @form-column-shade-background-color;
 }
 
 /* 행 음영 스타일 */
 .cl-formlayout-row-shade {
+	background-color: @form-row-shade-background-color;
 }
 
 
 /* 구분 선 스타일 */
 .cl-formlayout-vertical-separator,
 .cl-formlayout-horizontal-separator {
+	background-color: @form-separator-background-color;
 }
 
-/* 폼 그룹 스타일 */
 .cl-form-group {
-	border: solid 1px #cccccc;
+	background-color: @form-background-color;
+	border: @form-border-base;
+	border-radius: @form-border-radius;
+	
+	&.cl-output.label {
+		font-weight: @font-weight-medium;
+	}
 }
 
-/* 경량 리사이저 스타일 */
+/* 리사이즈 스타일 */
 .cl-formlayout-vertical-lightweight-resizer,
 .cl-formlayout-horizontal-lightweight-resizer {
+	background-color: @form-lightweight-resizer;
 }

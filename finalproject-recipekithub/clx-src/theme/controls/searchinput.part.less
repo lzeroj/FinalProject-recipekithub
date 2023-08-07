@@ -1,85 +1,89 @@
-@import "../settings.part.less";
+@import "../custom-settings.part.less";
 
-/* 서치 인풋 */
+ /* 서치 인풋 */
 .cl-searchinput {
-	font: @default-font;
-	color: @default-text-color;
-	border: 1px solid @default-border-color;
-	text-align: left;
+	font: @font-base;
+	color: @input-text-color;
+	border: @input-border-base;
+	border-radius: @input-border-radius;
+	background-color: @input-background-color;
+	background-image: @input-background-image;
+	transition: @transition-base;
 
 	/* 서치 인풋 텍스트 */
-	.cl-text {}
-
-	/* 서치 인풋 클리어 버튼 */
-	.cl-searchinput-clear {
-		// background-image: url(icons/clear-button.png);
-		// background-repeat: no-repeat;
-		// background-size: contain;
-		// background-position: center;
-		// align-self: center;
-
-		// cursor:pointer;
-		&:hover {
+	.cl-text {
+		padding: @input-padding-0 @input-padding-x;
+		
+		&.cl-placeholder {
+			color: @input-placeholder-text-color !important;
 		}
+	}
+
+	/* 서치 인풋 Clear버튼 */
+	.cl-searchinput-clear{
+		background-image: url(images/controls/input/icon-close.png);
+		background-size: 16px;
+		width: 20px;
 	}
 
 	/* 서치 인풋 검색버튼 */
 	.cl-searchinput-search {
-		// background-image: url(icons/search-button.png);
-		// background-repeat: no-repeat;
-		// background-size: contain;
-		// background-position: center;
-		// align-self: center;
-		// cursor:pointer;
-
-		/* 검색버튼이 왼쪽에 표시될때 스타일 */
+		background-image: url(images/controls/input/icon-search.png);
+		background-size: 16px;
+		width: calc(@input-padding-x + 12px); // padding + image size ( - image padding ) <-- 4px
+		
 		&.cl-left {
+			background-position: right center;
 		}
-
-		/* 검색버튼이 오른쪽에 표시될때 스타일 */
+		
 		&.cl-right {
-		}
-
-		/* 검색버튼 - hover */
-		&:hover {
+			background-position: left center;
 		}
 	}
 
-	/* 비활성화 */
-	&.cl-disabled {
-
+	&.cl-disabled{
+		/* 서치 인풋 disabled 상태 Clear버튼 */
+		.cl-searchinput-clear{
+			 background-image: url(images/controls/input/icon-close-disabled.png);
+		}
+		/* 서치 인풋 disabled 상태 검색버튼 */
 		.cl-searchinput-search {
-			// background-image: url(icons/search-button-disabled.png);
+			 background-image: url(images/controls/input/icon-search-disabled.png);
 		}
 	}
+	
+	&:not(.cl-disabled):hover {
+		.cl-searchinput-clear{
+			background-image: url(images/controls/input/icon-close.png);
+		}
+	
+		.cl-searchinput-search{
+			background-image: url(images/controls/input/icon-search.png);
+		}
+	}
+}
 
-	&:not(.cl-disabled) {
+/* 서치 인풋 disabled 상태 */
+.cl-searchinput.cl-disabled {
+	color: @input-disabled-text-color;
+	background-color: @input-disabled-background-color;
+	border-color: @input-disabled-border-color;
 
-		/* 클리어 버튼 - hover */
-		.cl-searchinput-clear:hover {}
+	/* 서치 인풋 disabled 상태 텍스트*/
+	input {
+		color : @input-disabled-text-color;
+	}
+}
 
-		/* 클리어 버튼 - active */
-		.cl-searchinput-clear:active {}
-
-		/* 검색버튼 - hover */
-		.cl-searchinput-search:hover {}
-
-		/* 검색버튼 - active */
-		.cl-searchinput-search:active {}
+/* 서치 인풋 포커스 상태 */
+.cl-searchinput.cl-focus {
+	border-color: @input-focus-border-color;
+	
+	.cl-searchinput-clear{
+		background-image: url(images/controls/input/icon-close.png);
 	}
 
-	&.cl-disabled {
-		color: @disabled-text-color;
-		background-color: @disabled-selection-background;
-		border-color: @disabled-border-color;
-	}
-
-	/* 서치 인풋 - 포커스 */
-	&.cl-focus {
-		border-color: @focus-border-color;
-
-		.cl-searchinput-search {}
-
-		.cl-searchinput-clear {}
+	.cl-searchinput-search{
+		background-image: url(images/controls/input/icon-search.png);
 	}
 }

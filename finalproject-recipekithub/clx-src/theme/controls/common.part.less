@@ -1,21 +1,22 @@
 @charset "UTF-8";
-@import "../settings.part.less";
+@import "../custom-settings.part.less";
 
 /* 모든 UIControl 공통 스타일 */
 .cl-control {
-	font: @default-font;
-	color: @default-text-color;
+	font: @font-base;
+	color: @component-text-color;
 }
 
 /* 오류 발생시 표시되는 메시지 스타일 */
 .cl-unavailable {
-	// border: 1px solid red;
+	 border: @border-width @border-style @danger;
+	 
 	.cl-text {
-		// color: red;
-		// font-weight: bold;
+		 color: @danger;
+		 font-weight: @font-weight-medium;
 	}
 	.cl-text:before {
-		// content: "X";
+		 content: "X";
 	}
 }
 
@@ -40,8 +41,4 @@
 	background-color: rgba(0,0,0,.3);
 	border: solid 1px transparent;
 	background-clip: content-box;
-}
-
-body.cl-has-modal {
-	overflow:hidden;
 }

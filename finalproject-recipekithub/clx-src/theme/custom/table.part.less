@@ -1,0 +1,69 @@
+@import "../custom-settings.part.less";
+
+.cl-grid.thead-dark {
+	.cl-grid-header {
+		background-color: @gray-600;
+		
+		.cl-grid-cell {
+			color: @white;
+			
+			.cl-control {
+				color: @white;
+			}
+		}
+		
+		.cl-blank {
+			// background-color: @gray-600;
+		}
+		
+		.cl-filter {
+			background-image: url(images/controls/grid/icon-filter2.png);
+			
+			&:hover {
+				 background-image: url(images/controls/grid/icon-filter-hover.png);
+			}
+
+			&.cl-filtered {
+				 background-image: url(images/controls/grid/icon-filter-on2.png);
+			}
+		}
+	}
+}
+
+.cl-grid.table-striped {
+	.cl-grid-detail {
+		.cl-grid-row {
+			&.cl-even-row {
+				background-color: @table-row-odd-background-color;
+				color: @table-row-odd-text-color;			
+			}
+		}
+	}
+}
+
+.cl-grid.table-borderless {
+	.cl-grid-cell {
+		border-right: none;
+	}
+}
+
+.cl-grid.table-hoverable {
+	.cl-grid-detail {
+		.cl-grid-row {
+			&.cl-hover, &:hover {
+				background-color: @table-row-hover-background-color;
+				color: @table-row-hover-text-color;
+			}
+		}
+	}
+}
+
+.cl-grid.table-autosize {
+	.cl-grid-detail {
+		.cl-grid-row:last-child {
+			.cl-grid-cell {
+				border-bottom: none;
+			}
+		}
+	}
+}

@@ -1,0 +1,47 @@
+@import "../custom-settings.part.less";
+
+.cl-container.card {
+	background-color: @white;
+	border-radius: @component-border-radius;
+	
+	.cl-output.card-title {
+		font-family: @headings-font-family;
+	  	font-weight: @headings-font-weight;
+	  	line-height: @headings-line-height-base;
+	  	color: @headings-color;
+	  	font-size: @h5-font-size;
+	}
+	
+	.cl-output.card-subtitle {
+		color: #8094ae;
+		font-family: @headings-font-family;
+		font-weight: @font-weight-regular;
+	  	line-height: @headings-line-height-base;
+		font-size: @h6-font-size;
+	}
+	
+	.cl-output.card-link {
+		color: #798bff;
+		text-decoration: none;
+		background-color: @transparent;
+		cursor: pointer;
+	}
+	
+	.cl-output.overline-title {
+		color: #364a63;
+		font-weight: @font-weight-medium;
+	}
+	
+	.card-header,
+	.card-footer {
+		background-color: rgba(0,0,0,0.07);
+	}
+}
+
+.card.card-bordered {
+	border: @component-border-base;
+}
+
+.card.card-bordered.dashed {
+	border-style: dashed;
+}

@@ -1,19 +1,26 @@
-@import "../settings.part.less";
+@import "../custom-settings.part.less";
 
- /* 콤보 박스 스타일 */
+ /* 콤보 박스 루트 */
 .cl-combobox {
-	font: @default-font;
-	color: @default-text-color;
-	border: 1px solid @default-border-color;
-	background-color: #fff;
+	font: @font-base;
+	color: @input-text-color;
+	border: @input-border-base;
+	border-radius: @input-border-radius;
+	background-color: @input-background-color;
+	transition: @transition-base;
 
-	/* 선택된 아이템의 아이콘 */
+	/*선택된 아이템의 아이콘*/
 	.cl-icon {
 	}
 
-	/* 텍스트 영역 스타일 */
 	.cl-text {
-		/* preventInput=true인 경우 */
+		padding: @input-padding-0 @input-padding-x;
+		
+		&.cl-placeholder {
+			color: @input-placeholder-text-color !important;
+		}
+		
+		/* preventInput속성일때 스타일*/
 		&.cl-preventinput {
 			
 		}
@@ -21,193 +28,119 @@
 
 	/* 콤보 박스 펼침 버튼 */
 	.cl-combobox-button {
-		// background-image: url(icons/chevron.png);
+		background-image: url(images/controls/combobox/icon-chevron-down.png);
+		background-position: left center;
+		background-size: 16px;
+		width: calc(@input-padding-x + 12px); // padding + image size ( - image padding ) <-- 4px
 	}
 
 	/* 포커스 상태 */
 	&.cl-focus {
-		border-color: @focus-border-color;
+		border-color: @input-focus-border-color;
 	}
 
-	/* 비활성화 상태 */
+	/* 콤보 박스 disabled 상태 */
 	&.cl-disabled {
-		border-color: @disabled-border-color;
-		background-color: @disabled-selection-background;
-		color: @disabled-text-color;
+		border-color: @input-disabled-border-color;
+		background-color: @input-disabled-background-color;
+		color: @input-disabled-text-color;
+		
+		.cl-combobox-button {
+			background-image: url(images/controls/combobox/icon-chevron-down-disabled.png);
+		}
 	}
 }
 
-	/* 콤보 박스의 리스트 스타일 */
+/* 콤보 박스 리스트 박스 */
 .cl-combobox-list {
-	font: @default-font;
-	border: 1px solid @focus-border-color;
-	color: @default-text-color;
+	font: @font-base;
+	background-color: @list-background-color;
+	border-color: @list-focus-border-color;
+	border-radius: @list-border-radius;
+	color: @list-text-color;
 
-	/* 리스트의 쉐도우 */
+	/*리스트박스의 쉐도우*/
 	&.cl-popup {
-		// box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, .3);
+		 box-shadow: @list-box-shadow;
 	}
-
+	
 	/* 콤보박스 위에 표시될때 상태 */
-	&.cl-top {}
-
+	&.cl-top {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		margin-bottom: -2px;
+	}
+	
 	/* 콤보박스 아래에 표시될때 상태 */
-	&.cl-bottom {}
-
-	/* 리스트의 최대 높이 */
+	&.cl-bottom {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		margin-top: -2px;
+	}
+	
+	/* 리스박스의 최대 높이*/
 	.cl-viewport{
 		//max-height:150px;
 	}
 	
-	/* 콤보박스 리스트 아이템 */
+	/* 콤보 박스 리스트 아이템 */
 	.cl-combobox-item {
-		//min-height: 30px;
+		height: @list-item-height;
 		
-		/* 아이템 체크박스 */
+		/* 콤보 박스 리스트 아이템 체크박스 */
 		.cl-checkbox{
-			// background-image: url(icons/checkbox.png);
+			background-image: url(images/controls/checkbox/icon-checkbox.png);
+			
+			&.cl-checked {
+				background-image: url(images/controls/checkbox/icon-checkbox-selected.png);
+			}
+		}
+		/* 콤보 박스 리스트 아이템 아이콘 */
+		.cl-icon {
+
+		}
+		/* 콤보 박스 리스트 아이템 텍스트 */
+		.cl-text {
 		}
 
-		/* 아이템 아이콘 */
-		.cl-icon {}
-
-		/* 아이템 텍스트 */
-		.cl-text {}
-
-		/* 선택 상태 */
+		/* 콤보 박스 리스트 아이템 - 선택 됨 */
 		&.cl-selected { 
-			background-color: @selection-background;
-			color: @selection-foreground;
+			background-color: @list-item-selected-background-color;
+			color: @list-item-selected-text-color;
 		}
 
-		/* 비활성화 상태 */
+		/* disabled 상태 콤보 박스 리스트 아이템 */
 		&.cl-disabled {
-			color: @disabled-text-color;
+			color: @list-item-disabled-text-color;
 
-			/* 비활성화 상태로 선택 */
+			/* disabled 상태에서 선택된 콤보 박스 리스트 아이템 */
 			&.cl-selected {
-				color: @disabled-selection-foreground;
-				background-color:  @disabled-selection-background;
+				color: @list-item-disabled-selected-text-color;
+				background-color:  @list-item-disabled-selected-background-color;
 			}
 		}
 
 		&:not(.cl-disabled) {
-			/* 호버 상태 */
+			/* 콤보 박스 리스트 아이템 - 호버 */
 			&:not(.cl-selected):hover, &:not(.cl-selected).cl-hover{
-				color: @hover-foreground;
-				background-color: @hover-background;
+				color: @list-item-hover-text-color;
+				background-color: @list-item-hover-background-color;
 			}
-		}
-
-		/* 콤보박스 트리 아이템 스타일 */
-		&.cl-treeitem {
-			// padding: 0px 10px 0px 0px;
-
-			/* 트리 아이콘 스타일 */
-			.cl-treeicon {
-				/*트리 확장 아이콘 스타일*/
-			}
-	
-			/* 체크 박스 스타일 */
-			.cl-checkbox {
-				// background-image: url(icons/checkbox.png);
-				
-				/* 체크 상태 */
-				&.cl-checked {
-					// background-image: url(icons/checkbox-selected.png);
-				}
-	
-				/* 부분 체크 상태 */
-				&.cl-partialchecked {
-					// background-image: url(icons/checkbox-partial-selected.png);
-				}
-			}
-
-			/* 텍스트 스타일 */
-			.cl-text {
-				// padding: 3px 0px 3px 4px;
-			}
-	
-			/* 트리 라인, 아이콘 */
-			.cl-line, .cl-treeicon, .cl-treeicon-line {
-				// padding: 3px 0px 3px 0px;
-			}
-	
-			/* 펼침 아이콘*/
-			&.cl-expanded .cl-treeicon {
-				// background-image: url('icons/node-expanded-black.png');
-			}
-
-			&.cl-expanded.cl-selected .cl-treeicon {
-				// background-image: url('icons/node-expanded-white.png');
-			}
-
-			/* 접음 아이콘 */
-			&.cl-collapsed .cl-treeicon {
-				// background-image: url('icons/node-collapsed-black.png');
-			}
-
-			&.cl-collapsed.cl-selected .cl-treeicon {
-				// background-image: url('icons/node-collapsed-white.png');
-			}
-
-			.cl-line {
-				// background-image: url('icons/tree-line.png');
-				
-			}
-			.cl-treeicon-line {
-				// background-image: url('icons/tree-line-child.png');
-			}
-
-			/* 마지막 아이템 */
-			&.cl-last{
-				.cl-treeicon-line {
-					// background-image: url('icons/tree-line-child-last.png');
-				}
-			}
-
-			/* 처음 아이템 */
-			&.cl-first{
-				.cl-treeicon-line {
-					// background-image: url('icons/tree-line-first.png');
-				}
-			}
-
-			&.cl-first.cl-last{
-				.cl-treeicon-line{
-					// background-image: url('icons/tree-line-first-last.png');
-				}
-			}
-		
 		}
 	}
-
-	/* 체크박스 다중선택 아이템 스타일 */
+	/*체크박스 다중선택 리스트박스 스타일*/
 	&.cl-multi-select{
 		.cl-combobox-item {
 			&:not(.cl-disabled){
 				&.cl-selected:hover{
-					color: @hover-foreground;
-					background-color: @hover-background;
+					color: @list-item-hover-text-color;
+					background-color: @list-item-hover-background-color;
 				}
 				&.cl-hover.cl-selected{
-					color: @hover-background;
-					background-color: @hover-foreground;
-				}
-			}
-			
-			&.cl-treeitem {
-				&.cl-expanded.cl-selected .cl-treeicon {
-					// background-image: url('icons/node-expanded-black.png');
-				}
-				
-				&.cl-collapsed.cl-selected .cl-treeicon {
-					// background-image: url('icons/node-collapsed-black.png');
+					background-color: @list-item-selected-background-color;
+					color: @list-item-selected-text-color;
 				}
 			}
 		}
-		
 	}
-
 }
-

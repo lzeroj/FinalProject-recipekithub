@@ -1,11 +1,12 @@
-@import "../settings.part.less";
+@import "../custom-settings.part.less";
 
-/* 아웃풋 */
+/* 아웃풋 */	
 .cl-output {
-	font: @default-font;
-	color: @default-text-color;
+	font: @font-base;
+	color: @input-text-color;
+	background-repeat: no-repeat;
 
 	&.cl-disabled{
-		color: @disabled-text-color;
+		color: @input-disabled-text-color;
 	}
 }

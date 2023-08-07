@@ -1,62 +1,94 @@
-@import "../settings.part.less";
+@import "../custom-settings.part.less";
 
-/* 알림 아이템 */
+/* 노티파이어 아이템 */
 .cl-notifier-item {
-	font: @default-font;
+	font: @font-base;
+	border-width: 0 0 0 4px;
+	border-radius: @alert-border-radius;
+	font-weight: @font-weight-medium;
+	padding: @alert-padding-y @alert-padding-x;
+	box-shadow: @alert-box-shadow;
+	
+	/* 노티파이어 아이템 텍스트 */
+	.cl-text {
+		padding-left: 5px;
+	}
 
-	/* 알림 아이템 텍스트 */
-	.cl-text {}
+	/* 노티파이어 아이템 아이콘 */
+	.cl-notifier-icon {
+		background-size: 24px 25px;
+		background-position: left center;
+		width: 25px;
+	}
 
-	/* 알림 아이템 아이콘 */
-	.cl-notifier-icon {}
-
-	/* 알림 아이템 닫기 버튼 */
+	/* 노티파이어 아이템 닫기 버튼 */
 	.cl-notifier-closebutton {
-		// background-image: url("icons/notifier-close.png");
+		 background-image: url(images/controls/notifier/icon-notifier-close.png);
+		 background-size: 14px 13px;
 	}
 
-	/* 알림 아이템 기본 스타일 */
+	/* 노티파이어 아이템 기본 스타일 */
 	&.cl-notifier-default {
-
-		/* 알림 아이템 기본 아이콘 */
+		background-color: @alert-default-background-color;
+		border-color: @alert-default-border-color;
+		color: @alert-default-text-color;
+		
+		/* 노티파이어 아이템 기본 아이콘 */
 		.cl-notifier-default-icon {
-			// background-image: url("icons/notifier-default.png");
+			 background-image: url(images/controls/notifier/icon-notifier-default.png);
+		}
+		
+		/* 노티파이어 아이템 닫기 버튼 */
+		.cl-notifier-closebutton {
+			 background-image: url(images/controls/notifier/icon-notifier-close2.png);
 		}
 	}
 
-	/* 알림 아이템 success 스타일 */
+	/* 노티파이어 아이템 success 스타일 */
 	&.cl-notifier-success {
+		background-color: @alert-success-background-color;
+		border-color: @alert-success-border-color;
+		color: @alert-success-text-color;
 
-		/* 알림 아이템 success 아이콘 */
+		/* 노티파이어 아이템 success 아이콘 */
 		.cl-notifier-success-icon {
-			// background-image: url("icons/notifier-success.png");
+			background-image: url(images/controls/notifier/icon-notifier-success.png);
 		}
 	}
 
-	/* 알림 아이템 info 스타일 */
+	/* 노티파이어 아이템 info 스타일 */
 	&.cl-notifier-info {
-
-		/* 알림 아이템 info 아이콘 */
+		background-color: @alert-info-background-color;
+		border-color: @alert-info-border-color;
+		color: @alert-info-text-color;
+		
+		/* 노티파이어 아이템 info 아이콘 */
 		.cl-notifier-info-icon {
-			// background-image: url("icons/notifier-info.png");
+			background-image: url(images/controls/notifier/icon-notifier-info.png);
 		}
 	}
-
-	/* 알림 아이템 warning 스타일 */
+	
+	/* 노티파이어 아이템 warning 스타일 */
 	&.cl-notifier-warning {
-
-		/* 알림 아이템 warning 아이콘 */
+		background-color: @alert-warning-background-color;
+		border-color: @alert-warning-border-color;
+		color: @alert-warning-text-color;
+		
+		/* 노티파이어 아이템 warning 아이콘 */
 		.cl-notifier-warning-icon {
-			// background-image: url("icons/notifier-warning.png");
+			background-image: url(images/controls/notifier/icon-notifier-warning.png);
 		}
 	}
-
-	/* 알림 아이템 danger 스타일 */
+	
+	/* 노티파이어 아이템 danger 스타일 */
 	&.cl-notifier-danger {
-
-		/* 알림 아이템 danger 아이콘 */
+		background-color: @alert-danger-background-color;
+		border-color: @alert-danger-border-color;
+		color: @alert-danger-text-color;
+	
+		/* 노티파이어 아이템 danger 아이콘 */
 		.cl-notifier-danger-icon {
-			// background-image: url("icons/notifier-danger.png");
+			background-image: url(images/controls/notifier/icon-notifier-danger.png);
 		}
 	}
 }

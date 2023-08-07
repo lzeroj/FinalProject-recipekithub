@@ -36,6 +36,14 @@
 			container.setLayout(xYLayout_1);
 			
 			// UI Configuration
+			var button_1 = new cpr.controls.Button();
+			button_1.value = "Button";
+			container.addChild(button_1, {
+				"top": "219px",
+				"left": "168px",
+				"width": "100px",
+				"height": "20px"
+			});
 		}
 	});
 	app.title = "index";

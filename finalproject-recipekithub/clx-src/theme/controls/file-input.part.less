@@ -1,33 +1,67 @@
-@import "../settings.part.less";
+@import "../custom-settings.part.less";
 
-/* 파일 인풋 루트 */
+@fileinput-button-width: 70px;
+
+ /* 파일 인풋 루트 */
 .cl-fileinput {
-	font: @default-font;
-	color: @default-text-color;
-	border: solid 1px @default-border-color;
-
-	// background-color: #fff;
-	/* autoSize 설정시 표시되는 기본크기 */
-	//min-width: 50px;
-	//min-height: 20px;
+	font: @font-base;
+	color: @input-text-color;
+	border:@input-border-base;
+	border-radius: @input-border-radius;
+	background-color: @input-background-color;
+	background-image: @input-background-image;
+	text-align: left;
+	transition: @transition-base;
+	
 	/* 파일 인풋 내 텍스트 */
-	.cl-text {}
+	.cl-text {
+		padding: @input-padding-0 calc(@input-padding-x + @fileinput-button-width) @input-padding-0 @input-padding-x;
+		
+		&.cl-placeholder {
+			color: @input-placeholder-text-color !important;
+		}
+	}
+	
+	/* 파일 아이콘 스타일 */
+	&:before {
+		content: "Browse";
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+		width: @fileinput-button-width;
+		
+		right: 0;
+		top:0;
+		bottom: 0;
+		
+		border-left: @input-border-base;
+		background-color: @lighter;
+		color: @input-text-color;
+	}
 
 	/* 포커스 상태 */
-	&.cl-focus {
-		border-color: @focus-border-color;
+	&:focus{
+		border-color: @input-focus-border-color;
+		
+		&:before {
+			content: "Browse";
+			border-left-color: @input-focus-border-color;
+		}
 	}
-
-	/* 비활성화 상태 */
+	
 	&.cl-disabled {
-		border-color: @disabled-border-color;
-		// background-image: none;
-		background-color: @disabled-selection-background;
-		color: @default-text-color;
-	}
-
-	/* 파일 인풋 - 클리어 버튼 */
-	.cl-fileinput-clear {
-		&:hover {}
+		border-color: @input-disabled-border-color;
+		background-color: @input-disabled-background-color;
+		color: @input-disabled-text-color;
+		
+		&:before {
+			content: "Browse";
+			
+			border-left-color: @input-disabled-border-color;
+			background-color: @input-disabled-background-color;
+			color: @input-disabled-text-color;
+		}
 	}
 }
