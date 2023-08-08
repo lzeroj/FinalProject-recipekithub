@@ -7,11 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartVO {
-	private int cartNo;
-	private char cartOrderedStatus;
-	private int cartTotal;
-	private MemberVO memberVO;
-	private CartdetailVO cartdetailVO;
+public class CartdetailVO {
+	private CartVO cartVO;
 	private MealkitboardVO mealkitboardVO;
+	private int cartDetailQuantity;
 }

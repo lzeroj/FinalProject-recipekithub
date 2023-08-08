@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosta.recipekithub.model.mapper.CartMapper">
+	
+	<resultMap type="org.kosta.recipekithub.model.vo.CartVO" id="cartProductInfoList">
+		<result column="MEALKIT_NAME" property="mealkitboardVO.mealkitName"/>
+		<result column="MEMBER_IMAGE" property="mealkitboardVO.mealkitImage"/>
+		<result column="MEALKIT_PRICE" property="mealkitboardVO.mealkitPrice"/>
+		<result column="CART_DETAIL_QUANTITY" property="cartdetailVO.cartDetailQuantity"/>
+		<result column="MEMBER_EMAIL" property="memberVO.memberEmail"/>
+	</resultMap>
+	<select id="selectMyCart" resultMap="cartProductInfoList">
+		SELECT mb.MEALKIT_NAME,mb.MEMBER_IMAGE ,mb.MEALKIT_PRICE ,cd.CART_DETAIL_QUANTITY 
+		FROM CART_DETAIL cd, MEALKIT_BOARD mb, CART c, "MEMBER" m 
+		WHERE cd.CART_NO = c.CART_NO
+		AND cd.MEALKIT_NO = mb.MEALKIT_NO 
+		AND c.CART_ORDER_STATUS = 'N'
+		AND m.MEMBER_EMAIL = #{memberEmail}
+	</select>
+	
+	
+	<insert id="insertCart">
+		
+	</insert>
+
+
+</mapper>

@@ -11,14 +11,18 @@
           <cl:datacolumn std:sid="d-column-11d7f073" name="mealkitName"/>
           <cl:datacolumn std:sid="d-column-d2d67bb6" name="mealkitPrice" datatype="number"/>
           <cl:datacolumn std:sid="d-column-d2bfb006" name="cartDetailQuantity" datatype="number"/>
-          <cl:datacolumn std:sid="d-column-d29fd79e" name="cartNo" datatype="number"/>
           <cl:datacolumn std:sid="d-column-494677a6" name="cartTotal" datatype="number"/>
         </cl:datacolumnlist>
       </cl:dataset>
+      <cl:submission std:sid="submission-c12c2327" id="selectMyCart" action="/selectMyCart">
+        <cl:listener std:sid="listener-6ca5abbd" name="submit-success" handler="onSelectMyCartSubmitSuccess"/>
+        <cl:responsedata dataid="cartlist"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
   <body std:sid="body-ea122247">
+    <cl:listener std:sid="listener-bc966f2e" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-5ef8cda1" class="cl-form-group">
       <cl:xylayoutdata std:sid="xyl-data-fbfc2860" top="200px" right="0px" bottom="250px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:output std:sid="output-93dc1bf1" style="font-weight:bold; font-size:25px; font-family:'Noto Sans KR' , 'Malgun Gothic' , sans-serif;" value="장바구니">
