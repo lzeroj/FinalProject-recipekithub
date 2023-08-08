@@ -8,9 +8,15 @@
     <cl:appspec/>
   </head>
   <body std:sid="body-742fa205">
-    <cl:button std:sid="button-2ab1f6d6" value="Button">
-      <cl:xylayoutdata std:sid="xyl-data-e6570113" top="219px" left="168px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:button>
+    <cl:listener std:sid="listener-def95c39" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-b764769d">
+      <cl:xylayoutdata std:sid="xyl-data-ba2d696a" top="100px" right="140px" bottom="100px" left="140px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:embeddedapp std:sid="e-app-b04448a7" id="ea1">
+        <cl:listener std:sid="listener-8d8ab156" name="click" handler="onEa1Click"/>
+        <cl:xylayoutdata std:sid="xyl-data-f336297e" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      </cl:embeddedapp>
+      <cl:xylayout std:sid="xylayout-2b64f377"/>
+    </cl:group>
     <cl:xylayout std:sid="xylayout-f50d3061"/>
   </body>
   <std:studiosetting>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-327e43da" version="1.0.4584">
+  <head std:sid="head-58e951a7">
+    <screen std:sid="screen-64cf9a87" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-0195cd87" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-b1734d6a" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-7a3b7d0c">
+      <cl:dataset std:sid="d-set-ca8b850c" id="cartlist">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-95b36456" name="mealkitImage"/>
+          <cl:datacolumn std:sid="d-column-11d7f073" name="mealkitName"/>
+          <cl:datacolumn std:sid="d-column-d2d67bb6" name="mealkitPrice" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d2bfb006" name="cartDetailQuantity" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d29fd79e" name="cartNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-494677a6" name="cartTotal" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ea122247">
+    <cl:group std:sid="group-5ef8cda1" class="cl-form-group">
+      <cl:xylayoutdata std:sid="xyl-data-fbfc2860" top="200px" right="0px" bottom="250px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-93dc1bf1" style="font-weight:bold; font-size:25px; font-family:'Noto Sans KR' , 'Malgun Gothic' , sans-serif;" value="장바구니">
+        <cl:formdata std:sid="f-data-6692a6c5" row="0" col="0" rowspan="1" colspan="7"/>
+      </cl:output>
+      <cl:checkbox std:sid="c-box-3788f6c7" id="cbx1" style="background-color:#f9f9f9; font-weight:600;" value="" text="전체상품">
+        <cl:formdata std:sid="f-data-5d7c39f3" row="1" col="0" rowspan="1" colspan="5"/>
+      </cl:checkbox>
+      <cl:output std:sid="output-74eada54" value="">
+        <cl:formdata std:sid="f-data-94a828c9" row="2" col="0" rowspan="1" colspan="7"/>
+      </cl:output>
+      <cl:output std:sid="output-0fabbde3" value="&lt; 쇼핑 계속하기">
+        <cl:formdata std:sid="f-data-65274631" row="5" col="0" rowspan="1" colspan="7"/>
+      </cl:output>
+      <cl:grid std:sid="grid-6d67e65a" id="grd1" datasetid="cartlist">
+        <cl:formdata std:sid="f-data-fe747965" row="3" col="0" rowspan="2" colspan="7"/>
+        <cl:gridcolumn std:sid="g-column-019c1081" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-69c1d460"/>
+        <cl:gridcolumn std:sid="g-column-70468fa0"/>
+        <cl:gridcolumn std:sid="g-column-8d4813dd"/>
+        <cl:gridcolumn std:sid="g-column-4dc24dc5"/>
+        <cl:gridcolumn std:sid="g-column-de4738bc"/>
+        <cl:gridheader std:sid="gh-band-33136b3c">
+          <cl:gridrow std:sid="g-row-9046acc8"/>
+          <cl:gridcell std:sid="gh-cell-287b455c" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-887d4f67" rowindex="0" colindex="1" rowspan="1" colspan="2" style="background-color:#f9f9f9; font-weight:400;" targetcolumnname="mealkitName" sortable="false" filterable="false" text="상품 정보"/>
+          <cl:gridcell std:sid="gh-cell-e9e00db1" rowindex="0" colindex="3" style="background-color:#f9f9f9; font-weight:400;" targetcolumnname="mealkitPrice" sortable="false" filterable="false" text="가격"/>
+          <cl:gridcell std:sid="gh-cell-1fc2f6a6" rowindex="0" colindex="4" style="background-color:#f9f9f9; font-weight:400;" targetcolumnname="cartDetailQuantity" sortable="false" filterable="false" text="상품 수량"/>
+          <cl:gridcell std:sid="gh-cell-e9b83441" rowindex="0" colindex="5" style="background-color:#f9f9f9; font-weight:400;" text="총 가격"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-cf45ddda">
+          <cl:gridrow std:sid="g-row-113804dd"/>
+          <cl:gridcell std:sid="gd-cell-fd628508" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-dd3899cc" rowindex="0" colindex="1" columnname="mealkitImage">
+            <cl:img std:sid="image-a09ed00f">
+              <cl:celldata std:sid="c-data-7b107fab"/>
+            </cl:img>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-11577796" rowindex="0" colindex="2" columnname="mealkitName"/>
+          <cl:gridcell std:sid="gd-cell-acc780a8" rowindex="0" colindex="3" columnname="mealkitPrice"/>
+          <cl:gridcell std:sid="gd-cell-2bbb410f" rowindex="0" colindex="4" columnname="cartDetailQuantity"/>
+          <cl:gridcell std:sid="gd-cell-3294e63e" rowindex="0" colindex="5">
+            <cl:numbereditor std:sid="n-editor-c6f2e8b5" id="nbe1">
+              <cl:expbind property="value" category="PROPERTY" expression="mealkitPrice * cartDetailQuantity"/>
+              <cl:celldata std:sid="c-data-d3b363fc"/>
+            </cl:numbereditor>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:button std:sid="button-10825f8f" style="background-color:#818B97;" value="선택 삭제">
+        <cl:formdata std:sid="f-data-5ef2df01" row="1" col="5" rowspan="1" colspan="2"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-d28bc64c" scrollable="true" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
+        <cl:rows length="50" unit="PIXEL"/>
+        <cl:rows length="70" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="25" unit="PIXEL" shadetype="CUSTOM" shadecolor="#F9F9F9"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:columns length="100" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
+        <cl:columns length="100" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
+        <cl:columns length="120" unit="PIXEL"/>
+        <cl:columns length="100" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
+        <cl:columns length="100" unit="PIXEL"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:output std:sid="output-c114cc9d" style="border-right-style:solid; border-top-width:3px; border-bottom-color:#e5e5e5; border-right-width:3px; border-left-color:#e5e5e5; border-right-color:#e5e5e5; border-left-width:3px; border-top-style:solid; border-left-style:solid; border-bottom-width:3px; border-top-color:#e5e5e5; border-bottom-style:solid; text-align:right;">
+      <cl:datasetbind property="value" datacontrolid="cartlist" columnname="cartTotal" rowindex="0"/>
+      <cl:xylayoutdata std:sid="xyl-data-91e2b8ba" top="542px" right="0px" left="0px" height="71px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:button std:sid="button-923ccc1b" style="background-color:#818B97;" value="전체 상품 주문">
+      <cl:xylayoutdata std:sid="xyl-data-0cc5e3e2" right="0px" bottom="100px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+    </cl:button>
+    <cl:button std:sid="button-41a920fd" style="background-color:#FFFFFF; border-right-style:solid; color:#000000; border-bottom-color:#000000; border-left-style:solid; border-left-color:#000000; border-top-color:#000000; border-bottom-style:solid; border-right-color:#000000; border-top-style:solid;" value="선택 상품 주문">
+      <cl:xylayoutdata std:sid="xyl-data-735b395a" right="210px" bottom="100px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+    </cl:button>
+    <cl:button std:sid="button-a28e6477" style="background-color:#FFFFFF; border-right-style:solid; color:#000000; border-bottom-color:#000000; border-left-style:solid; border-left-color:#000000; border-top-color:#000000; border-bottom-style:solid; border-right-color:#000000; border-top-style:solid;" value="선택 상품 삭제">
+      <cl:xylayoutdata std:sid="xyl-data-81ca384c" bottom="110px" left="0px" width="110px" height="30px" horizontalAnchor="LEFT" verticalAnchor="BOTTOM"/>
+    </cl:button>
+    <cl:xylayout std:sid="xylayout-73dbc74f"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

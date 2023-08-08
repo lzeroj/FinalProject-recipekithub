@@ -14,7 +14,8 @@
   ],
   "runtime-lib": [
     "/resource/cleopatra.js",
-    "/resource/conf/defaults.js"
+    "/resource/conf/defaults.js",
+    "ui/cpr-lib/udc.js"
   ],
   "fileupload": {
     "maxbodysize": -1.0,

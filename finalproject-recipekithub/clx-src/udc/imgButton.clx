@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-1a50aada" version="1.0.3793">
+  <head std:sid="head-f6b2eb3f">
+    <screen std:sid="screen-14ee98c2" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-d46674df" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-192fc078" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-4fd09628"/>
+    <cl:appspec>
+      <cl:property name="src" type="string" std:desc="이미지 경로"/>
+      <cl:event name="deleteImg" type="cpr.events.CAppEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-382d7dc8" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:listener std:sid="listener-fc8121e5" name="load" handler="onBodyLoad"/>
+    <cl:img std:sid="image-5b4c56db" id="img1">
+      <cl:xylayoutdata std:sid="xyl-data-e8198890" top="0px" left="0px" width="300px" height="300px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:button std:sid="button-d48a9ab3" id="btn1" value="삭제">
+      <cl:listener std:sid="listener-c7e0b52e" name="click" handler="onButtonClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-50632a5b" top="10px" left="250px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:xylayout std:sid="xylayout-8210db9e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>
