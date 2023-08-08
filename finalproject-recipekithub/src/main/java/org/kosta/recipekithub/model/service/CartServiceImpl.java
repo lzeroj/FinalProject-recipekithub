@@ -24,4 +24,9 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.selectMyCart(memberEmail);
 	}
 
+	@Override
+	public int updateCart(int cartNo, int mealkiitNo, int cartDetailQuantity) {
+		return cartMapper.updateCart(cartNo,mealkiitNo,cartDetailQuantity);
+	}
+
 }

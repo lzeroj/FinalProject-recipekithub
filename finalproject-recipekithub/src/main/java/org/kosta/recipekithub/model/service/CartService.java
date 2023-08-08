@@ -10,4 +10,6 @@ public interface CartService {
 
 	List<CartVO> selectMyCart(String memberEmail);
 
+	int updateCart(int cartNo, int mealkiitNo, int cartDetailQuantity);
+
 }

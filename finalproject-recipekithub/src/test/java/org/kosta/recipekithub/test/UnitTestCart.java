@@ -23,7 +23,6 @@ public class UnitTestCart {
 		List<CartVO> cartlist = cartService.selectMyCart(memberEmail);
 		System.out.println(cartlist.toString());
 		Assertions.assertEquals(1, cartlist.size());
-
 	}
 	
 	@Test
@@ -31,6 +30,14 @@ public class UnitTestCart {
 		int result = cartService.insertCart();
 		System.out.println(result);
 		Assertions.assertEquals(1, result);
-		
+	}
+	
+	@Test
+	public void updateCart() {
+		int cartNo = 2;
+		int mealkiitNo = 1;
+		int cartDetailQuantity = 3;
+		int result = cartService.updateCart(cartNo,mealkiitNo,cartDetailQuantity);
+		Assertions.assertEquals(1, result);
 	}
 }

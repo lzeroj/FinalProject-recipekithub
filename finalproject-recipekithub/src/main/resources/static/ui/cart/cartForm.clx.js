@@ -33,6 +33,34 @@
 			function onSelectMyCartSubmitSuccess(e){
 				var selectMyCart = e.control;
 				
+				var metadata = selectMyCart.getMetadata("cartInfoEtc");
+				var cartDetailMeta = selectMyCart.getMetadata("cartDetail");
+				var dscartlist = app.lookup("cartlist");
+				
+				for(var i=0;i<metadata.length;i++){
+					dscartlist.setValue(i, "mealkitImage", 'theme/images/mealkit/'+metadata[i].mealkitImage);
+					dscartlist.setValue(i, "mealkitName", metadata[i].mealkitName);
+					dscartlist.setValue(i, "mealkitPrice", metadata[i].mealkitPrice);
+					dscartlist.setValue(i, "cartDetailQuantity", cartDetailMeta[i]);
+				}
+				
+				dscartlist.refresh();
+				var sum = 0;
+				for(var j=0;j<metadata.length;j++){
+					var value = dscartlist.getValue(j, "cartTotal");
+					sum= value+sum;
+				}
+				app.lookup("totalval").value = sum;
+				app.lookup("grd1").redraw();
+			}
+
+			/*
+			 * "전체 상품 주문" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick(e){
+				var button = e.control;
+				
 			};
 			// End - User Script
 			
@@ -52,11 +80,30 @@
 					},
 					{
 						"name": "cartTotal",
-						"dataType": "number"
+						"dataType": "expression",
+						"displayOnly": true,
+						"expression": "cartDetailQuantity * mealkitPrice"
 					}
 				]
 			});
 			app.register(dataSet_1);
+			var dataMap_1 = new cpr.data.DataMap("paymentTotal");
+			dataMap_1.parseData({
+				"columns" : [{
+					"name": "totalpay",
+					"dataType": "number"
+				}]
+			});
+			app.register(dataMap_1);
+			
+			var dataMap_2 = new cpr.data.DataMap("updateQuantity");
+			dataMap_2.parseData({
+				"columns" : [{
+					"name": "cartDetailQuantity",
+					"dataType": "number"
+				}]
+			});
+			app.register(dataMap_2);
 			var submission_1 = new cpr.protocols.Submission("selectMyCart");
 			submission_1.action = "/selectMyCart";
 			submission_1.addResponseData(dataSet_1, false);
@@ -64,6 +111,14 @@
 				submission_1.addEventListener("submit-success", onSelectMyCartSubmitSuccess);
 			}
 			app.register(submission_1);
+			
+			var submission_2 = new cpr.protocols.Submission("payment");
+			submission_2.mediaType = "application/x-www-form-urlencoded;simple";
+			submission_2.addRequestData(dataMap_1);
+			app.register(submission_2);
+			
+			var submission_3 = new cpr.protocols.Submission("updateMyCart");
+			app.register(submission_3);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -146,6 +201,9 @@
 				var grid_1 = new cpr.controls.Grid("grd1");
 				grid_1.init({
 					"dataSet": app.lookup("cartlist"),
+					"autoRowHeight": "all",
+					"resizableColumns": "all",
+					"noDataMessage": "장바구니에 목록이없습니다 ",
 					"columns": [
 						{"width": "25px"},
 						{"width": "100px"},
@@ -166,7 +224,7 @@
 								}
 							},
 							{
-								"constraint": {"rowIndex": 0, "colIndex": 1, "rowSpan": 1, "colSpan": 2},
+								"constraint": {"rowIndex": 0, "colIndex": 1, "colSpan": 2},
 								"configurator": function(cell){
 									cell.filterable = false;
 									cell.sortable = false;
@@ -192,7 +250,7 @@
 								}
 							},
 							{
-								"constraint": {"rowIndex": 0, "colIndex": 4},
+								"constraint": {"rowIndex": 0, "colIndex": 4, "rowSpan": 1, "colSpan": 1},
 								"configurator": function(cell){
 									cell.filterable = false;
 									cell.sortable = false;
@@ -205,7 +263,7 @@
 								}
 							},
 							{
-								"constraint": {"rowIndex": 0, "colIndex": 5},
+								"constraint": {"rowIndex": 0, "colIndex": 5, "rowSpan": 1, "colSpan": 1},
 								"configurator": function(cell){
 									cell.text = "총 가격";
 									cell.style.css({
@@ -217,7 +275,7 @@
 						]
 					},
 					"detail": {
-						"rows": [{"height": "24px"}],
+						"rows": [{"height": "130px"}],
 						"cells": [
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 0},
@@ -230,7 +288,7 @@
 								"configurator": function(cell){
 									cell.columnName = "mealkitImage";
 									cell.control = (function(){
-										var image_1 = new cpr.controls.Image();
+										var image_1 = new cpr.controls.Image("imggrd");
 										image_1.bind("value").toDataColumn("mealkitImage");
 										return image_1;
 									})();
@@ -253,15 +311,25 @@
 								"constraint": {"rowIndex": 0, "colIndex": 4},
 								"configurator": function(cell){
 									cell.columnName = "cartDetailQuantity";
+									cell.control = (function(){
+										var numberEditor_1 = new cpr.controls.NumberEditor("nbe2");
+										numberEditor_1.min = new cpr.foundation.DecimalType("1");
+										numberEditor_1.bind("value").toDataColumn("cartDetailQuantity");
+										return numberEditor_1;
+									})();
+									cell.controlConstraint = {
+										"horizontalAlign": "center",
+										"verticalAlign": "center"
+									};
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 5},
 								"configurator": function(cell){
 									cell.control = (function(){
-										var numberEditor_1 = new cpr.controls.NumberEditor("nbe1");
-										numberEditor_1.bind("value").toExpression("mealkitPrice * cartDetailQuantity");
-										return numberEditor_1;
+										var output_4 = new cpr.controls.Output("sumex");
+										output_4.bind("value").toExpression("mealkitPrice * cartDetailQuantity");
+										return output_4;
 									})();
 									cell.controlConstraint = {};
 								}
@@ -294,8 +362,9 @@
 				"left": "0px"
 			});
 			
-			var output_4 = new cpr.controls.Output();
-			output_4.style.css({
+			var output_5 = new cpr.controls.Output("totalval");
+			output_5.dataType = "number";
+			output_5.style.css({
 				"border-right-style" : "solid",
 				"border-top-width" : "3px",
 				"border-bottom-color" : "#e5e5e5",
@@ -310,8 +379,7 @@
 				"border-bottom-style" : "solid",
 				"text-align" : "right"
 			});
-			output_4.bind("value").toDataSet(app.lookup("cartlist"), "cartTotal", 0);
-			container.addChild(output_4, {
+			container.addChild(output_5, {
 				"top": "542px",
 				"right": "0px",
 				"left": "0px",
@@ -323,6 +391,9 @@
 			button_2.style.css({
 				"background-color" : "#818B97"
 			});
+			if(typeof onButtonClick == "function") {
+				button_2.addEventListener("click", onButtonClick);
+			}
 			container.addChild(button_2, {
 				"right": "0px",
 				"bottom": "100px",
