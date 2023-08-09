@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.CartService;
 import org.kosta.recipekithub.model.vo.CartVO;
@@ -75,10 +74,19 @@ public class CartController {
 	}
 	
 	@RequestMapping("/updateMyCart")
-	public View updateMyCart(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
-		
-		
-		
+	public View updateMyCart(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest, String cartDetailQuantity, String mealkitName) {
+//		HttpSession session = request.getSession(false);
+//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMemberEmail("shj");
+		if(memberVO != null) {
+			// 장바구니 번호 조회
+			CartVO cvo = cartService.findCartNoByMemberEmail(memberVO.getMemberEmail());
+			// 밀키트 번호 조회
+			MealkitboardVO mlvo = cartService.findMealkitBoardByMealkitName(mealkitName);
+			// 수량 업데이트
+			cartService.updateCart(cvo.getCartNo(), mlvo.getMealkitNo(), Integer.parseInt(cartDetailQuantity));
+		}
 		return new JSONDataView();
 	}
 	

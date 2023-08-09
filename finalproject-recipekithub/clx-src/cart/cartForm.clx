@@ -22,16 +22,19 @@
       <cl:datamap std:sid="d-map-6a8ee540" id="updateQuantity">
         <cl:datacolumnlist>
           <cl:datacolumn std:sid="d-column-fb2d4bf8" name="cartDetailQuantity" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-64b34dad" name="mealkitName"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:submission std:sid="submission-c12c2327" id="selectMyCart" action="/selectMyCart">
         <cl:listener std:sid="listener-6ca5abbd" name="submit-success" handler="onSelectMyCartSubmitSuccess"/>
         <cl:responsedata dataid="cartlist"/>
       </cl:submission>
-      <cl:submission std:sid="submission-ddc928a9" id="payment" mediatype="application/x-www-form-urlencoded;simple">
+      <cl:submission std:sid="submission-ddc928a9" id="payment" action="/paymentInsert" mediatype="application/x-www-form-urlencoded;simple">
         <cl:requestdata dataid="paymentTotal"/>
       </cl:submission>
-      <cl:submission std:sid="submission-265a02a8" id="updateMyCart"/>
+      <cl:submission std:sid="submission-265a02a8" id="updateMyCart" action="/updateMyCart" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:requestdata dataid="updateQuantity"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
@@ -79,6 +82,7 @@
           <cl:gridcell std:sid="gd-cell-acc780a8" rowindex="0" colindex="3" columnname="mealkitPrice"/>
           <cl:gridcell std:sid="gd-cell-c9cafc2b" rowindex="0" colindex="4" columnname="cartDetailQuantity">
             <cl:numbereditor std:sid="n-editor-adb0f60c" id="nbe2" min="1" upbuttonimage="">
+              <cl:listener std:sid="listener-522227da" name="value-change" handler="onNbe2ValueChange"/>
               <cl:celldata std:sid="c-data-e5cdfd84" halign="CENTER" valign="CENTER"/>
             </cl:numbereditor>
           </cl:gridcell>

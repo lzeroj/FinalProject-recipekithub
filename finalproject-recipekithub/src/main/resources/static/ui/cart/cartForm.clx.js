@@ -60,7 +60,36 @@
 			 */
 			function onButtonClick(e){
 				var button = e.control;
+				app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);
+				app.lookup("payment").send();
+			}
+
+			/*
+			 * 넘버 에디터에서 value-change 이벤트 발생 시 호출.
+			 * NumberEditor의 value를 변경하여 변경된 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onNbe2ValueChange(e){
+				var nbe2 = e.control;
+				var grid = app.lookup("grd1");
+				var dataRowCount = grid.getDataRowCount(); //총 행의 갯수
+				var dscartlist = app.lookup("cartlist");
 				
+				// 토탈 Output 적용
+				var sum = 0;
+				for(var j=0;j<dataRowCount;j++){
+					var value = dscartlist.getValue(j, "cartTotal");
+					sum+=value;
+				}
+				app.lookup("totalval").value = sum;
+				app.lookup("totalval").redraw();
+				
+				// 수정 서브미션 DB적용
+				var selectedRowIndex = grid.getSelectedRowIndex();
+				var cellValue = grid.getCellValue(selectedRowIndex, "cartDetailQuantity");
+				app.lookup("updateQuantity").setValue("cartDetailQuantity", cellValue);
+				var cellValue = grid.getCellValue(selectedRowIndex, "mealkitName");
+				app.lookup("updateQuantity").setValue("mealkitName", cellValue);
+				app.lookup("updateMyCart").send();
 			};
 			// End - User Script
 			
@@ -98,10 +127,13 @@
 			
 			var dataMap_2 = new cpr.data.DataMap("updateQuantity");
 			dataMap_2.parseData({
-				"columns" : [{
-					"name": "cartDetailQuantity",
-					"dataType": "number"
-				}]
+				"columns" : [
+					{
+						"name": "cartDetailQuantity",
+						"dataType": "number"
+					},
+					{"name": "mealkitName"}
+				]
 			});
 			app.register(dataMap_2);
 			var submission_1 = new cpr.protocols.Submission("selectMyCart");
@@ -113,11 +145,15 @@
 			app.register(submission_1);
 			
 			var submission_2 = new cpr.protocols.Submission("payment");
+			submission_2.action = "/paymentInsert";
 			submission_2.mediaType = "application/x-www-form-urlencoded;simple";
 			submission_2.addRequestData(dataMap_1);
 			app.register(submission_2);
 			
 			var submission_3 = new cpr.protocols.Submission("updateMyCart");
+			submission_3.action = "/updateMyCart";
+			submission_3.mediaType = "application/x-www-form-urlencoded;simple";
+			submission_3.addRequestData(dataMap_2);
 			app.register(submission_3);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -314,6 +350,9 @@
 									cell.control = (function(){
 										var numberEditor_1 = new cpr.controls.NumberEditor("nbe2");
 										numberEditor_1.min = new cpr.foundation.DecimalType("1");
+										if(typeof onNbe2ValueChange == "function") {
+											numberEditor_1.addEventListener("value-change", onNbe2ValueChange);
+										}
 										numberEditor_1.bind("value").toDataColumn("cartDetailQuantity");
 										return numberEditor_1;
 									})();

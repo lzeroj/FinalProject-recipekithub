@@ -47,9 +47,34 @@ function onSelectMyCartSubmitSuccess(e){
  */
 function onButtonClick(e){
 	var button = e.control;
-	
+	app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);
+	app.lookup("payment").send();
 }
 
-
-
-
+/*
+ * 넘버 에디터에서 value-change 이벤트 발생 시 호출.
+ * NumberEditor의 value를 변경하여 변경된 값이 저장된 후에 발생하는 이벤트.
+ */
+function onNbe2ValueChange(e){
+	var nbe2 = e.control;
+	var grid = app.lookup("grd1");
+	var dataRowCount = grid.getDataRowCount(); //총 행의 갯수
+	var dscartlist = app.lookup("cartlist");
+	
+	// 토탈 Output 적용
+	var sum = 0;
+	for(var j=0;j<dataRowCount;j++){
+		var value = dscartlist.getValue(j, "cartTotal");
+		sum+=value;
+	}
+	app.lookup("totalval").value = sum;
+	app.lookup("totalval").redraw();
+	
+	// 수정 서브미션 DB적용
+	var selectedRowIndex = grid.getSelectedRowIndex();
+	var cellValue = grid.getCellValue(selectedRowIndex, "cartDetailQuantity");
+	app.lookup("updateQuantity").setValue("cartDetailQuantity", cellValue);
+	var cellValue = grid.getCellValue(selectedRowIndex, "mealkitName");
+	app.lookup("updateQuantity").setValue("mealkitName", cellValue);
+	app.lookup("updateMyCart").send();
+}

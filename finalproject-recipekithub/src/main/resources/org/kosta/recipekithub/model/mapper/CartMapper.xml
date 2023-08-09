@@ -16,6 +16,7 @@
 		AND cd.MEALKIT_NO = mb.MEALKIT_NO 
 		AND c.CART_ORDER_STATUS = 'N'
 		AND m.MEMBER_EMAIL = #{memberEmail}
+		AND cd.IS_CHECKED = 'Y'
 	</select>
 	
 	<update id="updateCart">
@@ -25,6 +26,28 @@
 	<insert id="insertCart">
 		
 	</insert>
+	
+	<select id="findCartNoByMemberEmail" resultType="org.kosta.recipekithub.model.vo.CartVO">
+		SELECT c.CART_NO, c.CART_ORDER_STATUS, c.CART_TOTAL
+		FROM CART C,"MEMBER" m 
+		WHERE m.MEMBER_EMAIL = #{memberEmail} 
+	</select>
+	
+	<select id="findMealkitBoardByMealkitName" resultType="org.kosta.recipekithub.model.vo.MealkitboardVO">
+		SELECT * FROM MEALKIT_BOARD WHERE MEALKIT_NAME = #{mealkitName}
+	</select>
+	
+	<resultMap type="org.kosta.recipekithub.model.vo.CartVO" id="mealkitQuantityComparison">
+		<result column="MEALKIT_NO" property="mealkitboardVO.mealkitNo"/>
+		<result column="MEALKIT_INVENTORY" property="mealkitboardVO.mealkitInventory"/>
+		<result column="CART_DETAIL_QUANTITY" property="cartdetailVO.cartDetailQuantity"/>
+	</resultMap>
+	<select id="mealkitQuantityComparisonByCart" resultMap="mealkitQuantityComparison">
+		SELECT mb.MEALKIT_NO,mb.MEALKIT_INVENTORY,cd.CART_DETAIL_QUANTITY
+		FROM MEALKIT_BOARD mb, CART_DETAIL cd 
+		WHERE cd.MEALKIT_NO = mb.MEALKIT_NO 
+		AND cd.CART_NO = #{cartNo}
+	</select>
 
 
 </mapper>

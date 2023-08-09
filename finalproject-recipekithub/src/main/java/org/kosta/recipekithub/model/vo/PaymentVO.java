@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartdetailVO {
+public class PaymentVO {
+	private int paymentId;
+	private String paymentDate;
+	private String paymentState;
+	private int paymentTotal;
 	private CartVO cartVO;
-	private MealkitboardVO mealkitboardVO;
-	private int cartDetailQuantity;
-	private String isChecked;
 }
