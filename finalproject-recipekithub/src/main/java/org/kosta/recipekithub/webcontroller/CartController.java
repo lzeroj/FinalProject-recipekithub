@@ -34,7 +34,6 @@ public class CartController {
 	
 	@RequestMapping("/findMyCartForm")
 	public View findMyCartForm(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {	
-		System.out.println("form controller");
 		return new UIView("ui/cart/cartForm.clx"); 
 	}
 	
@@ -46,7 +45,6 @@ public class CartController {
 		List<CartVO> myCartInfo = new ArrayList<>();
 		if(mvo != null) {
 			myCartInfo = cartService.selectMyCart(mvo.getMemberEmail());
-			System.out.println(myCartInfo);
 			
 			// 밀키트 데이터
 			List<MealkitboardVO> mlkitlist = new ArrayList<>();
@@ -59,11 +57,6 @@ public class CartController {
 				mlkitlist.add(mlvo);
 			}
 			
-			// cart_detail 데이터
-//			List<Integer> cartDetailQuantity = new ArrayList<>();
-//			for(int i=0;i<myCartInfo.size();i++) {
-//				cartDetailQuantity.add(myCartInfo.get(i).getCartdetailVO().getCartDetailQuantity());
-//			}
 			List<CartdetailVO> cartDetailQuantity = new ArrayList<>();
 			CartdetailVO cdvo = null;
 			for(int i=0;i<myCartInfo.size();i++) {
@@ -72,7 +65,6 @@ public class CartController {
 				cdvo.setCartDetailQuantity(myCartInfo.get(i).getCartdetailVO().getCartDetailQuantity());
 				cartDetailQuantity.add(cdvo);
 			}
-			
 			
 			Map<String,Object> map = new HashMap<>();
 			map.put("cartInfoEtc", mlkitlist);
@@ -111,7 +103,6 @@ public class CartController {
 	@RequestMapping("/deleteMyCart")
 	public View deleteMyCart(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
 		ParameterGroup param = dataRequest.getParameterGroup("selectList");
-//		ArrayList<String> list = param.getValue("mealkitName");
 		String ary[] = param.getValues("mealkitName");
 //		HttpSession session = request.getSession(false);
 //		session.getAttribute("member");

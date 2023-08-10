@@ -20,5 +20,13 @@ exports.getText = function(){
 function onButtonClick(e){
 	var button = e.control;
 	window.location.href="/findMyCartForm";
-//	cpr.core.App.load("cart/cartForm");
+}
+
+/*
+ * 버튼(mypage)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onMypageClick(e){
+	var mypage = e.control;
+	window.location.href="/findMyPageForm";
 }

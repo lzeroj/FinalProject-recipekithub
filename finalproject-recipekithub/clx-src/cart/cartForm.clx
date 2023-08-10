@@ -77,7 +77,7 @@
         <cl:output std:sid="output-0fabbde3" style="border-right-style:solid; border-right-color:white;" value="    &lt; 쇼핑 계속하기">
           <cl:formdata std:sid="f-data-6684d753" row="5" col="0" rowspan="1" colspan="2"/>
         </cl:output>
-        <cl:grid std:sid="grid-6d67e65a" id="grd1" datasetid="cartlist" autofit="all" autorowheight="all" nodatamessage="장바구니에 목록이없습니다 " wheelrowcount="1" resizablecolumns="all">
+        <cl:grid std:sid="grid-6d67e65a" id="grd1" style="background-color:#FFFFFF; background-image:none;" datasetid="cartlist" autofit="all" autorowheight="all" nodatamessage="장바구니에 목록이없습니다 " wheelrowcount="1" resizablecolumns="all">
           <cl:listener std:sid="listener-3961564a" name="row-uncheck" handler="onGrd1RowUncheck"/>
           <cl:listener std:sid="listener-fb14824e" name="row-check" handler="onGrd1RowCheck"/>
           <cl:formdata std:sid="f-data-fe747965" row="3" col="0" rowspan="2" colspan="7"/>
@@ -145,7 +145,7 @@
           <cl:columns length="150" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
-      <cl:button std:sid="button-923ccc1b" style="background-color:#eb5307; white-space:normal; background-image:none;" value="전체 상품 주문">
+      <cl:button std:sid="button-923ccc1b" style="background-color:#eb5307; color:#FFFFFF; white-space:normal; background-image:none;" value="전체 상품 주문">
         <cl:listener std:sid="listener-7d528e36" name="click" handler="onButtonClick"/>
         <cl:xylayoutdata std:sid="xyl-data-cc9ccce4" right="0px" bottom="0px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
       </cl:button>
@@ -154,14 +154,14 @@
         <cl:xylayoutdata std:sid="xyl-data-9da41d14" right="208px" bottom="0px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
       </cl:button>
       <cl:group std:sid="group-3349f7ae">
-        <cl:xylayoutdata std:sid="xyl-data-1ebf251a" top="588px" right="0px" bottom="88px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-        <cl:output std:sid="output-c114cc9d" id="totalval" style="background-color:#FFFFFF; border-radius:0px; border-top-width:3px; border-bottom-color:#e5e5e5; border-bottom-width:3px; border-top-color:#e5e5e5; border-bottom-style:solid; border-top-style:solid; text-align:right;" datatype="number">
+        <cl:xylayoutdata std:sid="xyl-data-1ebf251a" right="0px" bottom="88px" left="0px" height="52px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+        <cl:output std:sid="output-c114cc9d" id="totalval" style="background-color:#FFFFFF; border-radius:0px; border-top-width:3px; border-bottom-color:#e5e5e5; border-bottom-width:3px; border-top-color:#e5e5e5; border-bottom-style:solid; background-image:none; border-top-style:solid; text-align:right;" datatype="number">
           <cl:formdata std:sid="f-data-2411d5be" row="0" col="1" rowspan="1" colspan="1"/>
         </cl:output>
-        <cl:output std:sid="output-d695ad09" style="background-color:#FFFFFF; border-top-width:3px; border-bottom-color:#e5e5e5; border-left-style:solid; border-left-color:#e5e5e5; border-bottom-width:3px; border-top-color:#e5e5e5; border-bottom-style:solid; border-left-width:3px; border-top-style:solid; text-align:right;" value="총 결제할 금액은 ">
+        <cl:output std:sid="output-d695ad09" style="background-color:#FFFFFF; border-top-width:3px; border-bottom-color:#e5e5e5; border-left-style:solid; border-left-color:#e5e5e5; border-bottom-width:3px; border-top-color:#e5e5e5; border-bottom-style:solid; background-image:none; border-left-width:3px; border-top-style:solid; text-align:right;" value="총 결제할 금액은 ">
           <cl:formdata std:sid="f-data-17f8107c" row="0" col="0" rowspan="1" colspan="1"/>
         </cl:output>
-        <cl:output std:sid="output-84edf401" style="border-right-style:solid; border-top-width:3px; border-bottom-color:#e5e5e5; border-right-width:3px; border-right-color:#e5e5e5; border-top-style:solid; background-color:#FFFFFF; border-bottom-width:3px; border-top-color:#e5e5e5; border-bottom-style:solid;" value="원 입니다">
+        <cl:output std:sid="output-84edf401" style="border-right-style:solid; background-color:#FFFFFF; border-top-width:3px; border-bottom-color:#e5e5e5; border-right-width:3px; border-bottom-width:3px; border-top-color:#e5e5e5; border-right-color:#e5e5e5; border-bottom-style:solid; background-image:none; border-top-style:solid;" value="원 입니다">
           <cl:formdata std:sid="f-data-dbc74ddd" row="0" col="2"/>
         </cl:output>
         <cl:formlayout std:sid="f-layout-19d94262" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">

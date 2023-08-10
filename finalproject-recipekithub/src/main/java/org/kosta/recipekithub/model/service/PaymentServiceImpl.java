@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class PaymentServiceImpl implements PaymentService {
 
 	private final PaymentMapper paymentMapper;
@@ -23,7 +21,6 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override // Exception 을 통한 재고처리 구현
 	@Transactional
 	public int paymentInsert(int paymentTotal, int cartNo) throws NotEnoughStockException {
-		System.out.println("paymentInsert PaymentServiceImpl 진입");
 		List<CartVO> cartlist = cartMapper.mealkitQuantityComparisonByCart(cartNo);
 		for(int i=0;i<cartlist.size();i++) {
 			int cartQuantity = cartlist.get(i).getCartdetailVO().getCartDetailQuantity();
@@ -33,9 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
 			if(cartQuantity > mealkitInventory) {
 				throw new NotEnoughStockException("재고수량이 충분하지 않습니다");
 			}else {
-				System.out.println("업데이트 성공");
 				mealkitInventoryUpdate(cartlist.get(i).getMealkitboardVO().getMealkitNo(), cartQuantity);
-				System.out.println(cartlist.get(i).getMealkitboardVO().getMealkitNo());
 			}
 		}
 		return paymentMapper.paymentInsert(paymentTotal,cartNo);

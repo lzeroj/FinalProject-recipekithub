@@ -622,6 +622,10 @@
 							]
 						}
 					});
+					grid_1.style.css({
+						"background-color" : "#FFFFFF",
+						"background-image" : "none"
+					});
 					if(typeof onGrd1RowUncheck == "function") {
 						grid_1.addEventListener("row-uncheck", onGrd1RowUncheck);
 					}
@@ -689,6 +693,7 @@
 				button_2.value = "전체 상품 주문";
 				button_2.style.css({
 					"background-color" : "#eb5307",
+					"color" : "#FFFFFF",
 					"white-space" : "normal",
 					"background-image" : "none"
 				});
@@ -747,6 +752,7 @@
 						"border-bottom-width" : "3px",
 						"border-top-color" : "#e5e5e5",
 						"border-bottom-style" : "solid",
+						"background-image" : "none",
 						"border-top-style" : "solid",
 						"text-align" : "right"
 					});
@@ -767,6 +773,7 @@
 						"border-bottom-width" : "3px",
 						"border-top-color" : "#e5e5e5",
 						"border-bottom-style" : "solid",
+						"background-image" : "none",
 						"border-left-width" : "3px",
 						"border-top-style" : "solid",
 						"text-align" : "right"
@@ -789,6 +796,7 @@
 						"border-top-color" : "#e5e5e5",
 						"border-right-color" : "#e5e5e5",
 						"border-bottom-style" : "solid",
+						"background-image" : "none",
 						"border-top-style" : "solid"
 					});
 					container.addChild(output_8, {
@@ -797,10 +805,10 @@
 					});
 				})(group_3);
 				container.addChild(group_3, {
-					"top": "588px",
 					"right": "0px",
 					"bottom": "88px",
-					"left": "0px"
+					"left": "0px",
+					"height": "52px"
 				});
 			})(group_1);
 			container.addChild(group_1, {

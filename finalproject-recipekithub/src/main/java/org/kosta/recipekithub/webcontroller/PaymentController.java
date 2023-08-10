@@ -42,7 +42,7 @@ public class PaymentController {
 			System.out.println(mealkitary[i]);
 		}
 		
-		//		HttpSession session = request.getSession(false);
+//		HttpSession session = request.getSession(false);
 //		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMemberEmail("shj");
@@ -54,13 +54,16 @@ public class PaymentController {
 				// payment 테이블에 인서트
 				int result = paymentService.paymentInsert(totalpay, cvo.getCartNo());
 				if(result == 1) {
+				
 					// 장바구니 상태 업데이트
 					paymentService.updateCartOrderStatus();
+					
 					// 장바구니 상세보기 업데이트
 					for(int i=0; i<mealkitary.length;i++) {
 						MealkitboardVO mealkitVO = cartService.findMealkitBoardByMealkitName(mealkitary[i]);
 						paymentService.updateCartDetailOrderStatus(cvo.getCartNo(),mealkitVO.getMealkitNo());
 					}
+					
 					// 장바구니 정리 (주문하지 않은 목록 삭제)
 					paymentService.deleteCartNoneOrder();
 				}

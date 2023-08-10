@@ -1739,7 +1739,7 @@ body {
 /*   background-color: #E0E1E2; */
   border-radius: 4px;
   border: solid 1px #959697;
-  text-shadow: 0px 1px 0px white;
+/*   text-shadow: 0px 1px 0px white; */
   cursor: pointer;
   text-align: center;
   display: block;

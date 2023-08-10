@@ -36,14 +36,20 @@
 				function onButtonClick(e){
 					var button = e.control;
 					window.location.href="/findMyCartForm";
-				//	cpr.core.App.load("cart/cartForm");
+				}
+	
+				/*
+				 * 버튼(mypage)에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onMypageClick(e){
+					var mypage = e.control;
+					window.location.href="/findMyPageForm";
 				};
 				// End - User Script
 				
 				// Header
 				app.declareAppProperty("cartbtn", null);
-				var submission_1 = new cpr.protocols.Submission("findmycart");
-				app.register(submission_1);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 				app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -189,7 +195,7 @@
 							"width": "370px",
 							"height": "50px"
 						});
-						var button_5 = new cpr.controls.Button();
+						var button_5 = new cpr.controls.Button("mypage");
 						button_5.value = "";
 						button_5.style.setClasses(["login"]);
 						button_5.style.css({
@@ -200,6 +206,9 @@
 							"background-image" : "url('udc/theme/images/recipe/login.png')",
 							"border-top-style" : "none"
 						});
+						if(typeof onMypageClick == "function") {
+							button_5.addEventListener("click", onMypageClick);
+						}
 						container.addChild(button_5, {
 							"top": "20px",
 							"left": "686px",
