@@ -10,12 +10,14 @@ import org.kosta.recipekithub.model.exception.NotEnoughStockException;
 import org.kosta.recipekithub.model.service.CartService;
 import org.kosta.recipekithub.model.service.PaymentService;
 import org.kosta.recipekithub.model.vo.CartVO;
+import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import com.cleopatra.protocol.data.DataRequest;
+import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.spring.JSONDataView;
 
 import lombok.RequiredArgsConstructor;
@@ -28,8 +30,19 @@ public class PaymentController {
 	private final CartService cartService;
 	
 	@RequestMapping("/paymentInsert")
-	public View paymentInsert(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest, int totalpay) {
-//		HttpSession session = request.getSession(false);
+	public View paymentInsert(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		ParameterGroup param = dataRequest.getParameterGroup("paymentTotal");
+		int totalpay = Integer.parseInt(param.getValue("totalpay"));
+		System.out.println(totalpay);
+		
+		ParameterGroup parammealkit = dataRequest.getParameterGroup("selectList");
+		String[] mealkitary = parammealkit.getValues("mealkitName");
+		
+		for(int i=0;i<mealkitary.length;i++) {
+			System.out.println(mealkitary[i]);
+		}
+		
+		//		HttpSession session = request.getSession(false);
 //		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMemberEmail("shj");
@@ -43,6 +56,13 @@ public class PaymentController {
 				if(result == 1) {
 					// 장바구니 상태 업데이트
 					paymentService.updateCartOrderStatus();
+					// 장바구니 상세보기 업데이트
+					for(int i=0; i<mealkitary.length;i++) {
+						MealkitboardVO mealkitVO = cartService.findMealkitBoardByMealkitName(mealkitary[i]);
+						paymentService.updateCartDetailOrderStatus(cvo.getCartNo(),mealkitVO.getMealkitNo());
+					}
+					// 장바구니 정리 (주문하지 않은 목록 삭제)
+					paymentService.deleteCartNoneOrder();
 				}
 				Map<String,Object> message = new HashMap<>();
 				message.put("insertInfo", "success");

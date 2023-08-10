@@ -11,6 +11,8 @@ public interface PaymentMapper {
 
 	int updateCartOrderStatus();
 
-	int updateCartDetailOrderStatus(String isOrderedDetail);
+	int updateCartDetailOrderStatus(int cartNO,int mealkitNo);
+
+	int deleteCartNoneOrder();
 
 }

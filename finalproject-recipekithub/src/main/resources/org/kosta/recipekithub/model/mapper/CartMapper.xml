@@ -21,7 +21,8 @@
 	</select>
 	
 	<update id="updateCart">
-		UPDATE CART_DETAIL SET CART_NO = #{cartNo} ,MEALKIT_NO = #{mealkiitNo},CART_DETAIL_QUANTITY = #{cartDetailQuantity}
+		UPDATE CART_DETAIL SET CART_DETAIL_QUANTITY = #{cartDetailQuantity}
+		WHERE MEALKIT_NO = #{mealkiitNo} AND CART_NO = #{cartNo} AND IS_ORDERED_DATAIL = 'N'
 	</update>
 	
 	<insert id="insertCart">
@@ -57,6 +58,7 @@
 	<delete id="deleteMyCart">
 		DELETE FROM CART_DETAIL WHERE MEALKIT_NO = #{mealkitNo} AND CART_NO = #{cartNo}
 	</delete>
+	
 
 
 </mapper>

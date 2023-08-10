@@ -10,12 +10,20 @@
 		UPDATE cart SET CART_ORDER_STATUS = 'Y'
 	</update>
 	
-	<update id="IsOrderedDetail">
-		UPDATE 
+	<update id="updateCartDetailOrderStatus">
+		UPDATE CART_DETAIL SET IS_ORDERED_DATAIL ='Y' 
+		<if test="cartNO != null and mealkitNo != null">
+			WHERE CART_NO = #{cartNO} AND MEALKIT_NO = #{mealkitNo}
+		</if>
 	</update>
 	
 	<update id="mealkitInventoryUpdate">
 		UPDATE MEALKIT_BOARD SET MEALKIT_INVENTORY = MEALKIT_INVENTORY - #{cartQuantity} where MEALKIT_NO = #{cartNo}
 	</update>
+	
+	<delete id="deleteCartNoneOrder">
+		DELETE FROM CART_DETAIL WHERE IS_CHECKED = 'N' AND IS_ORDERED_DATAIL = 'N'
+	</delete>
+	
 
 </mapper>

@@ -41,9 +41,10 @@
         <cl:listener std:sid="listener-6ca5abbd" name="submit-success" handler="onSelectMyCartSubmitSuccess"/>
         <cl:responsedata dataid="cartlist"/>
       </cl:submission>
-      <cl:submission std:sid="submission-ddc928a9" id="payment" action="/paymentInsert" mediatype="application/x-www-form-urlencoded;simple">
+      <cl:submission std:sid="submission-ddc928a9" id="payment" action="/paymentInsert">
         <cl:listener std:sid="listener-36f544a7" name="submit-success" handler="onPaymentSubmitSuccess"/>
         <cl:requestdata dataid="paymentTotal"/>
+        <cl:requestdata dataid="selectList" payload="modified"/>
       </cl:submission>
       <cl:submission std:sid="submission-265a02a8" id="updateMyCart" action="/updateMyCart" mediatype="application/x-www-form-urlencoded;simple">
         <cl:requestdata dataid="updateQuantity"/>
@@ -62,7 +63,7 @@
     <cl:listener std:sid="listener-bc966f2e" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-b8f6dc4d">
       <cl:xylayoutdata std:sid="xyl-data-79d5a85f" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:group std:sid="group-5ef8cda1" style="border-radius:30px;" class="cl-form-group">
+      <cl:group std:sid="group-5ef8cda1" style="border-radius:30px; background-color:#FFFFFF;" class="cl-form-group">
         <cl:xylayoutdata std:sid="xyl-data-0a61e2ac" top="0px" right="0px" bottom="150px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:output std:sid="output-93dc1bf1" style="background-color:#FFFFFF; color:#eb5307; font-weight:bold; font-size:25px; font-family:'Noto Sans KR' , 'Malgun Gothic' , sans-serif;" value="  장바구니">
           <cl:formdata std:sid="f-data-81ebaa46" row="0" col="1" rowspan="1" colspan="6"/>
@@ -73,14 +74,14 @@
         <cl:output std:sid="output-74eada54" value="">
           <cl:formdata std:sid="f-data-94a828c9" row="2" col="0" rowspan="1" colspan="7"/>
         </cl:output>
-        <cl:output std:sid="output-0fabbde3" value="    &lt; 쇼핑 계속하기">
-          <cl:formdata std:sid="f-data-65274631" row="5" col="0" rowspan="1" colspan="7"/>
+        <cl:output std:sid="output-0fabbde3" style="border-right-style:solid; border-right-color:white;" value="    &lt; 쇼핑 계속하기">
+          <cl:formdata std:sid="f-data-6684d753" row="5" col="0" rowspan="1" colspan="2"/>
         </cl:output>
         <cl:grid std:sid="grid-6d67e65a" id="grd1" datasetid="cartlist" autofit="all" autorowheight="all" nodatamessage="장바구니에 목록이없습니다 " wheelrowcount="1" resizablecolumns="all">
           <cl:listener std:sid="listener-3961564a" name="row-uncheck" handler="onGrd1RowUncheck"/>
           <cl:listener std:sid="listener-fb14824e" name="row-check" handler="onGrd1RowCheck"/>
           <cl:formdata std:sid="f-data-fe747965" row="3" col="0" rowspan="2" colspan="7"/>
-          <cl:gridcolumn std:sid="g-column-019c1081" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-019c1081" width="22px"/>
           <cl:gridcolumn std:sid="g-column-69c1d460" width="143px"/>
           <cl:gridcolumn std:sid="g-column-70468fa0" width="345px"/>
           <cl:gridcolumn std:sid="g-column-8d4813dd" width="143px"/>
@@ -95,7 +96,7 @@
             <cl:gridcell std:sid="gh-cell-e9b83441" rowindex="0" colindex="5" rowspan="1" colspan="1" style="background-color:#e5e5e5; font-weight:400;" text="총 가격"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-cf45ddda">
-            <cl:gridrow std:sid="g-row-113804dd" height="130px"/>
+            <cl:gridrow std:sid="g-row-113804dd" height="158px"/>
             <cl:gridcell std:sid="gd-cell-fd628508" rowindex="0" colindex="0" columntype="checkbox" columnname="isChecked"/>
             <cl:gridcell std:sid="gd-cell-dd3899cc" rowindex="0" colindex="1" columnname="mealkitImage">
               <cl:img std:sid="image-a09ed00f" id="imggrd">
@@ -123,8 +124,11 @@
         </cl:img>
         <cl:button std:sid="button-a28e6477" style="background-color:#e5e5e5; color:#eb5307; border-bottom-color:#e5e5e5; border-left-color:#e5e5e5; border-top-color:#e5e5e5; border-right-color:#e5e5e5;" value="선택 삭제 X">
           <cl:listener std:sid="listener-837e31b1" name="click" handler="onButtonClick3"/>
-          <cl:formdata std:sid="f-data-369fadbe" row="1" col="6"/>
+          <cl:formdata std:sid="f-data-e1a69184" row="1" col="6"/>
         </cl:button>
+        <cl:output std:sid="output-5a94143e" style="background-color:#FFFFFF; border-left-style:solid; border-left-color:white;" value="">
+          <cl:formdata std:sid="f-data-00f4578d" row="5" col="2" rowspan="1" colspan="5"/>
+        </cl:output>
         <cl:formlayout std:sid="f-layout-d28bc64c" scrollable="true" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
           <cl:rows length="80" unit="PIXEL"/>
           <cl:rows length="70" unit="PIXEL"/>
@@ -133,7 +137,7 @@
           <cl:rows length="1" unit="FRACTION"/>
           <cl:rows length="25" unit="PIXEL"/>
           <cl:columns length="100" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
-          <cl:columns length="100" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
+          <cl:columns length="34" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
           <cl:columns length="1" unit="FRACTION"/>
           <cl:columns length="100" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
           <cl:columns length="120" unit="PIXEL"/>
@@ -141,7 +145,7 @@
           <cl:columns length="150" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
-      <cl:button std:sid="button-923ccc1b" id="btn1" style="background-color:#2D1F18;" class="btn-outline-info" value="전체 상품 주문">
+      <cl:button std:sid="button-923ccc1b" style="background-color:#eb5307; white-space:normal; background-image:none;" value="전체 상품 주문">
         <cl:listener std:sid="listener-7d528e36" name="click" handler="onButtonClick"/>
         <cl:xylayoutdata std:sid="xyl-data-cc9ccce4" right="0px" bottom="0px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
       </cl:button>

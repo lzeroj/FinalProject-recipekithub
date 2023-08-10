@@ -52,8 +52,13 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public int updateCartDetailOrderStatus(String IsOrderedDetail) {
-		return paymentMapper.updateCartDetailOrderStatus(IsOrderedDetail);
+	public int updateCartDetailOrderStatus(int cartNO,int mealkitNo) {
+		return paymentMapper.updateCartDetailOrderStatus(cartNO,mealkitNo);
+	}
+
+	@Override
+	public int deleteCartNoneOrder() {
+		return paymentMapper.deleteCartNoneOrder();
 	}
 
 }

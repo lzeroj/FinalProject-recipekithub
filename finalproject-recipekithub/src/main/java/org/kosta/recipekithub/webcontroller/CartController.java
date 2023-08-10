@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.CartService;
 import org.kosta.recipekithub.model.vo.CartVO;
@@ -59,7 +58,6 @@ public class CartController {
 				mlvo.setMealkitPrice(myCartInfo.get(i).getMealkitboardVO().getMealkitPrice());
 				mlkitlist.add(mlvo);
 			}
-			
 			
 			// cart_detail 데이터
 //			List<Integer> cartDetailQuantity = new ArrayList<>();

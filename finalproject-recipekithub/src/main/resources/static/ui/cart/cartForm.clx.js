@@ -24,11 +24,6 @@
 			 */
 			function onBodyLoad(e){
 				app.lookup("selectMyCart").send();
-				var button = app.lookup("btn1");
-				button.style.css({
-					"background-color": "red"
-					, "background-image": "none"
-				})
 			}
 
 			/*
@@ -84,8 +79,17 @@
 			 */
 			function onButtonClick(e){
 				var button = e.control;
-				
-				if(app.lookup("grd1").getDataRowCount() > 0){
+				var grid = app.lookup("grd1");
+				if(grid.getDataRowCount() > 0){
+					for(var i=0;i<grid.getDataRowCount();i++){
+						if(grid.isCheckedRow(i)){
+							var cellValue = grid.getCellValue(i, "mealkitName");
+							var data = {"mealkitName" : cellValue};
+							console.log(cellValue);
+							app.lookup("selectList").addRowData(data);
+							console.log(app.lookup("selectList").getValue(i, "mealkitName"));
+						}
+					}
 					app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);
 					app.lookup("payment").send();
 				}else{
@@ -207,11 +211,22 @@
 			 */
 			function onButtonClick2(e){
 				var button = e.control;
-				if(app.lookup("grd1").getCheckRowIndices().length > 0){
+				var grid = app.lookup("grd1");
+				if(grid.getCheckRowIndices().length > 0){
+					for(var i=0;i<grid.getDataRowCount();i++){
+						if(grid.isCheckedRow(i)){
+							var cellValue = grid.getCellValue(i, "mealkitName");
+							var data = {"mealkitName" : cellValue};
+							console.log(cellValue);
+							
+							app.lookup("selectList").addRowData(data);
+							console.log(app.lookup("selectList").getValue(i, "mealkitName"));
+						}
+					}
 					app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);
 					app.lookup("payment").send();
 				}else{
-					if(app.lookup("grd1").getDataRowCount() == 0)	{
+					if(grid.getDataRowCount() == 0)	{
 						var src = "dialog/failPayment";
 						var initValue = "장바구니에 물건이 없습니다";
 						app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
@@ -240,8 +255,8 @@
 			function onButtonClick3(e){
 				var button = e.control;
 				var grid = app.lookup("grd1");
-				var checkRowIndices = grid.getCheckRowIndices();
-				var value = grid.getDataRow(checkRowIndices[0]).getValue("mealkitName");
+			//	var checkRowIndices = grid.getCheckRowIndices();
+			//	var value = grid.getDataRow(checkRowIndices[0]).getValue("mealkitName");
 				for(var i=0;i<grid.getDataRowCount();i++){
 					if(grid.isCheckedRow(i)){
 						var cellValue = grid.getCellValue(i, "mealkitName");
@@ -338,8 +353,8 @@
 			
 			var submission_2 = new cpr.protocols.Submission("payment");
 			submission_2.action = "/paymentInsert";
-			submission_2.mediaType = "application/x-www-form-urlencoded;simple";
 			submission_2.addRequestData(dataMap_1);
+			submission_2.addRequestData(dataSet_2, cpr.protocols.PayloadType.modified);
 			if(typeof onPaymentSubmitSuccess == "function") {
 				submission_2.addEventListener("submit-success", onPaymentSubmitSuccess);
 			}
@@ -388,7 +403,8 @@
 				var group_2 = new cpr.controls.Container();
 				group_2.style.setClasses(["cl-form-group"]);
 				group_2.style.css({
-					"border-radius" : "30px"
+					"border-radius" : "30px",
+					"background-color" : "#FFFFFF"
 				});
 				var formLayout_1 = new cpr.controls.layouts.FormLayout();
 				formLayout_1.scrollable = true;
@@ -400,7 +416,7 @@
 				formLayout_1.verticalSpacing = "0px";
 				formLayout_1.horizontalSeparatorWidth = 1;
 				formLayout_1.verticalSeparatorWidth = 1;
-				formLayout_1.setColumns(["100px", "100px", "1fr", "100px", "120px", "100px", "150px"]);
+				formLayout_1.setColumns(["100px", "34px", "1fr", "100px", "120px", "100px", "150px"]);
 				formLayout_1.setCustomColumnShade(0, "#FFFFFF");
 				formLayout_1.setCustomColumnShade(1, "#FFFFFF");
 				formLayout_1.setCustomColumnShade(3, "#FFFFFF");
@@ -448,10 +464,14 @@
 					});
 					var output_3 = new cpr.controls.Output();
 					output_3.value = "    < 쇼핑 계속하기";
+					output_3.style.css({
+						"border-right-style" : "solid",
+						"border-right-color" : "white"
+					});
 					container.addChild(output_3, {
 						"colIndex": 0,
 						"rowIndex": 5,
-						"colSpan": 7,
+						"colSpan": 2,
 						"rowSpan": 1
 					});
 					var grid_1 = new cpr.controls.Grid("grd1");
@@ -463,7 +483,7 @@
 						"resizableColumns": "all",
 						"noDataMessage": "장바구니에 목록이없습니다 ",
 						"columns": [
-							{"width": "25px"},
+							{"width": "22px"},
 							{"width": "143px"},
 							{"width": "345px"},
 							{"width": "143px"},
@@ -536,7 +556,7 @@
 							]
 						},
 						"detail": {
-							"rows": [{"height": "130px"}],
+							"rows": [{"height": "158px"}],
 							"cells": [
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 0},
@@ -645,6 +665,19 @@
 						"colIndex": 6,
 						"rowIndex": 1
 					});
+					var output_5 = new cpr.controls.Output();
+					output_5.value = "";
+					output_5.style.css({
+						"background-color" : "#FFFFFF",
+						"border-left-style" : "solid",
+						"border-left-color" : "white"
+					});
+					container.addChild(output_5, {
+						"colIndex": 2,
+						"rowIndex": 5,
+						"colSpan": 5,
+						"rowSpan": 1
+					});
 				})(group_2);
 				container.addChild(group_2, {
 					"top": "0px",
@@ -652,11 +685,12 @@
 					"bottom": "150px",
 					"left": "0px"
 				});
-				var button_2 = new cpr.controls.Button("btn1");
+				var button_2 = new cpr.controls.Button();
 				button_2.value = "전체 상품 주문";
-				button_2.style.setClasses(["btn-outline-info"]);
 				button_2.style.css({
-					"background-color" : "#2D1F18"
+					"background-color" : "#eb5307",
+					"white-space" : "normal",
+					"background-image" : "none"
 				});
 				if(typeof onButtonClick == "function") {
 					button_2.addEventListener("click", onButtonClick);
@@ -703,9 +737,9 @@
 				formLayout_2.setRows(["50px"]);
 				group_3.setLayout(formLayout_2);
 				(function(container){
-					var output_5 = new cpr.controls.Output("totalval");
-					output_5.dataType = "number";
-					output_5.style.css({
+					var output_6 = new cpr.controls.Output("totalval");
+					output_6.dataType = "number";
+					output_6.style.css({
 						"background-color" : "#FFFFFF",
 						"border-radius" : "0px",
 						"border-top-width" : "3px",
@@ -716,15 +750,15 @@
 						"border-top-style" : "solid",
 						"text-align" : "right"
 					});
-					container.addChild(output_5, {
+					container.addChild(output_6, {
 						"colIndex": 1,
 						"rowIndex": 0,
 						"colSpan": 1,
 						"rowSpan": 1
 					});
-					var output_6 = new cpr.controls.Output();
-					output_6.value = "총 결제할 금액은 ";
-					output_6.style.css({
+					var output_7 = new cpr.controls.Output();
+					output_7.value = "총 결제할 금액은 ";
+					output_7.style.css({
 						"background-color" : "#FFFFFF",
 						"border-top-width" : "3px",
 						"border-bottom-color" : "#e5e5e5",
@@ -737,15 +771,15 @@
 						"border-top-style" : "solid",
 						"text-align" : "right"
 					});
-					container.addChild(output_6, {
+					container.addChild(output_7, {
 						"colIndex": 0,
 						"rowIndex": 0,
 						"colSpan": 1,
 						"rowSpan": 1
 					});
-					var output_7 = new cpr.controls.Output();
-					output_7.value = "원 입니다";
-					output_7.style.css({
+					var output_8 = new cpr.controls.Output();
+					output_8.value = "원 입니다";
+					output_8.style.css({
 						"border-right-style" : "solid",
 						"background-color" : "#FFFFFF",
 						"border-top-width" : "3px",
@@ -757,7 +791,7 @@
 						"border-bottom-style" : "solid",
 						"border-top-style" : "solid"
 					});
-					container.addChild(output_7, {
+					container.addChild(output_8, {
 						"colIndex": 2,
 						"rowIndex": 0
 					});

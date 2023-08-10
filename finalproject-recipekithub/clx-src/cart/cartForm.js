@@ -11,11 +11,6 @@
  */
 function onBodyLoad(e){
 	app.lookup("selectMyCart").send();
-	var button = app.lookup("btn1");
-	button.style.css({
-		"background-color": "red"
-		, "background-image": "none"
-	})
 }
 
 /*
@@ -71,8 +66,17 @@ function getSumPrice(){
  */
 function onButtonClick(e){
 	var button = e.control;
-	
-	if(app.lookup("grd1").getDataRowCount() > 0){
+	var grid = app.lookup("grd1");
+	if(grid.getDataRowCount() > 0){
+		for(var i=0;i<grid.getDataRowCount();i++){
+			if(grid.isCheckedRow(i)){
+				var cellValue = grid.getCellValue(i, "mealkitName");
+				var data = {"mealkitName" : cellValue};
+				console.log(cellValue);
+				app.lookup("selectList").addRowData(data);
+				console.log(app.lookup("selectList").getValue(i, "mealkitName"));
+			}
+		}
 		app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);
 		app.lookup("payment").send();
 	}else{
@@ -194,11 +198,22 @@ function onGrd1RowCheck(e){
  */
 function onButtonClick2(e){
 	var button = e.control;
-	if(app.lookup("grd1").getCheckRowIndices().length > 0){
+	var grid = app.lookup("grd1");
+	if(grid.getCheckRowIndices().length > 0){
+		for(var i=0;i<grid.getDataRowCount();i++){
+			if(grid.isCheckedRow(i)){
+				var cellValue = grid.getCellValue(i, "mealkitName");
+				var data = {"mealkitName" : cellValue};
+				console.log(cellValue);
+				
+				app.lookup("selectList").addRowData(data);
+				console.log(app.lookup("selectList").getValue(i, "mealkitName"));
+			}
+		}
 		app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);
 		app.lookup("payment").send();
 	}else{
-		if(app.lookup("grd1").getDataRowCount() == 0)	{
+		if(grid.getDataRowCount() == 0)	{
 			var src = "dialog/failPayment";
 			var initValue = "장바구니에 물건이 없습니다";
 			app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
@@ -227,8 +242,8 @@ function onButtonClick2(e){
 function onButtonClick3(e){
 	var button = e.control;
 	var grid = app.lookup("grd1");
-	var checkRowIndices = grid.getCheckRowIndices();
-	var value = grid.getDataRow(checkRowIndices[0]).getValue("mealkitName");
+//	var checkRowIndices = grid.getCheckRowIndices();
+//	var value = grid.getDataRow(checkRowIndices[0]).getValue("mealkitName");
 	for(var i=0;i<grid.getDataRowCount();i++){
 		if(grid.isCheckedRow(i)){
 			var cellValue = grid.getCellValue(i, "mealkitName");
