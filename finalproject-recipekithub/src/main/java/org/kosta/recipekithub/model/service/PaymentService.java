@@ -8,4 +8,6 @@ public interface PaymentService {
 
 	int mealkitInventoryUpdate(int cartNo, int cartQuantity);
 
+	int updateCartOrderStatus();
+
 }

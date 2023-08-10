@@ -1145,6 +1145,9 @@ code,
 .btn-round {
   border-radius: 2.125rem !important;
 }
+.btn-1 {
+  background-color: aqua;
+}
 .btn-square {
   border-radius: 0;
 }

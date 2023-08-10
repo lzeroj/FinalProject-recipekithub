@@ -6,6 +6,14 @@
 		INSERT INTO PAYMENT VALUES(PAYMENT_seq.NEXTVAL,#{cartNo},SYSDATE,'Y',#{paymentTotal})
 	</insert>
 	
+	<update id="updateCartOrderStatus">
+		UPDATE cart SET CART_ORDER_STATUS = 'Y'
+	</update>
+	
+	<update id="">
+		
+	</update>
+	
 	<update id="mealkitInventoryUpdate">
 		UPDATE MEALKIT_BOARD SET MEALKIT_INVENTORY = MEALKIT_INVENTORY - #{cartQuantity} where MEALKIT_NO = #{cartNo}
 	</update>

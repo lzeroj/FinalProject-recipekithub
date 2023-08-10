@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-7e78c35b" version="1.0.4584">
+  <head std:sid="head-c3a00910">
+    <screen std:sid="screen-aa9858f4" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="300" customWidth="400" active="true"/>
+    <screen std:sid="screen-57357ca2" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-8f4cfd37" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-f1f69ed0"/>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-c75b7c6a">
+    <cl:listener std:sid="listener-bf190cb3" name="load" handler="onBodyLoad"/>
+    <cl:output std:sid="output-485050e6" style="background-color:#FFFFFF; font-size:18px; text-align:center;" value="감사합니다">
+      <cl:xylayoutdata std:sid="xyl-data-de24190e" top="51px" right="20px" left="20px" height="100px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:button std:sid="button-d2ed04fc" value="홈으로">
+      <cl:listener std:sid="listener-2e1c0af7" name="click" handler="onButtonClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-7961af3e" right="20px" bottom="20px" left="20px" height="40px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+    </cl:button>
+    <cl:output std:sid="output-46d855e1" id="opb1" style="background-color:#FFFFFF; color:#727C89; font-size:15px; font-style:normal; text-align:center;" value="">
+      <cl:xylayoutdata std:sid="xyl-data-2be05c82" top="150px" right="20px" left="20px" height="80px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:xylayout std:sid="xylayout-3b74c2b2"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

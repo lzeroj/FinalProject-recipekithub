@@ -9,4 +9,6 @@ public interface PaymentMapper {
 
 	int mealkitInventoryUpdate(int cartNo,int cartQuantity);
 
+	int updateCartOrderStatus();
+
 }

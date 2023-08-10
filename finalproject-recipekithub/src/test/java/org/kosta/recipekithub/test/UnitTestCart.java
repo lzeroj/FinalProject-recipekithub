@@ -25,8 +25,12 @@ public class UnitTestCart {
 	public void selectMyCart() {
 		String memberEmail = "shj";
 		List<CartVO> cartlist = cartService.selectMyCart(memberEmail);
-		System.out.println(cartlist.toString());
-		Assertions.assertEquals(1, cartlist.size());
+		System.out.println(cartlist.get(0));
+		System.out.println(cartlist.get(1));
+		for(int i=0;i<cartlist.size();i++) {
+			System.out.println(cartlist.get(i));
+		}
+		Assertions.assertEquals(2, cartlist.size());
 	}
 	
 	@Test
@@ -76,5 +80,28 @@ public class UnitTestCart {
 		for(int i=0;i<cartlist.size();i++) {
 			System.out.println(cartlist.toString());
 		}
+	}
+	
+	@Test
+	public void isCheckedChange() {
+		int result = 0;
+		int mealkitNo = 1;
+		String chkinfo = "N";
+		if(chkinfo == "N") {
+			chkinfo = "Y";
+			result = cartService.isCheckedChange(chkinfo,mealkitNo);
+		}else { // chkbox==false
+			chkinfo = "N";
+			result = cartService.isCheckedChange(chkinfo,mealkitNo);
+		}
+		Assertions.assertEquals(1, result);
+	}
+	
+	@Test
+	public void deleteMyCart() {
+		int mealkitNo = 14;
+		int cartNo = 2;
+		int result = cartService.deleteMyCart(mealkitNo,cartNo);
+		Assertions.assertEquals(1, result);
 	}
 }

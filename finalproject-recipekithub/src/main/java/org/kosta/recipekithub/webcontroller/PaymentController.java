@@ -38,18 +38,22 @@ public class PaymentController {
 			CartVO cvo = cartService.findCartNoByMemberEmail(memberVO.getMemberEmail());
 			Map<String,Object> errormsg = new HashMap<>();
 			try {
-				paymentService.paymentInsert(totalpay, cvo.getCartNo());
-				errormsg.put("errormsg", "success");
+				// payment 테이블에 인서트
+				int result = paymentService.paymentInsert(totalpay, cvo.getCartNo());
+				if(result == 1) {
+					// 장바구니 상태 업데이트
+					paymentService.updateCartOrderStatus();
+				}
 				Map<String,Object> message = new HashMap<>();
 				message.put("insertInfo", "success");
 				dataRequest.setMetadata(true, message);
+				
+				errormsg.put("errormsg", "결제가 정상적으로 완료되었습니다");
 			} catch (NotEnoughStockException e) {
 				e.printStackTrace();
 				String message = e.getMessage();
 				
-				
 				errormsg.put("errormsg", message);
-				
 			}
 			dataRequest.setMetadata(true, errormsg);
 		}

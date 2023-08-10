@@ -45,4 +45,14 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.mealkitQuantityComparisonByCart(cartNo);
 	}
 
+	@Override
+	public int isCheckedChange(String chkinfo, int mealkitNo) {
+		return cartMapper.isCheckedChange(chkinfo,mealkitNo);
+	}
+
+	@Override
+	public int deleteMyCart(int mealkitNo, int cartNo) {
+		return cartMapper.deleteMyCart(mealkitNo,cartNo);
+	}
+
 }

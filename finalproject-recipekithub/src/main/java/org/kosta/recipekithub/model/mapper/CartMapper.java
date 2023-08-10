@@ -21,4 +21,8 @@ public interface CartMapper {
 
 	List<CartVO> mealkitQuantityComparisonByCart(int cartNo);
 
+	int isCheckedChange(String chkinfo, int mealkitNo);
+
+	int deleteMyCart(int mealkitNo, int cartNo);
+
 }

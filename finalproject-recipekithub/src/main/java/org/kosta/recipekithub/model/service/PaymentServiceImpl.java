@@ -46,4 +46,9 @@ public class PaymentServiceImpl implements PaymentService {
 		return paymentMapper.mealkitInventoryUpdate(cartNo,cartQuantity);
 	}
 
+	@Override
+	public int updateCartOrderStatus() {
+		return paymentMapper.updateCartOrderStatus();
+	}
+
 }

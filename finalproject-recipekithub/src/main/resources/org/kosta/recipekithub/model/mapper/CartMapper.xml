@@ -7,16 +7,17 @@
 		<result column="MEALKIT_IMAGE" property="mealkitboardVO.mealkitImage"/>
 		<result column="MEALKIT_PRICE" property="mealkitboardVO.mealkitPrice"/>
 		<result column="CART_DETAIL_QUANTITY" property="cartdetailVO.cartDetailQuantity"/>
+		<result column="IS_CHECKED" property="cartdetailVO.isChecked"/>
 		<result column="MEMBER_EMAIL" property="memberVO.memberEmail"/>
 	</resultMap>
 	<select id="selectMyCart" resultMap="cartProductInfoList">
-		SELECT mb.MEALKIT_NAME,mb.MEALKIT_IMAGE ,mb.MEALKIT_PRICE ,cd.CART_DETAIL_QUANTITY 
+		SELECT mb.MEALKIT_NAME,mb.MEALKIT_IMAGE ,mb.MEALKIT_PRICE ,cd.CART_DETAIL_QUANTITY,cd.IS_CHECKED
 		FROM CART_DETAIL cd, MEALKIT_BOARD mb, CART c, "MEMBER" m 
 		WHERE cd.CART_NO = c.CART_NO
 		AND cd.MEALKIT_NO = mb.MEALKIT_NO 
 		AND c.CART_ORDER_STATUS = 'N'
 		AND m.MEMBER_EMAIL = #{memberEmail}
-		AND cd.IS_CHECKED = 'Y'
+		AND cd.IS_ORDERED_DATAIL = 'N'
 	</select>
 	
 	<update id="updateCart">
@@ -48,6 +49,14 @@
 		WHERE cd.MEALKIT_NO = mb.MEALKIT_NO 
 		AND cd.CART_NO = #{cartNo}
 	</select>
+	
+	<update id="isCheckedChange">
+		UPDATE CART_DETAIL SET IS_CHECKED = #{chkinfo} WHERE MEALKIT_NO = #{mealkitNo}
+	</update>
+	
+	<delete id="deleteMyCart">
+		DELETE FROM CART_DETAIL WHERE MEALKIT_NO = #{mealkitNo} AND CART_NO = #{cartNo}
+	</delete>
 
 
 </mapper>

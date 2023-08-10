@@ -1,6 +1,5 @@
 package org.kosta.recipekithub.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.kosta.recipekithub.model.vo.CartVO;
@@ -19,5 +18,9 @@ public interface CartService {
 	MealkitboardVO findMealkitBoardByMealkitName(String mealkitName);
 
 	List<CartVO> mealkitQuantityComparisonByCart(int cartNo);
+
+	int isCheckedChange(String chkinfo, int mealkitNo);
+
+	int deleteMyCart(int mealkitNo, int cartNo);
 
 }
