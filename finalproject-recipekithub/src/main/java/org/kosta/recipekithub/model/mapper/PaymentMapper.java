@@ -11,4 +11,6 @@ public interface PaymentMapper {
 
 	int updateCartOrderStatus();
 
+	int updateCartDetailOrderStatus(String isOrderedDetail);
+
 }

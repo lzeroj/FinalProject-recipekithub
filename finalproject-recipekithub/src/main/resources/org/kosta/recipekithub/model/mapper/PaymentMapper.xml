@@ -10,8 +10,8 @@
 		UPDATE cart SET CART_ORDER_STATUS = 'Y'
 	</update>
 	
-	<update id="">
-		
+	<update id="IsOrderedDetail">
+		UPDATE 
 	</update>
 	
 	<update id="mealkitInventoryUpdate">

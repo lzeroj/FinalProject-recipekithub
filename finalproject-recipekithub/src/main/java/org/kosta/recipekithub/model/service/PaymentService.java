@@ -10,4 +10,6 @@ public interface PaymentService {
 
 	int updateCartOrderStatus();
 
+	int updateCartDetailOrderStatus(String IsOrderedDetail);
+
 }

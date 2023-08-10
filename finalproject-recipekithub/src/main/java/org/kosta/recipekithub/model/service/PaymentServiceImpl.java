@@ -51,4 +51,9 @@ public class PaymentServiceImpl implements PaymentService {
 		return paymentMapper.updateCartOrderStatus();
 	}
 
+	@Override
+	public int updateCartDetailOrderStatus(String IsOrderedDetail) {
+		return paymentMapper.updateCartDetailOrderStatus(IsOrderedDetail);
+	}
+
 }

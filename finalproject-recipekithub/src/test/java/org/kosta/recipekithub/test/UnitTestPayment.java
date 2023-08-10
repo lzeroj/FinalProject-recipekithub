@@ -31,4 +31,10 @@ public class UnitTestPayment {
 		Assertions.assertEquals(1, result);
 	}
 	
+	@Test
+	public void updateCartDetailOrderStatus() {
+		int result = paymentService.updateCartDetailOrderStatus("Y");
+		Assertions.assertEquals(1, result);
+	}
+	
 }
