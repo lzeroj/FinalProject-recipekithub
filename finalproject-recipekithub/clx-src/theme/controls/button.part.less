@@ -1,64 +1,43 @@
-@import "../custom-settings.part.less";
+@import "../settings.part.less";
 
 /* 버튼 */
 .cl-button {
-	font: @font-base;
-	color: @btn-text-color;
-	background-image: none;
-	background-color: @btn-background-color;
-	background-repeat: no-repeat;
-	border-radius: @btn-border-radius;
-	border: none;
-	text-shadow: @btn-text-shadow;
-	transition: @transition-base;
-	// background-image: url('../../theme/sems/images/ico_search.png');
-	
-	/*
-	.cl-search-button{
-		background-image: url('../../theme/sems/images/ico_search.png');
-	}
-	*/
-	
-	
-	
+	font: @default-font;
+	color: @default-text-color;
+	/*background-image: linear-gradient(#FCFEFF, #E0E1E2);*/
+	border-radius: 4px;
+	border: solid 1px #959697;
+	text-shadow: 0px 1px 0px white;
+
 	/* 텍스트 스타일 */
 	.cl-text {
 		// text-overflow:ellipsis;
 		// overflow:hidden;
 	}
-	
+
 	/* 아이콘 스타일 */
 	.cl-icon{
 		// width: 1em;
 		// height: 1em;
 	}
-	
-	/* 버튼위에 마우스를 올렸을 때의 스타일 */
+
+	/* 마우스 호버 스타일 */
 	&:not(.cl-disabled):hover{
-		background-color: @btn-hover-background-color;
-		border-color: @btn-hover-border-color;
-		color: @btn-hover-text-color;
-	}
-	/* 버튼이 포커스를 가졌을 때의 스타일 */
-	&:focus, &.cl-focus{
-		background-color: @btn-focus-background-color;
-		border-color: @btn-focus-border-color;
-		color: @btn-focus-text-color;
+		color: #1068A4;
 	}
 
-	/* 버튼을 클릭했을 때의 스타일 */
+	/* 포커스 스타일 */
+	&:focus, &.cl-focus{
+		border: solid 1px @focus-border-color;
+	}
+
+	/* 클릭 스타일 */
 	&:not(.cl-disabled).cl-activated, &:not(.cl-disabled):active {
-		background-image: @btn-background-image;
-		background-color: @btn-active-background-color;
-		border-color: @btn-active-border-color;
-		color: @btn-active-text-color;
+		/*background-image: linear-gradient(#ddd, #eee 5px, #ddd);*/
 	}
 }
 
 /* Disable 상태의 버튼 */
 .cl-button.cl-disabled{
-	background-color: @btn-disabled-background-color;
-	border-color: @btn-disabled-border-color;
-	color: @btn-disabled-text-color;
-	opacity: @btn-disabled-opacity;
+	color: @disabled-text-color;
 }

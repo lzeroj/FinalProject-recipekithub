@@ -1,33 +1,44 @@
-@import "../custom-settings.part.less";
+@import "../settings.part.less";
 
- /* 인풋 박스 루트 */
+/* 인풋 박스 루트 */
 .cl-inputbox {
-	font: @font-base;
-	color: @input-text-color;
-	border: @input-border-base;
-	border-radius: @input-border-radius;
-	background-color: @input-background-color;
-	background-image: @input-background-image;
-	transition: @transition-base;
+	font: @default-font;
+	color: @default-text-color;
+	border: 1px solid @default-border-color;
+	background-color: #fff;
 
 	/* 인풋 박스 텍스트 */
-	.cl-text{
-		padding: @input-padding-0 @input-padding-x;
-		
-		&.cl-placeholder {
-			color: @input-placeholder-text-color !important;
-		}
-	}
-	
+	.cl-text {}
+
 	/* 인풋 박스 - 포커스 상태 */
 	&.cl-focus {
-		border-color: @input-focus-border-color;
+		border-color: @focus-border-color;
+	}
+
+	/* 인풋 박스 - 클리어 버튼 */
+	.cl-inputbox-clear {
+		//background-image: url(icons/clear-button.png);
 	}
 
 	/* 인풋 박스 - disabled 상태 */
 	&.cl-disabled {
-		border-color: @input-disabled-border-color;
-		background-color: @input-disabled-background-color;
-		color: @input-disabled-text-color;
+		// border-color: @disabled-border-color;
+		// background-image: none;
+		// background-color: @disabled-selection-background;
+		// color: @default-text-color;
+
+		.cl-inputbox-clear {
+			// background-image: url(icons/clear-button-disabled.png);
+			// cursor: default;
+		}
+	}
+
+	&:not(.cl-disabled) {
+
+		/* 클리어 버튼 hover상태 */
+		.cl-inputbox-clear:hover {}
+
+		/* 클리어 버튼 active상태 */
+		.cl-inputbox-clear:active {}
 	}
 }
