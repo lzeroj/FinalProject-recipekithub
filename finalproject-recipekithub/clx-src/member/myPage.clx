@@ -4,6 +4,7 @@
     <screen std:sid="screen-b8bbaf23" id="default" name="default" width="1024px" height="768px"/>
     <screen std:sid="screen-18df3791" id="tablet" name="tablet" width="500px" height="667px"/>
     <screen std:sid="screen-483f05e6" id="mobile" name="mobile" width="350px" height="525px"/>
+    <link std:sid="link-126d6ee1" href="../theme/custom/navigation.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-c7d8d66f">
       <cl:dataset std:sid="d-set-863eab05" id="navval">
         <cl:datacolumnlist>
@@ -31,26 +32,33 @@
   <body std:sid="body-075178bb">
     <cl:listener std:sid="listener-b0b3e7df" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-3e468ab3">
-      <cl:xylayoutdata std:sid="xyl-data-449706f5" width="984px" height="728px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
-      <cl:group std:sid="group-3de6e575">
-        <cl:xylayoutdata std:sid="xyl-data-cb462386" top="80px" bottom="20px" left="20px" width="640px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
-        <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1">
-          <cl:xylayoutdata std:sid="xyl-data-1467882b" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-        </cl:embeddedapp>
-        <cl:xylayout std:sid="xylayout-6eef3a02"/>
+      <cl:xylayoutdata std:sid="xyl-data-449706f5" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-13bc8f58">
+        <cl:xylayoutdata std:sid="xyl-data-ba4a6983" top="166px" right="20px" bottom="5px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:group std:sid="group-3de6e575">
+          <cl:xylayoutdata std:sid="xyl-data-3c938e4d" top="39px" bottom="0px" left="0px" width="709px" verticalAnchor="BOTH"/>
+          <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1" src="../embedded/myPagePaymentInfo.clx">
+            <cl:xylayoutdata std:sid="xyl-data-1467882b" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:embeddedapp>
+          <cl:xylayout std:sid="xylayout-6eef3a02"/>
+        </cl:group>
+        <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-bottom-color:#FFFFFF; border-bottom-style:0;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click">
+          <cl:xylayoutdata std:sid="xyl-data-9d7e939c" top="0px" left="0px" width="355px" height="40px"/>
+          <cl:menuitem std:sid="m-item-cda41080" label="레시피" value="1"/>
+          <cl:menuitem std:sid="m-item-efa3cc1b" label="구매내역" value="2"/>
+          <cl:menuitem std:sid="m-item-daee6a4f" label="좋아요" value="3"/>
+        </cl:navigationbar>
+        <cl:group std:sid="group-8003b2a0">
+          <cl:xylayoutdata std:sid="xyl-data-99146801" top="0px" right="0px" width="270px" height="200px" horizontalAnchor="RIGHT"/>
+          <cl:xylayout std:sid="xylayout-ac8d4db3"/>
+        </cl:group>
+        <cl:xylayout std:sid="xylayout-697e72d5" scrollable="false"/>
       </cl:group>
-      <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" menutype="fullmenu" expandtrigger="click">
-        <cl:xylayoutdata std:sid="xyl-data-ec4f9c86" top="20px" left="20px" width="640px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-        <cl:menuitem std:sid="m-item-cda41080" label="레시피" value="1"/>
-        <cl:menuitem std:sid="m-item-efa3cc1b" label="구매내역" value="2"/>
-        <cl:menuitem std:sid="m-item-daee6a4f" label="좋아요" value="3"/>
-      </cl:navigationbar>
       <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
     </cl:group>
-    <cl:group std:sid="group-8003b2a0">
-      <cl:xylayoutdata std:sid="xyl-data-0e1071d4" top="20px" right="20px" width="300px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
-      <cl:xylayout std:sid="xylayout-ac8d4db3"/>
-    </cl:group>
+    <cl:udc std:sid="ud-control-ebbaefc3" type="udc.header">
+      <cl:xylayoutdata std:sid="xyl-data-477b5bef" top="0px" right="0px" left="0px" height="163px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:udc>
     <cl:xylayout std:sid="xylayout-c3614e7a"/>
   </body>
   <std:studiosetting>

@@ -1,8 +1,11 @@
 package org.kosta.recipekithub.test;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.kosta.recipekithub.model.service.PaymentService;
+import org.kosta.recipekithub.model.vo.CartdetailVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -38,5 +41,15 @@ public class UnitTestPayment {
 		int result = paymentService.updateCartDetailOrderStatus(cartNO,mealkitNo);
 		Assertions.assertEquals(1, result);
 	}
+	
+	@Test
+	public void findMealkitNameAndCount() {
+		int cartNO = 3;
+		int paymentId = 19;
+		String memberEmail = "shj";
+		List<CartdetailVO> list = paymentService.findMealkitNameAndCount(memberEmail,cartNO,paymentId);
+		Assertions.assertEquals(3, list.size());
+	}
+
 	
 }

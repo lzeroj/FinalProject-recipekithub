@@ -25,5 +25,35 @@
 		DELETE FROM CART_DETAIL WHERE IS_CHECKED = 'N' AND IS_ORDERED_DATAIL = 'N'
 	</delete>
 	
+	<resultMap type="org.kosta.recipekithub.model.vo.PaymentVO" id="findMypaymentListMap">
+		<result column="MEMBER_EMAIL" property="cartVO.memberVO.memberEmail"/>
+		<result column="MEALKIT_NO" property="mealkitVO.mealkitNo"/>
+		<result column="MEALKIT_NAME" property="mealkitVO.mealkitName"/>
+	</resultMap>
+	<select id="findMyPaymentList" resultMap="findMypaymentListMap">
+		SELECT c.MEMBER_EMAIL , p.PAYMENT_DATE , p.PAYMENT_ID  , p.PAYMENT_TOTAL , mb.MEALKIT_NO, mb.MEALKIT_NAME
+		FROM CART c , CART_DETAIL cd , PAYMENT p , MEALKIT_BOARD mb 
+		WHERE p.CART_NO = c.CART_NO AND c.CART_NO = cd.CART_NO AND mb.MEALKIT_NO = cd.MEALKIT_NO 
+		AND cd.IS_ORDERED_DATAIL = 'Y'
+		AND c.CART_ORDER_STATUS = 'Y'
+		AND c.MEMBER_EMAIL = #{memberEmail}
+		ORDER BY p.PAYMENT_ID desc
+	</select>
+	
+	<!-- 밀키트 이름과 수량 -->
+	<resultMap type="org.kosta.recipekithub.model.vo.CartdetailVO" id="findMealkitNameAndCountMap">
+		<result column="MEALKIT_NAME" property="mealkitboardVO.mealkitName"/>
+	</resultMap>
+	<select id="findMealkitNameAndCount" resultMap="findMealkitNameAndCountMap">
+		SELECT mb.MEALKIT_NAME , cd.CART_DETAIL_QUANTITY 
+		FROM CART c , CART_DETAIL cd , PAYMENT p , MEALKIT_BOARD mb 
+		WHERE p.CART_NO = c.CART_NO AND c.CART_NO = cd.CART_NO AND mb.MEALKIT_NO = cd.MEALKIT_NO 
+		AND cd.IS_ORDERED_DATAIL = 'Y'
+		AND c.CART_ORDER_STATUS = 'Y'
+		AND c.MEMBER_EMAIL = #{memberEmail}
+		AND c.CART_NO = #{cartNO}
+		AND p.PAYMENT_ID = #{paymentId}
+	</select>
+	
 
 </mapper>

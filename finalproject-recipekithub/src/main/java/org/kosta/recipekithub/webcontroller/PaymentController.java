@@ -1,6 +1,8 @@
 package org.kosta.recipekithub.webcontroller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +12,10 @@ import org.kosta.recipekithub.model.exception.NotEnoughStockException;
 import org.kosta.recipekithub.model.service.CartService;
 import org.kosta.recipekithub.model.service.PaymentService;
 import org.kosta.recipekithub.model.vo.CartVO;
+import org.kosta.recipekithub.model.vo.CartdetailVO;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.PaymentVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
@@ -80,6 +84,41 @@ public class PaymentController {
 			}
 			dataRequest.setMetadata(true, errormsg);
 		}
+		return new JSONDataView();
+	}
+	
+	@RequestMapping("/findMyPaymentList")
+	public View findMyPaymentList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+//		HttpSession session = request.getSession(false);
+//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMemberEmail("shj");
+		
+		List<PaymentVO> paymentlist = paymentService.findMyPaymentList(memberVO.getMemberEmail());
+		// 밀키트 데이터
+		List<MealkitboardVO> sendMealkitInfo = new ArrayList<>();
+		MealkitboardVO mlvo = null;
+		for(int i=0;i<paymentlist.size();i++) {
+			mlvo = new MealkitboardVO();
+			mlvo.setMealkitName(paymentlist.get(i).getMealkitVO().getMealkitName());
+			mlvo.setMealkitNo(paymentlist.get(i).getMealkitVO().getMealkitNo());
+			sendMealkitInfo.add(mlvo);
+		}
+		
+		StringBuilder sb = new StringBuilder();
+//		for() {
+//			sb.append("음식명 X 갯수");
+//		}
+		
+		
+		List<CartdetailVO> senCartDetailInfo = new ArrayList<>();
+		CartdetailVO cartdetailVO = null;
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("sendMealkitInfo", sendMealkitInfo);
+		map.put("listmealkitname", map);
+		dataRequest.setResponse("myPaymentList", paymentlist);
+		dataRequest.setMetadata(true, map);
 		return new JSONDataView();
 	}
 	

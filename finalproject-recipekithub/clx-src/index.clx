@@ -15,12 +15,12 @@
       <cl:xylayoutdata std:sid="xyl-data-ba2d696a" top="200px" right="140px" bottom="100px" left="140px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:embeddedapp std:sid="e-app-b04448a7" id="ea1">
         <cl:listener std:sid="listener-8d8ab156" name="click" handler="onEa1Click"/>
-        <cl:xylayoutdata std:sid="xyl-data-f336297e" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:xylayoutdata std:sid="xyl-data-f336297e" top="-28px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       </cl:embeddedapp>
       <cl:xylayout std:sid="xylayout-2b64f377"/>
     </cl:group>
     <cl:udc std:sid="ud-control-ba2d34d8" type="udc.header">
-      <cl:xylayoutdata std:sid="xyl-data-71e7dd03" top="0px" right="0px" bottom="568px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:xylayoutdata std:sid="xyl-data-71e7dd03" top="0px" right="0px" left="0px" height="160px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
     </cl:udc>
     <cl:xylayout std:sid="xylayout-f50d3061"/>
   </body>
