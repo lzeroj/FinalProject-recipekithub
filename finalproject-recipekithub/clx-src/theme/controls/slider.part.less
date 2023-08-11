@@ -1,4 +1,4 @@
-@import "../custom-settings.part.less";
+@import "../settings.part.less";
 
  /* 슬라이더 */
 .cl-slider {
@@ -14,77 +14,58 @@
 
 	/* 슬라이더 바 */
 	.cl-slider-bar {
-		background-color: @lighter;
-		border: @component-border-base;
+		// background-color:#fff;
+		border:1px solid @default-border-color;
 
 		/* 슬라이더 가로 바 */
 		&.cl-horizontal{
-			 background-image: @component-background-image;
+			// background-image: linear-gradient(#ddd, white 3px);
 		}
 
-		/* 슬라이더 세로 바*/
+		/* 슬라이더 세로 바 */
 		&.cl-vertical {
-			 background-image: @component-background-image;
+			// background-image: linear-gradient(to right, #ddd, white 3px);
 		}
 
 
 		/* 슬라이더 핸들 */
 		.cl-slider-handle {
+			// background-image: url("icons/slider-thumb.png");
 
 			/* 슬라이더 가로바 핸들 */
 			&.cl-horizontal {
-				background-image: url(images/controls/slider/icon-slider-handle.png);
-				background-size: 8px 19px;
-				width: 8px;
-				height: 19px;
-				top: -7px;
-				transform: translateX(-7px);
 			}
 
 			/* 슬라이더 세로바 핸들 */
 			&.cl-vertical {
-				background-image: url(images/controls/slider/icon-slider-handle-vertical.png);
-				background-size: 19px 8px;
-				width: 19px;
-				height: 8px;
-				left: -7px;
-				transform: translateY(-7px);
 			}
+
 		}
 
 		/* 슬라이더 선택 영역 표시 바 */
 		.cl-slider-range {
-			background-color: @primary;
+			background-color: lighten(@selection-background, 20%);
 		}
 	}
 
 	&.cl-focus{
+		
 		/* 슬라이더 바 - focus */
 		.cl-slider-bar {
-			border-color: @component-focus-border-color;
+			border-color: @focus-border-color;
 		}
 	}
 
 	&.cl-disabled {
-		
-		.cl-slider-bar {
-			background-color: @component-disabled-background-color;
-		}
-		
-		/* 슬라이더 바 핸들 - disabled */
+
+		/* 슬라이더 바 핸들 - 비활성화 */
 		.cl-slider-handle {
-			&.cl-horizontal {
-				 background-image: url(images/controls/slider/icon-slider-handle-disabled.png);
-			}
-			
-			&.cl-vertical {
-				 background-image: url(images/controls/slider/icon-slider-handle-vertical-disabled.png);
-			}
+			// background-image: url("icons/slider-thumb-disabled.png");
 		}
 
-		/* 슬라이더 바 선택 영역 - disabled */
+		/* 슬라이더 바 선택 영역 - 비활성화 */
 		.cl-slider-range {
-			background-color: @component-disabled-selected-background-color;
+			background-color: @disabled-selection-background;
 		}
 	}
 }
@@ -92,15 +73,10 @@
 .cl-slider:not(.cl-disabled){
 	.cl-slider-bar {
 		.cl-slider-handle{
+			
 			/* 슬라이더 바 핸들 - hover */
 			&:hover, &.cl-hover {
-				&.cl-horizontal {
-					 background-image: url(images/controls/slider/icon-slider-handle-hover.png);
-				}
-				
-				&.cl-vertical {
-					 background-image: url(images/controls/slider/icon-slider-handle-vertical-hover.png);
-				}
+				// background-image: url("icons/slider-thumb-hover.png");
 			}
 		}
 	}
