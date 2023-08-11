@@ -1270,10 +1270,6 @@ body.cl-has-modal {
   background-color: #DAEFFC;
   color: #333435;
 }
-.cl-navigationbar .cl-navigationbar-bar .cl-navigationbar-item.cl-hover .indexnav {
-	background-color: #0CA44E;
-}
-
 .cl-navigationbar .cl-navigationbar-bar .cl-navigationbar-item:not(.cl-disabled):not(.cl-selected):hover,
 .cl-navigationbar .cl-navigationbar-bar .cl-navigationbar-item:not(.cl-disabled).cl-hover {
   background-color: #DAEFFC;
