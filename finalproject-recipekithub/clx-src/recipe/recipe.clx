@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-89ac9e79" version="1.0.4584">
+  <head std:sid="head-8c418f20">
+    <screen std:sid="screen-a8bffe4e" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-7c6e53dd" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-9b829c66" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-3384392a">
+      <cl:dataset std:sid="d-set-e5f476e5" id="recipe_board">
+        <cl:datacolumnlist/>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:submission std:sid="submission-e98b949e" id="recipeBoardList" action="/findRecipeBoardList">
+        <cl:listener std:sid="listener-f92b8356" name="receive" handler="onRecipeBoardListReceive"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-eca35059" style="background-color:#E8E8E8;">
+    <cl:listener std:sid="listener-e680d378" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-29a6ab6a" style="background-color:#FFFFFF;">
+      <cl:xylayoutdata std:sid="xyl-data-c92f033b" top="20px" width="984px" height="220px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-eb1e8c36" style="color:#000000; font-weight:bold; text-align:center;" value="종류별">
+        <cl:xylayoutdata std:sid="xyl-data-95d05cf0" top="10px" left="10px" width="90px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-d01ca22e" style="color:#000000; font-weight:bold; text-align:center;" value="재료별">
+        <cl:xylayoutdata std:sid="xyl-data-c97a0cd0" top="80px" left="10px" width="90px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-56ba7f12" style="color:#000000; font-weight:bold; text-align:center;" value="방법별">
+        <cl:xylayoutdata std:sid="xyl-data-2325ce2d" top="150px" left="10px" width="90px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:navigationbar std:sid="n-bar-fd2fcc6f">
+        <cl:xylayoutdata std:sid="xyl-data-ba8bd6dd" top="10px" left="110px" width="854px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:menuitem std:sid="m-item-a2e79cbe" label="전체" value="value1"/>
+        <cl:menuitem std:sid="m-item-a8ceeb70" label="밑반찬" value="value2"/>
+        <cl:menuitem std:sid="m-item-e4568c21" label="메인반찬" value="value3"/>
+        <cl:menuitem std:sid="m-item-b86c272a" label="국/탕" value="value4"/>
+        <cl:menuitem std:sid="m-item-918da262" label="디저트" value="value5"/>
+        <cl:menuitem std:sid="m-item-fa051e26" label="면" value="value6"/>
+        <cl:menuitem std:sid="m-item-efc36dbd" label="샐러드" value="value8"/>
+        <cl:menuitem std:sid="m-item-b56a3f4f" label="음료" value="value9"/>
+        <cl:menuitem std:sid="m-item-1aaab860" label="기타" value="value10"/>
+      </cl:navigationbar>
+      <cl:navigationbar std:sid="n-bar-92ff7ec1">
+        <cl:xylayoutdata std:sid="xyl-data-d03b956e" top="80px" left="110px" width="854px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:menuitem std:sid="m-item-0cfbc5df" label="전체" value="value1"/>
+        <cl:menuitem std:sid="m-item-21654230" label="육류" value="value2"/>
+        <cl:menuitem std:sid="m-item-a774d7b7" label="채소류" value="value3"/>
+        <cl:menuitem std:sid="m-item-9659f2fd" label="해물류" value="value4"/>
+        <cl:menuitem std:sid="m-item-26198adf" label="달걀/유제품" value="value5"/>
+        <cl:menuitem std:sid="m-item-9db333fe" label="가공식품류" value="value6"/>
+        <cl:menuitem std:sid="m-item-584296fd" label="과일류" value="value7"/>
+        <cl:menuitem std:sid="m-item-7da4fcc2" label="기타" value="value8"/>
+      </cl:navigationbar>
+      <cl:navigationbar std:sid="n-bar-5fbda7e7">
+        <cl:xylayoutdata std:sid="xyl-data-439ef08d" top="150px" left="110px" width="854px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:menuitem std:sid="m-item-feb4c79e" label="전체" value="value1"/>
+        <cl:menuitem std:sid="m-item-5555a229" label="볶음" value="value2"/>
+        <cl:menuitem std:sid="m-item-6f31889b" label="끓이기" value="value3"/>
+        <cl:menuitem std:sid="m-item-4dfc6b6c" label="조림" value="value4"/>
+        <cl:menuitem std:sid="m-item-6ad87404" label="튀김" value="value5"/>
+        <cl:menuitem std:sid="m-item-6eaae471" label="삶기" value="value6"/>
+        <cl:menuitem std:sid="m-item-ddb1db45" label="굽기" value="value7"/>
+        <cl:menuitem std:sid="m-item-97632a07" label="기타" value="value8"/>
+      </cl:navigationbar>
+      <cl:xylayout std:sid="xylayout-0fdf2e7e"/>
+    </cl:group>
+    <cl:group std:sid="group-2c062443" style="background-color:#FFFFFF;">
+      <cl:xylayoutdata std:sid="xyl-data-b7f19213" top="250px" width="984px" height="90px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-2eed6e9b" value="총">
+        <cl:xylayoutdata std:sid="xyl-data-c504d9b3" top="50px" left="20px" width="18px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:button std:sid="button-4f6ada68" value="최신순">
+        <cl:xylayoutdata std:sid="xyl-data-ab269e1b" top="50px" left="652px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:button>
+      <cl:button std:sid="button-a3d0c71a" value="좋아요순">
+        <cl:xylayoutdata std:sid="xyl-data-151094f3" top="50px" left="762px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:button>
+      <cl:button std:sid="button-303a4025" value="조회수순">
+        <cl:xylayoutdata std:sid="xyl-data-79ed7119" top="50px" left="872px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:button>
+      <cl:output std:sid="output-44acfea4" value="output">
+        <cl:xylayoutdata std:sid="xyl-data-811fe71b" top="43px" left="37px" width="56px" height="38px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-1f066570" value="개의 맛있는 레시피가 있습니다.">
+        <cl:xylayoutdata std:sid="xyl-data-d1d49fe5" top="50px" left="92px" width="247px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:xylayout std:sid="xylayout-ffe6ae24"/>
+    </cl:group>
+    <cl:group std:sid="group-b35ecae9" id="grp" style="background-color:#FFFFFF;">
+      <cl:xylayoutdata std:sid="xyl-data-a3cbc86b" top="350px" width="984px" height="800px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:flowlayout std:sid="f-layout-27a6850d"/>
+    </cl:group>
+    <cl:pageindexer std:sid="p-indexer-693e22e7">
+      <cl:xylayoutdata std:sid="xyl-data-f2af68aa" top="1170px" width="200px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+    </cl:pageindexer>
+    <cl:xylayout std:sid="xylayout-aa7fcea9"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

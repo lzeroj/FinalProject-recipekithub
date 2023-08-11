@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-3c540dfe" version="1.0.4584">
+  <head std:sid="head-faa49535">
+    <screen std:sid="screen-4c431770" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-dc9c0743" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-ff8fe7a2" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-d631fa03"/>
+    <cl:appspec>
+      <cl:property name="img" type="string" bindable="false" translatable="true"/>
+      <cl:property name="title" type="string"/>
+      <cl:property name="nick" type="string"/>
+      <cl:property name="like" type="string"/>
+      <cl:property name="hits" type="string"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-7d180e41" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:listener std:sid="listener-a2e3475b" name="load" handler="onBodyLoad"/>
+    <cl:img std:sid="image-433f24d8" id="img">
+      <cl:xylayoutdata std:sid="xyl-data-f316db93" top="0px" left="0px" width="230px" height="150px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:output std:sid="output-5df71c69" id="title" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-6eaf0822" top="150px" left="0px" width="230px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-5e4bbe61" id="nick" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-2ec42419" top="179px" left="0px" width="116px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-ec205da6" value="좋아요">
+      <cl:xylayoutdata std:sid="xyl-data-f41cdada" top="205px" left="0px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-86c3e89b" id="like" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-aa3180d1" top="205px" left="49px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-4c9c7b47" value="조회수">
+      <cl:xylayoutdata std:sid="xyl-data-0bf69b37" top="205px" left="100px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-d6d7c904" id="hits" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-a8a84330" top="205px" left="149px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:xylayout std:sid="xylayout-5fa74859"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

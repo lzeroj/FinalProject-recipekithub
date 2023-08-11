@@ -15,9 +15,9 @@
 		WHERE member_email=#{value}
 	</select>
 
-	<select id="checkDuplicateEmail" parameterType="string" resultType="int">
+<!-- 	<select id="checkDuplicateEmail" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE member_email=#{value}
-	</select>
+	</select> -->
 	
 	<select id="findMemberList" parameterType="string" resultType="org.kosta.recipekithub.model.vo.MemberVO">
 	<include refid="selectMember"></include>
