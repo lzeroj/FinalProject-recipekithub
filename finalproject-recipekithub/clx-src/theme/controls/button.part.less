@@ -1,5 +1,11 @@
 @import "../settings.part.less";
-
+.cl-button.main{
+	/* 마우스 호버 스타일 */
+	color:white;
+	&:not(.cl-disabled):hover{
+		color: yellow;
+	}
+}
 /* 버튼 */
 .cl-button {
 	font: @default-font;
