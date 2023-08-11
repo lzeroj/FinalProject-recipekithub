@@ -9,12 +9,12 @@
     <cl:group std:sid="group-ae1d04e7">
       <cl:xylayoutdata std:sid="xyl-data-c3e8ad3c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:group comment="날짜 검색, 물품검색" std:sid="group-b15a1e0c">
-        <cl:xylayoutdata std:sid="xyl-data-b7fc2c17" top="20px" right="20px" left="20px" height="130px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
-        <cl:output std:sid="output-1f1b4944" style="border-bottom-color:darkGrey; border-bottom-width:1px; border-bottom-style:solid;" value="구매 내역">
+        <cl:xylayoutdata std:sid="xyl-data-b7fc2c17" top="0px" right="0px" left="0px" height="348px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:output std:sid="output-1f1b4944" style="border-bottom-color:darkGrey; color:#f2bea9; border-bottom-width:1px; border-bottom-style:solid; text-align:center;" value="구매 내역">
           <cl:formdata std:sid="f-data-351106fa" row="0" col="0" rowspan="1" colspan="4"/>
         </cl:output>
         <cl:combobox std:sid="c-box-e4b777c7" id="cmb1" showicon="true" preventinput="true">
-          <cl:formdata std:sid="f-data-952be32a" row="2" col="0"/>
+          <cl:formdata std:sid="f-data-d606ab4f" row="2" col="0"/>
           <cl:item std:sid="t-item-8f999339" label="결제일자" value="paymentDate"/>
           <cl:item std:sid="t-item-c3dc66c3" label="밀키트 이름" value="mealkitName"/>
         </cl:combobox>
@@ -26,6 +26,22 @@
           <cl:columns length="130" unit="PIXEL"/>
           <cl:columns length="1" unit="FRACTION"/>
           <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-96481a9b">
+        <cl:xylayoutdata std:sid="xyl-data-46e378f9" right="0px" bottom="0px" left="0px" height="180px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+        <cl:output std:sid="output-80d33c46" style="border-bottom-color:darkGrey; color:#f2bea9; border-bottom-width:1px; border-bottom-style:solid; text-align:center;" value="상세 정보">
+          <cl:formdata std:sid="f-data-2902f091" row="0" col="0" rowspan="1" colspan="4"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-1a85de17" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="40" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
           <cl:columns length="1" unit="FRACTION"/>
         </cl:formlayout>
       </cl:group>

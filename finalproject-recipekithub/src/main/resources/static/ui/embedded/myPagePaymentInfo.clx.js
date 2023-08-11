@@ -55,8 +55,10 @@
 					output_1.value = "구매 내역";
 					output_1.style.css({
 						"border-bottom-color" : "darkGrey",
+						"color" : "#f2bea9",
 						"border-bottom-width" : "1px",
-						"border-bottom-style" : "solid"
+						"border-bottom-style" : "solid",
+						"text-align" : "center"
 					});
 					container.addChild(output_1, {
 						"colIndex": 0,
@@ -77,10 +79,45 @@
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "20px",
-					"right": "20px",
-					"left": "20px",
-					"height": "130px"
+					"top": "0px",
+					"right": "0px",
+					"left": "0px",
+					"height": "348px"
+				});
+				var group_3 = new cpr.controls.Container();
+				var formLayout_2 = new cpr.controls.layouts.FormLayout();
+				formLayout_2.scrollable = false;
+				formLayout_2.topMargin = "0px";
+				formLayout_2.rightMargin = "0px";
+				formLayout_2.bottomMargin = "0px";
+				formLayout_2.leftMargin = "0px";
+				formLayout_2.horizontalSpacing = "0px";
+				formLayout_2.verticalSpacing = "0px";
+				formLayout_2.setColumns(["1fr", "1fr", "1fr", "1fr"]);
+				formLayout_2.setRows(["40px", "1fr", "1fr", "1fr"]);
+				group_3.setLayout(formLayout_2);
+				(function(container){
+					var output_2 = new cpr.controls.Output();
+					output_2.value = "상세 정보";
+					output_2.style.css({
+						"border-bottom-color" : "darkGrey",
+						"color" : "#f2bea9",
+						"border-bottom-width" : "1px",
+						"border-bottom-style" : "solid",
+						"text-align" : "center"
+					});
+					container.addChild(output_2, {
+						"colIndex": 0,
+						"rowIndex": 0,
+						"colSpan": 4,
+						"rowSpan": 1
+					});
+				})(group_3);
+				container.addChild(group_3, {
+					"right": "0px",
+					"bottom": "0px",
+					"left": "0px",
+					"height": "180px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
