@@ -69,202 +69,233 @@
 				
 				// UI Configuration
 				var group_1 = new cpr.controls.Container();
-				group_1.style.css({
-					"background-color" : "rgb(173, 255, 47)",
-					"font-family" : "'맑은 고딕' , 'Malgun Gothic' , sans-serif"
-				});
-				var formLayout_1 = new cpr.controls.layouts.FormLayout();
-				formLayout_1.scrollable = false;
-				formLayout_1.topMargin = "5px";
-				formLayout_1.rightMargin = "5px";
-				formLayout_1.bottomMargin = "5px";
-				formLayout_1.leftMargin = "5px";
-				formLayout_1.horizontalSpacing = "10px";
-				formLayout_1.verticalSpacing = "10px";
-				formLayout_1.setColumns(["150px", "1fr", "150px", "1fr", "150px", "1fr", "150px", "1fr", "150px"]);
-				formLayout_1.setRows(["1fr"]);
-				group_1.setLayout(formLayout_1);
+				var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
+				group_1.setLayout(responsiveXYLayout_1);
 				(function(container){
-					var button_1 = new cpr.controls.Button();
-					button_1.value = "추천";
-					button_1.style.setClasses([".cl-button", "main"]);
-					button_1.style.css({
-						"border-right-style" : "none",
-						"background-color" : "transparent",
-						"border-left-style" : "none",
-						"font-size" : "20px",
-						"border-bottom-style" : "none",
-						"font-family" : "'맑은 고딕' , 'Malgun Gothic' , sans-serif",
-						"background-image" : "none",
-						"border-top-style" : "none"
-					});
-					container.addChild(button_1, {
-						"colIndex": 1,
-						"rowIndex": 0
-					});
-					var button_2 = new cpr.controls.Button();
-					button_2.value = "레시피";
-					button_2.style.setClasses([".cl-button", "main"]);
-					button_2.style.css({
-						"border-right-style" : "none",
-						"background-color" : "transparent",
-						"border-left-style" : "none",
-						"font-size" : "20px",
-						"border-bottom-style" : "none",
-						"background-image" : "none",
-						"border-top-style" : "none"
-					});
-					container.addChild(button_2, {
-						"colIndex": 3,
-						"rowIndex": 0
-					});
-					var button_3 = new cpr.controls.Button();
-					button_3.value = "밀키트";
-					button_3.style.setClasses([".cl-button", "main"]);
-					button_3.style.css({
-						"border-right-style" : "none",
-						"background-color" : "transparent",
-						"border-left-style" : "none",
-						"font-size" : "20px",
-						"border-bottom-style" : "none",
-						"background-image" : "none",
-						"border-top-style" : "none"
-					});
-					container.addChild(button_3, {
-						"colIndex": 5,
-						"rowIndex": 0
-					});
-					var button_4 = new cpr.controls.Button();
-					button_4.value = "공모전";
-					button_4.style.setClasses([".cl-button", "main"]);
-					button_4.style.css({
-						"border-right-style" : "none",
-						"background-color" : "transparent",
-						"border-left-style" : "none",
-						"font-size" : "20px",
-						"border-bottom-style" : "none",
-						"background-image" : "none",
-						"border-top-style" : "none"
-					});
-					container.addChild(button_4, {
-						"colIndex": 7,
-						"rowIndex": 0
-					});
-				})(group_1);
-				container.addChild(group_1, {
-					"top": "140px",
-					"right": "0px",
-					"left": "0px",
-					"height": "53px"
-				});
-				
-				var group_2 = new cpr.controls.Container();
-				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_2);
-				(function(container){
-					var group_3 = new cpr.controls.Container();
-					var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-					group_3.setLayout(xYLayout_3);
+					var group_2 = new cpr.controls.Container("grp1");
+					group_2.overscrollBehavior = "none";
+					var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+					xYLayout_2.scrollable = false;
+					group_2.setLayout(xYLayout_2);
 					(function(container){
 						var image_1 = new cpr.controls.Image();
-						image_1.src = "udc/theme/images/logo.png";
+						image_1.src = "theme/images/icon/recipekithubLog.png";
+						image_1.style.css({
+							"padding-top" : "0px"
+						});
 						container.addChild(image_1, {
-							"top": "0px",
-							"left": "0px",
-							"width": "200px",
-							"height": "90px"
+							"top": "-20px",
+							"left": "42px",
+							"width": "140px",
+							"height": "140px"
 						});
-						var searchInput_1 = new cpr.controls.SearchInput();
-						searchInput_1.style.css({
-							"border-bottom-color" : "rgb(173,255,47)",
-							"border-left-color" : "rgb(173,255,47)",
-							"border-top-color" : "rgb(173,255,47)",
-							"border-right-color" : "rgb(173,255,47)",
-							"background-origin" : "border-box"
-						});
-						searchInput_1.style.search.css({
-							"background-size" : "contain",
-							"width" : "2em"
-						});
-						searchInput_1.style.clear.css({
-							"width" : "2em"
-						});
-						container.addChild(searchInput_1, {
-							"top": "20px",
-							"left": "286px",
-							"width": "370px",
-							"height": "50px"
-						});
-						var button_5 = new cpr.controls.Button("mypage");
-						button_5.value = "";
-						button_5.style.setClasses(["login"]);
-						button_5.style.css({
+						var button_1 = new cpr.controls.Button("mypage");
+						button_1.value = "";
+						button_1.style.setClasses(["login"]);
+						button_1.style.css({
 							"border-right-style" : "none",
+							"background-color" : "#FFFFFF",
 							"background-size" : "cover",
 							"border-left-style" : "none",
 							"border-bottom-style" : "none",
-							"background-image" : "url('udc/theme/images/recipe/login.png')",
+							"background-image" : "url('theme/images/icon/people.png')",
 							"border-top-style" : "none"
 						});
 						if(typeof onMypageClick == "function") {
-							button_5.addEventListener("click", onMypageClick);
+							button_1.addEventListener("click", onMypageClick);
 						}
-						container.addChild(button_5, {
+						container.addChild(button_1, {
 							"top": "20px",
-							"left": "686px",
-							"width": "56px",
+							"left": "694px",
+							"width": "50px",
 							"height": "50px"
 						});
-						var button_6 = new cpr.controls.Button("cartbtn");
-						button_6.value = "";
-						button_6.style.setClasses(["recipe"]);
-						button_6.style.css({
+						var button_2 = new cpr.controls.Button("cartbtn");
+						button_2.value = "";
+						button_2.style.setClasses(["recipe"]);
+						button_2.style.css({
 							"border-right-style" : "none",
+							"background-color" : "#FFFFFF",
 							"background-size" : "cover",
 							"border-left-style" : "none",
 							"border-bottom-style" : "none",
-							"background-image" : "url('udc/theme/images/recipe/reciperegister.png')",
+							"background-image" : "url('theme/images/icon/shopping-basket.png')",
 							"border-top-style" : "none"
 						});
 						if(typeof onButtonClick == "function") {
-							button_6.addEventListener("click", onButtonClick);
+							button_2.addEventListener("click", onButtonClick);
 						}
-						container.addChild(button_6, {
+						container.addChild(button_2, {
 							"top": "20px",
-							"left": "778px",
-							"width": "56px",
+							"left": "771px",
+							"width": "50px",
 							"height": "50px"
 						});
-						var linkedComboBox_1 = new cpr.controls.LinkedComboBox("lcb1");
-						linkedComboBox_1.placeholders = ["종류"];
-						linkedComboBox_1.style.css({
-							"border-bottom-color" : "rgb(173,255,47)",
-							"border-left-color" : "rgb(173,255,47)",
-							"border-top-color" : "rgb(173,255,47)",
-							"border-right-color" : "rgb(173,255,47)"
+						var group_3 = new cpr.controls.Container();
+						group_3.style.setClasses(["cl-form-group"]);
+						group_3.style.css({
+							"border-right-style" : "solid",
+							"border-bottom-color" : "#b4b4b4",
+							"border-top-width" : "2px",
+							"border-right-width" : "2px",
+							"border-left-color" : "#b4b4b4",
+							"border-right-color" : "#b4b4b4",
+							"border-left-width" : "2px",
+							"border-top-style" : "solid",
+							"border-radius" : "15px",
+							"border-left-style" : "solid",
+							"border-bottom-width" : "2px",
+							"border-top-color" : "#b4b4b4",
+							"border-bottom-style" : "solid"
 						});
-						(function(linkedComboBox_1){
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("레시피", "recipe", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("밀키트", "mealkit", null));
-						})(linkedComboBox_1);
-						container.addChild(linkedComboBox_1, {
-							"top": "20px",
-							"left": "221px",
-							"width": "66px",
-							"height": "50px"
+						var formLayout_1 = new cpr.controls.layouts.FormLayout();
+						formLayout_1.scrollable = false;
+						formLayout_1.topMargin = "0px";
+						formLayout_1.rightMargin = "0px";
+						formLayout_1.bottomMargin = "0px";
+						formLayout_1.leftMargin = "0px";
+						formLayout_1.horizontalSpacing = "0px";
+						formLayout_1.verticalSpacing = "0px";
+						formLayout_1.horizontalSeparatorWidth = 1;
+						formLayout_1.verticalSeparatorWidth = 1;
+						formLayout_1.setColumns(["1fr", "1fr", "1fr"]);
+						formLayout_1.setRows(["1fr"]);
+						group_3.setLayout(formLayout_1);
+						(function(container){
+							var searchInput_1 = new cpr.controls.SearchInput();
+							searchInput_1.style.css({
+								"border-right-style" : "solid",
+								"border-bottom-color" : "#ffffff",
+								"border-left-style" : "solid",
+								"border-left-color" : "#ffffff",
+								"border-top-color" : "#ffffff",
+								"border-bottom-style" : "solid",
+								"border-right-color" : "#ffffff",
+								"border-top-style" : "solid"
+							});
+							container.addChild(searchInput_1, {
+								"colIndex": 1,
+								"rowIndex": 0,
+								"colSpan": 2,
+								"rowSpan": 1
+							});
+							var comboBox_1 = new cpr.controls.ComboBox("cmb1");
+							comboBox_1.preventInput = true;
+							comboBox_1.style.item.css({
+								"border-right-style" : "solid",
+								"border-bottom-color" : "#ffffff",
+								"border-top-width" : "0px",
+								"border-left-style" : "solid",
+								"border-right-width" : "0px",
+								"border-left-color" : "#ffffff",
+								"border-bottom-width" : "0px",
+								"border-top-color" : "#ffffff",
+								"border-bottom-style" : "solid",
+								"border-right-color" : "#ffffff",
+								"border-left-width" : "0px",
+								"border-top-style" : "solid"
+							});
+							(function(comboBox_1){
+								comboBox_1.addItem(new cpr.controls.Item("레시피", "value1"));
+								comboBox_1.addItem(new cpr.controls.Item("밀키트", "value2"));
+							})(comboBox_1);
+							container.addChild(comboBox_1, {
+								"colIndex": 0,
+								"rowIndex": 0
+							});
+						})(group_3);
+						container.addChild(group_3, {
+							"top": "23px",
+							"left": "218px",
+							"width": "431px",
+							"height": "45px"
 						});
-					})(group_3);
-					container.addChild(group_3, {
-						"top": "10px",
-						"width": "897px",
-						"height": "90px",
-						"left": "calc(50% - 448px)"
+					})(group_2);
+					container.addChild(group_2, {
+						positions: [
+							{
+								"media": "all and (min-width: 1024px)",
+								"top": "10px",
+								"width": "897px",
+								"height": "89px",
+								"left": "calc(50% - 448px)"
+							}, 
+							{
+								"media": "all and (min-width: 500px) and (max-width: 1023px)",
+								"top": "10px",
+								"width": "438px",
+								"height": "89px",
+								"left": "calc(50% - 219px)"
+							}, 
+							{
+								"media": "all and (max-width: 499px)",
+								"top": "10px",
+								"width": "307px",
+								"height": "89px",
+								"left": "calc(50% - 153px)"
+							}
+						]
 					});
-				})(group_2);
-				container.addChild(group_2, {
-					"top": "20px",
+					var navigationBar_1 = new cpr.controls.NavigationBar();
+					navigationBar_1.menuType = "fullmenu";
+					navigationBar_1.expandTrigger = "click";
+					navigationBar_1.style.setClasses(["indexnav"]);
+					navigationBar_1.style.css({
+						"background-color" : "#0ebc59",
+						"border-right-style" : "solid",
+						"color" : "#FFFFFF",
+						"border-bottom-color" : "#0ebc59",
+						"border-left-style" : "solid",
+						"border-left-color" : "#0ebc59",
+						"font-size" : "16px",
+						"border-top-color" : "#0ebc59",
+						"font-family" : "푸른잔디",
+						"border-bottom-style" : "solid",
+						"border-right-color" : "#0ebc59",
+						"border-top-style" : "solid"
+					});
+					navigationBar_1.style.bar.css({
+						"text-align" : "center"
+					});
+					navigationBar_1.style.item.css({
+						"text-align" : "center"
+					});
+					(function(navigationBar_1){
+						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "value1", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "value2", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "value3", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("공략", "value4", null));
+					})(navigationBar_1);
+					container.addChild(navigationBar_1, {
+						positions: [
+							{
+								"media": "all and (min-width: 1024px)",
+								"top": "98px",
+								"right": "0px",
+								"left": "0px",
+								"height": "51px"
+							}, 
+							{
+								"media": "all and (min-width: 500px) and (max-width: 1023px)",
+								"top": "98px",
+								"right": "0px",
+								"left": "0px",
+								"height": "51px"
+							}, 
+							{
+								"media": "all and (max-width: 499px)",
+								"top": "98px",
+								"right": "0px",
+								"left": "0px",
+								"height": "51px"
+							}
+						]
+					});
+				})(group_1);
+				container.addChild(group_1, {
+					"top": "0px",
 					"width": "1024px",
-					"height": "120px",
+					"height": "160px",
 					"left": "calc(50% - 512px)"
 				});
 			}

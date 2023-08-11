@@ -33,6 +33,7 @@
 		SELECT c.CART_NO, c.CART_ORDER_STATUS, c.CART_TOTAL
 		FROM CART C,"MEMBER" m 
 		WHERE m.MEMBER_EMAIL = #{memberEmail} 
+		AND C.CART_ORDER_STATUS = 'N'
 	</select>
 	
 	<select id="findMealkitBoardByMealkitName" resultType="org.kosta.recipekithub.model.vo.MealkitboardVO">

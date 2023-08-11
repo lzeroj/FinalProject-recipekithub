@@ -87,7 +87,6 @@
 							var data = {"mealkitName" : cellValue};
 							console.log(cellValue);
 							app.lookup("selectList").addRowData(data);
-							console.log(app.lookup("selectList").getValue(i, "mealkitName"));
 						}
 					}
 					app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);
@@ -655,12 +654,14 @@
 					var button_1 = new cpr.controls.Button();
 					button_1.value = "선택 삭제 X";
 					button_1.style.css({
-						"background-color" : "#e5e5e5",
-						"color" : "#eb5307",
+						"background-color" : "#eb5307",
+						"color" : "#FFFFFF",
 						"border-bottom-color" : "#e5e5e5",
+						"font-weight" : "bold",
 						"border-left-color" : "#e5e5e5",
 						"border-top-color" : "#e5e5e5",
-						"border-right-color" : "#e5e5e5"
+						"border-right-color" : "#e5e5e5",
+						"background-image" : "none"
 					});
 					if(typeof onButtonClick3 == "function") {
 						button_1.addEventListener("click", onButtonClick3);
@@ -695,6 +696,7 @@
 					"background-color" : "#eb5307",
 					"color" : "#FFFFFF",
 					"white-space" : "normal",
+					"font-weight" : "bold",
 					"background-image" : "none"
 				});
 				if(typeof onButtonClick == "function") {
@@ -714,6 +716,7 @@
 					"color" : "#000000",
 					"border-bottom-color" : "#ffffff",
 					"border-left-style" : "solid",
+					"font-weight" : "bold",
 					"border-left-color" : "#ffffff",
 					"border-top-color" : "#ffffff",
 					"border-bottom-style" : "solid",

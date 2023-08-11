@@ -74,7 +74,6 @@ function onButtonClick(e){
 				var data = {"mealkitName" : cellValue};
 				console.log(cellValue);
 				app.lookup("selectList").addRowData(data);
-				console.log(app.lookup("selectList").getValue(i, "mealkitName"));
 			}
 		}
 		app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);

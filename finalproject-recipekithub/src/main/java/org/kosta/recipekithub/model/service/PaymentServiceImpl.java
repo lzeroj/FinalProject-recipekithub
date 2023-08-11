@@ -6,6 +6,8 @@ import org.kosta.recipekithub.model.exception.NotEnoughStockException;
 import org.kosta.recipekithub.model.mapper.CartMapper;
 import org.kosta.recipekithub.model.mapper.PaymentMapper;
 import org.kosta.recipekithub.model.vo.CartVO;
+import org.kosta.recipekithub.model.vo.CartdetailVO;
+import org.kosta.recipekithub.model.vo.PaymentVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +56,16 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public int deleteCartNoneOrder() {
 		return paymentMapper.deleteCartNoneOrder();
+	}
+
+	@Override
+	public List<PaymentVO> findMyPaymentList(String memberEmail) {
+		return paymentMapper.findMyPaymentList(memberEmail);
+	}
+
+	@Override
+	public List<CartdetailVO> findMealkitNameAndCount(String memberEmail, int cartNO, int paymentId) {
+		return paymentMapper.findMealkitNameAndCount(memberEmail,cartNO,paymentId);
 	}
 
 }

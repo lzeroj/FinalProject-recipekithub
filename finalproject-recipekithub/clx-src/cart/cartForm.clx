@@ -122,7 +122,7 @@
         <cl:img std:sid="image-cae3b2d5" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;" src="../theme/images/cart/trolley.png">
           <cl:formdata std:sid="f-data-a9009691" row="0" col="0" rowspan="1" colspan="1"/>
         </cl:img>
-        <cl:button std:sid="button-a28e6477" style="background-color:#e5e5e5; color:#eb5307; border-bottom-color:#e5e5e5; border-left-color:#e5e5e5; border-top-color:#e5e5e5; border-right-color:#e5e5e5;" value="선택 삭제 X">
+        <cl:button std:sid="button-a28e6477" style="background-color:#eb5307; color:#FFFFFF; border-bottom-color:#e5e5e5; font-weight:bold; border-left-color:#e5e5e5; border-top-color:#e5e5e5; border-right-color:#e5e5e5; background-image:none;" value="선택 삭제 X">
           <cl:listener std:sid="listener-837e31b1" name="click" handler="onButtonClick3"/>
           <cl:formdata std:sid="f-data-e1a69184" row="1" col="6"/>
         </cl:button>
@@ -145,11 +145,11 @@
           <cl:columns length="150" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
-      <cl:button std:sid="button-923ccc1b" style="background-color:#eb5307; color:#FFFFFF; white-space:normal; background-image:none;" value="전체 상품 주문">
+      <cl:button std:sid="button-923ccc1b" style="background-color:#eb5307; color:#FFFFFF; white-space:normal; font-weight:bold; background-image:none;" value="전체 상품 주문">
         <cl:listener std:sid="listener-7d528e36" name="click" handler="onButtonClick"/>
         <cl:xylayoutdata std:sid="xyl-data-cc9ccce4" right="0px" bottom="0px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
       </cl:button>
-      <cl:button std:sid="button-41a920fd" style="background-color:#FFFFFF; border-right-style:solid; color:#000000; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" value="선택 상품 주문">
+      <cl:button std:sid="button-41a920fd" style="background-color:#FFFFFF; border-right-style:solid; color:#000000; border-bottom-color:#ffffff; border-left-style:solid; font-weight:bold; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" value="선택 상품 주문">
         <cl:listener std:sid="listener-4821ad56" name="click" handler="onButtonClick2"/>
         <cl:xylayoutdata std:sid="xyl-data-9da41d14" right="208px" bottom="0px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
       </cl:button>

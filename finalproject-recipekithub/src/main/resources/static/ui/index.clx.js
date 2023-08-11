@@ -71,7 +71,7 @@
 					embeddedApp_1.addEventListener("click", onEa1Click);
 				}
 				container.addChild(embeddedApp_1, {
-					"top": "0px",
+					"top": "-28px",
 					"right": "0px",
 					"bottom": "0px",
 					"left": "0px"
@@ -88,8 +88,8 @@
 			container.addChild(userDefinedControl_1, {
 				"top": "0px",
 				"right": "0px",
-				"bottom": "568px",
-				"left": "0px"
+				"left": "0px",
+				"height": "160px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

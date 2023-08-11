@@ -13,4 +13,6 @@ public class PaymentVO {
 	private String paymentState;
 	private int paymentTotal;
 	private CartVO cartVO;
+	private MealkitboardVO mealkitVO;
+	
 }

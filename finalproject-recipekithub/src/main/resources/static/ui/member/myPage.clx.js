@@ -7,6 +7,7 @@
 (function() {
 	var app = new cpr.core.App("member/myPage", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/custom/navigation.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -24,7 +25,7 @@
 			 */
 			function onBodyLoad(e){
 				var vcEmb = app.lookup("ea1");
-				cpr.core.App.load("embedded/dynamic-img", function(/*cpr.core.App*/ loadedApp){
+				cpr.core.App.load("embedded/myPagePaymentInfo", function(/*cpr.core.App*/ loadedApp){
 					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
 					if(vcEmb.getEmbeddedAppInstance()){
 						vcEmb.getEmbeddedAppInstance().dispose();
@@ -80,52 +81,81 @@
 			(function(container){
 				var group_2 = new cpr.controls.Container();
 				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+				xYLayout_3.scrollable = false;
 				group_2.setLayout(xYLayout_3);
 				(function(container){
-					var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
-					container.addChild(embeddedApp_1, {
+					var group_3 = new cpr.controls.Container();
+					var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+					group_3.setLayout(xYLayout_4);
+					(function(container){
+						var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+						cpr.core.App.load("embedded/myPagePaymentInfo", function(app) {
+							if(app){
+								embeddedApp_1.app = app;
+							}
+						});
+						container.addChild(embeddedApp_1, {
+							"top": "0px",
+							"right": "0px",
+							"bottom": "0px",
+							"left": "0px"
+						});
+					})(group_3);
+					container.addChild(group_3, {
+						"top": "39px",
+						"bottom": "0px",
+						"left": "0px",
+						"width": "709px"
+					});
+					var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
+					navigationBar_1.menuType = "fullmenu";
+					navigationBar_1.expandTrigger = "click";
+					navigationBar_1.style.setClasses(["cl-navigationbar", "my-navi"]);
+					navigationBar_1.style.css({
+						"border-bottom-color" : "#FFFFFF",
+						"border-bottom-style" : "0"
+					});
+					(function(navigationBar_1){
+						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "1", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("구매내역", "2", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("좋아요", "3", null));
+					})(navigationBar_1);
+					container.addChild(navigationBar_1, {
+						"top": "0px",
+						"left": "0px",
+						"width": "355px",
+						"height": "40px"
+					});
+					var group_4 = new cpr.controls.Container();
+					var xYLayout_5 = new cpr.controls.layouts.XYLayout();
+					group_4.setLayout(xYLayout_5);
+					container.addChild(group_4, {
 						"top": "0px",
 						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
+						"width": "270px",
+						"height": "200px"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "80px",
-					"bottom": "20px",
-					"left": "20px",
-					"width": "640px"
-				});
-				var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
-				navigationBar_1.menuType = "fullmenu";
-				navigationBar_1.expandTrigger = "click";
-				(function(navigationBar_1){
-					navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "1", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("구매내역", "2", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("좋아요", "3", null));
-				})(navigationBar_1);
-				container.addChild(navigationBar_1, {
-					"top": "20px",
-					"left": "20px",
-					"width": "640px",
-					"height": "40px"
+					"top": "166px",
+					"right": "20px",
+					"bottom": "5px",
+					"left": "20px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"width": "984px",
-				"height": "728px",
-				"left": "calc(50% - 492px)",
-				"top": "calc(50% - 364px)"
+				"top": "0px",
+				"right": "0px",
+				"bottom": "0px",
+				"left": "0px"
 			});
 			
-			var group_3 = new cpr.controls.Container();
-			var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-			group_3.setLayout(xYLayout_4);
-			container.addChild(group_3, {
-				"top": "20px",
-				"right": "20px",
-				"width": "300px",
-				"height": "200px"
+			var userDefinedControl_1 = new udc.header();
+			container.addChild(userDefinedControl_1, {
+				"top": "0px",
+				"right": "0px",
+				"left": "0px",
+				"height": "163px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

@@ -5,7 +5,9 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.kosta.recipekithub.model.service.MemberService;
+import org.kosta.recipekithub.model.service.PaymentService;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.PaymentVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 public class UnitTestMember {
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	PaymentService paymentService;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -104,4 +108,14 @@ public class UnitTestMember {
 		int result = memberService.deleteMember(memberEmail);
 		Assertions.assertEquals(1, result);
 	}
+	
+	@Test
+	public void findMyPaymentList() {
+		String memberEmail = "shj";
+		List<PaymentVO> list = paymentService.findMyPaymentList(memberEmail);
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
+		}
+	}
+	
 }

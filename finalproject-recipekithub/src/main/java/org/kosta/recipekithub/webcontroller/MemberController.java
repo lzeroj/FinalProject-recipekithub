@@ -59,5 +59,8 @@ public class MemberController {
 		return new JSONDataView();		// 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 	
+	
+	
+	
 
 }
