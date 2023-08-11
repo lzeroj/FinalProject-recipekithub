@@ -16,10 +16,82 @@
 			 * Created at 2023. 8. 10. 오후 11:08:02.
 			 *
 			 * @author shj22k
-			 ************************************************/;
+			 ************************************************/
+
+			/*
+			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+			 */
+			function onBodyLoad(e){
+				app.lookup("myPaymentListOnload").send();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onMyPaymentListOnloadSubmitSuccess(e){
+				var myPaymentListOnload = e.control;
+				var metadata = myPaymentListOnload.getMetadata("sendMealkitInfo");
+				var dataSet = app.lookup("myPaymentList");
+				var myMlkitlist = app.lookup("myPaymentMealkitList");
+				
+				for(var i=0;i<metadata.length;i++){
+					dataSet.setValue(i, "mealkitNo", metadata[i].mealkitNo);
+					dataSet.setValue(i, "mealkitName", metadata[i].mealkitName);
+			//		myMlkitlist.setValue(i, "cartDetailQuantity", dataSet.getValue(i, "mealkitName"));
+				}
+				
+				
+				dataSet.refresh();
+				app.lookup("grd1").redraw();
+			};
 			// End - User Script
 			
 			// Header
+			var dataSet_1 = new cpr.data.DataSet("myPaymentList");
+			dataSet_1.parseData({
+				"columns" : [
+					{
+						"name": "paymentTotal",
+						"dataType": "number"
+					},
+					{
+						"name": "paymentDate",
+						"dataType": "string"
+					},
+					{
+						"name": "mealkitNo",
+						"dataType": "number",
+						"displayOnly": false
+					},
+					{"name": "mealkitName"},
+					{
+						"name": "paymentNo",
+						"dataType": "number"
+					}
+				]
+			});
+			app.register(dataSet_1);
+			
+			var dataSet_2 = new cpr.data.DataSet("myPaymentMealkitList");
+			dataSet_2.parseData({
+				"columns" : [
+					{"name": "mealkitName"},
+					{
+						"name": "cartDetailQuantity",
+						"dataType": "number"
+					}
+				]
+			});
+			app.register(dataSet_2);
+			var submission_1 = new cpr.protocols.Submission("myPaymentListOnload");
+			submission_1.action = "/findMyPaymentList";
+			submission_1.addResponseData(dataSet_1, false);
+			if(typeof onMyPaymentListOnloadSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onMyPaymentListOnloadSubmitSuccess);
+			}
+			app.register(submission_1);
 			app.supportMedia("all", "myPageEm");
 			
 			// Configure root container
@@ -35,10 +107,16 @@
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
+			group_1.style.css({
+				"background-color" : "#ebeae8"
+			});
 			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
 			group_1.setLayout(xYLayout_2);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
+				group_2.style.css({
+					"background-color" : "#FFFFFF"
+				});
 				var formLayout_1 = new cpr.controls.layouts.FormLayout();
 				formLayout_1.scrollable = false;
 				formLayout_1.topMargin = "0px";
@@ -48,16 +126,19 @@
 				formLayout_1.horizontalSpacing = "0px";
 				formLayout_1.verticalSpacing = "0px";
 				formLayout_1.setColumns(["130px", "1fr", "100px", "1fr"]);
-				formLayout_1.setRows(["40px", "5px", "30px", "1fr"]);
+				formLayout_1.setRows(["40px", "5px", "30px", "5px", "1fr"]);
 				group_2.setLayout(formLayout_1);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
 					output_1.value = "구매 내역";
 					output_1.style.css({
 						"border-bottom-color" : "darkGrey",
-						"color" : "#f2bea9",
+						"color" : "#0fd465",
+						"font-weight" : "bold",
 						"border-bottom-width" : "1px",
+						"font-size" : "18px",
 						"border-bottom-style" : "solid",
+						"font-family" : "푸른전남",
 						"text-align" : "center"
 					});
 					container.addChild(output_1, {
@@ -66,44 +147,187 @@
 						"colSpan": 4,
 						"rowSpan": 1
 					});
-					var comboBox_1 = new cpr.controls.ComboBox("cmb1");
-					comboBox_1.showIcon = true;
-					comboBox_1.preventInput = true;
-					(function(comboBox_1){
-						comboBox_1.addItem(new cpr.controls.Item("결제일자", "paymentDate"));
-						comboBox_1.addItem(new cpr.controls.Item("밀키트 이름", "mealkitName"));
-					})(comboBox_1);
-					container.addChild(comboBox_1, {
+					var group_3 = new cpr.controls.Container();
+					group_3.style.setClasses(["cl-form-group"]);
+					group_3.style.css({
+						"border-right-style" : "solid",
+						"border-bottom-color" : "#ffffff",
+						"border-left-style" : "solid",
+						"border-left-color" : "#ffffff",
+						"border-top-color" : "#ffffff",
+						"border-bottom-style" : "solid",
+						"border-right-color" : "#ffffff",
+						"border-top-style" : "solid"
+					});
+					var formLayout_2 = new cpr.controls.layouts.FormLayout();
+					formLayout_2.scrollable = false;
+					formLayout_2.topMargin = "0px";
+					formLayout_2.rightMargin = "0px";
+					formLayout_2.bottomMargin = "0px";
+					formLayout_2.leftMargin = "0px";
+					formLayout_2.horizontalSpacing = "0px";
+					formLayout_2.verticalSpacing = "0px";
+					formLayout_2.horizontalSeparatorWidth = 1;
+					formLayout_2.verticalSeparatorWidth = 1;
+					formLayout_2.setColumns(["130px", "10px", "1fr", "10px", "100px"]);
+					formLayout_2.setRows(["1fr"]);
+					group_3.setLayout(formLayout_2);
+					(function(container){
+						var comboBox_1 = new cpr.controls.ComboBox("cmb1");
+						comboBox_1.showIcon = true;
+						comboBox_1.preventInput = true;
+						(function(comboBox_1){
+							comboBox_1.addItem(new cpr.controls.Item("결제일자", "paymentDate"));
+							comboBox_1.addItem(new cpr.controls.Item("밀키트 이름", "mealkitName"));
+						})(comboBox_1);
+						container.addChild(comboBox_1, {
+							"colIndex": 0,
+							"rowIndex": 0
+						});
+						var inputBox_1 = new cpr.controls.InputBox("ipb1");
+						container.addChild(inputBox_1, {
+							"colIndex": 2,
+							"rowIndex": 0
+						});
+						var button_1 = new cpr.controls.Button();
+						button_1.value = "검색";
+						button_1.style.css({
+							"background-color" : "#0ebc59",
+							"color" : "#FFFFFF",
+							"background-image" : "none"
+						});
+						container.addChild(button_1, {
+							"colIndex": 4,
+							"rowIndex": 0
+						});
+					})(group_3);
+					container.addChild(group_3, {
 						"colIndex": 0,
-						"rowIndex": 2
+						"rowIndex": 2,
+						"colSpan": 4,
+						"rowSpan": 1
+					});
+					var grid_1 = linker.grid_1 = new cpr.controls.Grid("grd1");
+					grid_1.readOnly = true;
+					grid_1.init({
+						"dataSet": app.lookup("myPaymentList"),
+						"columns": [
+							{"width": "50px"},
+							{"width": "100px"},
+							{"width": "100px"},
+							{"width": "100px"}
+						],
+						"header": {
+							"rows": [{"height": "24px"}],
+							"cells": [
+								{
+									"constraint": {"rowIndex": 0, "colIndex": 0},
+									"configurator": function(cell){
+										cell.filterable = false;
+										cell.sortable = false;
+									}
+								},
+								{
+									"constraint": {"rowIndex": 0, "colIndex": 1},
+									"configurator": function(cell){
+										cell.filterable = false;
+										cell.sortable = false;
+										cell.text = "주문 목록";
+									}
+								},
+								{
+									"constraint": {"rowIndex": 0, "colIndex": 2},
+									"configurator": function(cell){
+										cell.filterable = false;
+										cell.sortable = false;
+										cell.targetColumnName = "paymentDate";
+										cell.text = "주문 날짜";
+									}
+								},
+								{
+									"constraint": {"rowIndex": 0, "colIndex": 3},
+									"configurator": function(cell){
+										cell.filterable = false;
+										cell.sortable = false;
+										cell.targetColumnName = "paymentTotal";
+										cell.text = "총 가격";
+									}
+								}
+							]
+						},
+						"detail": {
+							"rows": [{"height": "24px"}],
+							"cells": [
+								{
+									"constraint": {"rowIndex": 0, "colIndex": 0},
+									"configurator": function(cell){
+										cell.columnType = "rowindex";
+									}
+								},
+								{
+									"constraint": {"rowIndex": 0, "colIndex": 1},
+									"configurator": function(cell){
+									}
+								},
+								{
+									"constraint": {"rowIndex": 0, "colIndex": 2},
+									"configurator": function(cell){
+										cell.columnName = "paymentDate";
+										cell.control = (function(){
+											var dateInput_1 = new cpr.controls.DateInput("dti1");
+											dateInput_1.bind("value").toDataColumn("paymentDate");
+											return dateInput_1;
+										})();
+									}
+								},
+								{
+									"constraint": {"rowIndex": 0, "colIndex": 3},
+									"configurator": function(cell){
+										cell.columnName = "paymentTotal";
+									}
+								}
+							]
+						}
+					});
+					container.addChild(grid_1, {
+						"colIndex": 0,
+						"rowIndex": 4,
+						"colSpan": 4,
+						"rowSpan": 1
 					});
 				})(group_2);
 				container.addChild(group_2, {
 					"top": "0px",
 					"right": "0px",
 					"left": "0px",
-					"height": "348px"
+					"height": "398px"
 				});
-				var group_3 = new cpr.controls.Container();
-				var formLayout_2 = new cpr.controls.layouts.FormLayout();
-				formLayout_2.scrollable = false;
-				formLayout_2.topMargin = "0px";
-				formLayout_2.rightMargin = "0px";
-				formLayout_2.bottomMargin = "0px";
-				formLayout_2.leftMargin = "0px";
-				formLayout_2.horizontalSpacing = "0px";
-				formLayout_2.verticalSpacing = "0px";
-				formLayout_2.setColumns(["1fr", "1fr", "1fr", "1fr"]);
-				formLayout_2.setRows(["40px", "1fr", "1fr", "1fr"]);
-				group_3.setLayout(formLayout_2);
+				var group_4 = new cpr.controls.Container();
+				group_4.style.css({
+					"background-color" : "#FFFFFF"
+				});
+				var formLayout_3 = new cpr.controls.layouts.FormLayout();
+				formLayout_3.scrollable = false;
+				formLayout_3.topMargin = "0px";
+				formLayout_3.rightMargin = "0px";
+				formLayout_3.bottomMargin = "0px";
+				formLayout_3.leftMargin = "0px";
+				formLayout_3.horizontalSpacing = "0px";
+				formLayout_3.verticalSpacing = "0px";
+				formLayout_3.setColumns(["1fr", "1fr", "1fr", "1fr"]);
+				formLayout_3.setRows(["40px", "1fr", "1fr", "1fr"]);
+				group_4.setLayout(formLayout_3);
 				(function(container){
 					var output_2 = new cpr.controls.Output();
 					output_2.value = "상세 정보";
 					output_2.style.css({
 						"border-bottom-color" : "darkGrey",
-						"color" : "#f2bea9",
+						"color" : "#0fd465",
+						"font-weight" : "bold",
 						"border-bottom-width" : "1px",
+						"font-size" : "18px",
 						"border-bottom-style" : "solid",
+						"font-family" : "푸른전남",
 						"text-align" : "center"
 					});
 					container.addChild(output_2, {
@@ -112,12 +336,101 @@
 						"colSpan": 4,
 						"rowSpan": 1
 					});
-				})(group_3);
-				container.addChild(group_3, {
+					var group_5 = linker.group_5 = new cpr.controls.Container();
+					group_5.style.setClasses(["cl-form-group"]);
+					var formLayout_4 = new cpr.controls.layouts.FormLayout();
+					formLayout_4.scrollable = false;
+					formLayout_4.topMargin = "0px";
+					formLayout_4.rightMargin = "0px";
+					formLayout_4.bottomMargin = "0px";
+					formLayout_4.leftMargin = "0px";
+					formLayout_4.horizontalSpacing = "0px";
+					formLayout_4.verticalSpacing = "0px";
+					formLayout_4.horizontalSeparatorWidth = 1;
+					formLayout_4.verticalSeparatorWidth = 1;
+					formLayout_4.setColumns(["100px", "1fr", "100px", "1fr"]);
+					formLayout_4.setUseColumnShade(0, true);
+					formLayout_4.setUseColumnShade(2, true);
+					formLayout_4.setRows(["1fr", "1fr", "1fr"]);
+					group_5.setLayout(formLayout_4);
+					(function(container){
+						var output_3 = new cpr.controls.Output();
+						output_3.value = "결제 번호";
+						output_3.style.css({
+							"text-align" : "center"
+						});
+						container.addChild(output_3, {
+							"colIndex": 0,
+							"rowIndex": 0
+						});
+						var output_4 = new cpr.controls.Output();
+						output_4.value = "총 가격";
+						output_4.style.css({
+							"text-align" : "center"
+						});
+						container.addChild(output_4, {
+							"colIndex": 2,
+							"rowIndex": 0
+						});
+						var output_5 = new cpr.controls.Output();
+						output_5.bind("value").toDataColumn("paymentNo");
+						container.addChild(output_5, {
+							"colIndex": 1,
+							"rowIndex": 0
+						});
+						var output_6 = new cpr.controls.Output();
+						output_6.bind("value").toDataColumn("mealkitName");
+						container.addChild(output_6, {
+							"colIndex": 1,
+							"rowIndex": 1,
+							"colSpan": 3,
+							"rowSpan": 1
+						});
+						var output_7 = new cpr.controls.Output();
+						output_7.bind("value").toDataColumn("paymentDate");
+						container.addChild(output_7, {
+							"colIndex": 1,
+							"rowIndex": 2,
+							"colSpan": 3,
+							"rowSpan": 1
+						});
+						var output_8 = new cpr.controls.Output();
+						output_8.value = "주문자 명";
+						output_8.style.css({
+							"text-align" : "center"
+						});
+						container.addChild(output_8, {
+							"colIndex": 0,
+							"rowIndex": 1
+						});
+						var output_9 = new cpr.controls.Output();
+						output_9.value = "결제 일자";
+						output_9.style.css({
+							"text-align" : "center"
+						});
+						container.addChild(output_9, {
+							"colIndex": 0,
+							"rowIndex": 2
+						});
+						var output_10 = new cpr.controls.Output();
+						output_10.bind("value").toDataColumn("paymentTotal");
+						container.addChild(output_10, {
+							"colIndex": 3,
+							"rowIndex": 0
+						});
+					})(group_5);
+					container.addChild(group_5, {
+						"colIndex": 0,
+						"rowIndex": 1,
+						"colSpan": 4,
+						"rowSpan": 3
+					});
+				})(group_4);
+				container.addChild(group_4, {
 					"right": "0px",
 					"bottom": "0px",
 					"left": "0px",
-					"height": "180px"
+					"height": "150px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
@@ -126,6 +439,11 @@
 				"bottom": "0px",
 				"left": "0px"
 			});
+			if(typeof onBodyLoad == "function"){
+				app.addEventListener("load", onBodyLoad);
+			}
+			// Linking
+			linker.group_5.setBindContext(new cpr.bind.GridSelectionContext(linker.grid_1));
 		}
 	});
 	app.title = "myPagePaymentInfo";
