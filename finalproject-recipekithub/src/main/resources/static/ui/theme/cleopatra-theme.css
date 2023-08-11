@@ -448,6 +448,13 @@ body.cl-has-modal {
   /* 파일 - 호버 상태 */
   /* 파일 업로드 버튼 - 호버 상태 */
 }
+.cl-button.main {
+  /* 마우스 호버 스타일 */
+  color: white;
+}
+.cl-button.main:not(.cl-disabled):hover {
+  color: yellow;
+}
 /* 버튼 */
 .cl-button {
   font: 14px "fonts/PureunJeonnam.ttf", "Malgun Gothic", sans-serif;
