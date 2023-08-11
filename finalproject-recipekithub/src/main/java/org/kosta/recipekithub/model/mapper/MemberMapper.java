@@ -24,5 +24,6 @@ public interface MemberMapper {
 	
 	int checkDuplicateEmail(String memberEmail);
 
+	int checkDuplicateNick(String memberNick);
 
 }

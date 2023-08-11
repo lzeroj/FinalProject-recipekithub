@@ -25,7 +25,7 @@
 	</select>
 
 	<insert id="registerMember" parameterType="org.kosta.recipekithub.model.vo.MemberVO">
-		INSERT INTO MEMBER(member_email, member_password, member_name, member_nick, member_address, member_phone, member_birthday) VALUES(#{memberEmail}, #{memberPassword}, #{memberName}, #{memberNick}, #{memberAddress}, #{memberPhone}, #{memberBirthday})
+		INSERT INTO MEMBER(member_email, member_password, member_name, member_nick, member_address, member_phone, member_birthday) VALUES(#{memberEmail}, #{memberPassword}, #{memberName}, #{memberNick}, #{memberAddress}, #{memberPhone}, to_date(#{memberBirthday}, 'YYYYMMDD'))
 	</insert>
 	
 	<update id="updateMember" parameterType="org.kosta.recipekithub.model.vo.MemberVO">
@@ -41,5 +41,12 @@
 		WHERE member_email=#{memberEmail} AND member_password=#{memberPassword}
 	</select>
 	
+	<select id="checkDuplicateEmail" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE member_email=#{value}
+	</select>
+	
+	<select id="checkDuplicateNick" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE member_nick=#{value}
+	</select>
 	
 </mapper>
