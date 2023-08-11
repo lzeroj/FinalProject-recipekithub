@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5a0904ad" version="1.0.4584">
+  <head std:sid="head-7865be45">
+    <screen std:sid="screen-65df6ef7" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-910c08f6" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-b5f77588" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-2fbbc385"/>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-c044c821">
+    <cl:group std:sid="group-254c0a37">
+      <cl:xylayoutdata std:sid="xyl-data-b6d7021b" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-ae8b8eff" style="font-size:32px;" value="찾기 페이지 aloha!">
+        <cl:xylayoutdata std:sid="xyl-data-8e1d5780" top="106px" left="48px" width="915px" height="595px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:xylayout std:sid="xylayout-850444d2"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-c2bc4237"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

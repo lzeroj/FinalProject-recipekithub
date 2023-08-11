@@ -8,63 +8,9 @@
 	var app = new cpr.core.App("member/login-form", { 
 		onPrepare: function(loader) {
 			loader.addCSS("theme/cleopatra-theme.css");
-			loader.addCSS("theme/controls/accordion.part.css");
-			loader.addCSS("theme/controls/apptitle.part.css");
-			loader.addCSS("theme/controls/audio.part.css");
-			loader.addCSS("theme/controls/button.part.css");
-			loader.addCSS("theme/controls/calendar.part.css");
-			loader.addCSS("theme/controls/checkbox.part.css");
-			loader.addCSS("theme/controls/combo-box.part.css");
-			loader.addCSS("theme/controls/common.part.css");
-			loader.addCSS("theme/controls/date-input.part.css");
-			loader.addCSS("theme/controls/dialog.part.css");
-			loader.addCSS("theme/controls/file-input.part.css");
-			loader.addCSS("theme/controls/file-upload.part.css");
-			loader.addCSS("theme/controls/focus.part.css");
-			loader.addCSS("theme/controls/form-layout.part.css");
-			loader.addCSS("theme/controls/grid.part.css");
 			loader.addCSS("theme/controls/htmlobject.css");
-			loader.addCSS("theme/controls/htmlobject.part.css");
-			loader.addCSS("theme/controls/input.part.css");
-			loader.addCSS("theme/controls/linked-combo-box.part.css");
-			loader.addCSS("theme/controls/linked-listbox.part.css");
-			loader.addCSS("theme/controls/listbox.part.css");
-			loader.addCSS("theme/controls/mask-editor.part.css");
-			loader.addCSS("theme/controls/menu.part.css");
-			loader.addCSS("theme/controls/nav-bar.part.css");
-			loader.addCSS("theme/controls/notifier.part.css");
-			loader.addCSS("theme/controls/number-editor.part.css");
-			loader.addCSS("theme/controls/output.part.css");
-			loader.addCSS("theme/controls/page-indexer.part.css");
-			loader.addCSS("theme/controls/progress-bar.part.css");
-			loader.addCSS("theme/controls/radio-button.part.css");
-			loader.addCSS("theme/controls/searchinput.part.css");
-			loader.addCSS("theme/controls/side-nav.part.css");
-			loader.addCSS("theme/controls/slider.part.css");
-			loader.addCSS("theme/controls/statecell.part.css");
-			loader.addCSS("theme/controls/tabfolder.part.css");
-			loader.addCSS("theme/controls/textarea.part.css");
-			loader.addCSS("theme/controls/tree.part.css");
-			loader.addCSS("theme/controls/treecell.part.css");
-			loader.addCSS("theme/controls/video.part.css");
-			loader.addCSS("theme/custom-settings.part.css");
 			loader.addCSS("theme/custom-theme.css");
-			loader.addCSS("theme/custom/badge.part.css");
-			loader.addCSS("theme/custom/breadcrumb.part.css");
-			loader.addCSS("theme/custom/button.part.css");
-			loader.addCSS("theme/custom/card.part.css");
-			loader.addCSS("theme/custom/dropdown.part.css");
-			loader.addCSS("theme/custom/extensions.part.css");
-			loader.addCSS("theme/custom/fonts.part.css");
-			loader.addCSS("theme/custom/globals.part.css");
-			loader.addCSS("theme/custom/main.part.css");
 			loader.addCSS("theme/custom/member.part.css");
-			loader.addCSS("theme/custom/search-box.part.css");
-			loader.addCSS("theme/custom/spinner.part.css");
-			loader.addCSS("theme/custom/status.part.css");
-			loader.addCSS("theme/custom/table.part.css");
-			loader.addCSS("theme/custom/typography.part.css");
-			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -104,7 +50,7 @@
 			 */
 			function onFindBtnClick(e) {
 				var findBtn = e.control;
-				
+				window.location.href = "member/find-info-form.clx";
 			}
 
 			/*
@@ -113,7 +59,7 @@
 			 */
 			function onSub_loginSubmitSuccess(e) {
 				var sub_login = e.control;
-				var httpPostMethod = new cpr.protocols.HttpPostMethod("ui/index.clx");
+				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 				httpPostMethod.submit();
 			}
 
@@ -123,7 +69,7 @@
 			 */
 			function onSub_loginSubmitError(e) {
 				var sub_login = e.control;
-				
+				alert("회원 정보를 다시 확인해주시기 바랍니다.")
 			}
 
 			/*
@@ -216,10 +162,16 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"border-left-color" : "#0ca44e",
+				"background-image" : "none",
+				"border-top-color" : "#0ca44e",
 				"border-bottom-style" : "none",
+				"border-right-color" : "#0ca44e",
 				"border-top-style" : "none",
+				"font-family" : "'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif",
 				"border-right-style" : "none",
 				"width" : "100%",
+				"border-bottom-color" : "#0ca44e",
 				"height" : "100%",
 				"border-left-style" : "none"
 			});
@@ -239,7 +191,7 @@
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"border-radius" : "5px",
-					"background-color" : "#FEF9F6"
+					"background-color" : "#ecfef4"
 				});
 				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
 				group_2.setLayout(xYLayout_2);
@@ -255,20 +207,11 @@
 						var group_4 = new cpr.controls.Container();
 						group_4.style.css({
 							"background-size" : "cover",
-							"background-position" : "center"
+							"background-position" : "center",
+							"background-image" : "url('theme/images/logo.png')"
 						});
 						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
 						group_4.setLayout(xYLayout_4);
-						(function(container){
-							var image_1 = new cpr.controls.Image();
-							image_1.src = "theme/images/icon/logo03(1).png";
-							container.addChild(image_1, {
-								"top": "0px",
-								"right": "0px",
-								"left": "0px",
-								"height": "210px"
-							});
-						})(group_4);
 						container.addChild(group_4, {
 							"top": "20px",
 							"bottom": "398px",
@@ -315,16 +258,16 @@
 									"colIndex": 1,
 									"rowIndex": 1
 								});
-								var image_2 = new cpr.controls.Image();
-								image_2.src = "theme/images/com/main/dashboard/icon-user-2-line.svg";
-								image_2.style.item.setClasses(["memberIcon"]);
-								container.addChild(image_2, {
+								var image_1 = new cpr.controls.Image();
+								image_1.src = "theme/images/com/main/dashboard/icon-user-2-line.svg";
+								image_1.style.item.setClasses(["memberIcon"]);
+								container.addChild(image_1, {
 									"colIndex": 0,
 									"rowIndex": 0
 								});
-								var image_3 = new cpr.controls.Image();
-								image_3.src = "theme/images/com/login/encrypted.png";
-								container.addChild(image_3, {
+								var image_2 = new cpr.controls.Image();
+								image_2.src = "theme/images/com/login/encrypted.png";
+								container.addChild(image_2, {
 									"colIndex": 0,
 									"rowIndex": 1
 								});
@@ -372,16 +315,16 @@
 							button_1.value = "로그인";
 							button_1.style.setClasses(["btnLogin"]);
 							button_1.style.css({
-								"background-color" : "#ec631d",
+								"background-color" : "#0CA44E",
 								"border-radius" : "50px",
 								"text-shadow" : "none",
-								"border-bottom-color" : "#fa5d09",
+								"border-bottom-color" : "#0ca44e",
 								"color" : "#FFFFFF",
 								"font-weight" : "bolder",
-								"border-left-color" : "#fa5d09",
+								"border-left-color" : "#0ca44e",
 								"font-size" : "20px",
-								"border-top-color" : "#fa5d09",
-								"border-right-color" : "#fa5d09",
+								"border-top-color" : "#0ca44e",
+								"border-right-color" : "#0ca44e",
 								"font-style" : "normal",
 								"background-image" : "none"
 							});
