@@ -905,19 +905,11 @@ body.cl-has-modal {
   /* 콤보 박스 아이템 텍스트 */
   /* 콤보 박스 아이템 드릴다운 아이콘 */
   /* 콤보 박스 아이템 리프 아이콘 */
-<<<<<<< HEAD
   /* en : Combobox item leaf icon *
 		.cl-linkedcombobox-arrow.cl-leaf {
 		}
 
 
-=======
-  /* en : Combobox item leaf icon *
-		.cl-linkedcombobox-arrow.cl-leaf {
-		}
-
-
->>>>>>> branch 'develop-branch' of https://github.com/lzeroj/FinalProject-recipekithub.git
 		/* 콤보 박스 아이템 - 선택됨 */
   /* 콤보 박스 아이템 - disabled 상태 */
 }
