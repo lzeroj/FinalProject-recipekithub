@@ -33,7 +33,7 @@ function onRegisterBtnClick(e) {
  */
 function onFindBtnClick(e) {
 	var findBtn = e.control;
-	
+	window.location.href = "member/find-info-form.clx";
 }
 
 /*
@@ -42,7 +42,7 @@ function onFindBtnClick(e) {
  */
 function onSub_loginSubmitSuccess(e) {
 	var sub_login = e.control;
-	var httpPostMethod = new cpr.protocols.HttpPostMethod("ui/index.clx");
+	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 	httpPostMethod.submit();
 }
 
@@ -52,7 +52,7 @@ function onSub_loginSubmitSuccess(e) {
  */
 function onSub_loginSubmitError(e) {
 	var sub_login = e.control;
-	
+	alert("회원 정보를 다시 확인해주시기 바랍니다.")
 }
 
 /*

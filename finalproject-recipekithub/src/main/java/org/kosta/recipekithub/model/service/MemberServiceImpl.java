@@ -52,4 +52,9 @@ public class MemberServiceImpl implements MemberService {
 	public int checkDuplicateEmail(String memberEmail) {
 		return memberMapper.checkDuplicateEmail(memberEmail);
 	}
+
+	@Override
+	public int checkDuplicateNick(String memberNick) {
+		return memberMapper.checkDuplicateNick(memberNick);
+	}
 }

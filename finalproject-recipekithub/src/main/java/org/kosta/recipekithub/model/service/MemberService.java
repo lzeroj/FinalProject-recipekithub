@@ -21,4 +21,6 @@ public interface MemberService {
 	List<MemberVO> findMemberList();
 
 	int checkDuplicateEmail(String memberEmail);
+
+	int checkDuplicateNick(String memberNick);
 }
