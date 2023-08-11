@@ -1,30 +1,24 @@
-@import "../custom-settings.part.less";
+@import "../settings.part.less";
 
  /* 링크드 콤보 박스 루트 */
 .cl-linkedcombobox{
-	font: @font-base;
-	color: @input-text-color;
+	font: @default-font;
+	color: @default-text-color;
 
 	/* 콤보 박스 */
 	.cl-linkedcombobox-combo {
-		border: @input-border-base;
-		border-radius: @input-border-radius;
-		background-color: @input-background-color;
-		transition: @transition-base;
+		border: 1px solid @default-border-color;
+		background-color: #fff;
+		// width: 150px;
 
-		/*선택된 아이템의 아이콘*/
+		/* 선택된 아이템의 아이콘 */
 		.cl-icon {
 		}
 
 		/* 콤보 박스 인풋 텍스트 */
 		.cl-text{
-			padding: @input-padding-0 @input-padding-x;
-			
-			&.cl-placeholder {
-				color: @input-placeholder-text-color !important;
-			}
-			
-			/* preventInput속성일때 스타일*/
+
+			/* preventInput속성일때 스타일 */
 			&.cl-preventinput{
 
 			}
@@ -32,30 +26,29 @@
 
 		/* 콤보 박스 펼침 버튼 */
 		.cl-linkedcombobox-button {
-			background-image: url(images/controls/combobox/icon-chevron-down.png);
-			background-position: left center;
-			width: calc(@input-padding-x + 12px); // padding + image size ( - image padding ) <-- 4px
+			// background-image: url(icons/chevron.png);
 		}
+
 	}
 
 	/* 콤보 박스 - 포커스 상태 */
 	.cl-linkedcombobox-combo  {
 		&.cl-focus {
-			border-color: @input-focus-border-color;
+			border-color: @focus-border-color;
 		}
 	}
 	
 	/* 콤보 박스 - disabled 상태 */
 	&.cl-disabled {
+		color: @disabled-text-color;
 		.cl-linkedcombobox-combo{
-			border-color: @input-disabled-border-color;
-			background-color: @input-disabled-background-color;
-			color: @input-disabled-text-color;
+			border-color: @disabled-border-color;
+			background-color: @disabled-selection-background;
 		}
 
 		/* 콤보 박스 펼침 버튼 - disabled 상태 */
 		.cl-linkedcombobox-button{
-			background-image: url(images/controls/combobox/icon-chevron-down-disabled.png);
+
 		}
 	}
 }
@@ -63,79 +56,75 @@
 
 /* 콤보 박스 리스트 박스 */
 .cl-linkedcombobox-list {
-	font: @font-base;
-	background-color: @input-background-color;
-	border-color: @list-focus-border-color;
-	border-radius: @list-border-radius;
-	color: @input-text-color;
+	font: @default-font;
+	color: @default-text-color;
+	border: 1px solid @focus-border-color;
+	background-color: white;
 	
-	/*리스트박스의 쉐도우*/
+	/* 리스트박스의 쉐도우 */
 	&.cl-popup {
-		box-shadow: @list-box-shadow;
+		// box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, .3);
 	}
 	
 	/* 콤보박스 위에 표시될때 상태 */
 	&.cl-top {
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
-		margin-bottom: -2px;
 	}
-	
+
 	/* 콤보박스 아래에 표시될때 상태 */
 	&.cl-bottom {
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-		margin-top: -2px;
 	}
 
 	/* 콤보 박스 아이템 */
 	.cl-linkedcombobox-item {
-		height: @list-item-height;
 		
 		/* 콤보 박스 아이템 아이콘 */
 		.cl-icon {
 		}
+		
 		/* 콤보 박스 아이템 텍스트 */
 		.cl-text {
 		}
 
 		/* 콤보 박스 아이템 드릴다운 아이콘 */
 		.cl-linkedcombobox-arrow.cl-folder {
-			 background-image: url(images/controls/combobox/icon-chevron-right.png);
+			// background-image: url(icons/drill-down.png);
 		}
 		
 		/* 콤보 박스 아이템 리프 아이콘 */
+		/* en : Combobox item leaf icon *
 		.cl-linkedcombobox-arrow.cl-leaf {
 		}
 
 
 		/* 콤보 박스 아이템 - 선택됨 */
 		&.cl-selected { 
-			background-color: @list-item-selected-background-color;
-			color: @list-item-selected-text-color;
+			background-color: @selection-background;
+			color: @selection-foreground;
 
 			/* 콤보 박스 아이템 드릴 다운 아이콘 - 선택됨 */
 			.cl-linkedcombobox-arrow.cl-folder {
-				 background-image: url(images/controls/combobox/icon-chevron-right.png);
+				// background-image: url(icons/drill-down-selected.png);
 			}
+
 		}
 
 		/* 콤보 박스 아이템 - disabled 상태 */
 		&.cl-disabled {
-			color: @list-item-disabled-text-color;
+			color: @disabled-text-color;
 
 			/* 콤보 박스 아이템 - 선택됨, disabled 상태 */
 			&.cl-selected {
-				color: @list-item-disabled-selected-text-color;
-				background-color:  @list-item-disabled-selected-background-color;
+				color: @disabled-selection-foreground;
+				background-color:  @disabled-selection-background;
 			}
 		}
 
 		&:not(.cl-disabled){
+			
 			/* 콤보 박스 아이템 - 호버 상태 */
 			&:not(.cl-selected):hover, &:not(.cl-selected).cl-hover {
-				color: @list-item-hover-text-color;
-				background-color: @list-item-hover-background-color;
+				color: @hover-foreground;
+				background-color: @hover-background;
 			}
 		}
 	}

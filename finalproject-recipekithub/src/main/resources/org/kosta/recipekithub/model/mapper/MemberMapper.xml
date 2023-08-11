@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosta.recipekithub.model.mapper.MemberMapper">
+
+	<sql id="selectMember">
+		SELECT member_email, member_password, member_name, member_nick, member_address, member_phone, member_birthday, member_type, member_status, member_reg_date FROM MEMBER
+	</sql>
+	
+	<select id="getTotalMemberCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+
+	<select id="findMemberByEmail" parameterType="string" resultType="org.kosta.recipekithub.model.vo.MemberVO">
+	<include refid="selectMember"></include>
+		WHERE member_email=#{value}
+	</select>
+
+	<select id="checkDuplicateEmail" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE member_email=#{value}
+	</select>
+	
+	<select id="findMemberList" parameterType="string" resultType="org.kosta.recipekithub.model.vo.MemberVO">
+	<include refid="selectMember"></include>
+ 		ORDER BY member_reg_date DESC
+	</select>
+
+	<insert id="registerMember" parameterType="org.kosta.recipekithub.model.vo.MemberVO">
+		INSERT INTO MEMBER(member_email, member_password, member_name, member_nick, member_address, member_phone, member_birthday) VALUES(#{memberEmail}, #{memberPassword}, #{memberName}, #{memberNick}, #{memberAddress}, #{memberPhone}, #{memberBirthday})
+	</insert>
+	
+	<update id="updateMember" parameterType="org.kosta.recipekithub.model.vo.MemberVO">
+		UPDATE MEMBER SET member_password=#{memberPassword}, member_name=#{memberName}, member_address=#{memberAddress}, member_phone=#{memberPhone}, member_birthday=#{memberBirthday} WHERE member_email=#{memberEmail}
+	</update>
+
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM MEMBER WHERE member_email=#{value}
+	</delete>
+
+	<select id="login" parameterType="org.kosta.recipekithub.model.vo.MemberVO" resultType="org.kosta.recipekithub.model.vo.MemberVO">
+	<include refid="selectMember"></include>
+		WHERE member_email=#{memberEmail} AND member_password=#{memberPassword}
+	</select>
+	
+	
+</mapper>
