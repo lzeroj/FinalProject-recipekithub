@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosta.recipekithub.model.mapper.RecipeBoardMapper">
+
+	<resultMap type="org.kosta.recipekithub.model.vo.RecipeBoardVO" id="memberNick">
+		<result column="member_nick" property="memberVO.memberNick"></result>
+	</resultMap>
+	<select id="findAllRecipeBoard" resultMap = "memberNick">
+		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
+		from recipe_board r
+		inner join member m on r.member_email = m.member_email
+	</select>
+ 	<insert id="insertRecipeBoard" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
+		insert into RECIPE_BOARD values(recipe_board_id_seq.nextval,#{memberVO.memberEmail},#{recipeBoardTitle},#{recipeBoardContent},
+		sysdate,null,0,#{categoryType},#{categoryIngredients},#{categoryMethod},#{recipeBoardImage})
+		<selectKey keyColumn="recipe_board_id" keyProperty="recipeBoardId" order="AFTER" resultType="long">
+			SELECT recipe_board_id_seq.currval from dual
+		</selectKey>
+	</insert> 
+	
+<!-- 	<select id="findDetailRecipe" resultMap="memberNick">
+		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_content
+		from recipe_board r
+		inner join member m on r.member_email = m.member_email
+	</select> -->
+</mapper>

@@ -40,7 +40,7 @@ public class UnitTestMember {
 	
 	@Test
 	public void findMemberByEmail() {
-		String memberEmail = "kjoonie@naver.com";
+		String memberEmail = "kjooniewetwet@kakao.com";
 		MemberVO member = memberService.findMemberByEmail(memberEmail);
 		Assertions.assertNotNull(member);
 	}
@@ -79,10 +79,10 @@ public class UnitTestMember {
 	
 	@Test
 	public void registerMember() {
-		String memberEmail = "kjoonie7@gmail.com";
+		String memberEmail = "kjoonie@kakao.com";
 		String memberPassword = "asdf";
 		String memberName = "금동준";
-		String memberNick = "kdj7";
+		String memberNick = "kdj77";
 		String memberAddress = "성남시 분당구";
 		String memberPhone = "01012345678";
 		String memberBirthday = "19930105";
@@ -94,8 +94,8 @@ public class UnitTestMember {
 		if(member == null) {
 			int result = memberService.registerMember(new MemberVO(memberEmail, memberPassword, memberName, memberNick,  memberAddress, memberPhone, memberBirthday));
 			//int result = memberService.registerMember(new MemberVO(memberEmail, memberPassword, memberName, memberNick,  memberAddress, memberPhone, memberBirthday, memberType, memberStatus, memberRegDate));
-			logger.info("result:{}", result);	// 1이 출력된다
-			Assertions.assertEquals(1, result);
+			logger.info("result:{}", result);	
+			Assertions.assertEquals(1, result); // 1이 출력된다
 		} else {
 			System.out.println("아이디가 중복됩니다.");
 			// throw new DuplicateIDException("아이디가 중복됩니다.");
@@ -118,4 +118,16 @@ public class UnitTestMember {
 		}
 	}
 	
+	public void checkDuplicateEmail() {
+		String memberEmail = "kjoonie@naver.com";
+		int result = memberService.checkDuplicateEmail(memberEmail);
+		Assertions.assertEquals(1, result);	// 중복되는 이메일이 있으면 1, 없으면 0
+	}
+	
+	@Test
+	public void checkDuplicateNick() {
+		String memberNick = "kdj";
+		int result = memberService.checkDuplicateNick(memberNick);
+		Assertions.assertEquals(1, result);	// 중복되는 이메일이 있으면 1, 없으면 0
+	}
 }

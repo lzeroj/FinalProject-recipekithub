@@ -52,15 +52,36 @@ public class MemberController {
 			return new UIView("ui/index.clx");
 		}
 
-		HttpSession sesison = request.getSession();
-		sesison.setAttribute("member", member); // 세션값에 담는작업
+		HttpSession session = request.getSession();
+		session.setAttribute("member", member); // 세션값에 담는작업
 		dataRequest.setResponse("ds_member", member); // 데이터 셋이 바인딩
 
-		return new JSONDataView();		// 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
-	
-	
-	
-	
 
+	@RequestMapping("/register")
+	public View registerMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
+		String memberEmail = param.getValue("member_email");
+		
+		if(memberService.findMemberByEmail(memberEmail) != null) {
+			return new UIView("ui/index.clx");
+		}
+		
+		String memberPassword = param.getValue("member_password");
+		String memberName = param.getValue("member_name"); 
+		String memberNick = param.getValue("member_nick"); 
+		String memberBirthday = param.getValue("member_birthday");
+		String memberPhone = param.getValue("member_phone"); 
+		String memberAddress = param.getValue("member_address");
+		
+		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberAddress, memberPhone, memberBirthday);
+		int result = memberService.registerMember(member);
+		System.out.println(result);
+		dataRequest.setResponse("ds_member", member); // 데이터 셋이 바인딩
+
+		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+	}
+
+	
 }
