@@ -1,16 +1,10 @@
 @import "../settings.part.less";
-.cl-button.main{
-	/* 마우스 호버 스타일 */
-	color:white;
-	&:not(.cl-disabled):hover{
-		color: yellow;
-	}
-}
+
 /* 버튼 */
 .cl-button {
 	font: @default-font;
 	color: @default-text-color;
-	/*background-image: linear-gradient(#FCFEFF, #E0E1E2);*/
+	background-image: linear-gradient(#FCFEFF, #E0E1E2);
 	border-radius: 4px;
 	border: solid 1px #959697;
 	text-shadow: 0px 1px 0px white;
@@ -39,7 +33,7 @@
 
 	/* 클릭 스타일 */
 	&:not(.cl-disabled).cl-activated, &:not(.cl-disabled):active {
-		/*background-image: linear-gradient(#ddd, #eee 5px, #ddd);*/
+		background-image: linear-gradient(#ddd, #eee 5px, #ddd);
 	}
 }
 
