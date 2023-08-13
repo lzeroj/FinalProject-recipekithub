@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +14,7 @@ import org.kosta.recipekithub.model.service.RecipeBoardService;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
@@ -46,11 +45,14 @@ public class RecipeBoardController {
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipe");
 		
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
-		String savePath = "C:\\kosta260\\spring-workspace2\\finalproject-test\\clx-src\\theme\\uploadrecipeimage\\";
 		UploadFile[] uploadFile = uploadFiles.get("image");
-		String origName = uploadFile[0].getFileName();
+		File orgName = uploadFile[0].getFile();
+		String saveName = uploadFile[0].getFileName();
+		//String savePath = "C:\\kosta260\\spring-workspace2\\finalproject-test\\clx-src\\theme\\uploadrecipeimage\\";
+		String savePath = "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
 		String uuid = UUID.randomUUID().toString();
-
+		FileCopyUtils.copy(orgName, new File(savePath+uuid+"_"+saveName));
+		
 		String title = initParam.getValue("RECIPE_BOARD_TITLE");
 		String content = initParam.getValue("RECIPE_BOARD_CONTENT");
 		String type = initParam.getValue("CATEGORY_TYPE");
@@ -65,7 +67,7 @@ public class RecipeBoardController {
 		recipeBoardVO.setCategoryType(type);
 		recipeBoardVO.setCategoryIngredients(ingredients);
 		recipeBoardVO.setCategoryMethod(method);
-		recipeBoardVO.setRecipeBoardImage(uuid+origName);
+		recipeBoardVO.setRecipeBoardImage(uuid+"_"+saveName);
 		recipeBoardService.insertRecipeBoard(recipeBoardVO);
 		
 		long recpieBoardId = recipeBoardVO.getRecipeBoardId();
@@ -75,7 +77,7 @@ public class RecipeBoardController {
 		dataRequest.setMetadata(true, message);
 		
 		
-		if(uploadFiles != null && uploadFiles.size() > 0) {
+/*		if(uploadFiles != null && uploadFiles.size() > 0) {
 			Set<Entry<String, UploadFile[]>> entries = uploadFiles.entrySet();
 			for(Entry<String, UploadFile[]> entry : entries) {
 				UploadFile[] uFiles = entry.getValue();
@@ -83,10 +85,10 @@ public class RecipeBoardController {
 					File file = uFile.getFile();		
 					String strFileName = uFile.getFileName();				
 					System.out.println(strFileName);
-					file.renameTo(new File(savePath+uuid+strFileName));			
+					file.renameTo(new File(savePath+uuid+"_"+strFileName));			
 				}
 			}
-		}
+		}*/
 		return new JSONDataView();
 	}
 	
