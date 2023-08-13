@@ -25,13 +25,15 @@
 		DELETE FROM CART_DETAIL WHERE IS_CHECKED = 'N' AND IS_ORDERED_DATAIL = 'N'
 	</delete>
 	
+	<!-- load시 내 구매내역 조회 -->
 	<resultMap type="org.kosta.recipekithub.model.vo.PaymentVO" id="findMypaymentListMap">
 		<result column="MEMBER_EMAIL" property="cartVO.memberVO.memberEmail"/>
 		<result column="MEALKIT_NO" property="mealkitVO.mealkitNo"/>
 		<result column="MEALKIT_NAME" property="mealkitVO.mealkitName"/>
+		<result column="CART_NO" property="cartVO.cartNo"/>
 	</resultMap>
 	<select id="findMyPaymentList" resultMap="findMypaymentListMap">
-		SELECT c.MEMBER_EMAIL , p.PAYMENT_DATE , p.PAYMENT_ID  , p.PAYMENT_TOTAL , mb.MEALKIT_NO, mb.MEALKIT_NAME
+		SELECT DISTINCT c.MEMBER_EMAIL , p.PAYMENT_DATE , p.PAYMENT_ID  , p.PAYMENT_TOTAL , mb.MEALKIT_NO, mb.MEALKIT_NAME, c.CART_NO
 		FROM CART c , CART_DETAIL cd , PAYMENT p , MEALKIT_BOARD mb 
 		WHERE p.CART_NO = c.CART_NO AND c.CART_NO = cd.CART_NO AND mb.MEALKIT_NO = cd.MEALKIT_NO 
 		AND cd.IS_ORDERED_DATAIL = 'Y'
@@ -54,6 +56,31 @@
 		AND c.CART_NO = #{cartNO}
 		AND p.PAYMENT_ID = #{paymentId}
 	</select>
+	
+	<!-- 검색버튼 클릭시 -->
+	<resultMap type="org.kosta.recipekithub.model.vo.PaymentVO" id="searchMyPaymentListMap">
+		<result column="MEMBER_EMAIL" property="cartVO.memberVO.memberEmail"/>
+		<result column="MEALKIT_NO" property="mealkitVO.mealkitNo"/>
+		<result column="MEALKIT_NAME" property="mealkitVO.mealkitName"/>
+		<result column="CART_NO" property="cartVO.cartNo"/>
+		<result column="CART_DETAIL_QUANTITY" property="cartdetailVO.cartDetailQuantity"/>
+	</resultMap>
+	<select id="searchMyPaymentList" resultMap="searchMyPaymentListMap">
+		SELECT c.MEMBER_EMAIL , p.PAYMENT_DATE , p.PAYMENT_ID  , p.PAYMENT_TOTAL , mb.MEALKIT_NO, mb.MEALKIT_NAME, c.CART_NO, cd.CART_DETAIL_QUANTITY 
+		FROM CART c , CART_DETAIL cd , PAYMENT p , MEALKIT_BOARD mb 
+		WHERE p.CART_NO = c.CART_NO AND c.CART_NO = cd.CART_NO AND mb.MEALKIT_NO = cd.MEALKIT_NO 
+		AND cd.IS_ORDERED_DATAIL = 'Y'
+		AND c.CART_ORDER_STATUS = 'Y'
+		AND c.MEMBER_EMAIL = #{memberEmail}
+		<if test="combovalue == 'mealkitName'">
+			AND mb.MEALKIT_NAME LIKE '%' || #{inputvalue} || '%'
+		</if>
+		<if test="combovalue == 'paymentDate'">
+			AND TO_CHAR(p.PAYMENT_DATE, 'YYYYMMDD') LIKE '%' || #{inputvalue} || '%'
+		</if>
+		ORDER BY p.PAYMENT_ID desc		
+	</select>
+	
 	
 
 </mapper>

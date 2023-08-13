@@ -68,4 +68,9 @@ public class PaymentServiceImpl implements PaymentService {
 		return paymentMapper.findMealkitNameAndCount(memberEmail,cartNO,paymentId);
 	}
 
+	@Override
+	public List<PaymentVO> searchMyPaymentList(String memberEmail, String combovalue, String inputvalue) {
+		return paymentMapper.searchMyPaymentList(memberEmail,combovalue,inputvalue);
+	}
+
 }

@@ -81,66 +81,159 @@
 			(function(container){
 				var group_2 = new cpr.controls.Container();
 				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-				xYLayout_3.scrollable = false;
 				group_2.setLayout(xYLayout_3);
 				(function(container){
 					var group_3 = new cpr.controls.Container();
-					var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-					group_3.setLayout(xYLayout_4);
+					group_3.style.css({
+						"text-align" : "center"
+					});
+					var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
+					group_3.setLayout(responsiveXYLayout_1);
 					(function(container){
-						var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
-						cpr.core.App.load("embedded/myPagePaymentInfo", function(app) {
-							if(app){
-								embeddedApp_1.app = app;
-							}
+						var group_4 = new cpr.controls.Container();
+						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+						group_4.setLayout(xYLayout_4);
+						(function(container){
+							var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+							embeddedApp_1.style.css({
+								"border-right-style" : "solid",
+								"border-bottom-color" : "#dddddd",
+								"border-top-width" : "1px",
+								"border-left-style" : "solid",
+								"border-right-width" : "1px",
+								"border-left-color" : "#dddddd",
+								"border-bottom-width" : "1px",
+								"border-top-color" : "#dddddd",
+								"border-bottom-style" : "solid",
+								"border-right-color" : "#dddddd",
+								"border-left-width" : "1px",
+								"border-top-style" : "solid"
+							});
+							cpr.core.App.load("embedded/myPagePaymentInfo", function(app) {
+								if(app){
+									embeddedApp_1.app = app;
+								}
+							});
+							container.addChild(embeddedApp_1, {
+								"top": "0px",
+								"right": "0px",
+								"bottom": "0px",
+								"left": "0px"
+							});
+						})(group_4);
+						container.addChild(group_4, {
+							positions: [
+								{
+									"media": "all and (min-width: 1024px)",
+									"top": "39px",
+									"right": "275px",
+									"bottom": "0px",
+									"left": "0px"
+								}, 
+								{
+									"media": "all and (min-width: 500px) and (max-width: 1023px)",
+									"top": "39px",
+									"right": "134px",
+									"bottom": "0px",
+									"left": "0px"
+								}, 
+								{
+									"media": "all and (max-width: 499px)",
+									"top": "39px",
+									"right": "94px",
+									"bottom": "0px",
+									"left": "0px"
+								}
+							]
 						});
-						container.addChild(embeddedApp_1, {
-							"top": "0px",
-							"right": "0px",
-							"bottom": "0px",
-							"left": "0px"
+						var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
+						navigationBar_1.menuType = "fullmenu";
+						navigationBar_1.expandTrigger = "click";
+						navigationBar_1.style.setClasses(["cl-navigationbar", "my-navi"]);
+						navigationBar_1.style.css({
+							"border-bottom-color" : "#FFFFFF",
+							"color" : "#0ebc59",
+							"font-weight" : "bold",
+							"border-bottom-style" : "0"
+						});
+						(function(navigationBar_1){
+							navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "1", null));
+							navigationBar_1.addItem(new cpr.controls.MenuItem("구매내역", "2", null));
+							navigationBar_1.addItem(new cpr.controls.MenuItem("좋아요", "3", null));
+						})(navigationBar_1);
+						container.addChild(navigationBar_1, {
+							positions: [
+								{
+									"media": "all and (min-width: 1024px)",
+									"top": "0px",
+									"right": "629px",
+									"width": "355px",
+									"height": "40px"
+								}, 
+								{
+									"media": "all and (min-width: 500px) and (max-width: 1023px)",
+									"top": "0px",
+									"right": "307px",
+									"width": "173px",
+									"height": "40px"
+								}, 
+								{
+									"media": "all and (max-width: 499px)",
+									"top": "0px",
+									"right": "215px",
+									"width": "121px",
+									"height": "40px"
+								}
+							]
+						});
+						var group_5 = new cpr.controls.Container();
+						var xYLayout_5 = new cpr.controls.layouts.XYLayout();
+						group_5.setLayout(xYLayout_5);
+						container.addChild(group_5, {
+							positions: [
+								{
+									"media": "all and (min-width: 1024px)",
+									"top": "0px",
+									"right": "0px",
+									"width": "270px",
+									"height": "200px"
+								}, 
+								{
+									"media": "all and (min-width: 500px) and (max-width: 1023px)",
+									"top": "0px",
+									"right": "0px",
+									"width": "132px",
+									"height": "200px"
+								}, 
+								{
+									"media": "all and (max-width: 499px)",
+									"top": "0px",
+									"right": "0px",
+									"width": "92px",
+									"height": "200px"
+								}
+							]
 						});
 					})(group_3);
 					container.addChild(group_3, {
-						"top": "39px",
+						"top": "166px",
 						"bottom": "0px",
-						"left": "0px",
-						"width": "709px"
-					});
-					var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
-					navigationBar_1.menuType = "fullmenu";
-					navigationBar_1.expandTrigger = "click";
-					navigationBar_1.style.setClasses(["cl-navigationbar", "my-navi"]);
-					navigationBar_1.style.css({
-						"border-bottom-color" : "#FFFFFF",
-						"border-bottom-style" : "0"
-					});
-					(function(navigationBar_1){
-						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "1", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("구매내역", "2", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("좋아요", "3", null));
-					})(navigationBar_1);
-					container.addChild(navigationBar_1, {
-						"top": "0px",
-						"left": "0px",
-						"width": "355px",
-						"height": "40px"
-					});
-					var group_4 = new cpr.controls.Container();
-					var xYLayout_5 = new cpr.controls.layouts.XYLayout();
-					group_4.setLayout(xYLayout_5);
-					container.addChild(group_4, {
-						"top": "0px",
-						"right": "0px",
-						"width": "270px",
-						"height": "200px"
+						"width": "984px",
+						"left": "calc(50% - 492px)"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "166px",
-					"right": "20px",
-					"bottom": "5px",
-					"left": "20px"
+					"top": "0px",
+					"right": "0px",
+					"bottom": "0px",
+					"left": "0px"
+				});
+				var userDefinedControl_1 = new udc.header();
+				container.addChild(userDefinedControl_1, {
+					"top": "0px",
+					"right": "0px",
+					"left": "0px",
+					"height": "163px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
@@ -148,14 +241,6 @@
 				"right": "0px",
 				"bottom": "0px",
 				"left": "0px"
-			});
-			
-			var userDefinedControl_1 = new udc.header();
-			container.addChild(userDefinedControl_1, {
-				"top": "0px",
-				"right": "0px",
-				"left": "0px",
-				"height": "163px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

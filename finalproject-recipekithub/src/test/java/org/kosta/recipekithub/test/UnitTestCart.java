@@ -57,6 +57,14 @@ public class UnitTestCart {
 	}
 	
 	@Test
+	public void findCartNoByMemberEmailOrderSuccess() {
+		String memberEmail = "shj";
+		List<CartVO> list = cartService.findCartNoByMemberEmailOrderSuccess(memberEmail);
+		Assertions.assertEquals(2,list.size());
+	}
+
+	
+	@Test
 	public void findMealkitBoardByMealkitName() {
 		String mealkitName = "로제 떡볶이";
 		MealkitboardVO mealkitboardVO = cartService.findMealkitBoardByMealkitName(mealkitName);
