@@ -33,7 +33,9 @@ function onRecipeBoardListReceive(e){
 		//udc 동적 생성
 		var recipeList = new udc.recipeListudc();
 		//udc에서 출판한 이미지 경로 앱 속성 지정
-		recipeList.img = "theme/uploadrecipeimage/" + recipe[i].recipeBoardImage;
+		//"theme/uploadrecipeimage/" + 
+		//"recipe/recipeUpload/"+recipe[i].recipeBoardImage;
+		recipeList.img = "theme/uploadrecipeimage/"+recipe[i].recipeBoardImage;
 		console.log(recipeList.img);
 		recipeList.hits = recipe[i].recipeBoardHits;
 		recipeList.nick = recipe[i].memberVO.memberNick;

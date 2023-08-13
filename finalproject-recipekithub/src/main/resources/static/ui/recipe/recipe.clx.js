@@ -46,7 +46,9 @@
 					//udc 동적 생성
 					var recipeList = new udc.recipeListudc();
 					//udc에서 출판한 이미지 경로 앱 속성 지정
-					recipeList.img = "theme/uploadrecipeimage/" + recipe[i].recipeBoardImage;
+					//"theme/uploadrecipeimage/" + 
+					//"recipe/recipeUpload/"+recipe[i].recipeBoardImage;
+					recipeList.img = "theme/uploadrecipeimage/"+recipe[i].recipeBoardImage;
 					console.log(recipeList.img);
 					recipeList.hits = recipe[i].recipeBoardHits;
 					recipeList.nick = recipe[i].memberVO.memberNick;
@@ -268,14 +270,14 @@
 			container.addChild(group_3, {
 				"top": "350px",
 				"width": "984px",
-				"height": "800px",
+				"height": "680px",
 				"left": "calc(50% - 492px)"
 			});
 			
 			var pageIndexer_1 = new cpr.controls.PageIndexer();
 			pageIndexer_1.init(1, 1, 1);
 			container.addChild(pageIndexer_1, {
-				"top": "1170px",
+				"top": "1041px",
 				"width": "200px",
 				"height": "40px",
 				"left": "calc(50% - 100px)"

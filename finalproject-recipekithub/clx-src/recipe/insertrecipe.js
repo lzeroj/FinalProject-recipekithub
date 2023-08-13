@@ -66,7 +66,7 @@ function onButtonClick(e) {
 	vsOpt.value = $('#summernote').summernote('code');
 	dataMap.setValue("RECIPE_BOARD_CONTENT", vsOpt.value);
 	var submission = app.lookup("insertRecipe");
-	var fileUpload = app.lookup("fileUpload");
+	
 	var fileInput = app.lookup("fi1");
 	var file = fileInput.file;
 	var value = dataMap.getValue("RECIPE_BOARD_TITLE");
