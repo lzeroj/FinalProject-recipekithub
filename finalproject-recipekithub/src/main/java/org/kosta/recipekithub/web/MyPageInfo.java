@@ -17,7 +17,6 @@ public class MyPageInfo {
 
 	@RequestMapping("/findMyPageForm")
 	public View findMyCartForm(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {	
-		System.out.println("form controller");
 		return new UIView("ui/member/myPage.clx"); 
 	}
 

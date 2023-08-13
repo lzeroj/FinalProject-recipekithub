@@ -22,4 +22,6 @@ public interface PaymentService {
 
 	List<CartdetailVO> findMealkitNameAndCount(String memberEmail, int cartNO, int paymentId);
 
+	List<PaymentVO> searchMyPaymentList(String memberEmail,String combovalue, String inputvalue);
+
 }

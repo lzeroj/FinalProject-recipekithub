@@ -55,4 +55,9 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.deleteMyCart(mealkitNo,cartNo);
 	}
 
+	@Override
+	public List<CartVO> findCartNoByMemberEmailOrderSuccess(String memberEmail) {
+		return cartMapper.findCartNoByMemberEmailOrderSuccess(memberEmail);
+	}
+
 }

@@ -95,30 +95,119 @@ public class PaymentController {
 		memberVO.setMemberEmail("shj");
 		
 		List<PaymentVO> paymentlist = paymentService.findMyPaymentList(memberVO.getMemberEmail());
+		
 		// 밀키트 데이터
 		List<MealkitboardVO> sendMealkitInfo = new ArrayList<>();
+		List<Map<String,Object>> mealkitinfo = new ArrayList<>();
+		Map<String,Object> mealkitInfoDetailmap = null;
+		
 		MealkitboardVO mlvo = null;
+		StringBuilder mealkitdetail = null;
+		StringBuilder mealkitdetailinfo = null;
+		
 		for(int i=0;i<paymentlist.size();i++) {
 			mlvo = new MealkitboardVO();
 			mlvo.setMealkitName(paymentlist.get(i).getMealkitVO().getMealkitName());
 			mlvo.setMealkitNo(paymentlist.get(i).getMealkitVO().getMealkitNo());
+			
+			int cartNO = paymentlist.get(i).getCartVO().getCartNo();
+			int paymentId = paymentlist.get(i).getPaymentId();
+			List<CartdetailVO> mealkitNameAndCount = paymentService.findMealkitNameAndCount(memberVO.getMemberEmail(), cartNO, paymentId);
+			
+			String mealkitName = null;
+			int cartDetailQuantity = 0;
+			for(int j=0; j<mealkitNameAndCount.size(); j++) {
+				mealkitdetail = new StringBuilder();
+				mealkitdetailinfo = new StringBuilder();
+				mealkitInfoDetailmap = new HashMap<>();
+				
+				mealkitName = mealkitNameAndCount.get(j).getMealkitboardVO().getMealkitName();
+				cartDetailQuantity = mealkitNameAndCount.get(j).getCartDetailQuantity();
+//				System.out.println(mealkitName+" "+cartDetailQuantity);
+				
+				if(mealkitNameAndCount.size()>1) {
+					mealkitdetailinfo.append(mealkitName+" x "+cartDetailQuantity).append("\n");
+				}else {
+					mealkitdetailinfo.append(mealkitName+" x "+cartDetailQuantity);
+				}
+				mealkitdetail.append(mealkitName+" 외 "+(mealkitNameAndCount.size()-1)+"개");
+				mealkitInfoDetailmap.put("mealkitdetailinfo", mealkitdetailinfo);
+				mealkitInfoDetailmap.put("mealkitdetail", mealkitdetail);
+				mealkitinfo.add(mealkitInfoDetailmap);
+//				System.out.println("mealkitdetailinfo : "+mealkitdetailinfo);
+			}
 			sendMealkitInfo.add(mlvo);
 		}
 		
-		StringBuilder sb = new StringBuilder();
-//		for() {
-//			sb.append("음식명 X 갯수");
-//		}
+		Map<String,Object> map = new HashMap<>();
+		map.put("sendMealkitInfo", sendMealkitInfo);
+		map.put("mealkitinfoString", mealkitinfo);
+		dataRequest.setResponse("myPaymentList", paymentlist);
+		dataRequest.setMetadata(true, map);
+		return new JSONDataView();
+	}
+	
+	@RequestMapping("/searchMyPaymentList")
+	public View searchMyPaymentList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest,String inputvalue, String combovalue) {
+		System.out.println(inputvalue+" "+combovalue);
+//		HttpSession session = request.getSession(false);
+//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMemberEmail("shj");
+		String memberId = memberVO.getMemberEmail();
+		List<PaymentVO> searchList = paymentService.searchMyPaymentList(memberId, combovalue, inputvalue);
+
+		// 밀키트 데이터
+		List<MealkitboardVO> sendMealkitInfo = new ArrayList<>();
+		List<Map<String,Object>> mealkitinfo = new ArrayList<>();
+		Map<String,Object> mealkitInfoDetailmap = null;
 		
+		MealkitboardVO mlvo = null;
+		StringBuilder mealkitdetail = null;
+		StringBuilder mealkitdetailinfo = null;
 		
-		List<CartdetailVO> senCartDetailInfo = new ArrayList<>();
-		CartdetailVO cartdetailVO = null;
+		for(int i=0;i<searchList.size();i++) {
+			mlvo = new MealkitboardVO();
+			mlvo.setMealkitName(searchList.get(i).getMealkitVO().getMealkitName());
+			mlvo.setMealkitNo(searchList.get(i).getMealkitVO().getMealkitNo());
+			
+//			int cartNO = searchList.get(i).getCartVO().getCartNo();
+//			int paymentId = searchList.get(i).getPaymentId();
+//			List<CartdetailVO> mealkitNameAndCount = paymentService.findMealkitNameAndCount(memberVO.getMemberEmail(), cartNO, paymentId);
+			
+			String mealkitName = null;
+			int cartDetailQuantity = 0;
+			for(int j=0; j<searchList.size(); j++) {
+				mealkitdetail = new StringBuilder();
+				mealkitdetailinfo = new StringBuilder();
+				mealkitInfoDetailmap = new HashMap<>();
+				
+				mealkitName = searchList.get(j).getMealkitVO().getMealkitName();
+				cartDetailQuantity = searchList.get(j).getCartdetailVO().getCartDetailQuantity();
+				System.out.println(mealkitName+" "+cartDetailQuantity);
+				
+				if(searchList.size()>1) {
+					mealkitdetailinfo.append(mealkitName+" x "+cartDetailQuantity).append("\n");
+				}else {
+					mealkitdetailinfo.append(mealkitName+" x "+cartDetailQuantity);
+				}
+				mealkitdetail.append(mealkitName+" 외 "+(searchList.size()-1)+"개");
+				mealkitInfoDetailmap.put("mealkitdetailinfo", mealkitdetailinfo);
+				mealkitInfoDetailmap.put("mealkitdetail", mealkitdetail);
+				mealkitinfo.add(mealkitInfoDetailmap);
+//				System.out.println("mealkitdetailinfo : "+mealkitdetailinfo);
+			}
+			sendMealkitInfo.add(mlvo);
+		}
 		
 		Map<String,Object> map = new HashMap<>();
 		map.put("sendMealkitInfo", sendMealkitInfo);
-		map.put("listmealkitname", map);
-		dataRequest.setResponse("myPaymentList", paymentlist);
+		map.put("mealkitinfoString", mealkitinfo);
+		dataRequest.setResponse("myPaymentList", searchList);
 		dataRequest.setMetadata(true, map);
+		
+		dataRequest.setResponse("searchList", searchList);
+		
 		return new JSONDataView();
 	}
 	

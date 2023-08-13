@@ -23,4 +23,6 @@ public interface CartService {
 
 	int deleteMyCart(int mealkitNo, int cartNo);
 
+	List<CartVO> findCartNoByMemberEmailOrderSuccess(String memberEmail);
+
 }
