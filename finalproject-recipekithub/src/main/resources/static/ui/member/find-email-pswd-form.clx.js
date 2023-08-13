@@ -7,6 +7,65 @@
 (function() {
 	var app = new cpr.core.App("member/find-email-pswd-form", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/controls/accordion.part.css");
+			loader.addCSS("theme/controls/apptitle.part.css");
+			loader.addCSS("theme/controls/audio.part.css");
+			loader.addCSS("theme/controls/button.part.css");
+			loader.addCSS("theme/controls/calendar.part.css");
+			loader.addCSS("theme/controls/checkbox.part.css");
+			loader.addCSS("theme/controls/combo-box.part.css");
+			loader.addCSS("theme/controls/common.part.css");
+			loader.addCSS("theme/controls/date-input.part.css");
+			loader.addCSS("theme/controls/dialog.part.css");
+			loader.addCSS("theme/controls/file-input.part.css");
+			loader.addCSS("theme/controls/file-upload.part.css");
+			loader.addCSS("theme/controls/focus.part.css");
+			loader.addCSS("theme/controls/form-layout.part.css");
+			loader.addCSS("theme/controls/grid.part.css");
+			loader.addCSS("theme/controls/htmlobject.css");
+			loader.addCSS("theme/controls/htmlobject.part.css");
+			loader.addCSS("theme/controls/input.part.css");
+			loader.addCSS("theme/controls/linked-combo-box.part.css");
+			loader.addCSS("theme/controls/linked-listbox.part.css");
+			loader.addCSS("theme/controls/listbox.part.css");
+			loader.addCSS("theme/controls/mask-editor.part.css");
+			loader.addCSS("theme/controls/menu.part.css");
+			loader.addCSS("theme/controls/nav-bar.part.css");
+			loader.addCSS("theme/controls/notifier.part.css");
+			loader.addCSS("theme/controls/number-editor.part.css");
+			loader.addCSS("theme/controls/output.part.css");
+			loader.addCSS("theme/controls/page-indexer.part.css");
+			loader.addCSS("theme/controls/progress-bar.part.css");
+			loader.addCSS("theme/controls/radio-button.part.css");
+			loader.addCSS("theme/controls/searchinput.part.css");
+			loader.addCSS("theme/controls/side-nav.part.css");
+			loader.addCSS("theme/controls/slider.part.css");
+			loader.addCSS("theme/controls/statecell.part.css");
+			loader.addCSS("theme/controls/tabfolder.part.css");
+			loader.addCSS("theme/controls/textarea.part.css");
+			loader.addCSS("theme/controls/tree.part.css");
+			loader.addCSS("theme/controls/treecell.part.css");
+			loader.addCSS("theme/controls/video.part.css");
+			loader.addCSS("theme/custom-settings.part.css");
+			loader.addCSS("theme/custom-theme.css");
+			loader.addCSS("theme/custom/badge.part.css");
+			loader.addCSS("theme/custom/breadcrumb.part.css");
+			loader.addCSS("theme/custom/button.part.css");
+			loader.addCSS("theme/custom/card.part.css");
+			loader.addCSS("theme/custom/dropdown.part.css");
+			loader.addCSS("theme/custom/extensions.part.css");
+			loader.addCSS("theme/custom/fonts.part.css");
+			loader.addCSS("theme/custom/globals.part.css");
+			loader.addCSS("theme/custom/main.part.css");
+			loader.addCSS("theme/custom/member.part.css");
+			loader.addCSS("theme/custom/navigation.part.css");
+			loader.addCSS("theme/custom/search-box.part.css");
+			loader.addCSS("theme/custom/spinner.part.css");
+			loader.addCSS("theme/custom/status.part.css");
+			loader.addCSS("theme/custom/table.part.css");
+			loader.addCSS("theme/custom/typography.part.css");
+			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -50,6 +109,26 @@
 					"left": "48px",
 					"width": "915px",
 					"height": "595px"
+				});
+				var button_1 = new cpr.controls.Button();
+				button_1.value = "로그인";
+				button_1.style.setClasses(["btn-login"]);
+				button_1.style.css({
+					"background-image" : "none"
+				});
+				container.addChild(button_1, {
+					"top": "298px",
+					"left": "453px",
+					"width": "248px",
+					"height": "103px"
+				});
+				var output_2 = new cpr.controls.Output();
+				output_2.value = "Output";
+				container.addChild(output_2, {
+					"top": "155px",
+					"left": "114px",
+					"width": "350px",
+					"height": "108px"
 				});
 			})(group_1);
 			container.addChild(group_1, {

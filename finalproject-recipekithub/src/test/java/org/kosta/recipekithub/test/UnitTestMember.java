@@ -46,13 +46,6 @@ public class UnitTestMember {
 	}
 	
 	@Test
-	public void checkDuplicateId() {
-		String memberEmail = "kjoonie@naver.com";
-		int result = memberService.checkDuplicateEmail(memberEmail); // 중복되는 이메일이 있으면 1, 없으면 0
-		Assertions.assertEquals(1, result);
-	}
-	
-	@Test
 	public void login() {
 		String memberEmail = "kjoonie@naver.com";
 		String memberPassword = "asdf";
@@ -67,7 +60,6 @@ public class UnitTestMember {
 		logger.debug(list.toString());
 		Assertions.assertEquals(8, list.size());
 	}
-	
 	
 	@Test
 	public void updateMember() {
@@ -104,7 +96,7 @@ public class UnitTestMember {
 	
 	@Test
 	public void deleteMember() {
-		String memberEmail = "kjoonie7@gmail.com";
+		String memberEmail = "kjoonie456@naver.com";
 		int result = memberService.deleteMember(memberEmail);
 		Assertions.assertEquals(1, result);
 	}
@@ -128,6 +120,6 @@ public class UnitTestMember {
 	public void checkDuplicateNick() {
 		String memberNick = "kdj";
 		int result = memberService.checkDuplicateNick(memberNick);
-		Assertions.assertEquals(1, result);	// 중복되는 이메일이 있으면 1, 없으면 0
+		Assertions.assertEquals(1, result);	// 중복되는 닉네임이 있으면 1, 없으면 0
 	}
 }

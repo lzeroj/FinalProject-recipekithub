@@ -81,7 +81,7 @@
 				if (e.keyCode == cpr.events.KeyCode.ENTER) {
 					app.lookup("btnLogin").click();
 				}
-			}
+			};
 			// End - User Script
 			
 			// Header
@@ -162,14 +162,15 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"border-top-color" : "#0ca44e",
+				"border-top-style" : "none",
+				"border-right-style" : "none",
 				"border-left-color" : "#0ca44e",
 				"background-image" : "none",
-				"border-top-color" : "#0ca44e",
 				"border-bottom-style" : "none",
 				"border-right-color" : "#0ca44e",
-				"border-top-style" : "none",
+				"font-size" : "24px",
 				"font-family" : "'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif",
-				"border-right-style" : "none",
 				"width" : "100%",
 				"border-bottom-color" : "#0ca44e",
 				"height" : "100%",
@@ -191,7 +192,10 @@
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"border-radius" : "5px",
-					"background-color" : "#ecfef4"
+					"background-color" : "#ecfef4",
+					"background-size" : "cover",
+					"background-image" : "url('theme/images/member/3.png')",
+					"background-position" : "center"
 				});
 				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
 				group_2.setLayout(xYLayout_2);
@@ -238,9 +242,11 @@
 								var inputBox_1 = new cpr.controls.InputBox("emailInput");
 								inputBox_1.placeholder = " Email";
 								inputBox_1.style.css({
+									"border-radius" : "10px",
 									"font-size" : "16px"
 								});
 								inputBox_1.bind("value").toDataMap(app.lookup("dm_login"), "member_email");
+								inputBox_1.bind("autocomplete").toDataMap(app.lookup("dm_login"), "member_email");
 								container.addChild(inputBox_1, {
 									"colIndex": 1,
 									"rowIndex": 0
@@ -248,6 +254,7 @@
 								var inputBox_2 = new cpr.controls.InputBox("pswdInput");
 								inputBox_2.placeholder = " Password";
 								inputBox_2.style.css({
+									"border-radius" : "10px",
 									"font-size" : "16px"
 								});
 								inputBox_2.bind("value").toDataMap(app.lookup("dm_login"), "member_password");
@@ -259,7 +266,6 @@
 									"rowIndex": 1
 								});
 								var image_1 = new cpr.controls.Image();
-								image_1.src = "theme/images/com/main/dashboard/icon-user-2-line.svg";
 								image_1.style.item.setClasses(["memberIcon"]);
 								container.addChild(image_1, {
 									"colIndex": 0,
@@ -306,38 +312,15 @@
 						formLayout_2.bottomMargin = "5px";
 						formLayout_2.leftMargin = "5px";
 						formLayout_2.horizontalSpacing = "10px";
-						formLayout_2.verticalSpacing = "25px";
+						formLayout_2.verticalSpacing = "30px";
 						formLayout_2.setColumns(["1fr"]);
 						formLayout_2.setRows(["45px", "45px", "25px"]);
 						group_7.setLayout(formLayout_2);
 						(function(container){
-							var button_1 = new cpr.controls.Button("btnLogin");
-							button_1.value = "로그인";
-							button_1.style.setClasses(["btnLogin"]);
+							var button_1 = new cpr.controls.Button("registerBtn");
+							button_1.value = "회원가입";
+							button_1.style.setClasses(["btn-apply"]);
 							button_1.style.css({
-								"background-color" : "#0CA44E",
-								"border-radius" : "50px",
-								"text-shadow" : "none",
-								"border-bottom-color" : "#0ca44e",
-								"color" : "#FFFFFF",
-								"font-weight" : "bolder",
-								"border-left-color" : "#0ca44e",
-								"font-size" : "20px",
-								"border-top-color" : "#0ca44e",
-								"border-right-color" : "#0ca44e",
-								"font-style" : "normal",
-								"background-image" : "none"
-							});
-							if(typeof onLoginBtnClick == "function") {
-								button_1.addEventListener("click", onLoginBtnClick);
-							}
-							container.addChild(button_1, {
-								"colIndex": 0,
-								"rowIndex": 0
-							});
-							var button_2 = new cpr.controls.Button("registerBtn");
-							button_2.value = "회원가입";
-							button_2.style.css({
 								"background-color" : "#f9bb00",
 								"border-radius" : "50px",
 								"text-shadow" : "none",
@@ -345,23 +328,23 @@
 								"color" : "#FFFFFF",
 								"font-weight" : "bolder",
 								"border-left-color" : "#f9bb00",
-								"font-size" : "20px",
+								"font-size" : "24px",
 								"border-top-color" : "#f9bb00",
 								"border-right-color" : "#f9bb00",
 								"font-style" : "normal",
 								"background-image" : "none"
 							});
 							if(typeof onRegisterBtnClick == "function") {
-								button_2.addEventListener("click", onRegisterBtnClick);
+								button_1.addEventListener("click", onRegisterBtnClick);
 							}
-							container.addChild(button_2, {
+							container.addChild(button_1, {
 								"colIndex": 0,
 								"rowIndex": 1
 							});
-							var button_3 = new cpr.controls.Button("findBtn");
-							button_3.value = "이메일 / 비밀번호 찾기";
-							button_3.ariaButtonType = "link";
-							button_3.style.css({
+							var button_2 = new cpr.controls.Button("findBtn");
+							button_2.value = "이메일 / 비밀번호 찾기";
+							button_2.ariaButtonType = "link";
+							button_2.style.css({
 								"background-color" : "#F0F0F0",
 								"text-shadow" : "none",
 								"border-bottom-color" : "#f0f0f0",
@@ -372,15 +355,35 @@
 								"background-image" : "none"
 							});
 							if(typeof onFindBtnClick == "function") {
-								button_3.addEventListener("click", onFindBtnClick);
+								button_2.addEventListener("click", onFindBtnClick);
 							}
-							container.addChild(button_3, {
+							container.addChild(button_2, {
 								"colIndex": 0,
 								"rowIndex": 2
 							});
+							var button_3 = new cpr.controls.Button("btnLogin");
+							button_3.value = "로그인";
+							button_3.style.setClasses(["btn-login"]);
+							button_3.style.css({
+								"border-right-style" : "none",
+								"color" : "#FFFFFF",
+								"border-left-style" : "none",
+								"border-bottom-style" : "none",
+								"background-image" : "none",
+								"border-top-style" : "none"
+							});
+							if(typeof onLoginBtnClick == "function") {
+								button_3.addEventListener("click", onLoginBtnClick);
+							}
+							container.addChild(button_3, {
+								"colIndex": 0,
+								"rowIndex": 0,
+								"colSpan": 1,
+								"rowSpan": 1
+							});
 						})(group_7);
 						container.addChild(group_7, {
-							"top": "437px",
+							"top": "420px",
 							"right": "40px",
 							"bottom": "20px",
 							"left": "40px"

@@ -37,12 +37,12 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-0689d0c1" style="border-right-style:none; border-bottom-color:#0ca44e; border-left-style:none; border-left-color:#0ca44e; border-top-color:#0ca44e; border-bottom-style:none; font-family:'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif; border-right-color:#0ca44e; background-image:none; border-top-style:none;">
+  <body std:sid="body-0689d0c1" style="border-right-style:none; border-bottom-color:#0ca44e; border-left-style:none; border-left-color:#0ca44e; border-top-color:#0ca44e; font-size:24px; border-bottom-style:none; font-family:'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif; border-right-color:#0ca44e; background-image:none; border-top-style:none;">
     <cl:group std:sid="group-61653a6f" style="background-color:#F0F0F0;">
       <cl:responsivexylayoutdata std:sid="rxyl-data-8708af51">
         <cl:xylayoutdata std:sid="sxyl-data-1a90debe" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
       </cl:responsivexylayoutdata>
-      <cl:group std:sid="group-29a94915" style="border-radius:5px; background-color:#ecfef4;">
+      <cl:group std:sid="group-29a94915" style="border-radius:5px; background-color:#ecfef4; background-size:cover; background-image:url(../theme/images/member/3.png); background-position:center;">
         <cl:xylayoutdata std:sid="xyl-data-d4cdd3c9" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-934310e0" style="border-radius:10px; background-color:#FFFFFF;">
           <cl:xylayoutdata std:sid="xyl-data-97f62aa5" width="384px" height="628px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
@@ -54,16 +54,17 @@
             <cl:xylayoutdata std:sid="xyl-data-ed7f739f" top="239px" right="40px" bottom="228px" left="40px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
             <cl:group std:sid="group-7a04d058">
               <cl:xylayoutdata std:sid="xyl-data-74a06a96" top="0px" right="0px" bottom="32px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-              <cl:inputbox std:sid="i-box-e70826e3" id="emailInput" style="font-size:16px;" placeholder=" Email">
+              <cl:inputbox std:sid="i-box-e70826e3" id="emailInput" style="border-radius:10px; font-size:16px;" placeholder=" Email">
                 <cl:datamapbind property="value" datacontrolid="dm_login" columnname="member_email"/>
+                <cl:datamapbind property="autocomplete" category="PROPERTY" datacontrolid="dm_login" columnname="member_email"/>
                 <cl:formdata std:sid="f-data-f9b0bdfb" row="0" col="1"/>
               </cl:inputbox>
-              <cl:inputbox std:sid="i-box-e4792af7" id="pswdInput" style="font-size:16px;" placeholder=" Password">
+              <cl:inputbox std:sid="i-box-e4792af7" id="pswdInput" style="border-radius:10px; font-size:16px;" placeholder=" Password">
                 <cl:listener std:sid="listener-89744944" name="keydown" handler="onPswdInputKeydown"/>
                 <cl:datamapbind property="value" datacontrolid="dm_login" columnname="member_password"/>
                 <cl:formdata std:sid="f-data-6a394eb1" row="1" col="1"/>
               </cl:inputbox>
-              <cl:img std:sid="image-24c99f00" src="../theme/images/com/main/dashboard/icon-user-2-line.svg">
+              <cl:img std:sid="image-24c99f00">
                 <cl:formdata std:sid="f-data-7300235f" row="0" col="0"/>
                 <cl:itemstyle class="memberIcon"/>
               </cl:img>
@@ -83,12 +84,8 @@
             <cl:xylayout std:sid="xylayout-1328dcbc"/>
           </cl:group>
           <cl:group std:sid="group-9eba4b11">
-            <cl:xylayoutdata std:sid="xyl-data-06b910bd" top="437px" right="40px" bottom="20px" left="40px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-            <cl:button std:sid="button-979fe998" id="btnLogin" style="background-color:#0CA44E; border-radius:50px; text-shadow:none; border-bottom-color:#0ca44e; color:#FFFFFF; font-weight:bolder; border-left-color:#0ca44e; font-size:20px; border-top-color:#0ca44e; border-right-color:#0ca44e; font-style:normal; background-image:none;" class="btnLogin" value="로그인">
-              <cl:listener std:sid="listener-0bc809ec" name="click" handler="onLoginBtnClick"/>
-              <cl:formdata std:sid="f-data-3ef556ed" row="0" col="0"/>
-            </cl:button>
-            <cl:button std:sid="button-9a405023" id="registerBtn" style="background-color:#f9bb00; border-radius:50px; text-shadow:none; border-bottom-color:#f9bb00; color:#FFFFFF; font-weight:bolder; border-left-color:#f9bb00; font-size:20px; border-top-color:#f9bb00; border-right-color:#f9bb00; font-style:normal; background-image:none;" value="회원가입">
+            <cl:xylayoutdata std:sid="xyl-data-06b910bd" top="420px" right="40px" bottom="20px" left="40px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:button std:sid="button-9a405023" id="registerBtn" style="background-color:#f9bb00; border-radius:50px; text-shadow:none; border-bottom-color:#f9bb00; color:#FFFFFF; font-weight:bolder; border-left-color:#f9bb00; font-size:24px; border-top-color:#f9bb00; border-right-color:#f9bb00; font-style:normal; background-image:none;" class="btn-apply" value="회원가입">
               <cl:listener std:sid="listener-796c5913" name="click" handler="onRegisterBtnClick"/>
               <cl:formdata std:sid="f-data-eef62653" row="1" col="0"/>
             </cl:button>
@@ -96,11 +93,15 @@
               <cl:listener std:sid="listener-85a417d3" name="click" handler="onFindBtnClick"/>
               <cl:formdata std:sid="f-data-53da6fdf" row="2" col="0"/>
             </cl:button>
-            <cl:formlayout std:sid="f-layout-254a31eb" scrollable="false" hspace="10px" vspace="25px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+            <cl:button std:sid="button-89e7888b" id="btnLogin" style="border-right-style:none; color:#FFFFFF; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;" class="btn-login" value="로그인">
+              <cl:listener std:sid="listener-868ce322" name="click" handler="onLoginBtnClick"/>
+              <cl:formdata std:sid="f-data-af334285" row="0" col="0" rowspan="1" colspan="1"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-254a31eb" scrollable="false" hspace="10px" vspace="30px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
               <cl:rows length="45" unit="PIXEL"/>
               <cl:rows length="45" unit="PIXEL"/>
               <cl:rows length="25" unit="PIXEL"/>
-              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
             </cl:formlayout>
           </cl:group>
           <cl:xylayout std:sid="xylayout-6adfc418"/>
