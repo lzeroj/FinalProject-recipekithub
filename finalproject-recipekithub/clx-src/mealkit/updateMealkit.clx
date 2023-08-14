@@ -8,31 +8,37 @@
       <cl:dataset std:sid="d-set-55c33be3" id="ds1"/>
       <cl:datamap std:sid="d-map-a2c29a86" id="updateMealkit">
         <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9daa433a" name="mealkitNo" datatype="string"/>
           <cl:datacolumn std:sid="d-column-fa76095c" name="mealkitName"/>
           <cl:datacolumn std:sid="d-column-5186a5f7" name="mealkitInfo"/>
           <cl:datacolumn std:sid="d-column-d0db5fb3" name="mealkitIngredients"/>
           <cl:datacolumn std:sid="d-column-cb4769b7" name="mealkitPrice"/>
           <cl:datacolumn std:sid="d-column-7de38e51" name="mealkitInventory"/>
           <cl:datacolumn std:sid="d-column-337e0c71" name="mealkitCategory"/>
+          <cl:datacolumn std:sid="d-column-42f83657" name="mealkitMember"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:datamap std:sid="d-map-3f7d6104" id="sendUpdatedMealkit">
         <cl:datacolumnlist>
-          <cl:datacolumn std:sid="d-column-d65cfad0" name="MEALKIT_NO" datatype="decimal"/>
-          <cl:datacolumn std:sid="d-column-14c89045" name="MEMBER_EMAIL" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-292e2b98" name="MEALKIT_NAME" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-586e7547" name="MEALKIT_INGREDIENTS" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-2ed4234d" name="MEALKIT_PRICE" datatype="decimal"/>
-          <cl:datacolumn std:sid="d-column-f44fc36b" name="MEALKIT_REG_DATE" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-1ad68ee5" name="MEALKIT_EDIT_DATE" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-2a5ecb7c" name="MEALKIT_INVENTORY" datatype="decimal"/>
-          <cl:datacolumn std:sid="d-column-b5f12aa3" name="MEALKIT_CATEGORY" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-6a1f087e" name="MEALKIT_IMAGE" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-97e68d1e" name="MEALKIT_BOARD_HITS" datatype="decimal"/>
-          <cl:datacolumn std:sid="d-column-109211ec" name="MEALKIT_INFO" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-86ef366e" name="mealkitNo"/>
+          <cl:datacolumn std:sid="d-column-0e443292" name="mealkitName"/>
+          <cl:datacolumn std:sid="d-column-2bfa0b5e" name="mealkitInfo"/>
+          <cl:datacolumn std:sid="d-column-324bf31c" name="mealkitPrice"/>
+          <cl:datacolumn std:sid="d-column-76d028d1" name="mealkitInventory"/>
+          <cl:datacolumn std:sid="d-column-32ac205e" name="mealkitCategory"/>
+          <cl:datacolumn std:sid="d-column-ecb6f13a" name="mealkitIngredients"/>
         </cl:datacolumnlist>
       </cl:datamap>
-      <cl:submission std:sid="submission-813cf157" id="updateMealkitSub"/>
+      <cl:datamap std:sid="d-map-3a3f3e47" id="returnMealkitNo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-981b22e3" name="mealkitNo" datatype="number" defaultvalue=""/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-813cf157" id="updateMealkitSub" action="/updateMealkit">
+        <cl:listener std:sid="listener-8e012dfa" name="submit-success" handler="onUpdateMealkitSubSubmitSuccess"/>
+        <cl:requestdata dataid="updateMealkit"/>
+        <cl:responsedata dataid="returnMealkitNo"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>

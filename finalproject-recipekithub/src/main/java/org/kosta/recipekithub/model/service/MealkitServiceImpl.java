@@ -40,14 +40,8 @@ public class MealkitServiceImpl implements MealkitService {
 	}
 	
 	@Override
-	public MealKitBoard editMealkit(MealKitBoard mealkit, MemberVO member) {
-		
-		if(mealkit.getMemberVO().getMemberEmail().equals(member.getMemberEmail())) {
-			mealKitMapper.editMealkit(mealkit);
-		}else {
-			//밀키트 작성자와 로그인한 사람이 다른 사람일 경우
-		}
-		
+	public MealKitBoard updateMealkit(MealKitBoard mealkit) {
+		mealKitMapper.updateMealkit(mealkit);		
 		return mealkit;
 	}
 	

@@ -18,26 +18,31 @@ function onBodyInit2(e){
             app.lookup("sampleThr").redraw();
         }); 
     });
-
+	var mealkitNo = cpr.core.Platform.INSTANCE.getParameter("mealkitNo");
 	var mealkitName = cpr.core.Platform.INSTANCE.getParameter("mealkitName");	
 	var mealkitInfo = cpr.core.Platform.INSTANCE.getParameter("mealkitInfo");	
 	var mealkitIngredients = cpr.core.Platform.INSTANCE.getParameter("mealkitIngredients");	
 	var mealkitPrice = cpr.core.Platform.INSTANCE.getParameter("mealkitPrice");	
 	var mealkitInventory = cpr.core.Platform.INSTANCE.getParameter("mealkitInventory");	
 	var mealkitCategory = cpr.core.Platform.INSTANCE.getParameter("mealkitCategory");
+	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");
+	
 	var vsOpt = app.lookup("sampleThr");
 	vsOpt.value = $('#summernote').summernote('code');
 	//var message = vsOpt.value;
 	var dataMap = app.lookup("updateMealkit");	
+	dataMap.setValue("mealkitNo", mealkitNo);
 	dataMap.setValue("mealkitName", mealkitName);
 	dataMap.setValue("mealkitInfo", mealkitInfo);
 	dataMap.setValue("mealkitIngredients", mealkitIngredients);
 	dataMap.setValue("mealkitPrice", mealkitPrice);
 	dataMap.setValue("mealkitInventory", mealkitInventory);
 	dataMap.setValue("mealkitCategory", mealkitCategory);
-	vsOpt.value = dataMap.getValue("mealkitInfo");
-	var info = $('#summernote').summernote('code', mealkitInfo); //이거 안 나옴 씨발
-	var mealkitInfoInfo = $('#summernote').summernote('insertText', mealkitInfo); // 이것도 안 나옴.
+	dataMap.setValue("mealkitMember", mealkitMember);
+	
+	//vsOpt.value = dataMap.getValue("mealkitInfo");
+	
+	
 	//console.log("info = " + info);
 	//console.log("mealkitInfoInfo = " + mealkitInfoInfo);
 	
@@ -66,6 +71,8 @@ function onSampleThrLoad(e){
      */
     var sampleThr = e.control;
     var content = e.content;
+    
+    var mealkitInfo = cpr.core.Platform.INSTANCE.getParameter("mealkitInfo");
 
     if (loaded) {
         sampleThr.registerComponent("Editor", content);
@@ -93,6 +100,8 @@ function onSampleThrLoad(e){
        
             ]
         });
+      $('#summernote').summernote('code', mealkitInfo);
+      app.lookup("")
     }
 	
 }
@@ -118,82 +127,17 @@ function onButtonClick2(e){
    	var combo3 = app.lookup("cmb3").text;
    	var category = combo1+"/"+combo2+"/"+combo3;
    	
-   	var mealkitMap = app.lookup("sendUpdatedMealkit");
-   	mealkitMap.setValue("", value);
-   	mealkitMap.setValue("mealkitInfo", message);
-   	mealkitMap.setValue("mealkitCategory", category);
- 	console.log("message = " + message);
- 	//유효성
- 	var name = app.lookup("ipb1");
- 	var ingredients = app.lookup("ipb2");
- 	var price = app.lookup("ipb3");
- 	var stock = app.lookup("ipb4");
- 	
- 	
- 	if(name.value == null || name.value.trim().length == 0){
- 		alert("밀키트 이름을 입력해주세요.");
- 		name.focus();
- 		return;
- 	}else if(combo1.length == 0 || combo2.length == 0 || combo3.length == 0){
- 		alert("카테고리를 반드시 선택해주세요.");
- 		return ;
- 		
- 	}else if(ingredients.value == null || ingredients.value.trim().length == 0){
- 		alert("밀키트 성분을 입력해주세요.");
- 		ingredients.focus();
- 		return;
- 	
- 	}else if(message == null || message.trim().length == 0){
- 		
- 		alert("밀키트 정보를 입력해주세요.");
- 		console.log("왜 안 먹지?");
- 		//e.preventDefault();
- 		return;
- 	}
- 	
- 	if(price.value == null || price.value == ""){
- 		alert("밀키트 가격을 입력해주세요.");
- 		price.focus();
- 		return;
- 		
- 	}else if(Number(price.value) <= 0 || isNaN(price.value)){
- 		alert("밀키트 가격은 숫자만 입력이 가능합니다. 다시 확인해주세요.");
- 		price.value = "";
- 		price.focus();
- 		return;
- 	}
- 	
- 	if(stock.value == null || stock.value == ""){
- 		alert("밀키트 수량을 입력해주세요.");
- 		stock.focus();
- 		return;
- 		
- 	}else if(Number(stock.value) <= 0 || isNaN(stock.value)){
- 		alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
- 		stock.value = "";
- 		stock.focus();
- 		return;
- 	}
- 	  	
-
-	var submission = app.lookup("mealkitSub");
-	submission.send();
-   	
+ 	var dataMap = app.lookup("updateMealkit");	
+	dataMap.setValue("mealkitName", name);
+	dataMap.setValue("mealkitInfo", message);
+	dataMap.setValue("mealkitIngredients", ingredients);
+	dataMap.setValue("mealkitPrice", price);
+	dataMap.setValue("mealkitInventory", inven);
+	dataMap.setValue("mealkitCategory", category);
+	
+	var submission = app.lookup("updateMealkitSub").send();
 }
 
-/*
- * 서브미션에서 submit-success 이벤트 발생 시 호출. done..
- * 통신이 성공하면 발생합니다.
- */
-function onMealkitSubSubmitSuccess(e){
-	var mealkitSub = e.control;
-	var mealkitNo = mealkitSub.getMetadata("result");
-	//var dataMap = app.lookup("mealkitNo");
-	//dataMap.setValue("mealkitNo", metadata);
-	var url = '/mealkitDetail/'+mealkitNo; //상세 페이지 url
-	window.location.href= url;
-		
-	}
 
 /*
  * "취소" 버튼에서 click 이벤트 발생 시 호출.
@@ -203,4 +147,18 @@ function onButtonClick(e){
 	var button = e.control;
 	window.location.href= "/"; //추후 상세 페이지로 바꿔야함.
 }
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onUpdateMealkitSubSubmitSuccess(e){
+	var updateMealkitSub = e.control;
+	var mealkitNo = updateMealkitSub.getMetadata("result");
+	//var dataMap = app.lookup("mealkitNo");
+	//dataMap.setValue("mealkitNo", metadata);
+	var url = '/mealkitDetail/'+mealkitNo; //상세 페이지 url
+	window.location.href= url;
 }
+	
+

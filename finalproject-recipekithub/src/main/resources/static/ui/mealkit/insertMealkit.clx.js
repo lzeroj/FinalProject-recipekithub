@@ -82,8 +82,8 @@
 			function onButtonClick2(e){
 				var button = e.control;
 				var vsOpt = app.lookup("sampleThr");
-			  	vsOpt.value = $('#summernote').summernote('code');
-			   	var message = vsOpt.value;
+			  	var message = $('#summernote').summernote('code', vsOpt.value);
+			   	//var message = vsOpt.value;
 			   	
 			   	var combo1 = app.lookup("cmb1").text;
 			   	var combo2 = app.lookup("cmb2").text;

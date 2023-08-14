@@ -58,5 +58,23 @@ public class UnitTestMealkit {
 		Assertions.assertNotNull(mealkit);
 	}
 	
+	@Test
+	void updateMealkit() {
+		MealKitBoard mealkit = new MealKitBoard();
+		mealkit.setMealkitNo(68);
+		MemberVO member = new MemberVO();
+		member.setMemberEmail("hellojava@naver.com");
+		mealkit.setMemberVO(member);
+		mealkit.setMealkitName("기울어진 마라탕");
+		mealkit.setMealkitInfo("묵으라");
+		mealkit.setMealkitPrice(5500);
+		mealkit.setMealkitInventory(9);
+		mealkit.setMealkitCategory("밑반찬/돼지고기/끓이기");
+		mealkit.setMealkitIngredients("하하");
+		MealKitBoard findMealkit = mealkitService.findMealKitByNo(68);
+		MealKitBoard updatedMealkit= mealkitService.updateMealkit(mealkit);
+		Assertions.assertNotEquals(findMealkit.getMealkitName(), updatedMealkit.getMealkitName());
+	}
+	
 
 }

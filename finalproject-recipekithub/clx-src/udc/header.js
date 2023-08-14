@@ -49,4 +49,12 @@ function onNavigationBarItemClick(e){
 	if(navigationBar.value == 'question'){
 		console.log(1);
 	}
+	
+	if(navigationBar.value == 'mealkit'){
+		window.location.href='/insertMealkitForm';
+	}
+		
+	if(navigationBar.value == 'recipe'){
+		window.location.href='/findRecipeBoardList';
+	}
 }

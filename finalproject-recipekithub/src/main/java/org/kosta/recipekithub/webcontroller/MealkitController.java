@@ -120,30 +120,62 @@ public class MealkitController {
 	public View editMealkitForm(@PathVariable int mealkitNo) {
 		MealKitBoard mealkit = mealKitService.findMealKitByNo(mealkitNo);
 		Map<String, Object> initParam = new HashMap<>();
-		initParam.put("mealkitNo", mealkit.getMealkitNo());
+		initParam.put("mealkitNo", String.valueOf(mealkit.getMealkitNo()));
 		initParam.put("mealkitName", mealkit.getMealkitName());
 		initParam.put("mealkitInfo", mealkit.getMealkitInfo());
 		initParam.put("mealkitIngredients", mealkit.getMealkitIngredients());
 		initParam.put("mealkitPrice", String.valueOf(mealkit.getMealkitPrice()));
 		initParam.put("mealkitInventory", String.valueOf(mealkit.getMealkitInventory()));
 		initParam.put("mealkitCategory", mealkit.getMealkitCategory());
+		initParam.put("mealkitMember", mealkit.getMemberVO().getMemberEmail());
 		
 		return new UIView("/ui/mealkit/updateMealkit.clx", initParam);
 	}
 	
 
-//	@RequestMapping("/editMealkit")
-//	public View editMealkit(HttpServletRequest request, HttpServletResponse response ,DataRequest dataRequest) {
-//		//수정 필요
-//		MealKitBoard mealkit = new MealKitBoard();
-//		
-//		HttpSession session = request.getSession(false);
-//		if(session != null) {
-//			MemberVO member = (MemberVO)session.getAttribute("mvo");
-//			mealKitService.editMealkit(mealkit, member);
-//		}
-//		return new JSONDataView();
-//	}
+	@PostMapping("/updateMealkit")
+	public View editMealkit(HttpServletRequest request, HttpServletResponse response ,DataRequest dataRequest) {
+		//수정 필요
+		ParameterGroup param = dataRequest.getParameterGroup("updateMealkit");
+		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo"));
+		String name = param.getValue("mealkitName");
+		String info = param.getValue("mealkitInfo");
+		String ingredients = param.getValue("mealkitIngredients");
+		int price = Integer.parseInt(param.getValue("mealkitPrice"));
+		int inventory = Integer.parseInt(param.getValue("mealkitInventory"));
+		String category = param.getValue("mealkitCategory");
+		String email = param.getValue("mealkitMember");
+		log.info("mealkitNo = {}", mealkitNo);
+		log.info("name = {}", name);
+		log.info("info = {}", info);
+		log.info("ingredients = {}", ingredients);
+		log.info("price = {}", price);
+		log.info("inventory = {}", inventory);
+		log.info("category = {}", category);
+		log.info("email = {}", email);
+		
+		MealKitBoard mealkit = new MealKitBoard();
+		mealkit.setMealkitNo(mealkitNo);
+		mealkit.setMealkitName(name);
+		mealkit.setMealkitInfo(info);
+		mealkit.setMealkitIngredients(ingredients);
+		mealkit.setMealkitPrice(price);
+		mealkit.setMealkitInventory(inventory);
+		mealkit.setMealkitCategory(category);
+		MemberVO member = new MemberVO();
+		member.setMemberEmail(email);
+		mealkit.setMemberVO(member);
+		
+		//HttpSession session = request.getSession(false);
+		//MemberVO sessionMember = (MemberVO)session.getAttribute("mvo");
+		//if(sessionMember.getMemberEmail().equals(mealkit.getMemberVO().getMemberEmail())) {
+			MealKitBoard updatedMealkit = mealKitService.updateMealkit(mealkit);
+			Map<String, Object> returnMealkitNo = new HashMap<>();
+			returnMealkitNo.put("result", mealkit.getMealkitNo());
+			dataRequest.setMetadata(true, returnMealkitNo);
+		//}
+		return new JSONDataView();
+	}
 	
 	
 	@PostMapping("/deleteMealkit/{mealkitNo}")

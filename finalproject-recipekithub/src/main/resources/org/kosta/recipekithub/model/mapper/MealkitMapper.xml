@@ -26,9 +26,9 @@ ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 	
 </select>
 
-<update id="editMealkit" parameterType="org.kosta.recipekithub.model.vo.MealKitBoard">
+<update id="updateMealkit" parameterType="org.kosta.recipekithub.model.vo.MealKitBoard">
 	UPDATE MEALKIT_BOARD SET MEALKIT_NAME = #{mealkitName}, MEALKIT_INFO = #{mealkitInfo}, MEALKIT_INGREDIENTS = #{mealkitIngredients},
-	MEALKIT_PRICE = #{mealkitPrice}, MEALKIT_INVENTORY = #{mealkitInventory}, MEALKIT_CATEGORY = #{mealkitCategory} 
+	MEALKIT_PRICE = #{mealkitPrice}, MEALKIT_INVENTORY = #{mealkitInventory}, MEALKIT_CATEGORY = #{mealkitCategory}, MEALKIT_EDIT_DATE = SYSDATE
 	WHERE MEALKIT_NO = #{mealkitNo}
 </update>
 
