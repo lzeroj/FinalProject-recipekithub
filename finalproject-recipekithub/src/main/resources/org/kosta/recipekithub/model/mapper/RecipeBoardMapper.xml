@@ -9,6 +9,7 @@
 		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
 		from recipe_board r
 		inner join member m on r.member_email = m.member_email
+		order by r.recipe_reg_date desc
 	</select>
  	<insert id="insertRecipeBoard" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
 		insert into RECIPE_BOARD values(recipe_board_id_seq.nextval,#{memberVO.memberEmail},#{recipeBoardTitle},#{recipeBoardContent},
@@ -18,9 +19,10 @@
 		</selectKey>
 	</insert> 
 	
-<!-- 	<select id="findDetailRecipe" resultMap="memberNick">
-		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_content
+	<select id="findDetailRecipe" resultMap="memberNick">
+		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_content, r.category_type, r.category_ingredients, r.category_method
 		from recipe_board r
 		inner join member m on r.member_email = m.member_email
-	</select> -->
+		where r.recipe_board_id=#{value}
+	</select> 
 </mapper>

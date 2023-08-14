@@ -23,77 +23,74 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
-				var submission = app.lookup("detailRecipe");
-				submission.send();
+				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
+				console.log(recipeBoardVO);
+				app.lookup("recipeBoardImage").src = "theme/uploadrecipeimage/"+recipeBoardVO.recipeBoardImage;
+				app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
+				app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
+				var hTMLSnippet = app.lookup("recipeContent");
+				hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
+			}
+
+			/*
+			 * 서브미션에서 receive 이벤트 발생 시 호출.
+			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+			 */
+			//function onDetailRecipeReceive(e){
+			//	var detailRecipe = e.control;
+			//	var xhr = detailRecipe.xhr;
+			//	var jsonData = JSON.parse(xhr.responseText);
+			//	console.log(jsonData);
+			//	detailRecipe = jsonData.recipe;
+			//	//app.lookup("recipeBoardImage").src = "theme/uploadrecipeimage/"+detailRecipe.recipeBoardImage;
+			//	//app.lookup("memberNick").value = detailRecipe.memberVO.memberNick;
+			//	//app.lookup("recipeBoardTitle").value = detailRecipe.recipeBoardTitle; 
+			//	//app.lookup("recipeBoardContent").value = detailRecipe.recipeBoardContent;
+			//}
+
+			/*
+			 * "레시피 수정하기" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick(e){
+				var button = e.control;
+				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
+				window.location.href = "/updateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
 			};
 			// End - User Script
 			
 			// Header
-			var dataSet_1 = new cpr.data.DataSet("recipe");
+			var dataSet_1 = new cpr.data.DataSet("recipeBoard");
 			dataSet_1.parseData({
 				"columns": [
 					{
-						"name": "RECIPE_BOARD_ID",
+						"name": "recipeBoardTitle",
+						"dataType": "string"
+					},
+					{
+						"name": "recipeBoardContent",
+						"dataType": "string"
+					},
+					{
+						"name": "recipeBoardHits",
 						"dataType": "decimal"
 					},
 					{
-						"name": "MEMBER_EMAIL",
+						"name": "recipeBoardImage",
 						"dataType": "string"
-					},
-					{
-						"name": "RECIPE_BOARD_TITLE",
-						"dataType": "string"
-					},
-					{
-						"name": "RECIPE_BOARD_CONTENT",
-						"dataType": "string"
-					},
-					{
-						"name": "RECIPE_REG_DATE",
-						"dataType": "string"
-					},
-					{
-						"name": "RECIPE_EDIT_DATE",
-						"dataType": "string"
-					},
-					{
-						"name": "RECIPE_BOARD_HITS",
-						"dataType": "decimal"
-					},
-					{
-						"name": "CATEGORY_TYPE",
-						"dataType": "string"
-					},
-					{
-						"name": "CATEGORY_INGREDIENTS",
-						"dataType": "string"
-					},
-					{
-						"name": "CATEGORY_METHOD",
-						"dataType": "string"
-					},
-					{
-						"name": "RECIPE_BOARD_IMAGE",
-						"dataType": "string"
-					},
-					{"name": "memberNick"}
+					}
 				],
-				"rows": [
-					{"RECIPE_BOARD_ID": "1", "MEMBER_EMAIL": "MEMBER_EMAIL1", "RECIPE_BOARD_TITLE": "RECIPE_BOARD_TITLE1", "RECIPE_BOARD_CONTENT": "RECIPE_BOARD_CONTENT1", "RECIPE_REG_DATE": "RECIPE_REG_DATE1", "RECIPE_EDIT_DATE": "RECIPE_EDIT_DATE1", "RECIPE_BOARD_HITS": "1", "CATEGORY_TYPE": "CATEGORY_TYPE1", "CATEGORY_INGREDIENTS": "CATEGORY_INGREDIENTS1", "CATEGORY_METHOD": "CATEGORY_METHOD1", "RECIPE_BOARD_IMAGE": "RECIPE_BOARD_IMAGE1", "memberNick": "memberNick1"},
-					{"RECIPE_BOARD_ID": "2", "MEMBER_EMAIL": "MEMBER_EMAIL2", "RECIPE_BOARD_TITLE": "RECIPE_BOARD_TITLE2", "RECIPE_BOARD_CONTENT": "RECIPE_BOARD_CONTENT2", "RECIPE_REG_DATE": "RECIPE_REG_DATE2", "RECIPE_EDIT_DATE": "RECIPE_EDIT_DATE2", "RECIPE_BOARD_HITS": "2", "CATEGORY_TYPE": "CATEGORY_TYPE2", "CATEGORY_INGREDIENTS": "CATEGORY_INGREDIENTS2", "CATEGORY_METHOD": "CATEGORY_METHOD2", "RECIPE_BOARD_IMAGE": "RECIPE_BOARD_IMAGE2", "memberNick": "memberNick2"},
-					{"RECIPE_BOARD_ID": "3", "MEMBER_EMAIL": "MEMBER_EMAIL3", "RECIPE_BOARD_TITLE": "RECIPE_BOARD_TITLE3", "RECIPE_BOARD_CONTENT": "RECIPE_BOARD_CONTENT3", "RECIPE_REG_DATE": "RECIPE_REG_DATE3", "RECIPE_EDIT_DATE": "RECIPE_EDIT_DATE3", "RECIPE_BOARD_HITS": "3", "CATEGORY_TYPE": "CATEGORY_TYPE3", "CATEGORY_INGREDIENTS": "CATEGORY_INGREDIENTS3", "CATEGORY_METHOD": "CATEGORY_METHOD3", "RECIPE_BOARD_IMAGE": "RECIPE_BOARD_IMAGE3", "memberNick": "memberNick3"},
-					{"RECIPE_BOARD_ID": "4", "MEMBER_EMAIL": "MEMBER_EMAIL4", "RECIPE_BOARD_TITLE": "RECIPE_BOARD_TITLE4", "RECIPE_BOARD_CONTENT": "RECIPE_BOARD_CONTENT4", "RECIPE_REG_DATE": "RECIPE_REG_DATE4", "RECIPE_EDIT_DATE": "RECIPE_EDIT_DATE4", "RECIPE_BOARD_HITS": "4", "CATEGORY_TYPE": "CATEGORY_TYPE4", "CATEGORY_INGREDIENTS": "CATEGORY_INGREDIENTS4", "CATEGORY_METHOD": "CATEGORY_METHOD4", "RECIPE_BOARD_IMAGE": "RECIPE_BOARD_IMAGE4", "memberNick": "memberNick4"},
-					{"RECIPE_BOARD_ID": "5", "MEMBER_EMAIL": "MEMBER_EMAIL5", "RECIPE_BOARD_TITLE": "RECIPE_BOARD_TITLE5", "RECIPE_BOARD_CONTENT": "RECIPE_BOARD_CONTENT5", "RECIPE_REG_DATE": "RECIPE_REG_DATE5", "RECIPE_EDIT_DATE": "RECIPE_EDIT_DATE5", "RECIPE_BOARD_HITS": "5", "CATEGORY_TYPE": "CATEGORY_TYPE5", "CATEGORY_INGREDIENTS": "CATEGORY_INGREDIENTS5", "CATEGORY_METHOD": "CATEGORY_METHOD5", "RECIPE_BOARD_IMAGE": "RECIPE_BOARD_IMAGE5", "memberNick": "memberNick5"},
-					{"RECIPE_BOARD_ID": "6", "MEMBER_EMAIL": "MEMBER_EMAIL6", "RECIPE_BOARD_TITLE": "RECIPE_BOARD_TITLE6", "RECIPE_BOARD_CONTENT": "RECIPE_BOARD_CONTENT6", "RECIPE_REG_DATE": "RECIPE_REG_DATE6", "RECIPE_EDIT_DATE": "RECIPE_EDIT_DATE6", "RECIPE_BOARD_HITS": "6", "CATEGORY_TYPE": "CATEGORY_TYPE6", "CATEGORY_INGREDIENTS": "CATEGORY_INGREDIENTS6", "CATEGORY_METHOD": "CATEGORY_METHOD6", "RECIPE_BOARD_IMAGE": "RECIPE_BOARD_IMAGE6", "memberNick": "memberNick6"},
-					{"RECIPE_BOARD_ID": "7", "MEMBER_EMAIL": "MEMBER_EMAIL7", "RECIPE_BOARD_TITLE": "RECIPE_BOARD_TITLE7", "RECIPE_BOARD_CONTENT": "RECIPE_BOARD_CONTENT7", "RECIPE_REG_DATE": "RECIPE_REG_DATE7", "RECIPE_EDIT_DATE": "RECIPE_EDIT_DATE7", "RECIPE_BOARD_HITS": "7", "CATEGORY_TYPE": "CATEGORY_TYPE7", "CATEGORY_INGREDIENTS": "CATEGORY_INGREDIENTS7", "CATEGORY_METHOD": "CATEGORY_METHOD7", "RECIPE_BOARD_IMAGE": "RECIPE_BOARD_IMAGE7", "memberNick": "memberNick7"},
-					{"RECIPE_BOARD_ID": "8", "MEMBER_EMAIL": "MEMBER_EMAIL8", "RECIPE_BOARD_TITLE": "RECIPE_BOARD_TITLE8", "RECIPE_BOARD_CONTENT": "RECIPE_BOARD_CONTENT8", "RECIPE_REG_DATE": "RECIPE_REG_DATE8", "RECIPE_EDIT_DATE": "RECIPE_EDIT_DATE8", "RECIPE_BOARD_HITS": "8", "CATEGORY_TYPE": "CATEGORY_TYPE8", "CATEGORY_INGREDIENTS": "CATEGORY_INGREDIENTS8", "CATEGORY_METHOD": "CATEGORY_METHOD8", "RECIPE_BOARD_IMAGE": "RECIPE_BOARD_IMAGE8", "memberNick": "memberNick8"}
-				]
+				"rows": []
 			});
 			app.register(dataSet_1);
-			var submission_1 = new cpr.protocols.Submission("detailRecipe");
-			submission_1.action = "/detailRecipe";
-			submission_1.addResponseData(dataSet_1, false);
-			app.register(submission_1);
+			var dataMap_1 = new cpr.data.DataMap("dm1");
+			dataMap_1.parseData({
+				"columns" : [{
+					"name": "recipeBoardId",
+					"dataType": "number"
+				}]
+			});
+			app.register(dataMap_1);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -114,37 +111,65 @@
 			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
 			group_1.setLayout(xYLayout_1);
 			(function(container){
-				var image_1 = new cpr.controls.Image();
-				image_1.bind("src").toDataSet(app.lookup("recipe"), "RECIPE_BOARD_IMAGE", 0);
+				var image_1 = new cpr.controls.Image("recipeBoardImage");
 				container.addChild(image_1, {
 					"top": "20px",
 					"width": "536px",
 					"height": "224px",
 					"left": "calc(50% - 268px)"
 				});
-				var output_1 = new cpr.controls.Output();
-				output_1.bind("value").toDataSet(app.lookup("recipe"), "memberNick", 0);
+				var output_1 = new cpr.controls.Output("memberNick");
+				output_1.value = "닉네임";
 				container.addChild(output_1, {
 					"top": "243px",
 					"width": "128px",
 					"height": "34px",
 					"left": "calc(50% - 64px)"
 				});
-				var output_2 = new cpr.controls.Output();
-				output_2.bind("value").toDataSet(app.lookup("recipe"), "RECIPE_BOARD_TITLE", 0);
+				var output_2 = new cpr.controls.Output("recipeBoardTitle");
+				output_2.value = "타이틀";
 				container.addChild(output_2, {
 					"top": "287px",
 					"left": "94px",
 					"width": "220px",
 					"height": "55px"
 				});
-				var button_1 = new cpr.controls.Button();
-				button_1.value = "좋아요";
-				container.addChild(button_1, {
-					"top": "254px",
-					"left": "94px",
-					"width": "52px",
+				var output_3 = new cpr.controls.Output();
+				output_3.value = "좋아요 갯수";
+				container.addChild(output_3, {
+					"top": "305px",
+					"left": "622px",
+					"width": "82px",
 					"height": "20px"
+				});
+				var button_1 = new cpr.controls.Button();
+				button_1.value = "";
+				button_1.style.css({
+					"background-color" : "#FFFFFF",
+					"border-right-style" : "none",
+					"background-size" : "cover",
+					"border-left-style" : "none",
+					"border-bottom-style" : "none",
+					"background-image" : "url('theme/images/recipe/heartnocolor.png')",
+					"background-position" : "center",
+					"border-top-style" : "none"
+				});
+				container.addChild(button_1, {
+					"top": "287px",
+					"left": "551px",
+					"width": "61px",
+					"height": "46px"
+				});
+				var button_2 = new cpr.controls.Button();
+				button_2.value = "레시피 수정";
+				if(typeof onButtonClick == "function") {
+					button_2.addEventListener("click", onButtonClick);
+				}
+				container.addChild(button_2, {
+					"top": "0px",
+					"right": "629px",
+					"left": "0px",
+					"height": "45px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
@@ -168,34 +193,6 @@
 						"top": "20px",
 						"width": "247px",
 						"height": "353px",
-						"left": "calc(50% - 123px)"
-					}
-				]
-			});
-			
-			var output_3 = new cpr.controls.Output();
-			output_3.bind("value").toDataSet(app.lookup("recipe"), "RECIPE_BOARD_CONTENT", 0);
-			container.addChild(output_3, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "383px",
-						"width": "724px",
-						"height": "222px",
-						"left": "calc(50% - 362px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "383px",
-						"width": "354px",
-						"height": "222px",
-						"left": "calc(50% - 177px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "383px",
-						"width": "247px",
-						"height": "222px",
 						"left": "calc(50% - 123px)"
 					}
 				]
@@ -237,22 +234,22 @@
 					{
 						"media": "all and (min-width: 1024px)",
 						"top": "668px",
+						"right": "1270px",
 						"left": "598px",
-						"width": "52px",
 						"height": "27px"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
 						"top": "668px",
+						"right": "620px",
 						"left": "292px",
-						"width": "25px",
 						"height": "27px"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
 						"top": "668px",
+						"right": "434px",
 						"left": "204px",
-						"width": "18px",
 						"height": "27px"
 					}
 				]
@@ -265,22 +262,22 @@
 					{
 						"media": "all and (min-width: 1024px)",
 						"top": "668px",
+						"right": "1192px",
 						"left": "649px",
-						"width": "58px",
 						"height": "27px"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
 						"top": "668px",
+						"right": "582px",
 						"left": "317px",
-						"width": "28px",
 						"height": "27px"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
 						"top": "668px",
+						"right": "407px",
 						"left": "222px",
-						"width": "20px",
 						"height": "27px"
 					}
 				]
@@ -314,57 +311,81 @@
 				]
 			});
 			
-			var inputBox_1 = new cpr.controls.InputBox("ipb1");
-			container.addChild(inputBox_1, {
+			var hTMLSnippet_1 = new cpr.controls.HTMLSnippet("recipeContent");
+			hTMLSnippet_1.value = "<p>HTML Snippet<\/p>";
+			container.addChild(hTMLSnippet_1, {
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "850px",
-						"left": "598px",
-						"width": "614px",
-						"height": "106px"
+						"top": "383px",
+						"width": "723px",
+						"height": "275px",
+						"left": "calc(50% - 361px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "850px",
-						"left": "292px",
-						"width": "300px",
-						"height": "106px"
+						"top": "383px",
+						"width": "353px",
+						"height": "275px",
+						"left": "calc(50% - 176px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "850px",
-						"left": "204px",
-						"width": "210px",
-						"height": "106px"
+						"top": "383px",
+						"width": "247px",
+						"height": "275px",
+						"left": "calc(50% - 123px)"
 					}
 				]
 			});
 			
-			var button_2 = new cpr.controls.Button();
-			button_2.value = "등록";
-			container.addChild(button_2, {
+			var group_3 = new cpr.controls.Container();
+			var formLayout_1 = new cpr.controls.layouts.FormLayout();
+			formLayout_1.scrollable = false;
+			formLayout_1.topMargin = "5px";
+			formLayout_1.rightMargin = "5px";
+			formLayout_1.bottomMargin = "5px";
+			formLayout_1.leftMargin = "5px";
+			formLayout_1.horizontalSpacing = "10px";
+			formLayout_1.verticalSpacing = "10px";
+			formLayout_1.setColumns(["1fr", "100px"]);
+			formLayout_1.setRows(["1fr"]);
+			group_3.setLayout(formLayout_1);
+			(function(container){
+				var inputBox_1 = new cpr.controls.InputBox("ipb1");
+				container.addChild(inputBox_1, {
+					"colIndex": 0,
+					"rowIndex": 0
+				});
+				var button_3 = new cpr.controls.Button();
+				button_3.value = "등록";
+				container.addChild(button_3, {
+					"colIndex": 1,
+					"rowIndex": 0
+				});
+			})(group_3);
+			container.addChild(group_3, {
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "850px",
-						"left": "1212px",
-						"width": "110px",
-						"height": "106px"
+						"top": "858px",
+						"width": "724px",
+						"height": "87px",
+						"left": "calc(50% - 362px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "850px",
-						"left": "592px",
-						"width": "54px",
-						"height": "106px"
+						"top": "858px",
+						"width": "354px",
+						"height": "87px",
+						"left": "calc(50% - 177px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "850px",
-						"left": "414px",
-						"width": "38px",
-						"height": "106px"
+						"top": "858px",
+						"width": "247px",
+						"height": "87px",
+						"left": "calc(50% - 123px)"
 					}
 				]
 			});

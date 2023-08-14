@@ -66,8 +66,8 @@
     </cl:group>
     <cl:group std:sid="group-2c062443" style="background-color:#FFFFFF;">
       <cl:xylayoutdata std:sid="xyl-data-b7f19213" top="250px" width="984px" height="90px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
-      <cl:output std:sid="output-2eed6e9b" value="총">
-        <cl:xylayoutdata std:sid="xyl-data-c504d9b3" top="50px" left="20px" width="18px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-2eed6e9b" style="font-weight:bold;" value="총">
+        <cl:xylayoutdata std:sid="xyl-data-c504d9b3" top="50px" left="45px" width="18px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:button std:sid="button-4f6ada68" value="최신순">
         <cl:xylayoutdata std:sid="xyl-data-ab269e1b" top="50px" left="652px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -78,11 +78,11 @@
       <cl:button std:sid="button-303a4025" value="조회수순">
         <cl:xylayoutdata std:sid="xyl-data-79ed7119" top="50px" left="872px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
-      <cl:output std:sid="output-44acfea4" value="output">
-        <cl:xylayoutdata std:sid="xyl-data-811fe71b" top="43px" left="37px" width="56px" height="38px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-44acfea4" id="recipeCount" style="color:#0CA44E; font-size:30px;" value="">
+        <cl:xylayoutdata std:sid="xyl-data-811fe71b" top="32px" left="62px" width="49px" height="38px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:output std:sid="output-1f066570" value="개의 맛있는 레시피가 있습니다.">
-        <cl:xylayoutdata std:sid="xyl-data-d1d49fe5" top="50px" left="92px" width="247px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-1f066570" style="font-weight:bold;" value="개의 맛있는 레시피가 있습니다.">
+        <cl:xylayoutdata std:sid="xyl-data-d1d49fe5" top="50px" left="110px" width="247px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:xylayout std:sid="xylayout-ffe6ae24"/>
     </cl:group>
@@ -91,6 +91,7 @@
       <cl:flowlayout std:sid="f-layout-27a6850d"/>
     </cl:group>
     <cl:pageindexer std:sid="p-indexer-693e22e7">
+      <cl:listener std:sid="listener-46376798" name="selection-change" handler="onPageIndexerSelectionChange"/>
       <cl:xylayoutdata std:sid="xyl-data-f2af68aa" top="1041px" width="200px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
     </cl:pageindexer>
     <cl:xylayout std:sid="xylayout-aa7fcea9"/>

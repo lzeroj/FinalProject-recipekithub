@@ -322,7 +322,7 @@
 			app.register(submission_2);
 			
 			var submission_3 = new cpr.protocols.Submission("sub_profile");
-			submission_3.action = "/memberUI/profileInfo";
+			submission_3.action = "/member/profileInfo";
 			submission_3.addResponseData(dataSet_1, false);
 			if(typeof onSub_profileSubmitSuccess == "function") {
 				submission_3.addEventListener("submit-success", onSub_profileSubmitSuccess);

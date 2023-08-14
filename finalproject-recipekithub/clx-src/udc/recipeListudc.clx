@@ -11,11 +11,14 @@
       <cl:property name="nick" type="string"/>
       <cl:property name="like" type="string"/>
       <cl:property name="hits" type="string"/>
+      <cl:event name="imgClick" type="cpr.events.CAppEvent"/>
     </cl:appspec>
   </head>
   <body std:sid="body-7d180e41" style="top:0px; left:0px; width:300px; height:300px;">
     <cl:listener std:sid="listener-a2e3475b" name="load" handler="onBodyLoad"/>
-    <cl:img std:sid="image-433f24d8" id="img">
+    <cl:img std:sid="image-433f24d8" id="img" style="cursor:pointer;">
+      <cl:listener std:sid="listener-575fa959" name="item-click" handler="onImgItemClick2"/>
+      <cl:listener std:sid="listener-4edc53df" name="click" handler="onImgClick"/>
       <cl:xylayoutdata std:sid="xyl-data-f316db93" top="0px" left="0px" width="230px" height="150px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:img>
     <cl:output std:sid="output-5df71c69" id="title" value="Output">

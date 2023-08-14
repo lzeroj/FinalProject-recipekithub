@@ -16,7 +16,8 @@
         <cl:responsivexylayoutdata std:sid="rxyl-data-fd5a2f3c">
           <cl:xylayoutdata std:sid="sxyl-data-b587d719" top="10px" width="897px" height="89px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
         </cl:responsivexylayoutdata>
-        <cl:img std:sid="image-fcd087c3" style="padding-top:0px;" src="../theme/images/icon/recipekithubLog.png">
+        <cl:img std:sid="image-fcd087c3" style="cursor:pointer; padding-top:0px;" src="../theme/images/icon/recipekithubLog.png">
+          <cl:listener std:sid="listener-65d67249" name="click" handler="onImageClick"/>
           <cl:xylayoutdata std:sid="xyl-data-61deda7a" top="-20px" left="42px" width="140px" height="140px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:img>
         <cl:button std:sid="button-d282e823" id="mypage" style="border-right-style:none; background-color:#FFFFFF; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url('../theme/images/icon/people.png'); border-top-style:none;" class="login" value="" icon="">
@@ -48,13 +49,14 @@
         <cl:xylayout std:sid="xylayout-5d2e6146" scrollable="false"/>
       </cl:group>
       <cl:navigationbar std:sid="n-bar-5ad827de" style="background-color:#0ebc59; border-right-style:solid; color:#FFFFFF; border-bottom-color:#0ebc59; border-left-style:solid; border-left-color:#0ebc59; font-size:16px; border-top-color:#0ebc59; font-family:푸른잔디; border-bottom-style:solid; border-right-color:#0ebc59; border-top-style:solid;" class="indexnav" menutype="fullmenu" expandtrigger="click">
+        <cl:listener std:sid="listener-be2670ff" name="item-click" handler="onNavigationBarItemClick"/>
         <cl:responsivexylayoutdata std:sid="rxyl-data-f9f57b94">
           <cl:xylayoutdata std:sid="sxyl-data-f2ddfd7b" top="98px" right="0px" left="0px" height="51px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
         </cl:responsivexylayoutdata>
         <cl:menuitem std:sid="m-item-27ee7474" label="추천" value="value1"/>
-        <cl:menuitem std:sid="m-item-2b69ecc0" label="레시피" value="value2"/>
-        <cl:menuitem std:sid="m-item-9a247b1f" label="밀키트" value="value3"/>
-        <cl:menuitem std:sid="m-item-fe761a4d" label="공략" value="value4"/>
+        <cl:menuitem std:sid="m-item-2b69ecc0" label="레시피" value="recipe"/>
+        <cl:menuitem std:sid="m-item-9a247b1f" label="밀키트" value="mealkit"/>
+        <cl:menuitem std:sid="m-item-fe761a4d" label="Q &amp; A" value="question"/>
         <cl:barstyle style="text-align:center;"/>
         <cl:itemstyle style="text-align:center;"/>
       </cl:navigationbar>
