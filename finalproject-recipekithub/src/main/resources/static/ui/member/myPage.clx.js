@@ -7,7 +7,6 @@
 (function() {
 	var app = new cpr.core.App("member/myPage", { 
 		onPrepare: function(loader) {
-			loader.addCSS("theme/custom/navigation.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};

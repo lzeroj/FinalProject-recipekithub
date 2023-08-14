@@ -6,54 +6,87 @@
       <cl:dataset std:sid="d-set-d25d2390" id="qnadslist">
         <cl:datacolumnlist>
           <cl:datacolumn std:sid="d-column-6b3614bb" name="boardTitle"/>
-          <cl:datacolumn std:sid="d-column-bdfd8fb2" name="boardNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bdfd8fb2" name="boardId" datatype="number"/>
           <cl:datacolumn std:sid="d-column-5661c135" name="boardRegDate" datatype="string"/>
           <cl:datacolumn std:sid="d-column-a8ca2101" name="boardResponseStatus"/>
+          <cl:datacolumn std:sid="d-column-5046b8ed" name="memberEmail"/>
         </cl:datacolumnlist>
       </cl:dataset>
+      <cl:dataset std:sid="d-set-c8372a2f" id="responseqnaselect">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bb8ddcaf" name="boardId"/>
+          <cl:datacolumn std:sid="d-column-e4e08a38" name="boardTitle"/>
+          <cl:datacolumn std:sid="d-column-d6077708" name="boardContent"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a7f8c689" id="requestqnaselect">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ca1e4d0f" name="boardId" datatype="decimal"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-7c70f667" id="subqna" action="/insertQnaForm"/>
+      <cl:submission std:sid="submission-fefd2e69" id="subqnalist" action="/selectQnaList">
+        <cl:listener std:sid="listener-f0474082" name="submit-success" handler="onSubqnalistSubmitSuccess"/>
+        <cl:responsedata dataid="qnadslist"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-5cbf826a" id="subqnaselect" action="/selectQnaDetail" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-97a5e5e2" name="submit-success" handler="onSubqnaselectSubmitSuccess"/>
+        <cl:requestdata dataid="requestqnaselect"/>
+        <cl:responsedata dataid="responseqnaselect"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec>
       <cl:event name="insertQnaForm" type="cpr.events.CAppEvent"/>
     </cl:appspec>
   </head>
   <body std:sid="body-40e7f9b4">
+    <cl:listener std:sid="listener-939aaa7a" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-183183f0">
       <cl:xylayoutdata std:sid="xyl-data-d22fd3da" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:grid std:sid="grid-febf449d" id="grd1">
-        <cl:xylayoutdata std:sid="xyl-data-e62e16ea" top="40px" right="0px" left="0px" height="468px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
-        <cl:gridcolumn std:sid="g-column-11fbdd7a"/>
-        <cl:gridcolumn std:sid="g-column-be8d3ab4"/>
-        <cl:gridcolumn std:sid="g-column-7af3e13d"/>
-        <cl:gridcolumn std:sid="g-column-5a7e1d1f"/>
-        <cl:gridcolumn std:sid="g-column-9dbc9d58"/>
-        <cl:gridheader std:sid="gh-band-1a226d2e">
-          <cl:gridrow std:sid="g-row-6512c14d"/>
-          <cl:gridcell std:sid="gh-cell-e8f5b7db" rowindex="0" colindex="0"/>
-          <cl:gridcell std:sid="gh-cell-e3e4446c" rowindex="0" colindex="1"/>
-          <cl:gridcell std:sid="gh-cell-e242cade" rowindex="0" colindex="2"/>
-          <cl:gridcell std:sid="gh-cell-92952815" rowindex="0" colindex="3"/>
-          <cl:gridcell std:sid="gh-cell-4b30e05c" rowindex="0" colindex="4"/>
+      <cl:grid std:sid="grid-febf449d" id="grd1" readonly="true" datasetid="qnadslist" autorowheight="all" selectionunit="row">
+        <cl:xylayoutdata std:sid="xyl-data-e62e16ea" top="70px" right="20px" left="20px" height="428px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:gridcolumn std:sid="g-column-ca9ff546" width="50px"/>
+        <cl:gridcolumn std:sid="g-column-66cd96ec" width="170px"/>
+        <cl:gridcolumn std:sid="g-column-600c3909" width="142px"/>
+        <cl:gridcolumn std:sid="g-column-db250291" width="54px"/>
+        <cl:gridheader std:sid="gh-band-f2c6a622">
+          <cl:gridrow std:sid="g-row-7f7ec297"/>
+          <cl:gridcell std:sid="gh-cell-c215da8d" rowindex="0" colindex="0" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-26693a72" rowindex="0" colindex="1" targetcolumnname="boardTitle" sortable="false" filterable="false" text="글 제목"/>
+          <cl:gridcell std:sid="gh-cell-d0288eb1" rowindex="0" colindex="2" targetcolumnname="boardRegDate" sortable="false" filterable="false" text="작성 일시"/>
+          <cl:gridcell std:sid="gh-cell-6d638098" rowindex="0" colindex="3" text="작성 여부"/>
         </cl:gridheader>
-        <cl:griddetail std:sid="gd-band-1ce5b4e5">
-          <cl:gridrow std:sid="g-row-92cb75ce"/>
-          <cl:gridcell std:sid="gd-cell-bc413b6f" rowindex="0" colindex="0"/>
-          <cl:gridcell std:sid="gd-cell-086a6da4" rowindex="0" colindex="1"/>
-          <cl:gridcell std:sid="gd-cell-886e7571" rowindex="0" colindex="2"/>
-          <cl:gridcell std:sid="gd-cell-0d643a6e" rowindex="0" colindex="3"/>
-          <cl:gridcell std:sid="gd-cell-e7ef72ab" rowindex="0" colindex="4"/>
+        <cl:griddetail std:sid="gd-band-384fa961">
+          <cl:gridrow std:sid="g-row-f88b21d3" height="48px"/>
+          <cl:gridcell std:sid="gd-cell-a1775a1f" rowindex="0" colindex="0" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-8589834a" rowindex="0" colindex="1" columnname="boardTitle"/>
+          <cl:gridcell std:sid="gd-cell-7f9b8c1e" rowindex="0" colindex="2" columnname="boardRegDate">
+            <cl:dateinput std:sid="d-input-0901d57b" id="dti1" style="text-align:center;" hidebutton="true">
+              <cl:celldata/>
+            </cl:dateinput>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-7e5e33e6" rowindex="0" colindex="3">
+            <cl:img std:sid="image-c0eb5a6c">
+              <cl:relativebind property="src" columnname="boardResponseStatus"/>
+              <cl:celldata halign="CENTER" valign="CENTER" width="40" height="40"/>
+            </cl:img>
+          </cl:gridcell>
         </cl:griddetail>
       </cl:grid>
       <cl:button std:sid="button-6e95866d" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="새 글 등록하기">
         <cl:listener std:sid="listener-116150ee" name="click" handler="onButtonClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-62013439" right="0px" bottom="10px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+        <cl:xylayoutdata std:sid="xyl-data-62013439" right="20px" bottom="20px" width="100px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
       </cl:button>
-      <cl:output std:sid="output-1f1b4944" style="border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="Q &amp; A">
-        <cl:xylayoutdata std:sid="xyl-data-0c231917" top="0px" right="0px" left="0px" height="40px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="Q &amp; A">
+        <cl:xylayoutdata std:sid="xyl-data-0c231917" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:output>
+      <cl:button std:sid="button-d4d403db" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="상세보기">
+        <cl:listener std:sid="listener-3dfc7d6c" name="click" handler="onButtonClick3"/>
+        <cl:xylayoutdata std:sid="xyl-data-6d98e6bc" right="130px" bottom="20px" width="100px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+      </cl:button>
       <cl:xylayout std:sid="xylayout-5c850fda"/>
     </cl:group>
-    <cl:xylayout std:sid="xylayout-755732c8"/>
+    <cl:xylayout std:sid="xylayout-755732c8" scrollable="false"/>
   </body>
   <std:studiosetting>
     <std:hruler/>
