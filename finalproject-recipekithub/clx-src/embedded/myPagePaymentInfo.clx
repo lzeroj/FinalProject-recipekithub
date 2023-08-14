@@ -68,7 +68,7 @@
           </cl:formlayout>
         </cl:group>
         <cl:grid std:sid="grid-24560983" id="grd1" readonly="true" datasetid="myPaymentList" autorowheight="all" suppressedcelltype="merged" wheelrowcount="3">
-          <cl:formdata std:sid="f-data-35257794" row="4" col="0" rowspan="1" colspan="4"/>
+          <cl:formdata std:sid="f-data-6160f69a" row="4" col="0" rowspan="1" colspan="4"/>
           <cl:gridcolumn std:sid="g-column-e02635be" width="50px"/>
           <cl:gridcolumn std:sid="g-column-56310a9b"/>
           <cl:gridcolumn std:sid="g-column-40a0a6b1"/>
@@ -101,7 +101,7 @@
           <cl:columns length="130" unit="PIXEL"/>
           <cl:columns length="1" unit="FRACTION"/>
           <cl:columns length="100" unit="PIXEL"/>
-          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
         </cl:formlayout>
       </cl:group>
       <cl:group std:sid="group-96481a9b" style="background-color:#FFFFFF;">

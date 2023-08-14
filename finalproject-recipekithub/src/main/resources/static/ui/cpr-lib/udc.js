@@ -45,6 +45,26 @@
 				function onMypageClick(e){
 					var mypage = e.control;
 					window.location.href="/findMyPageForm";
+				}
+	
+				/*
+				 * 이미지에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onImageClick(e){
+					var image = e.control;
+					window.location.href="/";
+				}
+	
+				/*
+				 * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
+				 * 아이템 클릭시 발생하는 이벤트.
+				 */
+				function onNavigationBarItemClick(e){
+					var navigationBar = e.control;
+					if(navigationBar.value == 'question'){
+						console.log(1);
+					}
 				};
 				// End - User Script
 				
@@ -81,8 +101,12 @@
 						var image_1 = new cpr.controls.Image();
 						image_1.src = "theme/images/icon/recipekithubLog.png";
 						image_1.style.css({
+							"cursor" : "pointer",
 							"padding-top" : "0px"
 						});
+						if(typeof onImageClick == "function") {
+							image_1.addEventListener("click", onImageClick);
+						}
 						container.addChild(image_1, {
 							"top": "-20px",
 							"left": "42px",
@@ -264,8 +288,11 @@
 						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "value1", null));
 						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "value2", null));
 						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "value3", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("공략", "value4", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("Q & A", "question", null));
 					})(navigationBar_1);
+					if(typeof onNavigationBarItemClick == "function") {
+						navigationBar_1.addEventListener("item-click", onNavigationBarItemClick);
+					}
 					container.addChild(navigationBar_1, {
 						positions: [
 							{

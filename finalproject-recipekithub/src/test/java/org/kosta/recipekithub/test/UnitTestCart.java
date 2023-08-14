@@ -42,8 +42,8 @@ public class UnitTestCart {
 	
 	@Test
 	public void updateCart() {
-		int cartNo = 2;
-		int mealkiitNo = 1;
+		int cartNo = 5;
+		int mealkiitNo = 70;
 		int cartDetailQuantity = 3;
 		int result = cartService.updateCart(cartNo,mealkiitNo,cartDetailQuantity);
 		Assertions.assertEquals(1, result);
@@ -53,6 +53,7 @@ public class UnitTestCart {
 	public void findCartNoByMemberEmail() {
 		String memberEmail = "shj";
 		CartVO cartVO = cartService.findCartNoByMemberEmail(memberEmail);
+		System.out.println(cartVO.toString());
 		Assertions.assertNotNull(cartVO);
 	}
 	

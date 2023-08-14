@@ -42,6 +42,38 @@
 				}); 
 				app.lookup("ea1").redraw();
 				
+			}
+
+			/*
+			 * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
+			 * 아이템 클릭시 발생하는 이벤트.
+			 */
+			function onNav1ItemClick(e){
+				var nav1 = e.control;
+				var src = null;
+				if(nav1.value == '4'){ // QnA 게시판
+					src = "embedded/myPageQuestion"
+				}else if(nav1.value == '2'){
+					src = "embedded/myPagePaymentInfo"
+				}
+				var vcEmb = app.lookup("ea1");
+				cpr.core.App.load(src, function(/*cpr.core.App*/ loadedApp){
+					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+					if(vcEmb.getEmbeddedAppInstance()){
+						vcEmb.getEmbeddedAppInstance().dispose();
+					}
+					/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+					if(loadedApp){						
+						/*초기값을 전달합니다.*/			
+						vcEmb.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+			//				embApp.initValue = voInitValue;
+						})
+						/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+						vcEmb.app = loadedApp;
+					}
+				}); 
+				app.lookup("ea1").redraw();	
+				
 			};
 			// End - User Script
 			
@@ -160,7 +192,11 @@
 							navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "1", null));
 							navigationBar_1.addItem(new cpr.controls.MenuItem("구매내역", "2", null));
 							navigationBar_1.addItem(new cpr.controls.MenuItem("좋아요", "3", null));
+							navigationBar_1.addItem(new cpr.controls.MenuItem("문의하기", "4", null));
 						})(navigationBar_1);
+						if(typeof onNav1ItemClick == "function") {
+							navigationBar_1.addEventListener("item-click", onNav1ItemClick);
+						}
 						container.addChild(navigationBar_1, {
 							positions: [
 								{
