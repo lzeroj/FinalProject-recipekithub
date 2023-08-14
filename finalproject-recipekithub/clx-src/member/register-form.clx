@@ -225,6 +225,8 @@
   </body>
   <std:studiosetting>
     <std:hruler/>
-    <std:vruler/>
+    <std:vruler>
+      <std:guide position="130"/>
+    </std:vruler>
   </std:studiosetting>
 </html>
