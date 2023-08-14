@@ -68,8 +68,12 @@ ALTER TABLE MEALKIT_BOARD RENAME COLUMN temp_mealkit_info TO mealkit_info;
 UPDATE MEMBER SET member_nick='kdj1' WHERE member_email='kjoonie456@naver.com';
 
 
+ALTER TABLE MEMBER ADD (member_postcode CHAR(6));
+UPDATE MEMBER SET member_postcode = '000000';  -- replace '000000' with any default or actual data.
+ALTER TABLE MEMBER MODIFY member_postcode CHAR(6) NOT NULL;
 
-
-
+ALTER TABLE MEMBER ADD (member_address_detail VARCHAR2(90));
+UPDATE MEMBER SET member_address_detail = 'Default Address';  -- replace 'Default Address' with an appropriate default or actual data.
+ALTER TABLE MEMBER MODIFY member_address_detail VARCHAR2(90) NOT NULL;
 
 

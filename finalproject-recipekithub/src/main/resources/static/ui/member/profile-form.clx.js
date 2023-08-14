@@ -37,67 +37,16 @@
 			 */
 			function onSub_profileSubmitSuccess(e){
 				var sub_profile = e.control;
-				//var metadata = sub_profile.getMetadata("myProfile");
 				var dsProfile = app.lookup("ds_profile");
 				
+				app.lookup("ipbEmail").text = dsProfile.getValue(0, "memberEmail");
+				app.lookup("ipbPassword1").text = dsProfile.getValue(0, "memberPassword");
+				app.lookup("ipbName").text = dsProfile.getValue(0, "memberName");
+				app.lookup("ipbNick").text = dsProfile.getValue(0, "memberNick");
+				app.lookup("ipbAddress").text = dsProfile.getValue(0, "memberAddress");
+				app.lookup("ipbPhone").mask = dsProfile.getValue(0, "memberPhone");
+				app.lookup("ipbBirthday").value = dsProfile.getValue(0, "memberBirthday");
 				
-				var memberEmail = cpr.core.Platform.INSTANCE.getParameter("memberEmail");
-				var memberPassword = cpr.core.Platform.INSTANCE.getParameter("memberPassword");
-				var memberName = cpr.core.Platform.INSTANCE.getParameter("memberName");
-				var memberNick = cpr.core.Platform.INSTANCE.getParameter("memberNick");
-				var memberAddress = cpr.core.Platform.INSTANCE.getParameter("memberAddress");
-				var memberPhone = cpr.core.Platform.INSTANCE.getParameter("memberPhone");
-				var memberBirthday = cpr.core.Platform.INSTANCE.getParameter("memberBirthday");
-				
-				/*
-				app.lookup("ipbEmail") = dsProfile.setValue("member_email", memberEmail);
-				app.lookup("ipbPassword1") = dsProfile.setValue("member_password", memberPassword);
-				app.lookup("ipbName") = dsProfile.setValue("member_name", memberName);
-				app.lookup("ipbNick") = dsProfile.setValue("member_nick", memberNick);
-				app.lookup("ipbAddress") = dsProfile.setValue("member_address", memberAddress);
-				app.lookup("ipbPhone") = dsProfile.setValue("member_phone", memberPhone);
-				app.lookup("ipbBirthday") = dsProfile.setValue("member_birthday", memberBirthday);
-				*/
-				
-				dsProfile.setValue("member_email", memberEmail);
-				dsProfile.setValue("member_password", memberPassword);
-				dsProfile.setValue("member_name", memberName);
-				dsProfile.setValue("member_nick", memberNick);
-				dsProfile.setValue("member_address", memberAddress);
-				dsProfile.setValue("member_phone", memberPhone);
-				dsProfile.setValue("member_birthday", memberBirthday);
-				
-				/*
-				for(var idx = 0; idx < metadata.length; idx++){
-					dsProfile.setValue(idx, "member_email", metadata[idx].memberEmail);
-					dsProfile.setValue(idx, "member_password", metadata[idx].memberPassword);
-					dsProfile.setValue(idx, "member_name", metadata[idx].memberName);
-					dsProfile.setValue(idx, "member_nick", metadata[idx].memberNick);
-					dsProfile.setValue(idx, "member_address", metadata[idx].memberAddress);
-					dsProfile.setValue(idx, "member_phone", metadata[idx].memberPhone);
-					dsProfile.setValue(idx, "member_birthday", metadata[idx].memberBirthday);
-				}
-				*/
-				
-				/*
-				dsProfile.setValue(1, "member_email", metadata.memberEmail);
-				dsProfile.setValue(2, "member_password", metadata.memberPassword);
-				dsProfile.setValue(3, "member_name", metadata.memberName);
-				dsProfile.setValue(4, "member_nick", metadata.memberNick);
-				dsProfile.setValue(5, "member_address", metadata.memberAddress);
-				dsProfile.setValue(6, "member_phone", metadata.memberPhone);
-				dsProfile.setValue(7, "member_birthday", metadata.memberBirthday);
-				*/
-				
-				dsProfile.refresh();
-				
-			//	app.lookup("ipbEmail").redraw();
-			//	app.lookup("ipbPassword1").redraw();
-			//	app.lookup("ipbName").redraw();
-			//	app.lookup("ipbNick").redraw();
-			//	app.lookup("ipbBirthday").redraw();
-			//	app.lookup("ipbPhone").redraw();
-			//	app.lookup("ipbAddress").redraw();
 			}
 
 			/*
@@ -108,13 +57,13 @@
 				var btnMemUpdate = e.control;
 				if(confirm("정말로 수정하시겠습니까?")) {
 					var dataMap = app.lookup("dm_update");
-					dataMap.setValue("member_email", app.lookup("ipbEmail").value);
-					dataMap.setValue("member_password", app.lookup("ipbPassword1").value);
-					dataMap.setValue("member_name", app.lookup("ipbName").value);
-					dataMap.setValue("member_nick", app.lookup("ipbNick").value);
-					dataMap.setValue("member_birthday", app.lookup("ipbBirthday").value);
-					dataMap.setValue("member_phone", app.lookup("ipbPhone").value);
-					dataMap.setValue("member_address", app.lookup("ipbAddress").value);
+					dataMap.setValue("memberEmail", app.lookup("ipbEmail").value);
+					dataMap.setValue("memberPassword", app.lookup("ipbPassword1").value);
+					dataMap.setValue("memberName", app.lookup("ipbName").value);
+					dataMap.setValue("memberNick", app.lookup("ipbNick").value);
+					dataMap.setValue("memberBirthday", app.lookup("ipbBirthday").value);
+					dataMap.setValue("memberPhone", app.lookup("ipbPhone").value);
+					dataMap.setValue("memberAddress", app.lookup("ipbAddress").value);
 					var submission = app.lookup("sub_update");
 					submission.send();
 				}
@@ -128,7 +77,7 @@
 				var btnMemDelete = e.control;
 				if(confirm("정말로 탈퇴하시겠습니까?")) {
 					var dataMap = app.lookup("dm_delete");
-					dataMap.setValue("member_email", app.lookup("ipbEmail").value);
+					dataMap.setValue("memberEmail", app.lookup("ipbEmail").value);
 					var submission = app.lookup("sub_delete");
 					submission.send();
 				}
@@ -170,43 +119,43 @@
 			dataSet_1.parseData({
 				"columns" : [
 					{
-						"name": "member_email",
+						"name": "memberEmail",
 						"dataType": "string"
 					},
 					{
-						"name": "member_password",
+						"name": "memberPassword",
 						"dataType": "string"
 					},
 					{
-						"name": "member_name",
+						"name": "memberName",
 						"dataType": "string"
 					},
 					{
-						"name": "member_nick",
+						"name": "memberNick",
 						"dataType": "string"
 					},
 					{
-						"name": "member_address",
+						"name": "memberAddress",
 						"dataType": "string"
 					},
 					{
-						"name": "member_phone",
+						"name": "memberPhone",
 						"dataType": "string"
 					},
 					{
-						"name": "member_birthday",
+						"name": "memberBirthday",
 						"dataType": "string"
 					},
 					{
-						"name": "member_type",
+						"name": "memberType",
 						"dataType": "string"
 					},
 					{
-						"name": "member_status",
+						"name": "memberStatus",
 						"dataType": "string"
 					},
 					{
-						"name": "member_reg_date",
+						"name": "memberRegDate",
 						"dataType": "string"
 					}
 				]
@@ -219,43 +168,43 @@
 			dataMap_1.parseData({
 				"columns" : [
 					{
-						"name": "member_email",
+						"name": "memberEmail",
 						"dataType": "string"
 					},
 					{
-						"name": "member_password",
+						"name": "memberPassword",
 						"dataType": "string"
 					},
 					{
-						"name": "member_name",
+						"name": "memberName",
 						"dataType": "string"
 					},
 					{
-						"name": "member_nick",
+						"name": "memberNick",
 						"dataType": "string"
 					},
 					{
-						"name": "member_address",
+						"name": "memberAddress",
 						"dataType": "string"
 					},
 					{
-						"name": "member_phone",
+						"name": "memberPhone",
 						"dataType": "string"
 					},
 					{
-						"name": "member_birthday",
+						"name": "memberBirthday",
 						"dataType": "string"
 					},
 					{
-						"name": "member_type",
+						"name": "memberType",
 						"dataType": "string"
 					},
 					{
-						"name": "member_status",
+						"name": "memberStatus",
 						"dataType": "string"
 					},
 					{
-						"name": "member_reg_date",
+						"name": "memberRegDate",
 						"dataType": "string"
 					}
 				]
@@ -265,7 +214,7 @@
 			var dataMap_2 = new cpr.data.DataMap("dm_delete");
 			dataMap_2.parseData({
 				"columns" : [{
-					"name": "member_email",
+					"name": "memberEmail",
 					"dataType": "string"
 				}]
 			});
@@ -275,31 +224,33 @@
 			dataMap_3.parseData({
 				"columns" : [
 					{
-						"name": "member_email",
+						"name": "memberEmail",
 						"dataType": "string"
 					},
 					{
-						"name": "member_password",
+						"name": "memberPassword",
 						"dataType": "string"
 					},
 					{
-						"name": "member_name",
+						"name": "memberName",
 						"dataType": "string"
 					},
 					{
-						"name": "member_nick",
+						"name": "memberNick",
+						"dataType": "string",
+						"defaultValue": "",
+						"info": ""
+					},
+					{
+						"name": "memberAddress",
 						"dataType": "string"
 					},
 					{
-						"name": "member_address",
+						"name": "memberPhone",
 						"dataType": "string"
 					},
 					{
-						"name": "member_phone",
-						"dataType": "string"
-					},
-					{
-						"name": "member_birthday",
+						"name": "memberBirthday",
 						"dataType": "string"
 					}
 				]
@@ -307,7 +258,7 @@
 			app.register(dataMap_3);
 			var submission_1 = new cpr.protocols.Submission("sub_update");
 			submission_1.action = "/member/updateMember";
-			submission_1.addRequestData(dataMap_1);
+			submission_1.addRequestData(dataMap_3);
 			if(typeof onSub_updateSubmitSuccess == "function") {
 				submission_1.addEventListener("submit-success", onSub_updateSubmitSuccess);
 			}
@@ -322,7 +273,7 @@
 			app.register(submission_2);
 			
 			var submission_3 = new cpr.protocols.Submission("sub_profile");
-			submission_3.action = "/memberUI/profileInfo";
+			submission_3.action = "/member/profileInfo";
 			submission_3.addResponseData(dataSet_1, false);
 			if(typeof onSub_profileSubmitSuccess == "function") {
 				submission_3.addEventListener("submit-success", onSub_profileSubmitSuccess);
@@ -502,27 +453,29 @@
 								"border-radius" : "5px",
 								"font-size" : "15px"
 							});
-							inputBox_1.bind("value").toDataSet(app.lookup("ds_profile"), "member_email", 0);
+							inputBox_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberEmail", 0);
 							container.addChild(inputBox_1, {
 								"colIndex": 1,
 								"rowIndex": 0
 							});
 							var inputBox_2 = new cpr.controls.InputBox("ipbPassword1");
 							inputBox_2.secret = true;
+							inputBox_2.showClearButton = true;
 							inputBox_2.maxLength = 25;
 							inputBox_2.spellCheck = false;
 							inputBox_2.style.css({
 								"border-radius" : "5px",
 								"font-size" : "15px"
 							});
-							inputBox_2.bind("value").toDataSet(app.lookup("ds_profile"), "member_password", 0);
-							inputBox_2.bind("placeholder").toDataSet(app.lookup("ds_profile"), "member_password", 0);
+							inputBox_2.bind("value").toDataSet(app.lookup("ds_profile"), "memberPassword", 0);
+							inputBox_2.bind("placeholder").toDataSet(app.lookup("ds_profile"), "memberPassword", 0);
 							container.addChild(inputBox_2, {
 								"colIndex": 1,
 								"rowIndex": 1
 							});
 							var inputBox_3 = new cpr.controls.InputBox("ipbPassword2");
 							inputBox_3.secret = true;
+							inputBox_3.showClearButton = true;
 							inputBox_3.maxLength = 25;
 							inputBox_3.spellCheck = false;
 							inputBox_3.style.css({
@@ -534,6 +487,7 @@
 								"rowIndex": 3
 							});
 							var inputBox_4 = new cpr.controls.InputBox("ipbName");
+							inputBox_4.showClearButton = true;
 							inputBox_4.lengthUnit = "utf8";
 							inputBox_4.maxLength = 18;
 							inputBox_4.spellCheck = false;
@@ -541,13 +495,14 @@
 								"border-radius" : "5px",
 								"font-size" : "15px"
 							});
-							inputBox_4.bind("value").toDataSet(app.lookup("ds_profile"), "member_name", 0);
-							inputBox_4.bind("placeholder").toDataSet(app.lookup("ds_profile"), "member_name", 0);
+							inputBox_4.bind("value").toDataSet(app.lookup("ds_profile"), "memberName", 0);
+							inputBox_4.bind("placeholder").toDataSet(app.lookup("ds_profile"), "memberName", 0);
 							container.addChild(inputBox_4, {
 								"colIndex": 1,
 								"rowIndex": 4
 							});
 							var inputBox_5 = new cpr.controls.InputBox("ipbNick");
+							inputBox_5.showClearButton = true;
 							inputBox_5.lengthUnit = "utf8";
 							inputBox_5.maxLength = 24;
 							inputBox_5.spellCheck = false;
@@ -555,8 +510,8 @@
 								"border-radius" : "5px",
 								"font-size" : "15px"
 							});
-							inputBox_5.bind("value").toDataSet(app.lookup("ds_profile"), "member_nick", 0);
-							inputBox_5.bind("placeholder").toDataSet(app.lookup("ds_profile"), "member_nick", 0);
+							inputBox_5.bind("value").toDataSet(app.lookup("ds_profile"), "memberNick", 0);
+							inputBox_5.bind("placeholder").toDataSet(app.lookup("ds_profile"), "memberNick", 0);
 							container.addChild(inputBox_5, {
 								"colIndex": 1,
 								"rowIndex": 5
@@ -565,36 +520,38 @@
 							textArea_1.lengthUnit = "utf8";
 							textArea_1.maxLength = 90;
 							textArea_1.spellCheck = false;
+							textArea_1.imeMode = "active";
 							textArea_1.style.css({
 								"border-radius" : "5px",
 								"font-size" : "15px"
 							});
-							textArea_1.bind("value").toDataSet(app.lookup("ds_profile"), "member_address", 0);
-							textArea_1.bind("placeholder").toDataSet(app.lookup("ds_profile"), "member_address", 0);
+							textArea_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberAddress", 0);
+							textArea_1.bind("placeholder").toDataSet(app.lookup("ds_profile"), "memberAddress", 0);
 							container.addChild(textArea_1, {
 								"colIndex": 1,
 								"rowIndex": 8
 							});
 							var dateInput_1 = new cpr.controls.DateInput("ipbBirthday");
 							dateInput_1.spinButton = true;
+							dateInput_1.showClearButton = true;
 							dateInput_1.style.setClasses(["cl-dateinput-register", "single-datepicker"]);
 							dateInput_1.style.css({
 								"border-radius" : "5px",
 								"font-size" : "15px"
 							});
-							dateInput_1.bind("value").toDataSet(app.lookup("ds_profile"), "member_birthday", 0);
-							dateInput_1.bind("placeholder").toDataSet(app.lookup("ds_profile"), "member_birthday", 0);
+							dateInput_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberBirthday", 0);
 							container.addChild(dateInput_1, {
 								"colIndex": 1,
 								"rowIndex": 6
 							});
 							var maskEditor_1 = new cpr.controls.MaskEditor("ipbPhone");
+							maskEditor_1.mask = "000-0000-0000";
+							maskEditor_1.showClearButton = true;
 							maskEditor_1.style.css({
 								"border-radius" : "5px",
 								"font-size" : "15px"
 							});
-							maskEditor_1.bind("value").toDataSet(app.lookup("ds_profile"), "member_phone", 0);
-							maskEditor_1.bind("mask").toDataSet(app.lookup("ds_profile"), "member_phone", 0);
+							maskEditor_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberPhone", 0);
 							container.addChild(maskEditor_1, {
 								"colIndex": 1,
 								"rowIndex": 7

@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.MemberService;
-import org.kosta.recipekithub.model.vo.CartVO;
-import org.kosta.recipekithub.model.vo.CartdetailVO;
-import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,9 +80,11 @@ public class MemberController {
 		String memberNick = param.getValue("member_nick"); 
 		String memberBirthday = param.getValue("member_birthday");
 		String memberPhone = param.getValue("member_phone"); 
+		String memberPostcode = param.getValue("member_postcode");
 		String memberAddress = param.getValue("member_address");
+		String memberAddressDetail = param.getValue("member_address_detail");
 		
-		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberAddress, memberPhone, memberBirthday);
+		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode, memberAddress, memberAddressDetail, memberPhone, memberBirthday);
 		int result = memberService.registerMember(member);
 		log.info("member 회원가입 {}", member);
 		dataRequest.setResponse("ds_member", member); 
@@ -98,16 +97,22 @@ public class MemberController {
 	@RequestMapping("/checkEmail")
 	@ResponseBody
 	public View checkEmail(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-		ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
+		ParameterGroup param = dataRequest.getParameterGroup("dm_check_email");
+		//ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
 		String memberEmail = param.getValue("member_email");
 		int checkResult = memberService.checkDuplicateEmail(memberEmail);
-		String result = null;
+		Map<String,Object> message = new HashMap<>();
+		//String result = null;
 		if (checkResult == 0) {
-			result = "ok";
+			message.put("checkResult", "ok");
+			//result = "ok";
 		} else {
-			result = "fail";
+			message.put("checkResult", "fail");
+			//result = "fail";
 		}
-		request.setAttribute("responsebody", result);
+		// request.setAttribute("responsebody", result);
+		dataRequest.setMetadata(true, message);
+
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 	
@@ -141,27 +146,9 @@ public class MemberController {
 		MemberVO member = (MemberVO)session.getAttribute("member");	// 현재 session에 담겨있는 회원 정보 가져오기
 		System.out.println(member);
 		
-		/*
 		List<MemberVO> myProfile = new ArrayList<>();
-		MemberVO mvo = null;
-		mvo.setMemberEmail(member.getMemberEmail());
-		mvo.setMemberPassword(member.getMemberPassword());
-		mvo.setMemberName(member.getMemberName());
-		mvo.setMemberNick(member.getMemberNick());
-		mvo.setMemberBirthday(member.getMemberBirthday());
-		mvo.setMemberPhone(member.getMemberPhone());
-		mvo.setMemberAddress(member.getMemberAddress());
-		myProfile.add(mvo);
-		*/
-		
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("myProfile", member);
-		System.out.println("map : " + map);
-		
-		
-		dataRequest.setResponse("ds_profile", member);
-		dataRequest.setMetadata(true, map);
+		myProfile.add(member);
+		dataRequest.setResponse("ds_profile", myProfile);
 		
 		return new JSONDataView();
 	}
@@ -176,15 +163,17 @@ public class MemberController {
 		}
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dm_update");
-		String memberEmail = param.getValue("member_email");
-		String memberPassword = param.getValue("member_password");
-		String memberName = param.getValue("member_name"); 
-		String memberNick = param.getValue("member_nick"); 
-		String memberBirthday = param.getValue("member_birthday");
-		String memberPhone = param.getValue("member_phone"); 
-		String memberAddress = param.getValue("member_address");
+		String memberEmail = param.getValue("memberEmail");
+		String memberPassword = param.getValue("memberPassword");
+		String memberName = param.getValue("memberName"); 
+		String memberNick = param.getValue("memberNick"); 
+		String memberBirthday = param.getValue("memberBirthday");
+		String memberPhone = param.getValue("memberPhone"); 
+		String memberPostcode = param.getValue("memberPostcode");
+		String memberAddress = param.getValue("memberAddress");
+		String memberAddressDetail = param.getValue("memberAddressDetail");
 		
-		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberAddress, memberPhone, memberBirthday);
+		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode, memberAddress, memberAddressDetail, memberPhone, memberBirthday);
 		if(member != null) {
 			int result = memberService.updateMember(member);
 			log.info("member 회원 정보 수정 {}", result);
@@ -209,7 +198,7 @@ public class MemberController {
 
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dm_delete");
-		String memberEmail = param.getValue("member_email");
+		String memberEmail = param.getValue("memberEmail");
 		
 		int result = memberService.deleteMember(memberEmail);
 		System.out.println(result);
