@@ -18,26 +18,31 @@ function onBodyInit2(e){
             app.lookup("sampleThr").redraw();
         }); 
     });
-
+	var mealkitNo = cpr.core.Platform.INSTANCE.getParameter("mealkitNo");
 	var mealkitName = cpr.core.Platform.INSTANCE.getParameter("mealkitName");	
 	var mealkitInfo = cpr.core.Platform.INSTANCE.getParameter("mealkitInfo");	
 	var mealkitIngredients = cpr.core.Platform.INSTANCE.getParameter("mealkitIngredients");	
 	var mealkitPrice = cpr.core.Platform.INSTANCE.getParameter("mealkitPrice");	
 	var mealkitInventory = cpr.core.Platform.INSTANCE.getParameter("mealkitInventory");	
 	var mealkitCategory = cpr.core.Platform.INSTANCE.getParameter("mealkitCategory");
+	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");
+	
 	var vsOpt = app.lookup("sampleThr");
 	vsOpt.value = $('#summernote').summernote('code');
 	//var message = vsOpt.value;
 	var dataMap = app.lookup("updateMealkit");	
+	dataMap.setValue("mealkitNo", mealkitNo);
 	dataMap.setValue("mealkitName", mealkitName);
 	dataMap.setValue("mealkitInfo", mealkitInfo);
 	dataMap.setValue("mealkitIngredients", mealkitIngredients);
 	dataMap.setValue("mealkitPrice", mealkitPrice);
 	dataMap.setValue("mealkitInventory", mealkitInventory);
 	dataMap.setValue("mealkitCategory", mealkitCategory);
-	vsOpt.value = dataMap.getValue("mealkitInfo");
-	var info = $('#summernote').summernote('code', mealkitInfo); //이거 안 나옴 씨발
-	var mealkitInfoInfo = $('#summernote').summernote('insertText', mealkitInfo); // 이것도 안 나옴.
+	dataMap.setValue("mealkitMember", mealkitMember);
+	
+	//vsOpt.value = dataMap.getValue("mealkitInfo");
+	
+	
 	//console.log("info = " + info);
 	//console.log("mealkitInfoInfo = " + mealkitInfoInfo);
 	
@@ -66,6 +71,8 @@ function onSampleThrLoad(e){
      */
     var sampleThr = e.control;
     var content = e.content;
+    
+    var mealkitInfo = cpr.core.Platform.INSTANCE.getParameter("mealkitInfo");
 
     if (loaded) {
         sampleThr.registerComponent("Editor", content);
@@ -93,6 +100,8 @@ function onSampleThrLoad(e){
        
             ]
         });
+      $('#summernote').summernote('code', mealkitInfo);
+      app.lookup("")
     }
 	
 }
@@ -104,42 +113,52 @@ function onSampleThrLoad(e){
  */
 function onButtonClick2(e){
 	var button = e.control;
-//	var vsOpt = app.lookup("sampleThr");
-//  	vsOpt.value = $('#summernote').summernote('code');
-//   	var message = vsOpt.value;
-//   	
-//   	var combo1 = app.lookup("cmb1").text;
-//   	var combo2 = app.lookup("cmb2").text;
-//   	var combo3 = app.lookup("cmb3").text;
-//   	var category = combo1+"/"+combo2+"/"+combo3;
-//   	
-//   	var dataMap = app.lookup("mealkitMap");
-//   	dataMap.setValue("mealkitInfo", message);
-//   	dataMap.setValue("mealkitCategory", category);
-//
-//	console.log("mealkitName = "+ dataMap.getValue("mealkitName"));
-//	console.log("mealkitInfo = "+ dataMap.getValue("mealkitInfo"));
-//	console.log("mealkitIngredients = "+ dataMap.getValue("mealkitIngredients"));
-//	console.log("mealkitPrice = "+ dataMap.getValue("mealkitPrice"));
-//	console.log("mealkitInventory = "+ dataMap.getValue("mealkitInventory"));
-//	console.log("mealkitCategory = "+ dataMap.getValue("mealkitCategory"));
-//	console.log("category = " + category);
-//	var submission = app.lookup("mealkitSub");
-//	submission.send();
+	var vsOpt = app.lookup("sampleThr");
+  	vsOpt.value = $('#summernote').summernote('code');
+   	var message = vsOpt.value;
    	
+   	var name = app.lookup("ipb1").value;
+   	var ingredients = app.lookup("ipb2").value;
+   	var price = app.lookup("ipb3").value;
+   	var inven = app.lookup("ipb4").value;
+   	
+   	var combo1 = app.lookup("cmb1").text;
+   	var combo2 = app.lookup("cmb2").text;
+   	var combo3 = app.lookup("cmb3").text;
+   	var category = combo1+"/"+combo2+"/"+combo3;
+   	
+ 	var dataMap = app.lookup("updateMealkit");	
+	dataMap.setValue("mealkitName", name);
+	dataMap.setValue("mealkitInfo", message);
+	dataMap.setValue("mealkitIngredients", ingredients);
+	dataMap.setValue("mealkitPrice", price);
+	dataMap.setValue("mealkitInventory", inven);
+	dataMap.setValue("mealkitCategory", category);
+	
+	var submission = app.lookup("updateMealkitSub").send();
+}
+
+
+/*
+ * "취소" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick(e){
+	var button = e.control;
+	window.location.href= "/"; //추후 상세 페이지로 바꿔야함.
 }
 
 /*
- * 서브미션에서 submit-success 이벤트 발생 시 호출. done..
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
  * 통신이 성공하면 발생합니다.
  */
-function onMealkitSubSubmitSuccess(e){
-	var mealkitSub = e.control;
-	var mealkitNo = mealkitSub.getMetadata("result");
+function onUpdateMealkitSubSubmitSuccess(e){
+	var updateMealkitSub = e.control;
+	var mealkitNo = updateMealkitSub.getMetadata("result");
 	//var dataMap = app.lookup("mealkitNo");
 	//dataMap.setValue("mealkitNo", metadata);
 	var url = '/mealkitDetail/'+mealkitNo; //상세 페이지 url
 	window.location.href= url;
-		
-	}
+}
 	
+

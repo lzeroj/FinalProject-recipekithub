@@ -1,6 +1,7 @@
 package org.kosta.recipekithub.model.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.kosta.recipekithub.model.mapper.MealkitMapper;
@@ -19,19 +20,17 @@ public class MealkitServiceImpl implements MealkitService {
 	@Override
 	public int insertMealKit(MealKitBoard mealKitBoard) {
 		//유효성 검사 코드 필요..!!
-		//MealKitBoard MadeMealkit= makeMealKit(param, request);
-		System.out.println("mealkit 객체를 알아보자" + mealKitBoard);
 		mealKitMapper.insertMealKit(mealKitBoard);
 		int num = mealKitBoard.getMealkitNo();
+		MealKitBoard mealkit = mealKitMapper.findMealKitByNo(num);
 		return num;
 	}
 	
 	@Override
 	public MealKitBoard findMealKitByNo(int mealkitNo) {
 		
-		Optional<MealKitBoard> mealkit = mealKitMapper.findMealKitByNo(mealkitNo);
-		MealKitBoard meal = mealkit.orElse(null);
-		return meal;
+		MealKitBoard mealkit = mealKitMapper.findMealKitByNo(mealkitNo);
+		return mealkit;
 	}
 	
 	@Override
@@ -41,15 +40,16 @@ public class MealkitServiceImpl implements MealkitService {
 	}
 	
 	@Override
-	public MealKitBoard editMealkit(MealKitBoard mealkit, MemberVO member) {
-		
-		if(mealkit.getMemberVO().getMemberEmail().equals(member.getMemberEmail())) {
-			mealKitMapper.editMealkit(mealkit);
-		}else {
-			//밀키트 작성자와 로그인한 사람이 다른 사람일 경우
-		}
-		
+	public MealKitBoard updateMealkit(MealKitBoard mealkit) {
+		mealKitMapper.updateMealkit(mealkit);		
 		return mealkit;
 	}
+	
+	@Override
+	public void deleteMealkit(int mealkitNo) {
+		mealKitMapper.deleteMealkit(mealkitNo);
+		
+	}
+	
 
 }
