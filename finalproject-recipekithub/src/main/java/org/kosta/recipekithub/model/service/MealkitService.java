@@ -14,7 +14,9 @@ public interface MealkitService {
 
 	List<MealKitBoard> findMealKitList();
 	
-	MealKitBoard editMealkit(MealKitBoard mealkit, MemberVO member);
+	MealKitBoard updateMealkit(MealKitBoard mealkit);
+
+	void deleteMealkit(int mealkitNo);
 	
 
 }
