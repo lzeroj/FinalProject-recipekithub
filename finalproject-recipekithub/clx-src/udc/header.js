@@ -32,4 +32,29 @@ function onMypageClick(e){
 }
 
 /*
+ * 이미지에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onImageClick(e){
+	var image = e.control;
+	window.location.href="/";
+}
+
+/*
+ * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
+ * 아이템 클릭시 발생하는 이벤트.
+ */
+function onNavigationBarItemClick(e){
+	var navigationBar = e.control;
+	if(navigationBar.value == 'question'){
+		console.log(1);
+	}
+	
+	if(navigationBar.value == 'mealkit'){
+		window.location.href='/insertMealkitForm';
+	}
+		
+	if(navigationBar.value == 'recipe'){
+		window.location.href='/findRecipeBoardList';
+	}
 }
