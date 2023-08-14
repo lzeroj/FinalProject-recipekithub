@@ -76,7 +76,7 @@ public class CartController {
 		return new JSONDataView();
 	}
 	
-	@RequestMapping("/updateMyCart")
+	@RequestMapping("/updateMyCart") //밀키트 이름이 똑같으면 exception 남
 	public View updateMyCart(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest, String cartDetailQuantity, String mealkitName) {
 //		HttpSession session = request.getSession(false);
 //		MemberVO memberVO = (MemberVO) session.getAttribute("member");

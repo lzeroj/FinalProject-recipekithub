@@ -19,7 +19,6 @@ public class IndexController {
 	Logger log = LoggerFactory.getLogger(getClass());
 	@RequestMapping("/")
 	public View index1(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {	
-		log.debug("테스트");
 		return new UIView("ui/index.clx"); 
 	}
 }

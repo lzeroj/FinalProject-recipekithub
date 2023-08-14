@@ -33,18 +33,80 @@
 			function onMyPaymentListOnloadSubmitSuccess(e){
 				var myPaymentListOnload = e.control;
 				var metadata = myPaymentListOnload.getMetadata("sendMealkitInfo");
+				var mealkitInfo = myPaymentListOnload.getMetadata("mealkitinfoString");
 				var dataSet = app.lookup("myPaymentList");
-				var myMlkitlist = app.lookup("myPaymentMealkitList");
 				
 				for(var i=0;i<metadata.length;i++){
 					dataSet.setValue(i, "mealkitNo", metadata[i].mealkitNo);
 					dataSet.setValue(i, "mealkitName", metadata[i].mealkitName);
-			//		myMlkitlist.setValue(i, "cartDetailQuantity", dataSet.getValue(i, "mealkitName"));
+					dataSet.setValue(i, "mealkitinfo", mealkitInfo[i].mealkitdetail);
+					dataSet.setValue(i, "mealkitdetailinfo", mealkitInfo[i].mealkitdetailinfo);
 				}
-				
-				
 				dataSet.refresh();
 				app.lookup("grd1").redraw();
+			}
+
+			/*
+			 * "검색" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick(e){
+				var button = e.control;
+				
+				var combovalue = app.lookup("cmb1").value;
+				var dataMap = app.lookup("searchparam");
+				if(combovalue == "mealkitName"){
+					dataMap.setValue("combovalue", "mealkitName");
+				}else if(combovalue == "paymentDate"){
+					dataMap.setValue("combovalue", "paymentDate");
+				}else if(combovalue == null || combovalue == "" ){
+					dataMap.setValue("combovalue", null);
+				}
+				app.lookup("sendsearchparam").send();
+			//	console.log(dataMap.getValue("combovalue"));
+			}
+
+			/*
+			 * 콤보 박스에서 selection-change 이벤트 발생 시 호출.
+			 * ComboBox Item을 선택하여 선택된 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onCmb1SelectionChange(e){
+				var cmb1 = e.control;
+				var combovalue = app.lookup("cmb1").value;
+				if(combovalue == "paymentDate"){
+					app.lookup("ipb1").placeholder = "년월일을 기입해 주세요 ex)20230813";
+					app.lookup("ipb1").redraw();
+				}	
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSendsearchparamSubmitSuccess(e){
+				var sendsearchparam = e.control;
+				var metadata = sendsearchparam.getMetadata("sendMealkitInfo");
+				var mealkitInfo = sendsearchparam.getMetadata("mealkitinfoString");
+				var dataSet = app.lookup("myPaymentList");
+				
+				for(var i=0;i<metadata.length;i++){
+					dataSet.setValue(i, "mealkitNo", metadata[i].mealkitNo);
+					dataSet.setValue(i, "mealkitName", metadata[i].mealkitName);
+					dataSet.setValue(i, "mealkitinfo", mealkitInfo[i].mealkitdetail);
+					dataSet.setValue(i, "mealkitdetailinfo", mealkitInfo[i].mealkitdetailinfo);
+				}
+				dataSet.refresh();
+				app.lookup("grd1").redraw();
+				
+			}
+
+			/*
+			 * "주문 취소" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick2(e){
+				var button = e.control;
+				console.log(1);
 			};
 			// End - User Script
 			
@@ -67,24 +129,32 @@
 					},
 					{"name": "mealkitName"},
 					{
-						"name": "paymentNo",
-						"dataType": "number"
+						"name": "paymentId",
+						"dataType": "number",
+						"displayOnly": false
+					},
+					{
+						"name": "mealkitdetailinfo",
+						"dataType": "string"
+					},
+					{
+						"name": "mealkitinfo",
+						"dataType": "string"
 					}
 				]
 			});
 			app.register(dataSet_1);
-			
-			var dataSet_2 = new cpr.data.DataSet("myPaymentMealkitList");
-			dataSet_2.parseData({
+			var dataMap_1 = new cpr.data.DataMap("searchparam");
+			dataMap_1.parseData({
 				"columns" : [
-					{"name": "mealkitName"},
 					{
-						"name": "cartDetailQuantity",
-						"dataType": "number"
-					}
+						"name": "inputvalue",
+						"dataType": "string"
+					},
+					{"name": "combovalue"}
 				]
 			});
-			app.register(dataSet_2);
+			app.register(dataMap_1);
 			var submission_1 = new cpr.protocols.Submission("myPaymentListOnload");
 			submission_1.action = "/findMyPaymentList";
 			submission_1.addResponseData(dataSet_1, false);
@@ -92,6 +162,16 @@
 				submission_1.addEventListener("submit-success", onMyPaymentListOnloadSubmitSuccess);
 			}
 			app.register(submission_1);
+			
+			var submission_2 = new cpr.protocols.Submission("sendsearchparam");
+			submission_2.action = "/searchMyPaymentList";
+			submission_2.mediaType = "application/x-www-form-urlencoded;simple";
+			submission_2.addRequestData(dataMap_1);
+			submission_2.addResponseData(dataSet_1, false);
+			if(typeof onSendsearchparamSubmitSuccess == "function") {
+				submission_2.addEventListener("submit-success", onSendsearchparamSubmitSuccess);
+			}
+			app.register(submission_2);
 			app.supportMedia("all", "myPageEm");
 			
 			// Configure root container
@@ -177,14 +257,19 @@
 						comboBox_1.showIcon = true;
 						comboBox_1.preventInput = true;
 						(function(comboBox_1){
+							comboBox_1.addItem(new cpr.controls.Item("----------", ""));
 							comboBox_1.addItem(new cpr.controls.Item("결제일자", "paymentDate"));
 							comboBox_1.addItem(new cpr.controls.Item("밀키트 이름", "mealkitName"));
 						})(comboBox_1);
+						if(typeof onCmb1SelectionChange == "function") {
+							comboBox_1.addEventListener("selection-change", onCmb1SelectionChange);
+						}
 						container.addChild(comboBox_1, {
 							"colIndex": 0,
 							"rowIndex": 0
 						});
 						var inputBox_1 = new cpr.controls.InputBox("ipb1");
+						inputBox_1.bind("value").toDataMap(app.lookup("searchparam"), "inputvalue");
 						container.addChild(inputBox_1, {
 							"colIndex": 2,
 							"rowIndex": 0
@@ -196,6 +281,9 @@
 							"color" : "#FFFFFF",
 							"background-image" : "none"
 						});
+						if(typeof onButtonClick == "function") {
+							button_1.addEventListener("click", onButtonClick);
+						}
 						container.addChild(button_1, {
 							"colIndex": 4,
 							"rowIndex": 0
@@ -211,6 +299,9 @@
 					grid_1.readOnly = true;
 					grid_1.init({
 						"dataSet": app.lookup("myPaymentList"),
+						"autoRowHeight": "all",
+						"wheelRowCount": 3,
+						"suppressedCellType": "merged",
 						"columns": [
 							{"width": "50px"},
 							{"width": "100px"},
@@ -267,23 +358,28 @@
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 1},
 									"configurator": function(cell){
+										cell.columnName = "mealkitName";
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 2},
 									"configurator": function(cell){
 										cell.columnName = "paymentDate";
+										cell.suppressRef = 3;
+										cell.suppressible = true;
 										cell.control = (function(){
 											var dateInput_1 = new cpr.controls.DateInput("dti1");
 											dateInput_1.bind("value").toDataColumn("paymentDate");
 											return dateInput_1;
 										})();
+										cell.controlConstraint = {};
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 3},
 									"configurator": function(cell){
 										cell.columnName = "paymentTotal";
+										cell.suppressible = true;
 									}
 								}
 							]
@@ -348,7 +444,7 @@
 					formLayout_4.verticalSpacing = "0px";
 					formLayout_4.horizontalSeparatorWidth = 1;
 					formLayout_4.verticalSeparatorWidth = 1;
-					formLayout_4.setColumns(["100px", "1fr", "100px", "1fr"]);
+					formLayout_4.setColumns(["100px", "250px", "100px", "40px", "60px", "1fr"]);
 					formLayout_4.setUseColumnShade(0, true);
 					formLayout_4.setUseColumnShade(2, true);
 					formLayout_4.setRows(["1fr", "1fr", "1fr"]);
@@ -373,7 +469,7 @@
 							"rowIndex": 0
 						});
 						var output_5 = new cpr.controls.Output();
-						output_5.bind("value").toDataColumn("paymentNo");
+						output_5.bind("value").toDataColumn("paymentId");
 						container.addChild(output_5, {
 							"colIndex": 1,
 							"rowIndex": 0
@@ -383,7 +479,7 @@
 						container.addChild(output_6, {
 							"colIndex": 1,
 							"rowIndex": 1,
-							"colSpan": 3,
+							"colSpan": 1,
 							"rowSpan": 1
 						});
 						var output_7 = new cpr.controls.Output();
@@ -391,7 +487,7 @@
 						container.addChild(output_7, {
 							"colIndex": 1,
 							"rowIndex": 2,
-							"colSpan": 3,
+							"colSpan": 1,
 							"rowSpan": 1
 						});
 						var output_8 = new cpr.controls.Output();
@@ -413,10 +509,34 @@
 							"rowIndex": 2
 						});
 						var output_10 = new cpr.controls.Output();
+						output_10.style.css({
+							"text-align" : "center"
+						});
 						output_10.bind("value").toDataColumn("paymentTotal");
 						container.addChild(output_10, {
 							"colIndex": 3,
-							"rowIndex": 0
+							"rowIndex": 0,
+							"colSpan": 3,
+							"rowSpan": 1
+						});
+						var output_11 = new cpr.controls.Output();
+						output_11.value = "상세 구매정보";
+						output_11.style.css({
+							"text-align" : "center"
+						});
+						container.addChild(output_11, {
+							"colIndex": 2,
+							"rowIndex": 1,
+							"colSpan": 1,
+							"rowSpan": 2
+						});
+						var output_12 = new cpr.controls.Output();
+						output_12.bind("value").toDataColumn("mealkitdetailinfo");
+						container.addChild(output_12, {
+							"colIndex": 3,
+							"rowIndex": 1,
+							"colSpan": 3,
+							"rowSpan": 2
 						});
 					})(group_5);
 					container.addChild(group_5, {

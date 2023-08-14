@@ -1,6 +1,8 @@
 package org.kosta.recipekithub.web;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,9 +38,9 @@ public class MemberUIController {
 		return new UIView("ui/member/register-form.clx"); 
 	}
 	
-	@RequestMapping("/mypageForm")
+	@RequestMapping("/profileForm")
 	public View findMypageForm(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {	
-		return new UIView("ui/member/mypage-form.clx"); 
+		return new UIView("ui/member/profile-form.clx"); 
 	}
 	
 	@RequestMapping("/logout")
@@ -56,4 +58,31 @@ public class MemberUIController {
 		return new UIView("ui/index.clx");
 	}
 	
+	
+	//---[ 회원 프로필 조회 ]---//
+	@RequestMapping("/profileInfo")
+	public View viewMyProfile(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
+		// 로그인 여부 확인
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("member") == null) {
+			System.out.println("---[로그인 상태가 아니므로 회원 정보 조회가 불가합니다.]---");
+			return new UIView("ui/member/login-form.clx");
+		}
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");	// 현재 session에 담겨있는 회원 정보 가져오기
+		System.out.println(member);
+		
+		Map<String, Object> initParam = new HashMap<>();
+		initParam.put("memberEmail", member.getMemberEmail());
+		initParam.put("memberPassword", member.getMemberPassword());
+		initParam.put("memberName", member.getMemberName());
+		initParam.put("memberNick", member.getMemberNick());
+		initParam.put("memberBirthday", member.getMemberBirthday());
+		initParam.put("memberPhone", member.getMemberPhone());
+		initParam.put("memberAddress", member.getMemberAddress());
+		
+		System.out.println("map : " + initParam);
+		
+		return new UIView("ui/member/profile-form.clx", initParam);
+	}
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.kosta.recipekithub.model.service.PaymentService;
 import org.kosta.recipekithub.model.vo.CartdetailVO;
+import org.kosta.recipekithub.model.vo.PaymentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -49,6 +50,15 @@ public class UnitTestPayment {
 		String memberEmail = "shj";
 		List<CartdetailVO> list = paymentService.findMealkitNameAndCount(memberEmail,cartNO,paymentId);
 		Assertions.assertEquals(3, list.size());
+	}
+	
+	@Test
+	public void searchMyPaymentList() {
+		String combovalue = "mealkitName";
+		String inputvalue = "기울어진";
+		String memberEmail = "shj";
+		List<PaymentVO> list = paymentService.searchMyPaymentList(memberEmail,combovalue,inputvalue);
+		Assertions.assertEquals(1, list.size());
 	}
 
 	

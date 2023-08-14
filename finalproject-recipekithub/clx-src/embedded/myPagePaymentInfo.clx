@@ -9,17 +9,24 @@
           <cl:datacolumn std:sid="d-column-756b2caf" name="paymentDate" datatype="string"/>
           <cl:datacolumn std:sid="d-column-07c5d8e8" name="mealkitNo" datatype="number" displayonly="false"/>
           <cl:datacolumn std:sid="d-column-bec67b2b" name="mealkitName"/>
-          <cl:datacolumn std:sid="d-column-d8b46706" name="paymentNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d8b46706" name="paymentId" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-8aa6c7f0" name="mealkitdetailinfo" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-ce46d135" name="mealkitinfo" datatype="string"/>
         </cl:datacolumnlist>
       </cl:dataset>
-      <cl:dataset std:sid="d-set-fe4b0c5b" id="myPaymentMealkitList">
+      <cl:datamap std:sid="d-map-554fb4db" id="searchparam">
         <cl:datacolumnlist>
-          <cl:datacolumn std:sid="d-column-73dbac70" name="mealkitName"/>
-          <cl:datacolumn std:sid="d-column-e7344704" name="cartDetailQuantity" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ffa66ecb" name="inputvalue" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-00a2cc41" name="combovalue"/>
         </cl:datacolumnlist>
-      </cl:dataset>
+      </cl:datamap>
       <cl:submission std:sid="submission-e2839d48" id="myPaymentListOnload" action="/findMyPaymentList">
         <cl:listener std:sid="listener-b2009cd7" name="submit-success" handler="onMyPaymentListOnloadSubmitSuccess"/>
+        <cl:responsedata dataid="myPaymentList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-ef57da1a" id="sendsearchparam" action="/searchMyPaymentList" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-26a26de5" name="submit-success" handler="onSendsearchparamSubmitSuccess"/>
+        <cl:requestdata dataid="searchparam"/>
         <cl:responsedata dataid="myPaymentList"/>
       </cl:submission>
     </cl:model>
@@ -37,14 +44,18 @@
         <cl:group std:sid="group-7362d673" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" class="cl-form-group">
           <cl:formdata std:sid="f-data-64598dd6" row="2" col="0" rowspan="1" colspan="4"/>
           <cl:combobox std:sid="c-box-e4b777c7" id="cmb1" showicon="true" preventinput="true">
+            <cl:listener std:sid="listener-66145c12" name="selection-change" handler="onCmb1SelectionChange"/>
             <cl:formdata std:sid="f-data-7e4500f5" row="0" col="0"/>
+            <cl:item std:sid="t-item-348949db" label="----------" value=""/>
             <cl:item std:sid="t-item-8f999339" label="결제일자" value="paymentDate"/>
             <cl:item std:sid="t-item-c3dc66c3" label="밀키트 이름" value="mealkitName"/>
           </cl:combobox>
           <cl:inputbox std:sid="i-box-6dc6e9c4" id="ipb1">
+            <cl:datamapbind property="value" category="PROPERTY" datacontrolid="searchparam" columnname="inputvalue"/>
             <cl:formdata std:sid="f-data-61214f1c" row="0" col="2"/>
           </cl:inputbox>
           <cl:button std:sid="button-470682d2" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="검색">
+            <cl:listener std:sid="listener-1f707801" name="click" handler="onButtonClick"/>
             <cl:formdata std:sid="f-data-ee7e29ab" row="0" col="4"/>
           </cl:button>
           <cl:formlayout std:sid="f-layout-753878a0" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
@@ -56,8 +67,8 @@
             <cl:columns length="100" unit="PIXEL"/>
           </cl:formlayout>
         </cl:group>
-        <cl:grid std:sid="grid-24560983" id="grd1" readonly="true" datasetid="myPaymentList">
-          <cl:formdata std:sid="f-data-35257794" row="4" col="0" rowspan="1" colspan="4"/>
+        <cl:grid std:sid="grid-24560983" id="grd1" readonly="true" datasetid="myPaymentList" autorowheight="all" suppressedcelltype="merged" wheelrowcount="3">
+          <cl:formdata std:sid="f-data-6160f69a" row="4" col="0" rowspan="1" colspan="4"/>
           <cl:gridcolumn std:sid="g-column-e02635be" width="50px"/>
           <cl:gridcolumn std:sid="g-column-56310a9b"/>
           <cl:gridcolumn std:sid="g-column-40a0a6b1"/>
@@ -72,13 +83,13 @@
           <cl:griddetail std:sid="gd-band-e563b250">
             <cl:gridrow std:sid="g-row-8cb67276"/>
             <cl:gridcell std:sid="gd-cell-1d6ade9e" rowindex="0" colindex="0" columntype="rowindex"/>
-            <cl:gridcell std:sid="gd-cell-3a7c38a0" rowindex="0" colindex="1"/>
-            <cl:gridcell std:sid="gd-cell-471320f2" rowindex="0" colindex="2" columnname="paymentDate">
+            <cl:gridcell std:sid="gd-cell-3a7c38a0" rowindex="0" colindex="1" columnname="mealkitName"/>
+            <cl:gridcell std:sid="gd-cell-471320f2" rowindex="0" colindex="2" columnname="paymentDate" suppressible="true" suppressref="3">
               <cl:dateinput std:sid="d-input-948461d3" id="dti1">
-                <cl:celldata/>
+                <cl:celldata std:sid="c-data-e0360fb2"/>
               </cl:dateinput>
             </cl:gridcell>
-            <cl:gridcell std:sid="gd-cell-cd64b4f4" rowindex="0" colindex="3" columnname="paymentTotal"/>
+            <cl:gridcell std:sid="gd-cell-cd64b4f4" rowindex="0" colindex="3" columnname="paymentTotal" suppressible="true"/>
           </cl:griddetail>
         </cl:grid>
         <cl:formlayout std:sid="f-layout-084a4444" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -90,7 +101,7 @@
           <cl:columns length="130" unit="PIXEL"/>
           <cl:columns length="1" unit="FRACTION"/>
           <cl:columns length="100" unit="PIXEL"/>
-          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
         </cl:formlayout>
       </cl:group>
       <cl:group std:sid="group-96481a9b" style="background-color:#FFFFFF;">
@@ -108,16 +119,16 @@
             <cl:formdata std:sid="f-data-99ccefbb" row="0" col="2"/>
           </cl:output>
           <cl:output std:sid="output-106cf696">
-            <cl:relativebind property="value" columnname="paymentNo"/>
+            <cl:relativebind property="value" columnname="paymentId"/>
             <cl:formdata std:sid="f-data-bb39e6e4" row="0" col="1"/>
           </cl:output>
           <cl:output std:sid="output-1be283f9">
             <cl:relativebind property="value" category="PROPERTY" columnname="mealkitName"/>
-            <cl:formdata std:sid="f-data-fd34cd17" row="1" col="1" rowspan="1" colspan="3"/>
+            <cl:formdata std:sid="f-data-d8e45ff8" row="1" col="1" rowspan="1" colspan="1"/>
           </cl:output>
           <cl:output std:sid="output-ec609f0b">
             <cl:relativebind property="value" category="PROPERTY" columnname="paymentDate"/>
-            <cl:formdata std:sid="f-data-a2fbbd07" row="2" col="1" rowspan="1" colspan="3"/>
+            <cl:formdata std:sid="f-data-08551bf3" row="2" col="1" rowspan="1" colspan="1"/>
           </cl:output>
           <cl:output std:sid="output-4ddea93d" style="text-align:center;" value="주문자 명">
             <cl:formdata std:sid="f-data-98520172" row="1" col="0"/>
@@ -125,17 +136,26 @@
           <cl:output std:sid="output-d8152fb1" style="text-align:center;" value="결제 일자">
             <cl:formdata std:sid="f-data-ec55df32" row="2" col="0"/>
           </cl:output>
-          <cl:output std:sid="output-f758297a">
+          <cl:output std:sid="output-f758297a" style="text-align:center;">
             <cl:relativebind property="value" category="PROPERTY" columnname="paymentTotal"/>
-            <cl:formdata std:sid="f-data-a851cc9b" row="0" col="3"/>
+            <cl:formdata std:sid="f-data-c99e56f1" row="0" col="3" rowspan="1" colspan="3"/>
+          </cl:output>
+          <cl:output std:sid="output-f896d1fe" style="text-align:center;" value="상세 구매정보">
+            <cl:formdata std:sid="f-data-41521e7c" row="1" col="2" rowspan="2" colspan="1"/>
+          </cl:output>
+          <cl:output std:sid="output-53bc8d86">
+            <cl:relativebind property="value" category="PROPERTY" columnname="mealkitdetailinfo"/>
+            <cl:formdata std:sid="f-data-49ebed32" row="1" col="3" rowspan="2" colspan="3"/>
           </cl:output>
           <cl:formlayout std:sid="f-layout-aa37eb8b" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
             <cl:rows length="1" unit="FRACTION"/>
             <cl:rows length="1" unit="FRACTION"/>
             <cl:rows length="1" unit="FRACTION"/>
             <cl:columns length="100" unit="PIXEL" shadetype="BY_CLASS"/>
-            <cl:columns length="1" unit="FRACTION"/>
-            <cl:columns length="100" unit="PIXEL" shadetype="BY_CLASS"/>
+            <cl:columns length="250" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+            <cl:columns length="100" unit="PIXEL" shadetype="BY_CLASS" shadecolor="transparent"/>
+            <cl:columns length="40" unit="PIXEL"/>
+            <cl:columns length="60" unit="PIXEL"/>
             <cl:columns length="1" unit="FRACTION"/>
           </cl:formlayout>
         </cl:group>

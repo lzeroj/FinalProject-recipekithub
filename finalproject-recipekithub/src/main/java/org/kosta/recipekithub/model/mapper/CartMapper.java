@@ -25,4 +25,6 @@ public interface CartMapper {
 
 	int deleteMyCart(int mealkitNo, int cartNo);
 
+	List<CartVO> findCartNoByMemberEmailOrderSuccess(String memberEmail);
+
 }

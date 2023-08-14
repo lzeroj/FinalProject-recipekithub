@@ -36,6 +36,13 @@
 		AND C.CART_ORDER_STATUS = 'N'
 	</select>
 	
+	<select id="findCartNoByMemberEmailOrderSuccess" resultType="org.kosta.recipekithub.model.vo.CartVO">
+		SELECT c.CART_NO, c.CART_ORDER_STATUS, c.CART_TOTAL
+		FROM CART C,"MEMBER" m 
+		WHERE m.MEMBER_EMAIL = #{memberEmail} 
+		AND C.CART_ORDER_STATUS = 'Y'
+	</select>
+	
 	<select id="findMealkitBoardByMealkitName" resultType="org.kosta.recipekithub.model.vo.MealkitboardVO">
 		SELECT * FROM MEALKIT_BOARD WHERE MEALKIT_NAME = #{mealkitName}
 	</select>
@@ -60,6 +67,6 @@
 		DELETE FROM CART_DETAIL WHERE MEALKIT_NO = #{mealkitNo} AND CART_NO = #{cartNo}
 	</delete>
 	
-
+	
 
 </mapper>

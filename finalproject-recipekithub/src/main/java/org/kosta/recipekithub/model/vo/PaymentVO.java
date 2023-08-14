@@ -14,5 +14,6 @@ public class PaymentVO {
 	private int paymentTotal;
 	private CartVO cartVO;
 	private MealkitboardVO mealkitVO;
+	private CartdetailVO cartdetailVO;
 	
 }

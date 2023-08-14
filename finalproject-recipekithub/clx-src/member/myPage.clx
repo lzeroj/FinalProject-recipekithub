@@ -31,34 +31,46 @@
   </head>
   <body std:sid="body-075178bb">
     <cl:listener std:sid="listener-b0b3e7df" name="load" handler="onBodyLoad"/>
-    <cl:group std:sid="group-3e468ab3">
-      <cl:xylayoutdata std:sid="xyl-data-449706f5" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:group std:sid="group-13bc8f58">
-        <cl:xylayoutdata std:sid="xyl-data-ba4a6983" top="166px" right="20px" bottom="5px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-        <cl:group std:sid="group-3de6e575">
-          <cl:xylayoutdata std:sid="xyl-data-3c938e4d" top="39px" bottom="0px" left="0px" width="709px" verticalAnchor="BOTH"/>
-          <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1" src="../embedded/myPagePaymentInfo.clx">
-            <cl:xylayoutdata std:sid="xyl-data-1467882b" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-          </cl:embeddedapp>
-          <cl:xylayout std:sid="xylayout-6eef3a02"/>
+    <cl:group std:sid="group-d198e5ec">
+      <cl:xylayoutdata std:sid="xyl-data-cdd958c9" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-3e468ab3">
+        <cl:xylayoutdata std:sid="xyl-data-a87a062c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:group std:sid="group-13bc8f58" style="text-align:center;">
+          <cl:xylayoutdata std:sid="xyl-data-ba4a6983" top="166px" bottom="0px" width="984px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+          <cl:group std:sid="group-3de6e575">
+            <cl:responsivexylayoutdata std:sid="rxyl-data-8fed52e1">
+              <cl:xylayoutdata std:sid="sxyl-data-30f9770a" top="39px" right="275px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+            </cl:responsivexylayoutdata>
+            <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1" style="border-right-style:solid; border-bottom-color:#dddddd; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-left-color:#dddddd; border-bottom-width:1px; border-top-color:#dddddd; border-bottom-style:solid; border-right-color:#dddddd; border-left-width:1px; border-top-style:solid;" src="../embedded/myPagePaymentInfo.clx">
+              <cl:xylayoutdata std:sid="xyl-data-1467882b" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:embeddedapp>
+            <cl:xylayout std:sid="xylayout-6eef3a02"/>
+          </cl:group>
+          <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-bottom-color:#FFFFFF; color:#0ebc59; font-weight:bold; border-bottom-style:0;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click">
+            <cl:listener std:sid="listener-cd03793d" name="item-click" handler="onNav1ItemClick"/>
+            <cl:responsivexylayoutdata std:sid="rxyl-data-3331906f">
+              <cl:xylayoutdata std:sid="sxyl-data-5f0aca76" top="0px" right="629px" width="355px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+            </cl:responsivexylayoutdata>
+            <cl:menuitem std:sid="m-item-cda41080" label="레시피" value="1"/>
+            <cl:menuitem std:sid="m-item-efa3cc1b" label="구매내역" value="2"/>
+            <cl:menuitem std:sid="m-item-daee6a4f" label="좋아요" value="3"/>
+            <cl:menuitem std:sid="m-item-437c11be" label="문의하기" value="4"/>
+          </cl:navigationbar>
+          <cl:group std:sid="group-8003b2a0">
+            <cl:responsivexylayoutdata std:sid="rxyl-data-bf0473b5">
+              <cl:xylayoutdata std:sid="sxyl-data-d752227b" top="0px" right="0px" width="270px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+            </cl:responsivexylayoutdata>
+            <cl:xylayout std:sid="xylayout-ac8d4db3"/>
+          </cl:group>
+          <cl:responsivexylayout std:sid="r-xylayout-6b15dc6d"/>
         </cl:group>
-        <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-bottom-color:#FFFFFF; border-bottom-style:0;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click">
-          <cl:xylayoutdata std:sid="xyl-data-9d7e939c" top="0px" left="0px" width="355px" height="40px"/>
-          <cl:menuitem std:sid="m-item-cda41080" label="레시피" value="1"/>
-          <cl:menuitem std:sid="m-item-efa3cc1b" label="구매내역" value="2"/>
-          <cl:menuitem std:sid="m-item-daee6a4f" label="좋아요" value="3"/>
-        </cl:navigationbar>
-        <cl:group std:sid="group-8003b2a0">
-          <cl:xylayoutdata std:sid="xyl-data-99146801" top="0px" right="0px" width="270px" height="200px" horizontalAnchor="RIGHT"/>
-          <cl:xylayout std:sid="xylayout-ac8d4db3"/>
-        </cl:group>
-        <cl:xylayout std:sid="xylayout-697e72d5" scrollable="false"/>
+        <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
       </cl:group>
-      <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
+      <cl:udc std:sid="ud-control-ebbaefc3" type="udc.header">
+        <cl:xylayoutdata std:sid="xyl-data-ef444a78" top="0px" right="0px" left="0px" height="163px" horizontalAnchor="BOTH"/>
+      </cl:udc>
+      <cl:xylayout std:sid="xylayout-832eec77"/>
     </cl:group>
-    <cl:udc std:sid="ud-control-ebbaefc3" type="udc.header">
-      <cl:xylayoutdata std:sid="xyl-data-477b5bef" top="0px" right="0px" left="0px" height="163px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
-    </cl:udc>
     <cl:xylayout std:sid="xylayout-c3614e7a"/>
   </body>
   <std:studiosetting>
