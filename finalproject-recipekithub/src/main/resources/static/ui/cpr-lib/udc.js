@@ -45,6 +45,16 @@
 				function onMypageClick(e){
 					var mypage = e.control;
 					window.location.href="/findMyPageForm";
+				}
+	
+				/*
+				 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+				 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+				 */
+				function onNavigationBarSelectionChange(e){
+					var navigationBar = e.control;
+					//var vsMenuAppId = navigationBar.get
+					window.location.href = "/findRecipeBoardList";
 				};
 				// End - User Script
 				
@@ -261,11 +271,14 @@
 						"text-align" : "center"
 					});
 					(function(navigationBar_1){
-						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "value1", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "value2", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "value3", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("공략", "value4", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "추천", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "레시피", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "밀키트", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("공략", "공략", null));
 					})(navigationBar_1);
+					if(typeof onNavigationBarSelectionChange == "function") {
+						navigationBar_1.addEventListener("selection-change", onNavigationBarSelectionChange);
+					}
 					container.addChild(navigationBar_1, {
 						positions: [
 							{
@@ -498,6 +511,16 @@
 					app.lookup("nick").text = app.getAppProperty("nick");
 					app.lookup("like").text = app.getAppProperty("like");
 					app.lookup("hits").text = app.getAppProperty("hits");
+				}
+	
+				/*
+				 * 이미지에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onImgClick(e){
+					var img = e.control;
+					var event = new cpr.events.CAppEvent("imgClick");
+					app.dispatchEvent(event);
 				};
 				// End - User Script
 				
@@ -526,6 +549,15 @@
 				
 				// UI Configuration
 				var image_1 = new cpr.controls.Image("img");
+				image_1.style.css({
+					"cursor" : "pointer"
+				});
+				if(typeof onImgItemClick2 == "function") {
+					image_1.addEventListener("item-click", onImgItemClick2);
+				}
+				if(typeof onImgClick == "function") {
+					image_1.addEventListener("click", onImgClick);
+				}
 				container.addChild(image_1, {
 					"top": "0px",
 					"left": "0px",

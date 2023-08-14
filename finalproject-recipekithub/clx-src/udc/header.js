@@ -30,3 +30,13 @@ function onMypageClick(e){
 	var mypage = e.control;
 	window.location.href="/findMyPageForm";
 }
+
+/*
+ * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+ * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+ */
+function onNavigationBarSelectionChange(e){
+	var navigationBar = e.control;
+	//var vsMenuAppId = navigationBar.get
+	window.location.href = "/findRecipeBoardList";
+}

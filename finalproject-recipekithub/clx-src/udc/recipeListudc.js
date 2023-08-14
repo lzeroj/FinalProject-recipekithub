@@ -24,3 +24,13 @@ function onBodyLoad(e){
 	app.lookup("like").text = app.getAppProperty("like");
 	app.lookup("hits").text = app.getAppProperty("hits");
 }
+
+/*
+ * 이미지에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onImgClick(e){
+	var img = e.control;
+	var event = new cpr.events.CAppEvent("imgClick");
+	app.dispatchEvent(event);
+}
