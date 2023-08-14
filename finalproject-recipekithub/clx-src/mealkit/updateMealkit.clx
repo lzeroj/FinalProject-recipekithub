@@ -8,14 +8,37 @@
       <cl:dataset std:sid="d-set-55c33be3" id="ds1"/>
       <cl:datamap std:sid="d-map-a2c29a86" id="updateMealkit">
         <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-66eebade" name="mealkitNo"/>
           <cl:datacolumn std:sid="d-column-fa76095c" name="mealkitName"/>
           <cl:datacolumn std:sid="d-column-5186a5f7" name="mealkitInfo"/>
           <cl:datacolumn std:sid="d-column-d0db5fb3" name="mealkitIngredients"/>
           <cl:datacolumn std:sid="d-column-cb4769b7" name="mealkitPrice"/>
           <cl:datacolumn std:sid="d-column-7de38e51" name="mealkitInventory"/>
           <cl:datacolumn std:sid="d-column-337e0c71" name="mealkitCategory"/>
+          <cl:datacolumn std:sid="d-column-2042df66" name="mealkitMember"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-73012936" id="sendUpdatedMealkit">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-23b76ac2" name="mealkitNo"/>
+          <cl:datacolumn std:sid="d-column-c617ee66" name="mealkitName"/>
+          <cl:datacolumn std:sid="d-column-f68450b6" name="mealkitInfo"/>
+          <cl:datacolumn std:sid="d-column-9eadef6a" name="mealkitPrice"/>
+          <cl:datacolumn std:sid="d-column-b5811983" name="mealkitInventory"/>
+          <cl:datacolumn std:sid="d-column-41af7f1c" name="mealkitCategory"/>
+          <cl:datacolumn std:sid="d-column-5cb7b8b0" name="mealkitIngredients"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-2013f9c6" id="returnMealkitNo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6f7a1d14" name="mealkitNo" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-d872f293" id="updateMealkitSub" action="/updateMealkit">
+        <cl:listener std:sid="listener-7375a989" name="submit-success" handler="onUpdateMealkitSubSubmitSuccess"/>
+        <cl:requestdata dataid="updateMealkit"/>
+        <cl:responsedata dataid="returnMealkitNo"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
@@ -57,7 +80,7 @@
         <cl:output std:sid="output-a3aa1e5b" style="color:#0CA44E; font-size:15px; text-align:center;" value="카테고리">
           <cl:xylayoutdata std:sid="xyl-data-3ae5b7fb" top="8px" left="48px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:combobox std:sid="c-box-3094e38c" id="cmb1" style="background-color:#F9F9F9;">
+        <cl:combobox std:sid="c-box-3094e38c" id="cmb1" style="background-color:#F9F9F9; text-align:center;" placeholder="-종류-">
           <cl:listener std:sid="listener-50416e41" name="selection-change" handler="onCmb1SelectionChange"/>
           <cl:xylayoutdata std:sid="xyl-data-f8262248" top="8px" left="174px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
           <cl:item std:sid="t-item-9b0716a1" label="밑반찬" value="밑반찬"/>
@@ -77,7 +100,7 @@
           <cl:item std:sid="t-item-16efd787" label="차/음료/술" value="차/음료/술"/>
           <cl:item std:sid="t-item-1f9b7d64" label="기타" value="기타"/>
         </cl:combobox>
-        <cl:combobox std:sid="c-box-0433b7ac" id="cmb2" style="background-color:#F9F9F9;">
+        <cl:combobox std:sid="c-box-0433b7ac" id="cmb2" style="background-color:#F9F9F9; text-align:center;" placeholder="-재료-">
           <cl:xylayoutdata std:sid="xyl-data-04bb4196" top="8px" left="284px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
           <cl:item std:sid="t-item-bb5f6206" label="소고기" value="소고기"/>
           <cl:item std:sid="t-item-98ba616c" label="돼지고기" value="돼지고기"/>
@@ -96,17 +119,22 @@
           <cl:item std:sid="t-item-d025da50" label="곡류" value="곡류"/>
           <cl:item std:sid="t-item-63f2ebb1" label="기타" value="기타"/>
         </cl:combobox>
-        <cl:combobox std:sid="c-box-33bd41e7" id="cmb3" style="background-color:#F9F9F9;">
+        <cl:combobox std:sid="c-box-33bd41e7" id="cmb3" style="background-color:#F9F9F9; text-align:center;" placeholder="-방법-">
           <cl:xylayoutdata std:sid="xyl-data-d7b2512d" top="8px" left="394px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-          <cl:item std:sid="t-item-4cacb63f" label="볶음" value="value1"/>
-          <cl:item std:sid="t-item-dc23226d" label="끓이기" value="value2"/>
-          <cl:item std:sid="t-item-086bc37b" label="부침" value="value3"/>
-          <cl:item std:sid="t-item-37e12161" label="조림" value="value4"/>
-          <cl:item std:sid="t-item-61a91d2e" label="무침" value="value5"/>
-          <cl:item std:sid="t-item-1bbaa8b4" label="label2" value="value6"/>
-          <cl:item std:sid="t-item-5b198adb" label="label3" value="value7"/>
-          <cl:item std:sid="t-item-19a49cc2" label="label4" value="value8"/>
-          <cl:item std:sid="t-item-74e03441" label="label5" value="value9"/>
+          <cl:item std:sid="t-item-4cacb63f" label="볶음" value="볶음"/>
+          <cl:item std:sid="t-item-dc23226d" label="끓이기" value="끓이기"/>
+          <cl:item std:sid="t-item-086bc37b" label="부침" value="부침"/>
+          <cl:item std:sid="t-item-37e12161" label="조림" value="조림"/>
+          <cl:item std:sid="t-item-61a91d2e" label="무침" value="무침"/>
+          <cl:item std:sid="t-item-1bbaa8b4" label="비빔" value="비빔"/>
+          <cl:item std:sid="t-item-5b198adb" label="찜" value="찜"/>
+          <cl:item std:sid="t-item-19a49cc2" label="절임" value="절임"/>
+          <cl:item std:sid="t-item-74e03441" label="튀김" value="튀김"/>
+          <cl:item std:sid="t-item-9592a1c3" label="삶기" value="삶기"/>
+          <cl:item std:sid="t-item-c3c4a452" label="굽기" value="굽기"/>
+          <cl:item std:sid="t-item-3604ed2e" label="데치기" value="데치기"/>
+          <cl:item std:sid="t-item-4d33517d" label="회" value="회"/>
+          <cl:item std:sid="t-item-b7fbec35" label="기타" value="기타"/>
         </cl:combobox>
         <cl:xylayout std:sid="xylayout-dbc58606"/>
       </cl:group>
@@ -144,6 +172,7 @@
         <cl:xylayoutdata std:sid="xyl-data-ce4c196e" top="670px" left="357px" width="104px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:button std:sid="button-8b76c874" style="background-color:#0ca44e; color:white; font-size:17px; background-image:none;" class=".cl-button mealkitbtn" value="취소">
+        <cl:listener std:sid="listener-cc986b1f" name="click" handler="onButtonClick"/>
         <cl:xylayoutdata std:sid="xyl-data-47c9b50e" top="670px" left="471px" width="111px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:xylayout std:sid="xylayout-9ecb7632"/>

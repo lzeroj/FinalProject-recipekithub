@@ -16,6 +16,10 @@
           <cl:datacolumn std:sid="d-column-0206e72e" name="mealkitIngredients"/>
           <cl:datacolumn std:sid="d-column-8465f77e" name="cnt" datatype="number"/>
           <cl:datacolumn std:sid="d-column-4756b3f2" name="total" datatype="expression" expression="(mealkitPrice * cnt)" defaultvalue="(Number(mealkitPrice) * cnt)"/>
+          <cl:datacolumn std:sid="d-column-de1138a2" name="mealkitRegDate"/>
+          <cl:datacolumn std:sid="d-column-8ae709f0" name="mealkitHits" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ac0a03ae" name="sessionMember"/>
+          <cl:datacolumn std:sid="d-column-0807fcbf" name="mealkitMember"/>
         </cl:datacolumnlist>
       </cl:datamap>
     </cl:model>
@@ -32,15 +36,22 @@
         <cl:xylayoutdata std:sid="xyl-data-711c5795" top="31px" left="513px" width="327px" height="57px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:output std:sid="output-1c694a5c" id="name">
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitName"/>
-          <cl:xylayoutdata std:sid="xyl-data-31f1c1c4" top="8px" left="9px" width="284px" height="41px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-31f1c1c4" top="19px" left="9px" width="284px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:output>
+        <cl:output std:sid="output-f752c9f0" id="seller" style="color:#a9a9a9; font-size:15px;">
+          <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitMember"/>
+          <cl:xylayoutdata std:sid="xyl-data-a9b92fe5" top="0px" left="9px" width="156px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:xylayout std:sid="xylayout-0601a4ca"/>
       </cl:group>
       <cl:group std:sid="group-d301ac9d">
         <cl:xylayoutdata std:sid="xyl-data-32efe5f5" top="98px" left="513px" width="264px" height="41px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-        <cl:output std:sid="output-53b0f5db" id="price">
+        <cl:output std:sid="output-53b0f5db" id="price" style="font-size:16px; text-align:center;">
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitPrice"/>
-          <cl:xylayoutdata std:sid="xyl-data-a82ae6f4" top="2px" left="9px" width="191px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-919fca71" top="10px" left="10px" width="90px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:output>
+        <cl:output std:sid="output-e4eb694b" value="원">
+          <cl:xylayoutdata std:sid="xyl-data-e3e2f498" top="10px" left="99px" width="25px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:xylayout std:sid="xylayout-5c3e5595"/>
       </cl:group>
@@ -103,10 +114,10 @@
       </cl:group>
       <cl:group std:sid="group-257d4c79">
         <cl:xylayoutdata std:sid="xyl-data-6864b996" top="450px" left="20px" width="960px" height="170px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-        <cl:output std:sid="output-13811266" id="info">
+        <cl:htmlsnippet std:sid="htmlsnippet-fd52013a" id="info">
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitInfo"/>
-          <cl:xylayoutdata std:sid="xyl-data-3b822abb" top="0px" left="1px" width="957px" height="167px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-        </cl:output>
+          <cl:xylayoutdata std:sid="xyl-data-486af3d7" top="3px" left="2px" width="956px" height="167px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:htmlsnippet>
         <cl:xylayout std:sid="xylayout-ad1c8924"/>
       </cl:group>
       <cl:group std:sid="group-72022dbe" style="background-color:#F9F9F9;">
@@ -123,8 +134,23 @@
       </cl:group>
       <cl:button std:sid="button-bbef5b23" id="updateBtn" value="수정">
         <cl:listener std:sid="listener-13c4f319" name="click" handler="onUpdateBtnClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-cf6062af" top="1px" left="880px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-cf6062af" top="430px" left="515px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
+      <cl:button std:sid="button-655c2ef5" value="삭제">
+        <cl:listener std:sid="listener-41c4bbc5" name="click" handler="onButtonClick3"/>
+        <cl:xylayoutdata std:sid="xyl-data-4c085b98" top="430px" left="627px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:button>
+      <cl:output std:sid="output-74bc907b" id="regDate">
+        <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitRegDate"/>
+        <cl:xylayoutdata std:sid="xyl-data-baef1c7f" top="12px" left="20px" width="123px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-d54cfc08" id="hits">
+        <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitHits"/>
+        <cl:xylayoutdata std:sid="xyl-data-aba9bb86" top="0px" left="766px" width="135px" height="21px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:img std:sid="image-159cf4f0" src="../theme/images/mealkit/free-icon-eye-118191.png">
+        <cl:xylayoutdata std:sid="xyl-data-42e0b305" top="2px" left="735px" width="26px" height="17px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:img>
       <cl:xylayout std:sid="xylayout-1e910270"/>
     </cl:group>
     <cl:xylayout std:sid="xylayout-58a5d367"/>
