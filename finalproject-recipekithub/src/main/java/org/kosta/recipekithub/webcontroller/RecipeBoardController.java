@@ -35,8 +35,10 @@ public class RecipeBoardController {
 	public View findRecipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
 		List<RecipeBoardVO> list = recipeBoardService.findAllRecipeBoard();
-		dataRequest.setResponse("recipe_board", list);
-		return new JSONDataView();
+		 Map<String, Object> initParam = new HashMap<String, Object>();	
+		 initParam.put("recipe_board", list);
+		//dataRequest.setResponse("recipe_board", list);
+		return new UIView("ui/recipe/recipe.clx",initParam);
 	}
 
 	@RequestMapping("/insertRecipe")
@@ -48,7 +50,6 @@ public class RecipeBoardController {
 		UploadFile[] uploadFile = uploadFiles.get("image");
 		File orgName = uploadFile[0].getFile();
 		String saveName = uploadFile[0].getFileName();
-		//String savePath = "C:\\kosta260\\spring-workspace2\\finalproject-test\\clx-src\\theme\\uploadrecipeimage\\";
 		String savePath = "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
 		String uuid = UUID.randomUUID().toString();
 		FileCopyUtils.copy(orgName, new File(savePath+uuid+"_"+saveName));
@@ -92,24 +93,34 @@ public class RecipeBoardController {
 		return new JSONDataView();
 	}
 	
-	@RequestMapping("/moveDetailRecipe")
-	public View detailRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+	@RequestMapping("/detailRecipe")
+	public View moveDetailRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		long id = Integer.parseInt(dataRequest.getParameter("recipeBoardId"));
+		RecipeBoardVO recipeBoardVO = recipeBoardService.findDetailRecipe(id);
 		 Map<String, Object> initParam = new HashMap<String, Object>();	
-		 initParam.put("recipeBoardId", id);
-		return new UIView("ui/detailrecipe.clx",initParam);	
+		 initParam.put("recipeBoardVO", recipeBoardVO);
+		return new UIView("ui/recipe/detailrecipe.clx",initParam);	
+	}
+	
+	/*
+	 * @RequestMapping("/detailRecipe") public View detailRecipe(HttpServletRequest
+	 * request, HttpServletResponse response, DataRequest dataRequest) {
+	 * ParameterGroup initParam = dataRequest.getParameterGroup("dm1"); long id =
+	 * Integer.parseInt(initParam.getValue("recipeBoardId")); RecipeBoardVO
+	 * recipeBoardVO = recipeBoardService.findDetailRecipe(id);
+	 * //System.out.println(recipeBoardVO); dataRequest.setResponse("recipeBoard",
+	 * recipeBoardVO); return new JSONDataView(); }
+	 */
+	@RequestMapping("/updateRecipe")
+	public View updateRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		long id = Integer.parseInt(dataRequest.getParameter("recipeBoardId"));
+		RecipeBoardVO recipeBoardVO = recipeBoardService.findDetailRecipe(id);
+		String imagePath =  "theme\\uploadrecipeimage\\" + recipeBoardVO.getRecipeBoardImage();
+		 Map<String, Object> initParam = new HashMap<String, Object>();	
+		 initParam.put("recipeBoardVO", recipeBoardVO);
+		 initParam.put("imagePath", imagePath);
+		 System.out.println(recipeBoardVO);
+		return new UIView("ui/recipe/updaterecipe.clx",initParam);	
 	}
 }
 
-
-
-//Map<String, File[]> files = dataRequest.getFiles();
-//if (files != null && files.size() > 0) {
-//	Set<Entry<String, File[]>> fileEntrySet = files.entrySet();
-//	for (Entry<String, File[]> entry : fileEntrySet) {
-//		for (File each : entry.getValue()) {
-//			System.out.println("upload:" + uploadFile[0].getFileName());
-//			FileCopyUtils.copy(each, new File(savePath + File.separator + uploadFile[0].getFileName()));
-//		}
-//	}
-//}

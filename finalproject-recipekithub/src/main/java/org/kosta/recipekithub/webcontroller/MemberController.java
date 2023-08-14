@@ -155,13 +155,14 @@ public class MemberController {
 		*/
 		
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("myProfile", member);
-		System.out.println("map : " + map);
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("myProfile", member);
+//		System.out.println("map : " + map);
+		List<MemberVO> memlist = new ArrayList<>();
+		memlist.add(member);
 		
-		
-		dataRequest.setResponse("ds_profile", member);
-		dataRequest.setMetadata(true, map);
+		dataRequest.setResponse("ds_profile", memlist);
+//		dataRequest.setMetadata(true, map);
 		
 		return new JSONDataView();
 	}

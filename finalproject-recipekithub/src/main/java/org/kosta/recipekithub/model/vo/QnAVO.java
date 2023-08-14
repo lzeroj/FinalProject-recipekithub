@@ -14,5 +14,6 @@ public class QnAVO {
 	private String boardRegDate;
 	private String boardEditDate;
 	private String boardType;
+	private String boardResponseStatus;
 	private MemberVO memberVO;
 }

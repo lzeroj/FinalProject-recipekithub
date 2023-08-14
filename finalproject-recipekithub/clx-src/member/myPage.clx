@@ -4,7 +4,6 @@
     <screen std:sid="screen-b8bbaf23" id="default" name="default" width="1024px" height="768px"/>
     <screen std:sid="screen-18df3791" id="tablet" name="tablet" width="500px" height="667px"/>
     <screen std:sid="screen-483f05e6" id="mobile" name="mobile" width="350px" height="525px"/>
-    <link std:sid="link-126d6ee1" href="../theme/custom/navigation.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-c7d8d66f">
       <cl:dataset std:sid="d-set-863eab05" id="navval">
         <cl:datacolumnlist>
