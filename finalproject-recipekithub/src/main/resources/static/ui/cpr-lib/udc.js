@@ -458,8 +458,12 @@
 						var image_1 = new cpr.controls.Image();
 						image_1.src = "theme/images/icon/recipekithubLog.png";
 						image_1.style.css({
+							"cursor" : "pointer",
 							"padding-top" : "0px"
 						});
+						if(typeof onImageClick == "function") {
+							image_1.addEventListener("click", onImageClick);
+						}
 						container.addChild(image_1, {
 							"top": "-20px",
 							"left": "42px",
@@ -638,13 +642,13 @@
 						"text-align" : "center"
 					});
 					(function(navigationBar_1){
-						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "추천", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "레시피", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "밀키트", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("공략", "공략", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "value1", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "recipe", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "mealkit", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("Q & A", "question", null));
 					})(navigationBar_1);
-					if(typeof onNavigationBarSelectionChange == "function") {
-						navigationBar_1.addEventListener("selection-change", onNavigationBarSelectionChange);
+					if(typeof onNavigationBarItemClick == "function") {
+						navigationBar_1.addEventListener("item-click", onNavigationBarItemClick);
 					}
 					container.addChild(navigationBar_1, {
 						positions: [

@@ -20,16 +20,67 @@ function onBodyLoad(e){
  */
 function onSub_profileSubmitSuccess(e){
 	var sub_profile = e.control;
+	//var metadata = sub_profile.getMetadata("myProfile");
 	var dsProfile = app.lookup("ds_profile");
 	
-	app.lookup("ipbEmail").text = dsProfile.getValue(0, "memberEmail");
-	app.lookup("ipbPassword1").text = dsProfile.getValue(0, "memberPassword");
-	app.lookup("ipbName").text = dsProfile.getValue(0, "memberName");
-	app.lookup("ipbNick").text = dsProfile.getValue(0, "memberNick");
-	app.lookup("ipbAddress").text = dsProfile.getValue(0, "memberAddress");
-	app.lookup("ipbPhone").mask = dsProfile.getValue(0, "memberPhone");
-	app.lookup("ipbBirthday").value = dsProfile.getValue(0, "memberBirthday");
 	
+	var memberEmail = cpr.core.Platform.INSTANCE.getParameter("memberEmail");
+	var memberPassword = cpr.core.Platform.INSTANCE.getParameter("memberPassword");
+	var memberName = cpr.core.Platform.INSTANCE.getParameter("memberName");
+	var memberNick = cpr.core.Platform.INSTANCE.getParameter("memberNick");
+	var memberAddress = cpr.core.Platform.INSTANCE.getParameter("memberAddress");
+	var memberPhone = cpr.core.Platform.INSTANCE.getParameter("memberPhone");
+	var memberBirthday = cpr.core.Platform.INSTANCE.getParameter("memberBirthday");
+	
+	/*
+	app.lookup("ipbEmail") = dsProfile.setValue("member_email", memberEmail);
+	app.lookup("ipbPassword1") = dsProfile.setValue("member_password", memberPassword);
+	app.lookup("ipbName") = dsProfile.setValue("member_name", memberName);
+	app.lookup("ipbNick") = dsProfile.setValue("member_nick", memberNick);
+	app.lookup("ipbAddress") = dsProfile.setValue("member_address", memberAddress);
+	app.lookup("ipbPhone") = dsProfile.setValue("member_phone", memberPhone);
+	app.lookup("ipbBirthday") = dsProfile.setValue("member_birthday", memberBirthday);
+	*/
+	
+	dsProfile.setValue("member_email", memberEmail);
+	dsProfile.setValue("member_password", memberPassword);
+	dsProfile.setValue("member_name", memberName);
+	dsProfile.setValue("member_nick", memberNick);
+	dsProfile.setValue("member_address", memberAddress);
+	dsProfile.setValue("member_phone", memberPhone);
+	dsProfile.setValue("member_birthday", memberBirthday);
+	
+	/*
+	for(var idx = 0; idx < metadata.length; idx++){
+		dsProfile.setValue(idx, "member_email", metadata[idx].memberEmail);
+		dsProfile.setValue(idx, "member_password", metadata[idx].memberPassword);
+		dsProfile.setValue(idx, "member_name", metadata[idx].memberName);
+		dsProfile.setValue(idx, "member_nick", metadata[idx].memberNick);
+		dsProfile.setValue(idx, "member_address", metadata[idx].memberAddress);
+		dsProfile.setValue(idx, "member_phone", metadata[idx].memberPhone);
+		dsProfile.setValue(idx, "member_birthday", metadata[idx].memberBirthday);
+	}
+	*/
+	
+	/*
+	dsProfile.setValue(1, "member_email", metadata.memberEmail);
+	dsProfile.setValue(2, "member_password", metadata.memberPassword);
+	dsProfile.setValue(3, "member_name", metadata.memberName);
+	dsProfile.setValue(4, "member_nick", metadata.memberNick);
+	dsProfile.setValue(5, "member_address", metadata.memberAddress);
+	dsProfile.setValue(6, "member_phone", metadata.memberPhone);
+	dsProfile.setValue(7, "member_birthday", metadata.memberBirthday);
+	*/
+	
+	dsProfile.refresh();
+	
+//	app.lookup("ipbEmail").redraw();
+//	app.lookup("ipbPassword1").redraw();
+//	app.lookup("ipbName").redraw();
+//	app.lookup("ipbNick").redraw();
+//	app.lookup("ipbBirthday").redraw();
+//	app.lookup("ipbPhone").redraw();
+//	app.lookup("ipbAddress").redraw();
 }
 
 /*
@@ -40,13 +91,13 @@ function onBtnMemUpdateClick(e){
 	var btnMemUpdate = e.control;
 	if(confirm("정말로 수정하시겠습니까?")) {
 		var dataMap = app.lookup("dm_update");
-		dataMap.setValue("memberEmail", app.lookup("ipbEmail").value);
-		dataMap.setValue("memberPassword", app.lookup("ipbPassword1").value);
-		dataMap.setValue("memberName", app.lookup("ipbName").value);
-		dataMap.setValue("memberNick", app.lookup("ipbNick").value);
-		dataMap.setValue("memberBirthday", app.lookup("ipbBirthday").value);
-		dataMap.setValue("memberPhone", app.lookup("ipbPhone").value);
-		dataMap.setValue("memberAddress", app.lookup("ipbAddress").value);
+		dataMap.setValue("member_email", app.lookup("ipbEmail").value);
+		dataMap.setValue("member_password", app.lookup("ipbPassword1").value);
+		dataMap.setValue("member_name", app.lookup("ipbName").value);
+		dataMap.setValue("member_nick", app.lookup("ipbNick").value);
+		dataMap.setValue("member_birthday", app.lookup("ipbBirthday").value);
+		dataMap.setValue("member_phone", app.lookup("ipbPhone").value);
+		dataMap.setValue("member_address", app.lookup("ipbAddress").value);
 		var submission = app.lookup("sub_update");
 		submission.send();
 	}
@@ -60,7 +111,7 @@ function onBtnMemDeleteClick(e){
 	var btnMemDelete = e.control;
 	if(confirm("정말로 탈퇴하시겠습니까?")) {
 		var dataMap = app.lookup("dm_delete");
-		dataMap.setValue("memberEmail", app.lookup("ipbEmail").value);
+		dataMap.setValue("member_email", app.lookup("ipbEmail").value);
 		var submission = app.lookup("sub_delete");
 		submission.send();
 	}

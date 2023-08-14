@@ -4,7 +4,6 @@
     <screen std:sid="screen-b8bbaf23" id="default" name="default" width="1024px" height="768px"/>
     <screen std:sid="screen-18df3791" id="tablet" name="tablet" width="500px" height="667px"/>
     <screen std:sid="screen-483f05e6" id="mobile" name="mobile" width="350px" height="525px"/>
-    <link std:sid="link-126d6ee1" href="../theme/custom/navigation.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-c7d8d66f">
       <cl:dataset std:sid="d-set-863eab05" id="navval">
         <cl:datacolumnlist>
@@ -47,12 +46,14 @@
             <cl:xylayout std:sid="xylayout-6eef3a02"/>
           </cl:group>
           <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-bottom-color:#FFFFFF; color:#0ebc59; font-weight:bold; border-bottom-style:0;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click">
+            <cl:listener std:sid="listener-cd03793d" name="item-click" handler="onNav1ItemClick"/>
             <cl:responsivexylayoutdata std:sid="rxyl-data-3331906f">
               <cl:xylayoutdata std:sid="sxyl-data-5f0aca76" top="0px" right="629px" width="355px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
             </cl:responsivexylayoutdata>
             <cl:menuitem std:sid="m-item-cda41080" label="레시피" value="1"/>
             <cl:menuitem std:sid="m-item-efa3cc1b" label="구매내역" value="2"/>
             <cl:menuitem std:sid="m-item-daee6a4f" label="좋아요" value="3"/>
+            <cl:menuitem std:sid="m-item-437c11be" label="문의하기" value="4"/>
           </cl:navigationbar>
           <cl:group std:sid="group-8003b2a0">
             <cl:responsivexylayoutdata std:sid="rxyl-data-bf0473b5">

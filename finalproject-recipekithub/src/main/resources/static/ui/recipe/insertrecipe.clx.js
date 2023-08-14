@@ -22,7 +22,6 @@
 			 * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
 			 */
 			function onBodyInit(e) {
-				var shl1 = e.control;
 				var voResourceLoader = new cpr.core.ResourceLoader();
 				voResourceLoader.addScript("https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js").load().then(function(input) {
 					voResourceLoader.addScript("https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js").load().then(function(input) {
@@ -52,7 +51,7 @@
 					content.appendChild(editorDiv);
 					
 					$('#summernote').summernote({
-						placeholder: 'Hello stand alone ui',
+						placeholder: '글 작성란',
 						tabsize: 2,
 						height: 300,
 						toolbar: [
@@ -82,6 +81,7 @@
 				
 				var fileInput = app.lookup("fi1");
 				var file = fileInput.file;
+				app.lookup("uploadImg").src = file;
 				var value = dataMap.getValue("RECIPE_BOARD_TITLE");
 				var value2 = dataMap.getValue("CATEGORY_TYPE");
 				var value3 = dataMap.getValue("CATEGORY_INGREDIENTS");
@@ -100,13 +100,43 @@
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onInsertRecipeSubmitSuccess(e){
+			function onInsertRecipeSubmitSuccess(e) {
 				var insertRecipe = e.control;
 				var recipeBoardId = insertRecipe.getMetadata("recipeBoardId");
 				if (recipeBoardId != null) {
-						window.location.href="/moveDetailRecipe?recipeBoardId="+recipeBoardId;
-					}
-				};
+					window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
+				}
+			}
+
+			/*
+			 * 파일 인풋에서 value-change 이벤트 발생 시 호출.
+			 * FileInput의 value를 변경하여 변경된 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onFi1ValueChange(e) {
+				var fi1 = e.control;
+				var image = app.lookup("uploadImg");
+				var fileInput = app.lookup("fi1");
+				if (fileInput.files && fileInput.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						image.src = e.target.result;
+					};
+					
+					reader.readAsDataURL(fileInput.files[0]);
+				}
+			}
+
+			/*
+			 * "X" 버튼(deleteImg)에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onDeleteImgClick(e) {
+				var deleteImg = e.control;
+				var fileInput = app.lookup("fi1");
+				var image = app.lookup("uploadImg");
+				fileInput.clear();
+				image.src = "";
+			}
 			// End - User Script
 			
 			// Header
@@ -167,7 +197,7 @@
 				uIControlShell_1.addEventListener("load", onShl1Load);
 			}
 			container.addChild(uIControlShell_1, {
-				"top": "273px",
+				"top": "263px",
 				"width": "724px",
 				"height": "277px",
 				"left": "calc(50% - 362px)"
@@ -196,16 +226,13 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "20px",
+				"top": "10px",
 				"width": "724px",
 				"height": "52px",
 				"left": "calc(50% - 362px)"
 			});
 			
 			var group_2 = new cpr.controls.Container();
-			group_2.style.css({
-				"background-color" : "#FFFFFF"
-			});
 			var formLayout_1 = new cpr.controls.layouts.FormLayout();
 			formLayout_1.scrollable = false;
 			formLayout_1.topMargin = "5px";
@@ -214,152 +241,9 @@
 			formLayout_1.leftMargin = "5px";
 			formLayout_1.horizontalSpacing = "10px";
 			formLayout_1.verticalSpacing = "10px";
-			formLayout_1.setColumns(["100px", "388px"]);
-			formLayout_1.setRows(["1fr", "1fr", "1fr"]);
+			formLayout_1.setColumns(["1fr", "1fr"]);
+			formLayout_1.setRows(["1fr"]);
 			group_2.setLayout(formLayout_1);
-			(function(container){
-				var output_2 = new cpr.controls.Output();
-				output_2.value = "레시피 제목";
-				output_2.style.css({
-					"font-weight" : "bolder",
-					"text-align" : "center"
-				});
-				container.addChild(output_2, {
-					"colIndex": 0,
-					"rowIndex": 0
-				});
-				var output_3 = new cpr.controls.Output();
-				output_3.value = "대표 사진";
-				output_3.style.css({
-					"font-weight" : "bolder",
-					"text-align" : "center"
-				});
-				container.addChild(output_3, {
-					"colIndex": 0,
-					"rowIndex": 1
-				});
-				var output_4 = new cpr.controls.Output();
-				output_4.value = "카테고리";
-				output_4.style.css({
-					"font-weight" : "bolder",
-					"text-align" : "center"
-				});
-				container.addChild(output_4, {
-					"colIndex": 0,
-					"rowIndex": 2
-				});
-				var inputBox_1 = new cpr.controls.InputBox("ipb1");
-				inputBox_1.style.css({
-					"font-size" : "18px"
-				});
-				inputBox_1.bind("value").toDataMap(app.lookup("recipe"), "RECIPE_BOARD_TITLE");
-				container.addChild(inputBox_1, {
-					"colIndex": 1,
-					"rowIndex": 0
-				});
-				var group_3 = new cpr.controls.Container();
-				var formLayout_2 = new cpr.controls.layouts.FormLayout();
-				formLayout_2.scrollable = false;
-				formLayout_2.topMargin = "5px";
-				formLayout_2.rightMargin = "5px";
-				formLayout_2.bottomMargin = "5px";
-				formLayout_2.leftMargin = "5px";
-				formLayout_2.horizontalSpacing = "10px";
-				formLayout_2.verticalSpacing = "10px";
-				formLayout_2.setColumns(["80px", "80px", "80px"]);
-				formLayout_2.setRows(["1fr"]);
-				group_3.setLayout(formLayout_2);
-				(function(container){
-					var linkedComboBox_1 = new cpr.controls.LinkedComboBox("lcb1");
-					linkedComboBox_1.placeholders = ["종류별"];
-					linkedComboBox_1.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_TYPE");
-					(function(linkedComboBox_1){
-						linkedComboBox_1.addItem((function(){
-							var treeItem_1 = new cpr.controls.TreeItem("밑반찬", "밑반찬", null);
-							treeItem_1.checked = false;
-							return treeItem_1;
-						})());
-						linkedComboBox_1.addItem(new cpr.controls.TreeItem("메인반찬", "메인반찬", null));
-						linkedComboBox_1.addItem(new cpr.controls.TreeItem("국/탕", "국/탕", null));
-						linkedComboBox_1.addItem(new cpr.controls.TreeItem("디저트", "디저트", null));
-						linkedComboBox_1.addItem(new cpr.controls.TreeItem("면", "면", null));
-						linkedComboBox_1.addItem(new cpr.controls.TreeItem("샐러드", "샐러드", null));
-						linkedComboBox_1.addItem(new cpr.controls.TreeItem("음료", "음료", null));
-						linkedComboBox_1.addItem(new cpr.controls.TreeItem("기타", "기타", null));
-					})(linkedComboBox_1);
-					container.addChild(linkedComboBox_1, {
-						"colIndex": 0,
-						"rowIndex": 0,
-						"colSpan": 1,
-						"rowSpan": 1
-					});
-					var linkedComboBox_2 = new cpr.controls.LinkedComboBox("lcb2");
-					linkedComboBox_2.placeholders = ["방법별"];
-					linkedComboBox_2.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_INGREDIENTS");
-					(function(linkedComboBox_2){
-						linkedComboBox_2.addItem(new cpr.controls.TreeItem("육류", "육류", null));
-						linkedComboBox_2.addItem(new cpr.controls.TreeItem("채소류", "채소류", null));
-						linkedComboBox_2.addItem(new cpr.controls.TreeItem("해물류", "해물류", null));
-						linkedComboBox_2.addItem(new cpr.controls.TreeItem("달걀/유제품", "달걀/유제품", null));
-						linkedComboBox_2.addItem(new cpr.controls.TreeItem("가공식품류", "가공식품류", null));
-						linkedComboBox_2.addItem(new cpr.controls.TreeItem("과일류", "과일류", null));
-						linkedComboBox_2.addItem(new cpr.controls.TreeItem("기타", "기타", null));
-					})(linkedComboBox_2);
-					container.addChild(linkedComboBox_2, {
-						"colIndex": 1,
-						"rowIndex": 0
-					});
-					var linkedComboBox_3 = new cpr.controls.LinkedComboBox("lcb3");
-					linkedComboBox_3.placeholders = ["재료별"];
-					linkedComboBox_3.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_METHOD");
-					(function(linkedComboBox_3){
-						linkedComboBox_3.addItem(new cpr.controls.TreeItem("볶음", "볶음", null));
-						linkedComboBox_3.addItem(new cpr.controls.TreeItem("끓이기", "끓이기", null));
-						linkedComboBox_3.addItem(new cpr.controls.TreeItem("조림", "조림", null));
-						linkedComboBox_3.addItem(new cpr.controls.TreeItem("튀김", "튀김", null));
-						linkedComboBox_3.addItem(new cpr.controls.TreeItem("삶기", "삶기", null));
-						linkedComboBox_3.addItem(new cpr.controls.TreeItem("굽기", "굽기", null));
-						linkedComboBox_3.addItem(new cpr.controls.TreeItem("기타", "기타", null));
-					})(linkedComboBox_3);
-					container.addChild(linkedComboBox_3, {
-						"colIndex": 2,
-						"rowIndex": 0
-					});
-				})(group_3);
-				container.addChild(group_3, {
-					"colIndex": 1,
-					"rowIndex": 2,
-					"colSpan": 1,
-					"rowSpan": 1
-				});
-				var fileInput_1 = new cpr.controls.FileInput("fi1");
-				if(typeof onFi1ValueChange == "function") {
-					fileInput_1.addEventListener("value-change", onFi1ValueChange);
-				}
-				container.addChild(fileInput_1, {
-					"colIndex": 1,
-					"rowIndex": 1
-				});
-			})(group_2);
-			container.addChild(group_2, {
-				"top": "82px",
-				"width": "724px",
-				"height": "192px",
-				"left": "calc(50% - 362px)"
-			});
-			
-			var group_4 = new cpr.controls.Container();
-			var formLayout_3 = new cpr.controls.layouts.FormLayout();
-			formLayout_3.scrollable = false;
-			formLayout_3.topMargin = "5px";
-			formLayout_3.rightMargin = "5px";
-			formLayout_3.bottomMargin = "5px";
-			formLayout_3.leftMargin = "5px";
-			formLayout_3.horizontalSpacing = "10px";
-			formLayout_3.verticalSpacing = "10px";
-			formLayout_3.setColumns(["1fr", "1fr"]);
-			formLayout_3.setRows(["1fr"]);
-			group_4.setLayout(formLayout_3);
 			(function(container){
 				var button_1 = new cpr.controls.Button();
 				button_1.value = "저장";
@@ -384,12 +268,189 @@
 					"colIndex": 1,
 					"rowIndex": 0
 				});
-			})(group_4);
-			container.addChild(group_4, {
+			})(group_2);
+			container.addChild(group_2, {
 				"top": "700px",
 				"width": "400px",
 				"height": "48px",
 				"left": "calc(50% - 200px)"
+			});
+			
+			var group_3 = new cpr.controls.Container();
+			var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+			group_3.setLayout(xYLayout_3);
+			(function(container){
+				var group_4 = new cpr.controls.Container();
+				group_4.style.css({
+					"background-color" : "#FFFFFF"
+				});
+				var formLayout_2 = new cpr.controls.layouts.FormLayout();
+				formLayout_2.scrollable = false;
+				formLayout_2.topMargin = "5px";
+				formLayout_2.rightMargin = "5px";
+				formLayout_2.bottomMargin = "5px";
+				formLayout_2.leftMargin = "5px";
+				formLayout_2.horizontalSpacing = "10px";
+				formLayout_2.verticalSpacing = "10px";
+				formLayout_2.setColumns(["100px", "388px"]);
+				formLayout_2.setRows(["1fr", "1fr", "1fr"]);
+				group_4.setLayout(formLayout_2);
+				(function(container){
+					var output_2 = new cpr.controls.Output();
+					output_2.value = "레시피 제목";
+					output_2.style.css({
+						"font-weight" : "bolder",
+						"text-align" : "center"
+					});
+					container.addChild(output_2, {
+						"colIndex": 0,
+						"rowIndex": 0
+					});
+					var output_3 = new cpr.controls.Output();
+					output_3.value = "대표 사진";
+					output_3.style.css({
+						"font-weight" : "bolder",
+						"text-align" : "center"
+					});
+					container.addChild(output_3, {
+						"colIndex": 0,
+						"rowIndex": 1
+					});
+					var output_4 = new cpr.controls.Output();
+					output_4.value = "카테고리";
+					output_4.style.css({
+						"font-weight" : "bolder",
+						"text-align" : "center"
+					});
+					container.addChild(output_4, {
+						"colIndex": 0,
+						"rowIndex": 2
+					});
+					var inputBox_1 = new cpr.controls.InputBox("ipb1");
+					inputBox_1.style.css({
+						"font-size" : "18px"
+					});
+					inputBox_1.bind("value").toDataMap(app.lookup("recipe"), "RECIPE_BOARD_TITLE");
+					container.addChild(inputBox_1, {
+						"colIndex": 1,
+						"rowIndex": 0
+					});
+					var group_5 = new cpr.controls.Container();
+					var formLayout_3 = new cpr.controls.layouts.FormLayout();
+					formLayout_3.scrollable = false;
+					formLayout_3.topMargin = "5px";
+					formLayout_3.rightMargin = "5px";
+					formLayout_3.bottomMargin = "5px";
+					formLayout_3.leftMargin = "5px";
+					formLayout_3.horizontalSpacing = "10px";
+					formLayout_3.verticalSpacing = "10px";
+					formLayout_3.setColumns(["80px", "80px", "80px"]);
+					formLayout_3.setRows(["1fr"]);
+					group_5.setLayout(formLayout_3);
+					(function(container){
+						var linkedComboBox_1 = new cpr.controls.LinkedComboBox("lcb1");
+						linkedComboBox_1.placeholders = ["종류별"];
+						linkedComboBox_1.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_TYPE");
+						(function(linkedComboBox_1){
+							linkedComboBox_1.addItem((function(){
+								var treeItem_1 = new cpr.controls.TreeItem("밑반찬", "밑반찬", null);
+								treeItem_1.checked = false;
+								return treeItem_1;
+							})());
+							linkedComboBox_1.addItem(new cpr.controls.TreeItem("메인반찬", "메인반찬", null));
+							linkedComboBox_1.addItem(new cpr.controls.TreeItem("국/탕", "국/탕", null));
+							linkedComboBox_1.addItem(new cpr.controls.TreeItem("디저트", "디저트", null));
+							linkedComboBox_1.addItem(new cpr.controls.TreeItem("면", "면", null));
+							linkedComboBox_1.addItem(new cpr.controls.TreeItem("샐러드", "샐러드", null));
+							linkedComboBox_1.addItem(new cpr.controls.TreeItem("음료", "음료", null));
+							linkedComboBox_1.addItem(new cpr.controls.TreeItem("기타", "기타", null));
+						})(linkedComboBox_1);
+						container.addChild(linkedComboBox_1, {
+							"colIndex": 0,
+							"rowIndex": 0,
+							"colSpan": 1,
+							"rowSpan": 1
+						});
+						var linkedComboBox_2 = new cpr.controls.LinkedComboBox("lcb2");
+						linkedComboBox_2.placeholders = ["방법별"];
+						linkedComboBox_2.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_INGREDIENTS");
+						(function(linkedComboBox_2){
+							linkedComboBox_2.addItem(new cpr.controls.TreeItem("육류", "육류", null));
+							linkedComboBox_2.addItem(new cpr.controls.TreeItem("채소류", "채소류", null));
+							linkedComboBox_2.addItem(new cpr.controls.TreeItem("해물류", "해물류", null));
+							linkedComboBox_2.addItem(new cpr.controls.TreeItem("달걀/유제품", "달걀/유제품", null));
+							linkedComboBox_2.addItem(new cpr.controls.TreeItem("가공식품류", "가공식품류", null));
+							linkedComboBox_2.addItem(new cpr.controls.TreeItem("과일류", "과일류", null));
+							linkedComboBox_2.addItem(new cpr.controls.TreeItem("기타", "기타", null));
+						})(linkedComboBox_2);
+						container.addChild(linkedComboBox_2, {
+							"colIndex": 1,
+							"rowIndex": 0
+						});
+						var linkedComboBox_3 = new cpr.controls.LinkedComboBox("lcb3");
+						linkedComboBox_3.placeholders = ["재료별"];
+						linkedComboBox_3.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_METHOD");
+						(function(linkedComboBox_3){
+							linkedComboBox_3.addItem(new cpr.controls.TreeItem("볶음", "볶음", null));
+							linkedComboBox_3.addItem(new cpr.controls.TreeItem("끓이기", "끓이기", null));
+							linkedComboBox_3.addItem(new cpr.controls.TreeItem("조림", "조림", null));
+							linkedComboBox_3.addItem(new cpr.controls.TreeItem("튀김", "튀김", null));
+							linkedComboBox_3.addItem(new cpr.controls.TreeItem("삶기", "삶기", null));
+							linkedComboBox_3.addItem(new cpr.controls.TreeItem("굽기", "굽기", null));
+							linkedComboBox_3.addItem(new cpr.controls.TreeItem("기타", "기타", null));
+						})(linkedComboBox_3);
+						container.addChild(linkedComboBox_3, {
+							"colIndex": 2,
+							"rowIndex": 0
+						});
+					})(group_5);
+					container.addChild(group_5, {
+						"colIndex": 1,
+						"rowIndex": 2,
+						"colSpan": 1,
+						"rowSpan": 1
+					});
+					var fileInput_1 = new cpr.controls.FileInput("fi1");
+					if(typeof onFi1ValueChange == "function") {
+						fileInput_1.addEventListener("value-change", onFi1ValueChange);
+					}
+					container.addChild(fileInput_1, {
+						"colIndex": 1,
+						"rowIndex": 1,
+						"colSpan": 1,
+						"rowSpan": 1
+					});
+				})(group_4);
+				container.addChild(group_4, {
+					"right": "215px",
+					"left": "5px",
+					"height": "193px",
+					"top": "calc(50% - 96px)"
+				});
+				var image_1 = new cpr.controls.Image("uploadImg");
+				container.addChild(image_1, {
+					"left": "508px",
+					"width": "216px",
+					"height": "193px",
+					"top": "calc(50% - 96px)"
+				});
+				var button_3 = new cpr.controls.Button("deleteImg");
+				button_3.value = "X";
+				if(typeof onDeleteImgClick == "function") {
+					button_3.addEventListener("click", onDeleteImgClick);
+				}
+				container.addChild(button_3, {
+					"top": "5px",
+					"left": "686px",
+					"width": "38px",
+					"height": "20px"
+				});
+			})(group_3);
+			container.addChild(group_3, {
+				"top": "61px",
+				"width": "724px",
+				"height": "203px",
+				"left": "calc(50% - 362px)"
 			});
 			if(typeof onBodyLoad2 == "function"){
 				app.addEventListener("load", onBodyLoad2);

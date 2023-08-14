@@ -98,6 +98,15 @@
 				dataSet.refresh();
 				app.lookup("grd1").redraw();
 				
+			}
+
+			/*
+			 * "주문 취소" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick2(e){
+				var button = e.control;
+				console.log(1);
 			};
 			// End - User Script
 			
@@ -197,12 +206,13 @@
 				formLayout_1.horizontalSpacing = "0px";
 				formLayout_1.verticalSpacing = "0px";
 				formLayout_1.setColumns(["130px", "1fr", "100px", "1fr"]);
-				formLayout_1.setRows(["40px", "5px", "30px", "5px", "1fr"]);
+				formLayout_1.setRows(["50px", "5px", "30px", "5px", "1fr"]);
 				group_2.setLayout(formLayout_1);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
 					output_1.value = "구매 내역";
 					output_1.style.css({
+						"padding-top" : "5px",
 						"border-bottom-color" : "darkGrey",
 						"color" : "#0fd465",
 						"font-weight" : "bold",

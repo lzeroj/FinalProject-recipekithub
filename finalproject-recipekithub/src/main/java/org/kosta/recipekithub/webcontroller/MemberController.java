@@ -149,7 +149,6 @@ public class MemberController {
 		List<MemberVO> myProfile = new ArrayList<>();
 		myProfile.add(member);
 		dataRequest.setResponse("ds_profile", myProfile);
-		
 		return new JSONDataView();
 	}
 	
