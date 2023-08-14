@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.MealkitService;
+import org.kosta.recipekithub.model.service.MemberService;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
@@ -27,32 +28,35 @@ import com.cleopatra.spring.JSONDataView;
 import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class MealkitController {
 	
 	private final MealkitService mealKitService;
 	
 	
-//	@RequestMapping("/mealkitList")
-//	public View mealkitList(HttpServletRequest request,HttpServletResponse response, DataRequest dataRequst) {
-//		
-//		List<MealKitBoard> list = mealKitService.findMealKitList();
-//		dataRequst.setResponse("mealkitList", list);
-//		return new JSONDataView();
-//		
-//	}
+	@RequestMapping("/mealkitList")
+	public View mealkitList(HttpServletRequest request,HttpServletResponse response, DataRequest dataRequst) {
+		
+		List<MealKitBoard> list = mealKitService.findMealKitList();
+		dataRequst.setResponse("mealkitList", list);
+		return new JSONDataView();
+		
+	}
 	
 	
-	@GetMapping("/mealkitDetail/{mealkitNo}")
+	@GetMapping("/mealkitDetail/{mealkitNo}") //밀키트 상세 페이지
 	public View mealKit(@PathVariable int mealkitNo, DataRequest dataRequest, HttpServletRequest request) {
 		//HttpSession session = request.getSession(false);
-		//MemberVO member = (MemberVO)session.getAttribute("mvo");
+		//MemberVO sessionMember = (MemberVO)session.getAttribute("member");
+		
 		
 		MealKitBoard mealkit = mealKitService.findMealKitByNo(mealkitNo);
-		System.out.println("mealkit = " + mealkit);
-		
+		log.info("Controller mealkit의 정보를 알아보자 {} ", mealkit);
+		//MemberVO member = memberService.findMemberByEmail(mealkit.getMemberVO().getMemberEmail());
 		Map<String, Object> initParam = new HashMap<>();
 		initParam.put("mealkitNo", mealkit.getMealkitNo());
 		initParam.put("mealkitName", mealkit.getMealkitName());
@@ -60,9 +64,11 @@ public class MealkitController {
 		initParam.put("mealkitPrice", String.valueOf(mealkit.getMealkitPrice()));
 		initParam.put("mealkitInventory", String.valueOf(mealkit.getMealkitInventory()));
 		initParam.put("mealkitIngredients", mealkit.getMealkitIngredients());
-		//initParam.put("mealkitMember", mealkit.getMemberVO().getMemberEmail());
-		//initParam.put("member", member.getMemberEmail());
+		initParam.put("mealkitMember", mealkit.getMemberVO().getMemberNick());	
+		initParam.put("mealkitRegDate", mealkit.getMealkitRegDate());
+		initParam.put("mealkitHits", mealkit.getMealkitHits());
 		
+		//initParam.put("sessionMember", sessionMember.getMemberNick());
 		return new UIView("/ui/mealkit/mealkitDetail.clx", initParam);
 	}
 	
@@ -74,6 +80,12 @@ public class MealkitController {
 	
 	@RequestMapping("/insertMealkit")
 	public View insertMealKit(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		//HttpSession session = request.getSession(false);
+		//MemberVO sessionMember = (MemberVO)session.getAttribute("member");
+		//if(sessionMember == null) {
+		//	return new UIView("/ui/index.clx");	
+		//}
+		
 		ParameterGroup param = dataRequest.getParameterGroup("mealkitMap");
 		String mealkitName = param.getValue("mealkitName");
 		String mealkitInfo = param.getValue("mealkitInfo");
@@ -82,13 +94,6 @@ public class MealkitController {
 		int mealkitInventory = Integer.parseInt(param.getValue("mealkitInventory"));
 		String mealkitCategory = param.getValue("mealkitCategory");
 		
-		System.out.println("입력한 name을 알아보자!! " + mealkitName);
-		System.out.println("입력한 mealkitInfo을 알아보자!! " + mealkitInfo);
-		System.out.println("입력한 mealkitIngredients을 알아보자!! " + mealkitIngredients);
-		System.out.println("입력한 mealkitPrice을 알아보자!! " + mealkitPrice);
-		System.out.println("입력한 mealkitCategory을 알아보자!! " + mealkitCategory);
-		System.out.println("입력한 mealkitInventory을 알아보자!! " + mealkitInventory);
-		
 		MealKitBoard mealkit = new MealKitBoard();
 		mealkit.setMealkitName(mealkitName);
 		mealkit.setMealkitInfo(mealkitInfo);
@@ -96,22 +101,18 @@ public class MealkitController {
 		mealkit.setMealkitPrice(mealkitPrice);
 		mealkit.setMealkitInventory(mealkitInventory);
 		mealkit.setMealkitCategory(mealkitCategory);
-		
-		//HttpSession session = request.getSession(false);
-		//MemberVO member = (MemberVO)session.getAttribute("mvo");
+
 		MemberVO member = new MemberVO("hellojava@naver.com", "123", "재헌강", "유스타스캡틴재헌", "성남", "01012345678", "1998-01-01", "1", "Y", null);
 		mealkit.setMemberVO(member);
 		System.out.println("Service mealkit = " + mealkit);
 		
 		
 		int mealkitNo = mealKitService.insertMealKit(mealkit);
-		System.out.println("Controller num의 값은 ? " + mealkitNo);
 		
 		Map<String, Object> mealkitMap = new HashMap<>();
 		mealkitMap.put("result", mealkitNo);
 		dataRequest.setMetadata(true, mealkitMap);
-		
-		//dataRequest.setResponse("mealkit", mealkitNo);
+		//dataRequest.setResponse("member", member);
 		return new JSONDataView();
 	}
 	
@@ -119,6 +120,7 @@ public class MealkitController {
 	public View editMealkitForm(@PathVariable int mealkitNo) {
 		MealKitBoard mealkit = mealKitService.findMealKitByNo(mealkitNo);
 		Map<String, Object> initParam = new HashMap<>();
+		initParam.put("mealkitNo", mealkit.getMealkitNo());
 		initParam.put("mealkitName", mealkit.getMealkitName());
 		initParam.put("mealkitInfo", mealkit.getMealkitInfo());
 		initParam.put("mealkitIngredients", mealkit.getMealkitIngredients());
@@ -142,5 +144,21 @@ public class MealkitController {
 //		}
 //		return new JSONDataView();
 //	}
+	
+	
+	@PostMapping("/deleteMealkit/{mealkitNo}")
+	public View deleteMealkit(@PathVariable int mealkitNo, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		log.info("member = {} ", member);
+		MealKitBoard mealkit = mealKitService.findMealKitByNo(mealkitNo);
+		log.info("mealkit 정보 = {} ", mealkit);
+		if(mealkit.getMemberVO().getMemberNick().equals(member.getMemberEmail())) {
+			log.info("mealkit = {} ", mealkit);
+			mealKitService.deleteMealkit(mealkitNo);
+		}
+		
+		return new UIView("/ui/index.clx");//추후 변경
+	}
 
 }

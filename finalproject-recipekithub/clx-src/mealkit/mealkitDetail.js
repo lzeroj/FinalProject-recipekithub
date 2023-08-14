@@ -17,6 +17,20 @@ function onBodyLoad(e){
 	var mealkitPrice = cpr.core.Platform.INSTANCE.getParameter("mealkitPrice");
 	var mealkitInventory = cpr.core.Platform.INSTANCE.getParameter("mealkitInventory");
 	var mealkitIngredients = cpr.core.Platform.INSTANCE.getParameter("mealkitIngredients");
+	var mealkitRegDate = cpr.core.Platform.INSTANCE.getParameter("mealkitRegDate");
+	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");
+	var mealkitHits = cpr.core.Platform.INSTANCE.getParameter("mealkitHits");
+	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
+	
+	
+//	if(mealkitMember === sessionMember){
+//		var deletebtn = app.lookup("deleBtn");
+//		var updatebtn = app.lookup("updateBtn");
+//		deletebtn.visible = true;
+//		updatebtn.visible = true;
+//		deletebtn.redraw();
+//		updatebtn.redraw();
+//	}
 	
 	/* 세션이 들어오면 Open
 	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");//게시물 작성자이메일
@@ -36,6 +50,10 @@ function onBodyLoad(e){
 	dataMap.setValue("mealkitPrice", mealkitPrice);
 	dataMap.setValue("mealkitInventory", mealkitInventory);
 	dataMap.setValue("mealkitIngredients", mealkitIngredients);
+	dataMap.setValue("mealkitRegDate", mealkitRegDate);
+	dataMap.setValue("mealkitMember", mealkitMember);
+	dataMap.setValue("mealkitHits", mealkitHits);
+	dataMap.setValue("sessionMember", sessionMember);
 	dataMap.setValue("cnt", cnt);
 	
 	
@@ -46,6 +64,13 @@ function onBodyLoad(e){
 	var total = app.lookup("total");
 	var info = app.lookup("info");
 	var ingredients = app.lookup("ingredients");
+	var reg = app.lookup("regDate");
+	var hits = app.lookup("hits");
+	var seller = app.lookup("seller");
+	
+	reg.redraw();
+	hits.redraw();
+	seller.redraw();
 	name.redraw();
 	name2.redraw();
 	price.redraw();
@@ -53,6 +78,7 @@ function onBodyLoad(e){
 	total.redraw();
 	info.redraw();
 	ingredients.redraw();
+	mealkitRegDate.re
 	
 	
 	
@@ -112,4 +138,24 @@ function onUpdateBtnClick(e){
 	var mealkit = app.lookup("mealkit");
 	var value = mealkit.getValue("mealkitNo");
 	window.location.href="/updateMealkitForm/"+value;
+}
+
+/*
+ * "삭제" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick3(e){
+	var button = e.control;
+	var mealkit = app.lookup("mealkit");
+	var mealkitNo = mealkit.getValue("mealkitNo");
+	
+	var sessionMember = mealkit.getValue("sessionMember");
+	var mealkitMember = mealkit.getValue("mealkitMember");
+	
+	if(sessionMember === mealkitMember){
+		var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+		HttpPostMethod.submit();
+	}
+		
+	
 }

@@ -16,6 +16,23 @@
           <cl:datacolumn std:sid="d-column-337e0c71" name="mealkitCategory"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-3f7d6104" id="sendUpdatedMealkit">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d65cfad0" name="MEALKIT_NO" datatype="decimal"/>
+          <cl:datacolumn std:sid="d-column-14c89045" name="MEMBER_EMAIL" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-292e2b98" name="MEALKIT_NAME" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-586e7547" name="MEALKIT_INGREDIENTS" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-2ed4234d" name="MEALKIT_PRICE" datatype="decimal"/>
+          <cl:datacolumn std:sid="d-column-f44fc36b" name="MEALKIT_REG_DATE" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-1ad68ee5" name="MEALKIT_EDIT_DATE" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-2a5ecb7c" name="MEALKIT_INVENTORY" datatype="decimal"/>
+          <cl:datacolumn std:sid="d-column-b5f12aa3" name="MEALKIT_CATEGORY" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-6a1f087e" name="MEALKIT_IMAGE" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-97e68d1e" name="MEALKIT_BOARD_HITS" datatype="decimal"/>
+          <cl:datacolumn std:sid="d-column-109211ec" name="MEALKIT_INFO" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-813cf157" id="updateMealkitSub"/>
     </cl:model>
     <cl:appspec/>
   </head>
@@ -57,7 +74,7 @@
         <cl:output std:sid="output-a3aa1e5b" style="color:#0CA44E; font-size:15px; text-align:center;" value="카테고리">
           <cl:xylayoutdata std:sid="xyl-data-3ae5b7fb" top="8px" left="48px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:combobox std:sid="c-box-3094e38c" id="cmb1" style="background-color:#F9F9F9;">
+        <cl:combobox std:sid="c-box-3094e38c" id="cmb1" style="background-color:#F9F9F9; text-align:center;" placeholder="-종류-">
           <cl:listener std:sid="listener-50416e41" name="selection-change" handler="onCmb1SelectionChange"/>
           <cl:xylayoutdata std:sid="xyl-data-f8262248" top="8px" left="174px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
           <cl:item std:sid="t-item-9b0716a1" label="밑반찬" value="밑반찬"/>
@@ -77,7 +94,7 @@
           <cl:item std:sid="t-item-16efd787" label="차/음료/술" value="차/음료/술"/>
           <cl:item std:sid="t-item-1f9b7d64" label="기타" value="기타"/>
         </cl:combobox>
-        <cl:combobox std:sid="c-box-0433b7ac" id="cmb2" style="background-color:#F9F9F9;">
+        <cl:combobox std:sid="c-box-0433b7ac" id="cmb2" style="background-color:#F9F9F9; text-align:center;" placeholder="-재료-">
           <cl:xylayoutdata std:sid="xyl-data-04bb4196" top="8px" left="284px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
           <cl:item std:sid="t-item-bb5f6206" label="소고기" value="소고기"/>
           <cl:item std:sid="t-item-98ba616c" label="돼지고기" value="돼지고기"/>
@@ -96,17 +113,22 @@
           <cl:item std:sid="t-item-d025da50" label="곡류" value="곡류"/>
           <cl:item std:sid="t-item-63f2ebb1" label="기타" value="기타"/>
         </cl:combobox>
-        <cl:combobox std:sid="c-box-33bd41e7" id="cmb3" style="background-color:#F9F9F9;">
+        <cl:combobox std:sid="c-box-33bd41e7" id="cmb3" style="background-color:#F9F9F9; text-align:center;" placeholder="-방법-">
           <cl:xylayoutdata std:sid="xyl-data-d7b2512d" top="8px" left="394px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-          <cl:item std:sid="t-item-4cacb63f" label="볶음" value="value1"/>
-          <cl:item std:sid="t-item-dc23226d" label="끓이기" value="value2"/>
-          <cl:item std:sid="t-item-086bc37b" label="부침" value="value3"/>
-          <cl:item std:sid="t-item-37e12161" label="조림" value="value4"/>
-          <cl:item std:sid="t-item-61a91d2e" label="무침" value="value5"/>
-          <cl:item std:sid="t-item-1bbaa8b4" label="label2" value="value6"/>
-          <cl:item std:sid="t-item-5b198adb" label="label3" value="value7"/>
-          <cl:item std:sid="t-item-19a49cc2" label="label4" value="value8"/>
-          <cl:item std:sid="t-item-74e03441" label="label5" value="value9"/>
+          <cl:item std:sid="t-item-4cacb63f" label="볶음" value="볶음"/>
+          <cl:item std:sid="t-item-dc23226d" label="끓이기" value="끓이기"/>
+          <cl:item std:sid="t-item-086bc37b" label="부침" value="부침"/>
+          <cl:item std:sid="t-item-37e12161" label="조림" value="조림"/>
+          <cl:item std:sid="t-item-61a91d2e" label="무침" value="무침"/>
+          <cl:item std:sid="t-item-1bbaa8b4" label="비빔" value="비빔"/>
+          <cl:item std:sid="t-item-5b198adb" label="찜" value="찜"/>
+          <cl:item std:sid="t-item-19a49cc2" label="절임" value="절임"/>
+          <cl:item std:sid="t-item-74e03441" label="튀김" value="튀김"/>
+          <cl:item std:sid="t-item-c5fd0aec" label="삶기" value="삶기"/>
+          <cl:item std:sid="t-item-99bc9933" label="굽기" value="굽기"/>
+          <cl:item std:sid="t-item-9b9dede1" label="데치기" value="데치기"/>
+          <cl:item std:sid="t-item-7c8e0955" label="회" value="회"/>
+          <cl:item std:sid="t-item-de022741" label="기타" value="기타"/>
         </cl:combobox>
         <cl:xylayout std:sid="xylayout-dbc58606"/>
       </cl:group>
@@ -144,6 +166,7 @@
         <cl:xylayoutdata std:sid="xyl-data-ce4c196e" top="670px" left="357px" width="104px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:button std:sid="button-8b76c874" style="background-color:#0ca44e; color:white; font-size:17px; background-image:none;" class=".cl-button mealkitbtn" value="취소">
+        <cl:listener std:sid="listener-0dadc513" name="click" handler="onButtonClick"/>
         <cl:xylayoutdata std:sid="xyl-data-47c9b50e" top="670px" left="471px" width="111px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:xylayout std:sid="xylayout-9ecb7632"/>

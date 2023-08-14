@@ -104,28 +104,80 @@ function onSampleThrLoad(e){
  */
 function onButtonClick2(e){
 	var button = e.control;
-//	var vsOpt = app.lookup("sampleThr");
-//  	vsOpt.value = $('#summernote').summernote('code');
-//   	var message = vsOpt.value;
-//   	
-//   	var combo1 = app.lookup("cmb1").text;
-//   	var combo2 = app.lookup("cmb2").text;
-//   	var combo3 = app.lookup("cmb3").text;
-//   	var category = combo1+"/"+combo2+"/"+combo3;
-//   	
-//   	var dataMap = app.lookup("mealkitMap");
-//   	dataMap.setValue("mealkitInfo", message);
-//   	dataMap.setValue("mealkitCategory", category);
-//
-//	console.log("mealkitName = "+ dataMap.getValue("mealkitName"));
-//	console.log("mealkitInfo = "+ dataMap.getValue("mealkitInfo"));
-//	console.log("mealkitIngredients = "+ dataMap.getValue("mealkitIngredients"));
-//	console.log("mealkitPrice = "+ dataMap.getValue("mealkitPrice"));
-//	console.log("mealkitInventory = "+ dataMap.getValue("mealkitInventory"));
-//	console.log("mealkitCategory = "+ dataMap.getValue("mealkitCategory"));
-//	console.log("category = " + category);
-//	var submission = app.lookup("mealkitSub");
-//	submission.send();
+	var vsOpt = app.lookup("sampleThr");
+  	vsOpt.value = $('#summernote').summernote('code');
+   	var message = vsOpt.value;
+   	
+   	var name = app.lookup("ipb1").value;
+   	var ingredients = app.lookup("ipb2").value;
+   	var price = app.lookup("ipb3").value;
+   	var inven = app.lookup("ipb4").value;
+   	
+   	var combo1 = app.lookup("cmb1").text;
+   	var combo2 = app.lookup("cmb2").text;
+   	var combo3 = app.lookup("cmb3").text;
+   	var category = combo1+"/"+combo2+"/"+combo3;
+   	
+   	var mealkitMap = app.lookup("sendUpdatedMealkit");
+   	mealkitMap.setValue("", value);
+   	mealkitMap.setValue("mealkitInfo", message);
+   	mealkitMap.setValue("mealkitCategory", category);
+ 	console.log("message = " + message);
+ 	//유효성
+ 	var name = app.lookup("ipb1");
+ 	var ingredients = app.lookup("ipb2");
+ 	var price = app.lookup("ipb3");
+ 	var stock = app.lookup("ipb4");
+ 	
+ 	
+ 	if(name.value == null || name.value.trim().length == 0){
+ 		alert("밀키트 이름을 입력해주세요.");
+ 		name.focus();
+ 		return;
+ 	}else if(combo1.length == 0 || combo2.length == 0 || combo3.length == 0){
+ 		alert("카테고리를 반드시 선택해주세요.");
+ 		return ;
+ 		
+ 	}else if(ingredients.value == null || ingredients.value.trim().length == 0){
+ 		alert("밀키트 성분을 입력해주세요.");
+ 		ingredients.focus();
+ 		return;
+ 	
+ 	}else if(message == null || message.trim().length == 0){
+ 		
+ 		alert("밀키트 정보를 입력해주세요.");
+ 		console.log("왜 안 먹지?");
+ 		//e.preventDefault();
+ 		return;
+ 	}
+ 	
+ 	if(price.value == null || price.value == ""){
+ 		alert("밀키트 가격을 입력해주세요.");
+ 		price.focus();
+ 		return;
+ 		
+ 	}else if(Number(price.value) <= 0 || isNaN(price.value)){
+ 		alert("밀키트 가격은 숫자만 입력이 가능합니다. 다시 확인해주세요.");
+ 		price.value = "";
+ 		price.focus();
+ 		return;
+ 	}
+ 	
+ 	if(stock.value == null || stock.value == ""){
+ 		alert("밀키트 수량을 입력해주세요.");
+ 		stock.focus();
+ 		return;
+ 		
+ 	}else if(Number(stock.value) <= 0 || isNaN(stock.value)){
+ 		alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
+ 		stock.value = "";
+ 		stock.focus();
+ 		return;
+ 	}
+ 	  	
+
+	var submission = app.lookup("mealkitSub");
+	submission.send();
    	
 }
 
@@ -142,4 +194,13 @@ function onMealkitSubSubmitSuccess(e){
 	window.location.href= url;
 		
 	}
-	
+
+/*
+ * "취소" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick(e){
+	var button = e.control;
+	window.location.href= "/"; //추후 상세 페이지로 바꿔야함.
+}
+}
