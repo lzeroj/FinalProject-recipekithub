@@ -24,6 +24,78 @@
 			 */
 			function onButtonClick(e){
 				var button = e.control;
+				var host = app.getHost(); // 부모 임베디드 앱
+			    if(confirm("등록화면으로 이동하시겠습니까?")){
+					cpr.core.App.load("embedded/myPageQnARegisterForm", function(loadedApp){
+						if (loadedApp){
+							host.app = loadedApp;
+						}
+					});
+			    }
+			}
+
+			/*
+			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+			 */
+			function onBodyLoad(e){
+				app.lookup("subqnalist").send();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubqnalistSubmitSuccess(e){
+				var subqnalist = e.control;
+				app.lookup("qnadslist").refresh();
+				var dataSet = app.lookup("qnadslist");
+				
+				var grid = app.lookup("grd1");
+				for(var i=0;i<dataSet.getRowCount();i++){
+					var boardResponseStatus = dataSet.getValue(i, "boardResponseStatus");
+					var value = "theme/images/mypage/"+boardResponseStatus+".png";
+					dataSet.setValue(i, "boardResponseStatus", value);
+				}
+				grid.redraw();
+			}
+
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubqnaselectSubmitSuccess(e){
+				var subqnaselect = e.control;
+				var host = app.getHost(); // 부모 임베디드 앱
+				var boardId = app.lookup("responseqnaselect").getValue(0, "boardId");
+				var boardTitle = app.lookup("responseqnaselect").getValue(0, "boardTitle");
+				var boardContent = app.lookup("responseqnaselect").getValue(0, "boardContent");
+				
+				var initValue = {"boardId": boardId , "boardTitle" : boardTitle, "boardContent":boardContent};
+				cpr.core.App.load("embedded/myPageQnARegisterSelect", function(loadedApp){
+					if (loadedApp){
+						host.initValue = initValue;
+						host.app = loadedApp;
+					}
+				});
+			}
+
+			/*
+			 * "상세보기" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick3(e){
+				var button = e.control;
+				var grid = app.lookup("grd1");
+			    var selectedRowIndex = grid.getSelectedRowIndex();
+			//    console.log(selectedRowIndex);
+			    if(selectedRowIndex == -1 || selectedRowIndex == null){
+			    	alert("확인할 부분을 선택한 뒤, 상세보기를 클릭해주세요");
+			    	return;
+			    }
+				app.lookup("requestqnaselect").setValue("boardId", grid.getCellValue(grid.getSelectedRowIndex(), "boardId"));
+				app.lookup("subqnaselect").send();
 			};
 			// End - User Script
 			
@@ -33,20 +105,57 @@
 				"columns" : [
 					{"name": "boardTitle"},
 					{
-						"name": "boardNo",
+						"name": "boardId",
 						"dataType": "number"
 					},
 					{
 						"name": "boardRegDate",
 						"dataType": "string"
 					},
-					{"name": "boardResponseStatus"}
+					{"name": "boardResponseStatus"},
+					{"name": "memberEmail"}
 				]
 			});
 			app.register(dataSet_1);
+			
+			var dataSet_2 = new cpr.data.DataSet("responseqnaselect");
+			dataSet_2.parseData({
+				"columns" : [
+					{"name": "boardId"},
+					{"name": "boardTitle"},
+					{"name": "boardContent"}
+				]
+			});
+			app.register(dataSet_2);
+			var dataMap_1 = new cpr.data.DataMap("requestqnaselect");
+			dataMap_1.parseData({
+				"columns" : [{
+					"name": "boardId",
+					"dataType": "decimal"
+				}]
+			});
+			app.register(dataMap_1);
 			var submission_1 = new cpr.protocols.Submission("subqna");
 			submission_1.action = "/insertQnaForm";
 			app.register(submission_1);
+			
+			var submission_2 = new cpr.protocols.Submission("subqnalist");
+			submission_2.action = "/selectQnaList";
+			submission_2.addResponseData(dataSet_1, false);
+			if(typeof onSubqnalistSubmitSuccess == "function") {
+				submission_2.addEventListener("submit-success", onSubqnalistSubmitSuccess);
+			}
+			app.register(submission_2);
+			
+			var submission_3 = new cpr.protocols.Submission("subqnaselect");
+			submission_3.action = "/selectQnaDetail";
+			submission_3.mediaType = "application/x-www-form-urlencoded;simple";
+			submission_3.addRequestData(dataMap_1);
+			submission_3.addResponseData(dataSet_2, false);
+			if(typeof onSubqnaselectSubmitSuccess == "function") {
+				submission_3.addEventListener("submit-success", onSubqnaselectSubmitSuccess);
+			}
+			app.register(submission_3);
 			app.supportMedia("all", "embe");
 			
 			// Configure root container
@@ -58,6 +167,7 @@
 			
 			// Layout
 			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			xYLayout_1.scrollable = false;
 			container.setLayout(xYLayout_1);
 			
 			// UI Configuration
@@ -66,13 +176,16 @@
 			group_1.setLayout(xYLayout_2);
 			(function(container){
 				var grid_1 = new cpr.controls.Grid("grd1");
+				grid_1.readOnly = true;
 				grid_1.init({
+					"dataSet": app.lookup("qnadslist"),
+					"autoRowHeight": "all",
+					"selectionUnit": "row",
 					"columns": [
-						{"width": "100px"},
-						{"width": "100px"},
-						{"width": "100px"},
-						{"width": "100px"},
-						{"width": "100px"}
+						{"width": "50px"},
+						{"width": "170px"},
+						{"width": "142px"},
+						{"width": "54px"}
 					],
 					"header": {
 						"rows": [{"height": "24px"}],
@@ -80,66 +193,90 @@
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 0},
 								"configurator": function(cell){
+									cell.filterable = false;
+									cell.sortable = false;
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 1},
 								"configurator": function(cell){
+									cell.filterable = false;
+									cell.sortable = false;
+									cell.targetColumnName = "boardTitle";
+									cell.text = "글 제목";
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 2},
 								"configurator": function(cell){
+									cell.filterable = false;
+									cell.sortable = false;
+									cell.targetColumnName = "boardRegDate";
+									cell.text = "작성 일시";
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 3},
 								"configurator": function(cell){
-								}
-							},
-							{
-								"constraint": {"rowIndex": 0, "colIndex": 4},
-								"configurator": function(cell){
+									cell.text = "작성 여부";
 								}
 							}
 						]
 					},
 					"detail": {
-						"rows": [{"height": "24px"}],
+						"rows": [{"height": "48px"}],
 						"cells": [
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 0},
 								"configurator": function(cell){
+									cell.columnType = "rowindex";
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 1},
 								"configurator": function(cell){
+									cell.columnName = "boardTitle";
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 2},
 								"configurator": function(cell){
+									cell.columnName = "boardRegDate";
+									cell.control = (function(){
+										var dateInput_1 = new cpr.controls.DateInput("dti1");
+										dateInput_1.hideButton = true;
+										dateInput_1.style.css({
+											"text-align" : "center"
+										});
+										dateInput_1.bind("value").toDataColumn("boardRegDate");
+										return dateInput_1;
+									})();
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 3},
 								"configurator": function(cell){
-								}
-							},
-							{
-								"constraint": {"rowIndex": 0, "colIndex": 4},
-								"configurator": function(cell){
+									cell.control = (function(){
+										var image_1 = new cpr.controls.Image();
+										image_1.bind("src").toDataColumn("boardResponseStatus");
+										return image_1;
+									})();
+									cell.controlConstraint = {
+										"horizontalAlign": "center",
+										"verticalAlign": "center",
+										"width": 40,
+										"height": 40
+									};
 								}
 							}
 						]
 					}
 				});
 				container.addChild(grid_1, {
-					"top": "40px",
-					"right": "0px",
-					"left": "0px",
-					"height": "468px"
+					"top": "70px",
+					"right": "20px",
+					"left": "20px",
+					"height": "428px"
 				});
 				var button_1 = new cpr.controls.Button();
 				button_1.value = "새 글 등록하기";
@@ -152,14 +289,15 @@
 					button_1.addEventListener("click", onButtonClick);
 				}
 				container.addChild(button_1, {
-					"right": "0px",
-					"bottom": "10px",
-					"width": "140px",
+					"right": "20px",
+					"bottom": "20px",
+					"width": "100px",
 					"height": "30px"
 				});
 				var output_1 = new cpr.controls.Output();
 				output_1.value = "Q & A";
 				output_1.style.css({
+					"padding-top" : "5px",
 					"border-bottom-color" : "darkGrey",
 					"color" : "#0fd465",
 					"font-weight" : "bold",
@@ -173,7 +311,23 @@
 					"top": "0px",
 					"right": "0px",
 					"left": "0px",
-					"height": "40px"
+					"height": "50px"
+				});
+				var button_2 = new cpr.controls.Button();
+				button_2.value = "상세보기";
+				button_2.style.css({
+					"background-color" : "#0ebc59",
+					"color" : "#FFFFFF",
+					"background-image" : "none"
+				});
+				if(typeof onButtonClick3 == "function") {
+					button_2.addEventListener("click", onButtonClick3);
+				}
+				container.addChild(button_2, {
+					"right": "130px",
+					"bottom": "20px",
+					"width": "100px",
+					"height": "30px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
@@ -182,6 +336,9 @@
 				"bottom": "0px",
 				"left": "0px"
 			});
+			if(typeof onBodyLoad == "function"){
+				app.addEventListener("load", onBodyLoad);
+			}
 		}
 	});
 	app.title = "myPageQuestion";
