@@ -26,7 +26,7 @@
 			 * "가입" 버튼에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onButtonClick(e){
+			function onButtonClick(e) {
 				var dataMap1 = app.lookup("dm_register_member");
 				var dataMap2 = app.lookup("dm_check_email");
 				var dataMap3 = app.lookup("dm_check_pswd");
@@ -37,7 +37,9 @@
 				dataMap4.setValue("member_nick", app.lookup("ipbNick").value);
 				dataMap1.setValue("member_birthday", app.lookup("ipbBirthday").value);
 				dataMap1.setValue("member_phone", app.lookup("ipbPhone").value);
-				dataMap1.setValue("member_address", app.lookup("ipbAddress").value);
+				dataMap1.setValue("member_postcode", app.lookup("postCode").value);
+				dataMap1.setValue("member_address", app.lookup("address").value);
+				dataMap1.setValue("member_address_detail", app.lookup("detailAddress").value);
 				var subLogin = app.lookup("sub_register");
 				subLogin.send();
 			}
@@ -46,7 +48,7 @@
 			 * "취소" 버튼에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onButtonClick2(e){
+			function onButtonClick2(e) {
 				window.location.href = "index.clx";
 			}
 
@@ -54,35 +56,38 @@
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onSub_registerSubmitSuccess(e){
+			function onSub_registerSubmitSuccess(e) {
 				var sub_register = e.control;
 				alert("RecipeKitHub에 오신 것을 환영합니다..!!")
 				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 				httpPostMethod.submit();
 			}
 
-
 			/*
 			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
 			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
 			 */
-			function onIpbEmailKeyup(e){
+			function onIpbEmailKeyup(e) {
 				var ipbEmail = e.control;
-				var checkEmailFlag = false;	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+				var subCheckEmail = app.lookup("sub_check_email");
+				subCheckEmail.send();
+				var checkEmailFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+				var metadata = subCheckEmail.getMetadata("message");
 				
-				var dataMap = app.lookup("dm_check_email");	
+				var dataMap = app.lookup("dm_check_email");
 				dataMap.setValue("member_email", app.lookup("ipbEmail").value);
 				
 				var memberEmail = app.lookup("ipbEmail").value;
 				var opbCheckEmailResult = app.lookup("opbCheckEmail");
 				
-				if (memberEmail.length < 6 || memberEmail.length > 25) {
+				if (memberEmail.length < 6 || memberEmail.length > 30) {
 					opbCheckEmailResult.value = "email은 6자이상 ~ 30자 이하이어야 합니다.";
 				} else {
 					var xhr = new XMLHttpRequest();
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4 && xhr.status == 200) {
-							if (xhr.responseText == "fail") {
+							//if (xhr.responseText == "fail") {
+							if (metadata == "fail") {
 								opbCheckEmailResult.value = "이메일이 중복됩니다.";
 							} else {
 								checkEmailFlag = true;
@@ -90,10 +95,10 @@
 							}
 						}
 					}
-					//xhr.open("get", "/member/CheckEmail", true);
+					//xhr.open("get", "../member/checkEmail", true);
+					//xhr.open("get", "../member/checkEmail?memberEmail=" + memberEmail, true);
 					//xhr.send();
-					var subCheckEmail = app.lookup("sub_check_email");
-					subCheckEmail.send();
+					
 				}
 			}
 
@@ -127,11 +132,12 @@
 			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
 			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
 			 */
-			function onIpbPassword1Keyup(e){
+			function onIpbPassword1Keyup(e) {
 				var ipbPassword1 = e.control;
-				var checkPswd1Flag = false;	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
-				var password1 = app.lookup("ipbPassword1").value;
-				var checkPswdResult1 = app.lookup("opbCheckPassword1");
+				var checkPswd1Flag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+				var password1 = app.lookup("ipbPassword1").text;
+				console.log(password1);
+				var checkPswdResult1 = app.lookup("opbCheckPassword").text;
 				if (password1.length < 2 || password1.length > 25) {
 					checkPswdResult1 = "비밀번호는 1자 이상 25자 이하이어야 합니다.";
 				} else {
@@ -143,21 +149,17 @@
 			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
 			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
 			 */
-			function onIpbPassword2Keyup(e){
+			function onIpbPassword2Keyup(e) {
 				var ipbPassword2 = e.control;
-				
-			}
-
-			function comparePassword() {
-				var checkPswd2Flag = false;	
+				var checkPswd2Flag = false;
 				var password2 = app.lookup("ipbPassword2").value;
-				var checkPswdResult2 = app.lookup("opbCheckPassword2");
+				var checkPswdResult2 = app.lookup("opbCheckPassword1");
 				//var pswd2_img1 = document.getElementById("pswd2_img1");
-
+				
 				if (app.lookup("ipbPassword1").value != password2) {
 					checkPswdResult2 = "<font color=red>위의 비밀번호와 일치하지 않습니다. 다시 한번 확인해주세요.</font>";
 					//pswd2_img1.classList.remove("glow"); 
-
+					
 				} else {
 					checkPswdResult2 = "<font color=blue>비밀번호가 일치합니다.</font>";
 					//pswd1_img1.classList.add("glow"); 
@@ -165,9 +167,27 @@
 				}
 			}
 
+			/*
+			function comparePassword() {
+				var checkPswd2Flag = false;
+				var password2 = app.lookup("ipbPassword2").value;
+				var checkPswdResult2 = app.lookup("opbCheckPassword2");
+				//var pswd2_img1 = document.getElementById("pswd2_img1");
+				
+				if (app.lookup("ipbPassword1").value != password2) {
+					checkPswdResult2 = "<font color=red>위의 비밀번호와 일치하지 않습니다. 다시 한번 확인해주세요.</font>";
+					//pswd2_img1.classList.remove("glow"); 
+					
+				} else {
+					checkPswdResult2 = "<font color=blue>비밀번호가 일치합니다.</font>";
+					//pswd1_img1.classList.add("glow"); 
+					//pswd2_img1.classList.add("glow"); 
+				}
+			}
+			*/
 
 			function checkNick() {
-				var checkNickFlag = false;	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+				var checkNickFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 				var memberNick = app.lookup("ipbNick").value;
 				var checkNickResult = document.getElementById("checkNickResult");
 				if (memberNick.length < 2 || memberNick.length > 10) {
@@ -187,7 +207,98 @@
 					xhr.open("get", "../CheckNick");
 					xhr.send();
 				}
-			};
+			}
+
+
+
+			/*
+			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+			 * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+			 */
+			function onBodyInit(e) {
+				// 다음에서 제공하는 통합로딩 url
+				var voResourceLoader = new cpr.core.ResourceLoader();
+				voResourceLoader.addScript("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js").load().then(function(input) {
+					//후처리
+				});
+			}
+
+			/*
+			 * "우편번호" 버튼(btnPostcode)에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onBtnPostcodeClick(e) {
+				//var btnPostcode = e.control;
+				//app.lookup("btnPostcode").click();
+				
+				postCode();
+			}
+
+			var appConf = cpr.core.AppConfig.INSTANCE;
+			appConf.getEnvConfig().setValue("appcache", true);
+
+			function postCode() {
+				new daum.Postcode({
+					/* 해당 정보를 받아 처리할 콜백 함수를 정의하는 부분 입니다. */
+					oncomplete: function(data) {
+						/* 팝업에서 검색결과 항목을 클릭했을떄 실행할 코드를 작성하는 부분 */
+						var vcPostCode = app.lookup("postCode");
+						var vcAddress = app.lookup("address");
+						var vcDetailAddress = app.lookup("detailAddress");
+						
+						// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						var roadAddr = data.roadAddress; // 도로명 주소 변수
+						var extraRoadAddr = ""; // 참고 항목 변수
+						
+						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+						if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+							extraRoadAddr += data.bname;
+						}
+						// 건물명이 있고, 공동주택일 경우 추가한다.
+						if (data.buildingName !== "" && data.apartment === "Y") {
+							extraRoadAddr += (extraRoadAddr !== "" ? ", " + data.buildingName : data.buildingName);
+						}
+						
+						// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+						if (extraRoadAddr !== "") {
+							extraRoadAddr = " (" + extraRoadAddr + ")";
+						}
+						
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						vcPostCode.value = data.zonecode;
+						
+						// 사용자가 도로명 주소를 선택한 경우
+						if (data.userSelectedType === "R") {
+							vcAddress.value = roadAddr + extraRoadAddr; // 참고항목이 있다면, 괄호와 함께 추가한다.
+						}
+						// 사용자가 지번 주소를 선택한 경우
+						else if (data.userSelectedType === "J") {
+							vcAddress.value = data.jibunAddress;
+						}
+						
+						// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+						if (roadAddr !== "") {
+							vcDetailAddress.value = extraRoadAddr;
+						} else {
+							vcDetailAddress.value = "";
+						}
+						
+						/*커서를 상세주소 필드로 이동합니다. */
+						vcDetailAddress.focus();
+					}
+				}).open();
+			}
+
+			/*
+			 * 루트 컨테이너에서 unload 이벤트 발생 시 호출.
+			 * 앱이 언로드된 후 발생하는 이벤트입니다.
+			 */
+			function onBodyUnload(e) {
+				var appConf = cpr.core.AppConfig.INSTANCE;
+				appConf.getEnvConfig().setValue("appcache", false);
+			}
 			// End - User Script
 			
 			// Header
@@ -233,6 +344,14 @@
 					{
 						"name": "member_reg_date",
 						"dataType": "string"
+					},
+					{
+						"name": "member_postcode",
+						"dataType": "string"
+					},
+					{
+						"name": "member_address_detail",
+						"dataType": "string"
 					}
 				]
 			});
@@ -267,6 +386,14 @@
 					{
 						"name": "member_birthday",
 						"dataType": "string"
+					},
+					{
+						"name": "member_postcode",
+						"dataType": "string"
+					},
+					{
+						"name": "member_address_detail",
+						"dataType": "string"
 					}
 				]
 			});
@@ -300,10 +427,10 @@
 			app.register(dataMap_4);
 			var submission_1 = new cpr.protocols.Submission("sub_register");
 			submission_1.action = "/member/register";
-			submission_1.addRequestData(dataMap_1);
 			submission_1.addRequestData(dataMap_2);
 			submission_1.addRequestData(dataMap_3);
 			submission_1.addRequestData(dataMap_4);
+			submission_1.addRequestData(dataMap_1);
 			if(typeof onSub_registerSubmitSuccess == "function") {
 				submission_1.addEventListener("submit-success", onSub_registerSubmitSuccess);
 			}
@@ -345,7 +472,7 @@
 			group_1.style.css({
 				"background-repeat" : "no-repeat",
 				"background-size" : "cover",
-				"background-image" : "url('theme/images/member/21.png')",
+				"background-image" : "url('theme/images/member/20.png')",
 				"background-position" : "center"
 			});
 			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
@@ -504,7 +631,7 @@
 									});
 								})(group_7);
 								container.addChild(group_7, {
-									"top": "566px",
+									"top": "578px",
 									"right": "21px",
 									"bottom": "5px",
 									"left": "20px"
@@ -530,7 +657,7 @@
 							formLayout_3.horizontalSpacing = "20px";
 							formLayout_3.verticalSpacing = "20px";
 							formLayout_3.setColumns(["120px", "200px", "80px"]);
-							formLayout_3.setRows(["30px", "25px", "30px", "25px", "30px", "30px", "30px", "30px", "30px", "85px"]);
+							formLayout_3.setRows(["30px", "25px", "30px", "25px", "30px", "30px", "30px", "30px", "30px", "115px"]);
 							group_8.setLayout(formLayout_3);
 							(function(container){
 								var output_2 = new cpr.controls.Output();
@@ -539,6 +666,7 @@
 								output_2.style.css({
 									"background-color" : "#F0F0F0",
 									"border-radius" : "5px",
+									"font-weight" : "bold",
 									"font-size" : "15px"
 								});
 								container.addChild(output_2, {
@@ -551,6 +679,7 @@
 								output_3.style.css({
 									"background-color" : "#F0F0F0",
 									"border-radius" : "5px",
+									"font-weight" : "bold",
 									"font-size" : "15px"
 								});
 								container.addChild(output_3, {
@@ -563,6 +692,7 @@
 								output_4.style.css({
 									"background-color" : "#F0F0F0",
 									"border-radius" : "5px",
+									"font-weight" : "bold",
 									"font-size" : "15px"
 								});
 								container.addChild(output_4, {
@@ -575,6 +705,7 @@
 								output_5.style.css({
 									"background-color" : "#F0F0F0",
 									"border-radius" : "5px",
+									"font-weight" : "bold",
 									"font-size" : "15px"
 								});
 								container.addChild(output_5, {
@@ -587,6 +718,7 @@
 								output_6.style.css({
 									"background-color" : "#F0F0F0",
 									"border-radius" : "5px",
+									"font-weight" : "bold",
 									"font-size" : "15px"
 								});
 								container.addChild(output_6, {
@@ -599,6 +731,7 @@
 								output_7.style.css({
 									"background-color" : "#F0F0F0",
 									"border-radius" : "5px",
+									"font-weight" : "bold",
 									"font-size" : "15px"
 								});
 								container.addChild(output_7, {
@@ -611,23 +744,12 @@
 								output_8.style.css({
 									"background-color" : "#F0F0F0",
 									"border-radius" : "5px",
+									"font-weight" : "bold",
 									"font-size" : "15px"
 								});
 								container.addChild(output_8, {
 									"colIndex": 0,
 									"rowIndex": 8
-								});
-								var output_9 = new cpr.controls.Output();
-								output_9.value = " - 주소";
-								output_9.style.css({
-									"background-color" : "#F0F0F0",
-									"border-radius" : "5px",
-									"font-size" : "15px",
-									"font-family" : "'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif"
-								});
-								container.addChild(output_9, {
-									"colIndex": 0,
-									"rowIndex": 9
 								});
 								var inputBox_1 = new cpr.controls.InputBox("ipbEmail");
 								inputBox_1.showClearButton = true;
@@ -707,20 +829,6 @@
 									"colIndex": 1,
 									"rowIndex": 6
 								});
-								var textArea_1 = new cpr.controls.TextArea("ipbAddress");
-								textArea_1.lengthUnit = "utf8";
-								textArea_1.maxLength = 90;
-								textArea_1.spellCheck = false;
-								textArea_1.imeMode = "active";
-								textArea_1.style.css({
-									"border-radius" : "5px",
-									"font-size" : "15px"
-								});
-								textArea_1.bind("value").toDataMap(app.lookup("dm_register_member"), "member_address");
-								container.addChild(textArea_1, {
-									"colIndex": 1,
-									"rowIndex": 9
-								});
 								var dateInput_1 = new cpr.controls.DateInput("ipbBirthday");
 								dateInput_1.spinButton = true;
 								dateInput_1.showClearButton = true;
@@ -746,68 +854,199 @@
 									"colIndex": 1,
 									"rowIndex": 8
 								});
-								var output_10 = new cpr.controls.Output("opbCheckEmail");
-								output_10.value = "";
-								output_10.style.css({
+								var output_9 = new cpr.controls.Output("opbCheckEmail");
+								output_9.value = "";
+								output_9.style.css({
 									"font-size" : "12px"
 								});
 								if(typeof onOpbCheckEmailValueChange == "function") {
-									output_10.addEventListener("value-change", onOpbCheckEmailValueChange);
+									output_9.addEventListener("value-change", onOpbCheckEmailValueChange);
 								}
-								container.addChild(output_10, {
+								container.addChild(output_9, {
 									"colIndex": 1,
 									"rowIndex": 1,
 									"colSpan": 2,
 									"rowSpan": 1
 								});
-								var output_11 = new cpr.controls.Output("opbCheckPassword1");
-								output_11.value = "";
-								output_11.style.css({
+								var output_10 = new cpr.controls.Output("opbCheckPassword");
+								output_10.value = "";
+								output_10.style.css({
 									"font-size" : "12px"
 								});
 								if(typeof onOpbCheckPassword1ValueChange == "function") {
-									output_11.addEventListener("value-change", onOpbCheckPassword1ValueChange);
+									output_10.addEventListener("value-change", onOpbCheckPassword1ValueChange);
 								}
-								container.addChild(output_11, {
+								container.addChild(output_10, {
 									"colIndex": 1,
 									"rowIndex": 3,
 									"colSpan": 2,
 									"rowSpan": 1
 								});
+								var output_11 = new cpr.controls.Output();
+								output_11.value = "❈ 이메일 형식, 30자 이하";
+								output_11.style.css({
+									"font-size" : "10px"
+								});
+								container.addChild(output_11, {
+									"colIndex": 0,
+									"rowIndex": 1
+								});
 								var output_12 = new cpr.controls.Output();
-								output_12.value = "❈ 이메일 형식, 30자 이하";
+								output_12.value = "❈ 1자 이상~25자 이하";
 								output_12.style.css({
 									"font-size" : "10px"
 								});
 								container.addChild(output_12, {
 									"colIndex": 0,
-									"rowIndex": 1
-								});
-								var output_13 = new cpr.controls.Output();
-								output_13.value = "❈ 1자 이상~25자 이하";
-								output_13.style.css({
-									"font-size" : "10px"
-								});
-								container.addChild(output_13, {
-									"colIndex": 0,
 									"rowIndex": 3
 								});
-								var output_14 = new cpr.controls.Output("opbCheckPassword2");
-								output_14.value = "";
-								container.addChild(output_14, {
-									"colIndex": 2,
-									"rowIndex": 4
+								var group_9 = new cpr.controls.Container();
+								group_9.style.css({
+									"background-color" : "#F0F0F0",
+									"border-radius" : "5px"
 								});
-								var image_1 = new cpr.controls.Image();
-								container.addChild(image_1, {
+								var formLayout_4 = new cpr.controls.layouts.FormLayout();
+								formLayout_4.scrollable = false;
+								formLayout_4.topMargin = "5px";
+								formLayout_4.rightMargin = "5px";
+								formLayout_4.bottomMargin = "5px";
+								formLayout_4.leftMargin = "5px";
+								formLayout_4.horizontalSpacing = "10px";
+								formLayout_4.verticalSpacing = "10px";
+								formLayout_4.setColumns(["1fr"]);
+								formLayout_4.setRows(["30px", "25px"]);
+								group_9.setLayout(formLayout_4);
+								(function(container){
+									var output_13 = new cpr.controls.Output();
+									output_13.value = " - 주소";
+									output_13.style.css({
+										"font-weight" : "bold",
+										"font-size" : "15px"
+									});
+									container.addChild(output_13, {
+										"colIndex": 0,
+										"rowIndex": 0
+									});
+								})(group_9);
+								container.addChild(group_9, {
+									"colIndex": 0,
+									"rowIndex": 9
+								});
+								var group_10 = new cpr.controls.Container();
+								var formLayout_5 = new cpr.controls.layouts.FormLayout();
+								formLayout_5.scrollable = false;
+								formLayout_5.topMargin = "5px";
+								formLayout_5.rightMargin = "5px";
+								formLayout_5.bottomMargin = "5px";
+								formLayout_5.leftMargin = "5px";
+								formLayout_5.horizontalSpacing = "10px";
+								formLayout_5.verticalSpacing = "10px";
+								formLayout_5.setColumns(["180px", "100px"]);
+								formLayout_5.setRows(["26px", "30px", "30px"]);
+								group_10.setLayout(formLayout_5);
+								(function(container){
+									var button_3 = new cpr.controls.Button("btnPostcode");
+									button_3.value = "우편번호";
+									if(typeof onBtnPostcodeClick == "function") {
+										button_3.addEventListener("click", onBtnPostcodeClick);
+									}
+									container.addChild(button_3, {
+										"colIndex": 1,
+										"rowIndex": 0
+									});
+									var inputBox_6 = new cpr.controls.InputBox("address");
+									inputBox_6.lengthUnit = "utf8";
+									inputBox_6.maxLength = 30;
+									inputBox_6.bind("value").toDataMap(app.lookup("dm_register_member"), "member_address");
+									container.addChild(inputBox_6, {
+										"colIndex": 0,
+										"rowIndex": 1,
+										"colSpan": 2,
+										"rowSpan": 1
+									});
+									var inputBox_7 = new cpr.controls.InputBox("detailAddress");
+									inputBox_7.lengthUnit = "utf8";
+									inputBox_7.maxLength = 30;
+									inputBox_7.bind("value").toDataMap(app.lookup("dm_register_member"), "member_address_detail");
+									container.addChild(inputBox_7, {
+										"colIndex": 0,
+										"rowIndex": 2,
+										"colSpan": 2,
+										"rowSpan": 1
+									});
+									var maskEditor_2 = new cpr.controls.MaskEditor("postCode");
+									maskEditor_2.mask = "00000";
+									maskEditor_2.bind("value").toDataMap(app.lookup("dm_register_member"), "member_postcode");
+									container.addChild(maskEditor_2, {
+										"colIndex": 0,
+										"rowIndex": 0
+									});
+								})(group_10);
+								container.addChild(group_10, {
+									"colIndex": 1,
+									"rowIndex": 9,
+									"colSpan": 2,
+									"rowSpan": 1
+								});
+								var group_11 = new cpr.controls.Container();
+								var formLayout_6 = new cpr.controls.layouts.FormLayout();
+								formLayout_6.scrollable = false;
+								formLayout_6.topMargin = "0px";
+								formLayout_6.rightMargin = "0px";
+								formLayout_6.bottomMargin = "0px";
+								formLayout_6.leftMargin = "0px";
+								formLayout_6.horizontalSpacing = "0px";
+								formLayout_6.verticalSpacing = "0px";
+								formLayout_6.setColumns(["1fr"]);
+								formLayout_6.setRows(["1fr"]);
+								group_11.setLayout(formLayout_6);
+								(function(container){
+									var image_1 = new cpr.controls.Image();
+									image_1.src = "theme/images/member/circle-check-regular.svg";
+									container.addChild(image_1, {
+										"colIndex": 0,
+										"rowIndex": 0
+									});
+								})(group_11);
+								container.addChild(group_11, {
 									"colIndex": 2,
 									"rowIndex": 2
 								});
+								var group_12 = new cpr.controls.Container();
+								var formLayout_7 = new cpr.controls.layouts.FormLayout();
+								formLayout_7.scrollable = false;
+								formLayout_7.topMargin = "0px";
+								formLayout_7.rightMargin = "0px";
+								formLayout_7.bottomMargin = "0px";
+								formLayout_7.leftMargin = "0px";
+								formLayout_7.horizontalSpacing = "0px";
+								formLayout_7.verticalSpacing = "0px";
+								formLayout_7.setColumns(["1fr"]);
+								formLayout_7.setRows(["1fr"]);
+								group_12.setLayout(formLayout_7);
+								(function(container){
+									var image_2 = new cpr.controls.Image();
+									image_2.src = "theme/images/member/circle-check-solid (1).svg";
+									container.addChild(image_2, {
+										"colIndex": 0,
+										"rowIndex": 0
+									});
+								})(group_12);
+								container.addChild(group_12, {
+									"colIndex": 2,
+									"rowIndex": 4
+								});
+								var output_14 = new cpr.controls.Output();
+								output_14.value = "Output";
+								container.addChild(output_14, {
+									"colIndex": 2,
+									"rowIndex": 6
+								});
 							})(group_8);
 							container.addChild(group_8, {
-								"top": "10px",
+								"top": "5px",
 								"right": "0px",
-								"bottom": "70px",
+								"bottom": "60px",
 								"left": "0px"
 							});
 						})(group_5);
@@ -817,44 +1056,44 @@
 									"media": "all and (min-width: 1920px)",
 									"top": "81px",
 									"right": "54px",
-									"left": "56px",
-									"height": "640px"
+									"bottom": "10px",
+									"left": "56px"
 								}, 
 								{
 									"media": "all and (min-width: 1024px) and (max-width: 1919px)",
 									"top": "81px",
 									"right": "29px",
-									"left": "30px",
-									"height": "640px"
+									"bottom": "10px",
+									"left": "30px"
 								}, 
 								{
 									"media": "all and (min-width: 500px) and (max-width: 1023px)",
 									"top": "81px",
 									"right": "14px",
-									"left": "15px",
-									"height": "640px"
+									"bottom": "10px",
+									"left": "15px"
 								}, 
 								{
 									"media": "all and (max-width: 499px)",
 									"top": "81px",
 									"right": "10px",
-									"left": "10px",
-									"height": "640px"
+									"bottom": "10px",
+									"left": "10px"
 								}
 							]
 						});
 					})(group_3);
 					container.addChild(group_3, {
 						"width": "530px",
-						"height": "726px",
+						"height": "738px",
 						"left": "calc(50% - 265px)",
-						"top": "calc(50% - 363px)"
+						"top": "calc(50% - 369px)"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "20px",
+					"top": "0px",
 					"right": "20px",
-					"bottom": "20px",
+					"bottom": "0px",
 					"left": "20px"
 				});
 			})(group_1);
@@ -890,6 +1129,12 @@
 					}
 				]
 			});
+			if(typeof onBodyInit == "function"){
+				app.addEventListener("init", onBodyInit);
+			}
+			if(typeof onBodyUnload == "function"){
+				app.addEventListener("unload", onBodyUnload);
+			}
 		}
 	});
 	app.title = "register-form";

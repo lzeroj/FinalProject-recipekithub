@@ -63,7 +63,7 @@ public class UnitTestMember {
 	
 	@Test
 	public void updateMember() {
-		MemberVO member = new MemberVO("kjoonie7@gmail.com", "asdf", "금동준", "kdj9315", "성남시 분당구","01012345678", "19930105");
+		MemberVO member = new MemberVO("kjoonie713@gmail.com", "asdf", "금동준", "kdj9315", "123456", "성남시 분당구", "정자일로135", "01012345678", "19930105");
 		int result = memberService.updateMember(member);
 		logger.info("result : {}", result);	// 1이 출력된다
 		Assertions.assertEquals(1, result);
@@ -75,7 +75,9 @@ public class UnitTestMember {
 		String memberPassword = "asdf";
 		String memberName = "금동준";
 		String memberNick = "kdj77";
+		String memberPostcode = "987234";
 		String memberAddress = "성남시 분당구";
+		String memberAddressDetail = "정자일로136";
 		String memberPhone = "01012345678";
 		String memberBirthday = "19930105";
 		//String memberType = "2";
@@ -84,7 +86,7 @@ public class UnitTestMember {
 		
 		MemberVO member = memberService.findMemberByEmail(memberEmail);
 		if(member == null) {
-			int result = memberService.registerMember(new MemberVO(memberEmail, memberPassword, memberName, memberNick,  memberAddress, memberPhone, memberBirthday));
+			int result = memberService.registerMember(new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode, memberAddress, memberAddressDetail, memberPhone, memberBirthday));
 			//int result = memberService.registerMember(new MemberVO(memberEmail, memberPassword, memberName, memberNick,  memberAddress, memberPhone, memberBirthday, memberType, memberStatus, memberRegDate));
 			logger.info("result:{}", result);	
 			Assertions.assertEquals(1, result); // 1이 출력된다

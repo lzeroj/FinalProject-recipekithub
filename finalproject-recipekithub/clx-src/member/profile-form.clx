@@ -64,7 +64,7 @@
         <cl:listener std:sid="listener-ed3616d7" name="submit-success" handler="onSub_deleteSubmitSuccess"/>
         <cl:requestdata dataid="dm_delete"/>
       </cl:submission>
-      <cl:submission std:sid="submission-9dc25f82" id="sub_profile" action="/member/profileInfo">
+      <cl:submission std:sid="submission-9dc25f82" id="sub_profile" action="/memberUI/profileInfo">
         <cl:listener std:sid="listener-899913c0" name="submit-success" handler="onSub_profileSubmitSuccess"/>
         <cl:responsedata dataid="ds_profile"/>
       </cl:submission>
