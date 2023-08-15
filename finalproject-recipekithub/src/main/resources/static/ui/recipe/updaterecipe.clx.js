@@ -124,11 +124,62 @@
 			 */
 			function onButtonClick(e){
 				var button = e.control;
-				alert(app.lookup("uploadImg").src);
+				
+				var vsOpt = app.lookup("smnote");
+				var dataMap = app.lookup("recipe");
+				vsOpt.value = $('#summernote').summernote('code');
+				dataMap.setValue("RECIPE_BOARD_CONTENT", vsOpt.value);
+				var submission = app.lookup("updateRecipe");
+				
+				var fileInput = app.lookup("fi1");
+				var file = fileInput.file;
+				
+				var value = dataMap.getValue("RECIPE_BOARD_TITLE");
+				var value2 = dataMap.getValue("CATEGORY_TYPE");
+				var value3 = dataMap.getValue("CATEGORY_INGREDIENTS");
+				var value4 = dataMap.getValue("CATEGORY_METHOD");
+				if (confirm("등록 하시겠습니까?")) {
+					if (value == "" || value2 == "" || value3 == "" || value4 == "") {
+						alert("내용을 입력하세요");
+					} else {
+						submission.addFileParameter("image", file);
+						submission.send();
+					}
+				}
 			};
 			// End - User Script
 			
 			// Header
+			var dataMap_1 = new cpr.data.DataMap("recipe");
+			dataMap_1.parseData({
+				"columns" : [
+					{
+						"name": "RECIPE_BOARD_TITLE",
+						"dataType": "string"
+					},
+					{
+						"name": "RECIPE_BOARD_CONTENT",
+						"dataType": "string"
+					},
+					{
+						"name": "CATEGORY_TYPE",
+						"dataType": "string"
+					},
+					{
+						"name": "CATEGORY_INGREDIENTS",
+						"dataType": "string"
+					},
+					{
+						"name": "CATEGORY_METHOD",
+						"dataType": "string"
+					}
+				]
+			});
+			app.register(dataMap_1);
+			var submission_1 = new cpr.protocols.Submission("updateRecipe");
+			submission_1.action = "/updateRecipe";
+			submission_1.addRequestData(dataMap_1);
+			app.register(submission_1);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -294,6 +345,7 @@
 					inputBox_1.style.css({
 						"font-size" : "18px"
 					});
+					inputBox_1.bind("value").toDataMap(app.lookup("recipe"), "RECIPE_BOARD_TITLE");
 					container.addChild(inputBox_1, {
 						"colIndex": 1,
 						"rowIndex": 0
@@ -313,6 +365,7 @@
 					(function(container){
 						var linkedComboBox_1 = new cpr.controls.LinkedComboBox("lcb1");
 						linkedComboBox_1.placeholders = ["종류별"];
+						linkedComboBox_1.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_TYPE");
 						(function(linkedComboBox_1){
 							linkedComboBox_1.addItem((function(){
 								var treeItem_1 = new cpr.controls.TreeItem("밑반찬", "밑반찬", null);
@@ -335,6 +388,7 @@
 						});
 						var linkedComboBox_2 = new cpr.controls.LinkedComboBox("lcb2");
 						linkedComboBox_2.placeholders = ["방법별"];
+						linkedComboBox_2.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_INGREDIENTS");
 						(function(linkedComboBox_2){
 							linkedComboBox_2.addItem(new cpr.controls.TreeItem("육류", "육류", null));
 							linkedComboBox_2.addItem(new cpr.controls.TreeItem("채소류", "채소류", null));
@@ -350,6 +404,7 @@
 						});
 						var linkedComboBox_3 = new cpr.controls.LinkedComboBox("lcb3");
 						linkedComboBox_3.placeholders = ["재료별"];
+						linkedComboBox_3.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_METHOD");
 						(function(linkedComboBox_3){
 							linkedComboBox_3.addItem(new cpr.controls.TreeItem("볶음", "볶음", null));
 							linkedComboBox_3.addItem(new cpr.controls.TreeItem("끓이기", "끓이기", null));

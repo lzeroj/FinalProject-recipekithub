@@ -55,7 +55,7 @@
 			function onButtonClick(e){
 				var button = e.control;
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
-				window.location.href = "/updateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
+				window.location.href = "/moveUpdateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
 			};
 			// End - User Script
 			
