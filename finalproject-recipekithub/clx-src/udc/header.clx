@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-6520eaa6" version="1.0.4584">
+  <head std:sid="head-db2a7902">
+    <screen std:sid="screen-0617fa18" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-984cfa0c" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-33eba066" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-2dd73fb1"/>
+    <cl:appspec>
+      <cl:property name="cartbtn" type="string"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-3d3d83c0" style="top:0px; left:0px; width:1024px; height:160px;">
+    <cl:group std:sid="group-b44fa0a5">
+      <cl:xylayoutdata std:sid="xyl-data-c7882a55" top="0px" width="1024px" height="160px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-5ee10563" id="grp1" overscrollbehavior="none">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-fd5a2f3c">
+          <cl:xylayoutdata std:sid="sxyl-data-b587d719" top="10px" width="897px" height="89px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        </cl:responsivexylayoutdata>
+        <cl:img std:sid="image-fcd087c3" style="cursor:pointer; padding-top:0px;" src="../theme/images/icon/recipekithubLog.png">
+          <cl:listener std:sid="listener-65d67249" name="click" handler="onImageClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-61deda7a" top="-20px" left="42px" width="140px" height="140px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:img>
+        <cl:button std:sid="button-d282e823" id="mypage" style="border-right-style:none; background-color:#FFFFFF; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url('../theme/images/icon/people.png'); border-top-style:none;" class="login" value="" icon="">
+          <cl:listener std:sid="listener-c5c87980" name="click" handler="onMypageClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-99fb05b5" top="20px" left="694px" width="50px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:button std:sid="button-4cb9f1bd" id="cartbtn" style="border-right-style:none; background-color:#FFFFFF; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url('../theme/images/icon/shopping-basket.png'); border-top-style:none;" class="recipe" value="">
+          <cl:listener std:sid="listener-11b5a7d2" name="click" handler="onButtonClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-63dc37b5" top="20px" left="771px" width="50px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:group std:sid="group-7180dd82" style="border-right-style:solid; border-bottom-color:#b4b4b4; border-top-width:2px; border-right-width:2px; border-left-color:#b4b4b4; border-right-color:#b4b4b4; border-left-width:2px; border-top-style:solid; border-radius:15px; border-left-style:solid; border-bottom-width:2px; border-top-color:#b4b4b4; border-bottom-style:solid;" class="cl-form-group">
+          <cl:xylayoutdata std:sid="xyl-data-bd341c0c" top="23px" left="218px" width="431px" height="45px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:searchinput std:sid="s-input-ff13a668" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;">
+            <cl:formdata std:sid="f-data-f606d1a1" row="0" col="1" rowspan="1" colspan="2"/>
+          </cl:searchinput>
+          <cl:combobox std:sid="c-box-6246d40e" id="cmb1" preventinput="true">
+            <cl:formdata std:sid="f-data-74e6790f" row="0" col="0"/>
+            <cl:item std:sid="t-item-86ed32a7" label="레시피" value="value1"/>
+            <cl:item std:sid="t-item-e0af8fd8" label="밀키트" value="value2"/>
+            <cl:itemstyle style="border-right-style:solid; border-bottom-color:#ffffff; border-top-width:0px; border-left-style:solid; border-right-width:0px; border-left-color:#ffffff; border-bottom-width:0px; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-left-width:0px; border-top-style:solid;"/>
+          </cl:combobox>
+          <cl:formlayout std:sid="f-layout-4176e8a9" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:xylayout std:sid="xylayout-5d2e6146" scrollable="false"/>
+      </cl:group>
+      <cl:navigationbar std:sid="n-bar-5ad827de" style="background-color:#0ebc59; border-right-style:solid; color:#FFFFFF; border-bottom-color:#0ebc59; border-left-style:solid; border-left-color:#0ebc59; font-size:16px; border-top-color:#0ebc59; font-family:푸른잔디; border-bottom-style:solid; border-right-color:#0ebc59; border-top-style:solid;" class="indexnav" menutype="fullmenu" expandtrigger="click">
+        <cl:listener std:sid="listener-be2670ff" name="item-click" handler="onNavigationBarItemClick"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-f9f57b94">
+          <cl:xylayoutdata std:sid="sxyl-data-f2ddfd7b" top="98px" right="0px" left="0px" height="51px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
+        </cl:responsivexylayoutdata>
+        <cl:menuitem std:sid="m-item-27ee7474" label="추천" value="value1"/>
+        <cl:menuitem std:sid="m-item-2b69ecc0" label="레시피" value="recipe"/>
+        <cl:menuitem std:sid="m-item-9a247b1f" label="밀키트" value="mealkit"/>
+        <cl:menuitem std:sid="m-item-fe761a4d" label="Q &amp; A" value="question"/>
+        <cl:barstyle style="text-align:center;"/>
+        <cl:itemstyle style="text-align:center;"/>
+      </cl:navigationbar>
+      <cl:responsivexylayout std:sid="r-xylayout-6a96409c"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-9edd3465"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

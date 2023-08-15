@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosta.recipekithub.model.mapper.CartMapper">
+	
+	<resultMap type="org.kosta.recipekithub.model.vo.CartVO" id="cartProductInfoList">
+		<result column="MEALKIT_NAME" property="mealkitboardVO.mealkitName"/>
+		<result column="MEALKIT_IMAGE" property="mealkitboardVO.mealkitImage"/>
+		<result column="MEALKIT_PRICE" property="mealkitboardVO.mealkitPrice"/>
+		<result column="CART_DETAIL_QUANTITY" property="cartdetailVO.cartDetailQuantity"/>
+		<result column="IS_CHECKED" property="cartdetailVO.isChecked"/>
+		<result column="MEMBER_EMAIL" property="memberVO.memberEmail"/>
+	</resultMap>
+	<select id="selectMyCart" resultMap="cartProductInfoList">
+		SELECT mb.MEALKIT_NAME,mb.MEALKIT_IMAGE ,mb.MEALKIT_PRICE ,cd.CART_DETAIL_QUANTITY,cd.IS_CHECKED
+		FROM CART_DETAIL cd, MEALKIT_BOARD mb, CART c, "MEMBER" m 
+		WHERE cd.CART_NO = c.CART_NO
+		AND cd.MEALKIT_NO = mb.MEALKIT_NO 
+		AND c.CART_ORDER_STATUS = 'N'
+		AND m.MEMBER_EMAIL = #{memberEmail}
+		AND cd.IS_ORDERED_DATAIL = 'N'
+	</select>
+	
+	<update id="updateCart">
+		UPDATE CART_DETAIL SET CART_DETAIL_QUANTITY = #{cartDetailQuantity}
+		WHERE MEALKIT_NO = #{mealkiitNo} AND CART_NO = #{cartNo} AND IS_ORDERED_DATAIL = 'N'
+	</update>
+	
+	<insert id="insertCart">
+		
+	</insert>
+	
+	<select id="findCartNoByMemberEmail" resultType="org.kosta.recipekithub.model.vo.CartVO">
+		SELECT c.CART_NO, c.CART_ORDER_STATUS, c.CART_TOTAL
+		FROM CART C,"MEMBER" m 
+		WHERE m.MEMBER_EMAIL = #{memberEmail} 
+		AND C.CART_ORDER_STATUS = 'N'
+	</select>
+	
+	<select id="findCartNoByMemberEmailOrderSuccess" resultType="org.kosta.recipekithub.model.vo.CartVO">
+		SELECT c.CART_NO, c.CART_ORDER_STATUS, c.CART_TOTAL
+		FROM CART C,"MEMBER" m 
+		WHERE m.MEMBER_EMAIL = #{memberEmail} 
+		AND C.CART_ORDER_STATUS = 'Y'
+	</select>
+	
+	<select id="findMealkitBoardByMealkitName" resultType="org.kosta.recipekithub.model.vo.MealkitboardVO">
+		SELECT * FROM MEALKIT_BOARD WHERE MEALKIT_NAME = #{mealkitName}
+	</select>
+	
+	<resultMap type="org.kosta.recipekithub.model.vo.CartVO" id="mealkitQuantityComparison">
+		<result column="MEALKIT_NO" property="mealkitboardVO.mealkitNo"/>
+		<result column="MEALKIT_INVENTORY" property="mealkitboardVO.mealkitInventory"/>
+		<result column="CART_DETAIL_QUANTITY" property="cartdetailVO.cartDetailQuantity"/>
+	</resultMap>
+	<select id="mealkitQuantityComparisonByCart" resultMap="mealkitQuantityComparison">
+		SELECT mb.MEALKIT_NO,mb.MEALKIT_INVENTORY,cd.CART_DETAIL_QUANTITY
+		FROM MEALKIT_BOARD mb, CART_DETAIL cd 
+		WHERE cd.MEALKIT_NO = mb.MEALKIT_NO 
+		AND cd.CART_NO = #{cartNo}
+	</select>
+	
+	<update id="isCheckedChange">
+		UPDATE CART_DETAIL SET IS_CHECKED = #{chkinfo} WHERE MEALKIT_NO = #{mealkitNo}
+	</update>
+	
+	<delete id="deleteMyCart">
+		DELETE FROM CART_DETAIL WHERE MEALKIT_NO = #{mealkitNo} AND CART_NO = #{cartNo}
+	</delete>
+	
+	
+
+</mapper>

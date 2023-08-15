@@ -16,10 +16,36 @@
 			 * Created at 2023. 8. 7. 오후 1:57:31.
 			 *
 			 * @author user
-			 ************************************************/;
+			 ************************************************/
+
+			/*
+			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+			 */
+			function onBodyLoad(e){
+				var vcEmb = app.lookup("ea1");
+				cpr.core.App.load("embedded/dynamic-img", function(/*cpr.core.App*/ loadedApp){
+					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+					if(vcEmb.getEmbeddedAppInstance()){
+						vcEmb.getEmbeddedAppInstance().dispose();
+					}
+					/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+					if(loadedApp){						
+						/*초기값을 전달합니다.*/			
+						vcEmb.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+			//				embApp.initValue = voInitValue;
+						})
+						/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+						vcEmb.app = loadedApp;
+					}
+				}); 
+				app.lookup("ea1").redraw();
+			};
 			// End - User Script
 			
 			// Header
+			var submission_1 = new cpr.protocols.Submission("find");
+			app.register(submission_1);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -36,6 +62,38 @@
 			container.setLayout(xYLayout_1);
 			
 			// UI Configuration
+			var group_1 = new cpr.controls.Container();
+			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_2);
+			(function(container){
+				var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+				if(typeof onEa1Click == "function") {
+					embeddedApp_1.addEventListener("click", onEa1Click);
+				}
+				container.addChild(embeddedApp_1, {
+					"top": "-28px",
+					"right": "0px",
+					"bottom": "0px",
+					"left": "0px"
+				});
+			})(group_1);
+			container.addChild(group_1, {
+				"top": "200px",
+				"right": "140px",
+				"bottom": "100px",
+				"left": "140px"
+			});
+			
+			var userDefinedControl_1 = new udc.header();
+			container.addChild(userDefinedControl_1, {
+				"top": "0px",
+				"right": "0px",
+				"left": "0px",
+				"height": "160px"
+			});
+			if(typeof onBodyLoad == "function"){
+				app.addEventListener("load", onBodyLoad);
+			}
 		}
 	});
 	app.title = "index";

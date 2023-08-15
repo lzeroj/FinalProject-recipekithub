@@ -1,0 +1,55 @@
+@import "../custom-settings.part.less";
+
+.cl-container.breadcrumbs {
+	.cl-output.breadcrumb-item {
+		color: @gray-500;
+		font-size: 11px;
+		font-weight: @font-weight-medium;
+		letter-spacing: .05rem;
+	}
+	
+	.cl-layout-wrap:not(:first-child) {
+		.cl-output.breadcrumb-item {
+			padding-left: 8px;
+			
+			.cl-text {
+				&:before {
+					content : "/";
+					display: inline-block;
+					padding-right: 8px;
+					color: @gray-500;
+				}
+			}
+			
+			&.arrow {
+				padding-left: 2px;
+				.cl-text {
+					&:before {
+						content : "";
+						width: 16px;
+						height: 16px;
+						vertical-align: sub;
+						padding-right: 4px;
+						background-image: url(images/icon/icon-arrow-breadcrumb.svg);
+						background-repeat: no-repeat;
+						background-position: left center;
+					}
+				}
+			}
+			
+			&.bar {
+				.cl-text {
+					&:before {
+						content : "|";
+					}
+				}
+			}
+		}
+	}
+	
+	.cl-layout-wrap:not(:first-child):last-child {
+		.cl-output.breadcrumb-item {
+			color: @gray-400;
+		}
+	}
+}

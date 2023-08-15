@@ -1,0 +1,180 @@
+@import "../custom-settings.part.less";
+
+/************************************************
+ * 컨테이너 (그룹)
+ ************************************************/
+ 
+ /* 버튼 애니메이션을 위한 스타일 클래스 */
+.cl-container.btn-wrapper {
+	z-index: 0;
+	
+	&:before {
+		position: absolute;
+	    z-index: -1;
+	    height: 20px;
+	    width: 20px;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    transform-origin: 50% 50%;
+	    content: '';
+	    background-color: @gray-200;
+	    border-radius: 50%;
+	    opacity: 0;
+	    transition: all .3s;
+	}
+	
+	&:hover, &.cl-hover {
+		&:before {
+			content: "";
+		    transform: translate(-50%, -50%);
+		    transform-origin: 50% 50%;
+			background-color: @gray-200;
+			width: 99%;
+			height: 99%;
+			opacity: 1;
+		}
+	}
+	
+	&.cl-selected,
+	&.cl-focus {
+		&:before {
+			content: "";
+		    transform: translate(-50%, -50%);
+		    transform-origin: 50% 50%;
+			background-color: @gray-300;
+			width: 99%;
+			height: 99%;
+			opacity: 1;
+		}
+	}
+}
+
+/************************************************
+ * 서치 인풋
+ ************************************************/
+ 
+ .cl-searchinput.unified-search {
+ 	.cl-searchinput-search {
+ 		background-image: url(images/com/main/icon-search.svg);
+ 		background-size: 20px;
+		width: calc(@input-padding-x + 15px);
+ 	}
+ 	
+ 	&:not(.cl-disabled):hover {
+	 	.cl-searchinput-search {
+	 		background-image: url(images/com/main/icon-search.svg);
+	 	}
+ 	}
+ 	
+ 	&.cl-focus {
+ 		border-color: @input-border-color;
+ 		
+ 		.cl-searchinput-search {
+	 		background-image: url(images/com/main/icon-search.svg);
+ 		}
+ 	}
+ }
+ 
+ /************************************************
+ * 폼 레이아웃
+ ************************************************/
+ 
+ .cl-container.cl-form-group {
+ 	.cl-output.label {
+ 		text-align: left;
+ 		// font-weight: @font-weight-medium;
+ 		
+ 		&.required {
+			background-image: url(images/controls/output/required.png);
+			background-position: left center;
+			padding-left: 8px;
+		}
+ 	}
+ }
+ 
+ 
+ /************************************************
+ * 토글 버튼
+ ************************************************/
+
+/* 토글 버튼을 감싸는 컨테이너 스타일 */
+.cl-container.toggle-wrap {
+	background-color: @light;
+	border-radius: 5px;
+	
+	/* 토글 버튼 스타일 */
+	.cl-checkbox.toggle {
+		text-align: center;
+		padding: 0px;
+		
+		.cl-icon-wrapper {
+			vertical-align: middle;
+		}
+		
+		.cl-checkbox-icon {
+			border-radius: 3px;
+			background-color: white;
+			background-image: none;
+		}
+		
+		&:hover,
+		&.cl-hover {
+			.cl-checkbox-icon {
+				background-color: white;
+				background-image: none;
+			}
+		}
+		
+		&.cl-checked {
+			.cl-checkbox-icon {
+				background-color: white;
+				background-image: none;
+			}
+			
+			&:hover,
+			&.cl-hover {
+				.cl-checkbox-icon {
+					background-color: white;
+					background-image: none;
+				}
+			}
+		}
+		
+		&.cl-focus {
+			.cl-checkbox-icon {
+				outline: none;
+			}
+		}
+	}
+	
+	/* 토글되어 ON 상태가 되었을 때 */
+	&.on {
+		background-color: @primary;
+	}
+	
+	&.round {
+		border-radius: 21px;
+		
+		.cl-checkbox.toggle {
+			.cl-checkbox-icon {
+				border-radius: 21px;
+			}
+		}
+	}
+	
+	.cl-output.hint {
+		font-size: 13px;
+		color: white;
+		
+		&.off {
+			text-align: right;	
+			color: #B5B5B5;
+		}
+		
+		&.on {
+			text-align: left;
+		}
+	}
+}
+ 

@@ -1,0 +1,103 @@
+@import "../custom-settings.part.less";
+
+/* 인풋 계열 공통 */
+.cl-inputbox, 
+.cl-searchinput, 
+.cl-numbereditor, 
+.cl-maskeditor, 
+.cl-textarea,
+.cl-dateinput,
+.cl-combobox,
+.cl-fileinput {
+	&.required {
+		background-color: @blue-dim;
+		border-color: @blue;
+		
+		.cl-text {
+			&.cl-placeholder {
+				color: @gray-500 !important;
+			}
+		}
+	}
+}
+
+/* 인풋 계열 확장 */
+.cl-numbereditor.required {
+	.cl-numbereditor-buttons:not(.cl-disabled) {
+		border-left-color: @blue;
+		
+		.cl-numbereditor-increase:hover,
+		.cl-numbereditor-decrease:hover {
+		}
+		
+		.cl-numbereditor-increase:active,
+		.cl-numbereditor-decrease:active {
+		}
+	}
+}
+
+.cl-fileinput.required {
+	&:before {
+		border-left-color: @blue;
+		background-color: @blue;
+		color: @white;
+	}
+}
+
+.cl-linkedcombobox.required {
+	.cl-linkedcombobox-combo {
+		background-color: @blue-dim;
+		border-color: @blue;
+	}
+}
+
+/* 에러 상태 */
+.cl-inputbox, 
+.cl-searchinput, 
+.cl-numbereditor, 
+.cl-maskeditor, 
+.cl-textarea,
+.cl-dateinput,
+.cl-combobox,
+.cl-fileinput {
+	&.danger {
+		background-color: @danger-dim;
+		border-color: @danger;
+		
+		.cl-text {
+			&.cl-placeholder {
+				color: @gray-500 !important;
+			}
+		}
+	}
+}
+
+/* 인풋 계열 확장 */
+.cl-numbereditor.danger {
+	.cl-numbereditor-buttons:not(.cl-disabled) {
+		border-left-color: @danger;
+		
+		.cl-numbereditor-increase:hover,
+		.cl-numbereditor-decrease:hover {
+		}
+		
+		.cl-numbereditor-increase:active,
+		.cl-numbereditor-decrease:active {
+		}
+	}
+}
+
+.cl-fileinput.danger {
+	&:before {
+		border-left-color: @danger;
+		background-color: @danger;
+		color: @white;
+	}
+}
+
+.cl-linkedcombobox.danger {
+	.cl-linkedcombobox-combo {
+		background-color: @danger-dim;
+		border-color: @danger;
+	}
+}

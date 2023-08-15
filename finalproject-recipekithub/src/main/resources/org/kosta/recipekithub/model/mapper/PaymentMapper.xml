@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosta.recipekithub.model.mapper.PaymentMapper">
+	
+	<insert id="paymentInsert">
+		INSERT INTO PAYMENT VALUES(PAYMENT_seq.NEXTVAL,#{cartNo},SYSDATE,'Y',#{paymentTotal})
+	</insert>
+	
+	<update id="updateCartOrderStatus">
+		UPDATE cart SET CART_ORDER_STATUS = 'Y'
+	</update>
+	
+	<update id="updateCartDetailOrderStatus">
+		UPDATE CART_DETAIL SET IS_ORDERED_DATAIL ='Y' 
+		<if test="cartNO != null and mealkitNo != null">
+			WHERE CART_NO = #{cartNO} AND MEALKIT_NO = #{mealkitNo}
+		</if>
+	</update>
+	
+	<update id="mealkitInventoryUpdate">
+		UPDATE MEALKIT_BOARD SET MEALKIT_INVENTORY = MEALKIT_INVENTORY - #{cartQuantity} where MEALKIT_NO = #{cartNo}
+	</update>
+	
+	<delete id="deleteCartNoneOrder">
+		DELETE FROM CART_DETAIL WHERE IS_CHECKED = 'N' AND IS_ORDERED_DATAIL = 'N'
+	</delete>
+	
+	<!-- load시 내 구매내역 조회 -->
+	<resultMap type="org.kosta.recipekithub.model.vo.PaymentVO" id="findMypaymentListMap">
+		<result column="MEMBER_EMAIL" property="cartVO.memberVO.memberEmail"/>
+		<result column="MEALKIT_NO" property="mealkitVO.mealkitNo"/>
+		<result column="MEALKIT_NAME" property="mealkitVO.mealkitName"/>
+		<result column="CART_NO" property="cartVO.cartNo"/>
+	</resultMap>
+	<select id="findMyPaymentList" resultMap="findMypaymentListMap">
+		SELECT DISTINCT c.MEMBER_EMAIL , p.PAYMENT_DATE , p.PAYMENT_ID  , p.PAYMENT_TOTAL , mb.MEALKIT_NO, mb.MEALKIT_NAME, c.CART_NO
+		FROM CART c , CART_DETAIL cd , PAYMENT p , MEALKIT_BOARD mb 
+		WHERE p.CART_NO = c.CART_NO AND c.CART_NO = cd.CART_NO AND mb.MEALKIT_NO = cd.MEALKIT_NO 
+		AND cd.IS_ORDERED_DATAIL = 'Y'
+		AND c.CART_ORDER_STATUS = 'Y'
+		AND c.MEMBER_EMAIL = #{memberEmail}
+		ORDER BY p.PAYMENT_ID desc
+	</select>
+	
+	<!-- 밀키트 이름과 수량 -->
+	<resultMap type="org.kosta.recipekithub.model.vo.CartdetailVO" id="findMealkitNameAndCountMap">
+		<result column="MEALKIT_NAME" property="mealkitboardVO.mealkitName"/>
+	</resultMap>
+	<select id="findMealkitNameAndCount" resultMap="findMealkitNameAndCountMap">
+		SELECT mb.MEALKIT_NAME , cd.CART_DETAIL_QUANTITY 
+		FROM CART c , CART_DETAIL cd , PAYMENT p , MEALKIT_BOARD mb 
+		WHERE p.CART_NO = c.CART_NO AND c.CART_NO = cd.CART_NO AND mb.MEALKIT_NO = cd.MEALKIT_NO 
+		AND cd.IS_ORDERED_DATAIL = 'Y'
+		AND c.CART_ORDER_STATUS = 'Y'
+		AND c.MEMBER_EMAIL = #{memberEmail}
+		AND c.CART_NO = #{cartNO}
+		AND p.PAYMENT_ID = #{paymentId}
+	</select>
+	
+	<!-- 검색버튼 클릭시 -->
+	<resultMap type="org.kosta.recipekithub.model.vo.PaymentVO" id="searchMyPaymentListMap">
+		<result column="MEMBER_EMAIL" property="cartVO.memberVO.memberEmail"/>
+		<result column="MEALKIT_NO" property="mealkitVO.mealkitNo"/>
+		<result column="MEALKIT_NAME" property="mealkitVO.mealkitName"/>
+		<result column="CART_NO" property="cartVO.cartNo"/>
+		<result column="CART_DETAIL_QUANTITY" property="cartdetailVO.cartDetailQuantity"/>
+	</resultMap>
+	<select id="searchMyPaymentList" resultMap="searchMyPaymentListMap">
+		SELECT c.MEMBER_EMAIL , p.PAYMENT_DATE , p.PAYMENT_ID  , p.PAYMENT_TOTAL , mb.MEALKIT_NO, mb.MEALKIT_NAME, c.CART_NO, cd.CART_DETAIL_QUANTITY 
+		FROM CART c , CART_DETAIL cd , PAYMENT p , MEALKIT_BOARD mb 
+		WHERE p.CART_NO = c.CART_NO AND c.CART_NO = cd.CART_NO AND mb.MEALKIT_NO = cd.MEALKIT_NO 
+		AND cd.IS_ORDERED_DATAIL = 'Y'
+		AND c.CART_ORDER_STATUS = 'Y'
+		AND c.MEMBER_EMAIL = #{memberEmail}
+		<if test="combovalue == 'mealkitName'">
+			AND mb.MEALKIT_NAME LIKE '%' || #{inputvalue} || '%'
+		</if>
+		<if test="combovalue == 'paymentDate'">
+			AND TO_CHAR(p.PAYMENT_DATE, 'YYYYMMDD') LIKE '%' || #{inputvalue} || '%'
+		</if>
+		ORDER BY p.PAYMENT_ID desc		
+	</select>
+	
+	
+
+</mapper>

@@ -1,0 +1,29 @@
+@import "../custom-settings.part.less";
+
+.cl-container.search-box {
+	background-color: @lighter;
+	border-radius: @component-border-radius;
+	border: @component-border-base;
+	
+	.cl-output.label {
+		text-align: right;
+		
+		&.required {
+			background-image: url(images/controls/output/required.png);
+			background-position: right center;
+			padding-right: 8px;
+		}
+	}
+	
+	&.vertical {
+		.cl-output.label {
+			text-align: left;
+			
+			&.required {
+				background-position:left center;
+				padding-right: 0px;
+				padding-left: 8px;
+			}
+		}
+	}
+}

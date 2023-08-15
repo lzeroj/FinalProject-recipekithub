@@ -1,0 +1,51 @@
+.cl-navigationbar.my-navi {
+	overflow: hidden;
+	background-color: #fff;
+	//border: solid 1px black;
+	color: #333;
+	border-radius: 0px;
+	
+	//아이템 클릭안하고 호버시 색변경
+	.cl-navigationbar-item:not(.cl-disabled):not(.cl-selected):hover,
+	.cl-navigationbar-item:not(.cl-disabled).cl-hover {
+		background-color: darkGrey;
+		color: white;
+	}
+	
+	//아이템 비활성화
+	.cl-navigationbar-item.cl-disabled {
+		color: #666;
+	}
+	
+	//비활성화 선택
+	.cl-navigationbar-item.cl-disabled.cl-selected {
+		color: #777;
+		background-color: #ccc;
+	}
+	
+	//아이템 선택시 색 변경
+	.cl-navigationbar-item.cl-selected {
+		background-color: Gray;
+		color: #FFFFFF;
+	}
+	
+	//포커스시 색 변경
+	.cl-focus {
+		border-color: darkGray;
+	}
+}
+
+.cl-navigationbar-list.cl-custom {
+	// 아이템리스트 항목중 아이템 호버시
+	.cl-navigationbar-listitem:not(.cl-disabled):not(.cl-selected):hover,
+	.cl-navigationbar-listitem:not(.cl-disabled).cl-hover {
+		background-color: darkGray;
+		color: #333435;
+	}
+	
+	// 아이템리스트 항목중 아이템 선택시
+	.cl-navigationbar-listitem.cl-selected {
+		background-color: Gray;
+		color: #FFFFFF;
+	}
+}

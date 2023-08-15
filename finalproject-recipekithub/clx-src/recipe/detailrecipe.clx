@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-dc7ab4e3" version="1.0.4584">
+  <head std:sid="head-c832a6d2">
+    <screen std:sid="screen-c6cd0f25" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1080" customWidth="1920" active="true"/>
+    <screen std:sid="screen-164e2275" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-fcc77fa4" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-6b99dcb1">
+      <cl:dataset std:sid="d-set-257eaa8d" id="recipeBoard">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a2122527" name="recipeBoardTitle" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b9417ef0" name="recipeBoardContent" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-6d4de1d5" name="recipeBoardHits" datatype="decimal"/>
+          <cl:datacolumn std:sid="d-column-73930dc7" name="recipeBoardImage" datatype="string"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-801ce5c1" id="dm1">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ea626df5" name="recipeBoardId" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-6931a0a1">
+    <cl:listener std:sid="listener-aad71981" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-331f46c0">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-719b9996">
+        <cl:xylayoutdata std:sid="sxyl-data-b4d12966" top="20px" width="724px" height="353px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+      <cl:img std:sid="image-a93fe2b5" id="recipeBoardImage">
+        <cl:xylayoutdata std:sid="xyl-data-f2fbe13b" top="20px" width="536px" height="224px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      </cl:img>
+      <cl:output std:sid="output-4175a2ee" id="memberNick" value="닉네임">
+        <cl:xylayoutdata std:sid="xyl-data-f7c51adc" top="243px" width="128px" height="34px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-10e92904" id="recipeBoardTitle" value="타이틀">
+        <cl:xylayoutdata std:sid="xyl-data-75d8834d" top="287px" left="94px" width="220px" height="55px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-2592074b" value="좋아요 갯수">
+        <cl:xylayoutdata std:sid="xyl-data-607cfe7e" top="305px" left="622px" width="82px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:button std:sid="button-c6b47e48" style="background-color:#FFFFFF; border-right-style:none; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url('../theme/images/recipe/heartnocolor.png'); background-position:center; border-top-style:none;" value="">
+        <cl:xylayoutdata std:sid="xyl-data-7a2590ed" top="287px" left="551px" width="61px" height="46px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:button>
+      <cl:button std:sid="button-47c5a456" value="레시피 수정">
+        <cl:listener std:sid="listener-396a8860" name="click" handler="onButtonClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-919d9edc" top="0px" right="629px" left="0px" height="45px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      </cl:button>
+      <cl:xylayout std:sid="xylayout-38653f1c"/>
+    </cl:group>
+    <cl:group std:sid="group-e5507d1a">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-544c1766">
+        <cl:xylayoutdata std:sid="sxyl-data-3116a2bb" top="694px" width="724px" height="154px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+      <cl:xylayout std:sid="xylayout-a7692c56"/>
+    </cl:group>
+    <cl:output std:sid="output-e8c32823" value="댓글">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-85768ed4">
+        <cl:xylayoutdata std:sid="sxyl-data-ed900da7" top="668px" right="1270px" left="598px" height="27px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+    </cl:output>
+    <cl:output std:sid="output-cc11ff80" value="댓글개수">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-0a0868e2">
+        <cl:xylayoutdata std:sid="sxyl-data-cdd3a4ce" top="668px" right="1192px" left="649px" height="27px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+    </cl:output>
+    <cl:pageindexer std:sid="p-indexer-275aa17e">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-0e718f55">
+        <cl:xylayoutdata std:sid="sxyl-data-06ff2aaf" top="966px" width="200px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+    </cl:pageindexer>
+    <cl:htmlsnippet std:sid="htmlsnippet-bf27aa3e" id="recipeContent" value="&lt;p>HTML Snippet&lt;/p>">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-efa31114">
+        <cl:xylayoutdata std:sid="sxyl-data-7e9d47f5" top="383px" width="723px" height="275px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+    </cl:htmlsnippet>
+    <cl:group std:sid="group-e9187c3c">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-39a26a86">
+        <cl:xylayoutdata std:sid="sxyl-data-ce45f3c8" top="858px" width="724px" height="87px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+      <cl:inputbox std:sid="i-box-bb4a5b42" id="ipb1">
+        <cl:formdata std:sid="f-data-51c3e8c7" row="0" col="0"/>
+      </cl:inputbox>
+      <cl:button std:sid="button-037313b9" value="등록">
+        <cl:formdata std:sid="f-data-5515b7b7" row="0" col="1"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-7706ac91" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-089b2778"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

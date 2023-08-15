@@ -138,6 +138,7 @@ body {
 .cl-grid .cl-grid-ctrl-inherit.cl-border-none {
   border: none;
 }
+
 .cl-grid .cl-grid-ctrl-inherit:not(.cl-button):not(.cl-disabled) {
   background: inherit;
   color: inherit;
@@ -1734,15 +1735,16 @@ body {
 .cl-button {
   box-sizing: border-box;
   overflow: hidden;
-  background-image: linear-gradient(#FCFEFF, #E0E1E2);
-  background-color: #E0E1E2;
+  /*   background-image: linear-gradient(#FCFEFF, #E0E1E2); */
+  /*   background-color: #E0E1E2; */
   border-radius: 4px;
-  border: solid 1px #959697;
-  text-shadow: 0px 1px 0px white;
+  /*border: solid 1px #959697;*/
+  /*text-shadow: 0px 1px 0px white;*/
   cursor: pointer;
   text-align: center;
   display: block;
 }
+
 .cl-button .cl-icon {
   height: 1em;
   width: 1em;
@@ -4835,3 +4837,4 @@ input::-ms-clear {
   clip-path: inset(50%);
   border: 0;
 }
+
