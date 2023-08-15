@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ad2fcb8e" version="1.0.4584">
+  <head std:sid="head-46e9b922">
+    <screen std:sid="screen-d87a3f9e" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-ecad4eb4" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-912c6448" id="mobile" name="mobile" width="350px" height="525px"/>
+    <link std:sid="link-03bf64d0" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-8bdd4190" href="../theme/controls/htmlobject.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-5c3b2091" href="../theme/custom-settings.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-71e67234" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-2b85b485" href="../theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-2d89070d" href="../theme/settings.part.less" rel="stylesheet" type="text/css"/>
+    <cl:model std:sid="model-bd3caffb"/>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ae3aca0a" style="top:0px; left:0px; width:1920px; height:100px;">
+    <cl:group std:sid="group-34fc9b15">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-cf0f14c8">
+        <cl:xylayoutdata std:sid="sxyl-data-760c12a9" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM" screenid="default"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-924c3d6f">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-2307c1e0">
+          <cl:xylayoutdata std:sid="sxyl-data-4ee45f36" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM" screenid="default"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-ef84850d" style="font-weight:bolder; text-align:center;" class="footer-bottom" value="Copyright RecipeKitHub Inc. All Rights Reserved">
+          <cl:formdata std:sid="f-data-3ee97252" row="1" col="0" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:group std:sid="group-53fdc39a" style="background-color:#6A8B41;">
+          <cl:formdata std:sid="f-data-a2f2107a" row="0" col="0" rowspan="1" colspan="1"/>
+          <cl:img std:sid="image-0dc9370c" src="../theme/images/common/footerLogo1.png">
+            <cl:formdata std:sid="f-data-435cfeed" row="0" col="0"/>
+          </cl:img>
+          <cl:group std:sid="group-dbf01117">
+            <cl:formdata std:sid="f-data-39030415" row="0" col="2"/>
+            <cl:output std:sid="output-b9ac6351" style="border-right-style:none; color:#F4FAEC; border-bottom-color:#ffffff; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:solid; border-top-style:none;" value="Team HI-FIVE">
+              <cl:formdata std:sid="f-data-8627a0eb" row="0" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-dbc9a072" style="color:#F4FAEC; font-weight:bolder;" value="금동준&#x9; 심현준&#x9; 엄용식&#x9;  임영준">
+              <cl:formdata std:sid="f-data-49939140" row="1" col="0" rowspan="1" colspan="1"/>
+            </cl:output>
+            <cl:formlayout std:sid="f-layout-b6500cc2" scrollable="false" hspace="10px" vspace="5px" top-margin="5px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="30" unit="PIXEL"/>
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="330" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-86f5bd20" scrollable="false" hspace="50px" vspace="30px" top-margin="0px" right-margin="50px" bottom-margin="0px" left-margin="50px">
+            <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+            <cl:columns length="400" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+            <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+            <cl:columns length="400" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-b281914b" scrollable="false" hspace="50px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="70" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:responsivexylayout std:sid="r-xylayout-2bf2b987"/>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-a6a25cc8"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler>
+      <std:guide position="504"/>
+    </std:hruler>
+    <std:vruler/>
+  </std:studiosetting>
+</html>
