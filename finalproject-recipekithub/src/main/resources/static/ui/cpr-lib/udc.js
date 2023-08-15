@@ -996,6 +996,9 @@
 						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "mealkit", null));
 						navigationBar_1.addItem(new cpr.controls.MenuItem("Q & A", "question", null));
 					})(navigationBar_1);
+					if(typeof onNavigationBarItemClick == "function") {
+						navigationBar_1.addEventListener("item-click", onNavigationBarItemClick);
+					}
 					container.addChild(navigationBar_1, {
 						"colIndex": 0,
 						"rowIndex": 1

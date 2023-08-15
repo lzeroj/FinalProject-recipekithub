@@ -57,13 +57,13 @@
 				var btnMemUpdate = e.control;
 				if(confirm("정말로 수정하시겠습니까?")) {
 					var dataMap = app.lookup("dm_update");
-					dataMap.setValue("memberEmail", app.lookup("ipbEmail").value);
-					dataMap.setValue("memberPassword", app.lookup("ipbPassword1").value);
-					dataMap.setValue("memberName", app.lookup("ipbName").value);
-					dataMap.setValue("memberNick", app.lookup("ipbNick").value);
-					dataMap.setValue("memberBirthday", app.lookup("ipbBirthday").value);
-					dataMap.setValue("memberPhone", app.lookup("ipbPhone").value);
-					dataMap.setValue("memberAddress", app.lookup("ipbAddress").value);
+					dataMap.setValue("member_email", app.lookup("ipbEmail").value);
+					dataMap.setValue("member_password", app.lookup("ipbPassword1").value);
+					dataMap.setValue("member_name", app.lookup("ipbName").value);
+					dataMap.setValue("member_nick", app.lookup("ipbNick").value);
+					dataMap.setValue("member_birthday", app.lookup("ipbBirthday").value);
+					dataMap.setValue("member_phone", app.lookup("ipbPhone").value);
+					dataMap.setValue("member_address", app.lookup("ipbAddress").value);
 					var submission = app.lookup("sub_update");
 					submission.send();
 				}
