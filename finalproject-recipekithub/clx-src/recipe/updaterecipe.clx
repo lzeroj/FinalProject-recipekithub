@@ -4,7 +4,20 @@
     <screen std:sid="screen-3824759e" id="default" name="default" width="1024px" height="768px"/>
     <screen std:sid="screen-2bef141c" id="tablet" name="tablet" width="500px" height="667px"/>
     <screen std:sid="screen-9a85f12c" id="mobile" name="mobile" width="350px" height="525px"/>
-    <cl:model std:sid="model-b5d86709"/>
+    <cl:model std:sid="model-b5d86709">
+      <cl:datamap std:sid="d-map-db57df7a" id="recipe">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-423bcf03" name="RECIPE_BOARD_TITLE" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-65d772dd" name="RECIPE_BOARD_CONTENT" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-49327e21" name="CATEGORY_TYPE" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-2588bba1" name="CATEGORY_INGREDIENTS" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-18ccb8b1" name="CATEGORY_METHOD" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-7c958744" id="updateRecipe" action="/updateRecipe">
+        <cl:requestdata dataid="recipe"/>
+      </cl:submission>
+    </cl:model>
     <cl:appspec/>
   </head>
   <body std:sid="body-6c7088e3" style="background-color:#F0F0F0;">
@@ -54,11 +67,13 @@
           <cl:formdata std:sid="f-data-9c41bf70" row="2" col="0"/>
         </cl:output>
         <cl:inputbox std:sid="i-box-6229cdab" id="ipb1" style="font-size:18px;">
+          <cl:datamapbind property="value" datacontrolid="recipe" columnname="RECIPE_BOARD_TITLE"/>
           <cl:formdata std:sid="f-data-33cd657a" row="0" col="1"/>
         </cl:inputbox>
         <cl:group std:sid="group-eb2c2a0c">
           <cl:formdata std:sid="f-data-800b551b" row="2" col="1" rowspan="1" colspan="1"/>
           <cl:linkedcombobox std:sid="lc-box-c8568b5a" id="lcb1">
+            <cl:datamapbind property="value" datacontrolid="recipe" columnname="CATEGORY_TYPE"/>
             <cl:formdata std:sid="f-data-057ddd76" row="0" col="0" rowspan="1" colspan="1"/>
             <cl:treeitem std:sid="t-item-17af4eee" label="밑반찬" value="밑반찬" checked="false"/>
             <cl:treeitem std:sid="t-item-258646d2" label="메인반찬" value="메인반찬"/>
@@ -71,6 +86,7 @@
             <cl:placeholder>종류별</cl:placeholder>
           </cl:linkedcombobox>
           <cl:linkedcombobox std:sid="lc-box-d8f45248" id="lcb2">
+            <cl:datamapbind property="value" datacontrolid="recipe" columnname="CATEGORY_INGREDIENTS"/>
             <cl:formdata std:sid="f-data-42e9fe72" row="0" col="1"/>
             <cl:treeitem std:sid="t-item-3cf1bf79" label="육류" value="육류"/>
             <cl:treeitem std:sid="t-item-b961ca99" label="채소류" value="채소류"/>
@@ -82,6 +98,7 @@
             <cl:placeholder>방법별</cl:placeholder>
           </cl:linkedcombobox>
           <cl:linkedcombobox std:sid="lc-box-99b5d909" id="lcb3">
+            <cl:datamapbind property="value" datacontrolid="recipe" columnname="CATEGORY_METHOD"/>
             <cl:formdata std:sid="f-data-9d5b88c4" row="0" col="2"/>
             <cl:treeitem std:sid="t-item-676255ce" label="볶음" value="볶음"/>
             <cl:treeitem std:sid="t-item-fc955ec1" label="끓이기" value="끓이기"/>

@@ -11,10 +11,12 @@ public interface MealkitMapper {
 	
 	void insertMealKit(MealKitBoard mealKit);
 
-	Optional<MealKitBoard> findMealKitByNo(int mealkitNo);
+	MealKitBoard findMealKitByNo(int mealkitNo);
 	
 	List<MealKitBoard> findMealKitList();
 
-	void editMealkit(MealKitBoard mealkit);
+	void updateMealkit(MealKitBoard mealkit);
+
+	void deleteMealkit(int mealkitNo);
 
 }

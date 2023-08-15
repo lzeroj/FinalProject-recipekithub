@@ -68,7 +68,6 @@ function onButtonClick(e) {
 	
 	var fileInput = app.lookup("fi1");
 	var file = fileInput.file;
-	app.lookup("uploadImg").src = file;
 	var value = dataMap.getValue("RECIPE_BOARD_TITLE");
 	var value2 = dataMap.getValue("CATEGORY_TYPE");
 	var value3 = dataMap.getValue("CATEGORY_INGREDIENTS");
@@ -107,8 +106,7 @@ function onFi1ValueChange(e) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			image.src = e.target.result;
-		};
-		
+		};	
 		reader.readAsDataURL(fileInput.files[0]);
 	}
 }
