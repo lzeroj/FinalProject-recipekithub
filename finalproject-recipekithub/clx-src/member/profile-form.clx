@@ -14,59 +14,62 @@
       <cl:dataset std:sid="d-set-6ee5b960" id="ds_profile">
         <cl:listener std:sid="listener-a55a6423" name="load" handler="onDs_profileLoad"/>
         <cl:datacolumnlist>
-          <cl:datacolumn std:sid="d-column-e42ab3cb" name="member_email" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-482c1f5a" name="member_password" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-42593b66" name="member_name" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-6ae0910e" name="member_nick" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-c4f3cd0f" name="member_address" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-a778ab8e" name="member_phone" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-488dec36" name="member_birthday" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-6a5d8c04" name="member_type" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-13e11854" name="member_status" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-2d6220f1" name="member_reg_date" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-e42ab3cb" name="memberEmail" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-482c1f5a" name="memberPassword" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-42593b66" name="memberName" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-6ae0910e" name="memberNick" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-c4f3cd0f" name="memberAddress" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-a778ab8e" name="memberPhone" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-488dec36" name="memberBirthday" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-6a5d8c04" name="memberType" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-13e11854" name="memberStatus" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-2d6220f1" name="memberRegDate" datatype="string"/>
         </cl:datacolumnlist>
       </cl:dataset>
       <cl:datamap std:sid="d-map-1b5345d8" id="dm_profile">
         <cl:datacolumnlist>
-          <cl:datacolumn std:sid="d-column-04effa28" name="member_email" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-69862722" name="member_password" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-acabfb05" name="member_name" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-38ebe215" name="member_nick" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-5265e4b6" name="member_address" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-d6dd38d2" name="member_phone" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-0e310fe8" name="member_birthday" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-c4d4fd81" name="member_type" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-2cb2df7c" name="member_status" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-d9705deb" name="member_reg_date" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-04effa28" name="memberEmail" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-69862722" name="memberPassword" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-acabfb05" name="memberName" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-38ebe215" name="memberNick" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-5265e4b6" name="memberAddress" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-d6dd38d2" name="memberPhone" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-0e310fe8" name="memberBirthday" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-c4d4fd81" name="memberType" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-2cb2df7c" name="memberStatus" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-d9705deb" name="memberRegDate" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:datamap std:sid="d-map-b969afc6" id="dm_delete">
         <cl:datacolumnlist>
-          <cl:datacolumn std:sid="d-column-506c6917" name="member_email" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-506c6917" name="memberEmail" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:datamap std:sid="d-map-6cedd180" id="dm_update">
         <cl:datacolumnlist>
-          <cl:datacolumn std:sid="d-column-6f5156db" name="member_email" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-5026c25a" name="member_password" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-901099d0" name="member_name" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-c0cdcf38" name="member_nick" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-36130d1e" name="member_address" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-6ad92531" name="member_phone" datatype="string"/>
-          <cl:datacolumn std:sid="d-column-97391594" name="member_birthday" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-6f5156db" name="memberEmail" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-5026c25a" name="memberPassword" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-901099d0" name="memberName" datatype="string"/>
+          <cl:datacolumn comment="" std:sid="d-column-c0cdcf38" info="" name="memberNick" datatype="string" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-36130d1e" name="memberAddress" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-6ad92531" name="memberPhone" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-97391594" name="memberBirthday" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:submission std:sid="submission-b1f294ca" id="sub_update" action="/member/updateMember">
         <cl:listener std:sid="listener-e54f281a" name="submit-success" handler="onSub_updateSubmitSuccess"/>
-        <cl:requestdata dataid="dm_profile"/>
+        <cl:requestdata dataid="dm_update"/>
       </cl:submission>
       <cl:submission std:sid="submission-9c912c68" id="sub_delete" action="/member/deleteMember">
         <cl:listener std:sid="listener-ed3616d7" name="submit-success" handler="onSub_deleteSubmitSuccess"/>
         <cl:requestdata dataid="dm_delete"/>
       </cl:submission>
-      <cl:submission std:sid="submission-9dc25f82" id="sub_profile" action="/memberUI/profileInfo">
+      <cl:submission std:sid="submission-9dc25f82" id="sub_profile" action="/member/profileInfo">
         <cl:listener std:sid="listener-899913c0" name="submit-success" handler="onSub_profileSubmitSuccess"/>
         <cl:responsedata dataid="ds_profile"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e3d470e6" id="sub_logout" action="/member/logout">
+        <cl:listener std:sid="listener-bf029179" name="submit-success" handler="onSub_logoutSubmitSuccess"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -106,40 +109,38 @@
               <cl:formdata std:sid="f-data-759bd6b2" row="8" col="0"/>
             </cl:output>
             <cl:inputbox std:sid="i-box-281314df" id="ipbEmail" style="border-radius:5px; font-size:15px;" readonly="true">
-              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="member_email" rowindex="0"/>
+              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberEmail" rowindex="0"/>
               <cl:formdata std:sid="f-data-b270e727" row="0" col="1"/>
             </cl:inputbox>
-            <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; font-size:15px;" secret="true" maxlength="25" spellcheck="false">
-              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="member_password" rowindex="0"/>
-              <cl:datasetbind property="placeholder" category="PROPERTY" datacontrolid="ds_profile" columnname="member_password"/>
+            <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; font-size:15px;" secret="true" showclearbutton="true" maxlength="25" spellcheck="false">
+              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberPassword" rowindex="0"/>
+              <cl:datasetbind property="placeholder" category="PROPERTY" datacontrolid="ds_profile" columnname="memberPassword"/>
               <cl:formdata std:sid="f-data-5ff4c6d5" row="1" col="1"/>
             </cl:inputbox>
-            <cl:inputbox std:sid="i-box-b6daa8de" id="ipbPassword2" style="border-radius:5px; font-size:15px;" secret="true" maxlength="25" spellcheck="false">
+            <cl:inputbox std:sid="i-box-b6daa8de" id="ipbPassword2" style="border-radius:5px; font-size:15px;" secret="true" showclearbutton="true" maxlength="25" spellcheck="false">
               <cl:formdata std:sid="f-data-df13cb09" row="3" col="1"/>
             </cl:inputbox>
-            <cl:inputbox std:sid="i-box-89c752dd" id="ipbName" style="border-radius:5px; font-size:15px;" lengthunit="utf8" maxlength="18" spellcheck="false">
-              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="member_name" rowindex="0"/>
-              <cl:datasetbind property="placeholder" category="PROPERTY" datacontrolid="ds_profile" columnname="member_name"/>
+            <cl:inputbox std:sid="i-box-89c752dd" id="ipbName" style="border-radius:5px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="18" spellcheck="false">
+              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberName" rowindex="0"/>
+              <cl:datasetbind property="placeholder" category="PROPERTY" datacontrolid="ds_profile" columnname="memberName"/>
               <cl:formdata std:sid="f-data-e78357df" row="4" col="1"/>
             </cl:inputbox>
-            <cl:inputbox std:sid="i-box-717e3d70" id="ipbNick" style="border-radius:5px; font-size:15px;" lengthunit="utf8" maxlength="24" spellcheck="false">
-              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="member_nick" rowindex="0"/>
-              <cl:datasetbind property="placeholder" category="PROPERTY" datacontrolid="ds_profile" columnname="member_nick"/>
+            <cl:inputbox std:sid="i-box-717e3d70" id="ipbNick" style="border-radius:5px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="24" spellcheck="false">
+              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberNick" rowindex="0"/>
+              <cl:datasetbind property="placeholder" category="PROPERTY" datacontrolid="ds_profile" columnname="memberNick"/>
               <cl:formdata std:sid="f-data-387988d5" row="5" col="1"/>
             </cl:inputbox>
-            <cl:textarea std:sid="t-area-8bb94514" id="ipbAddress" style="border-radius:5px; font-size:15px;" lengthunit="utf8" maxlength="90" spellcheck="false">
-              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="member_address" rowindex="0"/>
-              <cl:datasetbind property="placeholder" category="PROPERTY" datacontrolid="ds_profile" columnname="member_address"/>
+            <cl:textarea std:sid="t-area-8bb94514" id="ipbAddress" style="border-radius:5px; font-size:15px;" lengthunit="utf8" maxlength="90" spellcheck="false" imemode="active">
+              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberAddress" rowindex="0"/>
+              <cl:datasetbind property="placeholder" category="PROPERTY" datacontrolid="ds_profile" columnname="memberAddress"/>
               <cl:formdata std:sid="f-data-2752fa59" row="8" col="1"/>
             </cl:textarea>
-            <cl:dateinput std:sid="d-input-fa585cec" id="ipbBirthday" style="border-radius:5px; font-size:15px;" class="cl-dateinput-register single-datepicker" spinbutton="true">
-              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="member_birthday" rowindex="0"/>
-              <cl:datasetbind property="placeholder" category="PROPERTY" datacontrolid="ds_profile" columnname="member_birthday"/>
+            <cl:dateinput std:sid="d-input-fa585cec" id="ipbBirthday" style="border-radius:5px; font-size:15px;" class="cl-dateinput-register single-datepicker" spinbutton="true" showclearbutton="true">
+              <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberBirthday" rowindex="0"/>
               <cl:formdata std:sid="f-data-968e26cb" row="6" col="1"/>
             </cl:dateinput>
-            <cl:maskeditor std:sid="m-editor-0fbcd13a" id="ipbPhone" style="border-radius:5px; font-size:15px;">
-              <cl:datasetbind property="value" category="PROPERTY" datacontrolid="ds_profile" columnname="member_phone"/>
-              <cl:datasetbind property="mask" category="PROPERTY" datacontrolid="ds_profile" columnname="member_phone"/>
+            <cl:maskeditor std:sid="m-editor-0fbcd13a" id="ipbPhone" style="border-radius:5px; font-size:15px;" mask="000-0000-0000" showclearbutton="true" clearbuttonimage="">
+              <cl:datasetbind property="value" category="PROPERTY" datacontrolid="ds_profile" columnname="memberPhone"/>
               <cl:formdata std:sid="f-data-2b02537f" row="7" col="1"/>
             </cl:maskeditor>
             <cl:output std:sid="output-bb64ce6b" value="Output">
@@ -186,6 +187,18 @@
               <cl:columns length="60" unit="PIXEL"/>
             </cl:formlayout>
           </cl:group>
+          <cl:group std:sid="group-f9976b94">
+            <cl:listener std:sid="listener-b6e72240" name="click" handler="onGroupClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-19559bae" top="10px" right="10px" width="20px" height="20px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+            <cl:button std:sid="button-34eff9ec" style="background-color:#FFFFFF; border-right-style:none; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/member/ic_home.png); background-position:center; border-top-style:none;" value="">
+              <cl:listener std:sid="listener-ccc0c2e0" name="click" handler="onButtonClick"/>
+              <cl:formdata std:sid="f-data-5b705d42" row="0" col="0"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-92dd1ac7" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
           <cl:xylayout std:sid="xylayout-ae153c21"/>
         </cl:group>
         <cl:group std:sid="group-59113df7" style="background-color:#7dbe70; border-radius:10px;" class="a">
@@ -206,6 +219,8 @@
   </body>
   <std:studiosetting>
     <std:hruler/>
-    <std:vruler/>
+    <std:vruler>
+      <std:guide position="37"/>
+    </std:vruler>
   </std:studiosetting>
 </html>
