@@ -43,8 +43,10 @@ public class MealkitController {
 	public View mealkitList(HttpServletRequest request,HttpServletResponse response, DataRequest dataRequst) {
 		
 		List<MealKitBoard> list = mealKitService.findMealKitList();
-		dataRequst.setResponse("mealkitList", list);
-		return new JSONDataView();
+		log.info("MealkitBoard list = {} ", list);
+		Map<String, Object> initParam = new HashMap<String, Object>();
+		initParam.put("mealkitList", list);
+		return new UIView("ui/mealkit/mealkitList.clx", initParam);
 		
 	}
 	
@@ -91,7 +93,8 @@ public class MealkitController {
 		UploadFile[] uploadFile = uploadFiles.get("image");
 		File orgName = uploadFile[0].getFile();
 		String saveName = uploadFile[0].getFileName();
-		String savePath = "C:\\Users\\KOSTA\\git\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadmealkitimage\\";
+		//String savePath = "C:\\Users\\KOSTA\\git\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadmealkitimage\\";
+		String savePath = "C:\\upload\\mealkitUpload\\";
 		String uuid = UUID.randomUUID().toString();
 		FileCopyUtils.copy(orgName, new File(savePath+uuid+"_"+saveName));
 		
@@ -141,6 +144,7 @@ public class MealkitController {
 		initParam.put("mealkitInventory", String.valueOf(mealkit.getMealkitInventory()));
 		initParam.put("mealkitCategory", mealkit.getMealkitCategory());
 		initParam.put("mealkitMember", mealkit.getMemberVO().getMemberEmail());
+		initParam.put("mealkitImg", mealkit.getMealkitImage());
 		
 		return new UIView("/ui/mealkit/updateMealkit.clx", initParam);
 	}
@@ -194,12 +198,17 @@ public class MealkitController {
 	@PostMapping("/deleteMealkit/{mealkitNo}")
 	public View deleteMealkit(@PathVariable int mealkitNo, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		MemberVO member = (MemberVO)session.getAttribute("member");
-		log.info("member = {} ", member);
+		MemberVO member = (MemberVO)session.getAttribute("member");	
+		
+		String savePath = "C:\\upload\\mealkitUpload\\";
+		String mealkitImg= mealKitService.findMealKitByNo(mealkitNo).getMealkitImage();
+		File existImageFile = new File(savePath + mealkitImg);
+		if(existImageFile.exists()) {
+			existImageFile.delete();
+		}
+		
 		MealKitBoard mealkit = mealKitService.findMealKitByNo(mealkitNo);
-		log.info("mealkit 정보 = {} ", mealkit);
 		if(mealkit.getMemberVO().getMemberNick().equals(member.getMemberEmail())) {
-			log.info("mealkit = {} ", mealkit);
 			mealKitService.deleteMealkit(mealkitNo);
 		}
 		
