@@ -21,16 +21,14 @@ function onBodyLoad(e){
 	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");
 	var mealkitHits = cpr.core.Platform.INSTANCE.getParameter("mealkitHits");
 	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
-	
-	
-//	if(mealkitMember === sessionMember){
-//		var deletebtn = app.lookup("deleBtn");
-//		var updatebtn = app.lookup("updateBtn");
-//		deletebtn.visible = true;
-//		updatebtn.visible = true;
-//		deletebtn.redraw();
-//		updatebtn.redraw();
-//	}
+	var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
+
+	if(mealkitMember === sessionMember){
+		var deletebtn = app.lookup("deleBtn");
+		var updatebtn = app.lookup("updateBtn");
+		deletebtn.visible = true;
+		updatebtn.visible = true;
+}
 	
 	/* 세션이 들어오면 Open
 	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");//게시물 작성자이메일
@@ -68,6 +66,11 @@ function onBodyLoad(e){
 	var hits = app.lookup("hits");
 	var seller = app.lookup("seller");
 	
+	app.lookup("mealkitImg").src = "theme/uploadmealkitimage/"+mealkitImg;
+	var hTMLSnippet = app.lookup("info");
+	hTMLSnippet.value = mealkitInfo;	
+	
+	hTMLSnippet.redraw();
 	reg.redraw();
 	hits.redraw();
 	seller.redraw();
@@ -78,7 +81,6 @@ function onBodyLoad(e){
 	total.redraw();
 	info.redraw();
 	ingredients.redraw();
-	mealkitRegDate.re
 	
 	// 현준
 	app.lookup("submealkitlike").send();
