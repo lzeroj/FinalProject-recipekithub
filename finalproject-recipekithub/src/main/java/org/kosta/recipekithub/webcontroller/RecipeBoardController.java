@@ -111,8 +111,8 @@ public class RecipeBoardController {
 	 * //System.out.println(recipeBoardVO); dataRequest.setResponse("recipeBoard",
 	 * recipeBoardVO); return new JSONDataView(); }
 	 */
-	@RequestMapping("/updateRecipe")
-	public View updateRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+	@RequestMapping("/moveUpdateRecipe")
+	public View moveUpdateRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		long id = Integer.parseInt(dataRequest.getParameter("recipeBoardId"));
 		RecipeBoardVO recipeBoardVO = recipeBoardService.findDetailRecipe(id);
 		String imagePath =  "theme\\uploadrecipeimage\\" + recipeBoardVO.getRecipeBoardImage();
@@ -121,6 +121,18 @@ public class RecipeBoardController {
 		 initParam.put("imagePath", imagePath);
 		 System.out.println(recipeBoardVO);
 		return new UIView("ui/recipe/updaterecipe.clx",initParam);	
+	}
+	
+	@RequestMapping("/updateRecipe")
+	public View updateRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		long id = Integer.parseInt(dataRequest.getParameter("recipeBoardId"));
+//		RecipeBoardVO recipeBoardVO = recipeBoardService.findDetailRecipe(id);
+//		String imagePath =  "theme\\uploadrecipeimage\\" + recipeBoardVO.getRecipeBoardImage();
+//		 Map<String, Object> initParam = new HashMap<String, Object>();	
+//		 initParam.put("recipeBoardVO", recipeBoardVO);
+//		 initParam.put("imagePath", imagePath);
+//		 System.out.println(recipeBoardVO);
+		return new JSONDataView();
 	}
 }
 

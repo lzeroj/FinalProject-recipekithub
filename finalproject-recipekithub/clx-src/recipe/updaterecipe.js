@@ -111,5 +111,26 @@ function onDeleteImgClick(e){
  */
 function onButtonClick(e){
 	var button = e.control;
-	alert(app.lookup("uploadImg").src);
+	
+	var vsOpt = app.lookup("smnote");
+	var dataMap = app.lookup("recipe");
+	vsOpt.value = $('#summernote').summernote('code');
+	dataMap.setValue("RECIPE_BOARD_CONTENT", vsOpt.value);
+	var submission = app.lookup("updateRecipe");
+	
+	var fileInput = app.lookup("fi1");
+	var file = fileInput.file;
+	
+	var value = dataMap.getValue("RECIPE_BOARD_TITLE");
+	var value2 = dataMap.getValue("CATEGORY_TYPE");
+	var value3 = dataMap.getValue("CATEGORY_INGREDIENTS");
+	var value4 = dataMap.getValue("CATEGORY_METHOD");
+	if (confirm("등록 하시겠습니까?")) {
+		if (value == "" || value2 == "" || value3 == "" || value4 == "") {
+			alert("내용을 입력하세요");
+		} else {
+			submission.addFileParameter("image", file);
+			submission.send();
+		}
+	}
 }

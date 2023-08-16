@@ -184,38 +184,39 @@
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
-				"background-color" : "#F0F0F0"
+				"background-color" : "#6A8B41"
 			});
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			group_1.setLayout(xYLayout_1);
+			var responsiveXYLayout_2 = new cpr.controls.layouts.ResponsiveXYLayout();
+			group_1.setLayout(responsiveXYLayout_2);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"border-radius" : "5px",
-					"background-color" : "#ecfef4",
+					"background-color" : "#F4FAEC",
+					"background-repeat" : "no-repeat",
 					"background-size" : "cover",
-					"background-image" : "url('theme/images/member/3.png')",
+					"background-image" : "url('theme/images/member/20.png')",
 					"background-position" : "center"
 				});
-				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_2);
+				var responsiveXYLayout_3 = new cpr.controls.layouts.ResponsiveXYLayout();
+				group_2.setLayout(responsiveXYLayout_3);
 				(function(container){
 					var group_3 = new cpr.controls.Container();
 					group_3.style.css({
 						"border-radius" : "10px",
 						"background-color" : "#FFFFFF"
 					});
-					var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-					group_3.setLayout(xYLayout_3);
+					var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+					group_3.setLayout(xYLayout_1);
 					(function(container){
 						var group_4 = new cpr.controls.Container();
 						group_4.style.css({
 							"background-size" : "cover",
 							"background-position" : "center",
-							"background-image" : "url('theme/images/logo.png')"
+							"background-image" : "url('theme/images/common/logo.png')"
 						});
-						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-						group_4.setLayout(xYLayout_4);
+						var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+						group_4.setLayout(xYLayout_2);
 						container.addChild(group_4, {
 							"top": "20px",
 							"bottom": "398px",
@@ -223,8 +224,8 @@
 							"left": "calc(50% - 178px)"
 						});
 						var group_5 = new cpr.controls.Container();
-						var xYLayout_5 = new cpr.controls.layouts.XYLayout();
-						group_5.setLayout(xYLayout_5);
+						var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+						group_5.setLayout(xYLayout_3);
 						(function(container){
 							var group_6 = new cpr.controls.Container();
 							var formLayout_1 = new cpr.controls.layouts.FormLayout();
@@ -266,13 +267,14 @@
 									"rowIndex": 1
 								});
 								var image_1 = new cpr.controls.Image();
+								image_1.src = "theme/images/member/circle-user1.png";
 								image_1.style.item.setClasses(["memberIcon"]);
 								container.addChild(image_1, {
 									"colIndex": 0,
 									"rowIndex": 0
 								});
 								var image_2 = new cpr.controls.Image();
-								image_2.src = "theme/images/com/login/encrypted.png";
+								image_2.src = "theme/images/member/key.png";
 								container.addChild(image_2, {
 									"colIndex": 0,
 									"rowIndex": 1
@@ -285,7 +287,7 @@
 								"left": "0px"
 							});
 							var checkBox_1 = new cpr.controls.CheckBox("cbx1");
-							checkBox_1.value = "true";
+							checkBox_1.value = "";
 							checkBox_1.text = "ID 저장";
 							checkBox_1.style.css({
 								"font-size" : "15px",
@@ -326,7 +328,7 @@
 								"text-shadow" : "none",
 								"border-bottom-color" : "#f9bb00",
 								"color" : "#FFFFFF",
-								"font-weight" : "bolder",
+								"font-weight" : "normal",
 								"border-left-color" : "#f9bb00",
 								"font-size" : "24px",
 								"border-top-color" : "#f9bb00",
@@ -367,8 +369,13 @@
 							button_3.style.css({
 								"border-right-style" : "none",
 								"color" : "#FFFFFF",
+								"border-bottom-color" : "#90be70",
 								"border-left-style" : "none",
+								"font-weight" : "normal",
+								"border-left-color" : "#90be70",
+								"border-top-color" : "#90be70",
 								"border-bottom-style" : "none",
+								"border-right-color" : "#90be70",
 								"background-image" : "none",
 								"border-top-style" : "none"
 							});
@@ -390,17 +397,55 @@
 						});
 					})(group_3);
 					container.addChild(group_3, {
-						"width": "384px",
-						"height": "628px",
-						"left": "calc(50% - 192px)",
-						"top": "calc(50% - 314px)"
+						positions: [
+							{
+								"media": "all and (min-width: 1024px)",
+								"width": "384px",
+								"height": "628px",
+								"left": "calc(50% - 192px)",
+								"top": "calc(50% - 314px)"
+							}, 
+							{
+								"media": "all and (min-width: 500px) and (max-width: 1023px)",
+								"width": "188px",
+								"height": "628px",
+								"left": "calc(50% - 94px)",
+								"top": "calc(50% - 314px)"
+							}, 
+							{
+								"media": "all and (max-width: 499px)",
+								"width": "131px",
+								"height": "628px",
+								"left": "calc(50% - 65px)",
+								"top": "calc(50% - 314px)"
+							}
+						]
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "20px",
-					"right": "20px",
-					"bottom": "20px",
-					"left": "20px"
+					positions: [
+						{
+							"media": "all and (min-width: 1024px)",
+							"top": "20px",
+							"right": "20px",
+							"bottom": "20px",
+							"left": "20px"
+						}, 
+						{
+							"media": "all and (min-width: 500px) and (max-width: 1023px)",
+							"top": "20px",
+							"right": "10px",
+							"bottom": "20px",
+							"left": "10px"
+						}, 
+						{
+							"media": "all and (max-width: 499px)",
+							"top": "20px",
+							"right": "7px",
+							"bottom": "20px",
+							"left": "7px"
+						}
+					]
 				});
 			})(group_1);
 			container.addChild(group_1, {

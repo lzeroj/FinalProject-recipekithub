@@ -54,6 +54,8 @@
 					src = "embedded/myPageQuestion"
 				}else if(nav1.value == '2'){
 					src = "embedded/myPagePaymentInfo"
+				}else if(nav1.value == '3'){
+					src = "embedded/myPageMealkitLike"
 				}
 				var vcEmb = app.lookup("ea1");
 				cpr.core.App.load(src, function(/*cpr.core.App*/ loadedApp){
@@ -190,7 +192,7 @@
 						(function(navigationBar_1){
 							navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "1", null));
 							navigationBar_1.addItem(new cpr.controls.MenuItem("구매내역", "2", null));
-							navigationBar_1.addItem(new cpr.controls.MenuItem("좋아요", "3", null));
+							navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트찜", "3", null));
 							navigationBar_1.addItem(new cpr.controls.MenuItem("문의하기", "4", null));
 						})(navigationBar_1);
 						if(typeof onNav1ItemClick == "function") {

@@ -2992,6 +2992,8 @@ code,
   text-decoration: none;
   background-color: #90be70;
   border-radius: 50px;
+  box-shadow: 0 3px #696969;
+  top: -2px;
 }
 .btn-login::before {
   /* 원 배경을 의사 요소로 표현 */
@@ -3015,10 +3017,15 @@ code,
   /* 45° 회전시킨 심플하 화살표로 만듦 */
   width: 6px;
   height: 6px;
-  border-top: 2px solid #2b550e;
+  border-top: 2px solid #696969;
   /* 심플한 화살표의 한 변 */
-  border-right: 2px solid #2b550e;
+  border-right: 2px solid #696969;
   /* 심플한 화살표의 한 변 */
+  /* border-right: 2px solid #2b550e; 심플한 화살표의 한 변 */
+}
+.btn-login:hover {
+  box-shadow: 0 1px #696969;
+  top: 1px;
 }
 .btn-apply {
   display: flex;
@@ -3038,6 +3045,8 @@ code,
   text-decoration: none;
   background-color: #f9bb00;
   border-radius: 50px;
+  box-shadow: 0 3px #696969;
+  top: -2px;
 }
 .btn-apply::before {
   /* 원 배경을 의사 요소로 표현 */
@@ -3061,8 +3070,15 @@ code,
   /* 45° 회전시킨 심플하 화살표로 만듦 */
   width: 6px;
   height: 6px;
-  border-top: 2px solid #2b550e;
+  border-top: 2px solid #696969;
   /* 심플한 화살표의 한 변 */
-  border-right: 2px solid #2b550e;
+  border-right: 2px solid #696969;
   /* 심플한 화살표의 한 변 */
+}
+.btn-apply:hover {
+  box-shadow: 0 1px #696969;
+  top: 1px;
+}
+.footer-bottom {
+  background: linear-gradient(to top, transparent, #6A8B41);
 }

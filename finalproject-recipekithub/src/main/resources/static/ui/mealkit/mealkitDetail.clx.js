@@ -95,12 +95,11 @@
 				info.redraw();
 				ingredients.redraw();
 				
-				
-				
+				// 현준
+				app.lookup("submealkitlike").send();
 				
 				//var submission = app.lookup("mealkitSub");
 				//submission.send();
-				
 					
 			}
 
@@ -167,10 +166,50 @@
 				var sessionMember = mealkit.getValue("sessionMember");
 				var mealkitMember = mealkit.getValue("mealkitMember");
 				
-				if(sessionMember === mealkitMember){
-				var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-				HttpPostMethod.submit();
+				//if(sessionMember === mealkitMember){
+				//var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+				//HttpPostMethod.submit();
+				//}
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubmealkitlikeSubmitSuccess(e){
+				var submealkitlike = e.control;
+				var likeresult = submealkitlike.getMetadata("likeresult");
+				var likeimg = app.lookup("likeimg");
+				if(likeresult == 0){
+					likeimg.src = "theme/images/mealkit/heart.png";
+				}else{
+					likeimg.src = "theme/images/mealkit/heart_fill.png";
 				}
+			}
+
+			/*
+			 * 이미지에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onLikeimgClick(e){
+				var likeimg = e.control;
+				app.lookup("subclicklike").send();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubclicklikeSubmitSuccess(e){
+				var subclicklike = e.control;
+				var likeresult = subclicklike.getMetadata("likeresult");
+				var likeimg = app.lookup("likeimg");
+				if(likeresult == 0){
+					likeimg.src = "theme/images/mealkit/heart.png";
+				}else{
+					likeimg.src = "theme/images/mealkit/heart_fill.png";
+				}
+				likeimg.redraw();
 			};
 			// End - User Script
 			
@@ -216,6 +255,23 @@
 				dataMap_1.addEventListener("update", onMealkitUpdate);
 			}
 			app.register(dataMap_1);
+			var submission_1 = new cpr.protocols.Submission("submealkitlike");
+			submission_1.action = "/showLike";
+			submission_1.mediaType = "application/x-www-form-urlencoded;simple";
+			submission_1.addRequestData(dataMap_1);
+			if(typeof onSubmealkitlikeSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onSubmealkitlikeSubmitSuccess);
+			}
+			app.register(submission_1);
+			
+			var submission_2 = new cpr.protocols.Submission("subclicklike");
+			submission_2.action = "/clickLike";
+			submission_2.mediaType = "application/x-www-form-urlencoded;simple";
+			submission_2.addRequestData(dataMap_1);
+			if(typeof onSubclicklikeSubmitSuccess == "function") {
+				submission_2.addEventListener("submit-success", onSubclicklikeSubmitSuccess);
+			}
+			app.register(submission_2);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -677,18 +733,18 @@
 					"width": "436px",
 					"height": "250px"
 				});
-				var group_12 = new cpr.controls.Container();
-				group_12.style.css({
-					"background-color" : "#f9f9f9",
-					"background-image" : "none"
+				var image_4 = new cpr.controls.Image("likeimg");
+				image_4.style.css({
+					"cursor" : "pointer"
 				});
-				var xYLayout_12 = new cpr.controls.layouts.XYLayout();
-				group_12.setLayout(xYLayout_12);
-				container.addChild(group_12, {
-					"top": "1140px",
-					"left": "17px",
-					"width": "956px",
-					"height": "19px"
+				if(typeof onLikeimgClick == "function") {
+					image_4.addEventListener("click", onLikeimgClick);
+				}
+				container.addChild(image_4, {
+					"top": "31px",
+					"left": "874px",
+					"width": "90px",
+					"height": "68px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
