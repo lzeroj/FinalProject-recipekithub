@@ -49,10 +49,9 @@ public class MemberController {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_login");
 		String memberEmail = param.getValue("member_email");
 		String memberPassword = param.getValue("member_password");
-		System.out.println("memberEmail : " + memberEmail + ", memberPassword : " + memberPassword);
 
 		MemberVO member = memberService.login(memberEmail, memberPassword);
-		System.out.println(member);
+		log.debug("member 로그인 {}", member);
 
 		if (member == null) {
 			return new UIView("ui/index.clx");
@@ -65,6 +64,7 @@ public class MemberController {
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 
+	
 	//---[ 회원가입 ]---//
 	@RequestMapping("/register")
 	public View registerMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
@@ -86,9 +86,9 @@ public class MemberController {
 		
 		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode, memberAddress, memberAddressDetail, memberPhone, memberBirthday);
 		int result = memberService.registerMember(member);
-		log.info("member 회원가입 {}", member);
+		log.debug("member 회원가입 정보 : {}", member);
+		log.debug("member 회원가입 성공여부(if '1' succes) : {}", result);
 		dataRequest.setResponse("ds_member", member); 
-		System.out.println(result);
 
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
@@ -171,11 +171,11 @@ public class MemberController {
 		String memberPostcode = param.getValue("memberPostcode");
 		String memberAddress = param.getValue("memberAddress");
 		String memberAddressDetail = param.getValue("memberAddressDetail");
-		
 		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode, memberAddress, memberAddressDetail, memberPhone, memberBirthday);
+		
 		if(member != null) {
 			int result = memberService.updateMember(member);
-			log.info("member 회원 정보 수정 {}", result);
+			log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
 		}
 		return new JSONDataView();
 	}
@@ -189,21 +189,27 @@ public class MemberController {
 			return new UIView("ui/member/login-form.clx");
 		}
 		
-		//session.getAttribute("member");
-		//String memberEmail = session.getId();
-		//System.out.println(email);
-		
-		// MemberVO member = (MemberVO)session.getAttribute("member");
-
-		
 		ParameterGroup param = dataRequest.getParameterGroup("dm_delete");
 		String memberEmail = param.getValue("memberEmail");
-		
 		int result = memberService.deleteMember(memberEmail);
-		System.out.println(result);
-		log.info("member 회원 탈퇴 {}", result);
+		log.debug("member 회원탈퇴 성공여부(if '1' succes) : {}", result);
 
 		return new JSONDataView();
 	}
 	
+	//---[ 로그아웃 -> 메인 화면으로 이동 ]---//
+		@RequestMapping("/logout")
+		public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+			// Map<String, Object> message = new HashMap<String, Object>();
+			
+			HttpSession session = request.getSession(false);
+			if(session != null) {
+				session.invalidate();
+			}
+			
+			// message.put("uri", "login/login");
+			// dataRequest.setMetadata(true, message);
+			
+			return new JSONDataView();
+		}
 }
