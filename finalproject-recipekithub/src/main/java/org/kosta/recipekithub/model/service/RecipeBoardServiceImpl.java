@@ -24,4 +24,12 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	public RecipeBoardVO findDetailRecipe(long id) {
 		return recipeBoardMapper.findDetailRecipe(id);
 	}
+	@Override
+	public int updateRecipe(RecipeBoardVO recipeBoardVO) {
+		return recipeBoardMapper.updateRecipe(recipeBoardVO);
+	}
+	@Override
+	public int deleteRecipe(long recipeBoardId) {
+		return recipeBoardMapper.deleteRecipe(recipeBoardId);
+	}
 }

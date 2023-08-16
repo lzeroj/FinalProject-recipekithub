@@ -13,4 +13,8 @@ public interface RecipeBoardMapper {
 
 	RecipeBoardVO findDetailRecipe(long id);
 
+	int updateRecipe(RecipeBoardVO recipeBoardVO);
+
+	int deleteRecipe(long recipeBoardId);
+
 }

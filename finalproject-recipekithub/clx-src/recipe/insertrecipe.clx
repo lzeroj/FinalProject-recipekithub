@@ -14,7 +14,7 @@
           <cl:datacolumn std:sid="d-column-18ccb8b1" name="CATEGORY_METHOD" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
-      <cl:submission std:sid="submission-f3b73732" id="insertRecipe" action="/insertRecipe" mediatype="multipart/form-data" fallbackContentType="none">
+      <cl:submission std:sid="submission-f3b73732" id="insertRecipe" async="false" action="/insertRecipe" mediatype="multipart/form-data" fallbackContentType="none">
         <cl:listener std:sid="listener-5cddeeee" name="submit-success" handler="onInsertRecipeSubmitSuccess"/>
         <cl:requestdata dataid="recipe"/>
       </cl:submission>
@@ -113,7 +113,7 @@
             <cl:columns length="80" unit="PIXEL"/>
           </cl:formlayout>
         </cl:group>
-        <cl:fileinput std:sid="f-input-f3cf13f4" id="fi1">
+        <cl:fileinput std:sid="f-input-f3cf13f4" id="fi1" acceptfile="image/*">
           <cl:listener std:sid="listener-cfe84167" name="value-change" handler="onFi1ValueChange"/>
           <cl:formdata std:sid="f-data-06721a2e" row="1" col="1" rowspan="1" colspan="1"/>
         </cl:fileinput>
