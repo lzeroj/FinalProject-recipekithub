@@ -1,8 +1,11 @@
 package org.kosta.recipekithub.webcontroller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +15,7 @@ import org.kosta.recipekithub.model.service.MealkitService;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +24,7 @@ import org.springframework.web.servlet.View;
 
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
+import com.cleopatra.protocol.data.UploadFile;
 import com.cleopatra.spring.JSONDataView;
 import com.cleopatra.spring.UIView;
 
@@ -63,7 +68,7 @@ public class MealkitController {
 		initParam.put("mealkitMember", mealkit.getMemberVO().getMemberNick());	
 		initParam.put("mealkitRegDate", mealkit.getMealkitRegDate());
 		initParam.put("mealkitHits", mealkit.getMealkitHits());
-		
+		initParam.put("mealkitImg", mealkit.getMealkitImage());
 		//initParam.put("sessionMember", sessionMember.getMemberNick());
 		return new UIView("/ui/mealkit/mealkitDetail.clx", initParam);
 	}
@@ -75,12 +80,20 @@ public class MealkitController {
 	}
 	
 	@RequestMapping("/insertMealkit")
-	public View insertMealKit(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+	public View insertMealKit(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws IOException {
 		//HttpSession session = request.getSession(false);
 		//MemberVO sessionMember = (MemberVO)session.getAttribute("member");
 		//if(sessionMember == null) {
 		//	return new UIView("/ui/index.clx");	
 		//}
+		
+		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
+		UploadFile[] uploadFile = uploadFiles.get("image");
+		File orgName = uploadFile[0].getFile();
+		String saveName = uploadFile[0].getFileName();
+		String savePath = "C:\\Users\\KOSTA\\git\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadmealkitimage\\";
+		String uuid = UUID.randomUUID().toString();
+		FileCopyUtils.copy(orgName, new File(savePath+uuid+"_"+saveName));
 		
 		ParameterGroup param = dataRequest.getParameterGroup("mealkitMap");
 		String mealkitName = param.getValue("mealkitName");
@@ -89,7 +102,7 @@ public class MealkitController {
 		int mealkitPrice = Integer.parseInt(param.getValue("mealkitPrice"));
 		int mealkitInventory = Integer.parseInt(param.getValue("mealkitInventory"));
 		String mealkitCategory = param.getValue("mealkitCategory");
-		
+		System.out.println("mealkitInfo = " + mealkitInfo);
 		MealKitBoard mealkit = new MealKitBoard();
 		mealkit.setMealkitName(mealkitName);
 		mealkit.setMealkitInfo(mealkitInfo);
@@ -97,6 +110,7 @@ public class MealkitController {
 		mealkit.setMealkitPrice(mealkitPrice);
 		mealkit.setMealkitInventory(mealkitInventory);
 		mealkit.setMealkitCategory(mealkitCategory);
+		mealkit.setMealkitImage(uuid+"_"+saveName);
 		
 		//HttpSession session = request.getSession(false);
 		//MemberVO member = (MemberVO)session.getAttribute("mvo");

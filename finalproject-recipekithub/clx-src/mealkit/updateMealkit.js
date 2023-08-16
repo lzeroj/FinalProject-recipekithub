@@ -150,6 +150,7 @@ function onButtonClick(e){
 function onUpdateMealkitSubSubmitSuccess(e){
 	var updateMealkitSub = e.control;
 	var mealkitNo = updateMealkitSub.getMetadata("result");
+	alert("밀키트가 수정되었습니다.");
 	//var dataMap = app.lookup("mealkitNo");
 	//dataMap.setValue("mealkitNo", metadata);
 	var url = '/mealkitDetail/'+mealkitNo; //상세 페이지 url

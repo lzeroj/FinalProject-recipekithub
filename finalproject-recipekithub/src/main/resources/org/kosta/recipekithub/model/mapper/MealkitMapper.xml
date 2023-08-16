@@ -3,8 +3,8 @@
 <mapper namespace="org.kosta.recipekithub.model.mapper.MealkitMapper">
 
 <insert id="insertMealKit" parameterType="org.kosta.recipekithub.model.vo.MealKitBoard">
-	INSERT INTO MEALKIT_BOARD(MEALKIT_NO, MEMBER_EMAIL, MEALKIT_NAME, MEALKIT_INFO, MEALKIT_INGREDIENTS, MEALKIT_PRICE, MEALKIT_REG_DATE, MEALKIT_INVENTORY, MEALKIT_CATEGORY) 
-	VALUES(MEALKIT_BOARD_seq.nextval, #{memberVO.memberEmail}, #{mealkitName}, #{mealkitInfo}, #{mealkitIngredients}, #{mealkitPrice}, SYSDATE, #{mealkitInventory}, #{mealkitCategory})
+	INSERT INTO MEALKIT_BOARD(MEALKIT_NO, MEMBER_EMAIL, MEALKIT_NAME, MEALKIT_INFO, MEALKIT_INGREDIENTS, MEALKIT_PRICE, MEALKIT_REG_DATE, MEALKIT_INVENTORY, MEALKIT_CATEGORY, MEALKIT_IMAGE) 
+	VALUES(MEALKIT_BOARD_seq.nextval, #{memberVO.memberEmail}, #{mealkitName}, #{mealkitInfo}, #{mealkitIngredients}, #{mealkitPrice}, SYSDATE, #{mealkitInventory}, #{mealkitCategory}, #{mealkitImage})
 <selectKey keyColumn="MEALKIT_NO" keyProperty="mealkitNo" resultType="int" order="AFTER">
 	SELECT MEALKIT_BOARD_SEQ.CURRVAL FROM DUAL
 </selectKey>
@@ -16,8 +16,8 @@
 	<result column="member_nick" property="memberVO.memberNick" />
 </resultMap>
 <select id="findMealKitByNo" parameterType="int" resultMap="memberInfo">
-SELECT M.MEALKIT_NO, M.MEMBER_EMAIL, M.MEALKIT_NAME, M.MEALKIT_INGREDIENTS, M.MEALKIT_PRICE, to_char(M.MEALKIT_REG_DATE, 'yyyy-mm-dd hh24:mi')as MEALKIT_REG_DATE,
-M.MEALKIT_INVENTORY, M.MEALKIT_CATEGORY, U.MEMBER_EMAIL,U.MEMBER_NAME, U.MEMBER_NICK FROM MEALKIT_BOARD M INNER JOIN MEMBER U
+SELECT M.MEALKIT_NO, M.MEALKIT_INFO , M.MEMBER_EMAIL, M.MEALKIT_NAME, M.MEALKIT_INGREDIENTS, M.MEALKIT_PRICE, to_char(M.MEALKIT_REG_DATE, 'yyyy-mm-dd hh24:mi')as MEALKIT_REG_DATE,
+M.MEALKIT_INVENTORY, M.MEALKIT_CATEGORY, M.MEALKIT_IMAGE , U.MEMBER_EMAIL,U.MEMBER_NAME, U.MEMBER_NICK FROM MEALKIT_BOARD M INNER JOIN MEMBER U
 ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 </select>
 
