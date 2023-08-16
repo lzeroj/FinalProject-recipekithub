@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.recipekithub.model.service.RecipeBoardService;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.Pagination;
 import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -32,14 +33,32 @@ public class RecipeBoardController {
 
 	private final RecipeBoardService recipeBoardService;
 
+	@RequestMapping("/recipeBoardList")
+	public View recipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
+			throws IOException {
+		return  new UIView("ui/recipe/recipe.clx");
+	}
+	
 	@RequestMapping("/findRecipeBoardList")
 	public View findRecipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		List<RecipeBoardVO> list = recipeBoardService.findAllRecipeBoard();
-		Map<String, Object> initParam = new HashMap<String, Object>();
-		initParam.put("recipe_board", list);
-		// dataRequest.setResponse("recipe_board", list);
-		return new UIView("ui/recipe/recipe.clx", initParam);
+		
+		ParameterGroup reqPage = dataRequest.getParameterGroup("dmPage");
+		String pageNo = reqPage.getValue("pageNo");
+		System.out.println(pageNo);
+		Pagination pagination = null;
+		long totalPostCount = recipeBoardService.findTotalPostCount();
+		if(pageNo==null) {
+			pagination = new Pagination(totalPostCount);
+		}else {
+			pagination = new Pagination(totalPostCount,Long.parseLong(pageNo));
+		}
+		List<RecipeBoardVO> list = recipeBoardService.findAllRecipeBoard(pagination);
+		long recipeCount = recipeBoardService.findTotalPostCount();
+		dataRequest.setResponse("recipe_board", list);
+		dataRequest.setResponse("pagination", pagination);
+		dataRequest.setResponse("recipeCount", recipeCount);	
+		return  new JSONDataView(); 
 	}
 
 	@RequestMapping("/insertRecipe")
@@ -57,7 +76,7 @@ public class RecipeBoardController {
 		File orgName = uploadFile[0].getFile();
 		String saveName = uploadFile[0].getFileName();
 		//String savePath = "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
-		String savePath = "C:\\recipeUpload\\";
+		String savePath = "C:\\upload\\recipe\\";
 		String uuid = UUID.randomUUID().toString();
 		FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
 
@@ -135,7 +154,7 @@ public class RecipeBoardController {
 		String method = initParam.getValue("CATEGORY_METHOD");
 		long recipeBoardId = Integer.parseInt(initParam.getValue("RECIPE_BOARD_ID"));
 		//String savePath = "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
-		String savePath = "C:\\recipeUpload\\";
+		String savePath = "C:\\upload\\recipe\\";
 		String recipeBoardImage = recipeBoardService.findDetailRecipe(recipeBoardId).getRecipeBoardImage();
 		RecipeBoardVO recipeBoardVO = new RecipeBoardVO();
 
@@ -174,7 +193,7 @@ public class RecipeBoardController {
 			throws IOException {
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipeBoardId");
 		long recipeBoardId = Integer.parseInt(initParam.getValue("RECIPE_BOARD_ID"));
-		String savePath = "C:\\recipeUpload\\";
+		String savePath = "C:\\upload\\recipe\\";
 		String recipeBoardImage = recipeBoardService.findDetailRecipe(recipeBoardId).getRecipeBoardImage();
 		File existImageFile = new File(savePath + recipeBoardImage);
 		if (existImageFile.exists()) {

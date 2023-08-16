@@ -6,10 +6,16 @@
 		<result column="member_nick" property="memberVO.memberNick"></result>
 	</resultMap>
 	<select id="findAllRecipeBoard" resultMap = "memberNick">
-		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
+<!-- 		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
 		from recipe_board r
 		inner join member m on r.member_email = m.member_email
-		order by r.recipe_reg_date desc
+		order by r.recipe_reg_date desc -->	
+		SELECT rnum, r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
+		FROM ( SELECT
+		ROW_NUMBER() OVER(ORDER BY recipe_reg_date DESC)
+		AS rnum, recipe_board_id, member_email, recipe_board_title, recipe_board_image, recipe_board_hits FROM recipe_board ) r 
+		INNER JOIN member m ON r.member_email = m.member_email
+		AND rnum BETWEEN #{startRowNumber} AND #{endRowNumber}
 	</select>
  	<insert id="insertRecipeBoard" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
 		insert into RECIPE_BOARD values(recipe_board_id_seq.nextval,#{memberVO.memberEmail},#{recipeBoardTitle},#{recipeBoardContent},
@@ -36,4 +42,7 @@
 	<delete id="deleteRecipe" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
 		delete from recipe_board where recipe_board_id = #{value}
 	</delete>
+	<select id="findTotalPostCount">
+		select count(*) from recipe_board
+	</select>
 </mapper>

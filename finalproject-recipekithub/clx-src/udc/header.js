@@ -55,6 +55,6 @@ function onNavigationBarItemClick(e){
 	}
 		
 	if(navigationBar.value == 'recipe'){
-		window.location.href='/findRecipeBoardList';
+		window.location.href='/recipeBoardList';
 	}
 }
