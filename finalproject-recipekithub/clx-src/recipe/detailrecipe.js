@@ -12,7 +12,7 @@
 function onBodyLoad(e){
 	var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 	console.log(recipeBoardVO);
-	app.lookup("recipeBoardImage").src = "theme/uploadrecipeimage/"+recipeBoardVO.recipeBoardImage;
+	app.lookup("recipeBoardImage").src = "/upload/"+recipeBoardVO.recipeBoardImage;
 	app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 	app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
 	var hTMLSnippet = app.lookup("recipeContent");
@@ -42,5 +42,5 @@ function onBodyLoad(e){
 function onButtonClick(e){
 	var button = e.control;
 	var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
-	window.location.href = "/moveUpdateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
+	window.location.href = "/updateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
 }

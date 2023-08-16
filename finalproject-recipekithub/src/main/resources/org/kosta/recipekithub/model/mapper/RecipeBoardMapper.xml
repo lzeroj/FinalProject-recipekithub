@@ -25,4 +25,15 @@
 		inner join member m on r.member_email = m.member_email
 		where r.recipe_board_id=#{value}
 	</select> 
+	<update id="updateRecipe" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
+		update recipe_board set recipe_board_title = #{recipeBoardTitle}, recipe_board_content=#{recipeBoardContent},
+		recipe_edit_date=sysdate, category_type = #{categoryType}, category_ingredients = #{categoryIngredients} , category_method = #{categoryMethod}
+		<if test="recipeBoardImage!=null">
+			, recipe_board_image=#{recipeBoardImage}
+		</if>
+		where recipe_board_id = #{recipeBoardId}
+	</update>
+	<delete id="deleteRecipe" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
+		delete from recipe_board where recipe_board_id = #{value}
+	</delete>
 </mapper>

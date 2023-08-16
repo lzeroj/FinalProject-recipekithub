@@ -68,13 +68,18 @@ function onButtonClick(e) {
 	
 	var fileInput = app.lookup("fi1");
 	var file = fileInput.file;
+	var image = app.lookup("uploadImg");
 	var value = dataMap.getValue("RECIPE_BOARD_TITLE");
 	var value2 = dataMap.getValue("CATEGORY_TYPE");
 	var value3 = dataMap.getValue("CATEGORY_INGREDIENTS");
 	var value4 = dataMap.getValue("CATEGORY_METHOD");
 	if (confirm("등록 하시겠습니까?")) {
-		if (value == "" || value2 == "" || value3 == "" || value4 == "") {
-			alert("내용을 입력하세요");
+		if (value == ""){
+			alert("제목을 작성하세요");
+		} else if(value2 == "" || value3 == "" || value4 == ""){
+			alert("카테고리를 등록하세요");
+		} else if(image.src == "") {
+			alert("사진을 등록하세요");
 		} else {
 			submission.addFileParameter("image", file);
 			submission.send();
@@ -87,6 +92,7 @@ function onButtonClick(e) {
  * 통신이 성공하면 발생합니다.
  */
 function onInsertRecipeSubmitSuccess(e) {
+	alert("레시피가 등록되었습니다.");
 	var insertRecipe = e.control;
 	var recipeBoardId = insertRecipe.getMetadata("recipeBoardId");
 	if (recipeBoardId != null) {
@@ -119,6 +125,8 @@ function onDeleteImgClick(e) {
 	var deleteImg = e.control;
 	var fileInput = app.lookup("fi1");
 	var image = app.lookup("uploadImg");
+	if(confirm("사진을 삭제하시겠습니까?")){
 	fileInput.clear();
 	image.src = "";
+	}
 }

@@ -11,5 +11,9 @@ public interface RecipeBoardService {
 	int insertRecipeBoard(RecipeBoardVO recipeBoardVO);
 
 	RecipeBoardVO findDetailRecipe(long id);
+
+	int updateRecipe(RecipeBoardVO recipeBoardVO);
+
+	int deleteRecipe(long recipeBoardId);
 	
 }
