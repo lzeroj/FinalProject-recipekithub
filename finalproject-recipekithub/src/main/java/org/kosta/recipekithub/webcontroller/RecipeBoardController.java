@@ -25,7 +25,6 @@ import com.cleopatra.spring.JSONDataView;
 import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
-@Controller
 @RequiredArgsConstructor
 public class RecipeBoardController {
 	 

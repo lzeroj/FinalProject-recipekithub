@@ -20,6 +20,7 @@
           <cl:datacolumn std:sid="d-column-8ae709f0" name="mealkitHits" datatype="number"/>
           <cl:datacolumn std:sid="d-column-ac0a03ae" name="sessionMember"/>
           <cl:datacolumn std:sid="d-column-0807fcbf" name="mealkitMember"/>
+          <cl:datacolumn std:sid="d-column-1bc9fdfc" name="cartDetailQuantity" datatype="number"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:submission std:sid="submission-b17501d4" id="submealkitlike" action="/showLike" mediatype="application/x-www-form-urlencoded;simple">
@@ -28,6 +29,10 @@
       </cl:submission>
       <cl:submission std:sid="submission-8deb793b" id="subclicklike" action="/clickLike" mediatype="application/x-www-form-urlencoded;simple">
         <cl:listener std:sid="listener-95f68724" name="submit-success" handler="onSubclicklikeSubmitSuccess"/>
+        <cl:requestdata dataid="mealkit"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-1789080f" id="subcreatmycart" action="/creatMyCart">
+        <cl:listener std:sid="listener-96a7a4c1" name="submit-success" handler="onSubcreatmycartSubmitSuccess"/>
         <cl:requestdata dataid="mealkit"/>
       </cl:submission>
     </cl:model>
@@ -88,6 +93,7 @@
         <cl:xylayout std:sid="xylayout-3b8bbb0d"/>
       </cl:group>
       <cl:button std:sid="button-e8f1c6b8" style="background-color:#0ca44e; color:white; font-weight:bolder; font-size:17px; background-image:none;" value="바로 구매">
+        <cl:listener std:sid="listener-d13a2be1" name="click" handler="onButtonClick4"/>
         <cl:xylayoutdata std:sid="xyl-data-56a566ba" top="429px" left="515px" width="449px" height="52px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:group std:sid="group-c24af64e" style="background-color:#F9F9F9;">
