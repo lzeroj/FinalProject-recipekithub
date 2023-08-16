@@ -118,4 +118,57 @@ public class CartController {
 		return new JSONDataView();
 	}
 	
+	@RequestMapping("/creatMyCart")
+	public View creatMyCart(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
+		ParameterGroup param = dataRequest.getParameterGroup("mealkit");
+		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo")); //해당 페이지의 밀키트 번호
+		int cartDetailQuantity = Integer.parseInt(param.getValue("cartDetailQuantity")); //밀키트 수량
+		
+//		HttpSession session = request.getSession(false);
+//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMemberEmail("shj");
+		String memberEmail = memberVO.getMemberEmail();
+		String cartN1o = cartService.findMyCartStatusYN(memberEmail);
+		
+		// 만약 카트에 값이 있으면 cartNO 반환
+		int cartNO = 0;
+		if(cartN1o != null) {		
+			cartNO = Integer.parseInt(cartN1o);
+		}
+		
+		int resultDetail = 0;
+		if(cartN1o == null) {
+			int createresult = cartService.creatMyCart(memberEmail);
+			if(createresult == 1) {
+				// 생성한뒤 cartNO 재조회
+				cartNO =  Integer.parseInt(cartService.findMyCartStatusYN(memberEmail));
+				
+				// 활성화된 카트에 주문하려는 해당 밀키트가 존재하는지 확인한다
+				int duplicatecount = cartService.findDuplicateMealkitCount(memberEmail,mealkitNo);
+				if(duplicatecount == 1) {
+					resultDetail = cartService.updateCartDetailQuantity(cartDetailQuantity,mealkitNo,cartNO);
+				}else {
+					// 밀키트 주문
+					resultDetail = cartService.insertMyCartDetail(mealkitNo,cartNO,cartDetailQuantity);
+				}
+			}
+		}else {
+			// 활성화된 카트에 주문하려는 해당 밀키트가 존재하는지 확인한다
+			int duplicatecount = cartService.findDuplicateMealkitCount(memberEmail,mealkitNo);
+			if(duplicatecount == 1) {
+				resultDetail = cartService.updateCartDetailQuantity(cartDetailQuantity,mealkitNo,cartNO);
+			}else {
+				// 밀키트 주문
+				resultDetail = cartService.insertMyCartDetail(mealkitNo,cartNO,cartDetailQuantity);
+			}
+		}		
+		
+		Map<String, Object> message = new HashMap<>();
+		message.put("resultDetail", resultDetail);
+		
+		return new JSONDataView(true,message);
+	}
+	
+	
 }
