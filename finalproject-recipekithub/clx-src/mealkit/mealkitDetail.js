@@ -80,12 +80,11 @@ function onBodyLoad(e){
 	ingredients.redraw();
 	mealkitRegDate.re
 	
-	
-	
+	// 현준
+	app.lookup("submealkitlike").send();
 	
 	//var submission = app.lookup("mealkitSub");
 	//submission.send();
-	
 		
 }
 
@@ -156,4 +155,44 @@ function onButtonClick3(e){
 	//var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
 	//HttpPostMethod.submit();
 	//}
+}
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSubmealkitlikeSubmitSuccess(e){
+	var submealkitlike = e.control;
+	var likeresult = submealkitlike.getMetadata("likeresult");
+	var likeimg = app.lookup("likeimg");
+	if(likeresult == 0){
+		likeimg.src = "theme/images/mealkit/heart.png";
+	}else{
+		likeimg.src = "theme/images/mealkit/heart_fill.png";
+	}
+}
+
+/*
+ * 이미지에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onLikeimgClick(e){
+	var likeimg = e.control;
+	app.lookup("subclicklike").send();
+}
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSubclicklikeSubmitSuccess(e){
+	var subclicklike = e.control;
+	var likeresult = subclicklike.getMetadata("likeresult");
+	var likeimg = app.lookup("likeimg");
+	if(likeresult == 0){
+		likeimg.src = "theme/images/mealkit/heart.png";
+	}else{
+		likeimg.src = "theme/images/mealkit/heart_fill.png";
+	}
+	likeimg.redraw();
 }

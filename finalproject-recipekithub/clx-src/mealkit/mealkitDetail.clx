@@ -22,6 +22,14 @@
           <cl:datacolumn std:sid="d-column-0807fcbf" name="mealkitMember"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:submission std:sid="submission-b17501d4" id="submealkitlike" action="/showLike" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-6f0cf24d" name="submit-success" handler="onSubmealkitlikeSubmitSuccess"/>
+        <cl:requestdata dataid="mealkit"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-8deb793b" id="subclicklike" action="/clickLike" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-95f68724" name="submit-success" handler="onSubclicklikeSubmitSuccess"/>
+        <cl:requestdata dataid="mealkit"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
@@ -150,6 +158,10 @@
       </cl:output>
       <cl:img std:sid="image-159cf4f0" src="../theme/images/mealkit/free-icon-eye-118191.png">
         <cl:xylayoutdata std:sid="xyl-data-42e0b305" top="2px" left="735px" width="26px" height="17px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:img>
+      <cl:img std:sid="image-31c82b55" id="likeimg" style="cursor:pointer;">
+        <cl:listener std:sid="listener-69c514a3" name="click" handler="onLikeimgClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-f7f1d135" top="31px" left="874px" width="90px" height="68px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:xylayout std:sid="xylayout-1e910270"/>
     </cl:group>

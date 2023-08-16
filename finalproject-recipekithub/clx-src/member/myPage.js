@@ -41,6 +41,8 @@ function onNav1ItemClick(e){
 		src = "embedded/myPageQuestion"
 	}else if(nav1.value == '2'){
 		src = "embedded/myPagePaymentInfo"
+	}else if(nav1.value == '3'){
+		src = "embedded/myPageMealkitLike"
 	}
 	var vcEmb = app.lookup("ea1");
 	cpr.core.App.load(src, function(/*cpr.core.App*/ loadedApp){
