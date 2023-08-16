@@ -52,7 +52,7 @@
             </cl:responsivexylayoutdata>
             <cl:menuitem std:sid="m-item-cda41080" label="레시피" value="1"/>
             <cl:menuitem std:sid="m-item-efa3cc1b" label="구매내역" value="2"/>
-            <cl:menuitem std:sid="m-item-daee6a4f" label="좋아요" value="3"/>
+            <cl:menuitem std:sid="m-item-daee6a4f" label="밀키트찜" value="3"/>
             <cl:menuitem std:sid="m-item-437c11be" label="문의하기" value="4"/>
           </cl:navigationbar>
           <cl:group std:sid="group-8003b2a0">

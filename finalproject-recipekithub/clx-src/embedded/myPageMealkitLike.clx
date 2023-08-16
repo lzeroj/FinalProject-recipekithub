@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-7258442e" version="1.0.4640">
+  <head std:sid="head-8bedb934">
+    <screen std:sid="screen-616183e4" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="558" customWidth="709" active="true"/>
+    <screen std:sid="screen-3bb9b4d4" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-e1bf5713" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-c7bc4986">
+      <cl:dataset std:sid="d-set-86a674c6" id="mealkitLikeList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c34b2030" name="mealkitNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-99f90829" name="mealkitName"/>
+          <cl:datacolumn std:sid="d-column-2f792121" name="mealkitIngredients"/>
+          <cl:datacolumn std:sid="d-column-83115e54" name="mealkitCategory"/>
+          <cl:datacolumn std:sid="d-column-da634e1d" name="memberEmail"/>
+          <cl:datacolumn std:sid="d-column-c1a8d91c" name="likeYN"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-4ef7f6f0" id="submealkitlikelist" action="/findMealkitLikeList">
+        <cl:listener std:sid="listener-e269872d" name="submit-success" handler="onSubmealkitlikelistSubmitSuccess"/>
+        <cl:responsedata dataid="mealkitLikeList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-af87e0fd" id="subdeletemelkiktlike" action="/clickLike" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-d773c0df" name="submit-success" handler="onSubdeletemelkiktlikeSubmitSuccess"/>
+        <cl:listener std:sid="listener-c05962de" name="submit-done" handler="onSubdeletemelkiktlikeSubmitDone"/>
+        <cl:requestdata dataid="mealkitLikeList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-937475a3">
+    <cl:listener std:sid="listener-412c039b" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-52fa2123">
+      <cl:xylayoutdata std:sid="xyl-data-c266cfb2" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="밀키트찜 목록">
+        <cl:xylayoutdata std:sid="xyl-data-da28a6e7" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:group std:sid="group-92690e5f" style="border-radius:20px; background-color:#F6F6F6;">
+        <cl:xylayoutdata std:sid="xyl-data-efd923e8" top="60px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:grid std:sid="grid-df701717" id="grd1" readonly="true" datasetid="mealkitLikeList" selectionunit="cell">
+          <cl:listener std:sid="listener-831d0e17" name="cell-click" handler="onGrd1CellClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-9effb366" top="15px" right="15px" bottom="15px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:gridcolumn std:sid="g-column-809c5551" width="20px"/>
+          <cl:gridcolumn std:sid="g-column-20491fdc" width="125px"/>
+          <cl:gridcolumn std:sid="g-column-1e1abbec" width="115px"/>
+          <cl:gridcolumn std:sid="g-column-2062c974" width="115px"/>
+          <cl:gridcolumn std:sid="g-column-24b49998"/>
+          <cl:gridcolumn std:sid="g-column-e5c2aa16" width="42px"/>
+          <cl:gridheader std:sid="gh-band-548dfad2">
+            <cl:gridrow std:sid="g-row-7591f77c"/>
+            <cl:gridcell std:sid="gh-cell-544fc2d5" rowindex="0" colindex="0" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-d08d52cc" rowindex="0" colindex="1" targetcolumnname="mealkitName" sortable="false" filterable="false" text="밀키트명"/>
+            <cl:gridcell std:sid="gh-cell-1b1b603e" rowindex="0" colindex="2" targetcolumnname="mealkitIngredients" sortable="false" filterable="false" text="성분"/>
+            <cl:gridcell std:sid="gh-cell-fce6aec0" rowindex="0" colindex="3" targetcolumnname="mealkitCategory" sortable="false" filterable="false" text="카테고리"/>
+            <cl:gridcell std:sid="gh-cell-37fa085d" rowindex="0" colindex="4" targetcolumnname="memberEmail" sortable="false" filterable="false" text="등록자명"/>
+            <cl:gridcell std:sid="gh-cell-d7b220bb" rowindex="0" colindex="5"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-ca15c3d7">
+            <cl:gridrow std:sid="g-row-c85a221d" height="42px"/>
+            <cl:gridcell std:sid="gd-cell-6a63e263" rowindex="0" colindex="0" columntype="rowindex"/>
+            <cl:gridcell std:sid="gd-cell-28f906dc" rowindex="0" colindex="1" columnname="mealkitName"/>
+            <cl:gridcell std:sid="gd-cell-ce4f61ab" rowindex="0" colindex="2" columnname="mealkitIngredients"/>
+            <cl:gridcell std:sid="gd-cell-e0477cb3" rowindex="0" colindex="3" columnname="mealkitCategory"/>
+            <cl:gridcell std:sid="gd-cell-adf78a2c" rowindex="0" colindex="4" columnname="memberEmail"/>
+            <cl:gridcell std:sid="gd-cell-abb048f4" rowindex="0" colindex="5">
+              <cl:img std:sid="image-d6dce196" id="likeimg" style="cursor:pointer;">
+                <cl:relativebind property="src" columnname="likeYN"/>
+                <cl:celldata std:sid="c-data-e3b547e8" halign="CENTER" valign="CENTER" width="40" height="40"/>
+              </cl:img>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:xylayout std:sid="xylayout-be7da28c"/>
+      </cl:group>
+      <cl:xylayout std:sid="xylayout-e97e04ed"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-1ef13e50"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>
