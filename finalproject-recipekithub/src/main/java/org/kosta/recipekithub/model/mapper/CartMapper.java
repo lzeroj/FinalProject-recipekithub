@@ -27,4 +27,14 @@ public interface CartMapper {
 
 	List<CartVO> findCartNoByMemberEmailOrderSuccess(String memberEmail);
 
+	String findMyCartStatusYN(String memberEmail);
+
+	int creatMyCart(String memberEmail);
+
+	int insertMyCartDetail(int mealkitNo, int cartNO, int cartDetailQuantity);
+
+	int findDuplicateMealkitCount(String memberEmail, int mealkitNo);
+
+	int updateCartDetailQuantity(int cartDetailQuantity, int mealkitNo, int cartNo);
+
 }

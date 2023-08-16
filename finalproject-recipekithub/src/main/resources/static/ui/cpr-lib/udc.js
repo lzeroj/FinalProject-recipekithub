@@ -309,7 +309,7 @@
 					}
 						
 					if(navigationBar.value == 'recipe'){
-						window.location.href='/findRecipeBoardList';
+						window.location.href='/recipeBoardList';
 					}
 				};
 				// End - User Script
