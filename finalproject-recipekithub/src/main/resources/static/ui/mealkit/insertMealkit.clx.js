@@ -606,6 +606,7 @@
 				group_8.setLayout(xYLayout_9);
 				(function(container){
 					var fileInput_1 = new cpr.controls.FileInput("file1");
+					fileInput_1.placeholder = "클릭후 파일 업로드해주세요.";
 					if(typeof onFile1ValueChange == "function") {
 						fileInput_1.addEventListener("value-change", onFile1ValueChange);
 					}

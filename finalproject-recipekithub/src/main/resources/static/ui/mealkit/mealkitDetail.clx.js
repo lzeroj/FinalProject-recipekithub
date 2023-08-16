@@ -741,8 +741,8 @@
 					image_4.addEventListener("click", onLikeimgClick);
 				}
 				container.addChild(image_4, {
-					"top": "31px",
-					"left": "874px",
+					"top": "49px",
+					"left": "882px",
 					"width": "90px",
 					"height": "68px"
 				});

@@ -21,8 +21,10 @@ M.MEALKIT_INVENTORY, M.MEALKIT_CATEGORY, M.MEALKIT_IMAGE , U.MEMBER_EMAIL,U.MEMB
 ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 </select>
 
-<select id="findMealKitList" resultType="org.kosta.recipekithub.model.vo.MealKitBoard">
-	select * from mealkit_board
+<select id="findMealKitList" resultType="org.kosta.recipekithub.model.vo.MealKitBoard" resultMap="memberInfo">
+	SELECT M.MEALKIT_NO, M.MEALKIT_NAME, M.MEALKIT_INGREDIENTS, M.MEALKIT_PRICE, M.MEALKIT_REG_DATE, M.MEALKIT_EDIT_DATE, M.MEALKIT_INVENTORY,
+	M.MEALKIT_CATEGORY, M.MEALKIT_IMAGE, M.MEALKIT_BOARD_HITS, M.MEALKIT_INFO, B.MEMBER_EMAIL, B.MEMBER_NICK FROM MEALKIT_BOARD M
+	INNER JOIN MEMBER B ON M.MEMBER_EMAIL = B.MEMBER_EMAIL
 	
 </select>
 
@@ -35,6 +37,7 @@ ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 <delete id="deleteMealkit" parameterType="int">
 	delete from mealkit_board where mealkit_no = #{value}
 </delete>
+
 
 
 </mapper>

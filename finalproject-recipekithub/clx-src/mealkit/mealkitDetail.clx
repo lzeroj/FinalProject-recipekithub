@@ -181,7 +181,7 @@
       </cl:img>
       <cl:img std:sid="image-31c82b55" id="likeimg" style="cursor:pointer;">
         <cl:listener std:sid="listener-69c514a3" name="click" handler="onLikeimgClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-f7f1d135" top="31px" left="874px" width="90px" height="68px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-f7f1d135" top="49px" left="882px" width="90px" height="68px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:xylayout std:sid="xylayout-1e910270"/>
     </cl:group>
