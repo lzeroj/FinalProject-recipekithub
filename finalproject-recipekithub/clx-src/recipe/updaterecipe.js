@@ -73,7 +73,7 @@ function onBodyLoad(e) {
 	app.lookup("lcb1").value = recipeBoardVO.categoryType;
 	app.lookup("lcb2").value = recipeBoardVO.categoryIngredients;
 	app.lookup("lcb3").value = recipeBoardVO.categoryMethod;
-	app.lookup("uploadImg").src = "/upload/"+imagePath;
+	app.lookup("uploadImg").src = "/upload/recipe/"+imagePath;
 	var fileInput = app.lookup("fi1");
 	
 	// 파일인풋에 이름만 넣기 

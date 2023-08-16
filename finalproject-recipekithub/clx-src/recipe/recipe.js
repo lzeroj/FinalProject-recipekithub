@@ -17,7 +17,7 @@ function onBodyLoad(e) {
 	for (var i = 0; i < recipeList.length; i++) {
 		(function(index) {
 			var recipe = new udc.recipeListudc();
-			recipe.img = "/upload/" + recipeList[i].recipeBoardImage;
+			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
 			console.log(recipeList.img);
 			recipe.hits = recipeList[i].recipeBoardHits;
 			recipe.nick = recipeList[i].memberVO.memberNick;

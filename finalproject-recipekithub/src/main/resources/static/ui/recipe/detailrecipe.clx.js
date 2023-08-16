@@ -25,7 +25,7 @@
 			function onBodyLoad(e){
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 				console.log(recipeBoardVO);
-				app.lookup("recipeBoardImage").src = "/upload/"+recipeBoardVO.recipeBoardImage;
+				app.lookup("recipeBoardImage").src = "/upload/recipe/"+recipeBoardVO.recipeBoardImage;
 				app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 				app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
 				var hTMLSnippet = app.lookup("recipeContent");
