@@ -751,6 +751,9 @@
 				
 				// UI Configuration
 				var group_1 = new cpr.controls.Container();
+				group_1.style.css({
+					"box-shadow" : "0 0 10px #333"
+				});
 				var formLayout_1 = new cpr.controls.layouts.FormLayout();
 				formLayout_1.scrollable = false;
 				formLayout_1.topMargin = "0px";
