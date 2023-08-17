@@ -35,7 +35,7 @@ public class MemberUIController {
 	// ---[ 프로필 조회/수정 화면으로 이동 ]---//
 	@RequestMapping("/profileForm")
 	public View findMypageForm(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-		return new UIView("ui/member/profile-form.clx");
+		return new UIView("ui/member/profile.clx");
 	}
 
 }

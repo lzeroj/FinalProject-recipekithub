@@ -57,4 +57,14 @@ public class MemberServiceImpl implements MemberService {
 	public int checkDuplicateNick(String memberNick) {
 		return memberMapper.checkDuplicateNick(memberNick);
 	}
+
+	@Override
+	public String findEmailByNamePhoneBirthday(String memberName, String memberPhone, String memberBirthday) {
+		return memberMapper.findEmailByNamePhoneBirthday(memberName, memberPhone, memberBirthday);
+	}
+
+	@Override
+	public String findPswdByEmailNamePhone(String memberEmail, String memberName, String memberPhone) {
+		return memberMapper.findPswdByEmailNamePhone(memberEmail, memberName, memberPhone);
+	}
 }
