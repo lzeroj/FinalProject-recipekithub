@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.QnAService;
-import org.kosta.recipekithub.model.vo.MemberVO;
 import org.kosta.recipekithub.model.vo.QnAVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +24,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class QnAController {
 	private final QnAService qnAService;
+	
+	@RequestMapping("/findQnAAdminForm")
+	public View findQnAAdminForm() {
+		return new UIView("ui/embedded/admin/findQnAAdminForm.clx");
+	}
 	
 	@RequestMapping("/insertQnaForm")
 	public View insertQnaForm() {

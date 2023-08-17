@@ -44,14 +44,27 @@ function onSub_loginSubmitSuccess(e) {
 	// 현준
 	var sub_login = e.control;
 	var checkBox = app.lookup("cbx1");
+	var memberEmail = app.lookup("dm_login").getValue("member_email");
 	if(checkBox.checked){
-		var memberEmail = app.lookup("dm_login").getValue("member_email");
 		localStorage.setItem("memberEmail", memberEmail);
 	}
-	var httpPostMethod = new cpr.protocols.HttpPostMethod("index1.clx");
+	setTimedSessionData("memsession", memberEmail,10);
+	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 	httpPostMethod.submit();
 }
 
+// 데이터 저장과 만료 시간 설정
+function setTimedSessionData(key, value, expirationMinutes) {
+    var currentTime = new Date().getTime();
+    var expirationTime = currentTime + (expirationMinutes * 60 * 1000); // milliseconds
+
+    var data = {
+        value: value,
+        expirationTime: expirationTime
+    };
+
+    sessionStorage.setItem(key, JSON.stringify(data));
+}
 /*
  * 서브미션에서 submit-error 이벤트 발생 시 호출.
  * 통신 중 문제가 생기면 발생합니다.

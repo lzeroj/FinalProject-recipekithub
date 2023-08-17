@@ -20,4 +20,7 @@ public interface RecipeBoardMapper {
 
 	long findTotalPostCount();
 
+	long updateRecipeHits(long id);
+
+	long likeCount(long recipeBoardId);
 }

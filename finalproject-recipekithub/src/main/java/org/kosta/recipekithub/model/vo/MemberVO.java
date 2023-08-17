@@ -25,7 +25,7 @@ public class MemberVO implements Serializable{
 	@NonNull
 	private String memberNick;
 	@NonNull
-	private String memberPostcode;
+	private String memberPostcode; 
 	@NonNull
 	private String memberAddress;
 	@NonNull

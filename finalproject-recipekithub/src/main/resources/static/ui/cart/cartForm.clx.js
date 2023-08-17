@@ -161,7 +161,7 @@
 					}).then(function(returnValue){
 						console.log(returnValue);
 						console.log("페이지 이동하러감");
-						cpr.core.App.load("index", function(loadedApp) {
+						cpr.core.App.load("index1", function(loadedApp) {
 							app.close();
 							var newInst = loadedApp.createNewInstance();
 							newInst.run();

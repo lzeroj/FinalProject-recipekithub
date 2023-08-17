@@ -61,6 +61,10 @@
 				var container1 = app.lookup("grp1");
 				var container = app.getContainer();
 				
+			//	container.updateConstraint(container1, {
+			//		
+			//	});
+			//	
 				container1.style.css({
 					"height": "1200px",
 					"bottom": "100px",
@@ -115,13 +119,13 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container("grp1");
-			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-			group_1.setLayout(responsiveXYLayout_1);
+			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			group_1.setLayout(verticalLayout_2);
 			(function(container){
 				var output_1 = new cpr.controls.Output();
 				output_1.value = "Q & A";
@@ -137,19 +141,12 @@
 					"text-align" : "center"
 				});
 				container.addChild(output_1, {
-					positions: [
-						{
-							"media": "all",
-							"top": "0px",
-							"right": "0px",
-							"left": "0px",
-							"height": "50px"
-						}
-					]
+					"width": "709px",
+					"height": "50px"
 				});
 				var group_2 = new cpr.controls.Container();
-				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_2);
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_1);
 				(function(container){
 					var inputBox_1 = new cpr.controls.InputBox("ipb1");
 					inputBox_1.readOnly = true;
@@ -217,21 +214,13 @@
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					positions: [
-						{
-							"media": "all",
-							"top": "50px",
-							"right": "0px",
-							"left": "0px",
-							"height": "558px"
-						}
-					]
+					"width": "709px",
+					"height": "558px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "0px",
-				"right": "0px",
-				"left": "0px",
+				"autoSize": "height",
+				"width": "709px",
 				"height": "608px"
 			});
 			if(typeof onBodyLoad == "function"){

@@ -23,9 +23,11 @@ function onRecipeBoardListReceive(e) {
 	var xhr = recipeBoardList.xhr;
 	var jsonData = JSON.parse(xhr.responseText);
 	var recipeList = jsonData.recipe_board;
-	var recipeCount = jsonData.recipeCount;
+	var totalPostCount = jsonData.totalPostCount;
+	var likeCounts = jsonData.likeCounts;
+	console.log(likeCounts.length);
 	var container = app.lookup("grp");
-	app.lookup("recipeCount").value = recipeCount;
+	app.lookup("recipeCount").value = totalPostCount;
 	for (var i = 0; i < recipeList.length; i++) {
 		(function(index) {
 			//udc 동적 생성
@@ -35,6 +37,9 @@ function onRecipeBoardListReceive(e) {
 			recipe.hits = recipeList[i].recipeBoardHits;
 			recipe.nick = recipeList[i].memberVO.memberNick;
 			recipe.title = recipeList[i].recipeBoardTitle;
+			for(var j=0; j<likeCounts.length; j++){
+				recipe.like = likeCounts[j];
+			}
 			container.addChild(recipe, {
 				height: "250px",
 				width: "230px",

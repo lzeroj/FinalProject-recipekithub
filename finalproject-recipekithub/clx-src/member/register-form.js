@@ -316,5 +316,3 @@ function onBodyUnload(e) {
 	var appConf = cpr.core.AppConfig.INSTANCE;
 	appConf.getEnvConfig().setValue("appcache", false);
 }
-
-

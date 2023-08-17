@@ -36,9 +36,11 @@
 				var xhr = recipeBoardList.xhr;
 				var jsonData = JSON.parse(xhr.responseText);
 				var recipeList = jsonData.recipe_board;
-				var recipeCount = jsonData.recipeCount;
+				var totalPostCount = jsonData.totalPostCount;
+				var likeCounts = jsonData.likeCounts;
+				console.log(likeCounts.length);
 				var container = app.lookup("grp");
-				app.lookup("recipeCount").value = recipeCount;
+				app.lookup("recipeCount").value = totalPostCount;
 				for (var i = 0; i < recipeList.length; i++) {
 					(function(index) {
 						//udc 동적 생성
@@ -48,6 +50,9 @@
 						recipe.hits = recipeList[i].recipeBoardHits;
 						recipe.nick = recipeList[i].memberVO.memberNick;
 						recipe.title = recipeList[i].recipeBoardTitle;
+						for(var j=0; j<likeCounts.length; j++){
+							recipe.like = likeCounts[j];
+						}
 						container.addChild(recipe, {
 							height: "250px",
 							width: "230px",
@@ -330,11 +335,13 @@
 			container.addChild(group_3, {
 				"top": "350px",
 				"width": "984px",
-				"height": "680px",
+				"height": "730px",
 				"left": "calc(50% - 492px)"
 			});
 			
 			var pageIndexer_1 = new cpr.controls.PageIndexer();
+			pageIndexer_1.pageRowCount = 12;
+			pageIndexer_1.viewPageCount = 5;
 			pageIndexer_1.init(1, 1, 1);
 			container.addChild(pageIndexer_1, {
 				"top": "1090px",

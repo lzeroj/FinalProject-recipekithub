@@ -35,5 +35,25 @@ public class LikeServiceImpl implements LikeService {
 		return likeMapper.findMealkitLikeList(memberEmail);
 	}
 
+	@Override
+	public int countRecipeLikeList(int recipeBoardId) {
+		return likeMapper.countRecipeLikeList(recipeBoardId);
+	}
+
+	@Override
+	public int insertRecipeLike(int recipeBoardId, String memberEmail) {
+		return likeMapper.insertRecipeLike(recipeBoardId,memberEmail);
+	}
+
+	@Override
+	public int deleteRecipeLike(int recipeBoardId, String memberEmail) {
+		return likeMapper.deleteRecipeLike(recipeBoardId,memberEmail);
+	}
+
+	@Override
+	public int showRecipeLike(int recipeBoardId, String memberEmail) {
+		return likeMapper.showRecipeLike(recipeBoardId,memberEmail);
+	}
+
 
 }
