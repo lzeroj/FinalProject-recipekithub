@@ -48,6 +48,10 @@ function onButtonClick2(e){
 	var container1 = app.lookup("grp1");
 	var container = app.getContainer();
 	
+//	container.updateConstraint(container1, {
+//		
+//	});
+//	
 	container1.style.css({
 		"height": "1200px",
 		"bottom": "100px",

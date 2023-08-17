@@ -50,5 +50,39 @@ public class UnitTestLike {
 		List<MealkitboardVO> mealkitLikeList = likeService.findMealkitLikeList(memberEmail);
 		Assertions.assertEquals(1, mealkitLikeList.size());
 	}
+	
+	@Test
+	public void countRecipeLikeList() {
+		int recipeBoardId = 39;
+		int count = likeService.countRecipeLikeList(recipeBoardId);
+		System.out.println(count);
+	}
+	
+	@Test
+	public void insertRecipeLike() {
+		int recipeBoardId = 27;
+		String memberEmail = "shj";
+
+		int result = likeService.insertRecipeLike(recipeBoardId,memberEmail);
+		Assertions.assertEquals(1, result);
+	}
+
+	@Test
+	public void deleteRecipeLike() {
+		int recipeBoardId = 27;
+		String memberEmail = "shj";
+
+		int result = likeService.deleteRecipeLike(recipeBoardId,memberEmail);
+		Assertions.assertEquals(1, result);
+	}
+	
+	@Test
+	public void showRecipeLike() {
+		int recipeBoardId = 27;
+		String memberEmail = "shj";
+		int result = likeService.showRecipeLike(recipeBoardId,memberEmail);
+		Assertions.assertEquals(0, result);
+	}
+
 
 }

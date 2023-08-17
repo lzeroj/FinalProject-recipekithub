@@ -38,6 +38,7 @@
     <cl:appspec/>
   </head>
   <body std:sid="body-0689d0c1" style="border-right-style:none; border-bottom-color:#0ca44e; border-left-style:none; border-left-color:#0ca44e; border-top-color:#0ca44e; font-size:24px; border-bottom-style:none; font-family:'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif; border-right-color:#0ca44e; background-image:none; border-top-style:none;">
+    <cl:listener std:sid="listener-94ec2c95" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-61653a6f" style="background-color:#6A8B41;">
       <cl:responsivexylayoutdata std:sid="rxyl-data-8708af51">
         <cl:xylayoutdata std:sid="sxyl-data-1a90debe" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>

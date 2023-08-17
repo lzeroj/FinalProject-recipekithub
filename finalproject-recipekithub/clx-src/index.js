@@ -10,6 +10,7 @@
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e){
+//	console.log(getSessionStorage("memsession"));
 	var vcEmb = app.lookup("ea1");
 	cpr.core.App.load("embedded/dynamic-img", function(/*cpr.core.App*/ loadedApp){
 		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/

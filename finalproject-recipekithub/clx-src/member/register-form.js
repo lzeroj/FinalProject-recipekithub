@@ -60,8 +60,10 @@ function onIpbEmailKeyup(e) {
 	var dataMap = app.lookup("dm_check_email");
 	dataMap.setValue("member_email", app.lookup("ipbEmail").value);
 	
-	var memberEmail = app.lookup("ipbEmail").value;
+	var memberEmail = app.lookup("ipbEmail");
 	var opbCheckEmailResult = app.lookup("opbCheckEmail");
+	memberEmail.addEventListener('keyup', onIpbEmailKeyup);
+	
 	
 	if (memberEmail.length < 6 || memberEmail.length > 30) {
 		opbCheckEmailResult.value = "email은 6자이상 ~ 30자 이하이어야 합니다.";
@@ -118,13 +120,17 @@ function checkMemberEmail() {
 function onIpbPassword1Keyup(e) {
 	var ipbPassword1 = e.control;
 	var checkPswd1Flag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
-	var password1 = app.lookup("ipbPassword1").text;
+	var password1 = app.lookup("ipbPassword1");
+	password1.addEventListener('keyup', onIpbPassword1Keyup);
+	
 	console.log(password1);
-	var checkPswdResult1 = app.lookup("opbCheckPassword").text;
+	var checkPswdResult1 = app.lookup("opbCheckPassword");
 	if (password1.length < 2 || password1.length > 25) {
-		checkPswdResult1 = "비밀번호는 1자 이상 25자 이하이어야 합니다.";
+		checkPswdResult1.style.css("color", "red");
+		checkPswdResult1.text = "비밀번호는 1자 이상 25자 이하이어야 합니다.";
 	} else {
-		checkPswdResult1 = "사용가능한 비밀번호입니다.";
+		checkPswdResult1.style.css("color", "blue");
+		checkPswdResult1.text = "사용가능한 비밀번호입니다.";
 	}
 }
 
@@ -134,21 +140,33 @@ function onIpbPassword1Keyup(e) {
  */
 function onIpbPassword2Keyup(e) {
 	var ipbPassword2 = e.control;
+	console.log(ipbPassword2.value);
 	var checkPswd2Flag = false;
-	var password2 = app.lookup("ipbPassword2").value;
-	var checkPswdResult2 = app.lookup("opbCheckPassword1");
+	var password2 = app.lookup("ipbPassword2");
+	//password2.addEventListener('keyup', onIpbPassword2Keyup);
+	
+	var checkPswdResult2 = app.lookup("opbCheckPassword2");
 	//var pswd2_img1 = document.getElementById("pswd2_img1");
 	
-	if (app.lookup("ipbPassword1").value != password2) {
-		checkPswdResult2 = "<font color=red>위의 비밀번호와 일치하지 않습니다. 다시 한번 확인해주세요.</font>";
-		//pswd2_img1.classList.remove("glow"); 
+	if (app.lookup("ipbPassword1").value != password2.value) {
+		console.log(app.lookup("ipbPassword1").value);
 		
-	} else {
-		checkPswdResult2 = "<font color=blue>비밀번호가 일치합니다.</font>";
+		checkPswdResult2.style.css("color", "red");
+		//app.lookup("opbCheckPassword2").style.css("color", "red");
+		checkPswdResult2.value = "위의 비밀번호와 일치하지 않습니다.";
+		//pswd2_img1.classList.remove("glow"); 
+	} 
+	
+	if(app.lookup("ipbPassword1").value == password2.value) {
+		checkPswdResult2.style.css("color", "blue");
+		checkPswdResult2.value = "비밀번호가 일치합니다.";
 		//pswd1_img1.classList.add("glow"); 
 		//pswd2_img1.classList.add("glow"); 
 	}
+//	console.log(password2.value);
+//	console.log(password2.text);
 }
+
 
 /*
 function comparePassword() {
@@ -281,4 +299,37 @@ function postCode() {
 function onBodyUnload(e) {
 	var appConf = cpr.core.AppConfig.INSTANCE;
 	appConf.getEnvConfig().setValue("appcache", false);
+}
+
+/*
+ * 인풋 박스에서 value-change 이벤트 발생 시 호출.
+ * 변경된 value가 저장된 후에 발생하는 이벤트.
+ */
+function onIpbPassword2ValueChange(e){
+	var ipbPassword2 = e.control;
+	var inputBox = app.lookup("ipbPassword2");
+//	console.log(inputBox.value);
+}
+
+/*
+ * 인풋 박스에서 keydown 이벤트 발생 시 호출.
+ * 사용자가 키를 누를 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+ */
+function onIpbPassword2Keydown(e){
+	var ipbPassword2 = e.control;
+	var inputBox = app.lookup("ipbPassword2");
+//	console.log(inputBox.value);
+	
+}
+
+/*
+ * 인풋 박스에서 input 이벤트 발생 시 호출.
+ * 입력상자에 보여주는 텍스트가 키보드로부터 입력되어 변경되었을때 발생하는 이벤트.
+ */
+function onIpbPassword2Input(e){
+	var ipbPassword2 = e.control;
+	var inputBox = app.lookup("ipbPassword2");
+//	console.log("text : "+inputBox.text);
+//	console.log("value : "+inputBox.value);
+	
 }
