@@ -102,7 +102,7 @@
 						group_3.setLayout(formLayout_2);
 						(function(container){
 							var image_1 = new cpr.controls.Image();
-							image_1.src = "theme/images/common/footerLogo1.png";
+							image_1.src = "theme/images/common/footerLogo3.png";
 							container.addChild(image_1, {
 								"colIndex": 0,
 								"rowIndex": 0
@@ -781,7 +781,7 @@
 					group_2.setLayout(formLayout_2);
 					(function(container){
 						var image_1 = new cpr.controls.Image("headerLogo");
-						image_1.src = "theme/images/common/headerLogo_1.png";
+						image_1.src = "theme/images/common/headerLogo3.png";
 						if(typeof onHeaderLogoClick == "function") {
 							image_1.addEventListener("click", onHeaderLogoClick);
 						}
@@ -1518,6 +1518,7 @@
 				output_2.style.css({
 					"color" : "#0CA44E"
 				});
+
 				container.addChild(output_2, {
 					"top": "179px",
 					"left": "0px",
@@ -1533,7 +1534,6 @@
 					"width": "50px",
 					"height": "27px"
 				});
-				
 				var output_4 = new cpr.controls.Output("like");
 				output_4.value = "Output";
 				output_4.style.css({

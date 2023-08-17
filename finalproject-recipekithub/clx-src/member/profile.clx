@@ -222,7 +222,7 @@
                         <cl:columns length="1" unit="FRACTION"/>
                       </cl:formlayout>
                     </cl:group>
-                    <cl:img std:sid="image-7e3a7f36">
+                    <cl:img std:sid="image-7e3a7f36" src="../theme/images/common/mypageIcon.png">
                       <cl:formdata std:sid="f-data-958d5805" row="0" col="0"/>
                     </cl:img>
                     <cl:formlayout std:sid="f-layout-16a6ee7b" scrollable="false" hspace="20px" vspace="20px" top-margin="10px" right-margin="10px" bottom-margin="10px" left-margin="10px">

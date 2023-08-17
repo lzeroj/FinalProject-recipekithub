@@ -22,7 +22,7 @@ function onBodyLoad(e) {
 function onSub_profileSubmitSuccess(e) {
 	var sub_profile = e.control;
 	var dsProfile = app.lookup("ds_profile");
-	
+	//dataMap 형식으로 수정하기  -> 그룹 전체를 redraw하기
 	app.lookup("ipbEmail").text = dsProfile.getValue(0, "memberEmail");
 	app.lookup("ipbPassword1").text = dsProfile.getValue(0, "memberPassword");
 	app.lookup("ipbName").text = dsProfile.getValue(0, "memberName");

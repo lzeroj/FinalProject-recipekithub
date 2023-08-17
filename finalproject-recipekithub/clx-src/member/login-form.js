@@ -33,7 +33,7 @@ function onRegisterBtnClick(e) {
  */
 function onFindBtnClick(e) {
 	var findBtn = e.control;
-	window.location.href = "member/find-email-pswd-form.clx";
+	window.location.href = "member/find-info-form.clx";
 }
 
 /*
@@ -51,7 +51,6 @@ function onSub_loginSubmitSuccess(e) {
 	setTimedSessionData("memsession", memberEmail,10);
 	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 	httpPostMethod.submit();
-	
 }
 
 // 데이터 저장과 만료 시간 설정

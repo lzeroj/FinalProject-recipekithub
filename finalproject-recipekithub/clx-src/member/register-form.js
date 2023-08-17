@@ -41,6 +41,32 @@ function onButtonClick2(e) {
  */
 function onSub_registerSubmitSuccess(e) {
 	var sub_register = e.control;
+	var dataSet = app.lookup("ds_member");
+	var memberEmail = dataSet.getValue(0, "memberEmail");
+	var memberPassword = dataSet.getValue(0, "memberPassword");
+	var memberName = dataSet.getValue(0, "memberName");
+	var memberNick = dataSet.getValue(0, "memberNick");
+	var memberAddress = dataSet.getValue(0, "memberAddress");
+	var memberPostcode = dataSet.getValue(0, "memberPostcode");
+	var memberAddressDetail = dataSet.getValue(0, "memberAddressDetail");
+	var memberPhone = dataSet.getValue(0, "memberPhone");
+	var memberBirthday = dataSet.getValue(0, "memberBirthday");
+	
+	/*
+	if(confirm("가입 하시겠습니까?")) {
+		if (memberEmail == ""){
+			alert("제목을 작성하세요");
+		} else if(value2 == "" || value3 == "" || value4 == ""){
+			alert("카테고리를 등록하세요");
+		} else if(image.src == "") {
+			alert("사진을 등록하세요");
+		} else {
+			submission.addFileParameter("image", file);
+			submission.send();
+		}
+	}
+	*/
+	
 	alert("RecipeKitHub에 오신 것을 환영합니다..!!")
 	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 	httpPostMethod.submit();
@@ -55,61 +81,56 @@ function onIpbEmailKeyup(e) {
 	var subCheckEmail = app.lookup("sub_check_email");
 	subCheckEmail.send();
 	var checkEmailFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
-	var metadata = subCheckEmail.getMetadata("message");
+	var metadata = subCheckEmail.getMetadata("ok");
+	var metadata2 = subCheckEmail.getMetadata("fail");
 	
 	var dataMap = app.lookup("dm_check_email");
 	dataMap.setValue("member_email", app.lookup("ipbEmail").value);
 	
-	var memberEmail = app.lookup("ipbEmail").value;
-	var opbCheckEmailResult = app.lookup("opbCheckEmail");
+	//var memberEmail = app.lookup("ipbEmail");
 	
-	if (memberEmail.length < 6 || memberEmail.length > 30) {
-		opbCheckEmailResult.value = "email은 6자이상 ~ 30자 이하이어야 합니다.";
-	} else {
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				//if (xhr.responseText == "fail") {
-				if (metadata == "fail") {
-					opbCheckEmailResult.value = "이메일이 중복됩니다.";
-				} else {
-					checkEmailFlag = true;
-					opbCheckEmailResult.value = "사용가능한 이메일입니다.";
-				}
-			}
-		}
-		//xhr.open("get", "../member/checkEmail", true);
-		//xhr.open("get", "../member/checkEmail?memberEmail=" + memberEmail, true);
-		//xhr.send();
-		
-	}
-}
-
-/*
-function checkMemberEmail() {
-	var checkEmailFlag = false;	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
-	var memberEmail = app.lookup("ipbEmail").value;
+	var email = ipbEmail.displayText;
+	var emailValue = String(email);
+	
 	var opbCheckEmailResult = app.lookup("opbCheckEmail");
-	if (memberEmail.length < 6 || memberEmail.length > 25) {
-		opbCheckEmailResult = "<font color=pink>email은 6자이상 ~ 30자 이하이어야 합니다.</font>";
-	} else {
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				if (xhr.responseText == "fail") {
-					opbCheckEmailResult = "<font color=red>이메일이 중복됩니다.</font>";
-				} else {
-					checkEmailFlag = true;
-					opbCheckEmailResult = "<font color=blue>사용가능한 이메일입니다.</font>";
-				}
-			}
-		}
-		xhr.open("get", "../member/CheckEmail");
-		xhr.send();
+	//memberEmail.addEventListener('keyup', onIpbEmailKeyup);
+	
+	if (emailValue.length < 6 || emailValue.length > 30) {
+		opbCheckEmailResult.style.css("color", "red");
+		opbCheckEmailResult.value = "email은 6자이상 ~ 30자 이하이어야 합니다.";
+	} else if (metadata === "fail") {
+		opbCheckEmailResult.style.css("color", "red");
+		opbCheckEmailResult.value = "이메일이 중복됩니다.";
+	} else if (metadata === "ok") {
+		checkEmailFlag = true;
+		opbCheckEmailResult.style.css("color", "blue");
+		opbCheckEmailResult.value = "사용가능한 이메일입니다.";
 	}
 }
-*/
 
+//xhr.open("get", "../member/checkEmail", true);
+//xhr.open("get", "../member/checkEmail?memberEmail=" + memberEmail, true);
+//xhr.send();
+
+//	} else {
+//		var xhr = new XMLHttpRequest();
+//		xhr.onreadystatechange = function() {
+//			if (xhr.readyState == 4 && xhr.status == 200) {
+//				//if (xhr.responseText == "fail") {
+//				if (metadata === "fail") {
+//					opbCheckEmailResult.style.css("color", "red");
+//					opbCheckEmailResult.value = "이메일이 중복됩니다.";
+//				} else {
+//					checkEmailFlag = true;
+//					opbCheckEmailResult.style.css("color", "blue");
+//					opbCheckEmailResult.value = "사용가능한 이메일입니다.";
+//				}
+//			}
+//		}
+//		//xhr.open("get", "../member/checkEmail", true);
+//		//xhr.open("get", "../member/checkEmail?memberEmail=" + memberEmail, true);
+//		//xhr.send();
+//	}
 
 /*
  * 인풋 박스에서 keyup 이벤트 발생 시 호출.
@@ -118,14 +139,34 @@ function checkMemberEmail() {
 function onIpbPassword1Keyup(e) {
 	var ipbPassword1 = e.control;
 	var checkPswd1Flag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
-	var password1 = app.lookup("ipbPassword1").text;
-	console.log(password1);
+	var password1 = app.lookup("ipbPassword1");
+	//password1.addEventListener('keyup', onIpbPassword1Keyup);
+	
+	var pswd1 = ipbPassword1.displayText;
+	var pswd1Value = String(pswd1);
+	
 	var checkPswdResult1 = app.lookup("opbCheckPassword");
-	if (password1.length < 2 || password1.length > 25) {
+	
+	if (pswd1Value === "") {
+		checkPswdResult1.text = "";
+		app.lookup("imgPswd1").src = "";
+	} else if (pswd1Value.length < 2 || pswd1Value.length > 25) {
+		checkPswdResult1.style.css("color", "red");
 		checkPswdResult1.text = "비밀번호는 1자 이상 25자 이하이어야 합니다.";
+		app.lookup("imgPswd2").src = "../ui/theme/images/member/cross.png";
 	} else {
+		checkPswdResult1.style.css("color", "blue");
 		checkPswdResult1.text = "사용가능한 비밀번호입니다.";
+		app.lookup("imgPswd1").src = "../ui/theme/images/member/checked.png";
 	}
+	
+	//	password1.addEventListener('input', function(e) {
+	//	    if (pswd1Value === "") {
+	//	        checkPswdResult1.text = "";
+	//			app.lookup("imgPswd1").src = "";
+	//	    }
+	//	});
+	
 }
 
 /*
@@ -134,42 +175,37 @@ function onIpbPassword1Keyup(e) {
  */
 function onIpbPassword2Keyup(e) {
 	var ipbPassword2 = e.control;
-	var checkPswd2Flag = false;
-	var password2 = app.lookup("ipbPassword2").value;
-	var checkPswdResult2 = app.lookup("opbCheckPassword1");
-	//var pswd2_img1 = document.getElementById("pswd2_img1");
+	var ipbPassword1 = app.lookup("ipbPassword1");
+	//var password2 = app.lookup("ipbPassword2");
 	
-	if (app.lookup("ipbPassword1").value != password2) {
-		checkPswdResult2 = "<font color=red>위의 비밀번호와 일치하지 않습니다. 다시 한번 확인해주세요.</font>";
-		//pswd2_img1.classList.remove("glow"); 
-		
-	} else {
-		checkPswdResult2 = "<font color=blue>비밀번호가 일치합니다.</font>";
-		//pswd1_img1.classList.add("glow"); 
-		//pswd2_img1.classList.add("glow"); 
+	var pswd1 = ipbPassword1.displayText;
+	var pswd1Value = String(pswd1);
+	
+	var pswd2 = ipbPassword2.displayText;
+	var pswd2Value = String(pswd2);
+	
+	var checkPswdResult2 = app.lookup("opbCheckPassword2");
+	
+	if (pswd2Value === "") {
+		checkPswdResult2.text = "";
+		app.lookup("imgPswd2").src = "";
+	} else if (pswd1Value != pswd2Value) {
+		checkPswdResult2.style.css("color", "red");
+		checkPswdResult2.value = "위의 비밀번호와 일치하지 않습니다.";
+		app.lookup("imgPswd2").src = "../ui/theme/images/member/cross.png";
+	} else if (pswd1Value === pswd2Value) {
+		checkPswdResult2.style.css("color", "blue");
+		checkPswdResult2.value = "비밀번호가 일치합니다.";
+		app.lookup("imgPswd2").src = "../ui/theme/images/member/checked.png";
 	}
 }
 
 /*
-function comparePassword() {
-	var checkPswd2Flag = false;
-	var password2 = app.lookup("ipbPassword2").value;
-	var checkPswdResult2 = app.lookup("opbCheckPassword2");
-	//var pswd2_img1 = document.getElementById("pswd2_img1");
-	
-	if (app.lookup("ipbPassword1").value != password2) {
-		checkPswdResult2 = "<font color=red>위의 비밀번호와 일치하지 않습니다. 다시 한번 확인해주세요.</font>";
-		//pswd2_img1.classList.remove("glow"); 
-		
-	} else {
-		checkPswdResult2 = "<font color=blue>비밀번호가 일치합니다.</font>";
-		//pswd1_img1.classList.add("glow"); 
-		//pswd2_img1.classList.add("glow"); 
-	}
-}
-*/
-
-function checkNick() {
+ * 인풋 박스에서 keyup 이벤트 발생 시 호출.
+ * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+ */
+function onIpbNickKeyup(e){
+	var ipbNick = e.control;
 	var checkNickFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 	var memberNick = app.lookup("ipbNick").value;
 	var checkNickResult = document.getElementById("checkNickResult");
@@ -187,12 +223,10 @@ function checkNick() {
 				}
 			}
 		}
-		xhr.open("get", "../CheckNick");
-		xhr.send();
+		//xhr.open("get", "../CheckNick");
+		//xhr.send();
 	}
 }
-
-
 
 /*
  * 루트 컨테이너에서 init 이벤트 발생 시 호출.

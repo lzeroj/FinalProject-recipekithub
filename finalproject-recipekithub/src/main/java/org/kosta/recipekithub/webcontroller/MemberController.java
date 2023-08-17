@@ -104,12 +104,11 @@ public class MemberController {
 		int checkResult = memberService.checkDuplicateEmail(memberEmail);
 		Map<String,Object> message = new HashMap<>();
 		//String result = null;
+
 		if (checkResult == 0) {
-			message.put("checkResult", "ok");
-			//result = "ok";
+			message.put("ok", "이메일 사용 가능");
 		} else {
-			message.put("checkResult", "fail");
-			//result = "fail";
+			message.put("fail", "이메일 중복");
 		}
 		// request.setAttribute("responsebody", result);
 		dataRequest.setMetadata(true, message);
@@ -124,13 +123,18 @@ public class MemberController {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
 		String memberNick = param.getValue("member_nick");
 		int checkResult = memberService.checkDuplicateNick(memberNick);
-		String result = null;
+		//String result = null;
+		Map<String,Object> message = new HashMap<>();
+
 		if (checkResult == 0) {
-			result = "ok";
+			message.put("ok", "닉네임 사용 가능");
 		} else {
-			result = "fail";
+			message.put("fail", "닉네임 중복");
 		}
-		request.setAttribute("responsebody", result);
+		//request.setAttribute("responsebody", result);
+		
+		dataRequest.setMetadata(true, message);
+		
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 	
