@@ -28,18 +28,13 @@
 				app.lookup("recipeBoardImage").src = "/upload/recipe/"+recipeBoardVO.recipeBoardImage;
 				app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 				app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
-				app.lookup("recipeRegDate").value = recipeBoardVO.recipeRegDate;
-				app.lookup("recipeEditDate").value = recipeBoardVO.recipeEditDate;
-				if(app.lookup("recipeEditDate").value==null){
-					app.lookup("editDate").visible = false;
-					app.lookup("recipeEditDate").visible = false;
-				}
 				var hTMLSnippet = app.lookup("recipeContent");
 				hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 				
-				app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
-				var recipeCommentsub = app.lookup("recipeCommentList");
-				recipeCommentsub.send();
+				// 현준
+				app.lookup("dm1").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
+				app.lookup("subrecipelikecount").send();
+				
 			}
 
 			/*
@@ -65,57 +60,103 @@
 			function onButtonClick(e){
 				var button = e.control;
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
-				//	app.lookup("dmRecipeBoardId").setValue("dmRecipeBoardId", recipeBoardVO.recipeBoardId);
-				//	var submission = app.lookup("updateRecipe");
-				//	submission.send();
-				//window.location.href = "/updateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
-				
-				// 로그인 안한사람이 url 로 접속되는 것을 막기 위해 post 방식 사용
-			   var _httpPostMethod = new cpr.protocols.HttpPostMethod("/updateRecipe", "_self");
-				_httpPostMethod.addParameter("recipeBoardId", recipeBoardVO.recipeBoardId);
-				_httpPostMethod.submit(); 
-			}
-
-			/*
-			 * 서브미션에서 receive 이벤트 발생 시 호출.
-			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
-			 */
-			function onRecipeCommentListReceive(e){
-				var recipeCommentList = e.control;
-				var xhr = recipeCommentList.xhr;
-				var jsonData = JSON.parse(xhr.responseText);
-				var recipeCommentList = jsonData.recipeCommentList;
-				var container = app.lookup("commentgrp");
-					for (var i = 0; i < recipeCommentList.length; i++) {
-					(function(index) {
-						//udc 동적 생성
-						var recipeComment = new udc.recipeCommentudc();
-						//udc에서 출판한 이미지 경로 앱 속성 지정
-						recipeComment.nick = recipeCommentList[i].memberVO.memberNick;
-						recipeComment.regDate = recipeCommentList[i].recipeCommentDate;
-						recipeComment.content = recipeCommentList[i].recipeCommentContent;
-						container.addChild(recipeComment, {
-							height: "120px",
-							width: "100px",
-							autoSize: "both"
-						});
-						recipeComment.addEventListener("deleteClick", function(e) {
-						app.lookup("dmRecipeCommentId").setValue("recipeCommentId", recipeCommentList[index].recipeCommentId);
-						var deleteCommentsub = app.lookup("deleteComment");
-						deleteCommentsub.send();
-						});
-					})(i);
-				}
+				window.location.href = "/updateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
 			}
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onDeleteCommentSubmitSuccess(e){
-				var deleteComment = e.control;
-			    app.lookup("commentgrp").redraw();
+			function onSubrecipelikecountSubmitSuccess(e){
+				var subrecipelikecount = e.control;
+				var countRecipeLike = subrecipelikecount.getMetadata("countRecipeLike");
+				var showlikestatus = subrecipelikecount.getMetadata("showlikestatus");
+				var likeimg = app.lookup("likeimg");
+				if(showlikestatus == 0){
+					likeimg.src = "theme/images/mealkit/heart.png";
+				}else{
+					likeimg.src = "theme/images/mealkit/heart_fill.png";
+				}
+				likeimg.redraw();
+				
+				app.lookup("opt1").text = countRecipeLike;
+				app.lookup("opt1").redraw();
+			}
 
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubinsertrecipelikeSubmitSuccess(e){
+				var subinsertrecipelike = e.control;
+				var likeresult = subinsertrecipelike.getMetadata("likeresult");
+				var likeimg = app.lookup("likeimg");
+				var counttext = app.lookup("opt1").text;
+				if(likeresult == 0){
+					likeimg.src = "theme/images/mealkit/heart.png";
+					app.lookup("opt1").text = counttext - 1;
+				}else{
+					likeimg.src = "theme/images/mealkit/heart_fill.png";
+					app.lookup("opt1").text = parseInt(counttext) + 1;
+				}
+				likeimg.redraw();
+				
+			}
+
+			/*
+			 * 이미지에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onLikeimgClick(e){
+				var likeimg = e.control;
+				app.lookup("subinsertrecipelike").send();
+			}
+
+			/*
+			 * 이미지에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onImageClick(e){
+				var image = e.control;
+				console.log(app.lookup("dm1").getValue("recipeBoardId"));
+				var initvalue = {"recipeBoardId" : app.lookup("dm1").getValue("recipeBoardId")};
+				app.openDialog("dialog/declarationRecipe", {
+					width : 400
+					,height : 600
+					,headerVisible: false
+				}, function(dialog){
+					dialog.ready(function(dialogApp){
+						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+						dialog.initValue = initvalue;
+					});
+				}).then(function(returnValue){
+					if(returnValue == 0){
+						return;
+					}
+					if(returnValue == null || returnValue == ''){
+						return;
+					}
+					var recipeBoardId = app.lookup("dm1").getValue("recipeBoardId");
+					app.lookup("dmdeclaration").setValue("recipeBoardId", recipeBoardId);
+					app.lookup("dmdeclaration").setValue("inputtext", returnValue.inputtext);
+					app.lookup("dmdeclaration").setValue("textbox", returnValue.textbox);
+					app.lookup("dmdeclaration").setValue("declarationType", returnValue.declarationType);
+					app.lookup("subinsertDeclaration").send();
+				});
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubinsertDeclarationSubmitSuccess(e){
+				var subinsertDeclaration = e.control;
+				var metadata = subinsertDeclaration.getMetadata("insertresult");
+				if(metadata == 1){
+					alert("신고가 완료되었습니다");
+				}else if(metadata == 0){
+					alert("이미 신고를 완료한 게시물입니다");
+				}
 			};
 			// End - User Script
 			
@@ -138,18 +179,12 @@
 					{
 						"name": "recipeBoardImage",
 						"dataType": "string"
-					},
-					{"name": "recipeRegDate"},
-					{"name": "recipeEditDate"}
+					}
 				],
 				"rows": []
 			});
 			app.register(dataSet_1);
-			
-			var dataSet_2 = new cpr.data.DataSet("recipeComment");
-			dataSet_2.parseData({});
-			app.register(dataSet_2);
-			var dataMap_1 = new cpr.data.DataMap("dmRecipeBoardId");
+			var dataMap_1 = new cpr.data.DataMap("dm1");
 			dataMap_1.parseData({
 				"columns" : [{
 					"name": "recipeBoardId",
@@ -158,29 +193,44 @@
 			});
 			app.register(dataMap_1);
 			
-			var dataMap_2 = new cpr.data.DataMap("dmRecipeCommentId");
+			var dataMap_2 = new cpr.data.DataMap("dmdeclaration");
 			dataMap_2.parseData({
-				"columns" : [{
-					"name": "recipeCommentId",
-					"dataType": "number"
-				}]
+				"columns" : [
+					{
+						"name": "recipeBoardId",
+						"dataType": "number"
+					},
+					{"name": "inputtext"},
+					{"name": "textbox"},
+					{"name": "declarationType"}
+				]
 			});
 			app.register(dataMap_2);
-			var submission_1 = new cpr.protocols.Submission("recipeCommentList");
-			submission_1.action = "/recipeCommentList";
+			var submission_1 = new cpr.protocols.Submission("subrecipelikecount");
+			submission_1.action = "/countRecipeLikeList";
+			submission_1.mediaType = "application/x-www-form-urlencoded;simple";
 			submission_1.addRequestData(dataMap_1);
-			if(typeof onRecipeCommentListReceive == "function") {
-				submission_1.addEventListener("receive", onRecipeCommentListReceive);
+			if(typeof onSubrecipelikecountSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onSubrecipelikecountSubmitSuccess);
 			}
 			app.register(submission_1);
 			
-			var submission_2 = new cpr.protocols.Submission("deleteComment");
-			submission_2.action = "/deleteRecipeComment";
-			submission_2.addRequestData(dataMap_2);
-			if(typeof onDeleteCommentSubmitSuccess == "function") {
-				submission_2.addEventListener("submit-success", onDeleteCommentSubmitSuccess);
+			var submission_2 = new cpr.protocols.Submission("subinsertrecipelike");
+			submission_2.action = "/clickRecipeLike";
+			submission_2.mediaType = "application/x-www-form-urlencoded;simple";
+			submission_2.addRequestData(dataMap_1);
+			if(typeof onSubinsertrecipelikeSubmitSuccess == "function") {
+				submission_2.addEventListener("submit-success", onSubinsertrecipelikeSubmitSuccess);
 			}
 			app.register(submission_2);
+			
+			var submission_3 = new cpr.protocols.Submission("subinsertDeclaration");
+			submission_3.action = "/insertDeclaration";
+			submission_3.addRequestData(dataMap_2);
+			if(typeof onSubinsertDeclarationSubmitSuccess == "function") {
+				submission_3.addEventListener("submit-success", onSubinsertDeclarationSubmitSuccess);
+			}
+			app.register(submission_3);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -224,7 +274,7 @@
 					"width": "220px",
 					"height": "55px"
 				});
-				var output_3 = new cpr.controls.Output();
+				var output_3 = new cpr.controls.Output("opt1");
 				output_3.value = "좋아요 갯수";
 				container.addChild(output_3, {
 					"top": "305px",
@@ -233,33 +283,43 @@
 					"height": "20px"
 				});
 				var button_1 = new cpr.controls.Button();
-				button_1.value = "";
-				button_1.style.css({
-					"background-color" : "#FFFFFF",
-					"border-right-style" : "none",
-					"background-size" : "cover",
-					"border-left-style" : "none",
-					"border-bottom-style" : "none",
-					"background-image" : "url('theme/images/recipe/heartnocolor.png')",
-					"background-position" : "center",
-					"border-top-style" : "none"
-				});
-				container.addChild(button_1, {
-					"top": "287px",
-					"left": "551px",
-					"width": "61px",
-					"height": "46px"
-				});
-				var button_2 = new cpr.controls.Button();
-				button_2.value = "수정하기";
+				button_1.value = "레시피 수정";
 				if(typeof onButtonClick == "function") {
-					button_2.addEventListener("click", onButtonClick);
+					button_1.addEventListener("click", onButtonClick);
 				}
-				container.addChild(button_2, {
+				container.addChild(button_1, {
 					"top": "0px",
-					"right": "630px",
+					"right": "629px",
 					"left": "0px",
-					"height": "30px"
+					"height": "45px"
+				});
+				var image_2 = new cpr.controls.Image("likeimg");
+				image_2.style.css({
+					"cursor" : "pointer",
+					"background-image" : "none"
+				});
+				if(typeof onLikeimgClick == "function") {
+					image_2.addEventListener("click", onLikeimgClick);
+				}
+				container.addChild(image_2, {
+					"top": "295px",
+					"left": "572px",
+					"width": "40px",
+					"height": "40px"
+				});
+				var image_3 = new cpr.controls.Image();
+				image_3.src = "theme/images/mealkit/alarm.png";
+				image_3.style.css({
+					"cursor" : "pointer"
+				});
+				if(typeof onImageClick == "function") {
+					image_3.addEventListener("click", onImageClick);
+				}
+				container.addChild(image_3, {
+					"top": "295px",
+					"left": "522px",
+					"width": "40px",
+					"height": "40px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
@@ -288,31 +348,87 @@
 				]
 			});
 			
-			var group_2 = new cpr.controls.Container("commentgrp");
-			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
-			group_2.setLayout(verticalLayout_1);
+			var group_2 = new cpr.controls.Container();
+			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+			group_2.setLayout(xYLayout_2);
 			container.addChild(group_2, {
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "859px",
+						"top": "694px",
 						"width": "724px",
 						"height": "154px",
 						"left": "calc(50% - 362px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "859px",
+						"top": "694px",
 						"width": "354px",
 						"height": "154px",
 						"left": "calc(50% - 177px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "859px",
+						"top": "694px",
 						"width": "247px",
 						"height": "154px",
 						"left": "calc(50% - 123px)"
+					}
+				]
+			});
+			
+			var output_4 = new cpr.controls.Output();
+			output_4.value = "댓글";
+			container.addChild(output_4, {
+				positions: [
+					{
+						"media": "all and (min-width: 1024px)",
+						"top": "668px",
+						"right": "1270px",
+						"left": "598px",
+						"height": "27px"
+					}, 
+					{
+						"media": "all and (min-width: 500px) and (max-width: 1023px)",
+						"top": "668px",
+						"right": "620px",
+						"left": "292px",
+						"height": "27px"
+					}, 
+					{
+						"media": "all and (max-width: 499px)",
+						"top": "668px",
+						"right": "434px",
+						"left": "204px",
+						"height": "27px"
+					}
+				]
+			});
+			
+			var output_5 = new cpr.controls.Output();
+			output_5.value = "댓글개수";
+			container.addChild(output_5, {
+				positions: [
+					{
+						"media": "all and (min-width: 1024px)",
+						"top": "668px",
+						"right": "1192px",
+						"left": "649px",
+						"height": "27px"
+					}, 
+					{
+						"media": "all and (min-width: 500px) and (max-width: 1023px)",
+						"top": "668px",
+						"right": "582px",
+						"left": "317px",
+						"height": "27px"
+					}, 
+					{
+						"media": "all and (max-width: 499px)",
+						"top": "668px",
+						"right": "407px",
+						"left": "222px",
+						"height": "27px"
 					}
 				]
 			});
@@ -323,21 +439,21 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "1012px",
+						"top": "966px",
 						"width": "200px",
 						"height": "40px",
 						"left": "calc(50% - 100px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1012px",
+						"top": "966px",
 						"width": "98px",
 						"height": "40px",
 						"left": "calc(50% - 49px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "1012px",
+						"top": "966px",
 						"width": "68px",
 						"height": "40px",
 						"left": "calc(50% - 34px)"
@@ -391,9 +507,9 @@
 					"colIndex": 0,
 					"rowIndex": 0
 				});
-				var button_3 = new cpr.controls.Button();
-				button_3.value = "등록";
-				container.addChild(button_3, {
+				var button_2 = new cpr.controls.Button();
+				button_2.value = "등록";
+				container.addChild(button_2, {
 					"colIndex": 1,
 					"rowIndex": 0
 				});
@@ -402,141 +518,24 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "773px",
+						"top": "858px",
 						"width": "724px",
 						"height": "87px",
 						"left": "calc(50% - 362px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "773px",
+						"top": "858px",
 						"width": "354px",
 						"height": "87px",
 						"left": "calc(50% - 177px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "773px",
+						"top": "858px",
 						"width": "247px",
 						"height": "87px",
 						"left": "calc(50% - 123px)"
-					}
-				]
-			});
-			
-			var group_4 = new cpr.controls.Container();
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_4.setLayout(xYLayout_2);
-			(function(container){
-				var output_4 = new cpr.controls.Output();
-				output_4.value = "등록일";
-				container.addChild(output_4, {
-					"top": "20px",
-					"left": "1px",
-					"width": "49px",
-					"height": "20px"
-				});
-				var output_5 = new cpr.controls.Output("recipeRegDate");
-				container.addChild(output_5, {
-					"top": "20px",
-					"left": "49px",
-					"width": "185px",
-					"height": "20px"
-				});
-				var output_6 = new cpr.controls.Output("editDate");
-				output_6.value = "수정일";
-				container.addChild(output_6, {
-					"top": "20px",
-					"left": "233px",
-					"width": "50px",
-					"height": "20px"
-				});
-				var output_7 = new cpr.controls.Output("recipeEditDate");
-				container.addChild(output_7, {
-					"top": "20px",
-					"left": "282px",
-					"width": "208px",
-					"height": "20px"
-				});
-			})(group_4);
-			container.addChild(group_4, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "683px",
-						"width": "723px",
-						"height": "44px",
-						"left": "calc(50% - 361px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "683px",
-						"width": "353px",
-						"height": "44px",
-						"left": "calc(50% - 176px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "683px",
-						"width": "247px",
-						"height": "44px",
-						"left": "calc(50% - 123px)"
-					}
-				]
-			});
-			
-			var output_8 = new cpr.controls.Output();
-			output_8.value = "댓글";
-			container.addChild(output_8, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "747px",
-						"right": "373px",
-						"left": "599px",
-						"height": "27px"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "747px",
-						"right": "182px",
-						"left": "292px",
-						"height": "27px"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "747px",
-						"right": "127px",
-						"left": "205px",
-						"height": "27px"
-					}
-				]
-			});
-			
-			var output_9 = new cpr.controls.Output();
-			output_9.value = "댓글개수";
-			container.addChild(output_9, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "747px",
-						"right": "295px",
-						"left": "650px",
-						"height": "27px"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "747px",
-						"right": "144px",
-						"left": "317px",
-						"height": "27px"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "747px",
-						"right": "101px",
-						"left": "222px",
-						"height": "27px"
 					}
 				]
 			});
