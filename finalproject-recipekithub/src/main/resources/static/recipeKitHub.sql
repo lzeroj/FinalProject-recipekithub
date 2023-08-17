@@ -76,4 +76,5 @@ ALTER TABLE MEMBER ADD (member_address_detail VARCHAR2(90));
 UPDATE MEMBER SET member_address_detail = 'Default Address';  -- replace 'Default Address' with an appropriate default or actual data.
 ALTER TABLE MEMBER MODIFY member_address_detail VARCHAR2(90) NOT NULL;
 
-
+SELECT member_email FROM MEMBER	WHERE member_name='금동준' AND member_phone='01012345678' AND member_birthday='19930105';
+SELECT member_password FROM MEMBER WHERE member_email='kjoonie@kakao.com' AND member_name='금동준' AND member_phone='01012345678';

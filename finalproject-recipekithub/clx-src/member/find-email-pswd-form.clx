@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5a0904ad" version="1.0.4584">
   <head std:sid="head-7865be45">
-    <screen std:sid="screen-65df6ef7" id="default" name="default" width="1024px" height="768px"/>
-    <screen std:sid="screen-910c08f6" id="tablet" name="tablet" width="500px" height="667px"/>
-    <screen std:sid="screen-b5f77588" id="mobile" name="mobile" width="350px" height="525px"/>
     <link std:sid="link-ee37d408" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-633b2f72" href="../theme/controls/accordion.part.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-62c59101" href="../theme/controls/apptitle.part.less" rel="stylesheet" type="text/css"/>
@@ -63,24 +60,215 @@
     <link std:sid="link-69a99b52" href="../theme/custom/table.part.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-4b50cbee" href="../theme/custom/typography.part.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-7ed2b98b" href="../theme/settings.part.less" rel="stylesheet" type="text/css"/>
-    <cl:model std:sid="model-2fbbc385"/>
+    <screen std:sid="screen-a0438491" id="FHD" name="FHD" minwidth="1920px" width="1920px" height="1080px" active="true"/>
+    <screen std:sid="screen-7eaec4af" id="default" name="default" minwidth="1024px" maxwidth="1919px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-0dc4c357" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-f7fae4e4" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-2fbbc385">
+      <cl:dataset std:sid="d-set-38028f31" id="ds_member">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cca5ec43" name="memberEmail" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-f528feeb" name="memberPassword" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-37b25aca" id="dm_find_email">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f5d161f3" name="member_name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b6972395" name="member_phone" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-8a0cf4e0" name="member_birthday" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-14ca05cd" id="dm_find_pswd">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-39608244" name="member_email" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-fce2834a" name="member_name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-afabd019" name="member_phone" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-0659aa30" id="sub_findEmail" action="/member/findEmail">
+        <cl:listener std:sid="listener-5c56b74e" name="submit-success" handler="onSub_findEmailSubmitSuccess2"/>
+        <cl:requestdata dataid="dm_find_email"/>
+        <cl:responsedata dataid="ds_member"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c04bdbd6" id="sub_findPswd" action="/member/findPassword">
+        <cl:listener std:sid="listener-6590a5da" name="submit-success" handler="onSub_findPswdSubmitSuccess"/>
+        <cl:requestdata dataid="dm_find_pswd"/>
+        <cl:responsedata dataid="ds_member"/>
+      </cl:submission>
+    </cl:model>
     <cl:appspec/>
   </head>
   <body std:sid="body-c044c821">
-    <cl:group std:sid="group-254c0a37">
-      <cl:xylayoutdata std:sid="xyl-data-b6d7021b" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:output std:sid="output-ae8b8eff" style="font-size:32px;" value="찾기 페이지 aloha!">
-        <cl:xylayoutdata std:sid="xyl-data-8e1d5780" top="106px" left="48px" width="915px" height="595px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      </cl:output>
-      <cl:button std:sid="button-48a177de" style="background-image:none;" class="btn-login" value="로그인">
-        <cl:xylayoutdata std:sid="xyl-data-89f68272" top="298px" left="453px" width="248px" height="103px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      </cl:button>
-      <cl:output std:sid="output-28e5f0cb" value="Output">
-        <cl:xylayoutdata std:sid="xyl-data-60bf2f31" top="155px" left="114px" width="350px" height="108px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      </cl:output>
-      <cl:xylayout std:sid="xylayout-850444d2"/>
+    <cl:group std:sid="group-1fde106f">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-a8b21137">
+        <cl:xylayoutdata std:sid="sxyl-data-bb35dc2e" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="FHD"/>
+      </cl:responsivexylayoutdata>
+      <cl:udc std:sid="ud-control-c123483e" type="udc.header3">
+        <cl:formdata std:sid="f-data-6ee467b3" row="0" col="0"/>
+      </cl:udc>
+      <cl:udc std:sid="ud-control-101e92b1" type="udc.footer">
+        <cl:formdata std:sid="f-data-56f3e83c" row="2" col="0"/>
+      </cl:udc>
+      <cl:group std:sid="group-cb9a5a54" style="background-size:cover; background-image:url(../theme/images/common/bgimg8_1920.png); background-position:center;">
+        <cl:formdata std:sid="f-data-8373d46b" row="1" col="0"/>
+        <cl:group std:sid="group-e743ec30">
+          <cl:responsivexylayoutdata std:sid="rxyl-data-321c9805">
+            <cl:xylayoutdata std:sid="sxyl-data-b1688cd2" top="20px" left="20px" width="1880px" height="740px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="FHD"/>
+          </cl:responsivexylayoutdata>
+          <cl:tabfolder std:sid="t-folder-e86d9d0f">
+            <cl:responsivexylayoutdata std:sid="rxyl-data-cc68aef7">
+              <cl:xylayoutdata std:sid="sxyl-data-4658ab37" width="880px" height="610px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="FHD"/>
+            </cl:responsivexylayoutdata>
+            <cl:tabitem std:sid="t-item-ad46741c" name="tabFindEmail" selected="true" text="Email 찾기">
+              <std:metadata>
+                <std:property key="is-active-item" value="true"/>
+              </std:metadata>
+              <cl:group std:sid="group-142616c9">
+                <std:metadata>
+                  <std:property key="locked" value="true"/>
+                </std:metadata>
+                <cl:group std:sid="group-c31dcbba">
+                  <cl:xylayoutdata std:sid="xyl-data-7507050a" top="19px" left="19px" width="835px" height="515px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+                  <cl:output std:sid="output-1e224cdd" style="font-size:20px;" value="회원가입시 사용하신 Email을 찾기 위해 다음의 정보를 입력해주세요.">
+                    <cl:formdata std:sid="f-data-99f26704" row="0" col="0" rowspan="1" colspan="3"/>
+                  </cl:output>
+                  <cl:output std:sid="output-0a483dba" style="border-radius:10px; border-right-style:none; background-color:#F0F0F0; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:none; border-top-style:none;" value="- 회원명">
+                    <cl:formdata std:sid="f-data-9654cbc7" row="1" col="0" rowspan="1" colspan="1"/>
+                  </cl:output>
+                  <cl:output std:sid="output-f0b09533" style="border-radius:10px; border-right-style:none; background-color:#F0F0F0; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:none; border-top-style:none;" value="- 핸드폰 번호 ">
+                    <cl:listener std:sid="listener-41321a3a" name="value-change" handler="onOutputValueChange"/>
+                    <cl:formdata std:sid="f-data-1802fcd0" row="2" col="0"/>
+                  </cl:output>
+                  <cl:output std:sid="output-a0daba31" style="border-radius:10px; border-right-style:none; background-color:#F0F0F0; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:none; border-top-style:none;" value="- 회원 생년월일">
+                    <cl:formdata std:sid="f-data-fb6d4aa4" row="3" col="0"/>
+                  </cl:output>
+                  <cl:inputbox std:sid="i-box-aa047745" id="ipbName1" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" showclearbutton="true">
+                    <cl:datamapbind property="value" datacontrolid="dm_find_email" columnname="member_name"/>
+                    <cl:formdata std:sid="f-data-bab7b91d" row="1" col="1" rowspan="1" colspan="1"/>
+                  </cl:inputbox>
+                  <cl:inputbox std:sid="i-box-e74c7b5c" id="ipbPhone1" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" showclearbutton="true">
+                    <cl:datamapbind property="value" datacontrolid="dm_find_email" columnname="member_phone"/>
+                    <cl:formdata std:sid="f-data-cf77df75" row="2" col="1" rowspan="1" colspan="1"/>
+                  </cl:inputbox>
+                  <cl:inputbox std:sid="i-box-971c3214" id="ipbBirthday" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" showclearbutton="true">
+                    <cl:listener std:sid="listener-6e2326a6" name="keydown" handler="onIpbBirthdayKeydown"/>
+                    <cl:datamapbind property="value" datacontrolid="dm_find_email" columnname="member_birthday"/>
+                    <cl:formdata std:sid="f-data-739c6e10" row="3" col="1" rowspan="1" colspan="1"/>
+                  </cl:inputbox>
+                  <cl:output std:sid="output-6ca0d71a" id="opbFindEmailNotice" style="font-size:20px;" value="">
+                    <cl:formdata std:sid="f-data-d9f5ccff" row="5" col="0" rowspan="1" colspan="3"/>
+                  </cl:output>
+                  <cl:output std:sid="output-87c2b293" id="opbFindEmailResult" style="color:#EC631D; font-weight:bolder; font-size:30px; font-family:푸른전남 Medium; text-align:center;">
+                    <cl:datasetbind property="value" datacontrolid="ds_member" columnname="memberEmail" rowindex="0"/>
+                    <cl:formdata std:sid="f-data-4a3a9483" row="6" col="0" rowspan="1" colspan="3"/>
+                  </cl:output>
+                  <cl:button std:sid="button-c4c7c26b" id="btnFindEmail" style="color:#0CA44E; border-bottom-color:#0ca44e; border-top-width:2px; border-right-width:2px; border-left-color:#0ca44e; font-size:20px; border-right-color:#0ca44e; border-left-width:2px; background-color:#F4FAEC; border-radius:20px; border-bottom-width:2px; border-top-color:#0ca44e; background-image:none;" class="btn-outline-success" value="조회">
+                    <cl:listener std:sid="listener-b5e029b2" name="click" handler="onBtnFindEmailClick"/>
+                    <cl:formdata std:sid="f-data-12ad8c9e" row="4" col="0" rowspan="1" colspan="3"/>
+                  </cl:button>
+                  <cl:textarea std:sid="t-area-3619d733" id="txa1" style="border-right-style:none; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;">
+                    <cl:formdata std:sid="f-data-74cf39ff" row="1" col="2"/>
+                  </cl:textarea>
+                  <cl:textarea std:sid="t-area-120ef3a5" id="txa2" style="border-right-style:none; border-left-style:none; font-size:16px; border-bottom-style:none; background-image:none; border-top-style:none;" value="❈ (-) 을 제외한 11자리의 전화번호를 입력해주세요. (ex. 01012345678)">
+                    <cl:formdata std:sid="f-data-76db3927" row="2" col="2"/>
+                  </cl:textarea>
+                  <cl:textarea std:sid="t-area-9fd5f7cc" id="txa3" style="border-right-style:none; border-left-style:none; font-size:16px; border-bottom-style:none; background-image:none; border-top-style:none;" value="❈ 숫자만으로 이루어진 8자리의 숫자를 입력해주세요. (ex. 20230101)">
+                    <cl:formdata std:sid="f-data-e8fe149f" row="3" col="2"/>
+                  </cl:textarea>
+                  <cl:formlayout std:sid="f-layout-95dc5d21" scrollable="false" hspace="20px" vspace="20px" top-margin="10px" right-margin="10px" bottom-margin="10px" left-margin="10px">
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+                    <cl:columns length="200" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                    <cl:columns length="300" unit="PIXEL"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:xylayout std:sid="xylayout-62636aac"/>
+              </cl:group>
+            </cl:tabitem>
+            <cl:tabitem std:sid="t-item-7d703641" name="tabFindPswd" text="Password 찾기">
+              <cl:group std:sid="group-9bc8a01d">
+                <std:metadata>
+                  <std:property key="locked" value="true"/>
+                </std:metadata>
+                <cl:group std:sid="group-2c2d6cb6">
+                  <cl:xylayoutdata std:sid="xyl-data-4129a747" top="20px" left="20px" width="835px" height="515px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+                  <cl:output std:sid="output-960d46be" style="font-size:20px;" value="비밀번호를 찾기 위해 다음의 정보를 입력해주세요.">
+                    <cl:formdata std:sid="f-data-f73f85cc" row="0" col="0" rowspan="1" colspan="3"/>
+                  </cl:output>
+                  <cl:output std:sid="output-79e7a159" style="border-radius:10px; border-right-style:none; background-color:#F0F0F0; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:none; border-top-style:none;" value="- Email">
+                    <cl:formdata std:sid="f-data-6a0782fb" row="1" col="0" rowspan="1" colspan="1"/>
+                  </cl:output>
+                  <cl:output std:sid="output-a4c40201" style="border-radius:10px; border-right-style:none; background-color:#F0F0F0; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:none; border-top-style:none;" value="- 회원명">
+                    <cl:formdata std:sid="f-data-c4da31d2" row="2" col="0"/>
+                  </cl:output>
+                  <cl:output std:sid="output-2a7c98ad" style="border-radius:10px; border-right-style:none; background-color:#F0F0F0; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:none; border-top-style:none;" value="- 핸드폰 번호">
+                    <cl:formdata std:sid="f-data-fd3dac8e" row="3" col="0"/>
+                  </cl:output>
+                  <cl:inputbox std:sid="i-box-a86bf26e" id="ipbEmail" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;">
+                    <cl:datamapbind property="value" datacontrolid="dm_find_pswd" columnname="member_email"/>
+                    <cl:formdata std:sid="f-data-9057471c" row="1" col="1" rowspan="1" colspan="1"/>
+                  </cl:inputbox>
+                  <cl:inputbox std:sid="i-box-bff13fe5" id="ipbName2" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;">
+                    <cl:datamapbind property="value" datacontrolid="dm_find_pswd" columnname="member_name"/>
+                    <cl:formdata std:sid="f-data-8f285ddb" row="2" col="1" rowspan="1" colspan="1"/>
+                  </cl:inputbox>
+                  <cl:inputbox std:sid="i-box-b09de35c" id="ipbPhone2" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;">
+                    <cl:listener std:sid="listener-d7dcef90" name="keydown" handler="onIpbPhone2Keydown"/>
+                    <cl:datamapbind property="value" datacontrolid="dm_find_pswd" columnname="member_phone"/>
+                    <cl:formdata std:sid="f-data-d7802db2" row="3" col="1" rowspan="1" colspan="1"/>
+                  </cl:inputbox>
+                  <cl:output std:sid="output-6d7dd395" id="opbFindPswdNotice" style="font-size:20px;" value="">
+                    <cl:formdata std:sid="f-data-1f7e4682" row="5" col="0" rowspan="1" colspan="3"/>
+                  </cl:output>
+                  <cl:output std:sid="output-a18ffb82" id="opbFindPswdResult" style="color:#EC631D; font-weight:bolder; font-size:30px; font-family:푸른전남 Medium; text-align:center;">
+                    <cl:datasetbind property="value" datacontrolid="ds_member" columnname="memberPassword" rowindex="0"/>
+                    <cl:formdata std:sid="f-data-5a5fd462" row="6" col="0" rowspan="1" colspan="3"/>
+                  </cl:output>
+                  <cl:button std:sid="button-ceaeec86" id="btnFindPswd" style="color:#0CA44E; border-bottom-color:#0ca44e; border-top-width:2px; border-right-width:2px; border-left-color:#0ca44e; font-size:20px; border-right-color:#0ca44e; border-left-width:2px; background-color:#F4FAEC; border-radius:20px; border-bottom-width:2px; border-top-color:#0ca44e; background-image:none;" class="btn-outline-success" value="조회">
+                    <cl:listener std:sid="listener-79ba4ff1" name="click" handler="onBtnFindPswdClick"/>
+                    <cl:formdata std:sid="f-data-14410422" row="4" col="0" rowspan="1" colspan="3"/>
+                  </cl:button>
+                  <cl:textarea std:sid="t-area-d97f9312" id="txa4" style="border-right-style:none; border-left-style:none; font-size:16px; border-bottom-style:none; background-image:none; border-top-style:none;" value="❈ (-) 을 제외한 11자리의 전화번호를 입력해주세요. (ex. 01012345678)">
+                    <cl:formdata std:sid="f-data-26417759" row="3" col="2"/>
+                  </cl:textarea>
+                  <cl:formlayout std:sid="f-layout-7aa447f1" scrollable="false" hspace="20px" vspace="20px" top-margin="10px" right-margin="10px" bottom-margin="10px" left-margin="10px">
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="50" unit="PIXEL"/>
+                    <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+                    <cl:columns length="200" unit="PIXEL"/>
+                    <cl:columns length="300" unit="PIXEL"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:xylayout std:sid="xylayout-0515500f"/>
+              </cl:group>
+            </cl:tabitem>
+            <cl:header-style style="border-radius:0px; font-family:푸른전남 Medium;"/>
+            <cl:item-style style="background-color:#0CA44E; border-radius:20px 20px 0px 0px; padding-top:10px; padding-left:50px; font-size:24px; padding-bottom:10px; font-family:푸른전남 Medium; text-align:center; padding-right:50px;"/>
+            <cl:body-style style="border-radius:0px 10px 20px 20px; font-family:푸른전남 Medium;"/>
+          </cl:tabfolder>
+          <cl:responsivexylayout std:sid="r-xylayout-926f3e30"/>
+        </cl:group>
+        <cl:responsivexylayout std:sid="r-xylayout-b5f29a22"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-fb3937c4" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="200" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="100" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
     </cl:group>
-    <cl:xylayout std:sid="xylayout-c2bc4237"/>
+    <cl:responsivexylayout std:sid="r-xylayout-9f7b8363"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

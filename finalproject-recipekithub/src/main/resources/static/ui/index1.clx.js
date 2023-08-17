@@ -7,20 +7,6 @@
 (function() {
 	var app = new cpr.core.App("index1", { 
 		onPrepare: function(loader) {
-			loader.addCSS("theme/cleopatra-theme.css");
-			loader.addCSS("theme/controls/checkbox.part.css");
-			loader.addCSS("theme/controls/combo-box.part.css");
-			loader.addCSS("theme/controls/common.part.css");
-			loader.addCSS("theme/controls/htmlobject.css");
-			loader.addCSS("theme/controls/menu.part.css");
-			loader.addCSS("theme/controls/nav-bar.part.css");
-			loader.addCSS("theme/controls/searchinput.part.css");
-			loader.addCSS("theme/custom-settings.part.css");
-			loader.addCSS("theme/custom-theme.css");
-			loader.addCSS("theme/custom/member.part.css");
-			loader.addCSS("theme/custom/navigation.part.css");
-			loader.addCSS("theme/custom/search-box.part.css");
-			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -60,8 +46,7 @@
 			// Header
 			var submission_1 = new cpr.protocols.Submission("find");
 			app.register(submission_1);
-			app.supportMedia("all and (min-width: 1920px)", "FHD");
-			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
+			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
 			
@@ -73,87 +58,38 @@
 			});
 			
 			// Layout
-			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-			container.setLayout(responsiveXYLayout_1);
+			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			container.setLayout(xYLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
-			var formLayout_1 = new cpr.controls.layouts.FormLayout();
-			formLayout_1.scrollable = false;
-			formLayout_1.topMargin = "0px";
-			formLayout_1.rightMargin = "0px";
-			formLayout_1.bottomMargin = "0px";
-			formLayout_1.leftMargin = "0px";
-			formLayout_1.horizontalSpacing = "0px";
-			formLayout_1.verticalSpacing = "0px";
-			formLayout_1.setColumns(["1fr"]);
-			formLayout_1.setRows(["200px", "1fr", "100px"]);
-			group_1.setLayout(formLayout_1);
+			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_2);
 			(function(container){
-				var userDefinedControl_1 = new udc.header3();
-				container.addChild(userDefinedControl_1, {
-					"colIndex": 0,
-					"rowIndex": 0
-				});
-				var userDefinedControl_2 = new udc.footer();
-				container.addChild(userDefinedControl_2, {
-					"colIndex": 0,
-					"rowIndex": 2
-				});
-				var group_2 = new cpr.controls.Container();
-				group_2.style.css({
-					"background-color" : "#F4FAEC",
-					"background-size" : "cover",
-					"background-image" : "url('theme/images/common/bgimg10.png')",
-					"background-position" : "center"
-				});
-				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_1);
-				(function(container){
-					var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
-					container.addChild(embeddedApp_1, {
-						"right": "30px",
-						"left": "30px",
-						"height": "740px",
-						"top": "calc(50% - 370px)"
-					});
-				})(group_2);
-				container.addChild(group_2, {
-					"colIndex": 0,
-					"rowIndex": 1
+				var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+				if(typeof onEa1Click == "function") {
+					embeddedApp_1.addEventListener("click", onEa1Click);
+				}
+				container.addChild(embeddedApp_1, {
+					"top": "-28px",
+					"right": "0px",
+					"bottom": "0px",
+					"left": "0px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				positions: [
-					{
-						"media": "all and (min-width: 1920px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}
-				]
+				"top": "200px",
+				"right": "140px",
+				"bottom": "100px",
+				"left": "140px"
+			});
+			
+			var userDefinedControl_1 = new udc.header();
+			container.addChild(userDefinedControl_1, {
+				"top": "0px",
+				"right": "0px",
+				"left": "0px",
+				"height": "160px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

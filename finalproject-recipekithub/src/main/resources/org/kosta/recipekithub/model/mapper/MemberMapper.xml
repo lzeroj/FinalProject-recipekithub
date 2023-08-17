@@ -45,4 +45,12 @@
 		SELECT COUNT(*) FROM MEMBER WHERE member_nick=#{value}
 	</select>
 	
+	<select id="findEmailByNamePhoneBirthday" parameterType="string" resultType="string">
+				SELECT member_email FROM MEMBER	WHERE member_name=#{memberName} AND member_phone=#{memberPhone} AND member_birthday=#{memberBirthday}
+	</select>
+	
+	<select id="findPswdByEmailNamePhone" parameterType="string" resultType="string">
+				SELECT member_password FROM MEMBER WHERE member_email=#{memberEmail} AND member_name=#{memberName} AND member_phone=#{memberPhone} 
+	</select>
+	
 </mapper>
