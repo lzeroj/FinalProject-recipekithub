@@ -305,11 +305,11 @@
 					}
 					
 					if(navigationBar.value == 'mealkit'){
-						window.location.href='/insertMealkitForm';
+						window.location.href='/mealkitList';
 					}
 						
 					if(navigationBar.value == 'recipe'){
-						window.location.href='/findRecipeBoardList';
+						window.location.href='/recipeBoardList';
 					}
 				};
 				// End - User Script
@@ -673,6 +673,7 @@
 				 */
 				function onNavigationBarItemClick(e){
 					var navigationBar = e.control;
+					console.log(navigationBar.value);
 					if(navigationBar.value == 'question'){
 						console.log(1);
 					}
@@ -684,6 +685,12 @@
 					if(navigationBar.value == 'recipe'){
 						window.location.href='/findRecipeBoardList';
 					}
+					
+					if(navigationBar.value == 'questionAdmin'){
+						window.location.href='/findQnAAdminForm';
+					}
+					
+					
 				}
 	
 				/*
@@ -702,6 +709,26 @@
 				function onBtnLoginoffClick(e){
 					var btnLoginoff = e.control;
 					window.location.href="/memberUI/loginForm";
+				}
+	
+				/*
+				 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+				 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+				 */
+				function onBodyLoad(e){
+					var sessionval = getSessionStorage("memsession");
+					console.log("세션에 담긴값 : "+sessionval);
+					var navigationBar = app.lookup("nav1");
+				//	navigationBar.selectItem(4);
+				//	console.log(navigationBar.value);
+					
+					if(sessionval == "shj"){
+						navigationBar.addItem(new cpr.controls.TreeItem("관리자", "admin", "root"));
+						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
+						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
+					}
+				//	console.log(navigationBar.getItem(4));
+				//	console.log(navigationBar.getChildren());
 				};
 				// End - User Script
 				
@@ -726,9 +753,6 @@
 				
 				// UI Configuration
 				var group_1 = new cpr.controls.Container();
-				group_1.style.css({
-					"box-shadow" : "0 0 10px #333"
-				});
 				var formLayout_1 = new cpr.controls.layouts.FormLayout();
 				formLayout_1.scrollable = false;
 				formLayout_1.topMargin = "0px";
@@ -976,9 +1000,9 @@
 						"colIndex": 0,
 						"rowIndex": 0
 					});
-					var navigationBar_1 = new cpr.controls.NavigationBar("navbar");
+					var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
 					navigationBar_1.menuType = "fullmenu";
-					navigationBar_1.expandTrigger = "click";
+					navigationBar_1.expandTrigger = "hover";
 					navigationBar_1.style.setClasses(["indexnav"]);
 					navigationBar_1.style.css({
 						"background-color" : "#90be70",
@@ -1039,6 +1063,9 @@
 						}
 					]
 				});
+				if(typeof onBodyLoad == "function"){
+					app.addEventListener("load", onBodyLoad);
+				}
 			}
 		});
 	internalApp.title = "header3";

@@ -19,6 +19,26 @@
           <cl:datacolumn std:sid="d-column-ea626df5" name="recipeBoardId" datatype="number"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-070f7202" id="dmdeclaration">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cecb2208" name="recipeBoardId" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8c42de11" name="inputtext"/>
+          <cl:datacolumn std:sid="d-column-dae9b20b" name="textbox"/>
+          <cl:datacolumn std:sid="d-column-b19f301e" name="declarationType"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-61f22395" id="subrecipelikecount" action="/countRecipeLikeList" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-fb1dad1a" name="submit-success" handler="onSubrecipelikecountSubmitSuccess"/>
+        <cl:requestdata dataid="dm1"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c66d0cb5" id="subinsertrecipelike" action="/clickRecipeLike" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-e8c725ab" name="submit-success" handler="onSubinsertrecipelikeSubmitSuccess"/>
+        <cl:requestdata dataid="dm1"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-1fd701b5" id="subinsertDeclaration" action="/insertDeclaration">
+        <cl:listener std:sid="listener-067b2e52" name="submit-success" handler="onSubinsertDeclarationSubmitSuccess"/>
+        <cl:requestdata dataid="dmdeclaration"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
@@ -37,16 +57,21 @@
       <cl:output std:sid="output-10e92904" id="recipeBoardTitle" value="타이틀">
         <cl:xylayoutdata std:sid="xyl-data-75d8834d" top="287px" left="94px" width="220px" height="55px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:output std:sid="output-2592074b" value="좋아요 갯수">
+      <cl:output std:sid="output-2592074b" id="opt1" value="좋아요 갯수">
         <cl:xylayoutdata std:sid="xyl-data-607cfe7e" top="305px" left="622px" width="82px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:button std:sid="button-c6b47e48" style="background-color:#FFFFFF; border-right-style:none; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url('../theme/images/recipe/heartnocolor.png'); background-position:center; border-top-style:none;" value="">
-        <cl:xylayoutdata std:sid="xyl-data-7a2590ed" top="287px" left="551px" width="61px" height="46px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      </cl:button>
       <cl:button std:sid="button-47c5a456" value="레시피 수정">
         <cl:listener std:sid="listener-396a8860" name="click" handler="onButtonClick"/>
         <cl:xylayoutdata std:sid="xyl-data-919d9edc" top="0px" right="629px" left="0px" height="45px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:button>
+      <cl:img std:sid="image-98b0d895" id="likeimg" style="cursor:pointer; background-image:none;">
+        <cl:listener std:sid="listener-4e3e4ff8" name="click" handler="onLikeimgClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-167d2acd" top="295px" left="572px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:img>
+      <cl:img std:sid="image-0b5e307d" style="cursor:pointer;" src="../theme/images/mealkit/alarm.png">
+        <cl:listener std:sid="listener-fff7ab39" name="click" handler="onImageClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-0eac82ec" top="295px" left="522px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:img>
       <cl:xylayout std:sid="xylayout-38653f1c"/>
     </cl:group>
     <cl:group std:sid="group-e5507d1a">

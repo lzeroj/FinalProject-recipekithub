@@ -24,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class LikeController {
 	private final LikeService likeService;
 	
+	// 페이지 로드시 좋아요 표시 출력
 	@RequestMapping("/showLike")
 	public View showLike(HttpServletRequest request,DataRequest dataRequest,int mealkitNo) {
 		
@@ -107,4 +108,51 @@ public class LikeController {
 		return new JSONDataView();
 	}
 
+	// 레시피 좋아요
+	@RequestMapping("/countRecipeLikeList")
+	public View countRecipeLikeList(DataRequest dataRequest,String recipeBoardId) {
+		// 세션 적용
+//		HttpSession session = request.getSession(false);
+//		MemberVO memberVO = session.getAttribute("member");
+//		String memberEmail = memberVO.getMemberEmail();
+//		if(memberEmail == null || memberEmail == "") {
+//			return new UIView();
+//		}
+		String memberEmail = "shj";
+		
+		int result = likeService.countRecipeLikeList(Integer.parseInt(recipeBoardId));
+		int showlike = likeService.showRecipeLike(Integer.parseInt(recipeBoardId),memberEmail);
+		Map<String,Object> message = new HashMap<String, Object>();
+		message.put("countRecipeLike", result);
+		message.put("showlikestatus", showlike);
+		return new JSONDataView(true,message);
+	}
+
+	@RequestMapping("/clickRecipeLike")
+	public View clickRecipeLike(HttpServletRequest request,DataRequest dataRequest,int recipeBoardId) {
+		
+		// 세션 적용
+//		HttpSession session = request.getSession(false);
+//		MemberVO memberVO = session.getAttribute("member");
+//		String memberEmail = memberVO.getMemberEmail();
+//		if(memberEmail == null || memberEmail == "") {
+//			return new UIView();
+//		}
+		String memberEmail = "shj";
+//		System.out.println("mealkitNo : "+mealkitNo);
+		int result = likeService.showRecipeLike(recipeBoardId,memberEmail);
+		if(result == 0) {
+			likeService.insertRecipeLike(recipeBoardId, memberEmail);
+			result = 1;
+		}else {
+			likeService.deleteRecipeLike(recipeBoardId, memberEmail);
+			result = 0;
+		}
+		
+		Map<String,Object> message = new HashMap<>();
+		message.put("likeresult", result);
+		return new JSONDataView(true, message);
+	}
+
+	
 }

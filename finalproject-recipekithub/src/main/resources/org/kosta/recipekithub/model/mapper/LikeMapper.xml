@@ -23,4 +23,23 @@
 		AND ml.MEMBER_EMAIL = #{memberEmail}
 	</select>
 	
+	<!-- 레시피 좋아요 -->
+	<select id="countRecipeLikeList" resultType="int">
+		SELECT COUNT(*) FROM LIKE_RKH WHERE RECIPE_BOARD_ID = #{recipeBoardId}
+	</select>
+	
+	<insert id="insertRecipeLike">
+		INSERT INTO LIKE_RKH VALUES (#{memberEmail},#{recipeBoardId})
+	</insert>
+	
+	<delete id="deleteRecipeLike">
+		DELETE FROM LIKE_RKH WHERE RECIPE_BOARD_ID = #{recipeBoardId} AND MEMBER_EMAIL = #{memberEmail}
+	</delete>
+	
+	<select id="showRecipeLike" resultType="int">
+		SELECT count(*) FROM LIKE_RKH WHERE MEMBER_EMAIL = #{memberEmail} AND RECIPE_BOARD_ID = #{recipeBoardId}
+	</select>
+	
+	
+	
 </mapper>
