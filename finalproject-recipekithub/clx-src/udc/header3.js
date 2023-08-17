@@ -55,14 +55,12 @@ function onNavigationBarItemClick(e){
 		window.location.href='/insertMealkitForm';
 	}
 		
-	if(navigationBar.value == 'recipe'){
-		window.location.href='/findRecipeBoardList';
-	}
-	
 	if(navigationBar.value == 'questionAdmin'){
 		window.location.href='/findQnAAdminForm';
 	}
-	
+	if(navigationBar.value == 'recipe'){
+		window.location.href='/recipeBoardList';
+	}
 	
 }
 

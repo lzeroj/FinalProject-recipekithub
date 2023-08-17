@@ -31,8 +31,12 @@
 				var hTMLSnippet = app.lookup("recipeContent");
 				hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 				
+				app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
+				var recipeCommentsub = app.lookup("recipeCommentList");
+				recipeCommentsub.send();
+				
 				// 현준
-				app.lookup("dm1").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
+				app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 				app.lookup("subrecipelikecount").send();
 				
 			}
@@ -60,7 +64,56 @@
 			function onButtonClick(e){
 				var button = e.control;
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
-				window.location.href = "/updateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
+				//	app.lookup("dmRecipeBoardId").setValue("dmRecipeBoardId", recipeBoardVO.recipeBoardId);
+				//	var submission = app.lookup("updateRecipe");
+				//	submission.send();
+				//window.location.href = "/updateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
+				
+				// 로그인 안한사람이 url 로 접속되는 것을 막기 위해 post 방식 사용
+			   var _httpPostMethod = new cpr.protocols.HttpPostMethod("/updateRecipe", "_self");
+				_httpPostMethod.addParameter("recipeBoardId", recipeBoardVO.recipeBoardId);
+				_httpPostMethod.submit(); 
+			}
+
+			/*
+			 * 서브미션에서 receive 이벤트 발생 시 호출.
+			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+			 */
+			function onRecipeCommentListReceive(e){
+				var recipeCommentList = e.control;
+				var xhr = recipeCommentList.xhr;
+				var jsonData = JSON.parse(xhr.responseText);
+				var recipeCommentList = jsonData.recipeCommentList;
+				var container = app.lookup("commentgrp");
+					for (var i = 0; i < recipeCommentList.length; i++) {
+					(function(index) {
+						//udc 동적 생성
+						var recipeComment = new udc.recipeCommentudc();
+						//udc에서 출판한 이미지 경로 앱 속성 지정
+						recipeComment.nick = recipeCommentList[i].memberVO.memberNick;
+						recipeComment.regDate = recipeCommentList[i].recipeCommentDate;
+						recipeComment.content = recipeCommentList[i].recipeCommentContent;
+						container.addChild(recipeComment, {
+							height: "120px",
+							width: "100px",
+							autoSize: "both"
+						});
+						recipeComment.addEventListener("deleteClick", function(e) {
+						app.lookup("dmRecipeCommentId").setValue("recipeCommentId", recipeCommentList[index].recipeCommentId);
+						var deleteCommentsub = app.lookup("deleteComment");
+						deleteCommentsub.send();
+						});
+					})(i);
+				}
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onDeleteCommentSubmitSuccess(e){
+				var deleteComment = e.control;
+			    app.lookup("commentgrp").redraw();
 			}
 
 			/*
@@ -118,8 +171,8 @@
 			 */
 			function onImageClick(e){
 				var image = e.control;
-				console.log(app.lookup("dm1").getValue("recipeBoardId"));
-				var initvalue = {"recipeBoardId" : app.lookup("dm1").getValue("recipeBoardId")};
+				console.log(app.lookup("dmRecipeBoardId").getValue("recipeBoardId"));
+				var initvalue = {"recipeBoardId" : app.lookup("dmRecipeBoardId").getValue("recipeBoardId")};
 				app.openDialog("dialog/declarationRecipe", {
 					width : 400
 					,height : 600
@@ -136,7 +189,7 @@
 					if(returnValue == null || returnValue == ''){
 						return;
 					}
-					var recipeBoardId = app.lookup("dm1").getValue("recipeBoardId");
+					var recipeBoardId = app.lookup("dmRecipeBoardId").getValue("recipeBoardId");
 					app.lookup("dmdeclaration").setValue("recipeBoardId", recipeBoardId);
 					app.lookup("dmdeclaration").setValue("inputtext", returnValue.inputtext);
 					app.lookup("dmdeclaration").setValue("textbox", returnValue.textbox);
@@ -184,7 +237,11 @@
 				"rows": []
 			});
 			app.register(dataSet_1);
-			var dataMap_1 = new cpr.data.DataMap("dm1");
+			
+			var dataSet_2 = new cpr.data.DataSet("recipeComment");
+			dataSet_2.parseData({});
+			app.register(dataSet_2);
+			var dataMap_1 = new cpr.data.DataMap("dmRecipeBoardId");
 			dataMap_1.parseData({
 				"columns" : [{
 					"name": "recipeBoardId",
@@ -206,6 +263,15 @@
 				]
 			});
 			app.register(dataMap_2);
+			
+			var dataMap_3 = new cpr.data.DataMap("dmRecipeCommentId");
+			dataMap_3.parseData({
+				"columns" : [{
+					"name": "recipeCommentId",
+					"dataType": "number"
+				}]
+			});
+			app.register(dataMap_3);
 			var submission_1 = new cpr.protocols.Submission("subrecipelikecount");
 			submission_1.action = "/countRecipeLikeList";
 			submission_1.mediaType = "application/x-www-form-urlencoded;simple";
@@ -231,6 +297,22 @@
 				submission_3.addEventListener("submit-success", onSubinsertDeclarationSubmitSuccess);
 			}
 			app.register(submission_3);
+			
+			var submission_4 = new cpr.protocols.Submission("recipeCommentList");
+			submission_4.action = "/recipeCommentList";
+			submission_4.addRequestData(dataMap_1);
+			if(typeof onRecipeCommentListReceive == "function") {
+				submission_4.addEventListener("receive", onRecipeCommentListReceive);
+			}
+			app.register(submission_4);
+			
+			var submission_5 = new cpr.protocols.Submission("deleteComment");
+			submission_5.action = "/deleteRecipeComment";
+			submission_5.addRequestData(dataMap_3);
+			if(typeof onDeleteCommentSubmitSuccess == "function") {
+				submission_5.addEventListener("submit-success", onDeleteCommentSubmitSuccess);
+			}
+			app.register(submission_5);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -348,30 +430,30 @@
 				]
 			});
 			
-			var group_2 = new cpr.controls.Container();
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_2.setLayout(xYLayout_2);
+			var group_2 = new cpr.controls.Container("commentgrp");
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			group_2.setLayout(verticalLayout_1);
 			container.addChild(group_2, {
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "694px",
+						"top": "780px",
 						"width": "724px",
-						"height": "154px",
+						"height": "176px",
 						"left": "calc(50% - 362px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "694px",
+						"top": "780px",
 						"width": "354px",
-						"height": "154px",
+						"height": "176px",
 						"left": "calc(50% - 177px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "694px",
+						"top": "780px",
 						"width": "247px",
-						"height": "154px",
+						"height": "176px",
 						"left": "calc(50% - 123px)"
 					}
 				]
@@ -384,23 +466,23 @@
 					{
 						"media": "all and (min-width: 1024px)",
 						"top": "668px",
-						"right": "1270px",
-						"left": "598px",
-						"height": "27px"
+						"width": "52px",
+						"height": "27px",
+						"left": "calc(50% - 26px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
 						"top": "668px",
-						"right": "620px",
-						"left": "292px",
-						"height": "27px"
+						"width": "25px",
+						"height": "27px",
+						"left": "calc(50% - 12px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
 						"top": "668px",
-						"right": "434px",
-						"left": "204px",
-						"height": "27px"
+						"width": "18px",
+						"height": "27px",
+						"left": "calc(50% - 9px)"
 					}
 				]
 			});
@@ -412,22 +494,22 @@
 					{
 						"media": "all and (min-width: 1024px)",
 						"top": "668px",
-						"right": "1192px",
-						"left": "649px",
+						"left": "985px",
+						"width": "79px",
 						"height": "27px"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
 						"top": "668px",
-						"right": "582px",
-						"left": "317px",
+						"left": "481px",
+						"width": "39px",
 						"height": "27px"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
 						"top": "668px",
-						"right": "407px",
-						"left": "222px",
+						"left": "337px",
+						"width": "27px",
 						"height": "27px"
 					}
 				]
@@ -518,21 +600,21 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "858px",
+						"top": "694px",
 						"width": "724px",
 						"height": "87px",
 						"left": "calc(50% - 362px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "858px",
+						"top": "694px",
 						"width": "354px",
 						"height": "87px",
 						"left": "calc(50% - 177px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "858px",
+						"top": "694px",
 						"width": "247px",
 						"height": "87px",
 						"left": "calc(50% - 123px)"

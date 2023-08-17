@@ -14,7 +14,8 @@
         </cl:datacolumnlist>
         <cl:datarowlist/>
       </cl:dataset>
-      <cl:datamap std:sid="d-map-801ce5c1" id="dm1">
+      <cl:dataset std:sid="d-set-d8d31950" id="recipeComment"/>
+      <cl:datamap std:sid="d-map-801ce5c1" id="dmRecipeBoardId">
         <cl:datacolumnlist>
           <cl:datacolumn std:sid="d-column-ea626df5" name="recipeBoardId" datatype="number"/>
         </cl:datacolumnlist>
@@ -27,17 +28,30 @@
           <cl:datacolumn std:sid="d-column-b19f301e" name="declarationType"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-81d8be7d" id="dmRecipeCommentId">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-57e61bac" name="recipeCommentId" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-61f22395" id="subrecipelikecount" action="/countRecipeLikeList" mediatype="application/x-www-form-urlencoded;simple">
         <cl:listener std:sid="listener-fb1dad1a" name="submit-success" handler="onSubrecipelikecountSubmitSuccess"/>
-        <cl:requestdata dataid="dm1"/>
+        <cl:requestdata dataid="dmRecipeBoardId"/>
       </cl:submission>
       <cl:submission std:sid="submission-c66d0cb5" id="subinsertrecipelike" action="/clickRecipeLike" mediatype="application/x-www-form-urlencoded;simple">
         <cl:listener std:sid="listener-e8c725ab" name="submit-success" handler="onSubinsertrecipelikeSubmitSuccess"/>
-        <cl:requestdata dataid="dm1"/>
+        <cl:requestdata dataid="dmRecipeBoardId"/>
       </cl:submission>
       <cl:submission std:sid="submission-1fd701b5" id="subinsertDeclaration" action="/insertDeclaration">
         <cl:listener std:sid="listener-067b2e52" name="submit-success" handler="onSubinsertDeclarationSubmitSuccess"/>
         <cl:requestdata dataid="dmdeclaration"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-308cce28" id="recipeCommentList" action="/recipeCommentList">
+        <cl:listener std:sid="listener-1bc33a78" name="receive" handler="onRecipeCommentListReceive"/>
+        <cl:requestdata dataid="dmRecipeBoardId"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-32e74f3c" id="deleteComment" action="/deleteRecipeComment">
+        <cl:listener std:sid="listener-609b55e3" name="submit-success" handler="onDeleteCommentSubmitSuccess"/>
+        <cl:requestdata dataid="dmRecipeCommentId"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -74,20 +88,20 @@
       </cl:img>
       <cl:xylayout std:sid="xylayout-38653f1c"/>
     </cl:group>
-    <cl:group std:sid="group-e5507d1a">
+    <cl:group std:sid="group-e5507d1a" id="commentgrp">
       <cl:responsivexylayoutdata std:sid="rxyl-data-544c1766">
-        <cl:xylayoutdata std:sid="sxyl-data-3116a2bb" top="694px" width="724px" height="154px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-3116a2bb" top="780px" width="724px" height="176px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
-      <cl:xylayout std:sid="xylayout-a7692c56"/>
+      <cl:verticallayout std:sid="v-layout-369a8229"/>
     </cl:group>
     <cl:output std:sid="output-e8c32823" value="댓글">
       <cl:responsivexylayoutdata std:sid="rxyl-data-85768ed4">
-        <cl:xylayoutdata std:sid="sxyl-data-ed900da7" top="668px" right="1270px" left="598px" height="27px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-ed900da7" top="668px" width="52px" height="27px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
     </cl:output>
     <cl:output std:sid="output-cc11ff80" value="댓글개수">
       <cl:responsivexylayoutdata std:sid="rxyl-data-0a0868e2">
-        <cl:xylayoutdata std:sid="sxyl-data-cdd3a4ce" top="668px" right="1192px" left="649px" height="27px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-cdd3a4ce" top="668px" left="985px" width="79px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
     </cl:output>
     <cl:pageindexer std:sid="p-indexer-275aa17e">
@@ -102,7 +116,7 @@
     </cl:htmlsnippet>
     <cl:group std:sid="group-e9187c3c">
       <cl:responsivexylayoutdata std:sid="rxyl-data-39a26a86">
-        <cl:xylayoutdata std:sid="sxyl-data-ce45f3c8" top="858px" width="724px" height="87px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-ce45f3c8" top="694px" width="724px" height="87px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:inputbox std:sid="i-box-bb4a5b42" id="ipb1">
         <cl:formdata std:sid="f-data-51c3e8c7" row="0" col="0"/>
