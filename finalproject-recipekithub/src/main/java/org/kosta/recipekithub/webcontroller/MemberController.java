@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.recipekithub.model.mapper.MemberMapper;
 import org.kosta.recipekithub.model.service.MemberService;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
@@ -54,7 +55,7 @@ public class MemberController {
 		log.debug("member 로그인 {}", member);
 
 		if (member == null) {
-			return new UIView("ui/index.clx");
+			return new UIView("ui/index1.clx");
 		}
 
 		HttpSession session = request.getSession();
@@ -72,7 +73,7 @@ public class MemberController {
 		String memberEmail = param.getValue("member_email");
 		
 		if(memberService.findMemberByEmail(memberEmail) != null) {
-			return new UIView("ui/index.clx");
+			return new UIView("ui/index1.clx");
 		}
 		
 		String memberPassword = param.getValue("member_password");
@@ -210,6 +211,43 @@ public class MemberController {
 			// message.put("uri", "login/login");
 			// dataRequest.setMetadata(true, message);
 			
+			return new JSONDataView();
+		}
+		
+		
+		@RequestMapping("/findEmail")
+		public View findEmailByNamePhoneBirthday(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+			ParameterGroup param = dataRequest.getParameterGroup("dm_find_email");
+			String memberName = param.getValue("member_name");
+			String memberPhone = param.getValue("member_phone");
+			String memberBirthday = param.getValue("member_birthday");
+			String findEmailResult = memberService.findEmailByNamePhoneBirthday(memberName, memberPhone, memberBirthday);
+			
+			Map<String, String> email = new HashMap<>();
+			email.put("memberEmail", findEmailResult); 
+			
+			List<Map<String, String>> memberEmail = new ArrayList<>();
+			memberEmail.add(email);
+		    
+			dataRequest.setResponse("ds_member", memberEmail); 
+			return new JSONDataView();
+		}
+		
+		@RequestMapping("/findPassword")
+		public View findPswdByEmailNamePhone(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+			ParameterGroup param = dataRequest.getParameterGroup("dm_find_pswd");
+			String memberEmail = param.getValue("member_email");
+			String memberName = param.getValue("member_name");
+			String memberPhone = param.getValue("member_phone");
+			String findPswdResult = memberService.findPswdByEmailNamePhone(memberEmail, memberName, memberPhone);
+
+			Map<String, String> password = new HashMap<>();
+			password.put("memberPassword", findPswdResult); 
+			
+			List<Map<String, String>> memberPassword = new ArrayList<>();
+			memberPassword.add(password);
+			
+			dataRequest.setResponse("ds_member", memberPassword); 
 			return new JSONDataView();
 		}
 }
