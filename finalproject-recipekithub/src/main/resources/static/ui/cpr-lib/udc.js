@@ -305,11 +305,11 @@
 					}
 					
 					if(navigationBar.value == 'mealkit'){
-						window.location.href='/mealkitList';
+						window.location.href='/insertMealkitForm';
 					}
 						
 					if(navigationBar.value == 'recipe'){
-						window.location.href='/recipeBoardList';
+						window.location.href='/findRecipeBoardList';
 					}
 				};
 				// End - User Script
@@ -726,6 +726,9 @@
 				
 				// UI Configuration
 				var group_1 = new cpr.controls.Container();
+				group_1.style.css({
+					"box-shadow" : "0 0 10px #333"
+				});
 				var formLayout_1 = new cpr.controls.layouts.FormLayout();
 				formLayout_1.scrollable = false;
 				formLayout_1.topMargin = "0px";
@@ -973,7 +976,7 @@
 						"colIndex": 0,
 						"rowIndex": 0
 					});
-					var navigationBar_1 = new cpr.controls.NavigationBar();
+					var navigationBar_1 = new cpr.controls.NavigationBar("navbar");
 					navigationBar_1.menuType = "fullmenu";
 					navigationBar_1.expandTrigger = "click";
 					navigationBar_1.style.setClasses(["indexnav"]);

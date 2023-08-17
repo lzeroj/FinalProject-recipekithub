@@ -120,11 +120,11 @@ function onIpbPassword1Keyup(e) {
 	var checkPswd1Flag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 	var password1 = app.lookup("ipbPassword1").text;
 	console.log(password1);
-	var checkPswdResult1 = app.lookup("opbCheckPassword").text;
+	var checkPswdResult1 = app.lookup("opbCheckPassword");
 	if (password1.length < 2 || password1.length > 25) {
-		checkPswdResult1 = "비밀번호는 1자 이상 25자 이하이어야 합니다.";
+		checkPswdResult1.text = "비밀번호는 1자 이상 25자 이하이어야 합니다.";
 	} else {
-		checkPswdResult1 = "사용가능한 비밀번호입니다.";
+		checkPswdResult1.text = "사용가능한 비밀번호입니다.";
 	}
 }
 

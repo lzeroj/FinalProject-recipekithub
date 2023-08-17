@@ -33,7 +33,7 @@ function onRegisterBtnClick(e) {
  */
 function onFindBtnClick(e) {
 	var findBtn = e.control;
-	window.location.href = "member/find-info-form.clx";
+	window.location.href = "member/find-email-pswd-form.clx";
 }
 
 /*
@@ -42,7 +42,7 @@ function onFindBtnClick(e) {
  */
 function onSub_loginSubmitSuccess(e) {
 	var sub_login = e.control;
-	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+	var httpPostMethod = new cpr.protocols.HttpPostMethod("index1.clx");
 	httpPostMethod.submit();
 }
 
