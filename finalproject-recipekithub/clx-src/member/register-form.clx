@@ -60,6 +60,7 @@
         <cl:requestdata dataid="dm_check_pswd"/>
         <cl:requestdata dataid="dm_check_nick"/>
         <cl:requestdata dataid="dm_register_member"/>
+        <cl:responsedata dataid="ds_member"/>
       </cl:submission>
       <cl:submission std:sid="submission-4f13b3bf" id="sub_check_email" action="/member/checkEmail">
         <cl:requestdata dataid="dm_check_email"/>
@@ -76,250 +77,258 @@
   <body std:sid="body-73b0262e" style="background-color:none;">
     <cl:listener std:sid="listener-ba0c4459" name="init" handler="onBodyInit"/>
     <cl:listener std:sid="listener-a5efa734" name="unload" handler="onBodyUnload"/>
-    <cl:group std:sid="group-e9f8bd7b">
+    <cl:group std:sid="group-e9f8bd7b" style="background-size:cover; background-image:url(../theme/images/common/bgimg8_1920.png); background-position:center;">
       <cl:responsivexylayoutdata std:sid="rxyl-data-bcec5c20">
         <cl:xylayoutdata std:sid="sxyl-data-a98ac714" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
         <cl:xylayoutdata std:sid="sxyl-data-c6ec4c70" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="FHD"/>
       </cl:responsivexylayoutdata>
-      <cl:group std:sid="group-44b0ea3a" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg9.png); background-position:center;">
-        <cl:formdata std:sid="f-data-b6fa65ae" row="1" col="0"/>
-        <cl:group std:sid="group-bcaaf89d">
-          <cl:responsivexylayoutdata std:sid="rxyl-data-f3993863">
-            <cl:xylayoutdata std:sid="sxyl-data-fb5cfb96" top="20px" left="20px" width="1880px" height="760px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="FHD"/>
+      <cl:group std:sid="group-bcaaf89d">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-528f3446">
+          <cl:xylayoutdata std:sid="sxyl-data-6962ac5a" top="0px" left="0px" width="1869px" height="1080px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="FHD"/>
+        </cl:responsivexylayoutdata>
+        <cl:tabfolder std:sid="t-folder-140356dc">
+          <cl:responsivexylayoutdata std:sid="rxyl-data-3a9f4667">
+            <cl:xylayoutdata std:sid="sxyl-data-21488f91" width="520px" height="901px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="FHD"/>
           </cl:responsivexylayoutdata>
-          <cl:tabfolder std:sid="t-folder-140356dc">
-            <cl:responsivexylayoutdata std:sid="rxyl-data-3a9f4667">
-              <cl:xylayoutdata std:sid="sxyl-data-21488f91" width="520px" height="760px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="FHD"/>
-            </cl:responsivexylayoutdata>
-            <cl:tabitem std:sid="t-item-cf296849" selected="true" text="회원가입">
+          <cl:tabitem std:sid="t-item-cf296849" selected="true" text="회원가입">
+            <std:metadata>
+              <std:property key="is-active-item" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-35a0a5c0">
               <std:metadata>
-                <std:property key="is-active-item" value="true"/>
+                <std:property key="locked" value="true"/>
               </std:metadata>
-              <cl:group std:sid="group-35a0a5c0">
-                <std:metadata>
-                  <std:property key="locked" value="true"/>
-                </std:metadata>
-                <cl:group std:sid="group-e466c8d9">
-                  <cl:xylayoutdata std:sid="xyl-data-f85398ae" top="10px" right="20px" bottom="14px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-                  <cl:group std:sid="group-4c9e6022">
-                    <cl:xylayoutdata std:sid="xyl-data-8223845f" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-                    <cl:group std:sid="group-55145fa4">
-                      <cl:xylayoutdata std:sid="xyl-data-56100737" top="651px" right="20px" bottom="0px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-                      <cl:button std:sid="button-b35b676d" style="border-right-style:solid; border-bottom-color:#097f3d; border-top-width:2px; color:#097f3d; border-right-width:2px; font-weight:bolder; border-left-color:#097f3d; font-size:16px; border-right-color:#097f3d; border-left-width:2px; border-top-style:solid; background-color:#FFFFFF; text-shadow:none; border-left-style:solid; border-bottom-width:2px; border-top-color:#097f3d; border-bottom-style:solid; background-image:none;" value="가입">
-                        <cl:formdata std:sid="f-data-f65f75fa" row="0" col="1"/>
-                      </cl:button>
-                      <cl:button std:sid="button-a263fe55" style="border-right-style:solid; border-top-width:2px; border-bottom-color:#a0a0a0; color:#646464; border-right-width:2px; font-weight:bolder; border-left-color:#a0a0a0; font-size:16px; border-right-color:#a0a0a0; border-left-width:2px; border-top-style:solid; background-color:#FFFFFF; border-left-style:solid; border-bottom-width:2px; border-top-color:#a0a0a0; border-bottom-style:solid; background-image:none;" value="취소">
-                        <cl:formdata std:sid="f-data-0e9289c4" row="0" col="3"/>
-                      </cl:button>
-                      <cl:formlayout std:sid="f-layout-4be0398a" scrollable="false" hspace="20px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-                        <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-                        <cl:columns length="1" unit="FRACTION"/>
-                        <cl:columns length="1" unit="FRACTION"/>
-                        <cl:columns length="10" unit="PIXEL"/>
-                        <cl:columns length="1" unit="FRACTION"/>
-                        <cl:columns length="1" unit="FRACTION"/>
-                      </cl:formlayout>
-                    </cl:group>
-                    <cl:xylayout std:sid="xylayout-ea2d4d2f"/>
-                  </cl:group>
-                  <cl:group std:sid="group-401627dc" style="background-color:#FFFFFF; border-radius:10px;">
-                    <cl:xylayoutdata std:sid="xyl-data-05f962d8" top="0px" right="0px" bottom="50px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-                    <cl:output std:sid="output-acd8226d" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 이름">
-                      <cl:formdata std:sid="f-data-f92d40de" row="3" col="0"/>
-                    </cl:output>
-                    <cl:output std:sid="output-cdf0c67d" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 닉네임">
-                      <cl:formdata std:sid="f-data-40ffa2ca" row="4" col="0"/>
-                    </cl:output>
-                    <cl:output std:sid="output-f24a9174" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 생년월일">
-                      <cl:formdata std:sid="f-data-da4d60fb" row="5" col="0"/>
-                    </cl:output>
-                    <cl:output std:sid="output-c1784cad" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 핸드폰 번호">
-                      <cl:formdata std:sid="f-data-6fdfc544" row="6" col="0"/>
-                    </cl:output>
-                    <cl:inputbox std:sid="i-box-89c752dd" id="ipbName" style="border-radius:5px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="18" spellcheck="false" imemode="active">
-                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_name"/>
-                      <cl:formdata std:sid="f-data-e78357df" row="3" col="1"/>
-                    </cl:inputbox>
-                    <cl:inputbox std:sid="i-box-717e3d70" id="ipbNick" style="border-radius:5px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="24" spellcheck="false">
-                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_nick"/>
-                      <cl:formdata std:sid="f-data-387988d5" row="4" col="1"/>
-                    </cl:inputbox>
-                    <cl:dateinput std:sid="d-input-fa585cec" id="ipbBirthday" style="border-radius:5px; font-size:15px;" class="cl-dateinput-register single-datepicker" spinbutton="true" showclearbutton="true">
-                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_birthday"/>
-                      <cl:formdata std:sid="f-data-968e26cb" row="5" col="1"/>
-                    </cl:dateinput>
-                    <cl:maskeditor std:sid="m-editor-0fbcd13a" id="ipbPhone" style="border-radius:5px; font-size:15px;" mask="000-0000-0000" showclearbutton="true">
-                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_phone"/>
-                      <cl:formdata std:sid="f-data-2b02537f" row="6" col="1"/>
-                    </cl:maskeditor>
-                    <cl:group std:sid="group-b11a99d2" style="background-color:#F0F0F0; border-radius:5px;">
-                      <cl:formdata std:sid="f-data-60eff5c0" row="7" col="0"/>
-                      <cl:output std:sid="output-7d42d0c5" style="font-weight:bold; font-size:15px;" value=" - 주소">
-                        <cl:formdata std:sid="f-data-bb7f519d" row="0" col="0"/>
-                      </cl:output>
-                      <cl:formlayout std:sid="f-layout-4bf7d511" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
-                        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-                        <cl:rows length="25" unit="PIXEL"/>
-                        <cl:columns length="1" unit="FRACTION"/>
-                      </cl:formlayout>
-                    </cl:group>
-                    <cl:group std:sid="group-c1cc8067">
-                      <cl:formdata std:sid="f-data-f5e5fa12" row="7" col="1" rowspan="1" colspan="2"/>
-                      <cl:button std:sid="button-5b2ecc75" id="btnPostcode" value="우편번호">
-                        <cl:formdata std:sid="f-data-74cfdf72" row="0" col="1"/>
-                      </cl:button>
-                      <cl:inputbox std:sid="i-box-3eac9641" id="address" lengthunit="utf8" maxlength="30">
-                        <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_address"/>
-                        <cl:formdata std:sid="f-data-04799ea4" row="1" col="0" rowspan="1" colspan="2"/>
-                      </cl:inputbox>
-                      <cl:inputbox std:sid="i-box-f8e684d0" id="detailAddress" lengthunit="utf8" maxlength="30">
-                        <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_address_detail"/>
-                        <cl:formdata std:sid="f-data-19ed086b" row="2" col="0" rowspan="1" colspan="2"/>
-                      </cl:inputbox>
-                      <cl:maskeditor std:sid="m-editor-b351da49" id="postCode" mask="00000">
-                        <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_postcode"/>
-                        <cl:formdata std:sid="f-data-101aecfb" row="0" col="0"/>
-                      </cl:maskeditor>
-                      <cl:formlayout std:sid="f-layout-ce954665" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
-                        <cl:rows length="26" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:columns length="180" unit="PIXEL"/>
-                        <cl:columns length="100" unit="PIXEL"/>
-                      </cl:formlayout>
-                    </cl:group>
-                    <cl:output std:sid="output-ac9214fd" value="Output">
-                      <cl:formdata std:sid="f-data-48c500df" row="4" col="2"/>
-                    </cl:output>
-                    <cl:group std:sid="group-d4b3ccc0">
-                      <cl:formdata std:sid="f-data-6fc74c7e" row="0" col="0" rowspan="1" colspan="3"/>
-                      <cl:output std:sid="output-8173653f" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - Email">
-                        <cl:formdata std:sid="f-data-a5e07d48" row="0" col="0" rowspan="3" colspan="1"/>
-                      </cl:output>
-                      <cl:output std:sid="output-e6eb880f" style="font-size:10px;" value="❈ 중복이 불가한 이메일 형식, 30자 이하입니다">
-                        <cl:formdata std:sid="f-data-a7850f1d" row="2" col="1" rowspan="1" colspan="2"/>
-                      </cl:output>
-                      <cl:output std:sid="output-8e7f42cc" id="opbCheckEmail" style="font-size:12px;" value="">
-                        <cl:formdata std:sid="f-data-07c3b299" row="1" col="1" rowspan="1" colspan="2"/>
-                      </cl:output>
-                      <cl:inputbox std:sid="i-box-281314df" id="ipbEmail" style="border-radius:5px; font-size:15px;" showclearbutton="true" maxlength="30" spellcheck="false">
-                        <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_email"/>
-                        <cl:formdata std:sid="f-data-5fd0c5de" row="0" col="1" rowspan="1" colspan="2"/>
-                      </cl:inputbox>
-                      <cl:formlayout std:sid="f-layout-d6a0380b" scrollable="false" hspace="20px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-                        <cl:columns length="120" unit="PIXEL"/>
-                        <cl:columns length="200" unit="PIXEL"/>
-                        <cl:columns length="1" unit="FRACTION"/>
-                      </cl:formlayout>
-                    </cl:group>
-                    <cl:group std:sid="group-1d4772c6">
-                      <cl:formdata std:sid="f-data-8157a38d" row="1" col="0" rowspan="1" colspan="3"/>
-                      <cl:output std:sid="output-80de58cb" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 비밀번호">
-                        <cl:formdata std:sid="f-data-69d61cbf" row="0" col="0" rowspan="3" colspan="1"/>
-                      </cl:output>
-                      <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; font-size:15px;" showclearbutton="true" maxlength="25" spellcheck="false">
-                        <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_password"/>
-                        <cl:formdata std:sid="f-data-a9cb13bf" row="0" col="1" rowspan="1" colspan="1"/>
-                      </cl:inputbox>
-                      <cl:group std:sid="group-2c14a9f3">
-                        <cl:formdata std:sid="f-data-942e8253" row="0" col="2"/>
-                        <cl:img std:sid="image-3e37bcba" src="../theme/images/member/circle-check-regular.svg">
-                          <cl:formdata std:sid="f-data-921b5934" row="0" col="0"/>
-                        </cl:img>
-                        <cl:formlayout std:sid="f-layout-482d6931" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-                          <cl:rows length="1" unit="FRACTION"/>
-                          <cl:columns length="1" unit="FRACTION"/>
-                        </cl:formlayout>
-                      </cl:group>
-                      <cl:output std:sid="output-bb64ce6b" id="opbCheckPassword" style="font-size:12px;" value="">
-                        <cl:formdata std:sid="f-data-30c5bd7d" row="1" col="1" rowspan="1" colspan="2"/>
-                      </cl:output>
-                      <cl:output std:sid="output-38bce9e6" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
-                        <cl:formdata std:sid="f-data-a043a2b1" row="2" col="1" rowspan="1" colspan="2"/>
-                      </cl:output>
-                      <cl:formlayout std:sid="f-layout-ab8174a3" scrollable="false" hspace="20px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:columns length="120" unit="PIXEL"/>
-                        <cl:columns length="200" unit="PIXEL"/>
-                        <cl:columns length="1" unit="FRACTION"/>
-                      </cl:formlayout>
-                    </cl:group>
-                    <cl:group std:sid="group-3b28bf12">
-                      <cl:formdata std:sid="f-data-a299a01d" row="2" col="0" rowspan="1" colspan="3"/>
-                      <cl:output std:sid="output-43f7ba32" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 비밀번호 확인">
-                        <cl:formdata std:sid="f-data-ab8f458e" row="0" col="0" rowspan="3" colspan="1"/>
-                      </cl:output>
-                      <cl:inputbox std:sid="i-box-b6daa8de" id="ipbPassword2" style="border-radius:5px; font-size:15px;" showclearbutton="true" maxlength="25" spellcheck="false">
-                        <cl:formdata std:sid="f-data-0758c877" row="0" col="1" rowspan="1" colspan="1"/>
-                      </cl:inputbox>
-                      <cl:group std:sid="group-54e1f33d">
-                        <cl:formdata std:sid="f-data-924d41dc" row="0" col="2"/>
-                        <cl:img std:sid="image-80caaea6" src="../theme/images/member/circle-check-solid (1).svg">
-                          <cl:formdata std:sid="f-data-43eab43c" row="0" col="0"/>
-                        </cl:img>
-                        <cl:formlayout std:sid="f-layout-304a4bf4" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-                          <cl:rows length="1" unit="FRACTION"/>
-                          <cl:columns length="1" unit="FRACTION"/>
-                        </cl:formlayout>
-                      </cl:group>
-                      <cl:output std:sid="output-84eeb228" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
-                        <cl:formdata std:sid="f-data-ef015928" row="2" col="1" rowspan="1" colspan="2"/>
-                      </cl:output>
-                      <cl:output std:sid="output-b92eba14" value="Output">
-                        <cl:formdata std:sid="f-data-89da7b2a" row="1" col="1" rowspan="1" colspan="2"/>
-                      </cl:output>
-                      <cl:formlayout std:sid="f-layout-39a15f5f" scrollable="false" hspace="20px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:rows length="30" unit="PIXEL"/>
-                        <cl:columns length="120" unit="PIXEL"/>
-                        <cl:columns length="200" unit="PIXEL"/>
-                        <cl:columns length="1" unit="FRACTION"/>
-                      </cl:formlayout>
-                    </cl:group>
-                    <cl:formlayout std:sid="f-layout-27db53ec" scrollable="false" hspace="20px" vspace="10px" top-margin="5px" right-margin="10px" bottom-margin="5px" left-margin="20px">
-                      <cl:rows length="110" unit="PIXEL"/>
-                      <cl:rows length="110" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-                      <cl:rows length="110" unit="PIXEL"/>
-                      <cl:rows length="30" unit="PIXEL"/>
-                      <cl:rows length="30" unit="PIXEL"/>
-                      <cl:rows length="30" unit="PIXEL"/>
-                      <cl:rows length="30" unit="PIXEL"/>
-                      <cl:rows length="115" unit="PIXEL"/>
-                      <cl:columns length="120" unit="PIXEL"/>
-                      <cl:columns length="200" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-                      <cl:columns length="80" unit="PIXEL"/>
+              <cl:group std:sid="group-e466c8d9">
+                <cl:xylayoutdata std:sid="xyl-data-f85398ae" top="10px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:group std:sid="group-4c9e6022">
+                  <cl:xylayoutdata std:sid="xyl-data-8223845f" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                  <cl:group std:sid="group-55145fa4">
+                    <cl:xylayoutdata std:sid="xyl-data-56100737" top="775px" right="20px" bottom="0px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                    <cl:button std:sid="button-b35b676d" style="border-right-style:solid; border-bottom-color:#097f3d; border-top-width:2px; color:#097f3d; border-right-width:2px; font-weight:bolder; border-left-color:#097f3d; font-size:16px; border-right-color:#097f3d; border-left-width:2px; border-top-style:solid; background-color:#FFFFFF; text-shadow:none; border-left-style:solid; border-bottom-width:2px; border-top-color:#097f3d; border-bottom-style:solid; background-image:none;" value="가입">
+                      <cl:listener std:sid="listener-9dbebf33" name="click" handler="onButtonClick"/>
+                      <cl:formdata std:sid="f-data-f65f75fa" row="0" col="1"/>
+                    </cl:button>
+                    <cl:button std:sid="button-a263fe55" style="border-right-style:solid; border-top-width:2px; border-bottom-color:#a0a0a0; color:#646464; border-right-width:2px; font-weight:bolder; border-left-color:#a0a0a0; font-size:16px; border-right-color:#a0a0a0; border-left-width:2px; border-top-style:solid; background-color:#FFFFFF; border-left-style:solid; border-bottom-width:2px; border-top-color:#a0a0a0; border-bottom-style:solid; background-image:none;" value="취소">
+                      <cl:listener std:sid="listener-def2009d" name="click" handler="onButtonClick2"/>
+                      <cl:formdata std:sid="f-data-0e9289c4" row="0" col="3"/>
+                    </cl:button>
+                    <cl:formlayout std:sid="f-layout-4be0398a" scrollable="false" hspace="20px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                      <cl:rows length="50" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                      <cl:columns length="1" unit="FRACTION"/>
+                      <cl:columns length="1" unit="FRACTION"/>
+                      <cl:columns length="10" unit="PIXEL"/>
+                      <cl:columns length="1" unit="FRACTION"/>
+                      <cl:columns length="1" unit="FRACTION"/>
                     </cl:formlayout>
                   </cl:group>
-                  <cl:xylayout std:sid="xylayout-c0572ef2"/>
+                  <cl:xylayout std:sid="xylayout-ea2d4d2f"/>
                 </cl:group>
-                <cl:xylayout std:sid="xylayout-aa3a0542"/>
+                <cl:group std:sid="group-401627dc" style="background-color:#FFFFFF; border-radius:10px;">
+                  <cl:xylayoutdata std:sid="xyl-data-05f962d8" top="10px" right="0px" bottom="69px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                  <cl:output std:sid="output-acd8226d" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 이름">
+                    <cl:formdata std:sid="f-data-f92d40de" row="3" col="0"/>
+                  </cl:output>
+                  <cl:output std:sid="output-f24a9174" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 생년월일">
+                    <cl:formdata std:sid="f-data-da4d60fb" row="5" col="0"/>
+                  </cl:output>
+                  <cl:output std:sid="output-c1784cad" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 핸드폰 번호">
+                    <cl:formdata std:sid="f-data-6fdfc544" row="6" col="0"/>
+                  </cl:output>
+                  <cl:inputbox std:sid="i-box-89c752dd" id="ipbName" style="border-radius:5px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="18" spellcheck="false" imemode="active">
+                    <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_name"/>
+                    <cl:formdata std:sid="f-data-e78357df" row="3" col="1"/>
+                  </cl:inputbox>
+                  <cl:dateinput std:sid="d-input-fa585cec" id="ipbBirthday" style="border-radius:5px; font-size:15px;" class="cl-dateinput-register single-datepicker" spinbutton="true" showclearbutton="true">
+                    <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_birthday"/>
+                    <cl:formdata std:sid="f-data-968e26cb" row="5" col="1"/>
+                  </cl:dateinput>
+                  <cl:maskeditor std:sid="m-editor-0fbcd13a" id="ipbPhone" style="border-radius:5px; font-size:15px;" mask="000-0000-0000" showclearbutton="true">
+                    <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_phone"/>
+                    <cl:formdata std:sid="f-data-2b02537f" row="6" col="1"/>
+                  </cl:maskeditor>
+                  <cl:group std:sid="group-c1cc8067">
+                    <cl:formdata std:sid="f-data-f5e5fa12" row="7" col="1" rowspan="1" colspan="2"/>
+                    <cl:button std:sid="button-5b2ecc75" id="btnPostcode" value="우편번호">
+                      <cl:listener std:sid="listener-ad379c6a" name="click" handler="onBtnPostcodeClick"/>
+                      <cl:formdata std:sid="f-data-74cfdf72" row="0" col="1"/>
+                    </cl:button>
+                    <cl:inputbox std:sid="i-box-3eac9641" id="address" style="border-radius:5px;" lengthunit="utf8" maxlength="30">
+                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_address"/>
+                      <cl:formdata std:sid="f-data-04799ea4" row="1" col="0" rowspan="1" colspan="2"/>
+                    </cl:inputbox>
+                    <cl:inputbox std:sid="i-box-f8e684d0" id="detailAddress" style="border-radius:5px;" lengthunit="utf8" maxlength="30">
+                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_address_detail"/>
+                      <cl:formdata std:sid="f-data-19ed086b" row="2" col="0" rowspan="1" colspan="2"/>
+                    </cl:inputbox>
+                    <cl:maskeditor std:sid="m-editor-b351da49" id="postCode" style="border-radius:5px;" mask="00000">
+                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_postcode"/>
+                      <cl:formdata std:sid="f-data-101aecfb" row="0" col="0"/>
+                    </cl:maskeditor>
+                    <cl:formlayout std:sid="f-layout-ce954665" scrollable="false" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                      <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:columns length="180" unit="PIXEL"/>
+                      <cl:columns length="100" unit="PIXEL"/>
+                    </cl:formlayout>
+                  </cl:group>
+                  <cl:group std:sid="group-d4b3ccc0">
+                    <cl:formdata std:sid="f-data-0bb2cb9b" row="0" col="0" rowspan="1" colspan="3"/>
+                    <cl:output std:sid="output-8173653f" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - Email">
+                      <cl:formdata std:sid="f-data-a5e07d48" row="0" col="0" rowspan="3" colspan="1"/>
+                    </cl:output>
+                    <cl:output std:sid="output-8e7f42cc" id="opbCheckEmail" style="font-size:12px;" value="">
+                      <cl:formdata std:sid="f-data-bf3fee0c" row="2" col="1" rowspan="1" colspan="2"/>
+                    </cl:output>
+                    <cl:inputbox std:sid="i-box-281314df" id="ipbEmail" style="border-radius:5px; font-size:15px;" showclearbutton="true" maxlength="30" spellcheck="false">
+                      <cl:listener std:sid="listener-46907dcc" name="keyup" handler="onIpbEmailKeyup"/>
+                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_email"/>
+                      <cl:formdata std:sid="f-data-5fd0c5de" row="0" col="1" rowspan="1" colspan="2"/>
+                    </cl:inputbox>
+                    <cl:output std:sid="output-e6eb880f" style="font-size:10px;" value="❈ 중복이 불가한 이메일 형식, 30자 이하입니다">
+                      <cl:formdata std:sid="f-data-e62769af" row="1" col="1" rowspan="1" colspan="2"/>
+                    </cl:output>
+                    <cl:formlayout std:sid="f-layout-d6a0380b" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                      <cl:columns length="120" unit="PIXEL"/>
+                      <cl:columns length="200" unit="PIXEL"/>
+                      <cl:columns length="1" unit="FRACTION"/>
+                    </cl:formlayout>
+                  </cl:group>
+                  <cl:group std:sid="group-1d4772c6">
+                    <cl:formdata std:sid="f-data-8157a38d" row="1" col="0" rowspan="1" colspan="3"/>
+                    <cl:output std:sid="output-80de58cb" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 비밀번호">
+                      <cl:formdata std:sid="f-data-69d61cbf" row="0" col="0" rowspan="3" colspan="1"/>
+                    </cl:output>
+                    <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; font-size:15px;" maxlength="30" spellcheck="false">
+                      <cl:listener std:sid="listener-21022282" name="keyup" handler="onIpbPassword1Keyup"/>
+                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_password"/>
+                      <cl:formdata std:sid="f-data-a9cb13bf" row="0" col="1" rowspan="1" colspan="1"/>
+                    </cl:inputbox>
+                    <cl:group std:sid="group-2c14a9f3">
+                      <cl:formdata std:sid="f-data-942e8253" row="0" col="2"/>
+                      <cl:img std:sid="image-3e37bcba" id="imgPswd1">
+                        <cl:formdata std:sid="f-data-921b5934" row="0" col="0"/>
+                      </cl:img>
+                      <cl:formlayout std:sid="f-layout-482d6931" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="25px">
+                        <cl:rows length="30" unit="PIXEL"/>
+                        <cl:columns length="30" unit="PIXEL"/>
+                      </cl:formlayout>
+                    </cl:group>
+                    <cl:output std:sid="output-38bce9e6" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
+                      <cl:formdata std:sid="f-data-3f1820c3" row="1" col="1" rowspan="1" colspan="2"/>
+                    </cl:output>
+                    <cl:output std:sid="output-bb64ce6b" id="opbCheckPassword" style="font-size:12px;" value="">
+                      <cl:formdata std:sid="f-data-51c190f5" row="2" col="1" rowspan="1" colspan="2"/>
+                    </cl:output>
+                    <cl:formlayout std:sid="f-layout-ab8174a3" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:columns length="120" unit="PIXEL"/>
+                      <cl:columns length="200" unit="PIXEL"/>
+                      <cl:columns length="1" unit="FRACTION"/>
+                    </cl:formlayout>
+                  </cl:group>
+                  <cl:group std:sid="group-3b28bf12">
+                    <cl:formdata std:sid="f-data-a299a01d" row="2" col="0" rowspan="1" colspan="3"/>
+                    <cl:output std:sid="output-43f7ba32" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 비밀번호 확인">
+                      <cl:formdata std:sid="f-data-ab8f458e" row="0" col="0" rowspan="3" colspan="1"/>
+                    </cl:output>
+                    <cl:inputbox std:sid="i-box-b6daa8de" id="ipbPassword2" style="border-radius:5px; font-size:15px;" maxlength="25" spellcheck="false">
+                      <cl:listener std:sid="listener-f80fe237" name="keyup" handler="onIpbPassword2Keyup"/>
+                      <cl:formdata std:sid="f-data-0758c877" row="0" col="1" rowspan="1" colspan="1"/>
+                    </cl:inputbox>
+                    <cl:group std:sid="group-54e1f33d">
+                      <cl:formdata std:sid="f-data-924d41dc" row="0" col="2"/>
+                      <cl:img std:sid="image-e24b7249" id="imgPswd2">
+                        <cl:formdata std:sid="f-data-6e81911e" row="0" col="0"/>
+                      </cl:img>
+                      <cl:formlayout std:sid="f-layout-304a4bf4" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="25px">
+                        <cl:rows length="30" unit="PIXEL"/>
+                        <cl:columns length="30" unit="PIXEL"/>
+                      </cl:formlayout>
+                    </cl:group>
+                    <cl:output std:sid="output-b92eba14" id="opbCheckPassword2" value="">
+                      <cl:formdata std:sid="f-data-49038f39" row="2" col="1" rowspan="1" colspan="2"/>
+                    </cl:output>
+                    <cl:output std:sid="output-84eeb228" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
+                      <cl:formdata std:sid="f-data-23a9d338" row="1" col="1" rowspan="1" colspan="2"/>
+                    </cl:output>
+                    <cl:formlayout std:sid="f-layout-39a15f5f" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:columns length="120" unit="PIXEL"/>
+                      <cl:columns length="200" unit="PIXEL"/>
+                      <cl:columns length="1" unit="FRACTION"/>
+                    </cl:formlayout>
+                  </cl:group>
+                  <cl:group std:sid="group-8c1a064d">
+                    <cl:formdata std:sid="f-data-dca089b1" row="4" col="0" rowspan="1" colspan="3"/>
+                    <cl:output std:sid="output-cdf0c67d" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 닉네임">
+                      <cl:formdata std:sid="f-data-248096ad" row="0" col="0" rowspan="3" colspan="1"/>
+                    </cl:output>
+                    <cl:output std:sid="output-ac9214fd" value="Output">
+                      <cl:formdata std:sid="f-data-68be0cd7" row="2" col="1" rowspan="1" colspan="2"/>
+                    </cl:output>
+                    <cl:inputbox std:sid="i-box-717e3d70" id="ipbNick" style="border-radius:5px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="24" spellcheck="false">
+                      <cl:listener std:sid="listener-cd714c57" name="keyup" handler="onIpbNickKeyup"/>
+                      <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_nick"/>
+                      <cl:formdata std:sid="f-data-a6f62a95" row="0" col="1"/>
+                    </cl:inputbox>
+                    <cl:output std:sid="output-8fdb611f" style="font-size:10px;" value="❈ 닉네임은 1자 이상~8자 이하이며 중복 불가합니다.">
+                      <cl:formdata std:sid="f-data-07d68b0b" row="1" col="1" rowspan="1" colspan="2"/>
+                    </cl:output>
+                    <cl:group std:sid="group-e6545689">
+                      <cl:formdata std:sid="f-data-13ddf20b" row="0" col="2"/>
+                      <cl:img std:sid="image-b1006f48">
+                        <cl:formdata std:sid="f-data-95734d29" row="0" col="0"/>
+                      </cl:img>
+                      <cl:formlayout std:sid="f-layout-b62994f4" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="25px">
+                        <cl:rows length="30" unit="PIXEL"/>
+                        <cl:columns length="30" unit="PIXEL"/>
+                      </cl:formlayout>
+                    </cl:group>
+                    <cl:formlayout std:sid="f-layout-8f625d5f" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:rows length="30" unit="PIXEL"/>
+                      <cl:columns length="120" unit="PIXEL"/>
+                      <cl:columns length="200" unit="PIXEL"/>
+                      <cl:columns length="1" unit="FRACTION"/>
+                    </cl:formlayout>
+                  </cl:group>
+                  <cl:output std:sid="output-7d42d0c5" style="background-color:#F0F0F0; border-radius:5px; font-weight:bold; font-size:15px;" value=" - 주소">
+                    <cl:formdata std:sid="f-data-cfda7096" row="7" col="0" rowspan="1" colspan="1"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-27db53ec" scrollable="false" hspace="20px" vspace="10px" top-margin="20px" right-margin="10px" bottom-margin="20px" left-margin="20px">
+                    <cl:rows length="110" unit="PIXEL"/>
+                    <cl:rows length="110" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                    <cl:rows length="110" unit="PIXEL"/>
+                    <cl:rows length="30" unit="PIXEL"/>
+                    <cl:rows length="110" unit="PIXEL"/>
+                    <cl:rows length="30" unit="PIXEL"/>
+                    <cl:rows length="30" unit="PIXEL"/>
+                    <cl:rows length="115" unit="PIXEL"/>
+                    <cl:columns length="120" unit="PIXEL"/>
+                    <cl:columns length="200" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                    <cl:columns length="80" unit="PIXEL"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:xylayout std:sid="xylayout-c0572ef2"/>
               </cl:group>
-            </cl:tabitem>
-            <cl:item-style style="background-color:#0CA44E; border-radius:20 20 0 0; padding-top:5px; font-weight:bolder; padding-left:50px; font-size:24px; padding-bottom:5px; font-family:푸른전남 Medium; background-image:none; padding-right:50px;"/>
-            <cl:body-style style="border-radius:0 10 20 20; background-color:#E5F2E3;"/>
-          </cl:tabfolder>
-          <cl:responsivexylayout std:sid="r-xylayout-e3294c27"/>
-        </cl:group>
-        <cl:responsivexylayout std:sid="r-xylayout-26b73aee"/>
+              <cl:xylayout std:sid="xylayout-aa3a0542"/>
+            </cl:group>
+          </cl:tabitem>
+          <cl:item-style style="background-color:#0CA44E; border-radius:20 20 0 0; padding-top:5px; font-weight:bolder; padding-left:50px; font-size:24px; padding-bottom:5px; font-family:푸른전남 Medium; background-image:none; padding-right:50px;"/>
+          <cl:body-style style="border-radius:0 10 20 20; background-color:#E5F2E3;"/>
+        </cl:tabfolder>
+        <cl:responsivexylayout std:sid="r-xylayout-e3294c27"/>
       </cl:group>
-      <cl:udc std:sid="ud-control-73ad2445" type="udc.header3">
-        <cl:formdata std:sid="f-data-77a311e3" row="0" col="0"/>
-      </cl:udc>
-      <cl:udc std:sid="ud-control-1c072107" type="udc.footer">
-        <cl:formdata std:sid="f-data-bd3525fa" row="2" col="0"/>
-      </cl:udc>
-      <cl:formlayout std:sid="f-layout-60812e9d" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-        <cl:rows length="200" unit="PIXEL"/>
-        <cl:rows length="1" unit="FRACTION"/>
-        <cl:rows length="100" unit="PIXEL"/>
-        <cl:columns length="1" unit="FRACTION"/>
-      </cl:formlayout>
+      <cl:responsivexylayout std:sid="r-xylayout-de8b29b7"/>
     </cl:group>
     <cl:responsivexylayout std:sid="r-xylayout-6404805b"/>
   </body>

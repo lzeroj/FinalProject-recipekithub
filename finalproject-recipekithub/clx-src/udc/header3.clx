@@ -15,7 +15,7 @@
       </cl:responsivexylayoutdata>
       <cl:group std:sid="group-5ee10563" id="grp1" style="background-color:#F4FAEC;" overscrollbehavior="none">
         <cl:formdata std:sid="f-data-51c2bc79" row="0" col="0"/>
-        <cl:img std:sid="image-f6641e00" id="headerLogo" src="../theme/images/common/headerLogo_1.png">
+        <cl:img std:sid="image-f6641e00" id="headerLogo" src="../theme/images/common/headerLogo3.png">
           <cl:listener std:sid="listener-d294b3b7" name="click" handler="onHeaderLogoClick"/>
           <cl:formdata std:sid="f-data-e13beb71" row="0" col="0" rowspan="1" colspan="1"/>
         </cl:img>

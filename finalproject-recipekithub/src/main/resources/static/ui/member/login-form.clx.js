@@ -50,7 +50,7 @@
 			 */
 			function onFindBtnClick(e) {
 				var findBtn = e.control;
-				window.location.href = "member/find-email-pswd-form.clx";
+				window.location.href = "member/find-info-form.clx";
 			}
 
 			/*
@@ -58,7 +58,13 @@
 			 * 통신이 성공하면 발생합니다.
 			 */
 			function onSub_loginSubmitSuccess(e) {
+				// 현준
 				var sub_login = e.control;
+				var checkBox = app.lookup("cbx1");
+				if(checkBox.checked){
+					var memberEmail = app.lookup("dm_login").getValue("member_email");
+					localStorage.setItem("memberEmail", memberEmail);
+				}
 				var httpPostMethod = new cpr.protocols.HttpPostMethod("index1.clx");
 				httpPostMethod.submit();
 			}
@@ -81,6 +87,20 @@
 				if (e.keyCode == cpr.events.KeyCode.ENTER) {
 					app.lookup("btnLogin").click();
 				}
+			}
+
+			/*
+			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+			 */
+			function onBodyLoad(e){
+				// 현준
+				var item = localStorage.getItem("memberEmail");
+				if(item == null || item == ''){
+					return;
+				}
+				app.lookup("emailInput").text = item;
+				app.lookup("pswdInput").focus();
 			};
 			// End - User Script
 			
@@ -473,6 +493,9 @@
 					}
 				]
 			});
+			if(typeof onBodyLoad == "function"){
+				app.addEventListener("load", onBodyLoad);
+			}
 		}
 	});
 	app.title = "login-form";

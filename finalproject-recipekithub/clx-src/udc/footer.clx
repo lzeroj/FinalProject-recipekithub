@@ -27,7 +27,7 @@
         </cl:output>
         <cl:group std:sid="group-53fdc39a" style="background-color:#6A8B41;">
           <cl:formdata std:sid="f-data-a2f2107a" row="0" col="0" rowspan="1" colspan="1"/>
-          <cl:img std:sid="image-0dc9370c" src="../theme/images/common/footerLogo1.png">
+          <cl:img std:sid="image-0dc9370c" src="../theme/images/common/footerLogo3.png">
             <cl:formdata std:sid="f-data-435cfeed" row="0" col="0"/>
           </cl:img>
           <cl:group std:sid="group-dbf01117">

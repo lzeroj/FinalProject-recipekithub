@@ -276,11 +276,7 @@
 						"dataType": "number"
 					},
 					{"name": "sessionMember"},
-					{"name": "mealkitMember"},
-					{
-						"name": "cartDetailQuantity",
-						"dataType": "number"
-					}
+					{"name": "mealkitMember"}
 				]
 			});
 			if(typeof onMealkitUpdate == "function") {
@@ -304,14 +300,6 @@
 				submission_2.addEventListener("submit-success", onSubclicklikeSubmitSuccess);
 			}
 			app.register(submission_2);
-			
-			var submission_3 = new cpr.protocols.Submission("subcreatmycart");
-			submission_3.action = "/creatMyCart";
-			submission_3.addRequestData(dataMap_1);
-			if(typeof onSubcreatmycartSubmitSuccess == "function") {
-				submission_3.addEventListener("submit-success", onSubcreatmycartSubmitSuccess);
-			}
-			app.register(submission_3);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -508,9 +496,6 @@
 					"font-size" : "17px",
 					"background-image" : "none"
 				});
-				if(typeof onButtonClick4 == "function") {
-					button_1.addEventListener("click", onButtonClick4);
-				}
 				container.addChild(button_1, {
 					"top": "429px",
 					"left": "515px",
@@ -784,8 +769,8 @@
 					image_4.addEventListener("click", onLikeimgClick);
 				}
 				container.addChild(image_4, {
-					"top": "31px",
-					"left": "874px",
+					"top": "49px",
+					"left": "882px",
 					"width": "90px",
 					"height": "68px"
 				});

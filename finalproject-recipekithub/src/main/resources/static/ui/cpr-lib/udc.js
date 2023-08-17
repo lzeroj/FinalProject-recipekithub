@@ -102,7 +102,7 @@
 						group_3.setLayout(formLayout_2);
 						(function(container){
 							var image_1 = new cpr.controls.Image();
-							image_1.src = "theme/images/common/footerLogo1.png";
+							image_1.src = "theme/images/common/footerLogo3.png";
 							container.addChild(image_1, {
 								"colIndex": 0,
 								"rowIndex": 0
@@ -305,11 +305,11 @@
 					}
 					
 					if(navigationBar.value == 'mealkit'){
-						window.location.href='/insertMealkitForm';
+						window.location.href='/mealkitList';
 					}
 						
 					if(navigationBar.value == 'recipe'){
-						window.location.href='/findRecipeBoardList';
+						window.location.href='/recipeBoardList';
 					}
 				};
 				// End - User Script
@@ -759,7 +759,7 @@
 					group_2.setLayout(formLayout_2);
 					(function(container){
 						var image_1 = new cpr.controls.Image("headerLogo");
-						image_1.src = "theme/images/common/headerLogo_1.png";
+						image_1.src = "theme/images/common/headerLogo3.png";
 						if(typeof onHeaderLogoClick == "function") {
 							image_1.addEventListener("click", onHeaderLogoClick);
 						}
