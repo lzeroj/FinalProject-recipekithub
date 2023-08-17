@@ -9,8 +9,15 @@
         <cl:datacolumnlist/>
         <cl:datarowlist/>
       </cl:dataset>
+      <cl:datamap std:sid="d-map-0d24028a" id="dmPage">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cedc0248" name="pageNo" defaultvalue="1"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-e98b949e" id="recipeBoardList" action="/findRecipeBoardList">
         <cl:listener std:sid="listener-f92b8356" name="receive" handler="onRecipeBoardListReceive"/>
+        <cl:listener std:sid="listener-32de54e4" name="submit-success" handler="onRecipeBoardListSubmitSuccess"/>
+        <cl:requestdata dataid="dmPage"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -90,9 +97,8 @@
       <cl:xylayoutdata std:sid="xyl-data-a3cbc86b" top="350px" width="984px" height="680px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:flowlayout std:sid="f-layout-27a6850d"/>
     </cl:group>
-    <cl:pageindexer std:sid="p-indexer-693e22e7">
-      <cl:listener std:sid="listener-46376798" name="selection-change" handler="onPageIndexerSelectionChange"/>
-      <cl:xylayoutdata std:sid="xyl-data-f2af68aa" top="1041px" width="200px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+    <cl:pageindexer std:sid="p-indexer-bb5b5dab">
+      <cl:xylayoutdata std:sid="xyl-data-f80b8cd2" top="1090px" width="320px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
     </cl:pageindexer>
     <cl:xylayout std:sid="xylayout-aa7fcea9"/>
   </body>

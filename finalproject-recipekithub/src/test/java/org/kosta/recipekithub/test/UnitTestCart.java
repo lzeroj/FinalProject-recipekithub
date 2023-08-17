@@ -113,4 +113,64 @@ public class UnitTestCart {
 		int result = cartService.deleteMyCart(mealkitNo,cartNo);
 		Assertions.assertEquals(1, result);
 	}
+	
+	@Test
+	public void creatMyCart() {
+		String memberEmail = "shj"; //로그인한 멤버 이메일
+		String cartN1o = cartService.findMyCartStatusYN(memberEmail);
+		
+		// 만약 카트에 값이 있으면 cartNO 반환
+		int cartNO = 0;
+		if(cartN1o != null) {		
+			cartNO = Integer.parseInt(cartN1o);
+		}
+		int mealkitNo = 70; //밀키트 번호
+		int cartDetailQuantity = 1; //밀키트 수량
+		
+		int resultDetail = 0;
+		if(cartN1o == null) {
+			int createresult = cartService.creatMyCart(memberEmail);
+			if(createresult == 1) {
+				// 생성한뒤 cartNO 재조회
+				cartNO =  Integer.parseInt(cartService.findMyCartStatusYN(memberEmail));
+				
+				// 활성화된 카트에 주문하려는 해당 밀키트가 존재하는지 확인한다
+				int duplicatecount = cartService.findDuplicateMealkitCount(memberEmail,mealkitNo);
+				if(duplicatecount == 1) {
+					resultDetail = cartService.updateCart(cartDetailQuantity,mealkitNo,cartNO);
+				}else {
+					// 밀키트 주문
+					resultDetail = cartService.insertMyCartDetail(mealkitNo,cartNO,cartDetailQuantity);
+				}
+			}
+		}else {
+			// 활성화된 카트에 주문하려는 해당 밀키트가 존재하는지 확인한다
+			int duplicatecount = cartService.findDuplicateMealkitCount(memberEmail,mealkitNo);
+			if(duplicatecount == 1) {
+				resultDetail = cartService.updateCart(cartDetailQuantity,mealkitNo,cartNO);
+			}else {
+				// 밀키트 주문
+				resultDetail = cartService.insertMyCartDetail(mealkitNo,cartNO,cartDetailQuantity);
+			}
+		}
+	}
+	
+	@Test
+	public void findDuplicateMealkitCount() {
+		String memberEmail = "shj"; //로그인한 멤버 이메일
+		int mealkitNo = 177;
+		
+		int duplicatecount = cartService.findDuplicateMealkitCount(memberEmail,mealkitNo);
+		System.out.println(duplicatecount);
+	}
+	
+	@Test
+	public void updateCartDetailQuantity() {
+		int cartDetailQuantity = 1;
+		int mealkitNo = 177;
+		int cartNo = 9;
+		
+		int duplicatecount = cartService.updateCartDetailQuantity(cartDetailQuantity,mealkitNo,cartNo);
+		System.out.println(duplicatecount);
+	}
 }

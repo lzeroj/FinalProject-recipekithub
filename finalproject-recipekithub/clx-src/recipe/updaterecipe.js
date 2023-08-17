@@ -204,7 +204,7 @@ function onButtonClick2(e){
  */
 function onDeleteRecipeSubmitSuccess(e){
 	var deleteRecipe = e.control;
-	window.location.href = "/findRecipeBoardList"
+	window.location.href = "/recipeBoardList";
 }
 
 /*

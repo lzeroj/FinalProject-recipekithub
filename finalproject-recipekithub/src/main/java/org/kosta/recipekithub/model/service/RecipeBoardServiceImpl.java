@@ -3,6 +3,7 @@ package org.kosta.recipekithub.model.service;
 import java.util.List;
 
 import org.kosta.recipekithub.model.mapper.RecipeBoardMapper;
+import org.kosta.recipekithub.model.vo.Pagination;
 import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,8 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	
 	private final RecipeBoardMapper recipeBoardMapper;
 	@Override
-	public List<RecipeBoardVO> findAllRecipeBoard() {
-		return recipeBoardMapper.findAllRecipeBoard();
+	public List<RecipeBoardVO> findAllRecipeBoard(Pagination pagination) {
+		return recipeBoardMapper.findAllRecipeBoard(pagination);
 	}
 	@Override
 	public int insertRecipeBoard(RecipeBoardVO recipeBoardVO) {
@@ -31,5 +32,9 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	@Override
 	public int deleteRecipe(long recipeBoardId) {
 		return recipeBoardMapper.deleteRecipe(recipeBoardId);
+	}
+	@Override
+	public long findTotalPostCount() {
+		return recipeBoardMapper.findTotalPostCount();
 	}
 }

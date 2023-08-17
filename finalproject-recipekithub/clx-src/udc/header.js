@@ -51,10 +51,10 @@ function onNavigationBarItemClick(e){
 	}
 	
 	if(navigationBar.value == 'mealkit'){
-		window.location.href='/insertMealkitForm';
+		window.location.href='/mealkitList';
 	}
 		
 	if(navigationBar.value == 'recipe'){
-		window.location.href='/findRecipeBoardList';
+		window.location.href='/recipeBoardList';
 	}
 }

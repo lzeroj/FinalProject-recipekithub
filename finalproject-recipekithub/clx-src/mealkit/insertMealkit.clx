@@ -165,7 +165,7 @@
       </cl:button>
       <cl:group std:sid="group-756e860d">
         <cl:xylayoutdata std:sid="xyl-data-24f12dac" top="315px" left="60px" width="864px" height="129px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-        <cl:fileinput std:sid="f-input-4232da3d" id="file1">
+        <cl:fileinput std:sid="f-input-4232da3d" id="file1" placeholder="클릭후 파일 업로드해주세요.">
           <cl:listener std:sid="listener-e8b7487b" name="value-change" handler="onFile1ValueChange"/>
           <cl:xylayoutdata std:sid="xyl-data-207f98da" top="2px" left="173px" width="351px" height="126px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:fileinput>
