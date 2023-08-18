@@ -164,6 +164,7 @@
                   </cl:output>
                   <cl:button std:sid="button-c4c7c26b" id="btnFindEmail" style="color:#0CA44E; border-bottom-color:#0ca44e; border-top-width:2px; border-right-width:2px; border-left-color:#0ca44e; font-size:20px; border-right-color:#0ca44e; border-left-width:2px; background-color:#F4FAEC; border-radius:20px; border-bottom-width:2px; border-top-color:#0ca44e; background-image:none;" class="btn-outline-success" value="조회">
                     <cl:listener std:sid="listener-b5e029b2" name="click" handler="onBtnFindEmailClick"/>
+                    <cl:listener std:sid="listener-b062ecd3" name="animationend" handler="onBtnFindEmailAnimationend"/>
                     <cl:formdata std:sid="f-data-12ad8c9e" row="4" col="0" rowspan="1" colspan="3"/>
                   </cl:button>
                   <cl:textarea std:sid="t-area-3619d733" id="txa1" style="border-right-style:none; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;">

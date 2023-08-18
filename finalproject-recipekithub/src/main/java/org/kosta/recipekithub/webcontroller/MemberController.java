@@ -55,7 +55,7 @@ public class MemberController {
 		log.debug("member 로그인 {}", member);
 
 		if (member == null) {
-			return new UIView("ui/index1.clx");
+			return new UIView("ui/index.clx");
 		}
 
 		HttpSession session = request.getSession();
@@ -73,7 +73,7 @@ public class MemberController {
 		String memberEmail = param.getValue("member_email");
 		
 		if(memberService.findMemberByEmail(memberEmail) != null) {
-			return new UIView("ui/index1.clx");
+			return new UIView("ui/index.clx");
 		}
 		
 		String memberPassword = param.getValue("member_password");
@@ -103,14 +103,13 @@ public class MemberController {
 		String memberEmail = param.getValue("member_email");
 		int checkResult = memberService.checkDuplicateEmail(memberEmail);
 		Map<String,Object> message = new HashMap<>();
-		//String result = null;
 
 		if (checkResult == 0) {
 			message.put("ok", "이메일 사용 가능");
-		} else {
+		} else if (checkResult > 0){
+//		} else {
 			message.put("fail", "이메일 중복");
 		}
-		// request.setAttribute("responsebody", result);
 		dataRequest.setMetadata(true, message);
 
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
@@ -120,21 +119,19 @@ public class MemberController {
 	@RequestMapping("/checkNick")
 	@ResponseBody
 	public View checkNick(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-		ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
+		ParameterGroup param = dataRequest.getParameterGroup("dm_check_nick");
 		String memberNick = param.getValue("member_nick");
 		int checkResult = memberService.checkDuplicateNick(memberNick);
-		//String result = null;
 		Map<String,Object> message = new HashMap<>();
 
 		if (checkResult == 0) {
 			message.put("ok", "닉네임 사용 가능");
-		} else {
+		} else if (checkResult > 0){
+//		} else {
 			message.put("fail", "닉네임 중복");
 		}
-		//request.setAttribute("responsebody", result);
-		
 		dataRequest.setMetadata(true, message);
-		
+        //dataRequest.setResponse("test", "tomato");
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 	

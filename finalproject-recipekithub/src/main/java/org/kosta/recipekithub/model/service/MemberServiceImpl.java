@@ -67,4 +67,10 @@ public class MemberServiceImpl implements MemberService {
 	public String findPswdByEmailNamePhone(String memberEmail, String memberName, String memberPhone) {
 		return memberMapper.findPswdByEmailNamePhone(memberEmail, memberName, memberPhone);
 	}
+
+	@Override
+	public int insertProfileImg(String memberEmail) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

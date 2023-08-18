@@ -86,7 +86,6 @@
 				submission.send();
 			}
 
-
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
@@ -136,7 +135,7 @@
 			function onSub_updateSubmitSuccess(e) {
 				var sub_update = e.control;
 				alert("회원 정보 수정이 완료되었습니다. 감사합니다!")
-				var httpPostMethod = new cpr.protocols.HttpPostMethod("index1.clx");
+				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 				httpPostMethod.submit();
 			}
 
@@ -162,7 +161,7 @@
 			function onSub_deleteSubmitSuccess(e) {
 				var sub_delete = e.control;
 				alert("지금까지 RecipeKitHub을 이용해주셔서 감사합니다!")
-				var httpPostMethod = new cpr.protocols.HttpPostMethod("index1.clx");
+				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 				httpPostMethod.submit();
 			}
 
@@ -172,7 +171,7 @@
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
 			function onBtnCancelClick(e) {
-				window.location.href = "index1.clx";
+				window.location.href = "index.clx";
 			}
 
 
@@ -193,9 +192,10 @@
 			function onSub_logoutSubmitSuccess(e) {
 				var sub_logout = e.control;
 				alert("로그아웃이 완료되었습니다!")
-				var httpPostMethod = new cpr.protocols.HttpPostMethod("index1.clx");
+				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 				httpPostMethod.submit();
 			}
+
 
 			/*
 			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
@@ -284,6 +284,15 @@
 			function onBodyUnload(e){
 				var appConf = cpr.core.AppConfig.INSTANCE;
 				appConf.getEnvConfig().setValue("appcache", false);
+			}
+
+			/*
+			 * "프로필 사진 등록" 버튼(btnProfileImg)에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onBtnProfileImgClick(e){
+				var btnProfileImg = e.control;
+				
 			};
 			// End - User Script
 			
@@ -624,7 +633,7 @@
 											"colIndex": 0,
 											"rowIndex": 3
 										});
-										var button_1 = new cpr.controls.Button("btnInsProfileImg");
+										var button_1 = new cpr.controls.Button("btnProfileImg");
 										button_1.value = "프로필 사진 등록";
 										button_1.style.setClasses(["btn-outline-secondary"]);
 										button_1.style.css({
@@ -632,6 +641,9 @@
 											"text-shadow" : "none",
 											"background-image" : "none"
 										});
+										if(typeof onBtnProfileImgClick == "function") {
+											button_1.addEventListener("click", onBtnProfileImgClick);
+										}
 										container.addChild(button_1, {
 											"colIndex": 0,
 											"rowIndex": 1
@@ -772,7 +784,7 @@
 											"colIndex": 0,
 											"rowIndex": 4
 										});
-										var image_1 = new cpr.controls.Image();
+										var image_1 = new cpr.controls.Image("profileImg");
 										image_1.src = "theme/images/common/mypageIcon.png";
 										container.addChild(image_1, {
 											"colIndex": 0,
@@ -860,7 +872,7 @@
 												"rowIndex": 0
 											});
 											var output_5 = new cpr.controls.Output();
-											output_5.value = "Output";
+											output_5.value = "";
 											container.addChild(output_5, {
 												"colIndex": 1,
 												"rowIndex": 2,
@@ -931,7 +943,7 @@
 												"rowIndex": 0
 											});
 											var output_8 = new cpr.controls.Output();
-											output_8.value = "Output";
+											output_8.value = "";
 											container.addChild(output_8, {
 												"colIndex": 1,
 												"rowIndex": 2,
@@ -987,7 +999,7 @@
 												"rowIndex": 0
 											});
 											var output_10 = new cpr.controls.Output();
-											output_10.value = "Output";
+											output_10.value = "";
 											container.addChild(output_10, {
 												"colIndex": 1,
 												"rowIndex": 2
@@ -1073,13 +1085,13 @@
 										var group_14 = new cpr.controls.Container();
 										var formLayout_11 = new cpr.controls.layouts.FormLayout();
 										formLayout_11.scrollable = false;
-										formLayout_11.topMargin = "5px";
-										formLayout_11.rightMargin = "5px";
-										formLayout_11.bottomMargin = "5px";
-										formLayout_11.leftMargin = "5px";
+										formLayout_11.topMargin = "0px";
+										formLayout_11.rightMargin = "0px";
+										formLayout_11.bottomMargin = "0px";
+										formLayout_11.leftMargin = "0px";
 										formLayout_11.horizontalSpacing = "10px";
-										formLayout_11.verticalSpacing = "10px";
-										formLayout_11.setColumns(["120px", "100px"]);
+										formLayout_11.verticalSpacing = "15px";
+										formLayout_11.setColumns(["128px", "100px"]);
 										formLayout_11.setRows(["35px", "35px", "35px"]);
 										group_14.setLayout(formLayout_11);
 										(function(container){

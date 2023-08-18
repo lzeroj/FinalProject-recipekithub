@@ -77,3 +77,4 @@ function onIpbPhone2Keydown(e){
 		app.lookup("btnFindPswd").click();
 	}
 }
+
