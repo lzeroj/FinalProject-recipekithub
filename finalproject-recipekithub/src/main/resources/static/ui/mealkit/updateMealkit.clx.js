@@ -11,7 +11,7 @@
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
 			// Start - User Script
-			/************************************************
+			 /************************************************
 			 * insertMealkit.js
 			 * Created at 2023. 8. 10. 오후 3:23:42.
 			 *
@@ -31,44 +31,7 @@
 			            app.lookup("sampleThr").redraw();
 			        }); 
 			    });
-			//	var mealkitNo = cpr.core.Platform.INSTANCE.getParameter("mealkitNo");
-			//	var mealkitName = cpr.core.Platform.INSTANCE.getParameter("mealkitName");	
-			//	var mealkitInfo = cpr.core.Platform.INSTANCE.getParameter("mealkitInfo");	
-			//	var mealkitIngredients = cpr.core.Platform.INSTANCE.getParameter("mealkitIngredients");	
-			//	var mealkitPrice = cpr.core.Platform.INSTANCE.getParameter("mealkitPrice");	
-			//	var mealkitInventory = cpr.core.Platform.INSTANCE.getParameter("mealkitInventory");	
-			//	var mealkitCategory = cpr.core.Platform.INSTANCE.getParameter("mealkitCategory");
-			//	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");
-			//	
-			//	var vsOpt = app.lookup("sampleThr");
-			//	vsOpt.value = $('#summernote').summernote('code');
-			//	//var message = vsOpt.value;
-			//	var dataMap = app.lookup("updateMealkit");	
-			//	dataMap.setValue("mealkitNo", mealkitNo);
-			//	dataMap.setValue("mealkitName", mealkitName);
-			//	dataMap.setValue("mealkitInfo", mealkitInfo);
-			//	dataMap.setValue("mealkitIngredients", mealkitIngredients);
-			//	dataMap.setValue("mealkitPrice", mealkitPrice);
-			//	dataMap.setValue("mealkitInventory", mealkitInventory);
-			//	dataMap.setValue("mealkitCategory", mealkitCategory);
-			//	dataMap.setValue("mealkitMember", mealkitMember);
-			//	
-			//	//vsOpt.value = dataMap.getValue("mealkitInfo");
-			//	
-			//	
-			//	//console.log("info = " + info);
-			//	//console.log("mealkitInfoInfo = " + mealkitInfoInfo);
-			//	
-			//	var name = app.lookup("ipb1");
-			//	var textArea = app.lookup("ipb2");
-			//	var price = app.lookup("ipb3");
-			//	var inven = app.lookup("ipb4");
-			//	
-			//	name.redraw();
-			//	vsOpt.redraw();
-			//	textArea.redraw();
-			//	price.redraw();
-			//	inven.redraw();
+
 
 			}
 

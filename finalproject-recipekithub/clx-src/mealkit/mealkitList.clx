@@ -10,7 +10,7 @@
   <body std:sid="body-2490c64c">
     <cl:listener std:sid="listener-d027acff" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-f7dd2b85">
-      <cl:xylayoutdata std:sid="xyl-data-c533176f" top="20px" right="0px" bottom="-557px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:xylayoutdata std:sid="xyl-data-c533176f" top="20px" bottom="-557px" width="1004px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
       <cl:navigationbar std:sid="n-bar-2cf3bfa1" style="font-size:13px;">
         <cl:xylayoutdata std:sid="xyl-data-15947996" top="20px" width="1124px" height="36px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:menuitem std:sid="m-item-bb89d509" label="종류별" value="종류별"/>
@@ -73,24 +73,24 @@
         <cl:menuitem std:sid="m-item-2405b08a" label="기타" value="기타"/>
       </cl:navigationbar>
       <cl:group std:sid="group-2c062443" style="background-color:#FFFFFF;">
-        <cl:xylayoutdata std:sid="xyl-data-70ea6310" top="177px" width="984px" height="90px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-70ea6310" top="176px" width="984px" height="70px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:output std:sid="output-2eed6e9b" style="font-weight:bold;" value="총">
-          <cl:xylayoutdata std:sid="xyl-data-c504d9b3" top="40px" left="45px" width="18px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-c504d9b3" top="30px" left="45px" width="18px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:button std:sid="button-4f6ada68" style="background-color:#ffbb3f; background-image:none;" value="최신순">
-          <cl:xylayoutdata std:sid="xyl-data-ab269e1b" top="50px" left="652px" width="100px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-ab269e1b" top="34px" left="652px" width="100px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:button>
         <cl:button std:sid="button-a3d0c71a" style="background-color:white;" value="별점순">
-          <cl:xylayoutdata std:sid="xyl-data-151094f3" top="50px" left="762px" width="100px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-151094f3" top="35px" left="762px" width="100px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:button>
         <cl:button std:sid="button-303a4025" style="background-color:white;" value="조회수순">
-          <cl:xylayoutdata std:sid="xyl-data-79ed7119" top="50px" left="872px" width="100px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-79ed7119" top="35px" left="872px" width="100px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:button>
         <cl:output std:sid="output-1f066570" style="font-weight:bold;" value="개의 밀키트가 있습니다.">
-          <cl:xylayoutdata std:sid="xyl-data-d1d49fe5" top="40px" left="110px" width="247px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-d1d49fe5" top="30px" left="110px" width="247px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:output std:sid="output-b46e1f83" id="mealkitCnt" style="color:#0CA44E; font-weight:bold; font-size:18px; text-align:center;" value="">
-          <cl:xylayoutdata std:sid="xyl-data-de5ed657" top="30px" left="62px" width="49px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-de5ed657" top="20px" left="62px" width="49px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:xylayout std:sid="xylayout-ffe6ae24"/>
       </cl:group>
@@ -99,20 +99,24 @@
         <cl:xylayout std:sid="xylayout-6664e312"/>
       </cl:group>
       <cl:group std:sid="group-f63e3ec2" style="background-color:#f9f9f9; background-image:none;">
-        <cl:xylayoutdata std:sid="xyl-data-72364993" top="277px" width="974px" height="33px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-72364993" top="256px" width="974px" height="33px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:xylayout std:sid="xylayout-27b0cb22"/>
       </cl:group>
       <cl:button std:sid="button-3f919da4" value="Button">
         <cl:xylayoutdata std:sid="xyl-data-19a2857d" top="1133px" left="452px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:group std:sid="group-6e55fbbc" id="grp">
-        <cl:xylayoutdata std:sid="xyl-data-9c05ce4d" top="320px" width="968px" height="742px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-9c05ce4d" top="343px" width="968px" height="717px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:flowlayout std:sid="f-layout-3671cf03" scrollable="false"/>
       </cl:group>
       <cl:group std:sid="group-0a2f91f8" style="background-color:#f9f9f9; background-image:none;">
         <cl:xylayoutdata std:sid="xyl-data-7f73937c" top="1072px" width="974px" height="22px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:xylayout std:sid="xylayout-bb7fd84b"/>
       </cl:group>
+      <cl:button std:sid="button-068ac482" id="insertBtn" style="background-color:#0ca44e; color:white; font-weight:16; font-family:푸른전남 Medium; background-image:none;" class=".cl-button mealkitbtn" visible="false" value="밀키트 등록">
+        <cl:listener std:sid="listener-2e4bf9b4" name="click" handler="onButtonClick2"/>
+        <cl:xylayoutdata std:sid="xyl-data-ea1bc820" top="299px" right="20px" width="104px" height="34px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+      </cl:button>
       <cl:xylayout std:sid="xylayout-8fe99f2d" scrollable="false"/>
     </cl:group>
     <cl:xylayout std:sid="xylayout-d156a834"/>

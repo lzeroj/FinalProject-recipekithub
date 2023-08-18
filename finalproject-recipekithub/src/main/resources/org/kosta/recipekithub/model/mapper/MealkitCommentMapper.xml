@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.kosta.recipekithub.model.mapper.MealkitCommentMapper">
+	
+<resultMap type="org.kosta.recipekithub.model.vo.MealkitCommentVO" id="mealkitMap">
+	<result column="mealkit_no" property="mealkitBoard.mealkitNo"/>
+</resultMap>
+
+<resultMap type="org.kosta.recipekithub.model.vo.MealkitCommentVO" id="memberMap">
+	<result column="member_email" property="memberVO.memberEmail"/>
+	<result column="member_nick" property="memberVO.memberNick"/>
+</resultMap>
+
+<insert id="insertMealkitComment" parameterType="org.kosta.recipekithub.model.vo.MealkitCommentVO">	
+	insert into mealkit_comment(mealkit_comment_id, mealkit_no, member_email, mealkit_comment_content, mealkit_comment_date)
+	values(mealkit_comment_seq.nextval, #{mealkitBoard.mealkitNo}, #{member.memberEmail}, #{commentContent}, SYSDATE)
+
+<selectKey keyColumn="mealkit_comment_id" keyProperty="commentId" resultType="int" order="AFTER">
+	SELECT MEALKIT_COMMENT_SEQ.CURRVAL FROM DUAL
+</selectKey>	
+	
+</insert>
+
+
+<select id="findCommentByNo" parameterType="int" resultMap="mealkitMap , memberMap">
+select 
+	c.mealkit_comment_id, m.mealkit_no ,b.member_email, b.member_nick, c.mealkit_comment_content,
+	to_char(c.mealkit_comment_date, 'yyyy-mm-dd hh24:mi') as mealkit_comment_date,
+ 	to_char(c.mealkit_comment_edit_date, 'yyyy-mm-dd hh24:mi') as mealkit_comment_edit_date
+ 	from mealkit_comment c inner join mealkit_board m on c.mealkit_no = m.mealkit_no 
+ 	inner join member b on c.member_email = b.member_email where c.mealkit_comment_id = #{value}
+</select>
+
+<delete id="deleteComment" parameterType="int">
+	delete from mealkit_comment where mealkit_comment_id = #{value}
+</delete>
+
+
+<update id="updateCommentByNo" parameterType="org.kosta.recipekithub.model.vo.MealkitCommentVO">
+	update mealkit_comment set mealkit_comment_content = #{commentContent}, mealkit_comment_edit_date = sysdate where mealkit_comment_id =#{commentId}
+</update>
+
+<select id="findCommentListByMealkit" parameterType="int" resultMap="mealkitMap , memberMap">
+select c.mealkit_comment_id, m.mealkit_no ,b.member_email, b.member_nick, c.mealkit_comment_content,
+	to_char(c.mealkit_comment_date, 'yyyy-mm-dd hh24:mi') as mealkit_comment_date,
+ 	to_char(c.mealkit_comment_edit_date, 'yyyy-mm-dd hh24:mi') as mealkit_comment_edit_date
+ 	from mealkit_comment c inner join mealkit_board m on c.mealkit_no = m.mealkit_no 
+ 	inner join member b on c.member_email = b.member_email where m.mealkit_no = #{value}
+</select>
+
+
+
+</mapper>

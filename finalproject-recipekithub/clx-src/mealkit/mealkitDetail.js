@@ -23,12 +23,16 @@ function onBodyLoad(e){
 	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 	var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
 
+	console.log("mealkitMember, sessionMember = " + mealkitMember + ", " +sessionMember);
+
 	if(mealkitMember === sessionMember){
 		var deletebtn = app.lookup("deleBtn");
 		var updatebtn = app.lookup("updateBtn");
 		deletebtn.visible = true;
 		updatebtn.visible = true;
-}
+	}
+	
+	
 	
 	/* 세션이 들어오면 Open
 	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");//게시물 작성자이메일
@@ -85,6 +89,8 @@ function onBodyLoad(e){
 	// 현준
 	app.lookup("submealkitlike").send();
 	
+	
+	
 	//var submission = app.lookup("mealkitSub");
 	//submission.send();
 		
@@ -138,7 +144,12 @@ function onUpdateBtnClick(e){
 	var updateBtn = e.control;
 	var mealkit = app.lookup("mealkit");
 	var value = mealkit.getValue("mealkitNo");
-	window.location.href="/updateMealkitForm/"+value;
+	
+	if(confirm("수정하시겠습니까?")){
+		var httpPostMethod = new cpr.protocols.HttpPostMethod("/updateMealkitForm/"+value);
+		httpPostMethod.submit();	
+	}
+
 }
 
 /*
@@ -153,10 +164,12 @@ function onButtonClick3(e){
 	var sessionMember = mealkit.getValue("sessionMember");
 	var mealkitMember = mealkit.getValue("mealkitMember");
 	
-	//if(sessionMember === mealkitMember){
-	//var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-	//HttpPostMethod.submit();
-	//}
+	if(confirm("삭제하시겠습니까?")){
+		if(sessionMember === mealkitMember){
+			var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+			HttpPostMethod.submit();
+		}
+	}
 }
 
 /*
@@ -225,4 +238,33 @@ function onSubcreatmycartSubmitSuccess(e){
 		return;
 	}
 	alert("상품이 추가되었습니다");
+}
+
+/*
+ * "등록" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick5(e){
+	var button = e.control;
+	var comment = app.lookup("comment").value;
+	var dataMap = app.lookup("mealkit");
+	var mealkitNo = dataMap.getValue("mealkitNo");
+	var commentMap = app.lookup("commentMap");
+	commentMap.setValue("comment", comment);
+	commentMap.setValue("mealkitNo", mealkitNo);
+	
+	app.lookup("commentSub").send();
+	
+}
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onCommentSubSubmitSuccess(e){
+	var commentSub = e.control;
+	var commentMap = app.lookup("commentReturn");
+	var memberMap = app.lookup("memberReturn");
+	var mealkitMap = app.lookup("mealkitReturn");
+	commentMap.
 }

@@ -38,6 +38,9 @@ ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 	delete from mealkit_board where mealkit_no = #{value}
 </delete>
 
+<update id="increaseMealkitHits" parameterType="int">
+update mealkit_board set mealkit_board_hits = mealkit_board_hits + 1 where mealkit_no = #{value}
+</update>
 
 
 </mapper>

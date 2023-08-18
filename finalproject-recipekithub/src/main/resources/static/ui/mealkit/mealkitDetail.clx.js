@@ -36,12 +36,16 @@
 				var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 				var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
 
+				console.log("mealkitMember, sessionMember = " + mealkitMember + ", " +sessionMember);
+
 				if(mealkitMember === sessionMember){
 					var deletebtn = app.lookup("deleBtn");
 					var updatebtn = app.lookup("updateBtn");
 					deletebtn.visible = true;
 					updatebtn.visible = true;
-			}
+				}
+				
+				
 				
 				/* 세션이 들어오면 Open
 				var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");//게시물 작성자이메일
@@ -98,6 +102,8 @@
 				// 현준
 				app.lookup("submealkitlike").send();
 				
+				
+				
 				//var submission = app.lookup("mealkitSub");
 				//submission.send();
 					
@@ -151,7 +157,12 @@
 				var updateBtn = e.control;
 				var mealkit = app.lookup("mealkit");
 				var value = mealkit.getValue("mealkitNo");
-				window.location.href="/updateMealkitForm/"+value;
+				
+				if(confirm("수정하시겠습니까?")){
+					var httpPostMethod = new cpr.protocols.HttpPostMethod("/updateMealkitForm/"+value);
+					httpPostMethod.submit();	
+				}
+
 			}
 
 			/*
@@ -166,10 +177,12 @@
 				var sessionMember = mealkit.getValue("sessionMember");
 				var mealkitMember = mealkit.getValue("mealkitMember");
 				
-				//if(sessionMember === mealkitMember){
-				//var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-				//HttpPostMethod.submit();
-				//}
+				if(confirm("삭제하시겠습니까?")){
+					if(sessionMember === mealkitMember){
+						var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+						HttpPostMethod.submit();
+					}
+				}
 			}
 
 			/*
@@ -238,6 +251,35 @@
 					return;
 				}
 				alert("상품이 추가되었습니다");
+			}
+
+			/*
+			 * "등록" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick5(e){
+				var button = e.control;
+				var comment = app.lookup("comment").value;
+				var dataMap = app.lookup("mealkit");
+				var mealkitNo = dataMap.getValue("mealkitNo");
+				var commentMap = app.lookup("commentMap");
+				commentMap.setValue("comment", comment);
+				commentMap.setValue("mealkitNo", mealkitNo);
+				
+				app.lookup("commentSub").send();
+				
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onCommentSubSubmitSuccess(e){
+				var commentSub = e.control;
+				var commentMap = app.lookup("commentReturn");
+				var memberMap = app.lookup("memberReturn");
+				var mealkitMap = app.lookup("mealkitReturn");
+				commentMap.
 			};
 			// End - User Script
 			
@@ -276,17 +318,54 @@
 						"dataType": "number"
 					},
 					{"name": "sessionMember"},
-					{"name": "mealkitMember"},
-					{
-						"name": "cartDetailQuantity",
-						"dataType": "number"
-					}
+					{"name": "mealkitMember"}
 				]
 			});
 			if(typeof onMealkitUpdate == "function") {
 				dataMap_1.addEventListener("update", onMealkitUpdate);
 			}
 			app.register(dataMap_1);
+			
+			var dataMap_2 = new cpr.data.DataMap("commentMap");
+			dataMap_2.parseData({
+				"columns" : [
+					{"name": "comment"},
+					{
+						"name": "mealkitNo",
+						"dataType": "string"
+					}
+				]
+			});
+			app.register(dataMap_2);
+			
+			var dataMap_3 = new cpr.data.DataMap("commentReturn");
+			dataMap_3.parseData({
+				"columns" : [
+					{
+						"name": "commentId",
+						"dataType": "number"
+					},
+					{"name": "commentContent"},
+					{"name": "commentRegDate"},
+					{"name": "commentEditDate"}
+				]
+			});
+			app.register(dataMap_3);
+			
+			var dataMap_4 = new cpr.data.DataMap("memberReturn");
+			dataMap_4.parseData({
+				"columns" : [{"name": "memberEmail"}]
+			});
+			app.register(dataMap_4);
+			
+			var dataMap_5 = new cpr.data.DataMap("mealkitReturn");
+			dataMap_5.parseData({
+				"columns" : [{
+					"name": "mealkitNo",
+					"dataType": "number"
+				}]
+			});
+			app.register(dataMap_5);
 			var submission_1 = new cpr.protocols.Submission("submealkitlike");
 			submission_1.action = "/showLike";
 			submission_1.mediaType = "application/x-www-form-urlencoded;simple";
@@ -305,11 +384,14 @@
 			}
 			app.register(submission_2);
 			
-			var submission_3 = new cpr.protocols.Submission("subcreatmycart");
-			submission_3.action = "/creatMyCart";
-			submission_3.addRequestData(dataMap_1);
-			if(typeof onSubcreatmycartSubmitSuccess == "function") {
-				submission_3.addEventListener("submit-success", onSubcreatmycartSubmitSuccess);
+			var submission_3 = new cpr.protocols.Submission("commentSub");
+			submission_3.action = "/insertComment";
+			submission_3.addRequestData(dataMap_2);
+			submission_3.addResponseData(dataMap_3, false);
+			submission_3.addResponseData(dataMap_4, false);
+			submission_3.addResponseData(dataMap_4, false);
+			if(typeof onCommentSubSubmitSuccess == "function") {
+				submission_3.addEventListener("submit-success", onCommentSubSubmitSuccess);
 			}
 			app.register(submission_3);
 			app.supportMedia("all and (min-width: 1024px)", "default");
@@ -508,9 +590,6 @@
 					"font-size" : "17px",
 					"background-image" : "none"
 				});
-				if(typeof onButtonClick4 == "function") {
-					button_1.addEventListener("click", onButtonClick4);
-				}
 				container.addChild(button_1, {
 					"top": "429px",
 					"left": "515px",
@@ -700,8 +779,8 @@
 					"height": "27px"
 				});
 				var group_10 = new cpr.controls.Container();
-				var xYLayout_11 = new cpr.controls.layouts.XYLayout();
-				group_10.setLayout(xYLayout_11);
+				var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+				group_10.setLayout(verticalLayout_1);
 				container.addChild(group_10, {
 					"top": "1308px",
 					"left": "15px",
@@ -729,13 +808,19 @@
 						"font-size" : "16px",
 						"background-image" : "none"
 					});
+					if(typeof onButtonClick5 == "function") {
+						button_4.addEventListener("click", onButtonClick5);
+					}
 					container.addChild(button_4, {
 						"colIndex": 1,
 						"rowIndex": 0,
 						"colSpan": 1,
 						"rowSpan": 1
 					});
-					var inputBox_1 = new cpr.controls.InputBox("ipb1");
+					var inputBox_1 = new cpr.controls.InputBox("comment");
+					if(typeof onIpb1ValueChange == "function") {
+						inputBox_1.addEventListener("value-change", onIpb1ValueChange);
+					}
 					container.addChild(inputBox_1, {
 						"colIndex": 0,
 						"rowIndex": 0
@@ -748,6 +833,7 @@
 					"height": "92px"
 				});
 				var button_5 = new cpr.controls.Button("updateBtn");
+				button_5.visible = false;
 				button_5.value = "수정";
 				if(typeof onUpdateBtnClick == "function") {
 					button_5.addEventListener("click", onUpdateBtnClick);
@@ -758,7 +844,8 @@
 					"width": "100px",
 					"height": "20px"
 				});
-				var button_6 = new cpr.controls.Button();
+				var button_6 = new cpr.controls.Button("deleBtn");
+				button_6.visible = false;
 				button_6.value = "삭제";
 				if(typeof onButtonClick3 == "function") {
 					button_6.addEventListener("click", onButtonClick3);
@@ -784,8 +871,8 @@
 					image_4.addEventListener("click", onLikeimgClick);
 				}
 				container.addChild(image_4, {
-					"top": "31px",
-					"left": "874px",
+					"top": "49px",
+					"left": "882px",
 					"width": "90px",
 					"height": "68px"
 				});
