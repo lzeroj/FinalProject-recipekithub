@@ -9,6 +9,7 @@
       <cl:property name="nick" type="string"/>
       <cl:property name="regDate" type="string"/>
       <cl:property name="content" type="string"/>
+      <cl:property name="deleteBtn" type="control"/>
       <cl:event name="updateClick" type="cpr.events.CAppEvent"/>
       <cl:event name="deleteClick" type="cpr.events.CAppEvent"/>
     </cl:appspec>
@@ -22,15 +23,15 @@
       <cl:xylayoutdata std:sid="xyl-data-bcec8dbb" top="33px" left="3px" width="285px" height="66px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:output std:sid="output-dbe608d7" id="regDate" style="color:#CBCBCB;" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-a128355f" top="9px" left="93px" width="121px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-a128355f" top="9px" left="93px" width="132px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:button std:sid="button-0927c58b" value="수정">
       <cl:listener std:sid="listener-3b89bb90" name="click" handler="onButtonClick"/>
-      <cl:xylayoutdata std:sid="xyl-data-c4e6a112" top="9px" left="213px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-c4e6a112" top="9px" left="224px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:button>
-    <cl:button std:sid="button-8f320a4c" value="삭제">
+    <cl:button std:sid="button-8f320a4c" id="deleteBtn" value="삭제">
       <cl:listener std:sid="listener-f2b8e9e6" name="click" handler="onButtonClick2"/>
-      <cl:xylayoutdata std:sid="xyl-data-73d01a4e" top="9px" left="250px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-73d01a4e" top="9px" left="261px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:button>
     <cl:xylayout std:sid="xylayout-b3acc76d"/>
   </body>
