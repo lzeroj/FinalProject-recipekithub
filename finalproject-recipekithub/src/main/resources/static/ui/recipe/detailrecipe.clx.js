@@ -22,10 +22,15 @@
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
-			function onBodyLoad(e){
+			function onBodyLoad(e) {
+				var sessionval = getSessionStorage("memsession");
+				console.log(sessionval);
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 				console.log(recipeBoardVO);
-				app.lookup("recipeBoardImage").src = "/upload/recipe/"+recipeBoardVO.recipeBoardImage;
+				if(sessionval ==null || sessionval != recipeBoardVO.memberVO.memberEmail){
+					app.lookup("updateBtn").visible = false;
+				}
+				app.lookup("recipeBoardImage").src = "/upload/recipe/" + recipeBoardVO.recipeBoardImage;
 				app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 				app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
 				var hTMLSnippet = app.lookup("recipeContent");
@@ -61,7 +66,7 @@
 			 * "레시피 수정하기" 버튼에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onButtonClick(e){
+			function onButtonClick(e) {
 				var button = e.control;
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 				//	app.lookup("dmRecipeBoardId").setValue("dmRecipeBoardId", recipeBoardVO.recipeBoardId);
@@ -70,38 +75,84 @@
 				//window.location.href = "/updateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
 				
 				// 로그인 안한사람이 url 로 접속되는 것을 막기 위해 post 방식 사용
-			   var _httpPostMethod = new cpr.protocols.HttpPostMethod("/updateRecipe", "_self");
+				var _httpPostMethod = new cpr.protocols.HttpPostMethod("/updateRecipe", "_self");
 				_httpPostMethod.addParameter("recipeBoardId", recipeBoardVO.recipeBoardId);
-				_httpPostMethod.submit(); 
+				_httpPostMethod.submit();
 			}
 
 			/*
 			 * 서브미션에서 receive 이벤트 발생 시 호출.
 			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
 			 */
-			function onRecipeCommentListReceive(e){
+			//function onRecipeCommentListReceive(e){
+			//	var recipeCommentList = e.control;
+			//	var xhr = recipeCommentList.xhr;
+			//	var jsonData = JSON.parse(xhr.responseText);
+			//	var recipeComment = jsonData.recipeCommentList;
+			//	var totalCommentCount = jsonData.totalCommentCount;
+			//	app.lookup("commentCount").value = totalCommentCount;
+			//	var container = app.lookup("commentgrp");
+			//		for (var i = 0; i < recipeComment.length; i++) {
+			//		(function(index) {
+			//			//udc 동적 생성
+			//			var comment = new udc.recipeCommentudc();
+			//			//udc에서 출판한 이미지 경로 앱 속성 지정
+			//			comment.nick = recipeComment[i].memberVO.memberNick;
+			//			comment.regDate = recipeComment[i].recipeCommentDate;
+			//			comment.content = recipeComment[i].recipeCommentContent;
+			//			container.addChild(comment, {
+			//				height: "120px",
+			//				width: "100px",
+			//				autoSize: "both"
+			//			});
+			//			comment.addEventListener("deleteClick", function(e) {
+			//			app.lookup("dmRecipeCommentId").setValue("recipeCommentId", recipeComment[index].recipeCommentId);
+			//			var deleteCommentsub = app.lookup("deleteComment");
+			//			deleteCommentsub.send();
+			//			});
+			//		})(i);
+			//	}
+			//}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onRecipeCommentListSubmitSuccess(e) {
 				var recipeCommentList = e.control;
 				var xhr = recipeCommentList.xhr;
 				var jsonData = JSON.parse(xhr.responseText);
-				var recipeCommentList = jsonData.recipeCommentList;
+				var sessionval = getSessionStorage("memsession");
+				var recipeComment = jsonData.recipeCommentList;
+				var totalCommentCount = jsonData.totalCommentCount;
+				app.lookup("commentCount").value = totalCommentCount;
 				var container = app.lookup("commentgrp");
-					for (var i = 0; i < recipeCommentList.length; i++) {
+				
+				// 댓글 등록,삭제 시 재조회 할 수 있게 기존 목록 삭제
+				container.removeAllChildren();
+				
+				for (var i = 0; i < recipeComment.length; i++) {
 					(function(index) {
 						//udc 동적 생성
-						var recipeComment = new udc.recipeCommentudc();
+						var comment = new udc.recipeCommentudc();
 						//udc에서 출판한 이미지 경로 앱 속성 지정
-						recipeComment.nick = recipeCommentList[i].memberVO.memberNick;
-						recipeComment.regDate = recipeCommentList[i].recipeCommentDate;
-						recipeComment.content = recipeCommentList[i].recipeCommentContent;
-						container.addChild(recipeComment, {
+						comment.nick = recipeComment[i].memberVO.memberNick;
+						comment.regDate = recipeComment[i].recipeCommentDate;
+						comment.content = recipeComment[i].recipeCommentContent;
+						if(sessionval ==null || sessionval != recipeComment[i].memberVO.memberEmail){
+							comment.deleteBtn = false;
+						}
+						container.addChild(comment, {
 							height: "120px",
 							width: "100px",
 							autoSize: "both"
 						});
-						recipeComment.addEventListener("deleteClick", function(e) {
-						app.lookup("dmRecipeCommentId").setValue("recipeCommentId", recipeCommentList[index].recipeCommentId);
-						var deleteCommentsub = app.lookup("deleteComment");
-						deleteCommentsub.send();
+						comment.addEventListener("deleteClick", function(e) {
+							app.lookup("dmRecipeCommentId").setValue("recipeCommentId", recipeComment[index].recipeCommentId);
+							if (confirm("삭제하시겠습니까?")) {
+								var deleteCommentsub = app.lookup("deleteComment");
+								deleteCommentsub.send();
+							}
 						});
 					})(i);
 				}
@@ -111,23 +162,45 @@
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onDeleteCommentSubmitSuccess(e){
+			function onDeleteCommentSubmitSuccess(e) {
 				var deleteComment = e.control;
-			    app.lookup("commentgrp").redraw();
+				app.lookup("recipeCommentList").send();
+			}
+
+			/*
+			 * "등록" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick2(e) {
+				var button = e.control;
+				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
+				app.lookup("dmInsertValue").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
+				var insertComment = app.lookup("insertComment");
+				insertComment.send();
 			}
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onSubrecipelikecountSubmitSuccess(e){
+			function onInsertCommentSubmitSuccess(e) {
+				var insertComment = e.control;
+				app.lookup("recipeCommentList").send();
+				app.lookup("commentInput").clear();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubrecipelikecountSubmitSuccess(e) {
 				var subrecipelikecount = e.control;
 				var countRecipeLike = subrecipelikecount.getMetadata("countRecipeLike");
 				var showlikestatus = subrecipelikecount.getMetadata("showlikestatus");
 				var likeimg = app.lookup("likeimg");
-				if(showlikestatus == 0){
+				if (showlikestatus == 0) {
 					likeimg.src = "theme/images/mealkit/heart.png";
-				}else{
+				} else {
 					likeimg.src = "theme/images/mealkit/heart_fill.png";
 				}
 				likeimg.redraw();
@@ -140,15 +213,15 @@
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onSubinsertrecipelikeSubmitSuccess(e){
+			function onSubinsertrecipelikeSubmitSuccess(e) {
 				var subinsertrecipelike = e.control;
 				var likeresult = subinsertrecipelike.getMetadata("likeresult");
 				var likeimg = app.lookup("likeimg");
 				var counttext = app.lookup("opt1").text;
-				if(likeresult == 0){
+				if (likeresult == 0) {
 					likeimg.src = "theme/images/mealkit/heart.png";
 					app.lookup("opt1").text = counttext - 1;
-				}else{
+				} else {
 					likeimg.src = "theme/images/mealkit/heart_fill.png";
 					app.lookup("opt1").text = parseInt(counttext) + 1;
 				}
@@ -160,7 +233,7 @@
 			 * 이미지에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onLikeimgClick(e){
+			function onLikeimgClick(e) {
 				var likeimg = e.control;
 				app.lookup("subinsertrecipelike").send();
 			}
@@ -169,24 +242,26 @@
 			 * 이미지에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onImageClick(e){
+			function onImageClick(e) {
 				var image = e.control;
 				console.log(app.lookup("dmRecipeBoardId").getValue("recipeBoardId"));
-				var initvalue = {"recipeBoardId" : app.lookup("dmRecipeBoardId").getValue("recipeBoardId")};
+				var initvalue = {
+					"recipeBoardId": app.lookup("dmRecipeBoardId").getValue("recipeBoardId")
+				};
 				app.openDialog("dialog/declarationRecipe", {
-					width : 400
-					,height : 600
-					,headerVisible: false
-				}, function(dialog){
-					dialog.ready(function(dialogApp){
+					width: 400,
+					height: 600,
+					headerVisible: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
 						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
 						dialog.initValue = initvalue;
 					});
-				}).then(function(returnValue){
-					if(returnValue == 0){
+				}).then(function(returnValue) {
+					if (returnValue == 0) {
 						return;
 					}
-					if(returnValue == null || returnValue == ''){
+					if (returnValue == null || returnValue == '') {
 						return;
 					}
 					var recipeBoardId = app.lookup("dmRecipeBoardId").getValue("recipeBoardId");
@@ -202,15 +277,15 @@
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onSubinsertDeclarationSubmitSuccess(e){
+			function onSubinsertDeclarationSubmitSuccess(e) {
 				var subinsertDeclaration = e.control;
 				var metadata = subinsertDeclaration.getMetadata("insertresult");
-				if(metadata == 1){
+				if (metadata == 1) {
 					alert("신고가 완료되었습니다");
-				}else if(metadata == 0){
+				} else if (metadata == 0) {
 					alert("이미 신고를 완료한 게시물입니다");
 				}
-			};
+			}
 			// End - User Script
 			
 			// Header
@@ -272,6 +347,15 @@
 				}]
 			});
 			app.register(dataMap_3);
+			
+			var dataMap_4 = new cpr.data.DataMap("dmInsertValue");
+			dataMap_4.parseData({
+				"columns" : [
+					{"name": "recipeCommentContent"},
+					{"name": "recipeBoardId"}
+				]
+			});
+			app.register(dataMap_4);
 			var submission_1 = new cpr.protocols.Submission("subrecipelikecount");
 			submission_1.action = "/countRecipeLikeList";
 			submission_1.mediaType = "application/x-www-form-urlencoded;simple";
@@ -304,6 +388,9 @@
 			if(typeof onRecipeCommentListReceive == "function") {
 				submission_4.addEventListener("receive", onRecipeCommentListReceive);
 			}
+			if(typeof onRecipeCommentListSubmitSuccess == "function") {
+				submission_4.addEventListener("submit-success", onRecipeCommentListSubmitSuccess);
+			}
 			app.register(submission_4);
 			
 			var submission_5 = new cpr.protocols.Submission("deleteComment");
@@ -313,6 +400,14 @@
 				submission_5.addEventListener("submit-success", onDeleteCommentSubmitSuccess);
 			}
 			app.register(submission_5);
+			
+			var submission_6 = new cpr.protocols.Submission("insertComment");
+			submission_6.action = "/insertRecipeComment";
+			submission_6.addRequestData(dataMap_4);
+			if(typeof onInsertCommentSubmitSuccess == "function") {
+				submission_6.addEventListener("submit-success", onInsertCommentSubmitSuccess);
+			}
+			app.register(submission_6);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -364,7 +459,7 @@
 					"width": "82px",
 					"height": "20px"
 				});
-				var button_1 = new cpr.controls.Button();
+				var button_1 = new cpr.controls.Button("updateBtn");
 				button_1.value = "레시피 수정";
 				if(typeof onButtonClick == "function") {
 					button_1.addEventListener("click", onButtonClick);
@@ -459,62 +554,6 @@
 				]
 			});
 			
-			var output_4 = new cpr.controls.Output();
-			output_4.value = "댓글";
-			container.addChild(output_4, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "668px",
-						"width": "52px",
-						"height": "27px",
-						"left": "calc(50% - 26px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "668px",
-						"width": "25px",
-						"height": "27px",
-						"left": "calc(50% - 12px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "668px",
-						"width": "18px",
-						"height": "27px",
-						"left": "calc(50% - 9px)"
-					}
-				]
-			});
-			
-			var output_5 = new cpr.controls.Output();
-			output_5.value = "댓글개수";
-			container.addChild(output_5, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "668px",
-						"left": "985px",
-						"width": "79px",
-						"height": "27px"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "668px",
-						"left": "481px",
-						"width": "39px",
-						"height": "27px"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "668px",
-						"left": "337px",
-						"width": "27px",
-						"height": "27px"
-					}
-				]
-			});
-			
 			var pageIndexer_1 = new cpr.controls.PageIndexer();
 			pageIndexer_1.init(1, 1, 1);
 			container.addChild(pageIndexer_1, {
@@ -584,13 +623,17 @@
 			formLayout_1.setRows(["1fr"]);
 			group_3.setLayout(formLayout_1);
 			(function(container){
-				var inputBox_1 = new cpr.controls.InputBox("ipb1");
+				var inputBox_1 = new cpr.controls.InputBox("commentInput");
+				inputBox_1.bind("value").toDataMap(app.lookup("dmInsertValue"), "recipeCommentContent");
 				container.addChild(inputBox_1, {
 					"colIndex": 0,
 					"rowIndex": 0
 				});
 				var button_2 = new cpr.controls.Button();
 				button_2.value = "등록";
+				if(typeof onButtonClick2 == "function") {
+					button_2.addEventListener("click", onButtonClick2);
+				}
 				container.addChild(button_2, {
 					"colIndex": 1,
 					"rowIndex": 0
@@ -617,6 +660,57 @@
 						"top": "694px",
 						"width": "247px",
 						"height": "87px",
+						"left": "calc(50% - 123px)"
+					}
+				]
+			});
+			
+			var group_4 = new cpr.controls.Container();
+			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+			group_4.setLayout(xYLayout_2);
+			(function(container){
+				var output_4 = new cpr.controls.Output();
+				output_4.value = "댓글";
+				container.addChild(output_4, {
+					"top": "9px",
+					"left": "4px",
+					"width": "41px",
+					"height": "27px"
+				});
+				var output_5 = new cpr.controls.Output("commentCount");
+				output_5.value = "댓글개수";
+				output_5.style.css({
+					"color" : "#15820C",
+					"font-size" : "20px"
+				});
+				container.addChild(output_5, {
+					"top": "9px",
+					"left": "44px",
+					"width": "88px",
+					"height": "27px"
+				});
+			})(group_4);
+			container.addChild(group_4, {
+				positions: [
+					{
+						"media": "all and (min-width: 1024px)",
+						"top": "658px",
+						"width": "722px",
+						"height": "38px",
+						"left": "calc(50% - 361px)"
+					}, 
+					{
+						"media": "all and (min-width: 500px) and (max-width: 1023px)",
+						"top": "658px",
+						"width": "353px",
+						"height": "38px",
+						"left": "calc(50% - 176px)"
+					}, 
+					{
+						"media": "all and (max-width: 499px)",
+						"top": "658px",
+						"width": "247px",
+						"height": "38px",
 						"left": "calc(50% - 123px)"
 					}
 				]

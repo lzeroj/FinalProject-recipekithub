@@ -1001,9 +1001,9 @@
 						"colIndex": 0,
 						"rowIndex": 0
 					});
-					var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
+					var navigationBar_1 = new cpr.controls.NavigationBar("navbar");
 					navigationBar_1.menuType = "fullmenu";
-					navigationBar_1.expandTrigger = "hover";
+					navigationBar_1.expandTrigger = "click";
 					navigationBar_1.style.setClasses(["indexnav"]);
 					navigationBar_1.style.css({
 						"background-color" : "#90be70",
@@ -1064,9 +1064,6 @@
 						}
 					]
 				});
-				if(typeof onBodyLoad == "function"){
-					app.addEventListener("load", onBodyLoad);
-				}
 			}
 		});
 	internalApp.title = "header3";
@@ -1257,6 +1254,7 @@
 					app.lookup("nick").text = app.getAppProperty("nick");
 					app.lookup("regDate").text = app.getAppProperty("regDate");
 					app.lookup("content").text = app.getAppProperty("content");
+					app.lookup("deleteBtn").visible = app.getAppProperty("deleteBtn");
 				}
 	
 				/*
@@ -1284,6 +1282,7 @@
 				app.declareAppProperty("nick", null);
 				app.declareAppProperty("regDate", null);
 				app.declareAppProperty("content", null);
+				app.declareAppProperty("deleteBtn", null);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 				app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -1331,7 +1330,7 @@
 				container.addChild(output_3, {
 					"top": "9px",
 					"left": "93px",
-					"width": "121px",
+					"width": "132px",
 					"height": "20px"
 				});
 				
@@ -1342,19 +1341,19 @@
 				}
 				container.addChild(button_1, {
 					"top": "9px",
-					"left": "213px",
+					"left": "224px",
 					"width": "38px",
 					"height": "20px"
 				});
 				
-				var button_2 = new cpr.controls.Button();
+				var button_2 = new cpr.controls.Button("deleteBtn");
 				button_2.value = "삭제";
 				if(typeof onButtonClick2 == "function") {
 					button_2.addEventListener("click", onButtonClick2);
 				}
 				container.addChild(button_2, {
 					"top": "9px",
-					"left": "250px",
+					"left": "261px",
 					"width": "38px",
 					"height": "20px"
 				});
@@ -1402,6 +1401,14 @@
 		},
 		set: function(newValue){
 			return this.getEmbeddedAppInstance().setAppProperty("content", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.recipeCommentudc.prototype, "deleteBtn", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("deleteBtn");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("deleteBtn", newValue, true);
 		}
 	});
 	
@@ -1521,7 +1528,6 @@
 				output_2.style.css({
 					"color" : "#0CA44E"
 				});
-
 				container.addChild(output_2, {
 					"top": "179px",
 					"left": "0px",
@@ -1537,6 +1543,7 @@
 					"width": "50px",
 					"height": "27px"
 				});
+				
 				var output_4 = new cpr.controls.Output("like");
 				output_4.value = "Output";
 				output_4.style.css({

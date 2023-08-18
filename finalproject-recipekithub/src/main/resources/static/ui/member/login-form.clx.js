@@ -114,7 +114,7 @@
 				}
 				app.lookup("emailInput").text = item;
 				app.lookup("pswdInput").focus();
-			};
+			}
 			// End - User Script
 			
 			// Header

@@ -18,54 +18,38 @@ function onBodyLoad(e) {
  * 서브미션에서 receive 이벤트 발생 시 호출.
  * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
  */
-function onRecipeBoardListReceive(e) {
-	var recipeBoardList = e.control;
-	var xhr = recipeBoardList.xhr;
-	var jsonData = JSON.parse(xhr.responseText);
-	var recipeList = jsonData.recipe_board;
-	var totalPostCount = jsonData.totalPostCount;
-	var likeCounts = jsonData.likeCounts;
-	console.log(likeCounts.length);
-	var container = app.lookup("grp");
-	app.lookup("recipeCount").value = totalPostCount;
-	for (var i = 0; i < recipeList.length; i++) {
-		(function(index) {
-			//udc 동적 생성
-			var recipe = new udc.recipeListudc();
-			//udc에서 출판한 이미지 경로 앱 속성 지정
-			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
-			recipe.hits = recipeList[i].recipeBoardHits;
-			recipe.nick = recipeList[i].memberVO.memberNick;
-			recipe.title = recipeList[i].recipeBoardTitle;
-			for(var j=0; j<likeCounts.length; j++){
-				recipe.like = likeCounts[j];
-			}
-			container.addChild(recipe, {
-				height: "250px",
-				width: "230px",
-				autoSize: "both"
-			});
-			recipe.addEventListener("imgClick", function(e) {
-				window.location.href = "/detailRecipe?recipeBoardId=" + recipeList[index].recipeBoardId;
-			});
-		})(i);
-	}
-}	
-
-/*
- * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
- * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
- */
-//function onPageIndexerSelectionChange(e){
-//	var recipeList = cpr.core.Platform.INSTANCE.getParameter("recipe_board");
-//	var pageIndexer = e.control;
-//	var dmPage = app.lookup("dmPage");
-//	dmPage.setValue("pageNo", e.newSelection);
-//	app.lookup("recipeBoardList").send();
+//function onRecipeBoardListReceive(e) {
+//	var recipeBoardList = e.control;
+//	var xhr = recipeBoardList.xhr;
+//	var jsonData = JSON.parse(xhr.responseText);
+//	var recipeList = jsonData.recipe_board;
+//	var totalPostCount = jsonData.totalPostCount;
+//	var likeCounts = jsonData.likeCounts;
+//	console.log(likeCounts.length);
+//	var container = app.lookup("grp");
+//	app.lookup("recipeCount").value = totalPostCount;
+//	for (var i = 0; i < recipeList.length; i++) {
+//		(function(index) {
+//			//udc 동적 생성
+//			var recipe = new udc.recipeListudc();
+//			//udc에서 출판한 이미지 경로 앱 속성 지정
+//			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
+//			recipe.hits = recipeList[i].recipeBoardHits;
+//			recipe.nick = recipeList[i].memberVO.memberNick;
+//			recipe.title = recipeList[i].recipeBoardTitle;
+//			recipe.like = likeCounts[i];
+//			container.addChild(recipe, {
+//				height: "250px",
+//				width: "230px",
+//				autoSize: "both"
+//			});
+//			recipe.addEventListener("imgClick", function(e) {
+//				window.location.href = "/detailRecipe?recipeBoardId=" + recipeList[index].recipeBoardId;
+//			});
+//		})(i);
 //	}
-	
-	
-	
+//}	
+
 	
 	//	var recipeList = cpr.core.Platform.INSTANCE.getParameter("recipe_board");
 //	var pagination = cpr.core.Platform.INSTANCE.getParameter("pagination");
@@ -91,3 +75,71 @@ function onRecipeBoardListReceive(e) {
 //		})(i);
 //	}
 
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onRecipeBoardListSubmitSuccess(e){
+	var recipeBoardList = e.control;
+	var xhr = recipeBoardList.xhr;
+	var jsonData = JSON.parse(xhr.responseText);
+	var recipeList = jsonData.recipe_board;
+	var totalPostCount = jsonData.totalPostCount;
+	var likeCounts = jsonData.likeCounts;
+	var container = app.lookup("grp");
+	
+	
+	app.lookup("page").totalRowCount = totalPostCount;
+
+	app.lookup("recipeCount").value = totalPostCount;
+	
+	container.removeAllChildren();
+	
+	for (var i = 0; i < recipeList.length; i++) {
+		(function(index) {
+			//udc 동적 생성
+			var recipe = new udc.recipeListudc();
+			//udc에서 출판한 이미지 경로 앱 속성 지정
+			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
+			recipe.hits = recipeList[i].recipeBoardHits;
+			recipe.nick = recipeList[i].memberVO.memberNick;
+			recipe.title = recipeList[i].recipeBoardTitle;
+			recipe.like = likeCounts[i];
+			container.addChild(recipe, {
+				height: "250px",
+				width: "230px",
+				autoSize: "both"
+			});
+			recipe.addEventListener("imgClick", function(e) {
+				window.location.href = "/detailRecipe?recipeBoardId=" + recipeList[index].recipeBoardId;
+			});
+		})(i);
+	}
+}
+
+/*
+ * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
+ * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
+ */
+function onPageSelectionChange(e){
+	var page = e.control;
+	app.lookup("recipeBoardList").send();
+}
+
+/*
+ * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
+ * 아이템 클릭시 발생하는 이벤트.
+ */
+function onNavigationBarItemClick(e){
+	var navigationBar = e.control;
+	
+}
+
+/*
+ * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
+ * 아이템 클릭시 발생하는 이벤트.
+ */
+function onNavigationBarItemClick2(e){
+	var navigationBar = e.control;
+	
+}

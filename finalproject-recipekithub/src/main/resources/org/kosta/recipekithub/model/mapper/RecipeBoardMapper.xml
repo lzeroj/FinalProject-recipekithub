@@ -2,14 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.recipekithub.model.mapper.RecipeBoardMapper">
 
-	<resultMap type="org.kosta.recipekithub.model.vo.RecipeBoardVO" id="memberNick">
+	<resultMap type="org.kosta.recipekithub.model.vo.RecipeBoardVO" id="member">
 		<result column="member_nick" property="memberVO.memberNick"></result>
+		<result column="member_Email" property="memberVO.memberEmail"></result>
 	</resultMap>
-	<select id="findAllRecipeBoard" resultMap = "memberNick">
+	<select id="findAllRecipeBoard" resultMap = "member">
 <!-- 		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
 		from recipe_board r
 		inner join member m on r.member_email = m.member_email
-		order by r.recipe_reg_date desc -->	
+		order by r.recipe_reg_date desc	 -->
 		SELECT rnum, r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
 		FROM ( SELECT
 		ROW_NUMBER() OVER(ORDER BY recipe_reg_date DESC)
@@ -28,8 +29,8 @@
 		</selectKey>
 	</insert> 
 	
-	<select id="findDetailRecipe" resultMap="memberNick">
-		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_content, r.category_type, r.category_ingredients, r.category_method,
+	<select id="findDetailRecipe" resultMap="member">
+		select r.recipe_board_id, r.member_email, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_content, r.category_type, r.category_ingredients, r.category_method,
 		r.recipe_reg_date, r.recipe_edit_date
 		from recipe_board r
 		inner join member m on r.member_email = m.member_email
