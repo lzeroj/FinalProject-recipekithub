@@ -23,6 +23,7 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
+				console.log(sessionStorage.getItem("memsession"));
 				var vcEmb = app.lookup("ea1");
 				cpr.core.App.load("embedded/myPagePaymentInfo", function(/*cpr.core.App*/ loadedApp){
 					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
@@ -54,6 +55,8 @@
 					src = "embedded/myPageQuestion"
 				}else if(nav1.value == '2'){
 					src = "embedded/myPagePaymentInfo"
+				}else if(nav1.value == '3'){
+					src = "embedded/myPageMealkitLike"
 				}
 				var vcEmb = app.lookup("ea1");
 				cpr.core.App.load(src, function(/*cpr.core.App*/ loadedApp){
@@ -90,7 +93,8 @@
 				]
 			});
 			app.register(dataSet_1);
-			app.supportMedia("all and (min-width: 1024px)", "default");
+			app.supportMedia("all and (min-width: 1920px)", "new-screen");
+			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
 			
@@ -111,6 +115,9 @@
 			group_1.setLayout(xYLayout_2);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
+				group_2.style.css({
+					"background-color" : "#f4faec"
+				});
 				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
 				group_2.setLayout(xYLayout_3);
 				(function(container){
@@ -148,14 +155,28 @@
 							container.addChild(embeddedApp_1, {
 								"top": "0px",
 								"right": "0px",
-								"bottom": "0px",
+								"bottom": "30px",
 								"left": "0px"
+							});
+							var userDefinedControl_1 = new udc.header3();
+							container.addChild(userDefinedControl_1, {
+								"top": "-199px",
+								"right": "-972px",
+								"left": "-480px",
+								"height": "200px"
 							});
 						})(group_4);
 						container.addChild(group_4, {
 							positions: [
 								{
-									"media": "all and (min-width: 1024px)",
+									"media": "all and (min-width: 1920px)",
+									"top": "39px",
+									"right": "516px",
+									"bottom": "0px",
+									"left": "0px"
+								}, 
+								{
+									"media": "all and (min-width: 1024px) and (max-width: 1919px)",
 									"top": "39px",
 									"right": "275px",
 									"bottom": "0px",
@@ -190,7 +211,7 @@
 						(function(navigationBar_1){
 							navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "1", null));
 							navigationBar_1.addItem(new cpr.controls.MenuItem("구매내역", "2", null));
-							navigationBar_1.addItem(new cpr.controls.MenuItem("좋아요", "3", null));
+							navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트찜", "3", null));
 							navigationBar_1.addItem(new cpr.controls.MenuItem("문의하기", "4", null));
 						})(navigationBar_1);
 						if(typeof onNav1ItemClick == "function") {
@@ -199,7 +220,14 @@
 						container.addChild(navigationBar_1, {
 							positions: [
 								{
-									"media": "all and (min-width: 1024px)",
+									"media": "all and (min-width: 1920px)",
+									"top": "0px",
+									"right": "830px",
+									"left": "0px",
+									"height": "40px"
+								}, 
+								{
+									"media": "all and (min-width: 1024px) and (max-width: 1919px)",
 									"top": "0px",
 									"right": "629px",
 									"width": "355px",
@@ -227,7 +255,14 @@
 						container.addChild(group_5, {
 							positions: [
 								{
-									"media": "all and (min-width: 1024px)",
+									"media": "all and (min-width: 1920px)",
+									"top": "0px",
+									"right": "0px",
+									"width": "450px",
+									"height": "200px"
+								}, 
+								{
+									"media": "all and (min-width: 1024px) and (max-width: 1919px)",
 									"top": "0px",
 									"right": "0px",
 									"width": "270px",
@@ -251,10 +286,17 @@
 						});
 					})(group_3);
 					container.addChild(group_3, {
-						"top": "166px",
+						"top": "210px",
 						"bottom": "0px",
-						"width": "984px",
-						"left": "calc(50% - 492px)"
+						"width": "1230px",
+						"left": "calc(50% - 615px)"
+					});
+					var userDefinedControl_2 = new udc.header3();
+					container.addChild(userDefinedControl_2, {
+						"top": "0px",
+						"right": "0px",
+						"left": "0px",
+						"height": "200px"
 					});
 				})(group_2);
 				container.addChild(group_2, {
@@ -262,13 +304,6 @@
 					"right": "0px",
 					"bottom": "0px",
 					"left": "0px"
-				});
-				var userDefinedControl_1 = new udc.header();
-				container.addChild(userDefinedControl_1, {
-					"top": "0px",
-					"right": "0px",
-					"left": "0px",
-					"height": "163px"
 				});
 			})(group_1);
 			container.addChild(group_1, {

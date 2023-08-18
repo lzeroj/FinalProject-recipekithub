@@ -60,4 +60,29 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.findCartNoByMemberEmailOrderSuccess(memberEmail);
 	}
 
+	@Override
+	public String findMyCartStatusYN(String memberEmail) {
+		return cartMapper.findMyCartStatusYN(memberEmail);
+	}
+
+	@Override
+	public int creatMyCart(String memberEmail) {
+		return cartMapper.creatMyCart(memberEmail);
+	}
+
+	@Override
+	public int insertMyCartDetail(int mealkitNo, int cartNO, int cartDetailQuantity) {
+		return cartMapper.insertMyCartDetail(mealkitNo,cartNO,cartDetailQuantity);
+	}
+
+	@Override
+	public int findDuplicateMealkitCount(String memberEmail, int mealkitNo) {
+		return cartMapper.findDuplicateMealkitCount(memberEmail,mealkitNo);
+	}
+
+	@Override
+	public int updateCartDetailQuantity(int cartDetailQuantity, int mealkitNo, int cartNo) {
+		return cartMapper.updateCartDetailQuantity(cartDetailQuantity,mealkitNo,cartNo);
+	}
+
 }

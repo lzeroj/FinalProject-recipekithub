@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class MealKitBoard {
 
+	
 	private int mealkitNo;
 	private String mealkitName;
 	private String mealkitInfo;

@@ -12,10 +12,21 @@
           <cl:datacolumn std:sid="d-column-49327e21" name="CATEGORY_TYPE" datatype="string"/>
           <cl:datacolumn std:sid="d-column-2588bba1" name="CATEGORY_INGREDIENTS" datatype="string"/>
           <cl:datacolumn std:sid="d-column-18ccb8b1" name="CATEGORY_METHOD" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-e3419745" name="RECIPE_BOARD_ID" datatype="decimal"/>
         </cl:datacolumnlist>
       </cl:datamap>
-      <cl:submission std:sid="submission-7c958744" id="updateRecipe" action="/updateRecipe">
+      <cl:datamap std:sid="d-map-60eec90f" id="recipeBoardId">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-99042dca" name="RECIPE_BOARD_ID"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-7c958744" id="updateRecipe" async="false" action="/updateSaveRecipe">
+        <cl:listener std:sid="listener-f0787f2f" name="submit-success" handler="onUpdateRecipeSubmitSuccess"/>
         <cl:requestdata dataid="recipe"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a30adad7" id="deleteRecipe" action="/deleteRecipe">
+        <cl:listener std:sid="listener-0d73ab1f" name="submit-success" handler="onDeleteRecipeSubmitSuccess"/>
+        <cl:requestdata dataid="recipeBoardId"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -41,9 +52,11 @@
         <cl:formdata std:sid="f-data-69fd5ecb" row="0" col="0"/>
       </cl:button>
       <cl:button std:sid="button-e1ee046c" style="font-weight:bold; background-image:linear-gradient(#ffffff, #5690cb);" value="취소">
+        <cl:listener std:sid="listener-b5863857" name="click" handler="onButtonClick3"/>
         <cl:formdata std:sid="f-data-3896aaca" row="0" col="2"/>
       </cl:button>
       <cl:button std:sid="button-dc90f905" style="font-weight:bold; background-image:linear-gradient(#52b135,#58fd45);" value="삭제">
+        <cl:listener std:sid="listener-1c6851ca" name="click" handler="onButtonClick2"/>
         <cl:formdata std:sid="f-data-dbe9d911" row="0" col="1"/>
       </cl:button>
       <cl:formlayout std:sid="f-layout-bf922bb2" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
@@ -116,7 +129,7 @@
             <cl:columns length="80" unit="PIXEL"/>
           </cl:formlayout>
         </cl:group>
-        <cl:fileinput std:sid="f-input-f3cf13f4" id="fi1">
+        <cl:fileinput std:sid="f-input-f3cf13f4" id="fi1" style="text-align:left;" clearbuttonimage="" placeholder="요리 대표 사진을 등록해 주세요" acceptfile="image/*">
           <cl:listener std:sid="listener-d2ce385d" name="value-change" handler="onFi1ValueChange"/>
           <cl:formdata std:sid="f-data-dddb6e38" row="1" col="1"/>
         </cl:fileinput>
@@ -129,7 +142,6 @@
         </cl:formlayout>
       </cl:group>
       <cl:img std:sid="image-4a5fee11" id="uploadImg">
-        <cl:listener std:sid="listener-7adc8377" name="value-change" handler="onUploadImageValueChange"/>
         <cl:xylayoutdata std:sid="xyl-data-02dde795" top="5px" left="508px" width="216px" height="193px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:button std:sid="button-cc4a9f4f" id="deleteImg" value="X">

@@ -103,6 +103,9 @@
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
+			group_1.style.css({
+				"background-color" : "#FFFFFF"
+			});
 			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
 			group_1.setLayout(xYLayout_2);
 			(function(container){

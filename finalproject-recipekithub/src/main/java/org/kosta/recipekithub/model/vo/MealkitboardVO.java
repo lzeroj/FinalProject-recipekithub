@@ -13,6 +13,7 @@ public class MealkitboardVO {
 	private String mealkitInfo;
 	private String mealkitIngredients;
 	private int mealkitPrice;
+	private String mealkitCategory;
 	private String mealkitProductionDate;
 	private String mealkitExpirationDate;
 	private int mealkitInventory;

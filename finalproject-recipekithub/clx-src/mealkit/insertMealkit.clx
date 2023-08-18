@@ -35,8 +35,8 @@
   <body std:sid="body-ab2bbb72">
     <cl:listener std:sid="listener-76a265cc" name="init" handler="onBodyInit2"/>
     <cl:group std:sid="group-fc26d059">
-      <cl:xylayoutdata std:sid="xyl-data-bbcf1eee" top="20px" bottom="20px" width="984px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
-      <cl:group std:sid="group-79300f65" style="background-color:#F9F9F9;">
+      <cl:xylayoutdata std:sid="xyl-data-bbcf1eee" top="20px" bottom="-222px" width="984px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-79300f65" style="background-color:#f9f9f9; background-image:none;">
         <cl:xylayoutdata std:sid="xyl-data-31215747" top="39px" width="864px" height="81px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:output std:sid="output-7b3ee401" style="color:#0CA44E; font-weight:bolder; font-size:20px; font-style:normal;" value="밀키트 등록">
           <cl:xylayoutdata std:sid="xyl-data-fe37558f" top="30px" left="20px" width="122px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -68,7 +68,7 @@
       <cl:group std:sid="group-eee8dda2">
         <cl:xylayoutdata std:sid="xyl-data-c98428ac" top="200px" left="60px" width="864px" height="35px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:output std:sid="output-a3aa1e5b" style="color:#0CA44E; font-size:15px; text-align:center;" value="카테고리">
-          <cl:xylayoutdata std:sid="xyl-data-3ae5b7fb" top="8px" left="48px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-3ae5b7fb" top="8px" left="52px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:combobox std:sid="c-box-3094e38c" id="cmb1" style="background-color:#F9F9F9;">
           <cl:listener std:sid="listener-50416e41" name="selection-change" handler="onCmb1SelectionChange"/>
@@ -128,7 +128,7 @@
         <cl:xylayout std:sid="xylayout-dbc58606"/>
       </cl:group>
       <cl:group std:sid="group-3dbf3d97">
-        <cl:xylayoutdata std:sid="xyl-data-fa33e6d3" top="599px" left="60px" width="864px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-fa33e6d3" top="750px" left="60px" width="864px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:output std:sid="output-8b040f2e" style="color:#0CA44E; font-size:15px; text-align:center;" value="가격">
           <cl:xylayoutdata std:sid="xyl-data-f362a071" top="20px" left="46px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
@@ -146,7 +146,7 @@
         <cl:xylayout std:sid="xylayout-1fafb5dc"/>
       </cl:group>
       <cl:group std:sid="group-89377d31">
-        <cl:xylayoutdata std:sid="xyl-data-bba79709" top="315px" left="60px" width="864px" height="285px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-bba79709" top="454px" left="60px" width="864px" height="285px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:output std:sid="output-be2324d5" style="color:#0CA44E; font-size:15px; text-align:center;" value="밀키트 소개">
           <cl:xylayoutdata std:sid="xyl-data-cedb7e68" top="46px" left="54px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
@@ -158,11 +158,29 @@
       </cl:group>
       <cl:button std:sid="button-068ac482" style="background-color:#0ca44e; color:white; font-size:17px; background-image:none;" class=".cl-button mealkitbtn" value="등록">
         <cl:listener std:sid="listener-992ec53d" name="click" handler="onButtonClick2"/>
-        <cl:xylayoutdata std:sid="xyl-data-ce4c196e" top="670px" left="357px" width="104px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-ce4c196e" top="873px" left="389px" width="104px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:button std:sid="button-8b76c874" style="background-color:#0ca44e; color:white; font-size:17px; background-image:none;" class=".cl-button mealkitbtn" value="취소">
-        <cl:xylayoutdata std:sid="xyl-data-47c9b50e" top="670px" left="471px" width="111px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-47c9b50e" top="873px" left="503px" width="111px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
+      <cl:group std:sid="group-756e860d">
+        <cl:xylayoutdata std:sid="xyl-data-24f12dac" top="315px" left="60px" width="864px" height="129px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:fileinput std:sid="f-input-4232da3d" id="file1" placeholder="클릭후 파일 업로드해주세요.">
+          <cl:listener std:sid="listener-e8b7487b" name="value-change" handler="onFile1ValueChange"/>
+          <cl:xylayoutdata std:sid="xyl-data-207f98da" top="2px" left="173px" width="351px" height="126px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:fileinput>
+        <cl:img std:sid="image-66b02cea" id="uploadImg">
+          <cl:xylayoutdata std:sid="xyl-data-964daf95" top="2px" left="534px" width="290px" height="126px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:img>
+        <cl:output std:sid="output-0a715701" style="color:#0CA44E; text-align:center;" value="파일">
+          <cl:xylayoutdata std:sid="xyl-data-3bcea5f1" top="46px" left="52px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:output>
+        <cl:button std:sid="button-699f3e1b" id="deleteImgBtn" style="color:black;" value="X">
+          <cl:listener std:sid="listener-4f0ddf4d" name="click" handler="onDeleteImgBtnClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-f719d52e" top="2px" left="801px" width="23px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-b63c3446"/>
+      </cl:group>
       <cl:xylayout std:sid="xylayout-9ecb7632"/>
     </cl:group>
     <cl:xylayout std:sid="xylayout-01adf7b6"/>

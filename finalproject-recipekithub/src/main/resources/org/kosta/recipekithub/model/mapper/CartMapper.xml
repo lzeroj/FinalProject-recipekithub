@@ -25,9 +25,13 @@
 		WHERE MEALKIT_NO = #{mealkiitNo} AND CART_NO = #{cartNo} AND IS_ORDERED_DATAIL = 'N'
 	</update>
 	
-	<insert id="insertCart">
-		
-	</insert>
+	<!-- 현재 활성화된 카트가 존재하는지 확인 -->
+	<select id="findMyCartStatusYN" resultType="String">
+		SELECT c.cart_no 
+		FROM CART c  
+		WHERE c.CART_ORDER_STATUS = 'N'
+		AND c.MEMBER_EMAIL = #{memberEmail} 
+	</select>
 	
 	<select id="findCartNoByMemberEmail" resultType="org.kosta.recipekithub.model.vo.CartVO">
 		SELECT c.CART_NO, c.CART_ORDER_STATUS, c.CART_TOTAL
@@ -35,6 +39,35 @@
 		WHERE m.MEMBER_EMAIL = #{memberEmail} 
 		AND C.CART_ORDER_STATUS = 'N'
 	</select>
+	
+	<!-- 활성화된 카트가 없으면 카트 생성 -->
+	<insert id="creatMyCart">
+		INSERT INTO CART values(CART_seq.nextval,#{memberEmail},'N',0)
+	</insert>
+	
+	<!-- 활성화된 카트가 있으면 cart_detail에 값 추가 -->
+	<insert id="insertMyCartDetail">
+		INSERT INTO CART_DETAIL values(#{mealkitNo},#{cartNO},#{cartDetailQuantity},'Y','N')
+	</insert>
+	
+	<!-- 활성화된 카트에 동일한 밀키트가 있으면 수량만 변경한다, 그를 위한 수량 조회 -->
+	<select id="findDuplicateMealkitCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM CART_DETAIL cd , CART c , "MEMBER" m 
+		WHERE c.CART_NO = cd.CART_NO 
+		AND m.MEMBER_EMAIL = c.MEMBER_EMAIL
+		AND c.CART_ORDER_STATUS = 'N' 
+		AND cd.IS_ORDERED_DATAIL = 'N'
+		AND cd.MEALKIT_NO = #{mealkitNo}
+		AND m.MEMBER_EMAIL = #{memberEmail}
+	</select> 
+	
+	<!-- 활성화된 카트에 밀키트가 있으면 수량을 변경한다 -->
+	<update id="updateCartDetailQuantity">
+		UPDATE CART_DETAIL SET CART_DETAIL_QUANTITY = CART_DETAIL_QUANTITY + #{cartDetailQuantity}
+		WHERE CART_NO = #{cartNo} AND MEALKIT_NO = #{mealkitNo}
+	</update>
+	
 	
 	<select id="findCartNoByMemberEmailOrderSuccess" resultType="org.kosta.recipekithub.model.vo.CartVO">
 		SELECT c.CART_NO, c.CART_ORDER_STATUS, c.CART_TOTAL

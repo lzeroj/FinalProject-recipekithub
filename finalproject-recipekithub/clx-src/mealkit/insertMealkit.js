@@ -37,8 +37,8 @@ function onSampleThrLoad(e){
         //에디터를 넣어줄 div 생성
         var editorDiv = document.createElement("div")
         editorDiv.id = "summernote";
-        editorDiv.style.height = "60%";
-        editorDiv.style.width = "80%";
+        editorDiv.style.height = "100%";
+        editorDiv.style.width = "100%";
 
         //생성한 에디터를 쉘 영역안에 넣어준다.
         content.appendChild(editorDiv);
@@ -71,7 +71,6 @@ function onButtonClick2(e){
 	var vsOpt = app.lookup("sampleThr");
   	vsOpt.value = $('#summernote').summernote('code');
    	var message = vsOpt.value;
-   	
    	var combo1 = app.lookup("cmb1").text;
    	var combo2 = app.lookup("cmb2").text;
    	var combo3 = app.lookup("cmb3").text;
@@ -80,8 +79,8 @@ function onButtonClick2(e){
    	var dataMap = app.lookup("mealkitMap");
    	dataMap.setValue("mealkitInfo", message);
    	dataMap.setValue("mealkitCategory", category);
- 	console.log("message = " + message);
  	//유효성
+ 	
  	var name = app.lookup("ipb1");
  	var ingredients = app.lookup("ipb2");
  	var price = app.lookup("ipb3");
@@ -132,9 +131,14 @@ function onButtonClick2(e){
  		stock.focus();
  		return;
  	}
+ 	
+ 	var fileInput = app.lookup("file1");
+	var file = fileInput.file;
+	app.lookup("uploadImg").src = file;
  	  	
 
 	var submission = app.lookup("mealkitSub");
+	submission.addFileParameter("image", file);
 	submission.send();
    	
 }
@@ -146,6 +150,7 @@ function onButtonClick2(e){
 function onMealkitSubSubmitSuccess(e){
 	var mealkitSub = e.control;
 	var mealkitNo = mealkitSub.getMetadata("result");
+	alert("밀키트가 등록되었습니다.");
 	//var dataMap = app.lookup("mealkitNo");
 	//dataMap.setValue("mealkitNo", metadata);
 	var url = '/mealkitDetail/'+mealkitNo; //상세 페이지 url
@@ -160,4 +165,34 @@ function onMealkitSubSubmitSuccess(e){
 function onButtonClick(e){
 	var button = e.control;
 	window.location.href= "/"; //추후 리스트 페이지로 바꿔야함.
+}
+
+/*
+ * 파일 인풋에서 value-change 이벤트 발생 시 호출.
+ * FileInput의 value를 변경하여 변경된 값이 저장된 후에 발생하는 이벤트.
+ */
+function onFile1ValueChange(e){
+	var file1 = e.control;
+	var image = app.lookup("uploadImg");
+	var fileInput = app.lookup("file1");
+	if (fileInput.files && fileInput.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			image.src = e.target.result;
+		};
+		
+		reader.readAsDataURL(fileInput.files[0]);
+	}
+}
+
+/*
+ * "X" 버튼(deleteImgBtn)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onDeleteImgBtnClick(e){
+	var deleteImgBtn = e.control;
+	var fileInput = app.lookup("file1");
+	var image = app.lookup("uploadImg");
+	fileInput.clear();
+	image.src = "";
 }

@@ -50,7 +50,7 @@
 			 */
 			function onFindBtnClick(e) {
 				var findBtn = e.control;
-				window.location.href = "member/find-info-form.clx";
+				window.location.href = "member/find-email-pswd.clx";
 			}
 
 			/*
@@ -58,11 +58,30 @@
 			 * 통신이 성공하면 발생합니다.
 			 */
 			function onSub_loginSubmitSuccess(e) {
+				// 현준
 				var sub_login = e.control;
+				var checkBox = app.lookup("cbx1");
+				var memberEmail = app.lookup("dm_login").getValue("member_email");
+				if(checkBox.checked){
+					localStorage.setItem("memberEmail", memberEmail);
+				}
+				setTimedSessionData("memsession", memberEmail,30);
 				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 				httpPostMethod.submit();
 			}
 
+			// 데이터 저장과 만료 시간 설정
+			function setTimedSessionData(key, value, expirationMinutes) {
+			    var currentTime = new Date().getTime();
+			    var expirationTime = currentTime + (expirationMinutes * 60 * 1000); // milliseconds
+
+			    var data = {
+			        value: value,
+			        expirationTime: expirationTime
+			    };
+
+			    sessionStorage.setItem(key, JSON.stringify(data));
+			}
 			/*
 			 * 서브미션에서 submit-error 이벤트 발생 시 호출.
 			 * 통신 중 문제가 생기면 발생합니다.
@@ -81,7 +100,22 @@
 				if (e.keyCode == cpr.events.KeyCode.ENTER) {
 					app.lookup("btnLogin").click();
 				}
-			};
+			}
+
+			/*
+			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+			 */
+			function onBodyLoad(e){
+				// 현준
+				var item = localStorage.getItem("memberEmail");
+				if(item == null || item == ''){
+					return;
+				}
+				app.lookup("cbx1").checked = true;
+				app.lookup("emailInput").text = item;
+				app.lookup("pswdInput").focus();
+			}
 			// End - User Script
 			
 			// Header
@@ -184,47 +218,48 @@
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
-				"background-color" : "#F0F0F0"
+				"background-color" : "#6A8B41"
 			});
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			group_1.setLayout(xYLayout_1);
+			var responsiveXYLayout_2 = new cpr.controls.layouts.ResponsiveXYLayout();
+			group_1.setLayout(responsiveXYLayout_2);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"border-radius" : "5px",
-					"background-color" : "#ecfef4",
+					"background-color" : "#F4FAEC",
+					"background-repeat" : "no-repeat",
 					"background-size" : "cover",
-					"background-image" : "url('theme/images/member/3.png')",
+					"background-image" : "url('theme/images/member/20.png')",
 					"background-position" : "center"
 				});
-				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_2);
+				var responsiveXYLayout_3 = new cpr.controls.layouts.ResponsiveXYLayout();
+				group_2.setLayout(responsiveXYLayout_3);
 				(function(container){
 					var group_3 = new cpr.controls.Container();
 					group_3.style.css({
 						"border-radius" : "10px",
 						"background-color" : "#FFFFFF"
 					});
-					var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-					group_3.setLayout(xYLayout_3);
+					var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+					group_3.setLayout(xYLayout_1);
 					(function(container){
 						var group_4 = new cpr.controls.Container();
 						group_4.style.css({
 							"background-size" : "cover",
 							"background-position" : "center",
-							"background-image" : "url('theme/images/logo.png')"
+							"background-image" : "url('theme/images/common/logo.png')"
 						});
-						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-						group_4.setLayout(xYLayout_4);
+						var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+						group_4.setLayout(xYLayout_2);
 						container.addChild(group_4, {
 							"top": "20px",
-							"bottom": "398px",
 							"width": "356px",
+							"height": "209px",
 							"left": "calc(50% - 178px)"
 						});
 						var group_5 = new cpr.controls.Container();
-						var xYLayout_5 = new cpr.controls.layouts.XYLayout();
-						group_5.setLayout(xYLayout_5);
+						var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+						group_5.setLayout(xYLayout_3);
 						(function(container){
 							var group_6 = new cpr.controls.Container();
 							var formLayout_1 = new cpr.controls.layouts.FormLayout();
@@ -266,36 +301,37 @@
 									"rowIndex": 1
 								});
 								var image_1 = new cpr.controls.Image();
+								image_1.src = "theme/images/member/circle-user1.png";
 								image_1.style.item.setClasses(["memberIcon"]);
 								container.addChild(image_1, {
 									"colIndex": 0,
 									"rowIndex": 0
 								});
 								var image_2 = new cpr.controls.Image();
-								image_2.src = "theme/images/com/login/encrypted.png";
+								image_2.src = "theme/images/member/key.png";
 								container.addChild(image_2, {
 									"colIndex": 0,
 									"rowIndex": 1
 								});
 							})(group_6);
 							container.addChild(group_6, {
-								"top": "0px",
-								"right": "0px",
 								"bottom": "32px",
-								"left": "0px"
+								"width": "304px",
+								"height": "129px",
+								"left": "calc(50% - 152px)"
 							});
 							var checkBox_1 = new cpr.controls.CheckBox("cbx1");
-							checkBox_1.value = "true";
+							checkBox_1.value = "";
 							checkBox_1.text = "ID 저장";
 							checkBox_1.style.css({
 								"font-size" : "15px",
 								"text-align" : "right"
 							});
 							container.addChild(checkBox_1, {
-								"top": "128px",
-								"right": "0px",
 								"bottom": "0px",
-								"left": "0px"
+								"width": "304px",
+								"height": "33px",
+								"left": "calc(50% - 152px)"
 							});
 						})(group_5);
 						container.addChild(group_5, {
@@ -326,7 +362,7 @@
 								"text-shadow" : "none",
 								"border-bottom-color" : "#f9bb00",
 								"color" : "#FFFFFF",
-								"font-weight" : "bolder",
+								"font-weight" : "normal",
 								"border-left-color" : "#f9bb00",
 								"font-size" : "24px",
 								"border-top-color" : "#f9bb00",
@@ -367,8 +403,13 @@
 							button_3.style.css({
 								"border-right-style" : "none",
 								"color" : "#FFFFFF",
+								"border-bottom-color" : "#90be70",
 								"border-left-style" : "none",
+								"font-weight" : "normal",
+								"border-left-color" : "#90be70",
+								"border-top-color" : "#90be70",
 								"border-bottom-style" : "none",
+								"border-right-color" : "#90be70",
 								"background-image" : "none",
 								"border-top-style" : "none"
 							});
@@ -383,24 +424,62 @@
 							});
 						})(group_7);
 						container.addChild(group_7, {
-							"top": "420px",
-							"right": "40px",
 							"bottom": "20px",
-							"left": "40px"
+							"width": "304px",
+							"height": "188px",
+							"left": "calc(50% - 152px)"
 						});
 					})(group_3);
 					container.addChild(group_3, {
-						"width": "384px",
-						"height": "628px",
-						"left": "calc(50% - 192px)",
-						"top": "calc(50% - 314px)"
+						positions: [
+							{
+								"media": "all and (min-width: 1024px)",
+								"width": "384px",
+								"height": "628px",
+								"left": "calc(50% - 192px)",
+								"top": "calc(50% - 314px)"
+							}, 
+							{
+								"media": "all and (min-width: 500px) and (max-width: 1023px)",
+								"width": "188px",
+								"height": "628px",
+								"left": "calc(50% - 94px)",
+								"top": "calc(50% - 314px)"
+							}, 
+							{
+								"media": "all and (max-width: 499px)",
+								"width": "131px",
+								"height": "628px",
+								"left": "calc(50% - 65px)",
+								"top": "calc(50% - 314px)"
+							}
+						]
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "20px",
-					"right": "20px",
-					"bottom": "20px",
-					"left": "20px"
+					positions: [
+						{
+							"media": "all and (min-width: 1024px)",
+							"top": "20px",
+							"right": "20px",
+							"bottom": "20px",
+							"left": "20px"
+						}, 
+						{
+							"media": "all and (min-width: 500px) and (max-width: 1023px)",
+							"top": "20px",
+							"right": "10px",
+							"bottom": "20px",
+							"left": "10px"
+						}, 
+						{
+							"media": "all and (max-width: 499px)",
+							"top": "20px",
+							"right": "7px",
+							"bottom": "20px",
+							"left": "7px"
+						}
+					]
 				});
 			})(group_1);
 			container.addChild(group_1, {
@@ -428,6 +507,9 @@
 					}
 				]
 			});
+			if(typeof onBodyLoad == "function"){
+				app.addEventListener("load", onBodyLoad);
+			}
 		}
 	});
 	app.title = "login-form";

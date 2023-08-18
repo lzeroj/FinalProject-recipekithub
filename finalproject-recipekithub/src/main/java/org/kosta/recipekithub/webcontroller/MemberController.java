@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.recipekithub.model.mapper.MemberMapper;
 import org.kosta.recipekithub.model.service.MemberService;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
@@ -49,10 +50,9 @@ public class MemberController {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_login");
 		String memberEmail = param.getValue("member_email");
 		String memberPassword = param.getValue("member_password");
-		System.out.println("memberEmail : " + memberEmail + ", memberPassword : " + memberPassword);
 
 		MemberVO member = memberService.login(memberEmail, memberPassword);
-		System.out.println(member);
+		log.debug("member 로그인 {}", member);
 
 		if (member == null) {
 			return new UIView("ui/index.clx");
@@ -65,6 +65,7 @@ public class MemberController {
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 
+	
 	//---[ 회원가입 ]---//
 	@RequestMapping("/register")
 	public View registerMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
@@ -86,9 +87,9 @@ public class MemberController {
 		
 		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode, memberAddress, memberAddressDetail, memberPhone, memberBirthday);
 		int result = memberService.registerMember(member);
-		log.info("member 회원가입 {}", member);
+		log.debug("member 회원가입 정보 : {}", member);
+		log.debug("member 회원가입 성공여부(if '1' succes) : {}", result);
 		dataRequest.setResponse("ds_member", member); 
-		System.out.println(result);
 
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
@@ -102,15 +103,13 @@ public class MemberController {
 		String memberEmail = param.getValue("member_email");
 		int checkResult = memberService.checkDuplicateEmail(memberEmail);
 		Map<String,Object> message = new HashMap<>();
-		//String result = null;
+
 		if (checkResult == 0) {
-			message.put("checkResult", "ok");
-			//result = "ok";
-		} else {
-			message.put("checkResult", "fail");
-			//result = "fail";
+			message.put("ok", "이메일 사용 가능");
+		} else if (checkResult > 0){
+//		} else {
+			message.put("fail", "이메일 중복");
 		}
-		// request.setAttribute("responsebody", result);
 		dataRequest.setMetadata(true, message);
 
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
@@ -120,16 +119,19 @@ public class MemberController {
 	@RequestMapping("/checkNick")
 	@ResponseBody
 	public View checkNick(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-		ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
+		ParameterGroup param = dataRequest.getParameterGroup("dm_check_nick");
 		String memberNick = param.getValue("member_nick");
 		int checkResult = memberService.checkDuplicateNick(memberNick);
-		String result = null;
+		Map<String,Object> message = new HashMap<>();
+
 		if (checkResult == 0) {
-			result = "ok";
-		} else {
-			result = "fail";
+			message.put("ok", "닉네임 사용 가능");
+		} else if (checkResult > 0){
+//		} else {
+			message.put("fail", "닉네임 중복");
 		}
-		request.setAttribute("responsebody", result);
+		dataRequest.setMetadata(true, message);
+        //dataRequest.setResponse("test", "tomato");
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 	
@@ -171,11 +173,11 @@ public class MemberController {
 		String memberPostcode = param.getValue("memberPostcode");
 		String memberAddress = param.getValue("memberAddress");
 		String memberAddressDetail = param.getValue("memberAddressDetail");
-		
 		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode, memberAddress, memberAddressDetail, memberPhone, memberBirthday);
+		
 		if(member != null) {
 			int result = memberService.updateMember(member);
-			log.info("member 회원 정보 수정 {}", result);
+			log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
 		}
 		return new JSONDataView();
 	}
@@ -189,21 +191,64 @@ public class MemberController {
 			return new UIView("ui/member/login-form.clx");
 		}
 		
-		//session.getAttribute("member");
-		//String memberEmail = session.getId();
-		//System.out.println(email);
-		
-		// MemberVO member = (MemberVO)session.getAttribute("member");
-
-		
 		ParameterGroup param = dataRequest.getParameterGroup("dm_delete");
 		String memberEmail = param.getValue("memberEmail");
-		
 		int result = memberService.deleteMember(memberEmail);
-		System.out.println(result);
-		log.info("member 회원 탈퇴 {}", result);
+		log.debug("member 회원탈퇴 성공여부(if '1' succes) : {}", result);
 
 		return new JSONDataView();
 	}
 	
+	//---[ 로그아웃 -> 메인 화면으로 이동 ]---//
+		@RequestMapping("/logout")
+		public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+			// Map<String, Object> message = new HashMap<String, Object>();
+			
+			HttpSession session = request.getSession(false);
+			if(session != null) {
+				session.invalidate();
+			}
+			
+			// message.put("uri", "login/login");
+			// dataRequest.setMetadata(true, message);
+			
+			return new JSONDataView();
+		}
+		
+		
+		@RequestMapping("/findEmail")
+		public View findEmailByNamePhoneBirthday(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+			ParameterGroup param = dataRequest.getParameterGroup("dm_find_email");
+			String memberName = param.getValue("member_name");
+			String memberPhone = param.getValue("member_phone");
+			String memberBirthday = param.getValue("member_birthday");
+			String findEmailResult = memberService.findEmailByNamePhoneBirthday(memberName, memberPhone, memberBirthday);
+			
+			Map<String, String> email = new HashMap<>();
+			email.put("memberEmail", findEmailResult); 
+			
+			List<Map<String, String>> memberEmail = new ArrayList<>();
+			memberEmail.add(email);
+		    
+			dataRequest.setResponse("ds_member", memberEmail); 
+			return new JSONDataView();
+		}
+		
+		@RequestMapping("/findPassword")
+		public View findPswdByEmailNamePhone(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+			ParameterGroup param = dataRequest.getParameterGroup("dm_find_pswd");
+			String memberEmail = param.getValue("member_email");
+			String memberName = param.getValue("member_name");
+			String memberPhone = param.getValue("member_phone");
+			String findPswdResult = memberService.findPswdByEmailNamePhone(memberEmail, memberName, memberPhone);
+
+			Map<String, String> password = new HashMap<>();
+			password.put("memberPassword", findPswdResult); 
+			
+			List<Map<String, String>> memberPassword = new ArrayList<>();
+			memberPassword.add(password);
+			
+			dataRequest.setResponse("ds_member", memberPassword); 
+			return new JSONDataView();
+		}
 }

@@ -50,6 +50,49 @@
 					});
 			    }
 				
+			}
+
+			/*
+			 * "답변 달기" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick2(e){
+				var button = e.control;
+				var container1 = app.lookup("grp1");
+				var container = app.getContainer();
+				
+			//	container.updateConstraint(container1, {
+			//		
+			//	});
+				container1.style.css({
+					"height": "1200px",
+					"bottom": "100px",
+					"background-color": "black"
+				});
+				container1.redraw();
+				
+				var group_3 = new cpr.controls.Container("grp3");
+				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+				group_3.setLayout(xYLayout_3);
+				var button_3 = new cpr.controls.Button();
+				container.addChild(button_3, {
+					"top":"800px"
+				});
+				container.addChild(group_3, {
+					"top":"600px",
+					"height": "308px"
+				});
+				
+				app.lookup("grp1").redraw();
+			}
+
+			/*
+			 * 루트 컨테이너에서 before-draw 이벤트 발생 시 호출.
+			 * 그룹 컨텐츠가 그려지기 직전에 호출되는 이벤트 입니다. 내부 컨텐츠를 동적으로 구성하기위한 용도로만 사용됩니다.
+			 */
+			function onBodyBeforeDraw(e){
+				var group = e.control;
+
 			};
 			// End - User Script
 			
@@ -65,9 +108,7 @@
 			app.register(dataSet_1);
 			var submission_1 = new cpr.protocols.Submission("subqnaselect");
 			app.register(submission_1);
-			app.supportMedia("all and (min-width: 1024px)", "default");
-			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
-			app.supportMedia("all and (max-width: 499px)", "mobile");
+			app.supportMedia("all", "new-screen");
 			
 			// Configure root container
 			var container = app.getContainer();
@@ -77,13 +118,16 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
-			var group_1 = new cpr.controls.Container();
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_1.setLayout(xYLayout_2);
+			var group_1 = new cpr.controls.Container("grp1");
+			group_1.style.css({
+				"background-color" : "#FFFFFF"
+			});
+			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			group_1.setLayout(verticalLayout_2);
 			(function(container){
 				var output_1 = new cpr.controls.Output();
 				output_1.value = "Q & A";
@@ -99,14 +143,12 @@
 					"text-align" : "center"
 				});
 				container.addChild(output_1, {
-					"top": "0px",
-					"right": "0px",
-					"left": "0px",
+					"width": "709px",
 					"height": "50px"
 				});
 				var group_2 = new cpr.controls.Container();
-				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_3);
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_1);
 				(function(container){
 					var inputBox_1 = new cpr.controls.InputBox("ipb1");
 					inputBox_1.readOnly = true;
@@ -161,22 +203,33 @@
 						"width": "140px",
 						"height": "30px"
 					});
+					var button_3 = new cpr.controls.Button();
+					button_3.value = "답변 달기";
+					if(typeof onButtonClick2 == "function") {
+						button_3.addEventListener("click", onButtonClick2);
+					}
+					container.addChild(button_3, {
+						"top": "458px",
+						"left": "250px",
+						"width": "140px",
+						"height": "30px"
+					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "50px",
-					"right": "0px",
-					"bottom": "0px",
-					"left": "0px"
+					"width": "709px",
+					"height": "558px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "0px",
-				"right": "0px",
-				"bottom": "0px",
-				"left": "0px"
+				"autoSize": "height",
+				"width": "709px",
+				"height": "608px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
+			}
+			if(typeof onBodyBeforeDraw == "function"){
+				app.getContainer().addEventListener("before-draw", onBodyBeforeDraw);
 			}
 		}
 	});

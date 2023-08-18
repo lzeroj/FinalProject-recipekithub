@@ -14,4 +14,8 @@ public interface QnAService {
 
 	int updateQnA(int boardId, String boardTitle, String boardContent);
 
+	List<QnAVO> selectQnaListAdmin();
+
+	QnAVO selectQnaDetailAdmin(int boardId);
+
 }

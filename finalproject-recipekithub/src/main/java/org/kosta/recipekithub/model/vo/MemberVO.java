@@ -25,7 +25,7 @@ public class MemberVO implements Serializable{
 	@NonNull
 	private String memberNick;
 	@NonNull
-	private String memberPostcode;
+	private String memberPostcode; 
 	@NonNull
 	private String memberAddress;
 	@NonNull
@@ -37,6 +37,5 @@ public class MemberVO implements Serializable{
 	private String memberType;
 	private String memberStatus;
 	private String memberRegDate;
-	
 	
 }

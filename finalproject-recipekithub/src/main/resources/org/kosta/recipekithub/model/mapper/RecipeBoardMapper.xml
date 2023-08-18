@@ -2,14 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.recipekithub.model.mapper.RecipeBoardMapper">
 
-	<resultMap type="org.kosta.recipekithub.model.vo.RecipeBoardVO" id="memberNick">
+	<resultMap type="org.kosta.recipekithub.model.vo.RecipeBoardVO" id="member">
 		<result column="member_nick" property="memberVO.memberNick"></result>
+		<result column="member_Email" property="memberVO.memberEmail"></result>
 	</resultMap>
-	<select id="findAllRecipeBoard" resultMap = "memberNick">
-		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
+	<select id="findAllRecipeBoard" resultMap = "member">
+<!-- 		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
 		from recipe_board r
 		inner join member m on r.member_email = m.member_email
-		order by r.recipe_reg_date desc
+		order by r.recipe_reg_date desc	 -->
+		SELECT rnum, r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_hits
+		FROM ( SELECT
+		ROW_NUMBER() OVER(ORDER BY recipe_reg_date DESC)
+		AS rnum, recipe_board_id, member_email, recipe_board_title, recipe_board_image, recipe_board_hits FROM recipe_board ) r 
+		INNER JOIN member m ON r.member_email = m.member_email
+		AND rnum BETWEEN #{startRowNumber} AND #{endRowNumber}
+	</select>
+	<select id="likeCount" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
+		select count(*) from LIKE_RKH where recipe_board_id = #{value}
 	</select>
  	<insert id="insertRecipeBoard" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
 		insert into RECIPE_BOARD values(recipe_board_id_seq.nextval,#{memberVO.memberEmail},#{recipeBoardTitle},#{recipeBoardContent},
@@ -19,10 +29,28 @@
 		</selectKey>
 	</insert> 
 	
-	<select id="findDetailRecipe" resultMap="memberNick">
-		select r.recipe_board_id, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_content, r.category_type, r.category_ingredients, r.category_method
+	<select id="findDetailRecipe" resultMap="member">
+		select r.recipe_board_id, r.member_email, m.member_nick, r.recipe_board_title, r.recipe_board_image, r.recipe_board_content, r.category_type, r.category_ingredients, r.category_method,
+		r.recipe_reg_date, r.recipe_edit_date
 		from recipe_board r
 		inner join member m on r.member_email = m.member_email
 		where r.recipe_board_id=#{value}
 	</select> 
+	<update id="updateRecipeHits" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
+		update recipe_board set recipe_board_hits = recipe_board_hits+1 where recipe_board_id = #{value}
+	</update>
+	<update id="updateRecipe" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
+		update recipe_board set recipe_board_title = #{recipeBoardTitle}, recipe_board_content=#{recipeBoardContent},
+		recipe_edit_date=sysdate, category_type = #{categoryType}, category_ingredients = #{categoryIngredients} , category_method = #{categoryMethod}
+		<if test="recipeBoardImage!=null">
+			, recipe_board_image=#{recipeBoardImage}
+		</if>
+		where recipe_board_id = #{recipeBoardId}
+	</update>
+	<delete id="deleteRecipe" parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
+		delete from recipe_board where recipe_board_id = #{value}
+	</delete>
+	<select id="findTotalPostCount">
+		select count(*) from recipe_board
+	</select>
 </mapper>

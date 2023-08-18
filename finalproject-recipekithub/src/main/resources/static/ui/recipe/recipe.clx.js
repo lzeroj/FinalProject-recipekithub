@@ -23,18 +23,101 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e) {
-				var recipeList = cpr.core.Platform.INSTANCE.getParameter("recipe_board");
+				var submission = app.lookup("recipeBoardList");
+				submission.send();
+			}
+
+			/*
+			 * 서브미션에서 receive 이벤트 발생 시 호출.
+			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+			 */
+			//function onRecipeBoardListReceive(e) {
+			//	var recipeBoardList = e.control;
+			//	var xhr = recipeBoardList.xhr;
+			//	var jsonData = JSON.parse(xhr.responseText);
+			//	var recipeList = jsonData.recipe_board;
+			//	var totalPostCount = jsonData.totalPostCount;
+			//	var likeCounts = jsonData.likeCounts;
+			//	console.log(likeCounts.length);
+			//	var container = app.lookup("grp");
+			//	app.lookup("recipeCount").value = totalPostCount;
+			//	for (var i = 0; i < recipeList.length; i++) {
+			//		(function(index) {
+			//			//udc 동적 생성
+			//			var recipe = new udc.recipeListudc();
+			//			//udc에서 출판한 이미지 경로 앱 속성 지정
+			//			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
+			//			recipe.hits = recipeList[i].recipeBoardHits;
+			//			recipe.nick = recipeList[i].memberVO.memberNick;
+			//			recipe.title = recipeList[i].recipeBoardTitle;
+			//			recipe.like = likeCounts[i];
+			//			container.addChild(recipe, {
+			//				height: "250px",
+			//				width: "230px",
+			//				autoSize: "both"
+			//			});
+			//			recipe.addEventListener("imgClick", function(e) {
+			//				window.location.href = "/detailRecipe?recipeBoardId=" + recipeList[index].recipeBoardId;
+			//			});
+			//		})(i);
+			//	}
+			//}	
+
+				
+				//	var recipeList = cpr.core.Platform.INSTANCE.getParameter("recipe_board");
+			//	var pagination = cpr.core.Platform.INSTANCE.getParameter("pagination");
+			//	console.log(pagination);
+			//	var container = app.lookup("grp");
+			//	app.lookup("recipeCount").value = recipeList.length;
+			//	for (var i = 0; i < recipeList.length; i++) {
+			//		(function(index) {
+			//			var recipe = new udc.recipeListudc();
+			//			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
+			//			console.log(recipeList.img);
+			//			recipe.hits = recipeList[i].recipeBoardHits;
+			//			recipe.nick = recipeList[i].memberVO.memberNick;
+			//			recipe.title = recipeList[i].recipeBoardTitle;
+			//			container.addChild(recipe, {
+			//				height: "250px",
+			//				width: "230px",
+			//				autoSize: "both"
+			//			});
+			//			recipe.addEventListener("imgClick", function(e) {
+			//				window.location.href = "/detailRecipe?recipeBoardId=" + recipeList[index].recipeBoardId;
+			//			});
+			//		})(i);
+			//	}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onRecipeBoardListSubmitSuccess(e){
+				var recipeBoardList = e.control;
+				var xhr = recipeBoardList.xhr;
+				var jsonData = JSON.parse(xhr.responseText);
+				var recipeList = jsonData.recipe_board;
+				var totalPostCount = jsonData.totalPostCount;
+				var likeCounts = jsonData.likeCounts;
 				var container = app.lookup("grp");
-				console.log(recipeList);
-				app.lookup("recipeCount").value = recipeList.length;
+				
+				
+				app.lookup("page").totalRowCount = totalPostCount;
+
+				app.lookup("recipeCount").value = totalPostCount;
+				
+				container.removeAllChildren();
+				
 				for (var i = 0; i < recipeList.length; i++) {
 					(function(index) {
+						//udc 동적 생성
 						var recipe = new udc.recipeListudc();
-						recipe.img = "theme/uploadrecipeimage/" + recipeList[i].recipeBoardImage;
-						console.log(recipeList.img);
+						//udc에서 출판한 이미지 경로 앱 속성 지정
+						recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
 						recipe.hits = recipeList[i].recipeBoardHits;
 						recipe.nick = recipeList[i].memberVO.memberNick;
 						recipe.title = recipeList[i].recipeBoardTitle;
+						recipe.like = likeCounts[i];
 						container.addChild(recipe, {
 							height: "250px",
 							width: "230px",
@@ -48,52 +131,62 @@
 			}
 
 			/*
-			 * 서브미션에서 receive 이벤트 발생 시 호출.
-			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+			 * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
+			 * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
 			 */
-			//function onRecipeBoardListReceive(e) {
-			//	var recipeBoardList = e.control;
-			//	var xhr = recipeBoardList.xhr;
-			//	var jsonData = JSON.parse(xhr.responseText);
-			//	//console.log(jsonData);
-			//	var recipe = jsonData.recipe_board;
-			//	console.log(recipe);
-			//	var container = app.lookup("grp");
-			//	app.lookup("recipeCount").value = recipe.length;
-			//	for (var i = 0; i < recipe.length; i++) {
-			//		(function(index) {
-			//			//udc 동적 생성
-			//			var recipeList = new udc.recipeListudc();
-			//			//udc에서 출판한 이미지 경로 앱 속성 지정
-			//			recipeList.img = "theme/uploadrecipeimage/" + recipe[i].recipeBoardImage;
-			//			console.log(recipeList.img);
-			//			recipeList.hits = recipe[i].recipeBoardHits;
-			//			recipeList.nick = recipe[i].memberVO.memberNick;
-			//			recipeList.title = recipe[i].recipeBoardTitle;
-			//			container.addChild(recipeList, {
-			//				height: "250px",
-			//				width: "230px",
-			//				autoSize: "both"
-			//			});
-			//			recipeList.addEventListener("imgClick", function(e) {
-			//				window.location.href = "/moveDetailRecipe?recipeBoardId=" + recipe[index].recipeBoardId;
-			//			});
-			//		})(i);
-			//	}
-			//}
+			function onPageSelectionChange(e){
+				var page = e.control;
+				app.lookup("recipeBoardList").send();
+			}
+
+			/*
+			 * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
+			 * 아이템 클릭시 발생하는 이벤트.
+			 */
+			function onNavigationBarItemClick(e){
+				var navigationBar = e.control;
+				
+			}
+
+			/*
+			 * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
+			 * 아이템 클릭시 발생하는 이벤트.
+			 */
+			function onNavigationBarItemClick2(e){
+				var navigationBar = e.control;
+				
+			};
 			// End - User Script
 			
 			// Header
 			var dataSet_1 = new cpr.data.DataSet("recipe_board");
 			dataSet_1.parseData({
-				"columns": [],
+				"columns": [
+					{"name": "recipeBoardImage"},
+					{"name": "recipeBoardHits"},
+					{"name": "memberNick"},
+					{"name": "recipeBoardTitle"},
+					{"name": "likeCounts"}
+				],
 				"rows": []
 			});
 			app.register(dataSet_1);
+			var dataMap_1 = new cpr.data.DataMap("dmPage");
+			dataMap_1.parseData({
+				"columns" : [{
+					"name": "pageNo",
+					"defaultValue": "1"
+				}]
+			});
+			app.register(dataMap_1);
 			var submission_1 = new cpr.protocols.Submission("recipeBoardList");
 			submission_1.action = "/findRecipeBoardList";
+			submission_1.addRequestData(dataMap_1);
 			if(typeof onRecipeBoardListReceive == "function") {
 				submission_1.addEventListener("receive", onRecipeBoardListReceive);
+			}
+			if(typeof onRecipeBoardListSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onRecipeBoardListSubmitSuccess);
 			}
 			app.register(submission_1);
 			app.supportMedia("all and (min-width: 1024px)", "default");
@@ -159,7 +252,7 @@
 					"width": "90px",
 					"height": "60px"
 				});
-				var navigationBar_1 = new cpr.controls.NavigationBar();
+				var navigationBar_1 = new cpr.controls.NavigationBar("type");
 				(function(navigationBar_1){
 					navigationBar_1.addItem(new cpr.controls.MenuItem("전체", "value1", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("밑반찬", "value2", null));
@@ -171,13 +264,16 @@
 					navigationBar_1.addItem(new cpr.controls.MenuItem("음료", "value9", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("기타", "value10", null));
 				})(navigationBar_1);
+				if(typeof onNavigationBarItemClick == "function") {
+					navigationBar_1.addEventListener("item-click", onNavigationBarItemClick);
+				}
 				container.addChild(navigationBar_1, {
 					"top": "10px",
 					"left": "110px",
 					"width": "854px",
 					"height": "60px"
 				});
-				var navigationBar_2 = new cpr.controls.NavigationBar();
+				var navigationBar_2 = new cpr.controls.NavigationBar("ingredients");
 				(function(navigationBar_2){
 					navigationBar_2.addItem(new cpr.controls.MenuItem("전체", "value1", null));
 					navigationBar_2.addItem(new cpr.controls.MenuItem("육류", "value2", null));
@@ -188,13 +284,16 @@
 					navigationBar_2.addItem(new cpr.controls.MenuItem("과일류", "value7", null));
 					navigationBar_2.addItem(new cpr.controls.MenuItem("기타", "value8", null));
 				})(navigationBar_2);
+				if(typeof onNavigationBarItemClick2 == "function") {
+					navigationBar_2.addEventListener("item-click", onNavigationBarItemClick2);
+				}
 				container.addChild(navigationBar_2, {
 					"top": "80px",
 					"left": "110px",
 					"width": "854px",
 					"height": "60px"
 				});
-				var navigationBar_3 = new cpr.controls.NavigationBar();
+				var navigationBar_3 = new cpr.controls.NavigationBar("method");
 				(function(navigationBar_3){
 					navigationBar_3.addItem(new cpr.controls.MenuItem("전체", "value1", null));
 					navigationBar_3.addItem(new cpr.controls.MenuItem("볶음", "value2", null));
@@ -301,20 +400,23 @@
 			container.addChild(group_3, {
 				"top": "350px",
 				"width": "984px",
-				"height": "680px",
+				"height": "730px",
 				"left": "calc(50% - 492px)"
 			});
 			
-			var pageIndexer_1 = new cpr.controls.PageIndexer();
+			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
+			pageIndexer_1.pageRowCount = 12;
+			pageIndexer_1.viewPageCount = 5;
+			pageIndexer_1.bind("currentPageIndex").toDataMap(app.lookup("dmPage"), "pageNo");
 			pageIndexer_1.init(1, 1, 1);
-			if(typeof onPageIndexerSelectionChange == "function") {
-				pageIndexer_1.addEventListener("selection-change", onPageIndexerSelectionChange);
+			if(typeof onPageSelectionChange == "function") {
+				pageIndexer_1.addEventListener("selection-change", onPageSelectionChange);
 			}
 			container.addChild(pageIndexer_1, {
-				"top": "1041px",
-				"width": "200px",
+				"top": "1090px",
+				"width": "320px",
 				"height": "40px",
-				"left": "calc(50% - 100px)"
+				"left": "calc(50% - 160px)"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

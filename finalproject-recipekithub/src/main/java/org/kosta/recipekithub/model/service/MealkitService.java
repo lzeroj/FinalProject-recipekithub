@@ -17,6 +17,6 @@ public interface MealkitService {
 	MealKitBoard updateMealkit(MealKitBoard mealkit);
 
 	void deleteMealkit(int mealkitNo);
-	
 
 }
+
