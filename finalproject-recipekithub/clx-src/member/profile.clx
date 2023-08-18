@@ -183,7 +183,8 @@
                         <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
                       </cl:formlayout>
                     </cl:group>
-                    <cl:button std:sid="button-36ee6cc3" id="btnInsProfileImg" style="background-color:none; text-shadow:none; background-image:none;" class="btn-outline-secondary" value="프로필 사진 등록">
+                    <cl:button std:sid="button-36ee6cc3" id="btnProfileImg" style="background-color:none; text-shadow:none; background-image:none;" class="btn-outline-secondary" value="프로필 사진 등록">
+                      <cl:listener std:sid="listener-b9e299fe" name="click" handler="onBtnProfileImgClick"/>
                       <cl:formdata std:sid="f-data-d1e44fe2" row="1" col="0"/>
                     </cl:button>
                     <cl:group std:sid="group-4dec26a4">
@@ -222,7 +223,7 @@
                         <cl:columns length="1" unit="FRACTION"/>
                       </cl:formlayout>
                     </cl:group>
-                    <cl:img std:sid="image-7e3a7f36" src="../theme/images/common/mypageIcon.png">
+                    <cl:img std:sid="image-7e3a7f36" id="profileImg" src="../theme/images/common/mypageIcon.png">
                       <cl:formdata std:sid="f-data-958d5805" row="0" col="0"/>
                     </cl:img>
                     <cl:formlayout std:sid="f-layout-16a6ee7b" scrollable="false" hspace="20px" vspace="20px" top-margin="10px" right-margin="10px" bottom-margin="10px" left-margin="10px">
@@ -251,7 +252,7 @@
                       <cl:img std:sid="image-f29aab43">
                         <cl:formdata std:sid="f-data-0a05dda6" row="0" col="2"/>
                       </cl:img>
-                      <cl:output std:sid="output-bb64ce6b" value="Output">
+                      <cl:output std:sid="output-bb64ce6b" value="">
                         <cl:formdata std:sid="f-data-2ca75300" row="2" col="1" rowspan="1" colspan="2"/>
                       </cl:output>
                       <cl:formlayout std:sid="f-layout-2da4d9fa" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -277,7 +278,7 @@
                       <cl:img std:sid="image-7b0ffb16">
                         <cl:formdata std:sid="f-data-d37b1a71" row="0" col="2"/>
                       </cl:img>
-                      <cl:output std:sid="output-b92eba14" value="Output">
+                      <cl:output std:sid="output-b92eba14" value="">
                         <cl:formdata std:sid="f-data-1a48c378" row="2" col="1" rowspan="1" colspan="2"/>
                       </cl:output>
                       <cl:formlayout std:sid="f-layout-cb5a3e95" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -298,7 +299,7 @@
                         <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberNick" rowindex="0"/>
                         <cl:formdata std:sid="f-data-5d266f1a" row="0" col="1"/>
                       </cl:inputbox>
-                      <cl:output std:sid="output-147cb024" value="Output">
+                      <cl:output std:sid="output-147cb024" value="">
                         <cl:formdata std:sid="f-data-00994837" row="2" col="1"/>
                       </cl:output>
                       <cl:output std:sid="output-de90e3f9" style="font-size:10px;" value="❈ 닉네임은 1자 이상~8자 이하입니다.">
@@ -347,11 +348,11 @@
                         <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberAddressDetail" rowindex="0"/>
                         <cl:formdata std:sid="f-data-c680e801" row="2" col="0" rowspan="1" colspan="2"/>
                       </cl:inputbox>
-                      <cl:formlayout std:sid="f-layout-f208b712" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+                      <cl:formlayout std:sid="f-layout-f208b712" scrollable="false" hspace="10px" vspace="15px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
                         <cl:rows length="35" unit="PIXEL"/>
                         <cl:rows length="35" unit="PIXEL"/>
                         <cl:rows length="35" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-                        <cl:columns length="120" unit="PIXEL"/>
+                        <cl:columns length="128" unit="PIXEL"/>
                         <cl:columns length="100" unit="PIXEL"/>
                       </cl:formlayout>
                     </cl:group>
@@ -361,7 +362,7 @@
                       <cl:rows length="110" unit="PIXEL"/>
                       <cl:rows length="40" unit="PIXEL"/>
                       <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-                      <cl:rows length="135" unit="PIXEL"/>
+                      <cl:rows length="135" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
                       <cl:columns length="120" unit="PIXEL"/>
                       <cl:columns length="1" unit="FRACTION"/>
                     </cl:formlayout>

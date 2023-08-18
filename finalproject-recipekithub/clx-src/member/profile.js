@@ -14,7 +14,6 @@ function onBodyLoad(e) {
 	submission.send();
 }
 
-
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
  * 통신이 성공하면 발생합니다.
@@ -64,7 +63,7 @@ function onBtnMemUpdateClick(e){
 function onSub_updateSubmitSuccess(e) {
 	var sub_update = e.control;
 	alert("회원 정보 수정이 완료되었습니다. 감사합니다!")
-	var httpPostMethod = new cpr.protocols.HttpPostMethod("index1.clx");
+	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 	httpPostMethod.submit();
 }
 
@@ -90,7 +89,7 @@ function onBtnMemDeleteClick(e){
 function onSub_deleteSubmitSuccess(e) {
 	var sub_delete = e.control;
 	alert("지금까지 RecipeKitHub을 이용해주셔서 감사합니다!")
-	var httpPostMethod = new cpr.protocols.HttpPostMethod("index1.clx");
+	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 	httpPostMethod.submit();
 }
 
@@ -100,7 +99,7 @@ function onSub_deleteSubmitSuccess(e) {
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
 function onBtnCancelClick(e) {
-	window.location.href = "index1.clx";
+	window.location.href = "index.clx";
 }
 
 
@@ -121,9 +120,10 @@ function onButtonClick(e) {
 function onSub_logoutSubmitSuccess(e) {
 	var sub_logout = e.control;
 	alert("로그아웃이 완료되었습니다!")
-	var httpPostMethod = new cpr.protocols.HttpPostMethod("index1.clx");
+	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 	httpPostMethod.submit();
 }
+
 
 /*
  * 루트 컨테이너에서 init 이벤트 발생 시 호출.
@@ -212,4 +212,13 @@ function postCode() {
 function onBodyUnload(e){
 	var appConf = cpr.core.AppConfig.INSTANCE;
 	appConf.getEnvConfig().setValue("appcache", false);
+}
+
+/*
+ * "프로필 사진 등록" 버튼(btnProfileImg)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onBtnProfileImgClick(e){
+	var btnProfileImg = e.control;
+	
 }

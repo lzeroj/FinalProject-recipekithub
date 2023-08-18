@@ -34,4 +34,14 @@ public class QnAServiceImpl implements QnAService {
 		return qnAMapper.updateQnA(boardId,boardTitle,boardContent);
 	}
 
+	@Override
+	public List<QnAVO> selectQnaListAdmin() {
+		return qnAMapper.selectQnaListAdmin();
+	}
+
+	@Override
+	public QnAVO selectQnaDetailAdmin(int boardId) {
+		return qnAMapper.selectQnaDetailAdmin(boardId);
+	}
+
 }

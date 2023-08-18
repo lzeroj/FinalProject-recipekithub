@@ -14,17 +14,54 @@ function onButtonClick(e) {
 	var dataMap2 = app.lookup("dm_check_email");
 	var dataMap3 = app.lookup("dm_check_pswd");
 	var dataMap4 = app.lookup("dm_check_nick");
-	dataMap2.setValue("member_email", app.lookup("ipbEmail").value);
-	dataMap3.setValue("member_password", app.lookup("ipbPassword1").value);
-	dataMap1.setValue("member_name", app.lookup("ipbName").value);
-	dataMap4.setValue("member_nick", app.lookup("ipbNick").value);
-	dataMap1.setValue("member_birthday", app.lookup("ipbBirthday").value);
-	dataMap1.setValue("member_phone", app.lookup("ipbPhone").value);
-	dataMap1.setValue("member_postcode", app.lookup("postCode").value);
-	dataMap1.setValue("member_address", app.lookup("address").value);
-	dataMap1.setValue("member_address_detail", app.lookup("detailAddress").value);
-	var subLogin = app.lookup("sub_register");
-	subLogin.send();
+	
+	var memberEmail = app.lookup("ipbEmail").value;
+	var memberPassword = app.lookup("ipbPassword1").value;
+	var memberPassword2 = app.lookup("ipbPassword2").value;
+	var memberName = app.lookup("ipbName").value;
+	var memberNick = app.lookup("ipbNick").value;
+	var memberBirthday = app.lookup("ipbBirthday").value;
+	var memberPhone = app.lookup("ipbPhone").value;
+	var memberPostcode = app.lookup("postCode").value;
+	
+	dataMap2.setValue("member_email", memberEmail);
+	dataMap3.setValue("member_password", memberPassword);
+	dataMap1.setValue("member_name", memberName);
+	dataMap4.setValue("member_nick", memberNick);
+	dataMap1.setValue("member_birthday", memberBirthday);
+	dataMap1.setValue("member_phone", memberPhone);
+	dataMap1.setValue("member_postcode", memberPostcode);
+	
+	if (memberEmail === "") {
+		alert("사용하실 Email을 입력해주세요");
+		return;
+	} else if (memberPassword === "") {
+		alert("사용하실 비밀번호를 입력해주세요");
+		return;
+	} else if (memberPassword2 === "") {
+		alert("입력하신 비밀번호를 확인해주세요");
+		return;
+	} else if (memberName === "") {
+		alert("성명을 입력해주세요");
+		return;
+	} else if (memberNick === "") {
+		alert("사용하실 닉네임을 입력해주세요");
+		return;
+	} else if (memberBirthday === "") {
+		alert("생년월일을 입력해주세요");
+		return;
+	} else if (memberPhone === "") {
+		alert("전화번호를 입력해주세요");
+		return;
+	} else if (memberPostcode === "") {
+		alert("주소를 입력해주세요");
+		return;
+	} else {
+		if (confirm("가입 하시겠습니까?")) {
+			var subLogin = app.lookup("sub_register");
+			subLogin.send();
+		}
+	}
 }
 
 /*
@@ -41,33 +78,7 @@ function onButtonClick2(e) {
  */
 function onSub_registerSubmitSuccess(e) {
 	var sub_register = e.control;
-	var dataSet = app.lookup("ds_member");
-	var memberEmail = dataSet.getValue(0, "memberEmail");
-	var memberPassword = dataSet.getValue(0, "memberPassword");
-	var memberName = dataSet.getValue(0, "memberName");
-	var memberNick = dataSet.getValue(0, "memberNick");
-	var memberAddress = dataSet.getValue(0, "memberAddress");
-	var memberPostcode = dataSet.getValue(0, "memberPostcode");
-	var memberAddressDetail = dataSet.getValue(0, "memberAddressDetail");
-	var memberPhone = dataSet.getValue(0, "memberPhone");
-	var memberBirthday = dataSet.getValue(0, "memberBirthday");
-	
-	/*
-	if(confirm("가입 하시겠습니까?")) {
-		if (memberEmail == ""){
-			alert("제목을 작성하세요");
-		} else if(value2 == "" || value3 == "" || value4 == ""){
-			alert("카테고리를 등록하세요");
-		} else if(image.src == "") {
-			alert("사진을 등록하세요");
-		} else {
-			submission.addFileParameter("image", file);
-			submission.send();
-		}
-	}
-	*/
-	
-	alert("RecipeKitHub에 오신 것을 환영합니다..!!")
+	alert("RecipeKitHub에 오신 것을 환영합니다..!!");
 	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 	httpPostMethod.submit();
 }
@@ -78,35 +89,70 @@ function onSub_registerSubmitSuccess(e) {
  */
 function onIpbEmailKeyup(e) {
 	var ipbEmail = e.control;
-	var subCheckEmail = app.lookup("sub_check_email");
-	subCheckEmail.send();
-	var checkEmailFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
-	var metadata = subCheckEmail.getMetadata("ok");
-	var metadata2 = subCheckEmail.getMetadata("fail");
+	var checkEmailFlag = false; // 상태 초기화
 	
-	var dataMap = app.lookup("dm_check_email");
-	dataMap.setValue("member_email", app.lookup("ipbEmail").value);
-	
-	//var memberEmail = app.lookup("ipbEmail");
-	
-	var email = ipbEmail.displayText;
-	var emailValue = String(email);
-	
-	var opbCheckEmailResult = app.lookup("opbCheckEmail");
-	//memberEmail.addEventListener('keyup', onIpbEmailKeyup);
-	
-	if (emailValue.length < 6 || emailValue.length > 30) {
-		opbCheckEmailResult.style.css("color", "red");
-		opbCheckEmailResult.value = "email은 6자이상 ~ 30자 이하이어야 합니다.";
-	} else if (metadata === "fail") {
-		opbCheckEmailResult.style.css("color", "red");
-		opbCheckEmailResult.value = "이메일이 중복됩니다.";
-	} else if (metadata === "ok") {
-		checkEmailFlag = true;
-		opbCheckEmailResult.style.css("color", "blue");
-		opbCheckEmailResult.value = "사용가능한 이메일입니다.";
-	}
+    var subCheckEmail = app.lookup("sub_check_email");
+
+    var dataMap = app.lookup("dm_check_email");
+    dataMap.setValue("member_email", ipbEmail.value);
+
+    subCheckEmail.send();
+
+    subCheckEmail.addEventListener('submit-success', function(response) {
+        var metadataOk = subCheckEmail.getMetadata("ok");
+        var metadataFail = subCheckEmail.getMetadata("fail");
+
+        var opbCheckEmailResult = app.lookup("opbCheckEmail");
+
+        var email = ipbEmail.displayText;
+        var emailValue = String(email);
+
+        if (emailValue.length < 6 || emailValue.length > 30) {
+            opbCheckEmailResult.style.css("color", "red");
+            opbCheckEmailResult.value = "email은 6자이상 ~ 30자 이하이어야 합니다.";
+        } else if (metadataFail) {
+            opbCheckEmailResult.style.css("color", "red");
+            opbCheckEmailResult.value = "이메일이 중복됩니다.";
+        } else if (metadataOk) {
+        	checkEmailFlag = true;
+            opbCheckEmailResult.style.css("color", "blue");
+            opbCheckEmailResult.value = "사용가능한 이메일입니다.";
+        }
+    });
 }
+
+/*
+ * 	var ipbEmail = e.control;
+ * 	var subCheckEmail = app.lookup("sub_check_email");
+ * 	subCheckEmail.send();
+ * 	var checkEmailFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+ * 	var metadata = subCheckEmail.getMetadata("ok");
+ * 	var metadata2 = subCheckEmail.getMetadata("fail");
+ * 	
+ * 	var dataMap = app.lookup("dm_check_email");
+ * 	dataMap.setValue("member_email", app.lookup("ipbEmail").value);
+ * 	
+ * 	//var memberEmail = app.lookup("ipbEmail");
+ * 	
+ * 	var email = ipbEmail.displayText;
+ * 	var emailValue = String(email);
+ * 	
+ * 	var opbCheckEmailResult = app.lookup("opbCheckEmail");
+ * 	//memberEmail.addEventListener('keyup', onIpbEmailKeyup);
+ * 	
+ * 	if (emailValue.length < 6 || emailValue.length > 30) {
+ * 		opbCheckEmailResult.style.css("color", "red");
+ * 		opbCheckEmailResult.value = "email은 6자이상 ~ 30자 이하이어야 합니다.";
+ * 	} else if (metadata === "fail") {
+ * 		opbCheckEmailResult.style.css("color", "red");
+ * 		opbCheckEmailResult.value = "이메일이 중복됩니다.";
+ * 	} else if (metadata === "ok") {
+ * 		checkEmailFlag = true;
+ * 		opbCheckEmailResult.style.css("color", "blue");
+ * 		opbCheckEmailResult.value = "사용가능한 이메일입니다.";
+ * 	}
+ * }
+ */
 
 //xhr.open("get", "../member/checkEmail", true);
 //xhr.open("get", "../member/checkEmail?memberEmail=" + memberEmail, true);
@@ -204,29 +250,123 @@ function onIpbPassword2Keyup(e) {
  * 인풋 박스에서 keyup 이벤트 발생 시 호출.
  * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
  */
-function onIpbNickKeyup(e){
+function onIpbNickKeyup(e) {
 	var ipbNick = e.control;
 	var checkNickFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
-	var memberNick = app.lookup("ipbNick").value;
-	var checkNickResult = document.getElementById("checkNickResult");
-	if (memberNick.length < 2 || memberNick.length > 10) {
-		checkNickResult = "닉네임은 1자 이상 ~ 8자 이하이어야 합니다.";
-	} else {
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				if (xhr.responseText == "fail") {
-					checkNickResult = "닉네임이 중복됩니다.";
-				} else {
-					checkNickFlag = true;
-					checkNickResult = "사용가능한 닉네임입니다.";
-				}
-			}
-		}
-		//xhr.open("get", "../CheckNick");
-		//xhr.send();
-	}
+
+	var subCheckNick = app.lookup("sub_check_nick");
+
+    var dataMap = app.lookup("dm_check_nick");
+    dataMap.setValue("member_nick", ipbNick.value);
+
+    subCheckNick.send();
+
+    subCheckNick.addEventListener('submit-success', function(response) {
+        var metadataOk = subCheckNick.getMetadata("ok");
+        var metadataFail = subCheckNick.getMetadata("fail");
+
+        var checkNickResult = app.lookup("opbCheckNick");
+
+		var nick = ipbNick.displayText;
+		var nickValue = String(nick);
+
+        if (nickValue.length < 2 || nickValue.length > 10) {
+            checkNickResult.style.css("color", "red");
+            checkNickResult.value = "닉네임은 1자이상 ~ 8자 이하이어야 합니다.";
+        } else if (metadataFail) {
+            checkNickResult.style.css("color", "red");
+            checkNickResult.value = "닉네임이 중복됩니다.";
+        } else if (metadataOk) {
+        	checkNickFlag = true;
+            checkNickResult.style.css("color", "blue");
+            checkNickResult.value = "사용가능한 닉네임입니다.";
+        }
+    });
 }
+
+
+/*
+ * 	var subCheckNick = app.lookup("sub_check_nick");
+ * 	var dataMap = app.lookup("dm_check_email");
+ * 	var nick = ipbNick.displayText;
+ * 	var nickValue = String(nick);
+ * 	var checkNickResult = app.lookup("opbCheckNick");
+ * 
+ * 	dataMap.setValue("member_email", app.lookup("ipbEmail").value);
+ * 
+ * 	if (nickValue.length < 2 || nickValue.length > 10) {
+ * 		checkNickResult.style.css("color", "red");
+ * 		checkNickResult.text = "닉네임은 2자 이상 ~ 10자 이하이어야 합니다.";
+ * 		app.lookup("imgNick").src = "../ui/theme/images/member/cross.png";
+ * 	} else {
+ * 		subCheckNick.send();
+ * 
+ * 		// 서버 응답을 비동기적으로 처리하는 부분
+ * 		subCheckNick.addEventListener("submit-success", function(response) {
+ * 			console.log("submit-success event triggered!"); // 이 로그가 출력되는지 확인
+ * 			
+ * 			//var metadata = subCheckNick.getMetadata();
+ * 			var metadataOk = subCheckNick.getMetadata("ok");
+ *         	var metadataFail = subCheckNick.getMetadata("fail");
+ * 			console.log(metadataOk);
+ * 			console.log(metadataFail);
+ * 
+ * 			if (metadataFail) {
+ * 				checkNickResult.style.css("color", "red");
+ * 				checkNickResult.text = "닉네임이 중복됩니다.";
+ * 				app.lookup("imgNick").src = "../ui/theme/images/member/cross.png";
+ * 			} else if (metadataOk) {
+ * 				checkNickFlag = true;
+ * 				checkNickResult.style.css("color", "blue");
+ * 				checkNickResult.text = "사용가능한 닉네임입니다.";
+ * 				app.lookup("imgNick").src = "../ui/theme/images/member/checked.png";
+ * 			}
+ * 		});
+ * 	}
+ */
+	
+	
+	/*
+	 * var ipbNick = e.control;
+	 * var checkNickFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+	 * var subCheckNick = app.lookup("sub_check_nick");
+	 * subCheckNick.send();
+	 * subCheckNick.getMetadata("fail");
+	 * 
+	 * var dataMap = app.lookup("dm_check_email");
+	 * dataMap.setValue("member_email", app.lookup("ipbEmail").value);
+	 * 
+	 * var nick = ipbNick.displayText;
+	 * var nickValue = String(nick);
+	 * var checkNickResult = app.lookup("opbCheckNick");
+	 * 
+	 * if (nickValue.length < 2 || nickValue.length > 10) {
+	 * 	checkNickResult.style.css("color", "red");
+	 * 	checkNickResult.text = "닉네임은 1자 이상 ~ 8자 이하이어야 합니다.";
+	 * } else {
+	 * 	var xhr = new XMLHttpRequest();
+	 * 	xhr.onreadystatechange = function() {
+	 * 		if (xhr.readyState == 4 && xhr.status == 200) {
+	 * 			if (xhr.responseText == "fail") {
+	 * 				checkNickResult.style.css("color", "red");
+	 * 				checkNickResult.text = "닉네임이 중복됩니다.";
+	 * 				app.lookup("imgNick").src = "../ui/theme/images/member/cross.png";
+	 * 			} else {
+	 * 				checkNickFlag = true;
+	 * 				checkNickResult.style.css("color", "blue");
+	 * 				checkNickResult.text = "사용가능한 닉네임입니다.";
+	 * 				app.lookup("imgNick").src = "../ui/theme/images/member/checked.png";
+	 * 			}
+	 * 		}
+	 * 	}
+	 * }
+	 */
+	
+
+
+
+
+//=============================================[ 카카오 주소검색 API ]=============================================//
 
 /*
  * 루트 컨테이너에서 init 이벤트 발생 시 호출.

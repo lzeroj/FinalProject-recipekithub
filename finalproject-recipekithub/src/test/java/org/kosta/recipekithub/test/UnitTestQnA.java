@@ -45,5 +45,10 @@ public class UnitTestQnA {
 		int result = qnAService.updateQnA(boardId,boardTitle,boardContent);
 		Assertions.assertEquals(1, result);
 	}
+	
+	@Test
+	public void selectAllQnAListAdmin() {
+		
+	}
 
 }
