@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-fc0cd491" version="1.0.4584">
   <head std:sid="head-6f6b3cc6">
-    <screen std:sid="screen-1e14ad31" id="new-screen" name="new-screen" width="709px" height="1200px" useCustomWidth="false" useCustomHeight="false" customHeight="608" customWidth="709" active="true"/>
+    <screen std:sid="screen-d8c82a56" id="new-screen" name="new-screen" width="709px" height="791px" active="true"/>
     <cl:model std:sid="model-d37a594b">
       <cl:dataset std:sid="d-set-c8372a2f" id="responseqnaselect">
         <cl:datacolumnlist>
@@ -17,7 +17,7 @@
   <body std:sid="body-4623d88e">
     <cl:listener std:sid="listener-01388302" name="load" handler="onBodyLoad"/>
     <cl:listener std:sid="listener-40f443f3" name="before-draw" handler="onBodyBeforeDraw"/>
-    <cl:group std:sid="group-4fd6728f" id="grp1">
+    <cl:group std:sid="group-4fd6728f" id="grp1" style="background-color:#FFFFFF;">
       <cl:verticaldata std:sid="v-data-d93a7f70" width="709px" height="608px" autosize="height"/>
       <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="Q &amp; A">
         <cl:verticaldata std:sid="v-data-accb3108" width="709px" height="50px"/>

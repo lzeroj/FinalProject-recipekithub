@@ -7,20 +7,6 @@
 (function() {
 	var app = new cpr.core.App("index", { 
 		onPrepare: function(loader) {
-			loader.addCSS("theme/cleopatra-theme.css");
-			loader.addCSS("theme/controls/checkbox.part.css");
-			loader.addCSS("theme/controls/combo-box.part.css");
-			loader.addCSS("theme/controls/common.part.css");
-			loader.addCSS("theme/controls/htmlobject.css");
-			loader.addCSS("theme/controls/menu.part.css");
-			loader.addCSS("theme/controls/nav-bar.part.css");
-			loader.addCSS("theme/controls/searchinput.part.css");
-			loader.addCSS("theme/custom-settings.part.css");
-			loader.addCSS("theme/custom-theme.css");
-			loader.addCSS("theme/custom/member.part.css");
-			loader.addCSS("theme/custom/navigation.part.css");
-			loader.addCSS("theme/custom/search-box.part.css");
-			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -37,7 +23,8 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
-			//	console.log(getSessionStorage("memsession"));
+			//	var sessionval = getSessionStorage("memsession");
+			//	console.log("세션에 담긴값 : "+sessionval);
 				var vcEmb = app.lookup("ea1");
 				cpr.core.App.load("embedded/dynamic-img", function(/*cpr.core.App*/ loadedApp){
 					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
@@ -91,7 +78,7 @@
 			formLayout_1.setRows(["200px", "1fr", "100px"]);
 			group_1.setLayout(formLayout_1);
 			(function(container){
-				var userDefinedControl_1 = new udc.header3();
+				var userDefinedControl_1 = linker.userDefinedControl_1 = new udc.header3();
 				container.addChild(userDefinedControl_1, {
 					"colIndex": 0,
 					"rowIndex": 0
@@ -111,7 +98,7 @@
 				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
 				group_2.setLayout(xYLayout_1);
 				(function(container){
-					var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+					var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
 					container.addChild(embeddedApp_1, {
 						"right": "30px",
 						"left": "30px",
@@ -159,6 +146,8 @@
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
 			}
+			// Linking
+			linker.userDefinedControl_1.embe = linker.embeddedApp_1;
 		}
 	});
 	app.title = "index";

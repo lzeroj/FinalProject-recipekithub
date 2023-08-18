@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-c77713b6" version="1.0.4584">
   <head std:sid="head-0439e1f2">
-    <screen std:sid="screen-75e88215" id="embe" name="embe" width="640px" height="628px" useCustomWidth="true" useCustomHeight="true" customHeight="558" customWidth="709" active="true"/>
+    <screen std:sid="screen-69e852c6" id="embe" name="embe" width="640px" height="628px" useCustomWidth="true" useCustomHeight="true" customHeight="791" customWidth="709" active="true"/>
     <cl:model std:sid="model-9c2d0a42">
       <cl:dataset std:sid="d-set-d25d2390" id="qnadslist">
         <cl:datacolumnlist>
@@ -29,7 +29,7 @@
         <cl:listener std:sid="listener-f0474082" name="submit-success" handler="onSubqnalistSubmitSuccess"/>
         <cl:responsedata dataid="qnadslist"/>
       </cl:submission>
-      <cl:submission std:sid="submission-5cbf826a" id="subqnaselect" action="/selectQnaDetail" mediatype="application/x-www-form-urlencoded;simple">
+      <cl:submission std:sid="submission-5cbf826a" id="subqnaselect" action="/selectQnaDetailAdmin" mediatype="application/x-www-form-urlencoded;simple">
         <cl:listener std:sid="listener-97a5e5e2" name="submit-success" handler="onSubqnaselectSubmitSuccess"/>
         <cl:requestdata dataid="requestqnaselect"/>
         <cl:responsedata dataid="responseqnaselect"/>
@@ -41,7 +41,7 @@
   </head>
   <body std:sid="body-40e7f9b4">
     <cl:listener std:sid="listener-939aaa7a" name="load" handler="onBodyLoad"/>
-    <cl:group std:sid="group-183183f0">
+    <cl:group std:sid="group-183183f0" style="background-color:#FFFFFF;">
       <cl:xylayoutdata std:sid="xyl-data-d22fd3da" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:grid std:sid="grid-febf449d" id="grd1" readonly="true" datasetid="qnadslist" autorowheight="all" selectionunit="row">
         <cl:xylayoutdata std:sid="xyl-data-e62e16ea" top="70px" right="20px" left="20px" height="428px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
@@ -62,13 +62,13 @@
           <cl:gridcell std:sid="gd-cell-8589834a" rowindex="0" colindex="1" columnname="boardTitle"/>
           <cl:gridcell std:sid="gd-cell-7f9b8c1e" rowindex="0" colindex="2" columnname="boardRegDate">
             <cl:dateinput std:sid="d-input-0901d57b" id="dti1" style="text-align:center;" hidebutton="true">
-              <cl:celldata/>
+              <cl:celldata std:sid="c-data-0c69210b"/>
             </cl:dateinput>
           </cl:gridcell>
           <cl:gridcell std:sid="gd-cell-7e5e33e6" rowindex="0" colindex="3">
             <cl:img std:sid="image-c0eb5a6c">
               <cl:relativebind property="src" columnname="boardResponseStatus"/>
-              <cl:celldata halign="CENTER" valign="CENTER" width="40" height="40"/>
+              <cl:celldata std:sid="c-data-97930261" halign="CENTER" valign="CENTER" width="40" height="40"/>
             </cl:img>
           </cl:gridcell>
         </cl:griddetail>

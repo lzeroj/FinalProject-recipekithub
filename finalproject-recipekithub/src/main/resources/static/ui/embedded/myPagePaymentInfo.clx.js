@@ -317,6 +317,10 @@
 									"configurator": function(cell){
 										cell.filterable = false;
 										cell.sortable = false;
+										cell.style.css({
+											"background-color" : "#90be70",
+											"color" : "#FFFFFF"
+										});
 									}
 								},
 								{
@@ -325,6 +329,11 @@
 										cell.filterable = false;
 										cell.sortable = false;
 										cell.text = "주문 목록";
+										cell.style.css({
+											"background-color" : "#90be70",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -334,6 +343,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "paymentDate";
 										cell.text = "주문 날짜";
+										cell.style.css({
+											"background-color" : "#90be70",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -343,6 +357,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "paymentTotal";
 										cell.text = "총 가격";
+										cell.style.css({
+											"background-color" : "#90be70",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								}
 							]
@@ -397,7 +416,7 @@
 					"top": "0px",
 					"right": "0px",
 					"left": "0px",
-					"height": "398px"
+					"height": "630px"
 				});
 				var group_4 = new cpr.controls.Container();
 				group_4.style.css({

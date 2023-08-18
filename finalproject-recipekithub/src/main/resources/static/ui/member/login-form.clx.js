@@ -65,7 +65,7 @@
 				if(checkBox.checked){
 					localStorage.setItem("memberEmail", memberEmail);
 				}
-				setTimedSessionData("memsession", memberEmail,10);
+				setTimedSessionData("memsession", memberEmail,30);
 				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 				httpPostMethod.submit();
 			}
@@ -112,9 +112,10 @@
 				if(item == null || item == ''){
 					return;
 				}
+				app.lookup("cbx1").checked = true;
 				app.lookup("emailInput").text = item;
 				app.lookup("pswdInput").focus();
-			};
+			}
 			// End - User Script
 			
 			// Header

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource("classpath:context.xml")
+@ImportResource("classpath:context.xml") 
 public class FinalprojectRecipekithubApplication {
 
 	public static void main(String[] args) {

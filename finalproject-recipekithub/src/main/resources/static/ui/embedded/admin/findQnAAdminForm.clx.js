@@ -16,11 +16,71 @@
 			 * Created at 2023. 8. 17. 오후 4:59:21.
 			 *
 			 * @author shj22k
-			 ************************************************/;
+			 ************************************************/
+
+			/*
+			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+			 */
+			function onBodyLoad(e){
+				app.lookup("subfindqnalistadmin").send();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubfindqnalistadminSubmitSuccess(e){
+				var subfindqnalistadmin = e.control;
+				var dataSet = app.lookup("qnalistadmin");
+				var metadata = subfindqnalistadmin.getMetadata("memberEmail");
+				var grid = app.lookup("grd1");
+				for(var i=0;i<dataSet.getRowCount();i++){
+					var boardResponseStatus = dataSet.getValue(i, "boardResponseStatus");
+					var value = "theme/images/mypage/"+boardResponseStatus+".png";
+					dataSet.setValue(i, "memberEmail", metadata[i].memberEmail);
+					dataSet.setValue(i, "boardResponseStatus", value);
+				}
+				grid.redraw();
+			}
+
+			/*
+			 * "선택 열기" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick(e){
+				var button = e.control;
+				var grid = app.lookup("grd1");
+				var selectedRowIndex = grid.getSelectedRowIndex();	
+				var row = grid.dataSet.getRow(selectedRowIndex);
+				app.lookup("boardIddm").setValue("boardId", row.getValue("boardId"));
+				app.lookup("subfindqnadetailadmin").send();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubfindqnadetailadminSubmitSuccess(e){
+				var subfindqnadetailadmin = e.control;
+					var host = app.getHost(); // 부모 임베디드 앱
+				var boardId = app.lookup("responseqnaselect").getValue(0, "boardId");
+				var boardTitle = app.lookup("responseqnaselect").getValue(0, "boardTitle");
+				var boardContent = app.lookup("responseqnaselect").getValue(0, "boardContent");
+				
+				var initValue = {"boardId": boardId , "boardTitle" : boardTitle, "boardContent":boardContent};
+				cpr.core.App.load("embedded/myPageQnARegisterSelect", function(loadedApp){
+					if (loadedApp){
+						host.initValue = initValue;
+						host.app = loadedApp;
+					}
+				});
+				
+			};
 			// End - User Script
 			
 			// Header
-			var dataSet_1 = new cpr.data.DataSet("dsqnalist");
+			var dataSet_1 = new cpr.data.DataSet("qnalistadmin");
 			dataSet_1.parseData({
 				"columns" : [
 					{
@@ -37,14 +97,39 @@
 				]
 			});
 			app.register(dataSet_1);
+			
+			var dataSet_2 = new cpr.data.DataSet("responseqnaselect");
+			dataSet_2.parseData({
+				"columns" : [
+					{"name": "boardId"},
+					{"name": "boardTitle"},
+					{"name": "boardContent"}
+				]
+			});
+			app.register(dataSet_2);
+			var dataMap_1 = new cpr.data.DataMap("boardIddm");
+			dataMap_1.parseData({
+				"columns" : [{"name": "boardId"}]
+			});
+			app.register(dataMap_1);
 			var submission_1 = new cpr.protocols.Submission("subfindqnalistadmin");
-			submission_1.action = "/selectAllQnAListAdmin";
+			submission_1.action = "/selectQnaListAdmin";
 			submission_1.addResponseData(dataSet_1, false);
+			if(typeof onSubfindqnalistadminSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onSubfindqnalistadminSubmitSuccess);
+			}
 			app.register(submission_1);
-			app.supportMedia("all and (min-width: 1860px)", "FHD");
-			app.supportMedia("all and (min-width: 1024px) and (max-width: 1859px)", "default");
-			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
-			app.supportMedia("all and (max-width: 499px)", "mobile");
+			
+			var submission_2 = new cpr.protocols.Submission("subfindqnadetailadmin");
+			submission_2.action = "/selectQnaDetailAdmin";
+			submission_2.mediaType = "application/x-www-form-urlencoded;simple";
+			submission_2.addRequestData(dataMap_1);
+			submission_2.addResponseData(dataSet_2, false);
+			if(typeof onSubfindqnadetailadminSubmitSuccess == "function") {
+				submission_2.addEventListener("submit-success", onSubfindqnadetailadminSubmitSuccess);
+			}
+			app.register(submission_2);
+			app.supportMedia("all", "FHD");
 			
 			// Configure root container
 			var container = app.getContainer();
@@ -71,20 +156,22 @@
 				formLayout_1.leftMargin = "0px";
 				formLayout_1.horizontalSpacing = "0px";
 				formLayout_1.verticalSpacing = "0px";
-				formLayout_1.setColumns(["1fr"]);
-				formLayout_1.setRows(["50px", "20px", "1fr"]);
+				formLayout_1.setColumns(["1fr", "80px"]);
+				formLayout_1.setRows(["50px", "20px", "1fr", "20px", "40px"]);
 				group_2.setLayout(formLayout_1);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
 					output_1.value = "Q & A 리스트";
 					container.addChild(output_1, {
 						"colIndex": 0,
-						"rowIndex": 0
+						"rowIndex": 0,
+						"colSpan": 2,
+						"rowSpan": 1
 					});
 					var grid_1 = new cpr.controls.Grid("grd1");
 					grid_1.readOnly = true;
 					grid_1.init({
-						"dataSet": app.lookup("dsqnalist"),
+						"dataSet": app.lookup("qnalistadmin"),
 						"columns": [
 							{"width": "30px"},
 							{"width": "121px"},
@@ -189,7 +276,18 @@
 					});
 					container.addChild(grid_1, {
 						"colIndex": 0,
-						"rowIndex": 2
+						"rowIndex": 2,
+						"colSpan": 2,
+						"rowSpan": 1
+					});
+					var button_1 = new cpr.controls.Button();
+					button_1.value = "선택 열기";
+					if(typeof onButtonClick == "function") {
+						button_1.addEventListener("click", onButtonClick);
+					}
+					container.addChild(button_1, {
+						"colIndex": 1,
+						"rowIndex": 4
 					});
 				})(group_2);
 				container.addChild(group_2, {
@@ -205,6 +303,9 @@
 				"bottom": "0px",
 				"left": "0px"
 			});
+			if(typeof onBodyLoad == "function"){
+				app.addEventListener("load", onBodyLoad);
+			}
 		}
 	});
 	app.title = "findQnAAdminForm";
