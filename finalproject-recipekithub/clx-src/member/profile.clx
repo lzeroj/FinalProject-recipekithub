@@ -243,17 +243,18 @@
                         <cl:formdata std:sid="f-data-afe68c0d" row="0" col="0" rowspan="3" colspan="1"/>
                       </cl:output>
                       <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; font-size:15px;" secret="true" showclearbutton="true" maxlength="25" spellcheck="false">
+                        <cl:listener std:sid="listener-49d50be5" name="keyup" handler="onIpbPassword1Keyup"/>
                         <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberPassword" rowindex="0"/>
                         <cl:formdata std:sid="f-data-003590f1" row="0" col="1"/>
                       </cl:inputbox>
-                      <cl:output std:sid="output-7ce0a65c" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
-                        <cl:formdata std:sid="f-data-f4e169b0" row="1" col="1" rowspan="1" colspan="2"/>
-                      </cl:output>
-                      <cl:img std:sid="image-f29aab43">
+                      <cl:img std:sid="image-f29aab43" id="imgPswdChk1">
                         <cl:formdata std:sid="f-data-0a05dda6" row="0" col="2"/>
                       </cl:img>
-                      <cl:output std:sid="output-bb64ce6b" value="">
-                        <cl:formdata std:sid="f-data-2ca75300" row="2" col="1" rowspan="1" colspan="2"/>
+                      <cl:output std:sid="output-bb64ce6b" id="opbCheckPassword" value="">
+                        <cl:formdata std:sid="f-data-ead06923" row="1" col="1" rowspan="1" colspan="2"/>
+                      </cl:output>
+                      <cl:output std:sid="output-7ce0a65c" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
+                        <cl:formdata std:sid="f-data-3494a357" row="2" col="1" rowspan="1" colspan="2"/>
                       </cl:output>
                       <cl:formlayout std:sid="f-layout-2da4d9fa" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
                         <cl:rows length="40" unit="PIXEL"/>
@@ -270,16 +271,17 @@
                         <cl:formdata std:sid="f-data-4c01da8c" row="0" col="0" rowspan="3" colspan="1"/>
                       </cl:output>
                       <cl:inputbox std:sid="i-box-b6daa8de" id="ipbPassword2" style="border-radius:5px; font-size:15px;" secret="true" showclearbutton="true" maxlength="25" spellcheck="false">
+                        <cl:listener std:sid="listener-e418a2a9" name="keyup" handler="onIpbPassword2Keyup"/>
                         <cl:formdata std:sid="f-data-fdbde9be" row="0" col="1"/>
                       </cl:inputbox>
-                      <cl:output std:sid="output-38bce9e6" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
-                        <cl:formdata std:sid="f-data-8e530e4b" row="1" col="1" rowspan="1" colspan="2"/>
-                      </cl:output>
-                      <cl:img std:sid="image-7b0ffb16">
+                      <cl:img std:sid="image-7b0ffb16" id="imgPswdChk2">
                         <cl:formdata std:sid="f-data-d37b1a71" row="0" col="2"/>
                       </cl:img>
-                      <cl:output std:sid="output-b92eba14" value="">
-                        <cl:formdata std:sid="f-data-1a48c378" row="2" col="1" rowspan="1" colspan="2"/>
+                      <cl:output std:sid="output-b92eba14" id="opbCheckPassword2" value="">
+                        <cl:formdata std:sid="f-data-c62b1034" row="1" col="1" rowspan="1" colspan="2"/>
+                      </cl:output>
+                      <cl:output std:sid="output-38bce9e6" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
+                        <cl:formdata std:sid="f-data-d05f7be8" row="2" col="1" rowspan="1" colspan="2"/>
                       </cl:output>
                       <cl:formlayout std:sid="f-layout-cb5a3e95" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
                         <cl:rows length="40" unit="PIXEL"/>
@@ -296,20 +298,25 @@
                         <cl:formdata std:sid="f-data-b39d9a61" row="0" col="0" rowspan="3" colspan="1"/>
                       </cl:output>
                       <cl:inputbox std:sid="i-box-717e3d70" id="ipbNick" style="border-radius:5px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="24" spellcheck="false">
+                        <cl:listener std:sid="listener-062abdfb" name="keyup" handler="onIpbNickKeyup"/>
                         <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberNick" rowindex="0"/>
                         <cl:formdata std:sid="f-data-5d266f1a" row="0" col="1"/>
                       </cl:inputbox>
-                      <cl:output std:sid="output-147cb024" value="">
-                        <cl:formdata std:sid="f-data-00994837" row="2" col="1"/>
+                      <cl:output std:sid="output-147cb024" id="opbCheckNick" value="">
+                        <cl:formdata std:sid="f-data-bb2f5d0f" row="1" col="1" rowspan="1" colspan="2"/>
                       </cl:output>
                       <cl:output std:sid="output-de90e3f9" style="font-size:10px;" value="❈ 닉네임은 1자 이상~8자 이하입니다.">
-                        <cl:formdata std:sid="f-data-bcf8d5d9" row="1" col="1"/>
+                        <cl:formdata std:sid="f-data-9c8c8d34" row="2" col="1" rowspan="1" colspan="2"/>
                       </cl:output>
+                      <cl:img std:sid="image-30a70019" id="imgNickChk">
+                        <cl:formdata std:sid="f-data-26c3f314" row="0" col="2"/>
+                      </cl:img>
                       <cl:formlayout std:sid="f-layout-71436dc9" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
                         <cl:rows length="40" unit="PIXEL"/>
                         <cl:rows length="30" unit="PIXEL"/>
                         <cl:rows length="30" unit="PIXEL"/>
                         <cl:columns length="120" unit="PIXEL"/>
+                        <cl:columns length="180" unit="PIXEL"/>
                         <cl:columns length="1" unit="FRACTION"/>
                       </cl:formlayout>
                     </cl:group>

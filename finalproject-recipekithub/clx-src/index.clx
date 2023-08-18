@@ -15,22 +15,39 @@
   </head>
   <body std:sid="body-742fa205" style="background-color:#F4FAEC;">
     <cl:listener std:sid="listener-def95c39" name="load" handler="onBodyLoad"/>
-    <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
-      <cl:xylayoutdata std:sid="xyl-data-642ed781" top="0px" left="0px" width="1920px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      <cl:property name="embe" value="ea1" type="control"/>
-    </cl:udc>
-    <cl:group std:sid="group-19106c56" style="background-color:#F4FAEC; background-size:cover; background-image:url(theme/images/common/bgimg10.png); background-position:center;">
-      <cl:xylayoutdata std:sid="xyl-data-c865488b" top="205px" left="0px" width="1920px" height="780px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1">
-        <cl:responsivexylayoutdata std:sid="rxyl-data-dd351d24">
-          <cl:xylayoutdata std:sid="sxyl-data-61d0bbd5" right="20px" left="20px" height="720px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="FHD"/>
-        </cl:responsivexylayoutdata>
-      </cl:embeddedapp>
-      <cl:responsivexylayout std:sid="r-xylayout-b1999951"/>
+    <cl:group std:sid="group-3afdffe4">
+      <cl:xylayoutdata std:sid="xyl-data-46ab264b" top="0px" left="0px" width="1920px" height="1090px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
+        <cl:xylayoutdata std:sid="xyl-data-a879d1ba" top="0px" left="0px" width="1920px" height="200px"/>
+        <cl:property name="embe" value="ea1" type="control"/>
+      </cl:udc>
+      <cl:group std:sid="group-19106c56" style="background-color:#F4FAEC; background-size:cover; background-image:url(theme/images/common/bgimg10.png); background-position:center;">
+        <cl:xylayoutdata std:sid="xyl-data-22aa6dac" top="205px" left="0px" width="1920px" height="780px"/>
+        <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1">
+          <cl:responsivexylayoutdata std:sid="rxyl-data-dd351d24">
+            <cl:xylayoutdata std:sid="sxyl-data-61d0bbd5" right="20px" left="20px" height="720px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="FHD"/>
+          </cl:responsivexylayoutdata>
+        </cl:embeddedapp>
+        <cl:group std:sid="group-faa92370">
+          <cl:responsivexylayoutdata std:sid="rxyl-data-0d0c7fe0">
+            <cl:xylayoutdata std:sid="sxyl-data-560680a0" right="20px" bottom="0px" width="30px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM" screenid="FHD"/>
+          </cl:responsivexylayoutdata>
+          <cl:img std:sid="image-bbda04f5" src="theme/images/pivot/field/arrow-up-circle.svg">
+            <cl:listener std:sid="listener-aef89b4a" name="click" handler="onImageClick"/>
+            <cl:formdata std:sid="f-data-220eb14a" row="0" col="0"/>
+          </cl:img>
+          <cl:formlayout std:sid="f-layout-99156463" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:responsivexylayout std:sid="r-xylayout-b1999951"/>
+      </cl:group>
+      <cl:udc std:sid="ud-control-6c3a3fe8" type="udc.footer">
+        <cl:xylayoutdata std:sid="xyl-data-1c5d6085" top="990px" left="0px" width="1920px" height="100px"/>
+      </cl:udc>
+      <cl:xylayout std:sid="xylayout-c9b9125c"/>
     </cl:group>
-    <cl:udc std:sid="ud-control-6c3a3fe8" type="udc.footer">
-      <cl:xylayoutdata std:sid="xyl-data-f52c3329" top="990px" left="0px" width="1920px" height="100px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:udc>
     <cl:xylayout std:sid="xylayout-bc755070"/>
   </body>
   <std:studiosetting>

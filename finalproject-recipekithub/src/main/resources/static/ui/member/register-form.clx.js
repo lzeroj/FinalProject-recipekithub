@@ -472,7 +472,7 @@
 			function onBodyUnload(e) {
 				var appConf = cpr.core.AppConfig.INSTANCE;
 				appConf.getEnvConfig().setValue("appcache", false);
-			}
+			};
 			// End - User Script
 			
 			// Header
@@ -939,7 +939,7 @@
 										});
 										container.addChild(output_4, {
 											"colIndex": 1,
-											"rowIndex": 2,
+											"rowIndex": 1,
 											"colSpan": 2,
 											"rowSpan": 1
 										});
@@ -964,11 +964,11 @@
 										var output_5 = new cpr.controls.Output();
 										output_5.value = "❈ 중복이 불가한 이메일 형식, 30자 이하입니다";
 										output_5.style.css({
-											"font-size" : "10px"
+											"font-size" : "14px"
 										});
 										container.addChild(output_5, {
 											"colIndex": 1,
-											"rowIndex": 1,
+											"rowIndex": 2,
 											"colSpan": 2,
 											"rowSpan": 1
 										});
@@ -1007,6 +1007,7 @@
 											"rowSpan": 3
 										});
 										var inputBox_4 = new cpr.controls.InputBox("ipbPassword1");
+										inputBox_4.secret = true;
 										inputBox_4.maxLength = 30;
 										inputBox_4.spellCheck = false;
 										inputBox_4.style.css({
@@ -1046,10 +1047,10 @@
 											"colIndex": 2,
 											"rowIndex": 0
 										});
-										var output_7 = new cpr.controls.Output();
-										output_7.value = "❈ 비밀번호는 1자 이상~25자 이하입니다.";
+										var output_7 = new cpr.controls.Output("opbCheckPassword");
+										output_7.value = "";
 										output_7.style.css({
-											"font-size" : "10px"
+											"font-size" : "14px"
 										});
 										container.addChild(output_7, {
 											"colIndex": 1,
@@ -1057,8 +1058,8 @@
 											"colSpan": 2,
 											"rowSpan": 1
 										});
-										var output_8 = new cpr.controls.Output("opbCheckPassword");
-										output_8.value = "";
+										var output_8 = new cpr.controls.Output();
+										output_8.value = "❈ 1자 이상~25자 이하입니다.";
 										output_8.style.css({
 											"font-size" : "14px"
 										});
@@ -1103,6 +1104,7 @@
 											"rowSpan": 3
 										});
 										var inputBox_5 = new cpr.controls.InputBox("ipbPassword2");
+										inputBox_5.secret = true;
 										inputBox_5.maxLength = 25;
 										inputBox_5.spellCheck = false;
 										inputBox_5.style.css({
@@ -1145,18 +1147,18 @@
 										output_10.value = "";
 										container.addChild(output_10, {
 											"colIndex": 1,
-											"rowIndex": 2,
+											"rowIndex": 1,
 											"colSpan": 2,
 											"rowSpan": 1
 										});
 										var output_11 = new cpr.controls.Output();
-										output_11.value = "❈ 비밀번호는 1자 이상~25자 이하입니다.";
+										output_11.value = "❈ 1자 이상~25자 이하입니다.";
 										output_11.style.css({
-											"font-size" : "10px"
+											"font-size" : "14px"
 										});
 										container.addChild(output_11, {
 											"colIndex": 1,
-											"rowIndex": 1,
+											"rowIndex": 2,
 											"colSpan": 2,
 											"rowSpan": 1
 										});
@@ -1198,7 +1200,7 @@
 										output_13.value = "";
 										container.addChild(output_13, {
 											"colIndex": 1,
-											"rowIndex": 2,
+											"rowIndex": 1,
 											"colSpan": 2,
 											"rowSpan": 1
 										});
@@ -1218,17 +1220,6 @@
 										container.addChild(inputBox_6, {
 											"colIndex": 1,
 											"rowIndex": 0
-										});
-										var output_14 = new cpr.controls.Output();
-										output_14.value = "❈ 닉네임은 1자 이상~8자 이하이며 중복 불가합니다.";
-										output_14.style.css({
-											"font-size" : "10px"
-										});
-										container.addChild(output_14, {
-											"colIndex": 1,
-											"rowIndex": 1,
-											"colSpan": 2,
-											"rowSpan": 1
 										});
 										var group_15 = new cpr.controls.Container();
 										var formLayout_10 = new cpr.controls.layouts.FormLayout();
@@ -1252,6 +1243,17 @@
 										container.addChild(group_15, {
 											"colIndex": 2,
 											"rowIndex": 0
+										});
+										var output_14 = new cpr.controls.Output();
+										output_14.value = "❈ 1자 이상~8자 이하이며 중복 불가합니다.";
+										output_14.style.css({
+											"font-size" : "14px"
+										});
+										container.addChild(output_14, {
+											"colIndex": 1,
+											"rowIndex": 2,
+											"colSpan": 2,
+											"rowSpan": 1
 										});
 									})(group_14);
 									container.addChild(group_14, {

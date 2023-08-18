@@ -35,6 +35,105 @@ function onSub_profileSubmitSuccess(e) {
 
 
 /*
+ * 인풋 박스에서 keyup 이벤트 발생 시 호출.
+ * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+ */
+function onIpbPassword1Keyup(e){
+	var ipbPassword1 = e.control;
+	var checkPswd1Flag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+	var password1 = app.lookup("ipbPassword1");
+	
+	var pswd1 = ipbPassword1.displayText;
+	var pswd1Value = String(pswd1);
+	
+	var checkPswdResult1 = app.lookup("opbCheckPassword");
+	
+	if (pswd1Value === "") {
+		checkPswdResult1.text = "";
+		app.lookup("imgPswdChk1").src = "";
+	} else if (pswd1Value.length < 2 || pswd1Value.length > 25) {
+		checkPswdResult1.style.css("color", "red");
+		checkPswdResult1.text = "비밀번호는 1자 이상 25자 이하이어야 합니다.";
+		app.lookup("imgPswdChk2").src = "../ui/theme/images/member/cross.png";
+	} else {
+		checkPswdResult1.style.css("color", "blue");
+		checkPswdResult1.text = "사용가능한 비밀번호입니다.";
+		app.lookup("imgPswdChk1").src = "../ui/theme/images/member/checked.png";
+	}
+}
+
+
+/*
+ * 인풋 박스에서 keyup 이벤트 발생 시 호출.
+ * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+ */
+function onIpbPassword2Keyup(e){
+	var ipbPassword2 = e.control;
+	var ipbPassword1 = app.lookup("ipbPassword1");
+	
+	var pswd1 = ipbPassword1.displayText;
+	var pswd1Value = String(pswd1);
+	
+	var pswd2 = ipbPassword2.displayText;
+	var pswd2Value = String(pswd2);
+	
+	var checkPswdResult2 = app.lookup("opbCheckPassword2");
+	
+	if (pswd2Value === "") {
+		checkPswdResult2.text = "";
+		app.lookup("imgPswdChk2").src = "";
+	} else if (pswd1Value != pswd2Value) {
+		checkPswdResult2.style.css("color", "red");
+		checkPswdResult2.value = "위의 비밀번호와 일치하지 않습니다.";
+		app.lookup("imgPswdChk2").src = "../ui/theme/images/member/cross.png";
+	} else if (pswd1Value === pswd2Value) {
+		checkPswdResult2.style.css("color", "blue");
+		checkPswdResult2.value = "비밀번호가 일치합니다.";
+		app.lookup("imgPswdChk2").src = "../ui/theme/images/member/checked.png";
+	}
+}
+
+
+/*
+ * 인풋 박스에서 keyup 이벤트 발생 시 호출.
+ * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+ */
+function onIpbNickKeyup(e){
+	var ipbNick = e.control;
+	var checkNickFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+
+	var subCheckNick = app.lookup("sub_check_nick");
+
+    var dataMap = app.lookup("dm_check_nick");
+    dataMap.setValue("member_nick", ipbNick.value);
+
+    subCheckNick.send();
+
+    subCheckNick.addEventListener('submit-success', function(response) {
+        var metadataOk = subCheckNick.getMetadata("ok");
+        var metadataFail = subCheckNick.getMetadata("fail");
+
+        var checkNickResult = app.lookup("opbCheckNick");
+
+		var nick = ipbNick.displayText;
+		var nickValue = String(nick);
+
+        if (nickValue.length < 2 || nickValue.length > 10) {
+            checkNickResult.style.css("color", "red");
+            checkNickResult.value = "닉네임은 1자이상 ~ 8자 이하이어야 합니다.";
+        } else if (metadataFail) {
+            checkNickResult.style.css("color", "red");
+            checkNickResult.value = "닉네임이 중복됩니다.";
+        } else if (metadataOk) {
+        	checkNickFlag = true;
+            checkNickResult.style.css("color", "blue");
+            checkNickResult.value = "사용가능한 닉네임입니다.";
+        }
+    });
+}
+
+
+/*
  * "수정" 버튼(btnMemUpdate)에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
@@ -125,6 +224,18 @@ function onSub_logoutSubmitSuccess(e) {
 }
 
 
+
+/*
+ * "프로필 사진 등록" 버튼(btnProfileImg)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onBtnProfileImgClick(e){
+	var btnProfileImg = e.control;
+	
+}
+
+//=============================================[ 카카오 주소검색 API ]=============================================//
+
 /*
  * 루트 컨테이너에서 init 이벤트 발생 시 호출.
  * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
@@ -212,13 +323,4 @@ function postCode() {
 function onBodyUnload(e){
 	var appConf = cpr.core.AppConfig.INSTANCE;
 	appConf.getEnvConfig().setValue("appcache", false);
-}
-
-/*
- * "프로필 사진 등록" 버튼(btnProfileImg)에서 click 이벤트 발생 시 호출.
- * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
- */
-function onBtnProfileImgClick(e){
-	var btnProfileImg = e.control;
-	
 }

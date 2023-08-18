@@ -107,6 +107,105 @@
 
 
 			/*
+			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
+			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+			 */
+			function onIpbPassword1Keyup(e){
+				var ipbPassword1 = e.control;
+				var checkPswd1Flag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+				var password1 = app.lookup("ipbPassword1");
+				
+				var pswd1 = ipbPassword1.displayText;
+				var pswd1Value = String(pswd1);
+				
+				var checkPswdResult1 = app.lookup("opbCheckPassword");
+				
+				if (pswd1Value === "") {
+					checkPswdResult1.text = "";
+					app.lookup("imgPswdChk1").src = "";
+				} else if (pswd1Value.length < 2 || pswd1Value.length > 25) {
+					checkPswdResult1.style.css("color", "red");
+					checkPswdResult1.text = "비밀번호는 1자 이상 25자 이하이어야 합니다.";
+					app.lookup("imgPswdChk2").src = "../ui/theme/images/member/cross.png";
+				} else {
+					checkPswdResult1.style.css("color", "blue");
+					checkPswdResult1.text = "사용가능한 비밀번호입니다.";
+					app.lookup("imgPswdChk1").src = "../ui/theme/images/member/checked.png";
+				}
+			}
+
+
+			/*
+			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
+			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+			 */
+			function onIpbPassword2Keyup(e){
+				var ipbPassword2 = e.control;
+				var ipbPassword1 = app.lookup("ipbPassword1");
+				
+				var pswd1 = ipbPassword1.displayText;
+				var pswd1Value = String(pswd1);
+				
+				var pswd2 = ipbPassword2.displayText;
+				var pswd2Value = String(pswd2);
+				
+				var checkPswdResult2 = app.lookup("opbCheckPassword2");
+				
+				if (pswd2Value === "") {
+					checkPswdResult2.text = "";
+					app.lookup("imgPswdChk2").src = "";
+				} else if (pswd1Value != pswd2Value) {
+					checkPswdResult2.style.css("color", "red");
+					checkPswdResult2.value = "위의 비밀번호와 일치하지 않습니다.";
+					app.lookup("imgPswdChk2").src = "../ui/theme/images/member/cross.png";
+				} else if (pswd1Value === pswd2Value) {
+					checkPswdResult2.style.css("color", "blue");
+					checkPswdResult2.value = "비밀번호가 일치합니다.";
+					app.lookup("imgPswdChk2").src = "../ui/theme/images/member/checked.png";
+				}
+			}
+
+
+			/*
+			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
+			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+			 */
+			function onIpbNickKeyup(e){
+				var ipbNick = e.control;
+				var checkNickFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+
+				var subCheckNick = app.lookup("sub_check_nick");
+
+			    var dataMap = app.lookup("dm_check_nick");
+			    dataMap.setValue("member_nick", ipbNick.value);
+
+			    subCheckNick.send();
+
+			    subCheckNick.addEventListener('submit-success', function(response) {
+			        var metadataOk = subCheckNick.getMetadata("ok");
+			        var metadataFail = subCheckNick.getMetadata("fail");
+
+			        var checkNickResult = app.lookup("opbCheckNick");
+
+					var nick = ipbNick.displayText;
+					var nickValue = String(nick);
+
+			        if (nickValue.length < 2 || nickValue.length > 10) {
+			            checkNickResult.style.css("color", "red");
+			            checkNickResult.value = "닉네임은 1자이상 ~ 8자 이하이어야 합니다.";
+			        } else if (metadataFail) {
+			            checkNickResult.style.css("color", "red");
+			            checkNickResult.value = "닉네임이 중복됩니다.";
+			        } else if (metadataOk) {
+			        	checkNickFlag = true;
+			            checkNickResult.style.css("color", "blue");
+			            checkNickResult.value = "사용가능한 닉네임입니다.";
+			        }
+			    });
+			}
+
+
+			/*
 			 * "수정" 버튼(btnMemUpdate)에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
@@ -197,6 +296,18 @@
 			}
 
 
+
+			/*
+			 * "프로필 사진 등록" 버튼(btnProfileImg)에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onBtnProfileImgClick(e){
+				var btnProfileImg = e.control;
+				
+			}
+
+			//=============================================[ 카카오 주소검색 API ]=============================================//
+
 			/*
 			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
 			 * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
@@ -284,15 +395,6 @@
 			function onBodyUnload(e){
 				var appConf = cpr.core.AppConfig.INSTANCE;
 				appConf.getEnvConfig().setValue("appcache", false);
-			}
-
-			/*
-			 * "프로필 사진 등록" 버튼(btnProfileImg)에서 click 이벤트 발생 시 호출.
-			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-			 */
-			function onBtnProfileImgClick(e){
-				var btnProfileImg = e.control;
-				
 			};
 			// End - User Script
 			
@@ -851,28 +953,31 @@
 												"font-size" : "15px"
 											});
 											inputBox_3.bind("value").toDataSet(app.lookup("ds_profile"), "memberPassword", 0);
+											if(typeof onIpbPassword1Keyup == "function") {
+												inputBox_3.addEventListener("keyup", onIpbPassword1Keyup);
+											}
 											container.addChild(inputBox_3, {
 												"colIndex": 1,
 												"rowIndex": 0
 											});
-											var output_4 = new cpr.controls.Output();
-											output_4.value = "❈ 비밀번호는 1자 이상~25자 이하입니다.";
-											output_4.style.css({
-												"font-size" : "10px"
+											var image_2 = new cpr.controls.Image("imgPswdChk1");
+											container.addChild(image_2, {
+												"colIndex": 2,
+												"rowIndex": 0
 											});
+											var output_4 = new cpr.controls.Output("opbCheckPassword");
+											output_4.value = "";
 											container.addChild(output_4, {
 												"colIndex": 1,
 												"rowIndex": 1,
 												"colSpan": 2,
 												"rowSpan": 1
 											});
-											var image_2 = new cpr.controls.Image();
-											container.addChild(image_2, {
-												"colIndex": 2,
-												"rowIndex": 0
-											});
 											var output_5 = new cpr.controls.Output();
-											output_5.value = "";
+											output_5.value = "❈ 비밀번호는 1자 이상~25자 이하입니다.";
+											output_5.style.css({
+												"font-size" : "10px"
+											});
 											container.addChild(output_5, {
 												"colIndex": 1,
 												"rowIndex": 2,
@@ -922,28 +1027,31 @@
 												"border-radius" : "5px",
 												"font-size" : "15px"
 											});
+											if(typeof onIpbPassword2Keyup == "function") {
+												inputBox_4.addEventListener("keyup", onIpbPassword2Keyup);
+											}
 											container.addChild(inputBox_4, {
 												"colIndex": 1,
 												"rowIndex": 0
 											});
-											var output_7 = new cpr.controls.Output();
-											output_7.value = "❈ 비밀번호는 1자 이상~25자 이하입니다.";
-											output_7.style.css({
-												"font-size" : "10px"
+											var image_3 = new cpr.controls.Image("imgPswdChk2");
+											container.addChild(image_3, {
+												"colIndex": 2,
+												"rowIndex": 0
 											});
+											var output_7 = new cpr.controls.Output("opbCheckPassword2");
+											output_7.value = "";
 											container.addChild(output_7, {
 												"colIndex": 1,
 												"rowIndex": 1,
 												"colSpan": 2,
 												"rowSpan": 1
 											});
-											var image_3 = new cpr.controls.Image();
-											container.addChild(image_3, {
-												"colIndex": 2,
-												"rowIndex": 0
-											});
 											var output_8 = new cpr.controls.Output();
-											output_8.value = "";
+											output_8.value = "❈ 비밀번호는 1자 이상~25자 이하입니다.";
+											output_8.style.css({
+												"font-size" : "10px"
+											});
 											container.addChild(output_8, {
 												"colIndex": 1,
 												"rowIndex": 2,
@@ -966,7 +1074,7 @@
 										formLayout_10.leftMargin = "0px";
 										formLayout_10.horizontalSpacing = "20px";
 										formLayout_10.verticalSpacing = "5px";
-										formLayout_10.setColumns(["120px", "1fr"]);
+										formLayout_10.setColumns(["120px", "180px", "1fr"]);
 										formLayout_10.setRows(["40px", "30px", "30px"]);
 										group_13.setLayout(formLayout_10);
 										(function(container){
@@ -994,15 +1102,20 @@
 												"font-size" : "15px"
 											});
 											inputBox_5.bind("value").toDataSet(app.lookup("ds_profile"), "memberNick", 0);
+											if(typeof onIpbNickKeyup == "function") {
+												inputBox_5.addEventListener("keyup", onIpbNickKeyup);
+											}
 											container.addChild(inputBox_5, {
 												"colIndex": 1,
 												"rowIndex": 0
 											});
-											var output_10 = new cpr.controls.Output();
+											var output_10 = new cpr.controls.Output("opbCheckNick");
 											output_10.value = "";
 											container.addChild(output_10, {
 												"colIndex": 1,
-												"rowIndex": 2
+												"rowIndex": 1,
+												"colSpan": 2,
+												"rowSpan": 1
 											});
 											var output_11 = new cpr.controls.Output();
 											output_11.value = "❈ 닉네임은 1자 이상~8자 이하입니다.";
@@ -1011,7 +1124,14 @@
 											});
 											container.addChild(output_11, {
 												"colIndex": 1,
-												"rowIndex": 1
+												"rowIndex": 2,
+												"colSpan": 2,
+												"rowSpan": 1
+											});
+											var image_4 = new cpr.controls.Image("imgNickChk");
+											container.addChild(image_4, {
+												"colIndex": 2,
+												"rowIndex": 0
 											});
 										})(group_13);
 										container.addChild(group_13, {
