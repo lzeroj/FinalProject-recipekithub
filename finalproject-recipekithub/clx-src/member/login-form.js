@@ -33,7 +33,7 @@ function onRegisterBtnClick(e) {
  */
 function onFindBtnClick(e) {
 	var findBtn = e.control;
-	window.location.href = "member/find-info-form.clx";
+	window.location.href = "member/find-email-pswd.clx";
 }
 
 /*

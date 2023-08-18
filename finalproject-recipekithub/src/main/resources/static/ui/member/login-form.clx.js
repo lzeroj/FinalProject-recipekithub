@@ -50,7 +50,7 @@
 			 */
 			function onFindBtnClick(e) {
 				var findBtn = e.control;
-				window.location.href = "member/find-info-form.clx";
+				window.location.href = "member/find-email-pswd.clx";
 			}
 
 			/*
@@ -114,7 +114,7 @@
 				}
 				app.lookup("emailInput").text = item;
 				app.lookup("pswdInput").focus();
-			};
+			}
 			// End - User Script
 			
 			// Header
@@ -252,8 +252,8 @@
 						group_4.setLayout(xYLayout_2);
 						container.addChild(group_4, {
 							"top": "20px",
-							"bottom": "398px",
 							"width": "356px",
+							"height": "209px",
 							"left": "calc(50% - 178px)"
 						});
 						var group_5 = new cpr.controls.Container();
@@ -314,10 +314,10 @@
 								});
 							})(group_6);
 							container.addChild(group_6, {
-								"top": "0px",
-								"right": "0px",
 								"bottom": "32px",
-								"left": "0px"
+								"width": "304px",
+								"height": "129px",
+								"left": "calc(50% - 152px)"
 							});
 							var checkBox_1 = new cpr.controls.CheckBox("cbx1");
 							checkBox_1.value = "";
@@ -327,10 +327,10 @@
 								"text-align" : "right"
 							});
 							container.addChild(checkBox_1, {
-								"top": "128px",
-								"right": "0px",
 								"bottom": "0px",
-								"left": "0px"
+								"width": "304px",
+								"height": "33px",
+								"left": "calc(50% - 152px)"
 							});
 						})(group_5);
 						container.addChild(group_5, {
@@ -423,10 +423,10 @@
 							});
 						})(group_7);
 						container.addChild(group_7, {
-							"top": "420px",
-							"right": "40px",
 							"bottom": "20px",
-							"left": "40px"
+							"width": "304px",
+							"height": "188px",
+							"left": "calc(50% - 152px)"
 						});
 					})(group_3);
 					container.addChild(group_3, {

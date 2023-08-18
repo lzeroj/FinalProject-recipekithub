@@ -1001,12 +1001,13 @@
 						"colIndex": 0,
 						"rowIndex": 0
 					});
-					var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
+					var navigationBar_1 = new cpr.controls.NavigationBar("navbar");
 					navigationBar_1.menuType = "fullmenu";
-					navigationBar_1.expandTrigger = "hover";
+					navigationBar_1.expandTrigger = "click";
 					navigationBar_1.style.setClasses(["indexnav"]);
 					navigationBar_1.style.css({
 						"background-color" : "#90be70",
+						"box-shadow" : "5px 5px 10px",
 						"color" : "#F4FAEC",
 						"font-weight" : "bolder",
 						"font-size" : "24px",
@@ -1064,9 +1065,6 @@
 						}
 					]
 				});
-				if(typeof onBodyLoad == "function"){
-					app.addEventListener("load", onBodyLoad);
-				}
 			}
 		});
 	internalApp.title = "header3";
@@ -1521,7 +1519,6 @@
 				output_2.style.css({
 					"color" : "#0CA44E"
 				});
-
 				container.addChild(output_2, {
 					"top": "179px",
 					"left": "0px",
@@ -1537,6 +1534,7 @@
 					"width": "50px",
 					"height": "27px"
 				});
+				
 				var output_4 = new cpr.controls.Output("like");
 				output_4.value = "Output";
 				output_4.style.css({
