@@ -25,4 +25,19 @@
 		UPDATE QNA_BOARD SET BOARD_TITLE = #{boardTitle},BOARD_CONTENT = #{boardContent},BOARD_EDIT_DATE = SYSDATE WHERE BOARD_ID = #{boardId}
 	</update>
 	
+	<!-- admint Q&A 전체조회 -->
+	<resultMap type="org.kosta.recipekithub.model.vo.QnAVO" id="selectQnaListAdminMap">
+		<result column="MEMBER_EMAIL" property="memberVO.memberEmail"/>
+	</resultMap>
+	<select id="selectQnaListAdmin" resultMap="selectQnaListAdminMap">
+		SELECT * FROM QNA_BOARD qb 
+	</select>
+	
+	<!-- Q&A 선택조회 -->
+	<select id="selectQnaDetailAdmin" resultType="org.kosta.recipekithub.model.vo.QnAVO">
+		SELECT * FROM QNA_BOARD qb WHERE BOARD_ID = #{boardId}
+	</select>
+	
+	
+	
 </mapper>

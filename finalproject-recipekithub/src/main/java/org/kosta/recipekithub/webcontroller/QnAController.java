@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.recipekithub.model.service.QnAService;
+import org.kosta.recipekithub.model.vo.MemberVO;
 import org.kosta.recipekithub.model.vo.QnAVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,6 +94,36 @@ public class QnAController {
 		
 		return new JSONDataView(true,message);
 	}
+	
+	@RequestMapping("/selectQnaListAdmin")
+	public View selectQnaListAdmin(HttpServletRequest request,DataRequest dataRequest) {
+		List<QnAVO> qnalistadmin = qnAService.selectQnaListAdmin();
+		dataRequest.setResponse("qnalistadmin", qnalistadmin);
+		
+		Map<String, Object> message = new HashMap<>();
+		List<MemberVO> memberEmail = new ArrayList<>();
+		MemberVO memberVO = null;
+		for(int i=0;i<qnalistadmin.size();i++) {
+			memberVO = new MemberVO();
+			memberVO.setMemberEmail(qnalistadmin.get(i).getMemberVO().getMemberEmail());
+			memberEmail.add(memberVO);
+		}
+		message.put("memberEmail", memberEmail);
+		dataRequest.setResponse("qnalistadmin", qnalistadmin);
+		dataRequest.setMetadata(true, message);
+		return new JSONDataView();
+	}
+	
+	@RequestMapping("/selectQnaDetailAdmin")
+	public View selectQnaDetailAdmin(HttpServletRequest request,DataRequest dataRequest,int boardId) {
+		QnAVO qnAVO =  qnAService.selectQnaDetailAdmin(boardId);
+		List<QnAVO> list = new ArrayList<>();
+		list.add(qnAVO);
+		dataRequest.setResponse("responseqnaselect", list);
+		return new JSONDataView();
+	}
+
+
 	
 	
 }

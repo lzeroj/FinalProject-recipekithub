@@ -148,7 +148,7 @@
 			app.register(submission_2);
 			
 			var submission_3 = new cpr.protocols.Submission("subqnaselect");
-			submission_3.action = "/selectQnaDetail";
+			submission_3.action = "/selectQnaDetailAdmin";
 			submission_3.mediaType = "application/x-www-form-urlencoded;simple";
 			submission_3.addRequestData(dataMap_1);
 			submission_3.addResponseData(dataSet_2, false);
@@ -172,6 +172,9 @@
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
+			group_1.style.css({
+				"background-color" : "#FFFFFF"
+			});
 			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
 			group_1.setLayout(xYLayout_2);
 			(function(container){
@@ -251,6 +254,7 @@
 										dateInput_1.bind("value").toDataColumn("boardRegDate");
 										return dateInput_1;
 									})();
+									cell.controlConstraint = {};
 								}
 							},
 							{

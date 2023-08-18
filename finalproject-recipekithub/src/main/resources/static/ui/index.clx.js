@@ -7,20 +7,6 @@
 (function() {
 	var app = new cpr.core.App("index", { 
 		onPrepare: function(loader) {
-			loader.addCSS("theme/cleopatra-theme.css");
-			loader.addCSS("theme/controls/checkbox.part.css");
-			loader.addCSS("theme/controls/combo-box.part.css");
-			loader.addCSS("theme/controls/common.part.css");
-			loader.addCSS("theme/controls/htmlobject.css");
-			loader.addCSS("theme/controls/menu.part.css");
-			loader.addCSS("theme/controls/nav-bar.part.css");
-			loader.addCSS("theme/controls/searchinput.part.css");
-			loader.addCSS("theme/custom-settings.part.css");
-			loader.addCSS("theme/custom-theme.css");
-			loader.addCSS("theme/custom/member.part.css");
-			loader.addCSS("theme/custom/navigation.part.css");
-			loader.addCSS("theme/custom/search-box.part.css");
-			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -37,7 +23,8 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
-			//	console.log(getSessionStorage("memsession"));
+			//	var sessionval = getSessionStorage("memsession");
+			//	console.log("세션에 담긴값 : "+sessionval);
 				var vcEmb = app.lookup("ea1");
 				cpr.core.App.load("embedded/dynamic-img", function(/*cpr.core.App*/ loadedApp){
 					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
@@ -97,38 +84,37 @@
 			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
 			group_1.setLayout(responsiveXYLayout_1);
 			(function(container){
-				var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
-				container.addChild(embeddedApp_1, {
-					positions: [
-						{
-							"media": "all and (min-width: 1920px)",
-							"right": "20px",
-							"left": "20px",
-							"height": "720px",
-							"top": "calc(50% - 360px)"
-						}, 
-						{
-							"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-							"right": "20px",
-							"left": "20px",
-							"height": "720px",
-							"top": "calc(50% - 360px)"
-						}, 
-						{
-							"media": "all and (min-width: 500px) and (max-width: 1023px)",
-							"right": "10px",
-							"left": "10px",
-							"height": "720px",
-							"top": "calc(50% - 360px)"
-						}, 
-						{
-							"media": "all and (max-width: 499px)",
-							"right": "7px",
-							"left": "7px",
-							"height": "720px",
-							"top": "calc(50% - 360px)"
-						}
-					]
+				var userDefinedControl_1 = linker.userDefinedControl_1 = new udc.header3();
+				container.addChild(userDefinedControl_1, {
+					"colIndex": 0,
+					"rowIndex": 0
+				});
+				var userDefinedControl_2 = new udc.footer();
+				container.addChild(userDefinedControl_2, {
+					"colIndex": 0,
+					"rowIndex": 2
+				});
+				var group_2 = new cpr.controls.Container();
+				group_2.style.css({
+					"background-color" : "#F4FAEC",
+					"background-size" : "cover",
+					"background-image" : "url('theme/images/common/bgimg10.png')",
+					"background-position" : "center"
+				});
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_1);
+				(function(container){
+					var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+					container.addChild(embeddedApp_1, {
+						"right": "30px",
+						"left": "30px",
+						"height": "740px",
+						"top": "calc(50% - 370px)"
+					});
+				})(group_2);
+				container.addChild(group_2, {
+					"colIndex": 0,
+					"rowIndex": 1
 				});
 			})(group_1);
 			container.addChild(group_1, {
@@ -148,6 +134,8 @@
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
 			}
+			// Linking
+			linker.userDefinedControl_1.embe = linker.embeddedApp_1;
 		}
 	});
 	app.title = "index";
