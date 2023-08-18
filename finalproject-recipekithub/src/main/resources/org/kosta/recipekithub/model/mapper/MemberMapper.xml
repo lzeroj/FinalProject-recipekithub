@@ -3,7 +3,7 @@
 <mapper namespace="org.kosta.recipekithub.model.mapper.MemberMapper">
 
 	<sql id="selectMember">
-		SELECT member_email, member_password, member_name, member_nick, member_address, member_phone, member_birthday, member_type, member_status, member_reg_date, member_postcode, member_address_detail FROM MEMBER
+		SELECT member_email, member_password, member_name, member_nick, member_address, member_phone, member_birthday, member_type, member_status, member_reg_date, member_postcode, member_address_detail, member_image FROM MEMBER
 	</sql>
 	
 	<select id="getTotalMemberCount" resultType="int">
@@ -46,11 +46,14 @@
 	</select>
 	
 	<select id="findEmailByNamePhoneBirthday" parameterType="string" resultType="string">
-				SELECT member_email FROM MEMBER	WHERE member_name=#{memberName} AND member_phone=#{memberPhone} AND member_birthday=#{memberBirthday}
+		SELECT member_email FROM MEMBER	WHERE member_name=#{memberName} AND member_phone=#{memberPhone} AND member_birthday=#{memberBirthday}
 	</select>
 	
 	<select id="findPswdByEmailNamePhone" parameterType="string" resultType="string">
-				SELECT member_password FROM MEMBER WHERE member_email=#{memberEmail} AND member_name=#{memberName} AND member_phone=#{memberPhone} 
+		SELECT member_password FROM MEMBER WHERE member_email=#{memberEmail} AND member_name=#{memberName} AND member_phone=#{memberPhone} 
 	</select>
 	
+	<insert id="insertProfileImg " parameterType="string">
+		INSERT INTO MEMBER(member_image) VALUES(#{memberImage}) WHERE member_email=#{memberEmail} 
+	</insert>
 </mapper>

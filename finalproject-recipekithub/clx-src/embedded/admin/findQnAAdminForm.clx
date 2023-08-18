@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-202d4e89" version="1.0.4584">
   <head std:sid="head-eeadd73b">
-    <screen std:sid="screen-3b9408ed" id="FHD" name="FHD" minwidth="1860px" width="1860px" height="740px" active="true"/>
-    <screen std:sid="screen-4ca6364a" id="default" name="default" minwidth="1024px" maxwidth="1859px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
-    <screen std:sid="screen-90667586" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
-    <screen std:sid="screen-fff0e925" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <screen std:sid="screen-7d9f3f2e" id="FHD" name="FHD" width="1860px" height="740px" customHeight="600" customWidth="800" active="true"/>
     <cl:model std:sid="model-1173dffc">
-      <cl:dataset std:sid="d-set-9d3116b6" id="dsqnalist">
+      <cl:dataset std:sid="d-set-9d3116b6" id="qnalistadmin">
         <cl:datacolumnlist>
           <cl:datacolumn std:sid="d-column-0c863466" name="boardId" datatype="number"/>
           <cl:datacolumn std:sid="d-column-11e7469d" name="memberEmail"/>
@@ -15,22 +12,41 @@
           <cl:datacolumn std:sid="d-column-6d4cc379" name="boardResponseStatus"/>
         </cl:datacolumnlist>
       </cl:dataset>
-      <cl:submission std:sid="submission-4ac76ddd" id="subfindqnalistadmin" action="/selectAllQnAListAdmin">
-        <cl:responsedata dataid="dsqnalist"/>
+      <cl:dataset std:sid="d-set-c8372a2f" id="responseqnaselect">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bb8ddcaf" name="boardId"/>
+          <cl:datacolumn std:sid="d-column-e4e08a38" name="boardTitle"/>
+          <cl:datacolumn std:sid="d-column-d6077708" name="boardContent"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-ea6f40dd" id="boardIddm">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-833c9dfd" name="boardId"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-4ac76ddd" id="subfindqnalistadmin" action="/selectQnaListAdmin">
+        <cl:listener std:sid="listener-936ce7ef" name="submit-success" handler="onSubfindqnalistadminSubmitSuccess"/>
+        <cl:responsedata dataid="qnalistadmin"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-39645157" id="subfindqnadetailadmin" action="/selectQnaDetailAdmin" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-b16f8282" name="submit-success" handler="onSubfindqnadetailadminSubmitSuccess"/>
+        <cl:requestdata dataid="boardIddm"/>
+        <cl:responsedata dataid="responseqnaselect"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
   <body std:sid="body-f1290298">
+    <cl:listener std:sid="listener-087fd3cf" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-e98afb90">
       <cl:xylayoutdata std:sid="xyl-data-01dc0c93" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-67002643">
         <cl:xylayoutdata std:sid="xyl-data-8c30d336" top="30px" bottom="30px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:output std:sid="output-dfed24b2" value="Q &amp; A 리스트">
-          <cl:formdata std:sid="f-data-ba8235a6" row="0" col="0"/>
+          <cl:formdata std:sid="f-data-5129b7a0" row="0" col="0" rowspan="1" colspan="2"/>
         </cl:output>
-        <cl:grid std:sid="grid-6b88455a" id="grd1" readonly="true" datasetid="dsqnalist">
-          <cl:formdata std:sid="f-data-3dd4775a" row="2" col="0"/>
+        <cl:grid std:sid="grid-6b88455a" id="grd1" readonly="true" datasetid="qnalistadmin">
+          <cl:formdata std:sid="f-data-966c20bb" row="2" col="0" rowspan="1" colspan="2"/>
           <cl:gridcolumn std:sid="g-column-f08b842a" width="30px"/>
           <cl:gridcolumn std:sid="g-column-1bdea98a" width="121px"/>
           <cl:gridcolumn std:sid="g-column-c568d50d" width="74px"/>
@@ -52,16 +68,23 @@
             <cl:gridcell std:sid="gd-cell-8a4431f3" rowindex="0" colindex="3" columnname="boardRegDate"/>
             <cl:gridcell std:sid="gd-cell-6c062e7c" rowindex="0" colindex="4" columnname="boardResponseStatus">
               <cl:img std:sid="image-553c62eb">
-                <cl:celldata halign="CENTER" valign="CENTER" width="40" height="40"/>
+                <cl:celldata std:sid="c-data-90a7b61f" halign="CENTER" valign="CENTER" width="40" height="40"/>
               </cl:img>
             </cl:gridcell>
           </cl:griddetail>
         </cl:grid>
+        <cl:button std:sid="button-d88ae865" value="선택 열기">
+          <cl:listener std:sid="listener-33bfa1a7" name="click" handler="onButtonClick"/>
+          <cl:formdata std:sid="f-data-165374cd" row="4" col="1"/>
+        </cl:button>
         <cl:formlayout std:sid="f-layout-0c1ad31b" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
           <cl:rows length="50" unit="PIXEL"/>
           <cl:rows length="20" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
           <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="20" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
           <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
       <cl:xylayout std:sid="xylayout-032c94f6"/>

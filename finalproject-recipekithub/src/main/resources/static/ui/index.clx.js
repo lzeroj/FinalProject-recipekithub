@@ -7,20 +7,6 @@
 (function() {
 	var app = new cpr.core.App("index", { 
 		onPrepare: function(loader) {
-			loader.addCSS("theme/cleopatra-theme.css");
-			loader.addCSS("theme/controls/checkbox.part.css");
-			loader.addCSS("theme/controls/combo-box.part.css");
-			loader.addCSS("theme/controls/common.part.css");
-			loader.addCSS("theme/controls/htmlobject.css");
-			loader.addCSS("theme/controls/menu.part.css");
-			loader.addCSS("theme/controls/nav-bar.part.css");
-			loader.addCSS("theme/controls/searchinput.part.css");
-			loader.addCSS("theme/custom-settings.part.css");
-			loader.addCSS("theme/custom-theme.css");
-			loader.addCSS("theme/custom/member.part.css");
-			loader.addCSS("theme/custom/navigation.part.css");
-			loader.addCSS("theme/custom/search-box.part.css");
-			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -37,7 +23,8 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
-			//	console.log(getSessionStorage("memsession"));
+			//	var sessionval = getSessionStorage("memsession");
+			//	console.log("세션에 담긴값 : "+sessionval);
 				var vcEmb = app.lookup("ea1");
 				cpr.core.App.load("embedded/dynamic-img", function(/*cpr.core.App*/ loadedApp){
 					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
@@ -69,29 +56,35 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"background-color" : "#F4FAEC",
 				"width" : "100%",
 				"height" : "100%"
 			});
 			
 			// Layout
-			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-			container.setLayout(responsiveXYLayout_1);
+			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			container.setLayout(xYLayout_1);
 			
 			// UI Configuration
+			var userDefinedControl_1 = new udc.header3();
+			container.addChild(userDefinedControl_1, {
+				"top": "0px",
+				"left": "0px",
+				"width": "1920px",
+				"height": "200px"
+			});
+			
 			var group_1 = new cpr.controls.Container();
-			var formLayout_1 = new cpr.controls.layouts.FormLayout();
-			formLayout_1.scrollable = false;
-			formLayout_1.topMargin = "0px";
-			formLayout_1.rightMargin = "0px";
-			formLayout_1.bottomMargin = "0px";
-			formLayout_1.leftMargin = "0px";
-			formLayout_1.horizontalSpacing = "0px";
-			formLayout_1.verticalSpacing = "0px";
-			formLayout_1.setColumns(["1fr"]);
-			formLayout_1.setRows(["200px", "1fr", "100px"]);
-			group_1.setLayout(formLayout_1);
+			group_1.style.css({
+				"background-color" : "#F4FAEC",
+				"background-size" : "cover",
+				"background-image" : "url('theme/images/common/bgimg10.png')",
+				"background-position" : "center"
+			});
+			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
+			group_1.setLayout(responsiveXYLayout_1);
 			(function(container){
-				var userDefinedControl_1 = new udc.header3();
+				var userDefinedControl_1 = linker.userDefinedControl_1 = new udc.header3();
 				container.addChild(userDefinedControl_1, {
 					"colIndex": 0,
 					"rowIndex": 0
@@ -111,7 +104,7 @@
 				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
 				group_2.setLayout(xYLayout_1);
 				(function(container){
-					var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+					var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
 					container.addChild(embeddedApp_1, {
 						"right": "30px",
 						"left": "30px",
@@ -125,40 +118,24 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				positions: [
-					{
-						"media": "all and (min-width: 1920px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}
-				]
+				"top": "205px",
+				"left": "0px",
+				"width": "1920px",
+				"height": "780px"
+			});
+			
+			var userDefinedControl_2 = new udc.footer();
+			container.addChild(userDefinedControl_2, {
+				"top": "990px",
+				"left": "0px",
+				"width": "1920px",
+				"height": "100px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
 			}
+			// Linking
+			linker.userDefinedControl_1.embe = linker.embeddedApp_1;
 		}
 	});
 	app.title = "index";

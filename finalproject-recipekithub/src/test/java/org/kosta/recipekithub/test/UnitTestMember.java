@@ -116,7 +116,7 @@ public class UnitTestMember {
 	
 	@Test
 	public void checkDuplicateNick() {
-		String memberNick = "kdj";
+		String memberNick = "kdjkdj";
 		int result = memberService.checkDuplicateNick(memberNick);
 		Assertions.assertEquals(1, result);	// 중복되는 닉네임이 있으면 1, 없으면 0
 	}
@@ -141,4 +141,9 @@ public class UnitTestMember {
 		Assertions.assertNotNull(memberPassword);
 	}
 	
+	@Test 
+	public void insertProfileImg() {
+		String memberEmail = "";
+		int result = memberService.insertProfileImg(memberEmail);
+	}
 }

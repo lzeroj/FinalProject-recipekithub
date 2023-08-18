@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-7258442e" version="1.0.4640">
   <head std:sid="head-8bedb934">
-    <screen std:sid="screen-616183e4" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="558" customWidth="709" active="true"/>
-    <screen std:sid="screen-3bb9b4d4" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
-    <screen std:sid="screen-e1bf5713" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <screen std:sid="screen-e502ef0c" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="791" customWidth="709" active="true"/>
+    <screen std:sid="screen-5a85695a" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-a3f1c675" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <cl:model std:sid="model-c7bc4986">
       <cl:dataset std:sid="d-set-86a674c6" id="mealkitLikeList">
         <cl:datacolumnlist>
@@ -29,7 +29,7 @@
   </head>
   <body std:sid="body-937475a3">
     <cl:listener std:sid="listener-412c039b" name="load" handler="onBodyLoad"/>
-    <cl:group std:sid="group-52fa2123">
+    <cl:group std:sid="group-52fa2123" style="background-color:#FFFFFF;">
       <cl:xylayoutdata std:sid="xyl-data-c266cfb2" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="밀키트찜 목록">
         <cl:xylayoutdata std:sid="xyl-data-da28a6e7" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
