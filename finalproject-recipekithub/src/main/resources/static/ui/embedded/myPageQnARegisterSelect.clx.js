@@ -64,7 +64,6 @@
 			//	container.updateConstraint(container1, {
 			//		
 			//	});
-			//	
 				container1.style.css({
 					"height": "1200px",
 					"bottom": "100px",
@@ -124,6 +123,9 @@
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container("grp1");
+			group_1.style.css({
+				"background-color" : "#FFFFFF"
+			});
 			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
 			group_1.setLayout(verticalLayout_2);
 			(function(container){

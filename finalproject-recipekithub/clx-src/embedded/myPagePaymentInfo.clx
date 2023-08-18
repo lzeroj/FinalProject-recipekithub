@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-f5e46deb" version="1.0.4584">
   <head std:sid="head-45318b01">
-    <screen std:sid="screen-d3ff52ce" id="myPageEm" name="myPageEm" width="640px" height="628px" useCustomWidth="true" useCustomHeight="true" customHeight="558" customWidth="709" active="true"/>
+    <screen std:sid="screen-c641fd66" id="myPageEm" name="myPageEm" width="640px" height="628px" useCustomWidth="true" useCustomHeight="true" customHeight="791" customWidth="709" active="true"/>
     <cl:model std:sid="model-698e7dee">
       <cl:dataset std:sid="d-set-bd880420" id="myPaymentList">
         <cl:datacolumnlist>
@@ -37,7 +37,7 @@
     <cl:group std:sid="group-ae1d04e7" style="background-color:#ebeae8;">
       <cl:xylayoutdata std:sid="xyl-data-c3e8ad3c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:group comment="날짜 검색, 물품검색" std:sid="group-b15a1e0c" style="background-color:#FFFFFF;">
-        <cl:xylayoutdata std:sid="xyl-data-b7fc2c17" top="0px" right="0px" left="0px" height="398px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-b7fc2c17" top="0px" right="0px" left="0px" height="630px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="구매 내역">
           <cl:formdata std:sid="f-data-351106fa" row="0" col="0" rowspan="1" colspan="4"/>
         </cl:output>
@@ -75,10 +75,10 @@
           <cl:gridcolumn std:sid="g-column-a3e28c95"/>
           <cl:gridheader std:sid="gh-band-6cd212db">
             <cl:gridrow std:sid="g-row-71bea12e"/>
-            <cl:gridcell std:sid="gh-cell-12efc04f" rowindex="0" colindex="0" sortable="false" filterable="false"/>
-            <cl:gridcell std:sid="gh-cell-0c2ecefa" rowindex="0" colindex="1" sortable="false" filterable="false" text="주문 목록"/>
-            <cl:gridcell std:sid="gh-cell-08e06b21" rowindex="0" colindex="2" targetcolumnname="paymentDate" sortable="false" filterable="false" text="주문 날짜"/>
-            <cl:gridcell std:sid="gh-cell-20018625" rowindex="0" colindex="3" targetcolumnname="paymentTotal" sortable="false" filterable="false" text="총 가격"/>
+            <cl:gridcell std:sid="gh-cell-12efc04f" rowindex="0" colindex="0" style="background-color:#90be70; color:#FFFFFF;" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-0c2ecefa" rowindex="0" colindex="1" style="background-color:#90be70; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false" text="주문 목록"/>
+            <cl:gridcell std:sid="gh-cell-08e06b21" rowindex="0" colindex="2" style="background-color:#90be70; color:#FFFFFF; font-weight:bold;" targetcolumnname="paymentDate" sortable="false" filterable="false" text="주문 날짜"/>
+            <cl:gridcell std:sid="gh-cell-20018625" rowindex="0" colindex="3" style="background-color:#90be70; color:#FFFFFF; font-weight:bold;" targetcolumnname="paymentTotal" sortable="false" filterable="false" text="총 가격"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-e563b250">
             <cl:gridrow std:sid="g-row-8cb67276"/>
@@ -97,7 +97,7 @@
           <cl:rows length="5" unit="PIXEL"/>
           <cl:rows length="30" unit="PIXEL"/>
           <cl:rows length="5" unit="PIXEL"/>
-          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
           <cl:columns length="130" unit="PIXEL"/>
           <cl:columns length="1" unit="FRACTION"/>
           <cl:columns length="100" unit="PIXEL"/>
