@@ -1037,7 +1037,7 @@
 						"colIndex": 0,
 						"rowIndex": 0
 					});
-					var navigationBar_1 = new cpr.controls.NavigationBar("navbar");
+					var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
 					navigationBar_1.menuType = "fullmenu";
 					navigationBar_1.expandTrigger = "click";
 					navigationBar_1.style.setClasses(["indexnav"]);
