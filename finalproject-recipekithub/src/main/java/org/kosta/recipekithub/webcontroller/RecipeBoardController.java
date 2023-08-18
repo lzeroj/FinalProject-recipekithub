@@ -43,8 +43,8 @@ public class RecipeBoardController {
 	public View recipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
 		return new UIView("ui/recipe/recipe.clx");
-	}
-
+	}    
+ 
 	@RequestMapping("/findRecipeBoardList")
 	public View findRecipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
@@ -53,25 +53,25 @@ public class RecipeBoardController {
 		System.out.println(pageNo);    
 		Pagination pagination = null;
 		long totalPostCount = recipeBoardService.findTotalPostCount();
-		if (pageNo == null) {
+		if(pageNo==null) {
 			pagination = new Pagination(totalPostCount);
-		} else {
-			pagination = new Pagination(totalPostCount, Long.parseLong(pageNo));
+		}else {
+			pagination = new Pagination(totalPostCount,Long.parseLong(pageNo));
 		}
+		 
 		List<RecipeBoardVO> list = recipeBoardService.findAllRecipeBoard(pagination);
-		
+
 		List<Long> likeCounts = new ArrayList<>();
 		for(RecipeBoardVO vo : list) {
 			long likeCount = recipeBoardService.likeCount(vo.getRecipeBoardId());
 			likeCounts.add(likeCount);
 		}
 		dataRequest.setResponse("likeCounts", likeCounts);
-		 
 		dataRequest.setResponse("recipe_board", list); 
 		dataRequest.setResponse("pagination", pagination);
 		dataRequest.setResponse("totalPostCount", totalPostCount);
 		return new JSONDataView();
-	}
+	}		 
 
 	@RequestMapping("/insertRecipe")
 	public View insertRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)

@@ -3,11 +3,12 @@
 <mapper
 	namespace="org.kosta.recipekithub.model.mapper.RecipeCommentMapper">
 	
-		<resultMap type="org.kosta.recipekithub.model.vo.RecipeCommentVO" id="memberNick">
+		<resultMap type="org.kosta.recipekithub.model.vo.RecipeCommentVO" id="member">
 		<result column="member_nick" property="memberVO.memberNick"></result>
+		<result column="member_email" property="memberVO.memberEmail"></result>
 		</resultMap>
-	<select id="findCommentListByRecipeId" resultMap="memberNick">
-		select r.recipe_comment_id, r.recipe_comment_content, m.member_nick, r.recipe_comment_date, r.recipe_comment_edit_date
+	<select id="findCommentListByRecipeId" parameterType="long" resultMap="member">
+		select r.recipe_comment_id, r.recipe_comment_content, r.member_email, m.member_nick, r.recipe_comment_date, r.recipe_comment_edit_date
 		from recipe_comment r
 		inner join member m ON r.member_email = m.member_email
 		where r.recipe_board_id = #{value}
@@ -16,4 +17,10 @@
 	<delete id="deleteRecipeCommentByCommentId" parameterType="org.kosta.recipekithub.model.vo.RecipeCommentVO">
 		delete from recipe_comment where recipe_comment_id = #{value}
 	</delete>
+	<insert id="insertRecipeComment" parameterType="org.kosta.recipekithub.model.vo.RecipeCommentVO">
+		insert into recipe_comment values(recipe_comment_id_seq.nextval,#{recipeBoardId},#{memberEmail},#{commentContent},sysdate,null)
+	</insert>
+	<select id="findCountCommentByRecipeId" parameterType="org.kosta.recipekithub.model.vo.RecipeCommentVO">
+		select count(*) from recipe_comment where recipe_board_id=#{value}
+	</select>
 </mapper>

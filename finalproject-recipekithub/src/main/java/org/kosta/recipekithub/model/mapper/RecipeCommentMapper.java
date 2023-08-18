@@ -12,4 +12,8 @@ public interface RecipeCommentMapper {
 
 	int deleteRecipeCommentByCommentId(long recipeCommentId);
 
+	int insertRecipeComment(long recipeBoardId, String memberEmail, String commentContent);
+
+	long findCountCommentByRecipeId(long recipeBoardId);
+
 }
