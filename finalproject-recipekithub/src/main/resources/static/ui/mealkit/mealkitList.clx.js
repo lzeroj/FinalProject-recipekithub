@@ -24,6 +24,13 @@
 			 */
 			function onBodyLoad(e){
 				var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
+				var email = cpr.core.Platform.INSTANCE.getParameter("member");
+				console.log("email = " + email);
+				if(email !== "guest"){
+					var button = app.lookup("insertBtn");
+					button.visible = true;
+					button.redraw();
+				}
 				var cnt = app.lookup("mealkitCnt");
 				cnt.value = mealkitList.length;
 				console.log("mealkitList = " + mealkitList);
@@ -46,6 +53,15 @@
 						});
 					})(i);
 				}
+			}
+
+			/*
+			 * "밀키트 등록" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick2(e){
+				var button = e.control;
+				window.location.href='/insertMealkitForm';
 			};
 			// End - User Script
 			
@@ -166,7 +182,7 @@
 						"font-weight" : "bold"
 					});
 					container.addChild(output_1, {
-						"top": "40px",
+						"top": "30px",
 						"left": "45px",
 						"width": "18px",
 						"height": "20px"
@@ -178,7 +194,7 @@
 						"background-image" : "none"
 					});
 					container.addChild(button_1, {
-						"top": "50px",
+						"top": "34px",
 						"left": "652px",
 						"width": "100px",
 						"height": "30px"
@@ -189,7 +205,7 @@
 						"background-color" : "white"
 					});
 					container.addChild(button_2, {
-						"top": "50px",
+						"top": "35px",
 						"left": "762px",
 						"width": "100px",
 						"height": "30px"
@@ -200,7 +216,7 @@
 						"background-color" : "white"
 					});
 					container.addChild(button_3, {
-						"top": "50px",
+						"top": "35px",
 						"left": "872px",
 						"width": "100px",
 						"height": "30px"
@@ -211,7 +227,7 @@
 						"font-weight" : "bold"
 					});
 					container.addChild(output_2, {
-						"top": "40px",
+						"top": "30px",
 						"left": "110px",
 						"width": "247px",
 						"height": "20px"
@@ -225,16 +241,16 @@
 						"text-align" : "center"
 					});
 					container.addChild(output_3, {
-						"top": "30px",
+						"top": "20px",
 						"left": "62px",
 						"width": "49px",
 						"height": "39px"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "177px",
+					"top": "176px",
 					"width": "984px",
-					"height": "90px",
+					"height": "70px",
 					"left": "calc(50% - 492px)"
 				});
 				var group_3 = new cpr.controls.Container();
@@ -258,7 +274,7 @@
 				var xYLayout_5 = new cpr.controls.layouts.XYLayout();
 				group_4.setLayout(xYLayout_5);
 				container.addChild(group_4, {
-					"top": "277px",
+					"top": "256px",
 					"width": "974px",
 					"height": "33px",
 					"left": "calc(50% - 487px)"
@@ -276,9 +292,9 @@
 				flowLayout_1.scrollable = false;
 				group_5.setLayout(flowLayout_1);
 				container.addChild(group_5, {
-					"top": "320px",
+					"top": "343px",
 					"width": "968px",
-					"height": "742px",
+					"height": "717px",
 					"left": "calc(50% - 484px)"
 				});
 				var group_6 = new cpr.controls.Container();
@@ -294,12 +310,32 @@
 					"height": "22px",
 					"left": "calc(50% - 487px)"
 				});
+				var button_5 = new cpr.controls.Button("insertBtn");
+				button_5.visible = false;
+				button_5.value = "밀키트 등록";
+				button_5.style.setClasses([".cl-button", "mealkitbtn"]);
+				button_5.style.css({
+					"background-color" : "#0ca44e",
+					"color" : "white",
+					"font-weight" : "16",
+					"font-family" : "푸른전남 Medium",
+					"background-image" : "none"
+				});
+				if(typeof onButtonClick2 == "function") {
+					button_5.addEventListener("click", onButtonClick2);
+				}
+				container.addChild(button_5, {
+					"top": "299px",
+					"right": "20px",
+					"width": "104px",
+					"height": "34px"
+				});
 			})(group_1);
 			container.addChild(group_1, {
 				"top": "20px",
-				"right": "0px",
 				"bottom": "-557px",
-				"left": "20px"
+				"width": "1004px",
+				"left": "calc(50% - 502px)"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

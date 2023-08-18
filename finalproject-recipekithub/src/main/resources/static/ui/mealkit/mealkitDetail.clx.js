@@ -35,13 +35,22 @@
 				var mealkitHits = cpr.core.Platform.INSTANCE.getParameter("mealkitHits");
 				var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 				var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
+				
+				var commentListMap = app.lookup("commentList");
+				commentListMap.setValue("mealkitNo", mealkitNo);
+				app.lookup("commentListSub").send();
+				
+
+				console.log("mealkitMember, sessionMember = " + mealkitMember + ", " +sessionMember);
 
 				if(mealkitMember === sessionMember){
 					var deletebtn = app.lookup("deleBtn");
 					var updatebtn = app.lookup("updateBtn");
 					deletebtn.visible = true;
 					updatebtn.visible = true;
-			}
+				}
+				
+				
 				
 				/* 세션이 들어오면 Open
 				var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");//게시물 작성자이메일
@@ -98,6 +107,8 @@
 				// 현준
 				app.lookup("submealkitlike").send();
 				
+				
+				
 				//var submission = app.lookup("mealkitSub");
 				//submission.send();
 					
@@ -151,7 +162,12 @@
 				var updateBtn = e.control;
 				var mealkit = app.lookup("mealkit");
 				var value = mealkit.getValue("mealkitNo");
-				window.location.href="/updateMealkitForm/"+value;
+				
+				if(confirm("수정하시겠습니까?")){
+					var httpPostMethod = new cpr.protocols.HttpPostMethod("/updateMealkitForm/"+value);
+					httpPostMethod.submit();	
+				}
+
 			}
 
 			/*
@@ -166,10 +182,12 @@
 				var sessionMember = mealkit.getValue("sessionMember");
 				var mealkitMember = mealkit.getValue("mealkitMember");
 				
-				//if(sessionMember === mealkitMember){
-				//var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-				//HttpPostMethod.submit();
-				//}
+				if(confirm("삭제하시겠습니까?")){
+					if(sessionMember === mealkitMember){
+						var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+						HttpPostMethod.submit();
+					}
+				}
 			}
 
 			/*
@@ -238,6 +256,67 @@
 					return;
 				}
 				alert("상품이 추가되었습니다");
+			}
+
+			/*
+			 * "등록" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick5(e){
+				var button = e.control;
+				var comment = app.lookup("comment").value;
+				var dataMap = app.lookup("mealkit");
+				var mealkitNo = dataMap.getValue("mealkitNo");
+				var commentMap = app.lookup("commentMap");
+				commentMap.setValue("comment", comment);
+				commentMap.setValue("mealkitNo", mealkitNo);
+				
+				app.lookup("commentSub").send();
+				
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onCommentSubSubmitSuccess(e){
+				var commentSub = e.control;
+				var commentMap = app.lookup("commentReturn");
+				var memberMap = app.lookup("memberReturn");
+				var mealkitMap = app.lookup("mealkitReturn");
+				//commentMap.
+			}
+
+			/*
+			 * 서브미션에서 receive 이벤트 발생 시 호출.
+			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+			 */
+			function onCommentListSubReceive(e){
+				var commentListSub = e.control;
+				var xhr = commentListSub.xhr;
+				var jsonData = JSON.parse(xhr.responseText);
+				var mealkitCommentList = jsonData.commentListSub;
+				var container = app.lookup("commentgrp");
+				for(var i =0; i<commentListSub.length; i++){
+					(function(index){
+						//udc 동적 생성
+						var mealkitComment = new udc.mealkitComment();
+						//udc에서 출판한 이미지 경로 앱 속성 지정
+						mealkitComment.nick = commentListSub[i].memberVO.memberNick;
+						mealkitComment.regDate = commentListSub[i].mealkitCommentDate;
+						mealkitComment.content = commentListSub[i].commentContent;
+						container.addChild(mealkitComment, {
+							height: "120px",
+							width: "100px",
+							autoSize: "both"
+							
+						});
+						mealkitComment.addEventListener("deleteClick", function(e){
+							app.lookup("commentId").setValue("mealkitCommentId", commentListSub[index].mealkitCommentId);
+							app.lookup("deleteComment").send();
+						});
+					});
+				}
 			};
 			// End - User Script
 			
@@ -283,6 +362,62 @@
 				dataMap_1.addEventListener("update", onMealkitUpdate);
 			}
 			app.register(dataMap_1);
+			
+			var dataMap_2 = new cpr.data.DataMap("commentMap");
+			dataMap_2.parseData({
+				"columns" : [
+					{"name": "comment"},
+					{
+						"name": "mealkitNo",
+						"dataType": "string"
+					}
+				]
+			});
+			app.register(dataMap_2);
+			
+			var dataMap_3 = new cpr.data.DataMap("commentReturn");
+			dataMap_3.parseData({
+				"columns" : [
+					{
+						"name": "commentId",
+						"dataType": "number"
+					},
+					{"name": "commentContent"},
+					{"name": "commentRegDate"},
+					{"name": "commentEditDate"}
+				]
+			});
+			app.register(dataMap_3);
+			
+			var dataMap_4 = new cpr.data.DataMap("memberReturn");
+			dataMap_4.parseData({
+				"columns" : [{"name": "memberEmail"}]
+			});
+			app.register(dataMap_4);
+			
+			var dataMap_5 = new cpr.data.DataMap("mealkitReturn");
+			dataMap_5.parseData({
+				"columns" : [{
+					"name": "mealkitNo",
+					"dataType": "number"
+				}]
+			});
+			app.register(dataMap_5);
+			
+			var dataMap_6 = new cpr.data.DataMap("commentList");
+			dataMap_6.parseData({
+				"columns" : [{"name": "mealkitNo"}]
+			});
+			app.register(dataMap_6);
+			
+			var dataMap_7 = new cpr.data.DataMap("commentId");
+			dataMap_7.parseData({
+				"columns" : [{
+					"name": "mealkitCommentId",
+					"dataType": "number"
+				}]
+			});
+			app.register(dataMap_7);
 			var submission_1 = new cpr.protocols.Submission("submealkitlike");
 			submission_1.action = "/showLike";
 			submission_1.mediaType = "application/x-www-form-urlencoded;simple";
@@ -300,6 +435,29 @@
 				submission_2.addEventListener("submit-success", onSubclicklikeSubmitSuccess);
 			}
 			app.register(submission_2);
+			
+			var submission_3 = new cpr.protocols.Submission("commentSub");
+			submission_3.action = "/insertComment";
+			submission_3.addRequestData(dataMap_2);
+			submission_3.addResponseData(dataMap_3, false);
+			submission_3.addResponseData(dataMap_4, false);
+			submission_3.addResponseData(dataMap_4, false);
+			if(typeof onCommentSubSubmitSuccess == "function") {
+				submission_3.addEventListener("submit-success", onCommentSubSubmitSuccess);
+			}
+			app.register(submission_3);
+			
+			var submission_4 = new cpr.protocols.Submission("commentListSub");
+			submission_4.action = "/commentList";
+			submission_4.addRequestData(dataMap_6);
+			if(typeof onCommentListSubReceive == "function") {
+				submission_4.addEventListener("receive", onCommentListSubReceive);
+			}
+			app.register(submission_4);
+			
+			var submission_5 = new cpr.protocols.Submission("deleteComment");
+			submission_5.addRequestData(dataMap_7);
+			app.register(submission_5);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -668,87 +826,25 @@
 					"width": "956px",
 					"height": "594px"
 				});
-				var output_16 = new cpr.controls.Output();
-				output_16.value = "댓글";
-				container.addChild(output_16, {
-					"top": "1271px",
-					"right": "917px",
-					"left": "15px",
-					"height": "27px"
-				});
-				var output_17 = new cpr.controls.Output();
-				output_17.value = "댓글개수";
-				container.addChild(output_17, {
-					"top": "1271px",
-					"right": "839px",
-					"left": "66px",
-					"height": "27px"
-				});
-				var group_10 = new cpr.controls.Container();
-				var xYLayout_11 = new cpr.controls.layouts.XYLayout();
-				group_10.setLayout(xYLayout_11);
-				container.addChild(group_10, {
-					"top": "1308px",
-					"left": "15px",
-					"width": "960px",
-					"height": "170px"
-				});
-				var group_11 = new cpr.controls.Container();
-				var formLayout_1 = new cpr.controls.layouts.FormLayout();
-				formLayout_1.scrollable = false;
-				formLayout_1.topMargin = "3px";
-				formLayout_1.rightMargin = "3px";
-				formLayout_1.bottomMargin = "3px";
-				formLayout_1.leftMargin = "3px";
-				formLayout_1.horizontalSpacing = "10px";
-				formLayout_1.verticalSpacing = "10px";
-				formLayout_1.setColumns(["1fr", "100px"]);
-				formLayout_1.setRows(["1fr"]);
-				group_11.setLayout(formLayout_1);
-				(function(container){
-					var button_4 = new cpr.controls.Button();
-					button_4.value = "등록";
-					button_4.style.css({
-						"background-color" : "#0ca44e",
-						"color" : "white",
-						"font-size" : "16px",
-						"background-image" : "none"
-					});
-					container.addChild(button_4, {
-						"colIndex": 1,
-						"rowIndex": 0,
-						"colSpan": 1,
-						"rowSpan": 1
-					});
-					var inputBox_1 = new cpr.controls.InputBox("ipb1");
-					container.addChild(inputBox_1, {
-						"colIndex": 0,
-						"rowIndex": 0
-					});
-				})(group_11);
-				container.addChild(group_11, {
-					"top": "1169px",
-					"left": "14px",
-					"width": "962px",
-					"height": "92px"
-				});
-				var button_5 = new cpr.controls.Button("updateBtn");
-				button_5.value = "수정";
+				var button_4 = new cpr.controls.Button("updateBtn");
+				button_4.visible = false;
+				button_4.value = "수정";
 				if(typeof onUpdateBtnClick == "function") {
-					button_5.addEventListener("click", onUpdateBtnClick);
+					button_4.addEventListener("click", onUpdateBtnClick);
 				}
-				container.addChild(button_5, {
+				container.addChild(button_4, {
 					"top": "12px",
 					"left": "627px",
 					"width": "100px",
 					"height": "20px"
 				});
-				var button_6 = new cpr.controls.Button();
-				button_6.value = "삭제";
+				var button_5 = new cpr.controls.Button("deleBtn");
+				button_5.visible = false;
+				button_5.value = "삭제";
 				if(typeof onButtonClick3 == "function") {
-					button_6.addEventListener("click", onButtonClick3);
+					button_5.addEventListener("click", onButtonClick3);
 				}
-				container.addChild(button_6, {
+				container.addChild(button_5, {
 					"top": "11px",
 					"left": "740px",
 					"width": "100px",
@@ -777,9 +873,83 @@
 			})(group_1);
 			container.addChild(group_1, {
 				"top": "20px",
-				"width": "984px",
-				"height": "1547px",
-				"left": "calc(50% - 492px)"
+				"width": "988px",
+				"height": "1252px",
+				"left": "calc(50% - 494px)"
+			});
+			
+			var group_10 = new cpr.controls.Container("commentgrp");
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			group_10.setLayout(verticalLayout_1);
+			container.addChild(group_10, {
+				"top": "1434px",
+				"left": "29px",
+				"width": "960px",
+				"height": "170px"
+			});
+			
+			var output_16 = new cpr.controls.Output();
+			output_16.value = "댓글";
+			container.addChild(output_16, {
+				"top": "1409px",
+				"right": "966px",
+				"left": "29px",
+				"height": "27px"
+			});
+			
+			var output_17 = new cpr.controls.Output();
+			output_17.value = "댓글개수";
+			container.addChild(output_17, {
+				"top": "1409px",
+				"right": "911px",
+				"left": "57px",
+				"height": "27px"
+			});
+			
+			var group_11 = new cpr.controls.Container();
+			var formLayout_1 = new cpr.controls.layouts.FormLayout();
+			formLayout_1.scrollable = false;
+			formLayout_1.topMargin = "3px";
+			formLayout_1.rightMargin = "3px";
+			formLayout_1.bottomMargin = "3px";
+			formLayout_1.leftMargin = "3px";
+			formLayout_1.horizontalSpacing = "10px";
+			formLayout_1.verticalSpacing = "10px";
+			formLayout_1.setColumns(["1fr", "100px"]);
+			formLayout_1.setRows(["1fr"]);
+			group_11.setLayout(formLayout_1);
+			(function(container){
+				var button_6 = new cpr.controls.Button();
+				button_6.value = "등록";
+				button_6.style.css({
+					"background-color" : "#0ca44e",
+					"color" : "white",
+					"font-size" : "16px",
+					"background-image" : "none"
+				});
+				if(typeof onButtonClick5 == "function") {
+					button_6.addEventListener("click", onButtonClick5);
+				}
+				container.addChild(button_6, {
+					"colIndex": 1,
+					"rowIndex": 0,
+					"colSpan": 1,
+					"rowSpan": 1
+				});
+				var inputBox_1 = new cpr.controls.InputBox("comment");
+				if(typeof onIpb1ValueChange == "function") {
+					inputBox_1.addEventListener("value-change", onIpb1ValueChange);
+				}
+				container.addChild(inputBox_1, {
+					"colIndex": 0,
+					"rowIndex": 0
+				});
+			})(group_11);
+			container.addChild(group_11, {
+				"top": "1281px",
+				"left": "29px",
+				"width": "960px",
+				"height": "92px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

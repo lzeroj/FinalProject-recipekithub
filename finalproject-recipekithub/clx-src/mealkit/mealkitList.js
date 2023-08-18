@@ -11,6 +11,13 @@
  */
 function onBodyLoad(e){
 	var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
+	var email = cpr.core.Platform.INSTANCE.getParameter("member");
+	console.log("email = " + email);
+	if(email !== "guest"){
+		var button = app.lookup("insertBtn");
+		button.visible = true;
+		button.redraw();
+	}
 	var cnt = app.lookup("mealkitCnt");
 	cnt.value = mealkitList.length;
 	console.log("mealkitList = " + mealkitList);
@@ -33,4 +40,13 @@ function onBodyLoad(e){
 			});
 		})(i);
 	}
+}
+
+/*
+ * "밀키트 등록" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick2(e){
+	var button = e.control;
+	window.location.href='/insertMealkitForm';
 }

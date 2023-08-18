@@ -8,8 +8,19 @@
 	var app = new cpr.core.App("index", { 
 		onPrepare: function(loader) {
 			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/controls/checkbox.part.css");
+			loader.addCSS("theme/controls/combo-box.part.css");
+			loader.addCSS("theme/controls/common.part.css");
 			loader.addCSS("theme/controls/htmlobject.css");
+			loader.addCSS("theme/controls/menu.part.css");
+			loader.addCSS("theme/controls/nav-bar.part.css");
+			loader.addCSS("theme/controls/searchinput.part.css");
+			loader.addCSS("theme/custom-settings.part.css");
 			loader.addCSS("theme/custom-theme.css");
+			loader.addCSS("theme/custom/member.part.css");
+			loader.addCSS("theme/custom/navigation.part.css");
+			loader.addCSS("theme/custom/search-box.part.css");
+			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -68,7 +79,7 @@
 			container.setLayout(xYLayout_1);
 			
 			// UI Configuration
-			var userDefinedControl_1 = linker.userDefinedControl_1 = new udc.header3();
+			var userDefinedControl_1 = new udc.header3();
 			container.addChild(userDefinedControl_1, {
 				"top": "0px",
 				"left": "0px",
@@ -86,7 +97,7 @@
 			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
 			group_1.setLayout(responsiveXYLayout_1);
 			(function(container){
-				var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+				var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
 				container.addChild(embeddedApp_1, {
 					positions: [
 						{
@@ -137,8 +148,6 @@
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
 			}
-			// Linking
-			linker.userDefinedControl_1.embe = linker.embeddedApp_1;
 		}
 	});
 	app.title = "index";

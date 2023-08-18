@@ -19,4 +19,6 @@ public interface MealkitMapper {
 
 	void deleteMealkit(int mealkitNo);
 
+	void increaseMealkitHits(int mealkitNo);
+
 }

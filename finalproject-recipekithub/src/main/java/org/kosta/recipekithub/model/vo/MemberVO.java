@@ -37,6 +37,5 @@ public class MemberVO implements Serializable{
 	private String memberType;
 	private String memberStatus;
 	private String memberRegDate;
-	private String memberImage;
 	
 }

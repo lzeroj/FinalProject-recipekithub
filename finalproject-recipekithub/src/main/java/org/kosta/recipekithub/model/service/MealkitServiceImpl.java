@@ -1,6 +1,8 @@
 package org.kosta.recipekithub.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.kosta.recipekithub.model.mapper.MealkitMapper;
@@ -9,12 +11,16 @@ import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MealkitServiceImpl implements MealkitService {
 
 	private final MealkitMapper mealKitMapper;
+	private static Map<String, Long> checkHits = new HashMap<>();
+
 
 	@Override
 	public int insertMealKit(MealKitBoard mealKitBoard) {
@@ -49,6 +55,6 @@ public class MealkitServiceImpl implements MealkitService {
 		mealKitMapper.deleteMealkit(mealkitNo);
 		
 	}
-	
+
 
 }

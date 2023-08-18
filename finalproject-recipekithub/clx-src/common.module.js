@@ -5,7 +5,13 @@
  * @author KOSTA
  ************************************************/
 
-// 데이터 가져오기
+// 글로벌 출판 방법
+globals.testAlert = function(){
+	alert("글로벌 출판 방법");
+	
+}
+
+//// 데이터 가져오기
 //globals.getSessionStorage = // 데이터 가져오기
 //function getTimedSessionData(key) {
 //    var storedData = sessionStorage.getItem(key);
