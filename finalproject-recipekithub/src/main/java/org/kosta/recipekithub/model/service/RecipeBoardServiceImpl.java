@@ -37,4 +37,12 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	public long findTotalPostCount() {
 		return recipeBoardMapper.findTotalPostCount();
 	}
+	@Override
+	public long updateRecipeHits(long id) {
+		return recipeBoardMapper.updateRecipeHits(id);
+	}
+	@Override
+	public long likeCount(long recipeBoardId) {
+		return recipeBoardMapper.likeCount(recipeBoardId);
+	}
 }

@@ -18,5 +18,9 @@ public interface RecipeBoardService {
 	int deleteRecipe(long recipeBoardId);
 
 	long findTotalPostCount();
-	
+
+	long updateRecipeHits(long id);
+
+	long likeCount(long recipeBoardId);
+
 }

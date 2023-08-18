@@ -23,4 +23,10 @@ public interface MemberService {
 	int checkDuplicateEmail(String memberEmail);
 
 	int checkDuplicateNick(String memberNick);
+
+	String findEmailByNamePhoneBirthday(String memberName, String memberPhone, String memberBirthday);
+
+	String findPswdByEmailNamePhone(String memberEmail, String memberName, String memberPhone);
+
+	int insertProfileImg(String memberEmail);
 }

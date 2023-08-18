@@ -50,7 +50,7 @@
 			 */
 			function onFindBtnClick(e) {
 				var findBtn = e.control;
-				window.location.href = "member/find-info-form.clx";
+				window.location.href = "member/find-email-pswd.clx";
 			}
 
 			/*
@@ -58,11 +58,30 @@
 			 * 통신이 성공하면 발생합니다.
 			 */
 			function onSub_loginSubmitSuccess(e) {
+				// 현준
 				var sub_login = e.control;
+				var checkBox = app.lookup("cbx1");
+				var memberEmail = app.lookup("dm_login").getValue("member_email");
+				if(checkBox.checked){
+					localStorage.setItem("memberEmail", memberEmail);
+				}
+				setTimedSessionData("memsession", memberEmail,10);
 				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 				httpPostMethod.submit();
 			}
 
+			// 데이터 저장과 만료 시간 설정
+			function setTimedSessionData(key, value, expirationMinutes) {
+			    var currentTime = new Date().getTime();
+			    var expirationTime = currentTime + (expirationMinutes * 60 * 1000); // milliseconds
+
+			    var data = {
+			        value: value,
+			        expirationTime: expirationTime
+			    };
+
+			    sessionStorage.setItem(key, JSON.stringify(data));
+			}
 			/*
 			 * 서브미션에서 submit-error 이벤트 발생 시 호출.
 			 * 통신 중 문제가 생기면 발생합니다.
@@ -81,7 +100,21 @@
 				if (e.keyCode == cpr.events.KeyCode.ENTER) {
 					app.lookup("btnLogin").click();
 				}
-			};
+			}
+
+			/*
+			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+			 */
+			function onBodyLoad(e){
+				// 현준
+				var item = localStorage.getItem("memberEmail");
+				if(item == null || item == ''){
+					return;
+				}
+				app.lookup("emailInput").text = item;
+				app.lookup("pswdInput").focus();
+			}
 			// End - User Script
 			
 			// Header
@@ -219,8 +252,8 @@
 						group_4.setLayout(xYLayout_2);
 						container.addChild(group_4, {
 							"top": "20px",
-							"bottom": "398px",
 							"width": "356px",
+							"height": "209px",
 							"left": "calc(50% - 178px)"
 						});
 						var group_5 = new cpr.controls.Container();
@@ -281,10 +314,10 @@
 								});
 							})(group_6);
 							container.addChild(group_6, {
-								"top": "0px",
-								"right": "0px",
 								"bottom": "32px",
-								"left": "0px"
+								"width": "304px",
+								"height": "129px",
+								"left": "calc(50% - 152px)"
 							});
 							var checkBox_1 = new cpr.controls.CheckBox("cbx1");
 							checkBox_1.value = "";
@@ -294,10 +327,10 @@
 								"text-align" : "right"
 							});
 							container.addChild(checkBox_1, {
-								"top": "128px",
-								"right": "0px",
 								"bottom": "0px",
-								"left": "0px"
+								"width": "304px",
+								"height": "33px",
+								"left": "calc(50% - 152px)"
 							});
 						})(group_5);
 						container.addChild(group_5, {
@@ -390,10 +423,10 @@
 							});
 						})(group_7);
 						container.addChild(group_7, {
-							"top": "420px",
-							"right": "40px",
 							"bottom": "20px",
-							"left": "40px"
+							"width": "304px",
+							"height": "188px",
+							"left": "calc(50% - 152px)"
 						});
 					})(group_3);
 					container.addChild(group_3, {
@@ -473,6 +506,9 @@
 					}
 				]
 			});
+			if(typeof onBodyLoad == "function"){
+				app.addEventListener("load", onBodyLoad);
+			}
 		}
 	});
 	app.title = "login-form";

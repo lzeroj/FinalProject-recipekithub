@@ -21,22 +21,22 @@
       <cl:listener std:sid="listener-4edc53df" name="click" handler="onImgClick"/>
       <cl:xylayoutdata std:sid="xyl-data-f316db93" top="0px" left="0px" width="230px" height="150px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:img>
-    <cl:output std:sid="output-5df71c69" id="title" value="Output">
+    <cl:output std:sid="output-5df71c69" id="title" style="font-weight:bold;" value="Output">
       <cl:xylayoutdata std:sid="xyl-data-6eaf0822" top="150px" left="0px" width="230px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:output std:sid="output-5e4bbe61" id="nick" value="Output">
+    <cl:output std:sid="output-5e4bbe61" id="nick" style="color:#0CA44E;" value="Output">
       <cl:xylayoutdata std:sid="xyl-data-2ec42419" top="179px" left="0px" width="116px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:output std:sid="output-ec205da6" value="좋아요">
       <cl:xylayoutdata std:sid="xyl-data-f41cdada" top="205px" left="0px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:output std:sid="output-86c3e89b" id="like" value="Output">
+    <cl:output std:sid="output-86c3e89b" id="like" style="color:#0CA44E;" value="Output">
       <cl:xylayoutdata std:sid="xyl-data-aa3180d1" top="205px" left="49px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:output std:sid="output-4c9c7b47" value="조회수">
       <cl:xylayoutdata std:sid="xyl-data-0bf69b37" top="205px" left="100px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:output std:sid="output-d6d7c904" id="hits" value="Output">
+    <cl:output std:sid="output-d6d7c904" id="hits" style="color:#0CA44E;" value="Output">
       <cl:xylayoutdata std:sid="xyl-data-a8a84330" top="205px" left="149px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:xylayout std:sid="xylayout-5fa74859"/>

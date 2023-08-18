@@ -94,10 +94,10 @@
       <cl:xylayout std:sid="xylayout-ffe6ae24"/>
     </cl:group>
     <cl:group std:sid="group-b35ecae9" id="grp" style="background-color:#FFFFFF;">
-      <cl:xylayoutdata std:sid="xyl-data-a3cbc86b" top="350px" width="984px" height="680px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-a3cbc86b" top="350px" width="984px" height="730px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:flowlayout std:sid="f-layout-27a6850d"/>
     </cl:group>
-    <cl:pageindexer std:sid="p-indexer-bb5b5dab">
+    <cl:pageindexer std:sid="p-indexer-bb5b5dab" pagerowcount="12" viewpagecount="5">
       <cl:xylayoutdata std:sid="xyl-data-f80b8cd2" top="1090px" width="320px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
     </cl:pageindexer>
     <cl:xylayout std:sid="xylayout-aa7fcea9"/>

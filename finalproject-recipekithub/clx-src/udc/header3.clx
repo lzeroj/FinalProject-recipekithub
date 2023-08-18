@@ -9,13 +9,13 @@
     <cl:appspec/>
   </head>
   <body std:sid="body-ae9875e0" style="top:0px; left:0px; width:1920px; height:200px;">
-    <cl:group std:sid="group-8f018fbd">
+    <cl:group std:sid="group-8f018fbd" style="box-shadow:0 0 10px #333;">
       <cl:responsivexylayoutdata std:sid="rxyl-data-86effc39">
         <cl:xylayoutdata std:sid="sxyl-data-71e9ad10" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:group std:sid="group-5ee10563" id="grp1" style="background-color:#F4FAEC;" overscrollbehavior="none">
         <cl:formdata std:sid="f-data-51c2bc79" row="0" col="0"/>
-        <cl:img std:sid="image-f6641e00" id="headerLogo" src="../theme/images/common/headerLogo_1.png">
+        <cl:img std:sid="image-f6641e00" id="headerLogo" src="../theme/images/common/headerLogo3.png">
           <cl:listener std:sid="listener-d294b3b7" name="click" handler="onHeaderLogoClick"/>
           <cl:formdata std:sid="f-data-e13beb71" row="0" col="0" rowspan="1" colspan="1"/>
         </cl:img>
@@ -77,7 +77,7 @@
           <cl:columns length="420" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         </cl:formlayout>
       </cl:group>
-      <cl:navigationbar std:sid="n-bar-5ad827de" style="background-color:#90be70; color:#F4FAEC; font-weight:bolder; font-size:24px; font-family:푸른전남 Medium;" class="indexnav" menutype="fullmenu" expandtrigger="click">
+      <cl:navigationbar std:sid="n-bar-5ad827de" id="navbar" style="background-color:#90be70; box-shadow:5px 5px 10px; color:#F4FAEC; font-weight:bolder; font-size:24px; font-family:푸른전남 Medium;" class="indexnav" menutype="fullmenu" listarrowimage="" expandtrigger="click">
         <cl:listener std:sid="listener-d5b72761" name="item-click" handler="onNavigationBarItemClick"/>
         <cl:formdata std:sid="f-data-79c669b9" row="1" col="0"/>
         <cl:menuitem std:sid="m-item-27ee7474" label="추천" value="value1"/>

@@ -22,6 +22,11 @@ function onBodyLoad(e){
 	var mealkitHits = cpr.core.Platform.INSTANCE.getParameter("mealkitHits");
 	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 	var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
+	
+	var commentListMap = app.lookup("commentList");
+	commentListMap.setValue("mealkitNo", mealkitNo);
+	app.lookup("commentListSub").send();
+	
 
 	console.log("mealkitMember, sessionMember = " + mealkitMember + ", " +sessionMember);
 
@@ -266,5 +271,37 @@ function onCommentSubSubmitSuccess(e){
 	var commentMap = app.lookup("commentReturn");
 	var memberMap = app.lookup("memberReturn");
 	var mealkitMap = app.lookup("mealkitReturn");
-	commentMap.
+	//commentMap.
+}
+
+/*
+ * 서브미션에서 receive 이벤트 발생 시 호출.
+ * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+ */
+function onCommentListSubReceive(e){
+	var commentListSub = e.control;
+	var xhr = commentListSub.xhr;
+	var jsonData = JSON.parse(xhr.responseText);
+	var mealkitCommentList = jsonData.commentListSub;
+	var container = app.lookup("commentgrp");
+	for(var i =0; i<commentListSub.length; i++){
+		(function(index){
+			//udc 동적 생성
+			var mealkitComment = new udc.mealkitComment();
+			//udc에서 출판한 이미지 경로 앱 속성 지정
+			mealkitComment.nick = commentListSub[i].memberVO.memberNick;
+			mealkitComment.regDate = commentListSub[i].mealkitCommentDate;
+			mealkitComment.content = commentListSub[i].commentContent;
+			container.addChild(mealkitComment, {
+				height: "120px",
+				width: "100px",
+				autoSize: "both"
+				
+			});
+			mealkitComment.addEventListener("deleteClick", function(e){
+				app.lookup("commentId").setValue("mealkitCommentId", commentListSub[index].mealkitCommentId);
+				app.lookup("deleteComment").send();
+			});
+		});
+	}
 }

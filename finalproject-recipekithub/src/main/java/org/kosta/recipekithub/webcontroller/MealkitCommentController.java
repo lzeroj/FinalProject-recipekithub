@@ -64,12 +64,12 @@ public class MealkitCommentController {
 		return null;
 	}
 	
-	@GetMapping("/mealkitList")
+	@GetMapping("/commentList")
 	public View mealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		ParameterGroup param= dataRequest.getParameterGroup("mealkitNoMap");
 		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo"));
 		List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
-		
-		return null;
+		dataRequest.setResponse("commentListSub", list);
+		return new JSONDataView();
 	}
 }

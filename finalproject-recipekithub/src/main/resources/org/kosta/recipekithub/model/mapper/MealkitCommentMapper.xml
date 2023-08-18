@@ -41,12 +41,11 @@ select
 	update mealkit_comment set mealkit_comment_content = #{commentContent}, mealkit_comment_edit_date = sysdate where mealkit_comment_id =#{commentId}
 </update>
 
-<select id="findCommentListByMealkit" parameterType="int" resultMap="mealkitMap , memberMap">
-select c.mealkit_comment_id, m.mealkit_no ,b.member_email, b.member_nick, c.mealkit_comment_content,
+<select id="findCommentListByMealkit" parameterType="int" resultMap="memberMap">
+select c.mealkit_comment_id, b.member_email, b.member_nick, c.mealkit_comment_content,
 	to_char(c.mealkit_comment_date, 'yyyy-mm-dd hh24:mi') as mealkit_comment_date,
  	to_char(c.mealkit_comment_edit_date, 'yyyy-mm-dd hh24:mi') as mealkit_comment_edit_date
- 	from mealkit_comment c inner join mealkit_board m on c.mealkit_no = m.mealkit_no 
- 	inner join member b on c.member_email = b.member_email where m.mealkit_no = #{value}
+ 	from mealkit_comment c inner join member b on c.member_email = b.member_email where c.mealkit_no = #{value}
 </select>
 
 

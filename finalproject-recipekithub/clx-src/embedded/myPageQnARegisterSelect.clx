@@ -18,16 +18,12 @@
     <cl:listener std:sid="listener-01388302" name="load" handler="onBodyLoad"/>
     <cl:listener std:sid="listener-40f443f3" name="before-draw" handler="onBodyBeforeDraw"/>
     <cl:group std:sid="group-4fd6728f" id="grp1">
-      <cl:xylayoutdata std:sid="xyl-data-a4fd68fc" top="0px" right="0px" left="0px" height="608px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:verticaldata std:sid="v-data-d93a7f70" width="709px" height="608px" autosize="height"/>
       <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="Q &amp; A">
-        <cl:responsivexylayoutdata std:sid="rxyl-data-596cf056">
-          <cl:xylayoutdata std:sid="sxyl-data-4c0654eb" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="new-screen"/>
-        </cl:responsivexylayoutdata>
+        <cl:verticaldata std:sid="v-data-accb3108" width="709px" height="50px"/>
       </cl:output>
       <cl:group std:sid="group-050bca7e">
-        <cl:responsivexylayoutdata std:sid="rxyl-data-7a558d78">
-          <cl:xylayoutdata std:sid="sxyl-data-e46ff1ae" top="50px" right="0px" left="0px" height="558px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="new-screen"/>
-        </cl:responsivexylayoutdata>
+        <cl:verticaldata std:sid="v-data-7c2b1a2a" width="709px" height="558px"/>
         <cl:inputbox std:sid="i-box-38573462" id="ipb1" style="border-radius:10px;" readonly="true" placeholder="제목">
           <cl:xylayoutdata std:sid="xyl-data-ce51ed4f" top="20px" right="20px" left="20px" height="40px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         </cl:inputbox>
@@ -47,9 +43,9 @@
         </cl:button>
         <cl:xylayout std:sid="xylayout-f91232f8"/>
       </cl:group>
-      <cl:responsivexylayout std:sid="r-xylayout-c1a568b9"/>
+      <cl:verticallayout std:sid="v-layout-d9bea495"/>
     </cl:group>
-    <cl:xylayout std:sid="xylayout-61d72412"/>
+    <cl:verticallayout std:sid="v-layout-c1f48da9"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

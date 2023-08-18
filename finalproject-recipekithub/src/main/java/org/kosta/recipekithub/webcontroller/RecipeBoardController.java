@@ -2,13 +2,16 @@ package org.kosta.recipekithub.webcontroller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.RecipeBoardService;
 import org.kosta.recipekithub.model.vo.MemberVO;
@@ -16,6 +19,7 @@ import org.kosta.recipekithub.model.vo.Pagination;
 import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
@@ -26,9 +30,11 @@ import com.cleopatra.spring.JSONDataView;
 import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class RecipeBoardController {
 
 	private final RecipeBoardService recipeBoardService;
@@ -36,38 +42,50 @@ public class RecipeBoardController {
 	@RequestMapping("/recipeBoardList")
 	public View recipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		return  new UIView("ui/recipe/recipe.clx");
+		return new UIView("ui/recipe/recipe.clx");
 	}
-	
+
 	@RequestMapping("/findRecipeBoardList")
 	public View findRecipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		
 		ParameterGroup reqPage = dataRequest.getParameterGroup("dmPage");
-		String pageNo = reqPage.getValue("pageNo");
-		System.out.println(pageNo);
+		String pageNo = reqPage.getValue("pageNo"); 
+		System.out.println(pageNo);    
 		Pagination pagination = null;
 		long totalPostCount = recipeBoardService.findTotalPostCount();
-		if(pageNo==null) {
+		if (pageNo == null) {
 			pagination = new Pagination(totalPostCount);
-		}else {
-			pagination = new Pagination(totalPostCount,Long.parseLong(pageNo));
+		} else {
+			pagination = new Pagination(totalPostCount, Long.parseLong(pageNo));
 		}
 		List<RecipeBoardVO> list = recipeBoardService.findAllRecipeBoard(pagination);
-		long recipeCount = recipeBoardService.findTotalPostCount();
-		dataRequest.setResponse("recipe_board", list);
+		
+		List<Long> likeCounts = new ArrayList<>();
+		for(RecipeBoardVO vo : list) {
+			long likeCount = recipeBoardService.likeCount(vo.getRecipeBoardId());
+			likeCounts.add(likeCount);
+		}
+		dataRequest.setResponse("likeCounts", likeCounts);
+		 
+		dataRequest.setResponse("recipe_board", list); 
 		dataRequest.setResponse("pagination", pagination);
-		dataRequest.setResponse("recipeCount", recipeCount);	
-		return  new JSONDataView(); 
+		dataRequest.setResponse("totalPostCount", totalPostCount);
+		return new JSONDataView();
 	}
 
 	@RequestMapping("/insertRecipe")
 	public View insertRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("member") == null) {
+			log.debug("비인증");
+			return new UIView("/ui/index.clx");
+		}
+		
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipe");
 		String title = initParam.getValue("RECIPE_BOARD_TITLE");
 		String content = initParam.getValue("RECIPE_BOARD_CONTENT");
-		String type = initParam.getValue("CATEGORY_TYPE");
+		String type = initParam.getValue("CATEGORY_TYPE"); 
 		String ingredients = initParam.getValue("CATEGORY_INGREDIENTS");
 		String method = initParam.getValue("CATEGORY_METHOD");
 
@@ -75,14 +93,14 @@ public class RecipeBoardController {
 		UploadFile[] uploadFile = uploadFiles.get("image");
 		File orgName = uploadFile[0].getFile();
 		String saveName = uploadFile[0].getFileName();
-		//String savePath = "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
+		// String savePath =
+		// "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
 		String savePath = "C:\\upload\\recipe\\";
 		String uuid = UUID.randomUUID().toString();
 		FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-
+    
 		RecipeBoardVO recipeBoardVO = new RecipeBoardVO();
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberEmail("test@naver.com");
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		recipeBoardVO.setMemberVO(memberVO);
 		recipeBoardVO.setRecipeBoardTitle(title);
 		recipeBoardVO.setRecipeBoardContent(content);
@@ -112,8 +130,33 @@ public class RecipeBoardController {
 	@RequestMapping("/detailRecipe")
 	public View moveDetailRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		long id = Integer.parseInt(dataRequest.getParameter("recipeBoardId"));
+		long id = Long.parseLong(dataRequest.getParameter("recipeBoardId"));
 		RecipeBoardVO recipeBoardVO = recipeBoardService.findDetailRecipe(id);
+		
+		//조회수 중복방지 구현
+		Cookie reCookie = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null && cookies.length > 0) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("hitsRecipe")) {
+					reCookie = cookie;
+				}
+			}
+		}
+		if (reCookie != null) {
+			if (!reCookie.getValue().contains("[" + id + "]")) {
+				recipeBoardService.updateRecipeHits(id);
+				reCookie.setValue(reCookie.getValue() + "_[" + id + "]");
+				reCookie.setPath("/"); 
+				response.addCookie(reCookie);
+				}
+			} else {
+				recipeBoardService.updateRecipeHits(id);
+				Cookie newCookie = new Cookie("hitsRecipe", "[" + id + "]"); 
+				newCookie.setPath("/");
+				response.addCookie(newCookie);
+			}
+
 		Map<String, Object> initParam = new HashMap<String, Object>();
 		initParam.put("recipeBoardVO", recipeBoardVO);
 		return new UIView("ui/recipe/detailrecipe.clx", initParam);
@@ -128,23 +171,33 @@ public class RecipeBoardController {
 	 * //System.out.println(recipeBoardVO); dataRequest.setResponse("recipeBoard",
 	 * recipeBoardVO); return new JSONDataView(); }
 	 */
-	@RequestMapping("/updateRecipe")
+	@PostMapping("/updateRecipe")
 	public View moveUpdateRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		long recipeBoardId = Integer.parseInt(dataRequest.getParameter("recipeBoardId"));
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("member") == null) {
+			log.debug("비인증");
+			return new UIView("/ui/index.clx");
+		}
+		long recipeBoardId = Long.parseLong(dataRequest.getParameter("recipeBoardId"));   
 		RecipeBoardVO recipeBoardVO = recipeBoardService.findDetailRecipe(recipeBoardId);
 		String imagePath = recipeBoardVO.getRecipeBoardImage();
 		Map<String, Object> initParam = new HashMap<String, Object>();
 		initParam.put("recipeBoardVO", recipeBoardVO);
 		initParam.put("imagePath", imagePath);
 		initParam.put("recipeBoardId", recipeBoardId);
-		System.out.println(recipeBoardVO);
-		return new UIView("ui/recipe/updaterecipe.clx", initParam);
+		return new UIView("ui/recipe/updaterecipe.clx", initParam);   
 	}
 
 	@RequestMapping("/updateSaveRecipe")
 	public View updateRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("member") == null) {
+			log.debug("비인증");
+			return new UIView("/ui/index.clx");
+		}
+		
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipe");
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
 		String title = initParam.getValue("RECIPE_BOARD_TITLE");
@@ -152,8 +205,9 @@ public class RecipeBoardController {
 		String type = initParam.getValue("CATEGORY_TYPE");
 		String ingredients = initParam.getValue("CATEGORY_INGREDIENTS");
 		String method = initParam.getValue("CATEGORY_METHOD");
-		long recipeBoardId = Integer.parseInt(initParam.getValue("RECIPE_BOARD_ID"));
-		//String savePath = "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
+		long recipeBoardId = Long.parseLong(initParam.getValue("RECIPE_BOARD_ID"));
+		// String savePath =
+		// "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
 		String savePath = "C:\\upload\\recipe\\";
 		String recipeBoardImage = recipeBoardService.findDetailRecipe(recipeBoardId).getRecipeBoardImage();
 		RecipeBoardVO recipeBoardVO = new RecipeBoardVO();
@@ -163,7 +217,7 @@ public class RecipeBoardController {
 			if (recipeBoardImage != null) {
 				File existImageFile = new File(savePath + recipeBoardImage);
 				if (existImageFile.exists()) {
-					existImageFile.delete();
+					existImageFile.delete(); 
 				}
 			}
 			UploadFile[] uploadFile = uploadFiles.get("image");
@@ -173,7 +227,7 @@ public class RecipeBoardController {
 			FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
 			recipeBoardVO.setRecipeBoardImage(uuid + "_" + saveName);
 		}
-		recipeBoardVO.setRecipeBoardId(recipeBoardId);
+		recipeBoardVO.setRecipeBoardId(recipeBoardId);  
 		recipeBoardVO.setRecipeBoardTitle(title);
 		recipeBoardVO.setRecipeBoardContent(content);
 		recipeBoardVO.setCategoryType(type);
@@ -191,8 +245,13 @@ public class RecipeBoardController {
 	@RequestMapping("/deleteRecipe")
 	public View deleteRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("member") == null) {
+			log.debug("비인증");
+			return new UIView("/ui/index.clx");
+		}
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipeBoardId");
-		long recipeBoardId = Integer.parseInt(initParam.getValue("RECIPE_BOARD_ID"));
+		long recipeBoardId = Long.parseLong(initParam.getValue("RECIPE_BOARD_ID"));
 		String savePath = "C:\\upload\\recipe\\";
 		String recipeBoardImage = recipeBoardService.findDetailRecipe(recipeBoardId).getRecipeBoardImage();
 		File existImageFile = new File(savePath + recipeBoardImage);

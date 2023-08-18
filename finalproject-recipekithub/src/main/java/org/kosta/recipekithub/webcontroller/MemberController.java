@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.recipekithub.model.mapper.MemberMapper;
 import org.kosta.recipekithub.model.service.MemberService;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
@@ -102,15 +103,13 @@ public class MemberController {
 		String memberEmail = param.getValue("member_email");
 		int checkResult = memberService.checkDuplicateEmail(memberEmail);
 		Map<String,Object> message = new HashMap<>();
-		//String result = null;
+
 		if (checkResult == 0) {
-			message.put("checkResult", "ok");
-			//result = "ok";
-		} else {
-			message.put("checkResult", "fail");
-			//result = "fail";
+			message.put("ok", "이메일 사용 가능");
+		} else if (checkResult > 0){
+//		} else {
+			message.put("fail", "이메일 중복");
 		}
-		// request.setAttribute("responsebody", result);
 		dataRequest.setMetadata(true, message);
 
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
@@ -120,16 +119,19 @@ public class MemberController {
 	@RequestMapping("/checkNick")
 	@ResponseBody
 	public View checkNick(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-		ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
+		ParameterGroup param = dataRequest.getParameterGroup("dm_check_nick");
 		String memberNick = param.getValue("member_nick");
 		int checkResult = memberService.checkDuplicateNick(memberNick);
-		String result = null;
+		Map<String,Object> message = new HashMap<>();
+
 		if (checkResult == 0) {
-			result = "ok";
-		} else {
-			result = "fail";
+			message.put("ok", "닉네임 사용 가능");
+		} else if (checkResult > 0){
+//		} else {
+			message.put("fail", "닉네임 중복");
 		}
-		request.setAttribute("responsebody", result);
+		dataRequest.setMetadata(true, message);
+        //dataRequest.setResponse("test", "tomato");
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 	
@@ -210,6 +212,43 @@ public class MemberController {
 			// message.put("uri", "login/login");
 			// dataRequest.setMetadata(true, message);
 			
+			return new JSONDataView();
+		}
+		
+		
+		@RequestMapping("/findEmail")
+		public View findEmailByNamePhoneBirthday(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+			ParameterGroup param = dataRequest.getParameterGroup("dm_find_email");
+			String memberName = param.getValue("member_name");
+			String memberPhone = param.getValue("member_phone");
+			String memberBirthday = param.getValue("member_birthday");
+			String findEmailResult = memberService.findEmailByNamePhoneBirthday(memberName, memberPhone, memberBirthday);
+			
+			Map<String, String> email = new HashMap<>();
+			email.put("memberEmail", findEmailResult); 
+			
+			List<Map<String, String>> memberEmail = new ArrayList<>();
+			memberEmail.add(email);
+		    
+			dataRequest.setResponse("ds_member", memberEmail); 
+			return new JSONDataView();
+		}
+		
+		@RequestMapping("/findPassword")
+		public View findPswdByEmailNamePhone(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+			ParameterGroup param = dataRequest.getParameterGroup("dm_find_pswd");
+			String memberEmail = param.getValue("member_email");
+			String memberName = param.getValue("member_name");
+			String memberPhone = param.getValue("member_phone");
+			String findPswdResult = memberService.findPswdByEmailNamePhone(memberEmail, memberName, memberPhone);
+
+			Map<String, String> password = new HashMap<>();
+			password.put("memberPassword", findPswdResult); 
+			
+			List<Map<String, String>> memberPassword = new ArrayList<>();
+			memberPassword.add(password);
+			
+			dataRequest.setResponse("ds_member", memberPassword); 
 			return new JSONDataView();
 		}
 }
