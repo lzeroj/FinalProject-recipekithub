@@ -110,98 +110,148 @@
 			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
 			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
 			 */
-			function onIpbPassword1Keyup(e){
+			//---[ password1이 변경될 때마다 호출되어 비밀번호 유효성을 확인하고, password2와의 일치 여부를 갱신 ]---//
+			function onIpbPassword1Keyup(e) {
 				var ipbPassword1 = e.control;
-				var checkPswd1Flag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+				var checkPswd1Flag = false; 	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 				var password1 = app.lookup("ipbPassword1");
-				
+				var imgPswd1 = app.lookup("imgPswdChk1");
+				var checkPswdResult1 = app.lookup("opbCheckPassword");
 				var pswd1 = ipbPassword1.displayText;
 				var pswd1Value = String(pswd1);
+				// 회원가입시 사용가능한 비밀번호 정규식을 체크하는 변수 : 8-25자 사이, 숫자, 대소문자, 특수 문자 모두 포함
+				var regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W])[a-zA-Z\d\W]{8,25}$/;
 				
-				var checkPswdResult1 = app.lookup("opbCheckPassword");
-				
-				if (pswd1Value === "") {
-					checkPswdResult1.text = "";
-					app.lookup("imgPswdChk1").src = "";
-				} else if (pswd1Value.length < 2 || pswd1Value.length > 25) {
+				if (pswd1Value === "") { 																//---> 1. 비밀번호 입력칸이 빈칸인 경우
+					checkPswdResult1.style.css("color", "pink");
+					checkPswdResult1.value = "비밀번호를 입력해주세요.";
+					imgPswd1.src = "";
+				} else if (pswd1Value.length < 8 || pswd1Value.length > 25) { 		//---> 2. 비밀번호로 입력한 값이 30자를 초과한 경우
 					checkPswdResult1.style.css("color", "red");
-					checkPswdResult1.text = "비밀번호는 1자 이상 25자 이하이어야 합니다.";
-					app.lookup("imgPswdChk2").src = "../ui/theme/images/member/cross.png";
-				} else {
+					checkPswdResult1.value = "비밀번호는 8자 이상 25자 이하이어야 합니다.";
+					imgPswd1.src = "../ui/theme/images/member/cross.png";
+				} else if (regExp.test(pswd1Value) == false) { 							//---> 3. 입력한 값이 비밀번호 형식에 적합하지 않아 사용할 수 없는 경우
+					checkPswdResult1.style.css("color", "red");
+					checkPswdResult1.value = "비밀번호 형식을 확인해주시기 바랍니다.";
+					imgPswd1.src = "../ui/theme/images/member/cross.png";
+				} else if (pswd1Value.search(" ") != -1) { 										//---> 4. 입력한 비밀번호에 공백이 포함되어 사용할 수 없는 경우
+					checkPswdResult1.style.css("color", "red");
+					checkPswdResult1.value = "비밀번호는 공백을 포함할 수 없습니다.";
+					imgPswd1.src = "../ui/theme/images/member/cross.png";
+				} else if (/(.)\1\1/.test(pswd1Value)) { 										//---> 5. 입력한 비밀번호에 같은 문자가 연속하여 3번 이상 사용된 경우
+					checkPswdResult1.style.css("color", "red");
+					checkPswdResult1.value = "같은 문자를 연속하여 3번 사용할 수 없습니다.";
+					imgPswd1.src = "../ui/theme/images/member/cross.png";
+				} else { 																						//---> 6. 입력한 비밀번호가 사용 가능한 경우
+					checkPswd1Flag = true;
 					checkPswdResult1.style.css("color", "blue");
-					checkPswdResult1.text = "사용가능한 비밀번호입니다.";
-					app.lookup("imgPswdChk1").src = "../ui/theme/images/member/checked.png";
+					checkPswdResult1.value = "사용가능한 비밀번호입니다.";
+					imgPswd1.src = "../ui/theme/images/member/checked.png";
+				}
+				
+				// password1이 변경될 때마다 password2와의 일치 여부를 검사하여 password2의 확인 상태를 갱신
+				var ipbPassword2 = app.lookup("ipbPassword2");
+				var pswd2 = ipbPassword2.displayText;
+				var pswd2Value = String(pswd2);
+				var checkPswdResult2 = app.lookup("opbCheckPassword2");
+				
+				if (pswd2Value !== "") { // password2가 비어 있지 않을 경우에만 확인
+					if (pswd1Value !== pswd2Value) {
+						checkPswdResult2.style.css("color", "red");
+						checkPswdResult2.value = "위의 비밀번호와 일치하지 않습니다.";
+						app.lookup("imgPswdChk2").src = "../ui/theme/images/member/cross.png";
+					} else {
+						checkPswdResult2.style.css("color", "blue");
+						checkPswdResult2.value = "비밀번호가 일치합니다.";
+						app.lookup("imgPswdChk2").src = "../ui/theme/images/member/checked.png";
+					}
 				}
 			}
-
 
 			/*
 			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
 			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
 			 */
-			function onIpbPassword2Keyup(e){
+			//---[ password2가 변경될 때마다 호출되어 password1과의 일치 여부를 확인 ]---//
+			function onIpbPassword2Keyup(e) {
 				var ipbPassword2 = e.control;
 				var ipbPassword1 = app.lookup("ipbPassword1");
-				
+				var imgPswd2 = app.lookup("imgPswdChk2");
 				var pswd1 = ipbPassword1.displayText;
 				var pswd1Value = String(pswd1);
-				
 				var pswd2 = ipbPassword2.displayText;
 				var pswd2Value = String(pswd2);
-				
 				var checkPswdResult2 = app.lookup("opbCheckPassword2");
 				
 				if (pswd2Value === "") {
 					checkPswdResult2.text = "";
-					app.lookup("imgPswdChk2").src = "";
+					imgPswd2.src = "";
 				} else if (pswd1Value != pswd2Value) {
 					checkPswdResult2.style.css("color", "red");
 					checkPswdResult2.value = "위의 비밀번호와 일치하지 않습니다.";
-					app.lookup("imgPswdChk2").src = "../ui/theme/images/member/cross.png";
+					imgPswd2.src = "../ui/theme/images/member/cross.png";
 				} else if (pswd1Value === pswd2Value) {
 					checkPswdResult2.style.css("color", "blue");
 					checkPswdResult2.value = "비밀번호가 일치합니다.";
-					app.lookup("imgPswdChk2").src = "../ui/theme/images/member/checked.png";
+					imgPswd2.src = "../ui/theme/images/member/checked.png";
 				}
 			}
-
 
 			/*
 			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
 			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
 			 */
-			function onIpbNickKeyup(e){
+			function onIpbNickKeyup(e) {
 				var ipbNick = e.control;
-				var checkNickFlag = false; // 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
-
+				
+				var dataMap = app.lookup("dm_check_nick");
+				dataMap.setValue("member_nick", ipbNick.value);
+				
 				var subCheckNick = app.lookup("sub_check_nick");
+				subCheckNick.send();
+			}
 
-			    var dataMap = app.lookup("dm_check_nick");
-			    dataMap.setValue("member_nick", ipbNick.value);
-
-			    subCheckNick.send();
-
-			    subCheckNick.addEventListener('submit-success', function(response) {
-			        var metadataOk = subCheckNick.getMetadata("ok");
-			        var metadataFail = subCheckNick.getMetadata("fail");
-
-			        var checkNickResult = app.lookup("opbCheckNick");
-
-					var nick = ipbNick.displayText;
-					var nickValue = String(nick);
-
-			        if (nickValue.length < 2 || nickValue.length > 10) {
-			            checkNickResult.style.css("color", "red");
-			            checkNickResult.value = "닉네임은 1자이상 ~ 8자 이하이어야 합니다.";
-			        } else if (metadataFail) {
-			            checkNickResult.style.css("color", "red");
-			            checkNickResult.value = "닉네임이 중복됩니다.";
-			        } else if (metadataOk) {
-			        	checkNickFlag = true;
-			            checkNickResult.style.css("color", "blue");
-			            checkNickResult.value = "사용가능한 닉네임입니다.";
-			        }
-			    });
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			//---[ 닉네임이 변경될 때마다 호출되어 닉네임 유효성을 확인 ]---//
+			function onSub_check_nickSubmitSuccess(e) {
+				var sub_check_nick = e.control;
+				var checkNickFlag = false; 		// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+				
+				var metadataOk = sub_check_nick.getMetadata("ok"); 		// Controller측에서 닉네임 중복 여부를 체크하여 ok(사용 가능)인 경우
+				var metadataFail = sub_check_nick.getMetadata("fail"); 	// Controller측에서 닉네임 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우
+				
+				var ipbNick = app.lookup("ipbNick"); 										// 닉네임 입력 input-box
+				var opbCheckNickResult = app.lookup("opbCheckNick"); 		// 닉네임 유효성 검사 결과가 출력되는 output-box
+				var imgNick = app.lookup("imgNickChk"); 									// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
+				
+				var nick = ipbNick.displayText;
+				var nickValue = String(nick); 		// input-box에서 보여지는 HTML Element의 value를 가져와서 String 타입으로 저장.	
+				
+				if (nickValue === "") { 															//---> 1. 닉네임 입력칸이 빈칸인 경우
+					opbCheckNickResult.style.css("color", "pink");
+					opbCheckNickResult.value = "닉네임을 입력해주세요.";
+					imgNick.src = "";
+				} else if (nickValue.length < 2 || nickValue.length > 8) { 		//---> 2. 닉네임으로 입력한 값이 1자 or 9자를 이상인 경우
+					opbCheckNickResult.style.css("color", "red");
+					opbCheckNickResult.value = "닉네임은 2자이상 ~ 8자 이하이어야 합니다.";
+					imgNick.src = "../ui/theme/images/member/cross.png";
+				} else if (metadataFail) { 													//---> 3. 입력한 닉네임이 중복되어 사용할 수 없는 경우
+					opbCheckNickResult.style.css("color", "red");
+					opbCheckNickResult.value = "이메일이 중복됩니다.";
+					imgNick.src = "../ui/theme/images/member/cross.png";
+				} else if (nickValue.search(" ") != -1) { 								//---> 4. 입력한 닉네임에 공백이 포함되어 사용할 수 없는 경우
+					opbCheckNickResult.style.css("color", "red");
+					opbCheckNickResult.value = "닉네임은 공백을 포함할 수 없습니다.";
+					imgNick.src = "../ui/theme/images/member/cross.png";
+				} else { 																				//---> 5. 입력한 닉네임이 사용 가능한 경우
+					checkNickFlag = true;
+					opbCheckNickResult.style.css("color", "blue");
+					opbCheckNickResult.value = "사용가능한 이메일입니다.";
+					imgNick.src = "../ui/theme/images/member/checked.png";
+				}
 			}
 
 
@@ -296,7 +346,6 @@
 			}
 
 
-
 			/*
 			 * "프로필 사진 등록" 버튼(btnProfileImg)에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
@@ -305,6 +354,8 @@
 				var btnProfileImg = e.control;
 				
 			}
+
+
 
 			//=============================================[ 카카오 주소검색 API ]=============================================//
 
@@ -555,6 +606,15 @@
 				}]
 			});
 			app.register(dataMap_3);
+			
+			var dataMap_4 = new cpr.data.DataMap("dm_check_nick");
+			dataMap_4.parseData({
+				"columns" : [{
+					"name": "member_nick",
+					"dataType": "string"
+				}]
+			});
+			app.register(dataMap_4);
 			var submission_1 = new cpr.protocols.Submission("sub_profile");
 			submission_1.action = "/member/profileInfo";
 			submission_1.addResponseData(dataSet_1, false);
@@ -585,6 +645,11 @@
 				submission_4.addEventListener("submit-success", onSub_logoutSubmitSuccess);
 			}
 			app.register(submission_4);
+			
+			var submission_5 = new cpr.protocols.Submission("sub_check_nick");
+			submission_5.action = "/member/checkNick";
+			submission_5.addRequestData(dataMap_4);
+			app.register(submission_5);
 			app.supportMedia("all and (min-width: 1920px)", "FHD");
 			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -603,27 +668,22 @@
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
-			var formLayout_1 = new cpr.controls.layouts.FormLayout();
-			formLayout_1.scrollable = false;
-			formLayout_1.topMargin = "0px";
-			formLayout_1.rightMargin = "0px";
-			formLayout_1.bottomMargin = "0px";
-			formLayout_1.leftMargin = "0px";
-			formLayout_1.horizontalSpacing = "0px";
-			formLayout_1.verticalSpacing = "0px";
-			formLayout_1.setColumns(["1fr"]);
-			formLayout_1.setRows(["200px", "1fr", "100px"]);
-			group_1.setLayout(formLayout_1);
+			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_2);
 			(function(container){
 				var userDefinedControl_1 = new udc.header3();
 				container.addChild(userDefinedControl_1, {
-					"colIndex": 0,
-					"rowIndex": 0
+					"top": "0px",
+					"left": "0px",
+					"width": "1920px",
+					"height": "200px"
 				});
 				var userDefinedControl_2 = new udc.footer();
 				container.addChild(userDefinedControl_2, {
-					"colIndex": 0,
-					"rowIndex": 2
+					"top": "980px",
+					"left": "0px",
+					"width": "1920px",
+					"height": "100px"
 				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
@@ -666,43 +726,43 @@
 								var tabItem_1 = new cpr.controls.TabItem();
 								tabItem_1.text = "MyProfile";
 								var group_5 = new cpr.controls.Container();
-								var formLayout_2 = new cpr.controls.layouts.FormLayout();
-								formLayout_2.scrollable = false;
-								formLayout_2.topMargin = "10px";
-								formLayout_2.rightMargin = "10px";
-								formLayout_2.bottomMargin = "10px";
-								formLayout_2.leftMargin = "10px";
-								formLayout_2.horizontalSpacing = "20px";
-								formLayout_2.verticalSpacing = "20px";
-								formLayout_2.setColumns(["1fr", "1fr"]);
-								formLayout_2.setRows(["1fr"]);
-								group_5.setLayout(formLayout_2);
+								var formLayout_1 = new cpr.controls.layouts.FormLayout();
+								formLayout_1.scrollable = false;
+								formLayout_1.topMargin = "10px";
+								formLayout_1.rightMargin = "10px";
+								formLayout_1.bottomMargin = "10px";
+								formLayout_1.leftMargin = "10px";
+								formLayout_1.horizontalSpacing = "20px";
+								formLayout_1.verticalSpacing = "20px";
+								formLayout_1.setColumns(["1fr", "1fr"]);
+								formLayout_1.setRows(["1fr"]);
+								group_5.setLayout(formLayout_1);
 								(function(container){
 									var group_6 = new cpr.controls.Container();
-									var formLayout_3 = new cpr.controls.layouts.FormLayout();
-									formLayout_3.scrollable = false;
-									formLayout_3.topMargin = "10px";
-									formLayout_3.rightMargin = "10px";
-									formLayout_3.bottomMargin = "10px";
-									formLayout_3.leftMargin = "10px";
-									formLayout_3.horizontalSpacing = "20px";
-									formLayout_3.verticalSpacing = "20px";
-									formLayout_3.setColumns(["1fr"]);
-									formLayout_3.setRows(["370px", "50px", "50px", "50px", "50px"]);
-									group_6.setLayout(formLayout_3);
+									var formLayout_2 = new cpr.controls.layouts.FormLayout();
+									formLayout_2.scrollable = false;
+									formLayout_2.topMargin = "10px";
+									formLayout_2.rightMargin = "10px";
+									formLayout_2.bottomMargin = "10px";
+									formLayout_2.leftMargin = "10px";
+									formLayout_2.horizontalSpacing = "20px";
+									formLayout_2.verticalSpacing = "20px";
+									formLayout_2.setColumns(["1fr"]);
+									formLayout_2.setRows(["370px", "50px", "50px", "50px", "50px"]);
+									group_6.setLayout(formLayout_2);
 									(function(container){
 										var group_7 = new cpr.controls.Container();
-										var formLayout_4 = new cpr.controls.layouts.FormLayout();
-										formLayout_4.scrollable = false;
-										formLayout_4.topMargin = "5px";
-										formLayout_4.rightMargin = "5px";
-										formLayout_4.bottomMargin = "5px";
-										formLayout_4.leftMargin = "5px";
-										formLayout_4.horizontalSpacing = "20px";
-										formLayout_4.verticalSpacing = "10px";
-										formLayout_4.setColumns(["120px", "1fr"]);
-										formLayout_4.setRows(["1fr"]);
-										group_7.setLayout(formLayout_4);
+										var formLayout_3 = new cpr.controls.layouts.FormLayout();
+										formLayout_3.scrollable = false;
+										formLayout_3.topMargin = "5px";
+										formLayout_3.rightMargin = "5px";
+										formLayout_3.bottomMargin = "5px";
+										formLayout_3.leftMargin = "5px";
+										formLayout_3.horizontalSpacing = "20px";
+										formLayout_3.verticalSpacing = "10px";
+										formLayout_3.setColumns(["120px", "1fr"]);
+										formLayout_3.setRows(["1fr"]);
+										group_7.setLayout(formLayout_3);
 										(function(container){
 											var output_1 = new cpr.controls.Output();
 											output_1.value = " - 이름";
@@ -751,17 +811,17 @@
 											"rowIndex": 1
 										});
 										var group_8 = new cpr.controls.Container();
-										var formLayout_5 = new cpr.controls.layouts.FormLayout();
-										formLayout_5.scrollable = false;
-										formLayout_5.topMargin = "5px";
-										formLayout_5.rightMargin = "5px";
-										formLayout_5.bottomMargin = "5px";
-										formLayout_5.leftMargin = "5px";
-										formLayout_5.horizontalSpacing = "20px";
-										formLayout_5.verticalSpacing = "10px";
-										formLayout_5.setColumns(["120px", "1fr"]);
-										formLayout_5.setRows(["1fr"]);
-										group_8.setLayout(formLayout_5);
+										var formLayout_4 = new cpr.controls.layouts.FormLayout();
+										formLayout_4.scrollable = false;
+										formLayout_4.topMargin = "5px";
+										formLayout_4.rightMargin = "5px";
+										formLayout_4.bottomMargin = "5px";
+										formLayout_4.leftMargin = "5px";
+										formLayout_4.horizontalSpacing = "20px";
+										formLayout_4.verticalSpacing = "10px";
+										formLayout_4.setColumns(["120px", "1fr"]);
+										formLayout_4.setRows(["1fr"]);
+										group_8.setLayout(formLayout_4);
 										(function(container){
 											var inputBox_2 = new cpr.controls.InputBox("ipbEmail");
 											inputBox_2.readOnly = true;
@@ -792,17 +852,17 @@
 											"rowIndex": 2
 										});
 										var group_9 = new cpr.controls.Container();
-										var formLayout_6 = new cpr.controls.layouts.FormLayout();
-										formLayout_6.scrollable = false;
-										formLayout_6.topMargin = "0px";
-										formLayout_6.rightMargin = "0px";
-										formLayout_6.bottomMargin = "0px";
-										formLayout_6.leftMargin = "0px";
-										formLayout_6.horizontalSpacing = "30px";
-										formLayout_6.verticalSpacing = "30px";
-										formLayout_6.setColumns(["1fr", "1fr", "1fr"]);
-										formLayout_6.setRows(["1fr"]);
-										group_9.setLayout(formLayout_6);
+										var formLayout_5 = new cpr.controls.layouts.FormLayout();
+										formLayout_5.scrollable = false;
+										formLayout_5.topMargin = "0px";
+										formLayout_5.rightMargin = "0px";
+										formLayout_5.bottomMargin = "0px";
+										formLayout_5.leftMargin = "0px";
+										formLayout_5.horizontalSpacing = "30px";
+										formLayout_5.verticalSpacing = "30px";
+										formLayout_5.setColumns(["1fr", "1fr", "1fr"]);
+										formLayout_5.setRows(["1fr"]);
+										group_9.setLayout(formLayout_5);
 										(function(container){
 											var button_2 = new cpr.controls.Button("btnMemUpdate");
 											button_2.value = "수정";
@@ -904,30 +964,30 @@
 										"font-weight" : "bolder",
 										"font-size" : "15px"
 									});
-									var formLayout_7 = new cpr.controls.layouts.FormLayout();
-									formLayout_7.scrollable = false;
-									formLayout_7.topMargin = "5px";
-									formLayout_7.rightMargin = "5px";
-									formLayout_7.bottomMargin = "5px";
-									formLayout_7.leftMargin = "5px";
-									formLayout_7.horizontalSpacing = "20px";
-									formLayout_7.verticalSpacing = "20px";
-									formLayout_7.setColumns(["120px", "1fr"]);
-									formLayout_7.setRows(["110px", "110px", "110px", "40px", "40px", "135px"]);
-									group_10.setLayout(formLayout_7);
+									var formLayout_6 = new cpr.controls.layouts.FormLayout();
+									formLayout_6.scrollable = false;
+									formLayout_6.topMargin = "5px";
+									formLayout_6.rightMargin = "5px";
+									formLayout_6.bottomMargin = "5px";
+									formLayout_6.leftMargin = "5px";
+									formLayout_6.horizontalSpacing = "20px";
+									formLayout_6.verticalSpacing = "20px";
+									formLayout_6.setColumns(["120px", "1fr"]);
+									formLayout_6.setRows(["110px", "110px", "110px", "40px", "40px", "135px"]);
+									group_10.setLayout(formLayout_6);
 									(function(container){
 										var group_11 = new cpr.controls.Container();
-										var formLayout_8 = new cpr.controls.layouts.FormLayout();
-										formLayout_8.scrollable = false;
-										formLayout_8.topMargin = "0px";
-										formLayout_8.rightMargin = "0px";
-										formLayout_8.bottomMargin = "0px";
-										formLayout_8.leftMargin = "0px";
-										formLayout_8.horizontalSpacing = "20px";
-										formLayout_8.verticalSpacing = "5px";
-										formLayout_8.setColumns(["120px", "180px", "1fr"]);
-										formLayout_8.setRows(["40px", "30px", "30px"]);
-										group_11.setLayout(formLayout_8);
+										var formLayout_7 = new cpr.controls.layouts.FormLayout();
+										formLayout_7.scrollable = false;
+										formLayout_7.topMargin = "0px";
+										formLayout_7.rightMargin = "0px";
+										formLayout_7.bottomMargin = "0px";
+										formLayout_7.leftMargin = "0px";
+										formLayout_7.horizontalSpacing = "20px";
+										formLayout_7.verticalSpacing = "5px";
+										formLayout_7.setColumns(["120px", "180px", "1fr"]);
+										formLayout_7.setRows(["40px", "30px", "30px"]);
+										group_11.setLayout(formLayout_7);
 										(function(container){
 											var output_3 = new cpr.controls.Output();
 											output_3.value = " - 비밀번호";
@@ -992,17 +1052,17 @@
 											"rowSpan": 1
 										});
 										var group_12 = new cpr.controls.Container();
-										var formLayout_9 = new cpr.controls.layouts.FormLayout();
-										formLayout_9.scrollable = false;
-										formLayout_9.topMargin = "0px";
-										formLayout_9.rightMargin = "0px";
-										formLayout_9.bottomMargin = "0px";
-										formLayout_9.leftMargin = "0px";
-										formLayout_9.horizontalSpacing = "20px";
-										formLayout_9.verticalSpacing = "5px";
-										formLayout_9.setColumns(["120px", "180px", "1fr"]);
-										formLayout_9.setRows(["40px", "30px", "30px"]);
-										group_12.setLayout(formLayout_9);
+										var formLayout_8 = new cpr.controls.layouts.FormLayout();
+										formLayout_8.scrollable = false;
+										formLayout_8.topMargin = "0px";
+										formLayout_8.rightMargin = "0px";
+										formLayout_8.bottomMargin = "0px";
+										formLayout_8.leftMargin = "0px";
+										formLayout_8.horizontalSpacing = "20px";
+										formLayout_8.verticalSpacing = "5px";
+										formLayout_8.setColumns(["120px", "180px", "1fr"]);
+										formLayout_8.setRows(["40px", "30px", "30px"]);
+										group_12.setLayout(formLayout_8);
 										(function(container){
 											var output_6 = new cpr.controls.Output();
 											output_6.value = " - 비밀번호 확인";
@@ -1066,17 +1126,17 @@
 											"rowSpan": 1
 										});
 										var group_13 = new cpr.controls.Container();
-										var formLayout_10 = new cpr.controls.layouts.FormLayout();
-										formLayout_10.scrollable = false;
-										formLayout_10.topMargin = "0px";
-										formLayout_10.rightMargin = "0px";
-										formLayout_10.bottomMargin = "0px";
-										formLayout_10.leftMargin = "0px";
-										formLayout_10.horizontalSpacing = "20px";
-										formLayout_10.verticalSpacing = "5px";
-										formLayout_10.setColumns(["120px", "180px", "1fr"]);
-										formLayout_10.setRows(["40px", "30px", "30px"]);
-										group_13.setLayout(formLayout_10);
+										var formLayout_9 = new cpr.controls.layouts.FormLayout();
+										formLayout_9.scrollable = false;
+										formLayout_9.topMargin = "0px";
+										formLayout_9.rightMargin = "0px";
+										formLayout_9.bottomMargin = "0px";
+										formLayout_9.leftMargin = "0px";
+										formLayout_9.horizontalSpacing = "20px";
+										formLayout_9.verticalSpacing = "5px";
+										formLayout_9.setColumns(["120px", "180px", "1fr"]);
+										formLayout_9.setRows(["40px", "30px", "30px"]);
+										group_13.setLayout(formLayout_9);
 										(function(container){
 											var output_9 = new cpr.controls.Output();
 											output_9.value = " - 닉네임";
@@ -1203,17 +1263,17 @@
 											"rowIndex": 4
 										});
 										var group_14 = new cpr.controls.Container();
-										var formLayout_11 = new cpr.controls.layouts.FormLayout();
-										formLayout_11.scrollable = false;
-										formLayout_11.topMargin = "0px";
-										formLayout_11.rightMargin = "0px";
-										formLayout_11.bottomMargin = "0px";
-										formLayout_11.leftMargin = "0px";
-										formLayout_11.horizontalSpacing = "10px";
-										formLayout_11.verticalSpacing = "15px";
-										formLayout_11.setColumns(["128px", "100px"]);
-										formLayout_11.setRows(["35px", "35px", "35px"]);
-										group_14.setLayout(formLayout_11);
+										var formLayout_10 = new cpr.controls.layouts.FormLayout();
+										formLayout_10.scrollable = false;
+										formLayout_10.topMargin = "0px";
+										formLayout_10.rightMargin = "0px";
+										formLayout_10.bottomMargin = "0px";
+										formLayout_10.leftMargin = "0px";
+										formLayout_10.horizontalSpacing = "10px";
+										formLayout_10.verticalSpacing = "15px";
+										formLayout_10.setColumns(["128px", "100px"]);
+										formLayout_10.setRows(["35px", "35px", "35px"]);
+										group_14.setLayout(formLayout_10);
 										(function(container){
 											var button_5 = new cpr.controls.Button("btnPostcode");
 											button_5.value = "주소 검색";
@@ -1379,8 +1439,10 @@
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"colIndex": 0,
-					"rowIndex": 1
+					"top": "200px",
+					"left": "0px",
+					"width": "1920px",
+					"height": "780px"
 				});
 			})(group_1);
 			container.addChild(group_1, {

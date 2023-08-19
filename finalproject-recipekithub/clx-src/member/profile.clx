@@ -5,65 +5,65 @@
     <screen std:sid="screen-9d1b9405" id="default" name="default" minwidth="1024px" maxwidth="1919px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
     <screen std:sid="screen-72d3591a" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
     <screen std:sid="screen-e0120e6c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
-    <link std:sid="link-04cdaa91" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-f1ba26c3" href="../theme/controls/accordion.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-627edfc3" href="../theme/controls/apptitle.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-e7824547" href="../theme/controls/audio.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-28bb22f7" href="../theme/controls/button.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-b2b0673d" href="../theme/controls/calendar.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-37241cb8" href="../theme/controls/checkbox.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-8bc27b9d" href="../theme/controls/combo-box.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-c3a834b5" href="../theme/controls/common.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-5dfd7904" href="../theme/controls/date-input.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-baf94a32" href="../theme/controls/dialog.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-3dc84867" href="../theme/controls/file-input.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-608e7795" href="../theme/controls/file-upload.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-b10d4647" href="../theme/controls/focus.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-707d03cc" href="../theme/controls/form-layout.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-0e100bd6" href="../theme/controls/grid.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-0cbd486b" href="../theme/controls/htmlobject.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-7da4a0ec" href="../theme/controls/htmlobject.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-2aa631a6" href="../theme/controls/input.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-9c5258c2" href="../theme/controls/linked-combo-box.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-a130a59d" href="../theme/controls/linked-listbox.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-afabbec5" href="../theme/controls/listbox.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-07a1a28d" href="../theme/controls/mask-editor.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-83eaee02" href="../theme/controls/menu.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-1fdacfe5" href="../theme/controls/nav-bar.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-58a7c501" href="../theme/controls/notifier.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-adcca458" href="../theme/controls/number-editor.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-aba570fd" href="../theme/controls/output.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-f5e0b355" href="../theme/controls/page-indexer.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-717d16e4" href="../theme/controls/progress-bar.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-04163e94" href="../theme/controls/radio-button.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-6902bd81" href="../theme/controls/searchinput.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-b5455c9b" href="../theme/controls/side-nav.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-067b5bba" href="../theme/controls/slider.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-d566f363" href="../theme/controls/statecell.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-d4e2ded3" href="../theme/controls/tabfolder.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-cd80fe86" href="../theme/controls/textarea.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-0c4f7008" href="../theme/controls/tree.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-4e492aa0" href="../theme/controls/treecell.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-99ad0606" href="../theme/controls/video.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-27444bc8" href="../theme/custom-settings.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-ed86b605" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-fb0aab47" href="../theme/custom/badge.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-dad01190" href="../theme/custom/breadcrumb.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-847128fd" href="../theme/custom/button.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-6b127948" href="../theme/custom/card.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-6d31c714" href="../theme/custom/dropdown.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-600b7a1a" href="../theme/custom/extensions.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-9e5dfaec" href="../theme/custom/fonts.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-15f159c1" href="../theme/custom/globals.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-6fa71c69" href="../theme/custom/main.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-c599b896" href="../theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-3209150b" href="../theme/custom/navigation.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-100ff1ed" href="../theme/custom/search-box.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-4b9f1274" href="../theme/custom/spinner.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-42527996" href="../theme/custom/status.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-40360c48" href="../theme/custom/table.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-f5d12c45" href="../theme/custom/typography.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-135c7390" href="../theme/settings.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-4252a4d7" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-d86ac235" href="../theme/controls/accordion.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-8f7e506b" href="../theme/controls/apptitle.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-64d7d6e6" href="../theme/controls/audio.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-87237215" href="../theme/controls/button.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-f6abf453" href="../theme/controls/calendar.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-a401c656" href="../theme/controls/checkbox.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-c8554fe1" href="../theme/controls/combo-box.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-cbd7610f" href="../theme/controls/common.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-9894bb33" href="../theme/controls/date-input.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-79a55db3" href="../theme/controls/dialog.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-a3d8ff1c" href="../theme/controls/file-input.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-7cca2de8" href="../theme/controls/file-upload.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-7b6098f4" href="../theme/controls/focus.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-28ca24e0" href="../theme/controls/form-layout.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-4df1ef0e" href="../theme/controls/grid.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-92cdfae9" href="../theme/controls/htmlobject.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-42510510" href="../theme/controls/htmlobject.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-85568406" href="../theme/controls/input.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-90ce6785" href="../theme/controls/linked-combo-box.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-e9a08594" href="../theme/controls/linked-listbox.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-dab4fde2" href="../theme/controls/listbox.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-205bca46" href="../theme/controls/mask-editor.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-5e85c4ca" href="../theme/controls/menu.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-e7d618f9" href="../theme/controls/nav-bar.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-4e19ae67" href="../theme/controls/notifier.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-446ada32" href="../theme/controls/number-editor.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-e7061d03" href="../theme/controls/output.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-87d0d147" href="../theme/controls/page-indexer.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-5eb92c48" href="../theme/controls/progress-bar.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-b322a97e" href="../theme/controls/radio-button.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-266c57d8" href="../theme/controls/searchinput.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-1bb004a5" href="../theme/controls/side-nav.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-88089217" href="../theme/controls/slider.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-bbfa87f6" href="../theme/controls/statecell.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-55d39c59" href="../theme/controls/tabfolder.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-b88ce542" href="../theme/controls/textarea.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-e396f9d9" href="../theme/controls/tree.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-6df561b2" href="../theme/controls/treecell.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-4213391f" href="../theme/controls/video.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-fd16b0aa" href="../theme/custom-settings.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-85831bc4" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-f70a7089" href="../theme/custom/badge.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-29b06ab0" href="../theme/custom/breadcrumb.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-65f2005b" href="../theme/custom/button.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-abe59549" href="../theme/custom/card.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-3fe310c3" href="../theme/custom/dropdown.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-c7bba428" href="../theme/custom/extensions.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-ec640f98" href="../theme/custom/fonts.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-65ea1c54" href="../theme/custom/globals.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-f054ad11" href="../theme/custom/main.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-e2a73e14" href="../theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-ab0c0a7c" href="../theme/custom/navigation.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-723222d1" href="../theme/custom/search-box.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-f3f8f5c1" href="../theme/custom/spinner.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-7e9fafa1" href="../theme/custom/status.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-75f9ba51" href="../theme/custom/table.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-14bfae72" href="../theme/custom/typography.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-6db5d72d" href="../theme/settings.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-026b268b">
       <cl:dataset std:sid="d-set-80185aa1" id="ds_profile">
         <cl:datacolumnlist>
@@ -114,6 +114,11 @@
           <cl:datacolumn std:sid="d-column-cf7c04f5" name="memberEmail" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-316a7bd7" id="dm_check_nick">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-962a4969" name="member_nick" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-fc8d20e1" id="sub_profile" action="/member/profileInfo">
         <cl:listener std:sid="listener-86c6f206" name="submit-success" handler="onSub_profileSubmitSuccess"/>
         <cl:responsedata dataid="ds_profile"/>
@@ -129,6 +134,9 @@
       <cl:submission std:sid="submission-2f947cef" id="sub_logout" action="/member/logout">
         <cl:listener std:sid="listener-57e9e82d" name="submit-success" handler="onSub_logoutSubmitSuccess"/>
       </cl:submission>
+      <cl:submission std:sid="submission-d01f233f" id="sub_check_nick" action="/member/checkNick">
+        <cl:requestdata dataid="dm_check_nick"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
@@ -139,13 +147,13 @@
     <cl:group std:sid="group-1fde106f">
       <cl:xylayoutdata std:sid="xyl-data-2751e6a5" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:udc std:sid="ud-control-c123483e" type="udc.header3">
-        <cl:formdata std:sid="f-data-b37358ea" row="0" col="0"/>
+        <cl:xylayoutdata std:sid="xyl-data-6a3056d4" top="0px" left="0px" width="1920px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:udc>
       <cl:udc std:sid="ud-control-101e92b1" type="udc.footer">
-        <cl:formdata std:sid="f-data-56f3e83c" row="2" col="0"/>
+        <cl:xylayoutdata std:sid="xyl-data-e6416565" top="980px" left="0px" width="1920px" height="100px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:udc>
       <cl:group std:sid="group-cb9a5a54" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg9.png); background-position:center;">
-        <cl:formdata std:sid="f-data-8373d46b" row="1" col="0"/>
+        <cl:xylayoutdata std:sid="xyl-data-94665a26" top="200px" left="0px" width="1920px" height="780px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:group std:sid="group-e743ec30">
           <cl:responsivexylayoutdata std:sid="rxyl-data-321c9805">
             <cl:xylayoutdata std:sid="sxyl-data-b1688cd2" top="20px" left="20px" width="1880px" height="740px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="FHD"/>
@@ -390,12 +398,7 @@
         </cl:group>
         <cl:responsivexylayout std:sid="r-xylayout-b5f29a22"/>
       </cl:group>
-      <cl:formlayout std:sid="f-layout-fb3937c4" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-        <cl:rows length="200" unit="PIXEL"/>
-        <cl:rows length="1" unit="FRACTION"/>
-        <cl:rows length="100" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-        <cl:columns length="1" unit="FRACTION"/>
-      </cl:formlayout>
+      <cl:xylayout std:sid="xylayout-a46ad782"/>
     </cl:group>
     <cl:xylayout std:sid="xylayout-800650e4"/>
   </body>

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.kosta.recipekithub.model.mapper.MemberMapper;
 import org.kosta.recipekithub.model.service.MemberService;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
@@ -131,7 +130,6 @@ public class MemberController {
 			message.put("fail", "닉네임 중복");
 		}
 		dataRequest.setMetadata(true, message);
-        //dataRequest.setResponse("test", "tomato");
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 	

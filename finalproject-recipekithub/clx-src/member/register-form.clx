@@ -64,12 +64,15 @@
         <cl:responsedata dataid="ds_member"/>
       </cl:submission>
       <cl:submission std:sid="submission-4f13b3bf" id="sub_check_email" action="/member/checkEmail">
+        <cl:listener std:sid="listener-e29ea6d8" name="submit-success" handler="onSub_check_emailSubmitSuccess"/>
         <cl:requestdata dataid="dm_check_email"/>
       </cl:submission>
       <cl:submission std:sid="submission-3053aa33" id="sub_check_password" action="/member/checkPswd">
         <cl:requestdata dataid="dm_check_pswd"/>
       </cl:submission>
       <cl:submission std:sid="submission-6375351f" id="sub_check_nick" action="/member/checkNick">
+        <cl:listener std:sid="listener-bde3b1e3" name="receive-json" handler="onSub_check_nickReceiveJson"/>
+        <cl:listener std:sid="listener-ccc4ce47" name="submit-success" handler="onSub_check_nickSubmitSuccess"/>
         <cl:requestdata dataid="dm_check_nick"/>
       </cl:submission>
     </cl:model>
@@ -78,6 +81,7 @@
   <body std:sid="body-73b0262e" style="background-color:none;">
     <cl:listener std:sid="listener-ba0c4459" name="init" handler="onBodyInit"/>
     <cl:listener std:sid="listener-a5efa734" name="unload" handler="onBodyUnload"/>
+    <cl:listener std:sid="listener-ebf238b4" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-e9f8bd7b" style="background-size:cover; background-image:url(../theme/images/common/bgimg8_1920.png); background-position:center;">
       <cl:responsivexylayoutdata std:sid="rxyl-data-bcec5c20">
         <cl:xylayoutdata std:sid="sxyl-data-a98ac714" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
@@ -177,21 +181,24 @@
                     <cl:output std:sid="output-8e7f42cc" id="opbCheckEmail" style="font-size:14px;" value="">
                       <cl:formdata std:sid="f-data-fe9b3c48" row="1" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
-                    <cl:inputbox std:sid="i-box-281314df" id="ipbEmail" style="border-radius:5px; font-size:15px;" showclearbutton="true" maxlength="30" spellcheck="false">
+                    <cl:inputbox std:sid="i-box-281314df" id="ipbEmail" style="border-radius:5px; font-size:15px;" showclearbutton="true" maxlength="35" spellcheck="false">
                       <cl:listener std:sid="listener-46907dcc" name="keyup" handler="onIpbEmailKeyup"/>
                       <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_email"/>
-                      <cl:formdata std:sid="f-data-5fd0c5de" row="0" col="1" rowspan="1" colspan="2"/>
+                      <cl:formdata std:sid="f-data-ccc0a682" row="0" col="1" rowspan="1" colspan="1"/>
                     </cl:inputbox>
-                    <cl:output std:sid="output-e6eb880f" style="font-size:14px;" value="❈ 중복이 불가한 이메일 형식, 30자 이하입니다">
+                    <cl:output std:sid="output-e6eb880f" style="font-size:14px;" value="❈ 30자 이하의 중복이 불가한 이메일 형식 입니다">
                       <cl:formdata std:sid="f-data-32299cb4" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
+                    <cl:img std:sid="image-5be06541" id="imgEmail">
+                      <cl:formdata std:sid="f-data-19cc881a" row="0" col="2"/>
+                    </cl:img>
                     <cl:formlayout std:sid="f-layout-d6a0380b" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
                       <cl:rows length="30" unit="PIXEL"/>
                       <cl:rows length="30" unit="PIXEL"/>
                       <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
                       <cl:columns length="120" unit="PIXEL"/>
-                      <cl:columns length="200" unit="PIXEL"/>
                       <cl:columns length="1" unit="FRACTION"/>
+                      <cl:columns length="30" unit="PIXEL"/>
                     </cl:formlayout>
                   </cl:group>
                   <cl:group std:sid="group-1d4772c6">
@@ -339,7 +346,7 @@
   <std:studiosetting>
     <std:hruler/>
     <std:vruler>
-      <std:guide position="130"/>
+      <std:guide position="0"/>
     </std:vruler>
   </std:studiosetting>
 </html>
