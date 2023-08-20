@@ -23,19 +23,26 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e) {
-				var sessionval = getSessionStorage("memsession");
-				console.log(sessionval);
+				//var sessionval = getSessionStorage("memsession");
+				//console.log(sessionval);
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 				console.log(recipeBoardVO);
-				if(sessionval ==null || sessionval != recipeBoardVO.memberVO.memberEmail){
-					app.lookup("updateBtn").visible = false;
-				}
+				//if(sessionval ==null || sessionval != recipeBoardVO.memberVO.memberEmail){
+				//	app.lookup("updateBtn").visible = false;
+				//}
 				app.lookup("recipeBoardImage").src = "/upload/recipe/" + recipeBoardVO.recipeBoardImage;
 				app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 				app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
 				var hTMLSnippet = app.lookup("recipeContent");
 				hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 				
+				app.lookup("regDate").value = recipeBoardVO.recipeRegDate;
+				if(recipeBoardVO.recipeEditDate ==null){
+					app.lookup("edit").visible = false;
+					app.lookup("editDate").visible = false;
+				}else{
+					app.lookup("editDate").value = recipeBoardVO.recipeEditDate;
+				}
 				app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 				var recipeCommentsub = app.lookup("recipeCommentList");
 				recipeCommentsub.send();
@@ -122,11 +129,13 @@
 				var recipeCommentList = e.control;
 				var xhr = recipeCommentList.xhr;
 				var jsonData = JSON.parse(xhr.responseText);
-				var sessionval = getSessionStorage("memsession");
+				//var sessionval = getSessionStorage("memsession");
 				var recipeComment = jsonData.recipeCommentList;
 				var totalCommentCount = jsonData.totalCommentCount;
 				app.lookup("commentCount").value = totalCommentCount;
 				var container = app.lookup("commentgrp");
+				
+				app.lookup("page").totalRowCount = totalCommentCount;
 				
 				// 댓글 등록,삭제 시 재조회 할 수 있게 기존 목록 삭제
 				container.removeAllChildren();
@@ -139,9 +148,9 @@
 						comment.nick = recipeComment[i].memberVO.memberNick;
 						comment.regDate = recipeComment[i].recipeCommentDate;
 						comment.content = recipeComment[i].recipeCommentContent;
-						if(sessionval ==null || sessionval != recipeComment[i].memberVO.memberEmail){
-							comment.deleteBtn = false;
-						}
+						//if(sessionval ==null || sessionval != recipeComment[i].memberVO.memberEmail){
+						//	comment.deleteBtn = false;
+						//}
 						container.addChild(comment, {
 							height: "120px",
 							width: "100px",
@@ -286,6 +295,15 @@
 					alert("이미 신고를 완료한 게시물입니다");
 				}
 			}
+
+			/*
+			 * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
+			 * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
+			 */
+			function onPageSelectionChange(e){
+				var page = e.control;
+				app.lookup("recipeCommentList").send();
+			};
 			// End - User Script
 			
 			// Header
@@ -356,6 +374,12 @@
 				]
 			});
 			app.register(dataMap_4);
+			
+			var dataMap_5 = new cpr.data.DataMap("dmPage");
+			dataMap_5.parseData({
+				"columns" : [{"name": "pageNo"}]
+			});
+			app.register(dataMap_5);
 			var submission_1 = new cpr.protocols.Submission("subrecipelikecount");
 			submission_1.action = "/countRecipeLikeList";
 			submission_1.mediaType = "application/x-www-form-urlencoded;simple";
@@ -385,9 +409,7 @@
 			var submission_4 = new cpr.protocols.Submission("recipeCommentList");
 			submission_4.action = "/recipeCommentList";
 			submission_4.addRequestData(dataMap_1);
-			if(typeof onRecipeCommentListReceive == "function") {
-				submission_4.addEventListener("receive", onRecipeCommentListReceive);
-			}
+			submission_4.addRequestData(dataMap_5);
 			if(typeof onRecipeCommentListSubmitSuccess == "function") {
 				submission_4.addEventListener("submit-success", onRecipeCommentListSubmitSuccess);
 			}
@@ -431,9 +453,9 @@
 				var image_1 = new cpr.controls.Image("recipeBoardImage");
 				container.addChild(image_1, {
 					"top": "20px",
-					"width": "536px",
+					"width": "642px",
 					"height": "224px",
-					"left": "calc(50% - 268px)"
+					"left": "calc(50% - 321px)"
 				});
 				var output_1 = new cpr.controls.Output("memberNick");
 				output_1.value = "닉네임";
@@ -447,15 +469,15 @@
 				output_2.value = "타이틀";
 				container.addChild(output_2, {
 					"top": "287px",
-					"left": "94px",
-					"width": "220px",
+					"left": "271px",
+					"width": "314px",
 					"height": "55px"
 				});
 				var output_3 = new cpr.controls.Output("opt1");
 				output_3.value = "좋아요 갯수";
 				container.addChild(output_3, {
 					"top": "305px",
-					"left": "622px",
+					"left": "1039px",
 					"width": "82px",
 					"height": "20px"
 				});
@@ -465,9 +487,9 @@
 					button_1.addEventListener("click", onButtonClick);
 				}
 				container.addChild(button_1, {
-					"top": "0px",
-					"right": "629px",
-					"left": "0px",
+					"top": "20px",
+					"right": "96px",
+					"left": "1065px",
 					"height": "45px"
 				});
 				var image_2 = new cpr.controls.Image("likeimg");
@@ -480,7 +502,7 @@
 				}
 				container.addChild(image_2, {
 					"top": "295px",
-					"left": "572px",
+					"left": "990px",
 					"width": "40px",
 					"height": "40px"
 				});
@@ -494,7 +516,7 @@
 				}
 				container.addChild(image_3, {
 					"top": "295px",
-					"left": "522px",
+					"left": "939px",
 					"width": "40px",
 					"height": "40px"
 				});
@@ -503,24 +525,24 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "20px",
-						"width": "724px",
+						"top": "199px",
+						"width": "1320px",
 						"height": "353px",
-						"left": "calc(50% - 362px)"
+						"left": "calc(50% - 660px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "20px",
-						"width": "354px",
+						"top": "199px",
+						"width": "645px",
 						"height": "353px",
-						"left": "calc(50% - 177px)"
+						"left": "calc(50% - 322px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "20px",
-						"width": "247px",
+						"top": "199px",
+						"width": "451px",
 						"height": "353px",
-						"left": "calc(50% - 123px)"
+						"left": "calc(50% - 225px)"
 					}
 				]
 			});
@@ -532,49 +554,54 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "780px",
-						"width": "724px",
+						"top": "1171px",
+						"width": "1320px",
 						"height": "176px",
-						"left": "calc(50% - 362px)"
+						"left": "calc(50% - 660px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "780px",
-						"width": "354px",
+						"top": "1171px",
+						"width": "645px",
 						"height": "176px",
-						"left": "calc(50% - 177px)"
+						"left": "calc(50% - 322px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "780px",
-						"width": "247px",
+						"top": "1171px",
+						"width": "451px",
 						"height": "176px",
-						"left": "calc(50% - 123px)"
+						"left": "calc(50% - 225px)"
 					}
 				]
 			});
 			
-			var pageIndexer_1 = new cpr.controls.PageIndexer();
+			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
+			pageIndexer_1.pageRowCount = 10;
+			pageIndexer_1.bind("currentPageIndex").toDataMap(app.lookup("dmPage"), "pageNo");
 			pageIndexer_1.init(1, 1, 1);
+			if(typeof onPageSelectionChange == "function") {
+				pageIndexer_1.addEventListener("selection-change", onPageSelectionChange);
+			}
 			container.addChild(pageIndexer_1, {
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "966px",
+						"top": "1357px",
 						"width": "200px",
 						"height": "40px",
 						"left": "calc(50% - 100px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "966px",
+						"top": "1357px",
 						"width": "98px",
 						"height": "40px",
 						"left": "calc(50% - 49px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "966px",
+						"top": "1357px",
 						"width": "68px",
 						"height": "40px",
 						"left": "calc(50% - 34px)"
@@ -588,24 +615,24 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "383px",
-						"width": "723px",
-						"height": "275px",
-						"left": "calc(50% - 361px)"
+						"top": "562px",
+						"width": "1320px",
+						"height": "430px",
+						"left": "calc(50% - 660px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "383px",
-						"width": "353px",
-						"height": "275px",
-						"left": "calc(50% - 176px)"
+						"top": "562px",
+						"width": "645px",
+						"height": "430px",
+						"left": "calc(50% - 322px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "383px",
-						"width": "247px",
-						"height": "275px",
-						"left": "calc(50% - 123px)"
+						"top": "562px",
+						"width": "451px",
+						"height": "430px",
+						"left": "calc(50% - 225px)"
 					}
 				]
 			});
@@ -643,24 +670,24 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "694px",
-						"width": "724px",
+						"top": "1085px",
+						"width": "1320px",
 						"height": "87px",
-						"left": "calc(50% - 362px)"
+						"left": "calc(50% - 660px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "694px",
-						"width": "354px",
+						"top": "1085px",
+						"width": "645px",
 						"height": "87px",
-						"left": "calc(50% - 177px)"
+						"left": "calc(50% - 322px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "694px",
-						"width": "247px",
+						"top": "1085px",
+						"width": "451px",
 						"height": "87px",
-						"left": "calc(50% - 123px)"
+						"left": "calc(50% - 225px)"
 					}
 				]
 			});
@@ -694,24 +721,114 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "658px",
-						"width": "722px",
+						"top": "1039px",
+						"width": "1320px",
 						"height": "38px",
-						"left": "calc(50% - 361px)"
+						"left": "calc(50% - 660px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "658px",
-						"width": "353px",
+						"top": "1039px",
+						"width": "645px",
 						"height": "38px",
-						"left": "calc(50% - 176px)"
+						"left": "calc(50% - 322px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "658px",
-						"width": "247px",
+						"top": "1039px",
+						"width": "451px",
 						"height": "38px",
-						"left": "calc(50% - 123px)"
+						"left": "calc(50% - 225px)"
+					}
+				]
+			});
+			
+			var group_5 = new cpr.controls.Container();
+			var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+			group_5.setLayout(xYLayout_3);
+			(function(container){
+				var output_6 = new cpr.controls.Output("reg");
+				output_6.value = "등록일";
+				container.addChild(output_6, {
+					"top": "9px",
+					"left": "0px",
+					"width": "51px",
+					"height": "20px"
+				});
+				var output_7 = new cpr.controls.Output("regDate");
+				output_7.value = "Output";
+				container.addChild(output_7, {
+					"top": "9px",
+					"left": "50px",
+					"width": "138px",
+					"height": "20px"
+				});
+				var output_8 = new cpr.controls.Output("edit");
+				output_8.value = "수정일";
+				container.addChild(output_8, {
+					"top": "9px",
+					"left": "198px",
+					"width": "51px",
+					"height": "20px"
+				});
+				var output_9 = new cpr.controls.Output("editDate");
+				output_9.value = "Output";
+				container.addChild(output_9, {
+					"top": "9px",
+					"left": "248px",
+					"width": "138px",
+					"height": "20px"
+				});
+			})(group_5);
+			container.addChild(group_5, {
+				positions: [
+					{
+						"media": "all and (min-width: 1024px)",
+						"top": "1003px",
+						"width": "1320px",
+						"height": "37px",
+						"left": "calc(50% - 660px)"
+					}, 
+					{
+						"media": "all and (min-width: 500px) and (max-width: 1023px)",
+						"top": "1003px",
+						"width": "645px",
+						"height": "37px",
+						"left": "calc(50% - 322px)"
+					}, 
+					{
+						"media": "all and (max-width: 499px)",
+						"top": "1003px",
+						"width": "451px",
+						"height": "37px",
+						"left": "calc(50% - 225px)"
+					}
+				]
+			});
+			
+			var userDefinedControl_1 = new udc.header3();
+			container.addChild(userDefinedControl_1, {
+				positions: [
+					{
+						"media": "all and (min-width: 1024px)",
+						"top": "0px",
+						"right": "0px",
+						"left": "0px",
+						"height": "200px"
+					}, 
+					{
+						"media": "all and (min-width: 500px) and (max-width: 1023px)",
+						"top": "0px",
+						"right": "0px",
+						"left": "0px",
+						"height": "200px"
+					}, 
+					{
+						"media": "all and (max-width: 499px)",
+						"top": "0px",
+						"right": "0px",
+						"left": "0px",
+						"height": "200px"
 					}
 				]
 			});

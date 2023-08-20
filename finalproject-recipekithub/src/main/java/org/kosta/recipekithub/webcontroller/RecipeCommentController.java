@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.RecipeCommentService;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipeCommentPagination;
 import org.kosta.recipekithub.model.vo.RecipeCommentVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,16 +27,28 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class RecipeCommentController {
-
+       
 	private final RecipeCommentService recipeCommentService;
-
+     
 	@RequestMapping("/recipeCommentList")
 	public View findRecipeCommentListByRecipeId(HttpServletRequest request, HttpServletResponse response,
 			DataRequest dataRequest) throws IOException {
 		ParameterGroup initParam = dataRequest.getParameterGroup("dmRecipeBoardId");
 		long recipeBoardId = Long.parseLong(initParam.getValue("recipeBoardId"));
-		List<RecipeCommentVO> list = recipeCommentService.findCommentListByRecipeId(recipeBoardId); 
-		long totalCommentCount = recipeCommentService.findCountCommentByRecipeId(recipeBoardId);  
+		        
+		ParameterGroup pageParam = dataRequest.getParameterGroup("dmPage");
+		String pageNo = pageParam.getValue("pageNo");
+		          
+		RecipeCommentPagination pagination = null;
+		long totalCommentCount = recipeCommentService.findCountCommentByRecipeId(recipeBoardId);
+		if(pageNo==null) {
+			pagination = new RecipeCommentPagination(totalCommentCount);   
+		}else {
+			pagination = new RecipeCommentPagination(totalCommentCount,Long.parseLong(pageNo));
+		}
+		
+		List<RecipeCommentVO> list = recipeCommentService.findCommentListByRecipeId(recipeBoardId, pagination); 
+
 		dataRequest.setResponse("recipeCommentList", list);   
 		dataRequest.setResponse("totalCommentCount", totalCommentCount);
 		return new JSONDataView();                 
@@ -54,7 +67,7 @@ public class RecipeCommentController {
 		recipeCommentService.deleteRecipeCommentByCommentId(recipeCommentId);
 		return new JSONDataView();
 	}  
-	
+	 
 	@RequestMapping("/insertRecipeComment")
 	public View insertRecipeComment(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {

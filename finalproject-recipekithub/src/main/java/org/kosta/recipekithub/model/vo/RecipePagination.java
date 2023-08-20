@@ -5,7 +5,7 @@ package org.kosta.recipekithub.model.vo;
  * @author KOSTA
  *
  */
-public class Pagination {
+public class RecipePagination {
 	/**
 	 * 현재 페이지
 	 */
@@ -23,10 +23,10 @@ public class Pagination {
 	 */
 	private long totalPostCount;
 	
-	public Pagination(long totalPostCount) {
+	public RecipePagination(long totalPostCount) {
 		this.totalPostCount=totalPostCount;
 	}
-	public Pagination(long totalPostCount,long nowPage) {
+	public RecipePagination(long totalPostCount,long nowPage) {
 		this.totalPostCount=totalPostCount;
 		this.nowPage=nowPage;
 	}

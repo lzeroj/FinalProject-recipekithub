@@ -17,21 +17,17 @@
   <body std:sid="body-9b6c5f59" style="top:0px; left:0px; width:300px; height:300px;">
     <cl:listener std:sid="listener-bbd39aa8" name="load" handler="onBodyLoad"/>
     <cl:output std:sid="output-9eff9e1f" id="nick" style="color:#3C00FF;" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-23f6ed8c" top="3px" left="3px" width="91px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-23f6ed8c" top="3px" left="3px" width="80px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:output std:sid="output-d76eb8b9" id="content" value="Output">
       <cl:xylayoutdata std:sid="xyl-data-bcec8dbb" top="33px" left="3px" width="285px" height="66px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:output std:sid="output-dbe608d7" id="regDate" style="color:#CBCBCB;" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-a128355f" top="9px" left="93px" width="132px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-a128355f" top="9px" left="82px" width="132px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:button std:sid="button-0927c58b" value="수정">
-      <cl:listener std:sid="listener-3b89bb90" name="click" handler="onButtonClick"/>
-      <cl:xylayoutdata std:sid="xyl-data-c4e6a112" top="9px" left="224px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:button>
     <cl:button std:sid="button-8f320a4c" id="deleteBtn" value="삭제">
       <cl:listener std:sid="listener-f2b8e9e6" name="click" handler="onButtonClick2"/>
-      <cl:xylayoutdata std:sid="xyl-data-73d01a4e" top="9px" left="261px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-73d01a4e" top="9px" left="213px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:button>
     <cl:xylayout std:sid="xylayout-b3acc76d"/>
   </body>
