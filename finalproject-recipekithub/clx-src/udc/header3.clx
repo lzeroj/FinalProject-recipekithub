@@ -8,6 +8,8 @@
     <cl:model std:sid="model-28488ec7"/>
     <cl:appspec>
       <cl:property name="embe" type="control"/>
+      <cl:property name="searchValue" type="string"/>
+      <cl:property name="categoryValue" type="string"/>
     </cl:appspec>
   </head>
   <body std:sid="body-ae9875e0" style="top:0px; left:0px; width:1920px; height:200px;">
@@ -26,13 +28,15 @@
           <cl:formdata std:sid="f-data-eed2089b" row="0" col="1"/>
           <cl:group std:sid="group-7180dd82" style="border-right-style:solid; border-bottom-color:#b4b4b4; border-top-width:2px; border-right-width:2px; border-left-color:#b4b4b4; border-right-color:#b4b4b4; border-left-width:2px; border-top-style:solid; border-radius:15px; border-left-style:solid; border-bottom-width:2px; border-top-color:#b4b4b4; border-bottom-style:solid;" class="cl-form-group">
             <cl:formdata std:sid="f-data-4d984b76" row="0" col="0"/>
-            <cl:searchinput std:sid="s-input-ff13a668" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;">
+            <cl:searchinput std:sid="s-input-ff13a668" id="searchInput" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;">
+              <cl:listener std:sid="listener-22cd388b" name="value-change" handler="onSearchInputValueChange"/>
+              <cl:listener std:sid="listener-bf4eb0fb" name="search" handler="onSearchInputSearch"/>
               <cl:formdata std:sid="f-data-f606d1a1" row="0" col="1" rowspan="1" colspan="2"/>
             </cl:searchinput>
-            <cl:combobox std:sid="c-box-6246d40e" id="cmb1" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:combobox std:sid="c-box-6246d40e" id="category" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
               <cl:formdata std:sid="f-data-74e6790f" row="0" col="0"/>
-              <cl:item std:sid="t-item-86ed32a7" label="레시피" value="value1"/>
-              <cl:item std:sid="t-item-e0af8fd8" label="밀키트" value="value2"/>
+              <cl:item std:sid="t-item-86ed32a7" label="레시피" value="레시피"/>
+              <cl:item std:sid="t-item-e0af8fd8" label="밀키트" value="밀키트"/>
               <cl:itemstyle style="border-right-style:solid; border-bottom-color:#ffffff; border-top-width:0px; border-left-style:solid; border-right-width:0px; border-left-color:#ffffff; border-bottom-width:0px; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-left-width:0px; border-top-style:solid;"/>
             </cl:combobox>
             <cl:formlayout std:sid="f-layout-4176e8a9" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">

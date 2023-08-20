@@ -18,6 +18,7 @@
     <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
       <cl:xylayoutdata std:sid="xyl-data-642ed781" top="0px" left="0px" width="1920px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       <cl:property name="embe" value="ea1" type="control"/>
+      <cl:property name="recipeApp" value="ea1" type="control"/>
     </cl:udc>
     <cl:group std:sid="group-19106c56" style="background-color:#F4FAEC; background-size:cover; background-image:url(theme/images/common/bgimg10.png); background-position:center;">
       <cl:xylayoutdata std:sid="xyl-data-c865488b" top="205px" left="0px" width="1920px" height="780px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>

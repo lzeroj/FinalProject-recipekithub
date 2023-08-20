@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.RecipeBoardService;
 import org.kosta.recipekithub.model.vo.MemberVO;
-import org.kosta.recipekithub.model.vo.Pagination;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -42,37 +42,65 @@ public class RecipeBoardController {
 	@RequestMapping("/recipeBoardList")
 	public View recipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		return new UIView("ui/recipe/recipe.clx");
-	}    
- 
+		String search = dataRequest.getParameter("search");
+		Map<String, Object> searchParam = new HashMap<String, Object>();
+		if(search !=null) {	
+			searchParam.put("searchValue", search); 
+		}
+		return new UIView("ui/recipe/recipe.clx",searchParam);
+	}            
+          
 	@RequestMapping("/findRecipeBoardList")
 	public View findRecipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		ParameterGroup reqPage = dataRequest.getParameterGroup("dmPage");
-		String pageNo = reqPage.getValue("pageNo"); 
-		System.out.println(pageNo);    
-		Pagination pagination = null;
-		long totalPostCount = recipeBoardService.findTotalPostCount();
+		// 페이지 번호 값
+		ParameterGroup pageParam = dataRequest.getParameterGroup("dmPage");
+		String pageNo = pageParam.getValue("pageNo"); 
+		// 카테고리 별 값
+		ParameterGroup categoryParam = dataRequest.getParameterGroup("dmCategory");
+		String type = categoryParam.getValue("type");
+		String ingredients = categoryParam.getValue("ingredients");
+		String method = categoryParam.getValue("method");
+		// 분류 별 값
+		ParameterGroup sortParam = dataRequest.getParameterGroup("dmSort"); 
+		String sort = sortParam.getValue("sort"); 
+		// 검색 바 값
+		ParameterGroup searchParam = dataRequest.getParameterGroup("dmSearch");
+		String searchValue = searchParam.getValue("searchValue"); 
+		
+		log.info("검색 창  : {}",searchValue);
+		log.info("type, ingredients, method, sort : {}, {}, {}, {}",type,ingredients,method,sort); 
+		    
+		RecipePagination pagination = null;
+		long totalRecipeCount = recipeBoardService.findTotalPostCount(type, ingredients, method, searchValue);
 		if(pageNo==null) {
-			pagination = new Pagination(totalPostCount);
+			pagination = new RecipePagination(totalRecipeCount);   
 		}else {
-			pagination = new Pagination(totalPostCount,Long.parseLong(pageNo));
+			pagination = new RecipePagination(totalRecipeCount,Long.parseLong(pageNo));
 		}
 		 
-		List<RecipeBoardVO> list = recipeBoardService.findAllRecipeBoard(pagination);
-
+		List<RecipeBoardVO> list = recipeBoardService.findAllRecipeBoard(type, ingredients, method,  sort, searchValue, pagination);
+		
+		//각 레시피별 좋아요 값
 		List<Long> likeCounts = new ArrayList<>();
 		for(RecipeBoardVO vo : list) {
 			long likeCount = recipeBoardService.likeCount(vo.getRecipeBoardId());
 			likeCounts.add(likeCount);
 		}
+		
 		dataRequest.setResponse("likeCounts", likeCounts);
 		dataRequest.setResponse("recipe_board", list); 
 		dataRequest.setResponse("pagination", pagination);
-		dataRequest.setResponse("totalPostCount", totalPostCount);
+		dataRequest.setResponse("totalRecipeCount", totalRecipeCount);
 		return new JSONDataView();
 	}		 
-
+	
+	@RequestMapping("/insertRecipeForm")
+	public View insertRecipeForm(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
+			throws Exception {
+		return new UIView("/ui/recipe/insertrecipe.clx");
+	}
+	
 	@RequestMapping("/insertRecipe")
 	public View insertRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
@@ -80,7 +108,7 @@ public class RecipeBoardController {
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("비인증");
 			return new UIView("/ui/index.clx");
-		}
+		} 
 		
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipe");
 		String title = initParam.getValue("RECIPE_BOARD_TITLE");
@@ -241,7 +269,7 @@ public class RecipeBoardController {
 
 		return new JSONDataView();
 	}
-
+    
 	@RequestMapping("/deleteRecipe")
 	public View deleteRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {

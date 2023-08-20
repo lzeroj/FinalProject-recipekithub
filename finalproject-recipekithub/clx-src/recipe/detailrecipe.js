@@ -10,19 +10,26 @@
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e) {
-	var sessionval = getSessionStorage("memsession");
-	console.log(sessionval);
+	//var sessionval = getSessionStorage("memsession");
+	//console.log(sessionval);
 	var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 	console.log(recipeBoardVO);
-	if(sessionval ==null || sessionval != recipeBoardVO.memberVO.memberEmail){
-		app.lookup("updateBtn").visible = false;
-	}
+	//if(sessionval ==null || sessionval != recipeBoardVO.memberVO.memberEmail){
+	//	app.lookup("updateBtn").visible = false;
+	//}
 	app.lookup("recipeBoardImage").src = "/upload/recipe/" + recipeBoardVO.recipeBoardImage;
 	app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 	app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
 	var hTMLSnippet = app.lookup("recipeContent");
 	hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 	
+	app.lookup("regDate").value = recipeBoardVO.recipeRegDate;
+	if(recipeBoardVO.recipeEditDate ==null){
+		app.lookup("edit").visible = false;
+		app.lookup("editDate").visible = false;
+	}else{
+		app.lookup("editDate").value = recipeBoardVO.recipeEditDate;
+	}
 	app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 	var recipeCommentsub = app.lookup("recipeCommentList");
 	recipeCommentsub.send();
@@ -109,11 +116,13 @@ function onRecipeCommentListSubmitSuccess(e) {
 	var recipeCommentList = e.control;
 	var xhr = recipeCommentList.xhr;
 	var jsonData = JSON.parse(xhr.responseText);
-	var sessionval = getSessionStorage("memsession");
+	//var sessionval = getSessionStorage("memsession");
 	var recipeComment = jsonData.recipeCommentList;
 	var totalCommentCount = jsonData.totalCommentCount;
 	app.lookup("commentCount").value = totalCommentCount;
 	var container = app.lookup("commentgrp");
+	
+	app.lookup("page").totalRowCount = totalCommentCount;
 	
 	// 댓글 등록,삭제 시 재조회 할 수 있게 기존 목록 삭제
 	container.removeAllChildren();
@@ -126,9 +135,9 @@ function onRecipeCommentListSubmitSuccess(e) {
 			comment.nick = recipeComment[i].memberVO.memberNick;
 			comment.regDate = recipeComment[i].recipeCommentDate;
 			comment.content = recipeComment[i].recipeCommentContent;
-			if(sessionval ==null || sessionval != recipeComment[i].memberVO.memberEmail){
-				comment.deleteBtn = false;
-			}
+			//if(sessionval ==null || sessionval != recipeComment[i].memberVO.memberEmail){
+			//	comment.deleteBtn = false;
+			//}
 			container.addChild(comment, {
 				height: "120px",
 				width: "100px",
@@ -272,4 +281,13 @@ function onSubinsertDeclarationSubmitSuccess(e) {
 	} else if (metadata == 0) {
 		alert("이미 신고를 완료한 게시물입니다");
 	}
+}
+
+/*
+ * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
+ * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
+ */
+function onPageSelectionChange(e){
+	var page = e.control;
+	app.lookup("recipeCommentList").send();
 }

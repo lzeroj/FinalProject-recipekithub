@@ -3,6 +3,7 @@ package org.kosta.recipekithub.model.service;
 import java.util.List;
 
 import org.kosta.recipekithub.model.mapper.RecipeCommentMapper;
+import org.kosta.recipekithub.model.vo.RecipeCommentPagination;
 import org.kosta.recipekithub.model.vo.RecipeCommentVO;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,11 @@ public class RecipeCommentServiceImpl implements RecipeCommentService {
 	private final RecipeCommentMapper recipeCommentMapper;
 	
 	@Override
-	public List<RecipeCommentVO> findCommentListByRecipeId(long recipeBoardId) {
+	public List<RecipeCommentVO> findCommentListByRecipeId(long recipeBoardId, RecipeCommentPagination pagination) {
 		// TODO Auto-generated method stub
-		return recipeCommentMapper.findCommentListByRecipeId(recipeBoardId);
+		return recipeCommentMapper.findCommentListByRecipeId(recipeBoardId, pagination);
 	}
-
+ 
 	@Override
 	public int deleteRecipeCommentByCommentId(long recipeCommentId) {
 		return recipeCommentMapper.deleteRecipeCommentByCommentId(recipeCommentId);
