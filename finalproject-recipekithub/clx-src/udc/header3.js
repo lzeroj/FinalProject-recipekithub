@@ -8,108 +8,108 @@
 /**
  * UDC 컨트롤이 그리드의 뷰 모드에서 표시할 텍스트를 반환합니다.
  */
-exports.getText = function(){
+exports.getText = function() {
 	// TODO: 그리드의 뷰 모드에서 표시할 텍스트를 반환하는 하는 코드를 작성해야 합니다.
 	return "";
 };
 
 function getTimedSessionData(key) {
-    var storedData = sessionStorage.getItem(key);
-
-    if (storedData) {
-        var data = JSON.parse(storedData);
-        var currentTime = new Date().getTime();
-
-        if (currentTime < data.expirationTime) {
-            return data.value;
-        } else {
-            sessionStorage.removeItem(key);
-        }
-    }
-    return null;
+	var storedData = sessionStorage.getItem(key);
+	
+	if (storedData) {
+		var data = JSON.parse(storedData);
+		var currentTime = new Date().getTime();
+		
+		if (currentTime < data.expirationTime) {
+			return data.value;
+		} else {
+			sessionStorage.removeItem(key);
+		}
+	}
+	return null;
 }
 
 /*
  * 이미지에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
-function onHeaderLogoClick(e){
+function onHeaderLogoClick(e) {
 	var headerLogo = e.control;
-	window.location.href="/";
+	window.location.href = "/";
 }
 
 /*
  * 버튼에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
-function onButtonClick(e){
+function onButtonClick(e) {
 	var button = e.control;
-	window.location.href="/findMyCartForm";
+	window.location.href = "/findMyCartForm";
 }
 
 /*
  * 버튼(mypage)에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
-function onMypageClick(e){
+function onMypageClick(e) {
 	var mypage = e.control;
-	window.location.href="/findMyPageForm";
+	window.location.href = "/findMyPageForm";
 }
 
 /*
  * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
  * 아이템 클릭시 발생하는 이벤트.
  */
-function onNavigationBarItemClick(e){
+function onNavigationBarItemClick(e) {
 	var navigationBar = e.control;
-	if(navigationBar.value == 'question'){
+	if (navigationBar.value == 'question') {
 		console.log(1);
 	}
 	
-	if(navigationBar.value == 'mealkit'){
-		window.location.href='/insertMealkitForm';
+	if (navigationBar.value == 'mealkit') {
+		window.location.href = '/insertMealkitForm';
 	}
-		
-	if(navigationBar.value == 'questionAdmin'){
-		/** @type cpr.controls.EmbeddedApp */ 
+	
+	if (navigationBar.value == 'questionAdmin') {
+		/** @type cpr.controls.EmbeddedApp */
 		var embeapp = app.getAppProperty("embe");
-		cpr.core.App.load("embedded/admin/findQnAAdminForm", function(/*cpr.core.App*/ loadedApp){
-		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-			if(embeapp.getEmbeddedAppInstance()){
+		cpr.core.App.load("embedded/admin/findQnAAdminForm", function( /*cpr.core.App*/ loadedApp) {
+			/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+			if (embeapp.getEmbeddedAppInstance()) {
 				embeapp.getEmbeddedAppInstance().dispose();
 			}
 			/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
-			if(loadedApp){						
-				/*초기값을 전달합니다.*/			
-				embeapp.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
-//					embApp.initValue = voInitValue;
+			if (loadedApp) {
+				/*초기값을 전달합니다.*/
+				embeapp.ready(function( /*cpr.controls.EmbeddedApp*/ embApp) {
+					//					embApp.initValue = voInitValue;
 				})
 				/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
 				embeapp.app = loadedApp;
 			}
-		}); 
+		});
 		embeapp.redraw();
 	}
 	
-	if(navigationBar.value == 'recipe'){
-		window.location.href='/recipeBoardList';
-//		var appProperty = app.getAppProperty("recipeApp");
-//				cpr.core.App.load("recipe/recipe", function(/*cpr.core.App*/ loadedApp){
-//		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-//			if(appProperty.getEmbeddedAppInstance()){
-//				appProperty.getEmbeddedAppInstance().dispose();
-//			}
-//			/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
-//			if(loadedApp){						
-//				/*초기값을 전달합니다.*/			
-//				appProperty.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
-////					embApp.initValue = voInitValue;
-//				})
-//				/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
-//				appProperty.app = loadedApp;
-//			}
-//		}); 
-//		appProperty.redraw();
+	if (navigationBar.value == 'recipe') {
+		window.location.href = '/recipeBoardList';
+		//		var appProperty = app.getAppProperty("recipeApp");
+		//				cpr.core.App.load("recipe/recipe", function(/*cpr.core.App*/ loadedApp){
+		//		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+		//			if(appProperty.getEmbeddedAppInstance()){
+		//				appProperty.getEmbeddedAppInstance().dispose();
+		//			}
+		//			/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+		//			if(loadedApp){						
+		//				/*초기값을 전달합니다.*/			
+		//				appProperty.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+		////					embApp.initValue = voInitValue;
+		//				})
+		//				/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+		//				appProperty.app = loadedApp;
+		//			}
+		//		}); 
+		//		appProperty.redraw();
 	}
 }
 
@@ -117,7 +117,7 @@ function onNavigationBarItemClick(e){
  * 버튼(btnWrite)에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
-function onBtnWriteClick(e){
+function onBtnWriteClick(e) {
 	var btnWrite = e.control;
 	window.location.href = "/insertRecipeForm";
 }
@@ -126,26 +126,26 @@ function onBtnWriteClick(e){
  * 버튼(btnLoginoff)에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
-function onBtnLoginoffClick(e){
+function onBtnLoginoffClick(e) {
 	var btnLoginoff = e.control;
-	window.location.href="/memberUI/loginForm";
+	window.location.href = "/memberUI/loginForm";
 }
 
 /*
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
-function onBodyLoad(e){
+function onBodyLoad(e) {
 	var sessionval = getTimedSessionData("memsession");
-	console.log("세션에 담긴값 : "+sessionval);
+	console.log("세션에 담긴값 : " + sessionval);
 	var navigationBar = app.lookup("nav1");
-	if(navigationBar.isSelectedByValue("admin") 
-	|| navigationBar.isSelectedByValue("questionAdmin") 
-	|| navigationBar.isSelectedByValue("reportAdmin")){
+	if (navigationBar.isSelectedByValue("admin") ||
+		navigationBar.isSelectedByValue("questionAdmin") ||
+		navigationBar.isSelectedByValue("reportAdmin")) {
 		return;
 	}
 	
-	if(sessionval == "shj"){
+	if (sessionval == "shj") {
 		navigationBar.addItem(new cpr.controls.TreeItem("관리자", "admin", "root"));
 		navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 		navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
@@ -159,15 +159,14 @@ function onBodyLoad(e){
  * 서치 인풋에서 search 이벤트 발생 시 호출.
  * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
  */
-function onSearchInputSearch(e){
+function onSearchInputSearch(e) {
 	var searchInput = e.control;
-	var comboBox = app.lookup("searchInput");
-	if(comboBox.value =="" || comboBox.value ==null){
+	var comboBox = app.lookup("category");
+	if (comboBox.value == "" || comboBox.value == null) {
 		alert("카테고리 선택하세요");
 		return;
 	}
-	if(comboBox.value =="레시피"){
-		window.location.href = "/recipeBoardList?search="+ searchInput.value;
+	if (comboBox.value == "레시피") {	
+		window.location.href = "/recipeBoardList?search=" + searchInput.value;
 	}
 }
-
