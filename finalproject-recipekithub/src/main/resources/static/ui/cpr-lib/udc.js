@@ -788,7 +788,7 @@
 				 */
 				function onSearchInputSearch(e){
 					var searchInput = e.control;
-					var comboBox = app.lookup("category");
+					var comboBox = app.lookup("searchInput");
 					if(comboBox.value =="" || comboBox.value ==null){
 						alert("카테고리 선택하세요");
 						return;
@@ -801,8 +801,8 @@
 				
 				// Header
 				app.declareAppProperty("embe", null);
-				app.declareAppProperty("searchValue", null);
 				app.declareAppProperty("categoryValue", null);
+				app.declareAppProperty("searchValue", null);
 				app.supportMedia("all and (min-width: 1920px)", "FHD");
 				app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -922,9 +922,6 @@
 									"border-right-color" : "#ffffff",
 									"border-top-style" : "solid"
 								});
-								if(typeof onSearchInputValueChange == "function") {
-									searchInput_1.addEventListener("value-change", onSearchInputValueChange);
-								}
 								if(typeof onSearchInputSearch == "function") {
 									searchInput_1.addEventListener("search", onSearchInputSearch);
 								}
@@ -957,8 +954,8 @@
 									"border-top-style" : "solid"
 								});
 								(function(comboBox_1){
-									comboBox_1.addItem(new cpr.controls.Item("레시피", "레시피"));
-									comboBox_1.addItem(new cpr.controls.Item("밀키트", "밀키트"));
+									comboBox_1.addItem(new cpr.controls.Item("레시피", "value1"));
+									comboBox_1.addItem(new cpr.controls.Item("밀키트", "value2"));
 								})(comboBox_1);
 								container.addChild(comboBox_1, {
 									"colIndex": 0,
@@ -1174,20 +1171,20 @@
 			return this.getEmbeddedAppInstance().setAppProperty("embe", newValue, true);
 		}
 	});
-	Object.defineProperty(udc.header3.prototype, "searchValue", {
-		get: function(){
-			return this.getEmbeddedAppInstance().getAppProperty("searchValue");
-		},
-		set: function(newValue){
-			return this.getEmbeddedAppInstance().setAppProperty("searchValue", newValue, true);
-		}
-	});
 	Object.defineProperty(udc.header3.prototype, "categoryValue", {
 		get: function(){
 			return this.getEmbeddedAppInstance().getAppProperty("categoryValue");
 		},
 		set: function(newValue){
 			return this.getEmbeddedAppInstance().setAppProperty("categoryValue", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.header3.prototype, "searchValue", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("searchValue");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("searchValue", newValue, true);
 		}
 	});
 	
@@ -1549,6 +1546,7 @@
 					app.lookup("deleteBtn").visible = app.getAppProperty("deleteBtn");
 				}
 	
+<<<<<<< HEAD
 	
 				/*
 				 * "삭제" 버튼에서 click 이벤트 발생 시 호출.
@@ -1625,6 +1623,105 @@
 				container.addChild(button_1, {
 					"top": "9px",
 					"left": "213px",
+=======
+				/*
+				 * "수정" 버튼에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onButtonClick(e){
+					var button = e.control;
+					var event = new cpr.events.CAppEvent("updateClick");
+					app.dispatchEvent(event);
+				}
+	
+				/*
+				 * "삭제" 버튼에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onButtonClick2(e){
+					var button = e.control;
+					var event = new cpr.events.CAppEvent("deleteClick");
+					app.dispatchEvent(event);
+				};
+				// End - User Script
+				
+				// Header
+				app.declareAppProperty("nick", null);
+				app.declareAppProperty("regDate", null);
+				app.declareAppProperty("content", null);
+				app.declareAppProperty("deleteBtn", null);
+				app.supportMedia("all and (min-width: 1024px)", "default");
+				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
+				app.supportMedia("all and (max-width: 499px)", "mobile");
+				
+				// Configure root container
+				var container = app.getContainer();
+				container.style.css({
+					"width" : "100%",
+					"top" : "0px",
+					"height" : "100%",
+					"left" : "0px"
+				});
+				
+				// Layout
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				container.setLayout(xYLayout_1);
+				
+				// UI Configuration
+				var output_1 = new cpr.controls.Output("nick");
+				output_1.value = "Output";
+				output_1.style.css({
+					"color" : "#3C00FF"
+				});
+				container.addChild(output_1, {
+					"top": "3px",
+					"left": "3px",
+					"width": "91px",
+					"height": "31px"
+				});
+				
+				var output_2 = new cpr.controls.Output("content");
+				output_2.value = "Output";
+				container.addChild(output_2, {
+					"top": "33px",
+					"left": "3px",
+					"width": "285px",
+					"height": "66px"
+				});
+				
+				var output_3 = new cpr.controls.Output("regDate");
+				output_3.value = "Output";
+				output_3.style.css({
+					"color" : "#CBCBCB"
+				});
+				container.addChild(output_3, {
+					"top": "9px",
+					"left": "93px",
+					"width": "132px",
+					"height": "20px"
+				});
+				
+				var button_1 = new cpr.controls.Button();
+				button_1.value = "수정";
+				if(typeof onButtonClick == "function") {
+					button_1.addEventListener("click", onButtonClick);
+				}
+				container.addChild(button_1, {
+					"top": "9px",
+					"left": "224px",
+					"width": "38px",
+					"height": "20px"
+				});
+				
+				var button_2 = new cpr.controls.Button("deleteBtn");
+				button_2.value = "삭제";
+				if(typeof onButtonClick2 == "function") {
+					button_2.addEventListener("click", onButtonClick2);
+				}
+				container.addChild(button_2, {
+					"top": "9px",
+					"left": "261px",
+>>>>>>> branch 'develop-branch' of https://github.com/lzeroj/FinalProject-recipekithub.git
 					"width": "38px",
 					"height": "20px"
 				});

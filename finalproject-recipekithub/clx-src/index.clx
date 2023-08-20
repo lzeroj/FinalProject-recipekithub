@@ -48,9 +48,6 @@
       </cl:udc>
       <cl:xylayout std:sid="xylayout-c9b9125c"/>
     </cl:group>
-    <cl:udc std:sid="ud-control-6c3a3fe8" type="udc.footer">
-      <cl:xylayoutdata std:sid="xyl-data-f52c3329" top="990px" left="0px" width="1920px" height="100px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:udc>
     <cl:xylayout std:sid="xylayout-bc755070"/>
   </body>
   <std:studiosetting>

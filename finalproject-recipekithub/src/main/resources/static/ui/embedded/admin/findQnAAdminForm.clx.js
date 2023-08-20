@@ -63,19 +63,18 @@
 			 */
 			function onSubfindqnadetailadminSubmitSuccess(e){
 				var subfindqnadetailadmin = e.control;
-					var host = app.getHost(); // 부모 임베디드 앱
+				var host = app.getHost(); // 부모 임베디드 앱
 				var boardId = app.lookup("responseqnaselect").getValue(0, "boardId");
 				var boardTitle = app.lookup("responseqnaselect").getValue(0, "boardTitle");
 				var boardContent = app.lookup("responseqnaselect").getValue(0, "boardContent");
 				
 				var initValue = {"boardId": boardId , "boardTitle" : boardTitle, "boardContent":boardContent};
-				cpr.core.App.load("embedded/myPageQnARegisterSelect", function(loadedApp){
+				cpr.core.App.load("embedded/admin/findQnAAdminSelect", function(loadedApp){
 					if (loadedApp){
 						host.initValue = initValue;
 						host.app = loadedApp;
 					}
 				});
-				
 			};
 			// End - User Script
 			

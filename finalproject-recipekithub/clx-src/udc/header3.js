@@ -161,7 +161,7 @@ function onBodyLoad(e){
  */
 function onSearchInputSearch(e){
 	var searchInput = e.control;
-	var comboBox = app.lookup("category");
+	var comboBox = app.lookup("searchInput");
 	if(comboBox.value =="" || comboBox.value ==null){
 		alert("카테고리 선택하세요");
 		return;
@@ -170,3 +170,4 @@ function onSearchInputSearch(e){
 		window.location.href = "/recipeBoardList?search="+ searchInput.value;
 	}
 }
+
