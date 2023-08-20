@@ -147,6 +147,9 @@
 			group_1.setLayout(xYLayout_2);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
+				group_2.style.css({
+					"background-color" : "#FFFFFF"
+				});
 				var formLayout_1 = new cpr.controls.layouts.FormLayout();
 				formLayout_1.scrollable = false;
 				formLayout_1.topMargin = "0px";
@@ -155,12 +158,20 @@
 				formLayout_1.leftMargin = "0px";
 				formLayout_1.horizontalSpacing = "0px";
 				formLayout_1.verticalSpacing = "0px";
-				formLayout_1.setColumns(["1fr", "80px"]);
-				formLayout_1.setRows(["50px", "20px", "1fr", "20px", "40px"]);
+				formLayout_1.setColumns(["1fr", "160px"]);
+				formLayout_1.setRows(["50px", "20px", "1fr", "20px", "50px"]);
 				group_2.setLayout(formLayout_1);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
 					output_1.value = "Q & A 리스트";
+					output_1.style.css({
+						"background-color" : "#FFFFFF",
+						"color" : "#0fd465",
+						"font-weight" : "bold",
+						"font-size" : "18px",
+						"font-family" : "푸른전남",
+						"text-align" : "center"
+					});
 					container.addChild(output_1, {
 						"colIndex": 0,
 						"rowIndex": 0,
@@ -186,6 +197,11 @@
 									"configurator": function(cell){
 										cell.filterable = false;
 										cell.sortable = false;
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -195,6 +211,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "boardTitle";
 										cell.text = "제목";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -204,6 +225,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "memberEmail";
 										cell.text = "작성자";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -213,6 +239,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "boardRegDate";
 										cell.text = "작성일";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -222,6 +253,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "boardResponseStatus";
 										cell.text = "답변여부";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								}
 							]
@@ -273,6 +309,17 @@
 							]
 						}
 					});
+					grid_1.style.css({
+						"background-color" : "#FFFFFF",
+						"border-right-style" : "solid",
+						"border-top-width" : "0px",
+						"border-left-style" : "solid",
+						"border-right-width" : "0px",
+						"border-bottom-width" : "0px",
+						"border-bottom-style" : "solid",
+						"border-left-width" : "0px",
+						"border-top-style" : "solid"
+					});
 					container.addChild(grid_1, {
 						"colIndex": 0,
 						"rowIndex": 2,
@@ -281,6 +328,12 @@
 					});
 					var button_1 = new cpr.controls.Button();
 					button_1.value = "선택 열기";
+					button_1.style.css({
+						"background-color" : "#0ebc59",
+						"color" : "#FFFFFF",
+						"font-size" : "16px",
+						"background-image" : "none"
+					});
 					if(typeof onButtonClick == "function") {
 						button_1.addEventListener("click", onButtonClick);
 					}

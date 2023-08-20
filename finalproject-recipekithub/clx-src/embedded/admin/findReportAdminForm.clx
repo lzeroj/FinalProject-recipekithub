@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ff0b782e" version="1.0.4584">
+  <head std:sid="head-c5045b3f">
+    <screen std:sid="screen-da0059fc" id="new-screen" name="new-screen" minwidth="1860px" width="1860px" height="740px" active="true"/>
+    <screen std:sid="screen-c6972ba1" id="default" name="default" minwidth="1024px" maxwidth="1859px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-4d59a315" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-f3e91d18" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-0055d4c0"/>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ac8a2f76">
+    <cl:group std:sid="group-7f20fd3e">
+      <cl:xylayoutdata std:sid="xyl-data-02b8e569" top="30px" bottom="30px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+      <cl:formlayout std:sid="f-layout-54b9fa56" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="50" unit="PIXEL"/>
+        <cl:rows length="20" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="20" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="140" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-a18a2cc5"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>
