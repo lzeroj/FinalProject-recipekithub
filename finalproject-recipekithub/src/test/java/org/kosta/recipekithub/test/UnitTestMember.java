@@ -59,7 +59,7 @@ public class UnitTestMember {
 	
 	@Test
 	public void updateMember() {
-		MemberVO member = new MemberVO("kjoonie@kakao.com", "asdf", "금동준", "kdj9315", "123456", "성남시 분당구", "정자일로135", "01081639834", "19930105");
+		MemberVO member = new MemberVO("kjoonie7@naver.com", "asdf", "금동준", "kdj9999", "123456", "성남시 분당구", "정자일로135", "01081639834", "19930105");
 		int result = memberService.updateMember(member);
 		log.debug("result : {}", result);	// 1이 출력된다
 		Assertions.assertEquals(1, result);

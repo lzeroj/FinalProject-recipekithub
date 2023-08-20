@@ -63,48 +63,70 @@
 				dataMap1.setValue("member_phone", memberPhone);
 				dataMap1.setValue("member_postcode", memberPostcode);
 				
+				// 다이얼로그창에 표시할 메시지
+				var initValue = null;		
+				// 회원가입 양식에서 빈칸으로 남아 있는 input-box가 있는 체크
 				if (memberEmail === "") {
-					alert("사용하실 Email을 입력해주세요");
-					return;
+					initValue = "사용하실 Email을 입력해주세요";
 				} else if (memberPassword === "") {
-					alert("사용하실 비밀번호를 입력해주세요");
-					return;
+					initValue = "사용하실 비밀번호를 입력해주세요";
 				} else if (memberPassword2 === "") {
-					alert("입력하신 비밀번호를 확인해주세요");
-					return;
+					initValue = "입력하신 비밀번호를 확인해주세요";
 				} else if (memberName === "") {
-					alert("성명을 입력해주세요");
-					return;
+					initValue = "성명을 입력해주세요";
 				} else if (memberNick === "") {
-					alert("사용하실 닉네임을 입력해주세요");
-					return;
+					initValue = "사용하실 닉네임을 입력해주세요";
 				} else if (memberBirthday === "") {
-					alert("생년월일을 입력해주세요");
-					return;
+					initValue = "생년월일을 입력해주세요";
 				} else if (memberPhone === "") {
-					alert("전화번호를 입력해주세요");
-					return;
+					initValue = "전화번호를 입력해주세요";
 				} else if (memberPostcode === "") {
-					alert("주소를 입력해주세요");
-					return;
-				} else {
-					if (confirm("가입 하시겠습니까?")) {
+					initValue = "주소를 입력해주세요";
+				}
+				
+				// 1. 회원가입 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
+				if (initValue) {		
+					app.openDialog("dialog/registerChkPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+						});
+					});
+				// 2. 회원가입 양식이 전부 유효하게 작성되어 있는 경우, 회원가입 서브미션 전송	
+				} else {		
+					initValue = "회원가입을 진행하시겠습니까?";
+					app.openDialog("dialog/registerPopup", {
+						width: 400, height: 300, headerClose: true, resizable: false
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
 						var subLogin = app.lookup("sub_register");
 						subLogin.send();
-					}
+					});
 				}
 			}
+
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
+			//---[ 회원가입이 성공적으로 이루어진 경우 ]---//	
 			function onSub_registerSubmitSuccess(e) {
 				var sub_register = e.control;
-				alert("RecipeKitHub에 오신 것을 환영합니다..!!");
-				//var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-				//httpPostMethod.submit();
-				window.location.href = "index.clx";
+				var initValue = "RecipeKitHub에 오신 것을 환영합니다..!!";
+				app.openDialog("dialog/registerChkPopup", {
+					width: 400, height: 300, resizable: false, headerMovable: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					window.location.href = "index.clx";
+				});
 			}
 
 			/*
@@ -112,7 +134,18 @@
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
 			function onButtonClick2(e) {
-				window.location.href = "index.clx";
+				//다이얼로그에 출력할 메시지
+				var initValue = "회원가입을 취소하고 메인페이지로 돌아가시겠습니까?";
+				app.openDialog("dialog/registerPopup", {
+					width: 400,
+					height: 300
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					window.location.href = "index.clx";
+				});
 			}
 
 			/*
@@ -142,36 +175,36 @@
 				var metadataOk = sub_check_email.getMetadata("ok"); 		// Controller측에서 Email 중복 여부를 체크하여 ok(사용 가능)인 경우
 				var metadataFail = sub_check_email.getMetadata("fail"); 	// Controller측에서 Email 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우
 				
-				var ipbEmail = app.lookup("ipbEmail"); // Email 입력 input-box
-				var opbCheckEmailResult = app.lookup("opbCheckEmail"); 	// Email 유효성 검사가 결과가 출력되는 output-box
-				var imgEmail = app.lookup("imgEmail"); 									// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
+				var ipbEmail = app.lookup("ipbEmail"); 									// Email 입력 input-box
+				var opbCheckEmailResult = app.lookup("opbCheckEmail"); 		// Email 유효성 검사가 결과가 출력되는 output-box
+				var imgEmail = app.lookup("imgEmail"); 								// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
 				
 				var email = ipbEmail.displayText;
-				var emailValue = String(email); 		// input-box에서 보여지는 HTML Element의 value를 가져와서 String 타입으로 저장.	
+				var emailValue = String(email); 											// input-box에서 보여지는 HTML Element의 value를 가져와서 String 타입으로 저장.	
 				// 회원가입시 사용가능한 Email 정규식을 체크하는 변수		
 				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,10}$/;
 				
-				if (emailValue === "") { 												//---> 1. email 입력칸이 빈칸인 경우
+				if (emailValue === "") { 										//---> 1. email 입력칸이 빈칸인 경우
 					opbCheckEmailResult.style.css("color", "pink");
 					opbCheckEmailResult.value = "email을 입력해주세요.";
 					imgEmail.src = "";
-				} else if (emailValue.length > 30) { 								//---> 2. email로 입력한 값이 30자를 초과한 경우
+				} else if (emailValue.length > 30) { 						//---> 2. email로 입력한 값이 30자를 초과한 경우
 					opbCheckEmailResult.style.css("color", "red");
 					opbCheckEmailResult.value = "사용가능한 email은 30자 이하이어야 합니다.";
 					imgEmail.src = "../ui/theme/images/member/cross.png";
-				} else if (metadataFail) {											 //---> 3. 입력한 email이 중복되어 사용할 수 없는 경우
+				} else if (metadataFail) { 									//---> 3. 입력한 email이 중복되어 사용할 수 없는 경우
 					opbCheckEmailResult.style.css("color", "red");
 					opbCheckEmailResult.value = "이메일이 중복됩니다.";
 					imgEmail.src = "../ui/theme/images/member/cross.png";
-				} else if (regExp.test(emailValue) == false) { 			//---> 4. 입력한 값이 email 형식에 적합하지 않아 사용할 수 없는 경우
+				} else if (regExp.test(emailValue) == false) { 		//---> 4. 입력한 값이 email 형식에 적합하지 않아 사용할 수 없는 경우
 					opbCheckEmailResult.style.css("color", "red");
 					opbCheckEmailResult.value = "email 형식인지 확인해주시기 바랍니다.";
 					imgEmail.src = "../ui/theme/images/member/cross.png";
-				} else if (emailValue.search(" ") != -1) {					 	//---> 5. 입력한 email에 공백이 포함되어 사용할 수 없는 경우
+				} else if (emailValue.search(" ") != -1) { 				//---> 5. 입력한 email에 공백이 포함되어 사용할 수 없는 경우
 					opbCheckEmailResult.style.css("color", "red");
 					opbCheckEmailResult.value = "닉네임은 공백을 포함할 수 없습니다.";
 					imgEmail.src = "../ui/theme/images/member/cross.png";
-				} else { 																		//---> 6. 입력한 email이 사용 가능한 경우
+				} else { 																//---> 6. 입력한 email이 사용 가능한 경우
 					checkEmailFlag = true;
 					opbCheckEmailResult.style.css("color", "blue");
 					opbCheckEmailResult.value = "사용가능한 이메일입니다.";
@@ -195,7 +228,7 @@
 				// 회원가입시 사용가능한 비밀번호 정규식을 체크하는 변수 : 8-25자 사이, 숫자, 대소문자, 특수 문자 모두 포함
 				var regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W])[a-zA-Z\d\W]{8,25}$/;
 				
-				if (pswd1Value === "") { 																//---> 1. 비밀번호 입력칸이 빈칸인 경우
+				if (pswd1Value === "") { 															//---> 1. 비밀번호 입력칸이 빈칸인 경우
 					checkPswdResult1.style.css("color", "pink");
 					checkPswdResult1.value = "비밀번호를 입력해주세요.";
 					imgPswd1.src = "";
@@ -207,15 +240,15 @@
 					checkPswdResult1.style.css("color", "red");
 					checkPswdResult1.value = "비밀번호 형식을 확인해주시기 바랍니다.";
 					imgPswd1.src = "../ui/theme/images/member/cross.png";
-				} else if (pswd1Value.search(" ") != -1) { 										//---> 4. 입력한 비밀번호에 공백이 포함되어 사용할 수 없는 경우
+				} else if (pswd1Value.search(" ") != -1) { 									//---> 4. 입력한 비밀번호에 공백이 포함되어 사용할 수 없는 경우
 					checkPswdResult1.style.css("color", "red");
 					checkPswdResult1.value = "비밀번호는 공백을 포함할 수 없습니다.";
 					imgPswd1.src = "../ui/theme/images/member/cross.png";
-				} else if (/(.)\1\1/.test(pswd1Value)) { 										//---> 5. 입력한 비밀번호에 같은 문자가 연속하여 3번 이상 사용된 경우
+				} else if (/(.)\1\1/.test(pswd1Value)) { 									//---> 5. 입력한 비밀번호에 같은 문자가 연속하여 3번 이상 사용된 경우
 					checkPswdResult1.style.css("color", "red");
 					checkPswdResult1.value = "같은 문자를 연속하여 3번 사용할 수 없습니다.";
 					imgPswd1.src = "../ui/theme/images/member/cross.png";
-				} else { 																						//---> 6. 입력한 비밀번호가 사용 가능한 경우
+				} else { 																					//---> 6. 입력한 비밀번호가 사용 가능한 경우
 					checkPswd1Flag = true;
 					checkPswdResult1.style.css("color", "blue");
 					checkPswdResult1.value = "사용가능한 비밀번호입니다.";
@@ -296,14 +329,14 @@
 				var metadataOk = sub_check_nick.getMetadata("ok"); 		// Controller측에서 닉네임 중복 여부를 체크하여 ok(사용 가능)인 경우
 				var metadataFail = sub_check_nick.getMetadata("fail"); 	// Controller측에서 닉네임 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우
 				
-				var ipbNick = app.lookup("ipbNick"); 										// 닉네임 입력 input-box
-				var opbCheckNickResult = app.lookup("opbCheckNick"); 		// 닉네임 유효성 검사 결과가 출력되는 output-box
-				var imgNick = app.lookup("imgNick"); 									// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
+				var ipbNick = app.lookup("ipbNick"); // 닉네임 입력 input-box
+				var opbCheckNickResult = app.lookup("opbCheckNick"); 	// 닉네임 유효성 검사 결과가 출력되는 output-box
+				var imgNick = app.lookup("imgNick"); 								// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
 				
 				var nick = ipbNick.displayText;
-				var nickValue = String(nick); 		// input-box에서 보여지는 HTML Element의 value를 가져와서 String 타입으로 저장.	
+				var nickValue = String(nick); 											// input-box에서 보여지는 HTML Element의 value를 가져와서 String 타입으로 저장.	
 				
-				if (nickValue === "") { 															//---> 1. 닉네임 입력칸이 빈칸인 경우
+				if (nickValue === "") { 													//---> 1. 닉네임 입력칸이 빈칸인 경우
 					opbCheckNickResult.style.css("color", "pink");
 					opbCheckNickResult.value = "닉네임을 입력해주세요.";
 					imgNick.src = "";
@@ -311,18 +344,18 @@
 					opbCheckNickResult.style.css("color", "red");
 					opbCheckNickResult.value = "닉네임은 2자이상 ~ 8자 이하이어야 합니다.";
 					imgNick.src = "../ui/theme/images/member/cross.png";
-				} else if (metadataFail) { 													//---> 3. 입력한 닉네임이 중복되어 사용할 수 없는 경우
+				} else if (metadataFail) { 												//---> 3. 입력한 닉네임이 중복되어 사용할 수 없는 경우
 					opbCheckNickResult.style.css("color", "red");
-					opbCheckNickResult.value = "이메일이 중복됩니다.";
+					opbCheckNickResult.value = "닉네임이 중복됩니다.";
 					imgNick.src = "../ui/theme/images/member/cross.png";
 				} else if (nickValue.search(" ") != -1) { 								//---> 4. 입력한 닉네임에 공백이 포함되어 사용할 수 없는 경우
 					opbCheckNickResult.style.css("color", "red");
 					opbCheckNickResult.value = "닉네임은 공백을 포함할 수 없습니다.";
 					imgNick.src = "../ui/theme/images/member/cross.png";
-				} else { 																				//---> 5. 입력한 닉네임이 사용 가능한 경우
+				} else { 																			//---> 5. 입력한 닉네임이 사용 가능한 경우
 					checkNickFlag = true;
 					opbCheckNickResult.style.css("color", "blue");
-					opbCheckNickResult.value = "사용가능한 이메일입니다.";
+					opbCheckNickResult.value = "사용가능한 닉네임입니다.";
 					imgNick.src = "../ui/theme/images/member/checked.png";
 				}
 			}

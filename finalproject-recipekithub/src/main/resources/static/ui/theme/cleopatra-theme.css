@@ -934,13 +934,145 @@ body.cl-has-modal {
   color: #FFFFFF;
   background-color: #0CA44E;
 }
+/* 
+ * Define Custom variables
+ * Template Name : common-template-v2
+ * Author : Da-eun Ryu
+ * File : less
+ */
+/****************************
+ * Color System
+ ****************************/
+/* ADDITIONAL COLOR */
+/* ADDITIONAL PALE COLOR */
+/* THEME COLOR */
+/* THEME PALE COLOR */
+/* THEME LIGHTEN  COLOR */
+/****************************
+ * Body
+ ****************************/
+/****************************
+ * Main
+ ****************************/
+/* 사이드 메뉴와 미니 메뉴 */
+/* 메가 메뉴 */
+/****************************
+ * Font
+ ****************************/
+/****************************
+ * Components
+ ****************************/
+/* Text */
+/* Background */
+/* Border */
+/* Read Only */
+/* Focus */
+/* Hover */
+/* Active */
+/* Disabled */
+/* Selected - List 계열이 상속받는 변수 */
+/* Selected Item Disabled - List 계열이 상속받는 변수 */
+/* Transition */
+/****************************
+ * Input Group
+ ****************************/
+/* Text */
+/* Background */
+/* Border */
+/* Hover */
+/* Focus */
+/* Disabled */
+/* Readonly */
+/****************************
+ * List Group (Selection)
+ ****************************/
+/* List */
+/* List Text */
+/* List Background */
+/* List Border */
+/* List Hover */
+/* List Focus */
+/* List Disabled */
+/* Item */
+/* Item Text */
+/* Item Background */
+/* Item Hover */
+/* Item Focus */
+/* Item Selected */
+/* Item Disabled */
+/****************************
+ * Button
+ ****************************/
+/* Use When AutoSize=true */
+/* Text */
+/* Background */
+/* Border */
+/* Hover */
+/* Focus */
+/* Active */
+/* Disabled */
+/****************************
+ * Form
+ ****************************/
+/****************************
+ * Table
+ ****************************/
+/*Header */
+/*Footer */
+/* Detail */
+/* Row - even, odd */
+/* Row - Insert */
+/* Row - Update */
+/* Row - Delete */
+/* Row - Hover */
+/* Row - Select */
+/* Row - Edit */
+/****************************
+ * Modal
+ ****************************/
+/****************************
+ * Tab
+ ****************************/
+/* Tab Text */
+/* Tab Background */
+/* Tab Border */
+/* Tab Disabled */
+/* Tab Item  */
+/* Item Text */
+/* Item Background */
+/* Item Border */
+/* Item Hover */
+/* Item Selected */
+/* Item Disabled */
+/****************************
+ * Alert
+ ****************************/
+/****************************
+ * Calendar
+ ****************************/
+/* Calendar Root */
+/* Header */
+/* Content header */
+/* Other month */
+/* Dates */
+/* Footer */
+/****************************
+ * File Upload
+ ****************************/
+/****************************
+ * Modal
+ ****************************/
 /* 다이얼로그 루트 */
 .cl-dialog {
-  border: solid 1px #0CA44E;
+  /* border: solid 1px @focus-border-color; */
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 3px 12px 1px rgba(44, 55, 130, 0.15);
   /* 다이얼로그 헤더 */
 }
 .cl-dialog .cl-dialog-header {
-  background-color: #1D7FDC;
+  background-color: #90be70;
+  /*background-color: #456C23;*/
   color: white;
   border-bottom: 1px solid #e5e5e5;
   /* 다이얼로그 헤더 텍스트 */
@@ -948,11 +1080,57 @@ body.cl-has-modal {
   /* 다이얼로그 닫기 버튼 - 호버 */
   /* 다이얼로그 닫기 버튼 - 액티브 */
   /* 다이얼로그 최소화 버튼 */
+  /* 다이얼로그 최소화 버튼 - 호버 */
   /* 다이얼로그 최소화 버튼 - 액티브 */
   /* 다이얼로그 최대화 버튼 */
+  /* 다이얼로그 최대화 버튼 - 호버 */
   /* 다이얼로그 최대화 버튼 - 액티브 */
   /* 다이얼로그 복구 버튼 */
+  /* 다이얼로그 복구 버튼 - 호버 */
   /* 다이얼로그 복구 버튼 - 액티브 */
+}
+.cl-dialog .cl-dialog-header .cl-dialog-close {
+  background-image: url("images/controls/dialog/icon-close.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-close:hover {
+  background-image: url("images/controls/dialog/icon-close-hover.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-close:active {
+  background-image: url("images/controls/dialog/icon-close-active.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-min {
+  background-image: url("images/controls/dialog/icon-minimize.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-min:hover {
+  background-image: url("images/controls/dialog/icon-minimize-hover.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-min:active {
+  background-image: url("images/controls/dialog/icon-minimize-active.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-max {
+  background-image: url("images/controls/dialog/icon-maximize.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-max:hover {
+  background-image: url("images/controls/dialog/icon-maximize-hover.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-max:active {
+  background-image: url("images/controls/dialog/icon-maximize-active.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-restore {
+  background-image: url("images/controls/dialog/icon-restore.png");
+  background-image: url("images/controls/dialog/icon-restore-hover.png");
+}
+.cl-dialog .cl-dialog-header .cl-dialog-restore:active {
+  background-image: url("images/controls/dialog/icon-restore-active.png");
+}
+.cl-overlay {
+  background-color: rgba(54, 74, 99, 0.35);
+}
+.cl-overlay.light {
+  background-color: rgba(16, 25, 36, 0.05);
+}
+.cl-overlay.dark {
+  background-color: rgba(52, 58, 64, 0.55);
 }
 /* 트리 */
 .cl-tree {

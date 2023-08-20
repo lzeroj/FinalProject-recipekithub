@@ -99,6 +99,7 @@
       </cl:datamap>
       <cl:datamap std:sid="d-map-684e7f1f" id="dm_update">
         <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bbaf74b2" name="memberEmail"/>
           <cl:datacolumn std:sid="d-column-41acdb9e" name="memberPassword" datatype="string"/>
           <cl:datacolumn std:sid="d-column-e67466aa" name="memberName" datatype="string"/>
           <cl:datacolumn std:sid="d-column-d60f2496" name="memberNick" datatype="string"/>
@@ -126,6 +127,7 @@
       <cl:submission std:sid="submission-ab199ee6" id="sub_update" action="/member/updateMember">
         <cl:listener std:sid="listener-93c1fbf7" name="submit-success" handler="onSub_updateSubmitSuccess"/>
         <cl:requestdata dataid="dm_update"/>
+        <cl:responsedata dataid="ds_profile"/>
       </cl:submission>
       <cl:submission std:sid="submission-100846ed" id="sub_delete" action="/member/deleteMember">
         <cl:listener std:sid="listener-d597c9ec" name="submit-success" handler="onSub_deleteSubmitSuccess"/>
@@ -135,6 +137,7 @@
         <cl:listener std:sid="listener-57e9e82d" name="submit-success" handler="onSub_logoutSubmitSuccess"/>
       </cl:submission>
       <cl:submission std:sid="submission-d01f233f" id="sub_check_nick" action="/member/checkNick">
+        <cl:listener std:sid="listener-adb91cad" name="submit-success" handler="onSub_check_nickSubmitSuccess"/>
         <cl:requestdata dataid="dm_check_nick"/>
       </cl:submission>
     </cl:model>
@@ -250,7 +253,7 @@
                       <cl:output std:sid="output-80de58cb" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - 비밀번호">
                         <cl:formdata std:sid="f-data-afe68c0d" row="0" col="0" rowspan="3" colspan="1"/>
                       </cl:output>
-                      <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; font-size:15px;" secret="true" showclearbutton="true" maxlength="25" spellcheck="false">
+                      <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; font-size:15px;" secret="true" showclearbutton="false" maxlength="25" spellcheck="false">
                         <cl:listener std:sid="listener-49d50be5" name="keyup" handler="onIpbPassword1Keyup"/>
                         <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberPassword" rowindex="0"/>
                         <cl:formdata std:sid="f-data-003590f1" row="0" col="1"/>
@@ -278,7 +281,7 @@
                       <cl:output std:sid="output-43f7ba32" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - 비밀번호 확인">
                         <cl:formdata std:sid="f-data-4c01da8c" row="0" col="0" rowspan="3" colspan="1"/>
                       </cl:output>
-                      <cl:inputbox std:sid="i-box-b6daa8de" id="ipbPassword2" style="border-radius:5px; font-size:15px;" secret="true" showclearbutton="true" maxlength="25" spellcheck="false">
+                      <cl:inputbox std:sid="i-box-b6daa8de" id="ipbPassword2" style="border-radius:5px; font-size:15px;" secret="true" showclearbutton="false" maxlength="25" spellcheck="false">
                         <cl:listener std:sid="listener-e418a2a9" name="keyup" handler="onIpbPassword2Keyup"/>
                         <cl:formdata std:sid="f-data-fdbde9be" row="0" col="1"/>
                       </cl:inputbox>

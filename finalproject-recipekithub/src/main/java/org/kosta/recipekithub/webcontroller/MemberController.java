@@ -61,7 +61,7 @@ public class MemberController {
 		session.setAttribute("member", member); 
 		dataRequest.setResponse("ds_member", member); 
 
-		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+		return new JSONDataView(); 	// 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 
 	
@@ -177,6 +177,8 @@ public class MemberController {
 			int result = memberService.updateMember(member);
 			log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
 		}
+		
+		dataRequest.setResponse("ds_profile", member); 
 		return new JSONDataView();
 	}
 	
@@ -200,13 +202,12 @@ public class MemberController {
 	//---[ 로그아웃 -> 메인 화면으로 이동 ]---//
 		@RequestMapping("/logout")
 		public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
-			// Map<String, Object> message = new HashMap<String, Object>();
-			
 			HttpSession session = request.getSession(false);
 			if(session != null) {
 				session.invalidate();
 			}
 			
+			// Map<String, Object> message = new HashMap<String, Object>();
 			// message.put("uri", "login/login");
 			// dataRequest.setMetadata(true, message);
 			
@@ -222,13 +223,18 @@ public class MemberController {
 			String memberBirthday = param.getValue("member_birthday");
 			String findEmailResult = memberService.findEmailByNamePhoneBirthday(memberName, memberPhone, memberBirthday);
 			
-			Map<String, String> email = new HashMap<>();
-			email.put("memberEmail", findEmailResult); 
+			Map<String, Object> email = new HashMap<>();
+			if (findEmailResult != null) {
+				email.put("ok", findEmailResult); 
+			} else {
+				email.put("fail", "이메일 찾기 실패");
+			}
 			
-			List<Map<String, String>> memberEmail = new ArrayList<>();
+			List<Map<String, Object>> memberEmail = new ArrayList<>();
 			memberEmail.add(email);
-		    
-			dataRequest.setResponse("ds_member", memberEmail); 
+			
+			dataRequest.setMetadata(true, email);
+			//dataRequest.setResponse("ds_member", memberEmail); 
 			return new JSONDataView();
 		}
 		
@@ -240,13 +246,18 @@ public class MemberController {
 			String memberPhone = param.getValue("member_phone");
 			String findPswdResult = memberService.findPswdByEmailNamePhone(memberEmail, memberName, memberPhone);
 
-			Map<String, String> password = new HashMap<>();
-			password.put("memberPassword", findPswdResult); 
+			Map<String, Object> password = new HashMap<>();
+			if (findPswdResult != null) {
+				password.put("ok", findPswdResult); 
+			} else {
+				password.put("fail", "비밀번호 찾기 실패");
+			}
 			
-			List<Map<String, String>> memberPassword = new ArrayList<>();
+			List<Map<String, Object>> memberPassword = new ArrayList<>();
 			memberPassword.add(password);
 			
-			dataRequest.setResponse("ds_member", memberPassword); 
+			dataRequest.setMetadata(true, password);
+			//dataRequest.setResponse("ds_member", memberPassword); 
 			return new JSONDataView();
 		}
 }
