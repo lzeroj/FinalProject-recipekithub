@@ -62,7 +62,6 @@ function onMypageClick(e){
  */
 function onNavigationBarItemClick(e){
 	var navigationBar = e.control;
-	console.log(navigationBar.value);
 	if(navigationBar.value == 'question'){
 		console.log(1);
 	}

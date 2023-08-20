@@ -689,7 +689,6 @@
 				 */
 				function onNavigationBarItemClick(e){
 					var navigationBar = e.control;
-					console.log(navigationBar.value);
 					if(navigationBar.value == 'question'){
 						console.log(1);
 					}
@@ -912,6 +911,7 @@
 							group_4.setLayout(formLayout_4);
 							(function(container){
 								var searchInput_1 = new cpr.controls.SearchInput("searchInput");
+								searchInput_1.searchButtonImage = "theme/images/com/main/icon-search-line.svg";
 								searchInput_1.style.css({
 									"border-right-style" : "solid",
 									"border-bottom-color" : "#ffffff",
