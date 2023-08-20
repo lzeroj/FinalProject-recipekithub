@@ -164,6 +164,7 @@
 			function onTypeSelectionChange(e){
 				var type = e.control;
 				app.lookup("sort").value = "최신순";
+				app.lookup("page").startPageIndex = 1;
 				app.lookup("recipeBoardList").send();
 			}
 
@@ -174,6 +175,7 @@
 			function onIngredientsSelectionChange(e){
 				var ingredients = e.control;
 				app.lookup("sort").value = "최신순";
+				app.lookup("page").startPageIndex = 1;
 				app.lookup("recipeBoardList").send();
 			}
 
@@ -184,6 +186,7 @@
 			function onMethodSelectionChange(e){
 				var method = e.control;
 				app.lookup("sort").value = "최신순";
+				app.lookup("page").startPageIndex = 1;
 				app.lookup("recipeBoardList").send();
 			}
 
@@ -193,6 +196,7 @@
 			 */
 			function onSortSelectionChange(e){
 				var sort = e.control;
+				app.lookup("page").startPageIndex = 1;
 				app.lookup("recipeBoardList").send();
 			};
 			// End - User Script
