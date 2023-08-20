@@ -689,7 +689,6 @@
 				 */
 				function onNavigationBarItemClick(e){
 					var navigationBar = e.control;
-					console.log(navigationBar.value);
 					if(navigationBar.value == 'question'){
 						console.log(1);
 					}
@@ -719,10 +718,48 @@
 						embeapp.redraw();
 					}
 					
-					if(navigationBar.value == 'recipe'){
-						window.location.href='/recipeBoardList';
+					if(navigationBar.value == 'reportAdmin'){
+						/** @type cpr.controls.EmbeddedApp */ 
+						var embeapp = app.getAppProperty("embe");
+						cpr.core.App.load("embedded/admin/findReportAdminForm", function(/*cpr.core.App*/ loadedApp){
+						/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+							if(embeapp.getEmbeddedAppInstance()){
+								embeapp.getEmbeddedAppInstance().dispose();
+							}
+							/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+							if(loadedApp){						
+								/*초기값을 전달합니다.*/			
+								embeapp.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+				//					embApp.initValue = voInitValue;
+								})
+								/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+								embeapp.app = loadedApp;
+							}
+						}); 
+						embeapp.redraw();
 					}
 					
+					
+					if (navigationBar.value == 'recipe') {
+						window.location.href = '/recipeBoardList';
+						//		var appProperty = app.getAppProperty("recipeApp");
+						//				cpr.core.App.load("recipe/recipe", function(/*cpr.core.App*/ loadedApp){
+						//		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+						//			if(appProperty.getEmbeddedAppInstance()){
+						//				appProperty.getEmbeddedAppInstance().dispose();
+						//			}
+						//			/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+						//			if(loadedApp){						
+						//				/*초기값을 전달합니다.*/			
+						//				appProperty.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+						////					embApp.initValue = voInitValue;
+						//				})
+						//				/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+						//				appProperty.app = loadedApp;
+						//			}
+						//		}); 
+						//		appProperty.redraw();
+					}
 				}
 	
 				/*
@@ -731,7 +768,7 @@
 				 */
 				function onBtnWriteClick(e){
 					var btnWrite = e.control;
-					
+					window.location.href = "/insertRecipeForm";
 				}
 	
 				/*
@@ -762,11 +799,32 @@
 						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 					}
-				};
+					
+					app.lookup("category").value = app.getAppProperty("categoryValue");
+					app.lookup("searchInput").value = app.getAppProperty("searchValue");
+				}
+	
+				/*
+				 * 서치 인풋에서 search 이벤트 발생 시 호출.
+				 * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
+				 */
+				function onSearchInputSearch(e) {
+					var searchInput = e.control;
+					var comboBox = app.lookup("category");
+					if (comboBox.value == "" || comboBox.value == null) {
+						alert("카테고리 선택하세요");
+						return;
+					}
+					if (comboBox.value == "레시피") {	
+						window.location.href = "/recipeBoardList?search=" + searchInput.value;
+					}
+				}
 				// End - User Script
 				
 				// Header
 				app.declareAppProperty("embe", null);
+				app.declareAppProperty("categoryValue", null);
+				app.declareAppProperty("searchValue", null);
 				app.supportMedia("all and (min-width: 1920px)", "FHD");
 				app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -874,7 +932,7 @@
 							formLayout_4.setRows(["1fr"]);
 							group_4.setLayout(formLayout_4);
 							(function(container){
-								var searchInput_1 = new cpr.controls.SearchInput();
+								var searchInput_1 = new cpr.controls.SearchInput("searchInput");
 								searchInput_1.searchButtonImage = "theme/images/com/main/icon-search-line.svg";
 								searchInput_1.style.css({
 									"border-right-style" : "solid",
@@ -886,13 +944,16 @@
 									"border-right-color" : "#ffffff",
 									"border-top-style" : "solid"
 								});
+								if(typeof onSearchInputSearch == "function") {
+									searchInput_1.addEventListener("search", onSearchInputSearch);
+								}
 								container.addChild(searchInput_1, {
 									"colIndex": 1,
 									"rowIndex": 0,
-									"colSpan": 2,
+									"colSpan": 1,
 									"rowSpan": 1
 								});
-								var comboBox_1 = new cpr.controls.ComboBox("cmb1");
+								var comboBox_1 = new cpr.controls.ComboBox("category");
 								comboBox_1.preventInput = true;
 								comboBox_1.style.css({
 									"border-right-style" : "none",
@@ -915,8 +976,8 @@
 									"border-top-style" : "solid"
 								});
 								(function(comboBox_1){
-									comboBox_1.addItem(new cpr.controls.Item("레시피", "value1"));
-									comboBox_1.addItem(new cpr.controls.Item("밀키트", "value2"));
+									comboBox_1.addItem(new cpr.controls.Item("레시피", "레시피"));
+									comboBox_1.addItem(new cpr.controls.Item("밀키트", "밀키트"));
 								})(comboBox_1);
 								container.addChild(comboBox_1, {
 									"colIndex": 0,
@@ -1130,6 +1191,22 @@
 		},
 		set: function(newValue){
 			return this.getEmbeddedAppInstance().setAppProperty("embe", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.header3.prototype, "categoryValue", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("categoryValue");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("categoryValue", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.header3.prototype, "searchValue", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("searchValue");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("searchValue", newValue, true);
 		}
 	});
 	
@@ -1450,6 +1527,7 @@
 })();
 /// end - udc.mealkitComment
 /// start - udc.recipeCommentudc
+
 /*
  * UDC Qualified Name: udc.recipeCommentudc
  * App URI: udc/recipeCommentudc
@@ -1491,15 +1569,6 @@
 					app.lookup("deleteBtn").visible = app.getAppProperty("deleteBtn");
 				}
 	
-				/*
-				 * "수정" 버튼에서 click 이벤트 발생 시 호출.
-				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-				 */
-				function onButtonClick(e){
-					var button = e.control;
-					var event = new cpr.events.CAppEvent("updateClick");
-					app.dispatchEvent(event);
-				}
 	
 				/*
 				 * "삭제" 버튼에서 click 이벤트 발생 시 호출.
@@ -1543,7 +1612,7 @@
 				container.addChild(output_1, {
 					"top": "3px",
 					"left": "3px",
-					"width": "91px",
+					"width": "80px",
 					"height": "31px"
 				});
 				
@@ -1563,31 +1632,19 @@
 				});
 				container.addChild(output_3, {
 					"top": "9px",
-					"left": "93px",
+					"left": "82px",
 					"width": "132px",
 					"height": "20px"
 				});
 				
-				var button_1 = new cpr.controls.Button();
-				button_1.value = "수정";
-				if(typeof onButtonClick == "function") {
-					button_1.addEventListener("click", onButtonClick);
+				var button_1 = new cpr.controls.Button("deleteBtn");
+				button_1.value = "삭제";
+				if(typeof onButtonClick2 == "function") {
+					button_1.addEventListener("click", onButtonClick2);
 				}
 				container.addChild(button_1, {
 					"top": "9px",
-					"left": "224px",
-					"width": "38px",
-					"height": "20px"
-				});
-				
-				var button_2 = new cpr.controls.Button("deleteBtn");
-				button_2.value = "삭제";
-				if(typeof onButtonClick2 == "function") {
-					button_2.addEventListener("click", onButtonClick2);
-				}
-				container.addChild(button_2, {
-					"top": "9px",
-					"left": "261px",
+					"left": "213px",
 					"width": "38px",
 					"height": "20px"
 				});
@@ -1651,6 +1708,7 @@
 })();
 /// end - udc.recipeCommentudc
 /// start - udc.recipeListudc
+
 /*
  * UDC Qualified Name: udc.recipeListudc
  * App URI: udc/recipeListudc

@@ -86,18 +86,40 @@
 				var value2 = dataMap.getValue("CATEGORY_TYPE");
 				var value3 = dataMap.getValue("CATEGORY_INGREDIENTS");
 				var value4 = dataMap.getValue("CATEGORY_METHOD");
-				if (confirm("등록 하시겠습니까?")) {
-					if (value == ""){
-						alert("제목을 작성하세요");
-					} else if(value2 == "" || value3 == "" || value4 == ""){
-						alert("카테고리를 등록하세요");
-					} else if(image.src == "") {
-						alert("사진을 등록하세요");
-					} else {
-						submission.addFileParameter("image", file);
-						submission.send();
+				if (value == "") {
+					alert("제목을 작성하세요");
+				} else if (value2 == "" || value3 == "" || value4 == "") {
+					alert("카테고리를 등록하세요");
+				} else if (image.src == null) {
+					alert("사진을 등록하세요");
+				} else {
+					var initValue = {
+						"msg": "레시피 등록하시겠습니까?"
 					}
-				}
+					app.openDialog("dialog/recipeSaveCheck", {
+						width: 800,
+						height: 600
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (JSON.stringify(returnValue) == true) {
+							submission.addFileParameter("image", file);
+							submission.send();
+						}
+					});
+				}	
+			}
+
+			/*
+			 * "취소" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick2(e) {
+				var button = e.control;
+				
 			}
 
 			/*
@@ -105,7 +127,6 @@
 			 * 통신이 성공하면 발생합니다.
 			 */
 			function onInsertRecipeSubmitSuccess(e) {
-				alert("레시피가 등록되었습니다.");
 				var insertRecipe = e.control;
 				var recipeBoardId = insertRecipe.getMetadata("recipeBoardId");
 				if (recipeBoardId != null) {
@@ -125,7 +146,7 @@
 					var reader = new FileReader();
 					reader.onload = function(e) {
 						image.src = e.target.result;
-					};	
+					};
 					reader.readAsDataURL(fileInput.files[0]);
 				}
 			}
@@ -138,9 +159,9 @@
 				var deleteImg = e.control;
 				var fileInput = app.lookup("fi1");
 				var image = app.lookup("uploadImg");
-				if(confirm("사진을 삭제하시겠습니까?")){
-				fileInput.clear();
-				image.src = "";
+				if (confirm("사진을 삭제하시겠습니까?")) {
+					fileInput.clear();
+					image.src = "";
 				}
 			}
 			// End - User Script
@@ -271,6 +292,9 @@
 					"font-weight" : "bold",
 					"background-image" : "linear-gradient(#ffffff, #5690cb)"
 				});
+				if(typeof onButtonClick2 == "function") {
+					button_2.addEventListener("click", onButtonClick2);
+				}
 				container.addChild(button_2, {
 					"colIndex": 1,
 					"rowIndex": 0

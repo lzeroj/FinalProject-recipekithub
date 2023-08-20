@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.kosta.recipekithub.model.mapper.LikeMapper;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

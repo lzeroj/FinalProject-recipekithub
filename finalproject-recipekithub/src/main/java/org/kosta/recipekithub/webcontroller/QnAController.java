@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.QnAService;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.QnAAnswerVO;
 import org.kosta.recipekithub.model.vo.QnAVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -123,7 +125,50 @@ public class QnAController {
 		return new JSONDataView();
 	}
 
-
+	@RequestMapping("/insertQnAAnswer")
+	public View insertQnAAnswer(HttpServletRequest request,DataRequest dataRequest) {
+		// 로그인 확인
+		HttpSession session = request.getSession(false);
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String answerMember = member.getMemberEmail();
+		
+		ParameterGroup param = dataRequest.getParameterGroup("dmqnaselect");
+		int boardId = Integer.parseInt(param.getValue("boardId"));
+		String boardAnswerTitle = param.getValue("boardAnswerTitle");
+		String boardAnswerContent = param.getValue("boardAnswerContent");
+		
+		QnAAnswerVO answerVO = new QnAAnswerVO();
+		answerVO.setBoardId(boardId);
+		answerVO.setAnswerMember(answerMember);
+		answerVO.setBoardAnswerTitle(boardAnswerTitle);
+		answerVO.setBoardAnswerContent(boardAnswerContent);
+		int result = qnAService.insertQnAAnswer(answerVO);
+		if(result == 1) {
+			// 현 상태 변경
+			qnAService.updateBoardResponseStatus(boardId);
+		}
+		
+		Map<String,Object> message = new HashMap<>();
+		message.put("insertResult", result);
+		
+		return new JSONDataView(true,message);
+	}
+	
+	@RequestMapping("/selectChkQnAAnswer")
+	public View selectChkQnAAnswer(HttpServletRequest request,DataRequest dataRequest) {
+		ParameterGroup param = dataRequest.getParameterGroup("dmboardinfo");
+		int boardId = Integer.parseInt(param.getValue("boardId"));
+		
+		QnAAnswerVO answerVO = qnAService.selectChkQnAAnswer(boardId);
+		if(answerVO != null) {
+			Map<String,Object> message = new HashMap<>();
+			message.put("chkmessage", 1);
+			dataRequest.setMetadata(true, message);
+		}
+		
+		dataRequest.setResponse("dmanswerboardinfo", answerVO);
+		return new JSONDataView();
+	}
 	
 	
 }

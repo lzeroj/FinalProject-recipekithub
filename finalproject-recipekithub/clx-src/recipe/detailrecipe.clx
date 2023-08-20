@@ -39,6 +39,11 @@
           <cl:datacolumn std:sid="d-column-afdfe469" name="recipeBoardId"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-34f182e2" id="dmPage">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3f3e2abd" name="pageNo"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-61f22395" id="subrecipelikecount" action="/countRecipeLikeList" mediatype="application/x-www-form-urlencoded;simple">
         <cl:listener std:sid="listener-fb1dad1a" name="submit-success" handler="onSubrecipelikecountSubmitSuccess"/>
         <cl:requestdata dataid="dmRecipeBoardId"/>
@@ -52,9 +57,9 @@
         <cl:requestdata dataid="dmdeclaration"/>
       </cl:submission>
       <cl:submission std:sid="submission-308cce28" id="recipeCommentList" action="/recipeCommentList">
-        <cl:listener std:sid="listener-1bc33a78" name="receive" handler="onRecipeCommentListReceive"/>
         <cl:listener std:sid="listener-d3c6bbbe" name="submit-success" handler="onRecipeCommentListSubmitSuccess"/>
         <cl:requestdata dataid="dmRecipeBoardId"/>
+        <cl:requestdata dataid="dmPage"/>
       </cl:submission>
       <cl:submission std:sid="submission-32e74f3c" id="deleteComment" action="/deleteRecipeComment">
         <cl:listener std:sid="listener-609b55e3" name="submit-success" handler="onDeleteCommentSubmitSuccess"/>
@@ -71,57 +76,59 @@
     <cl:listener std:sid="listener-aad71981" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-331f46c0">
       <cl:responsivexylayoutdata std:sid="rxyl-data-719b9996">
-        <cl:xylayoutdata std:sid="sxyl-data-b4d12966" top="20px" width="724px" height="353px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-b4d12966" top="199px" width="1320px" height="353px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:img std:sid="image-a93fe2b5" id="recipeBoardImage">
-        <cl:xylayoutdata std:sid="xyl-data-f2fbe13b" top="20px" width="536px" height="224px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-f2fbe13b" top="20px" width="642px" height="224px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:img>
       <cl:output std:sid="output-4175a2ee" id="memberNick" value="닉네임">
         <cl:xylayoutdata std:sid="xyl-data-f7c51adc" top="243px" width="128px" height="34px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:output>
       <cl:output std:sid="output-10e92904" id="recipeBoardTitle" value="타이틀">
-        <cl:xylayoutdata std:sid="xyl-data-75d8834d" top="287px" left="94px" width="220px" height="55px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-75d8834d" top="287px" left="271px" width="314px" height="55px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:output std:sid="output-2592074b" id="opt1" value="좋아요 갯수">
-        <cl:xylayoutdata std:sid="xyl-data-607cfe7e" top="305px" left="622px" width="82px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-607cfe7e" top="305px" left="1039px" width="82px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:button std:sid="button-47c5a456" id="updateBtn" value="레시피 수정">
         <cl:listener std:sid="listener-396a8860" name="click" handler="onButtonClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-919d9edc" top="0px" right="629px" left="0px" height="45px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-919d9edc" top="20px" right="96px" left="1065px" height="45px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:button>
       <cl:img std:sid="image-98b0d895" id="likeimg" style="cursor:pointer; background-image:none;">
         <cl:listener std:sid="listener-4e3e4ff8" name="click" handler="onLikeimgClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-167d2acd" top="295px" left="572px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-167d2acd" top="295px" left="990px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:img std:sid="image-0b5e307d" style="cursor:pointer;" src="../theme/images/mealkit/alarm.png">
         <cl:listener std:sid="listener-fff7ab39" name="click" handler="onImageClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-0eac82ec" top="295px" left="522px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-0eac82ec" top="295px" left="939px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:xylayout std:sid="xylayout-38653f1c"/>
     </cl:group>
     <cl:group std:sid="group-e5507d1a" id="commentgrp">
       <cl:responsivexylayoutdata std:sid="rxyl-data-544c1766">
-        <cl:xylayoutdata std:sid="sxyl-data-3116a2bb" top="780px" width="724px" height="176px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-3116a2bb" top="1171px" width="1320px" height="176px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:verticallayout std:sid="v-layout-369a8229"/>
     </cl:group>
-    <cl:pageindexer std:sid="p-indexer-275aa17e">
+    <cl:pageindexer std:sid="p-indexer-275aa17e" id="page" pagerowcount="10">
+      <cl:listener std:sid="listener-af5aa1ca" name="selection-change" handler="onPageSelectionChange"/>
+      <cl:datamapbind property="currentPageIndex" datacontrolid="dmPage" columnname="pageNo"/>
       <cl:responsivexylayoutdata std:sid="rxyl-data-0e718f55">
-        <cl:xylayoutdata std:sid="sxyl-data-06ff2aaf" top="966px" width="200px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-06ff2aaf" top="1357px" width="200px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
     </cl:pageindexer>
     <cl:htmlsnippet std:sid="htmlsnippet-bf27aa3e" id="recipeContent" value="&lt;p>HTML Snippet&lt;/p>">
       <cl:responsivexylayoutdata std:sid="rxyl-data-efa31114">
-        <cl:xylayoutdata std:sid="sxyl-data-7e9d47f5" top="383px" width="723px" height="275px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-7e9d47f5" top="562px" width="1320px" height="430px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
     </cl:htmlsnippet>
     <cl:group std:sid="group-e9187c3c">
       <cl:responsivexylayoutdata std:sid="rxyl-data-39a26a86">
-        <cl:xylayoutdata std:sid="sxyl-data-ce45f3c8" top="694px" width="724px" height="87px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-ce45f3c8" top="1085px" width="1320px" height="87px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:inputbox std:sid="i-box-bb4a5b42" id="commentInput">
         <cl:datamapbind property="value" datacontrolid="dmInsertValue" columnname="recipeCommentContent"/>
-        <cl:formdata std:sid="f-data-51c3e8c7" row="0" col="0"/>
+        <cl:formdata std:sid="f-data-29572db5" row="0" col="0"/>
       </cl:inputbox>
       <cl:button std:sid="button-037313b9" value="등록">
         <cl:listener std:sid="listener-1dcc942f" name="click" handler="onButtonClick2"/>
@@ -135,7 +142,7 @@
     </cl:group>
     <cl:group std:sid="group-a32172ec">
       <cl:responsivexylayoutdata std:sid="rxyl-data-05941be1">
-        <cl:xylayoutdata std:sid="sxyl-data-7cf61f1d" top="658px" width="722px" height="38px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-7cf61f1d" top="1039px" width="1320px" height="38px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:output std:sid="output-e8c32823" value="댓글">
         <cl:xylayoutdata std:sid="xyl-data-dda329cb" top="9px" left="4px" width="41px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -145,6 +152,29 @@
       </cl:output>
       <cl:xylayout std:sid="xylayout-9e462110"/>
     </cl:group>
+    <cl:group std:sid="group-3511dc92">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-696def2a">
+        <cl:xylayoutdata std:sid="sxyl-data-e173d436" top="1003px" width="1320px" height="37px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+      <cl:output std:sid="output-0617601f" id="reg" value="등록일">
+        <cl:xylayoutdata std:sid="xyl-data-395b46a0" top="9px" left="0px" width="51px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-496d9a27" id="regDate" value="Output">
+        <cl:xylayoutdata std:sid="xyl-data-0ca8c562" top="9px" left="50px" width="138px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-b6bf1897" id="edit" value="수정일">
+        <cl:xylayoutdata std:sid="xyl-data-ebc0075a" top="9px" left="198px" width="51px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-95d01f7f" id="editDate" value="Output">
+        <cl:xylayoutdata std:sid="xyl-data-9477e456" top="9px" left="248px" width="138px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:xylayout std:sid="xylayout-bebb0685"/>
+    </cl:group>
+    <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-a6eaddda">
+        <cl:xylayoutdata std:sid="sxyl-data-161b6a96" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+    </cl:udc>
     <cl:responsivexylayout std:sid="r-xylayout-089b2778"/>
   </body>
   <std:studiosetting>

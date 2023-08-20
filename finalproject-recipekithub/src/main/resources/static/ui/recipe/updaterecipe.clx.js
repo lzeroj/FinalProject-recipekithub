@@ -164,7 +164,7 @@
 						alert("제목을 작성하세요");
 					} else if(value2 == "" || value3 == "" || value4 == ""){
 						alert("카테고리를 등록하세요");
-					} else if(image.src == "") {
+					} else if(image.src == null) {
 						alert("사진을 등록하세요");
 					} else {
 						submission.addFileParameter("image", file);

@@ -42,7 +42,8 @@
         <cl:formdata std:sid="f-data-dafda9e2" row="0" col="0"/>
       </cl:button>
       <cl:button std:sid="button-e953cf5a" style="font-weight:bold; background-image:linear-gradient(#ffffff, #5690cb);" value="취소">
-        <cl:formdata std:sid="f-data-6a0ccb20" row="0" col="1"/>
+        <cl:listener std:sid="listener-88c4a13e" name="click" handler="onButtonClick2"/>
+        <cl:formdata std:sid="f-data-c9c399a4" row="0" col="1"/>
       </cl:button>
       <cl:formlayout std:sid="f-layout-f00213c3" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
         <cl:rows length="1" unit="FRACTION"/>

@@ -62,7 +62,6 @@ function onMypageClick(e){
  */
 function onNavigationBarItemClick(e){
 	var navigationBar = e.control;
-	console.log(navigationBar.value);
 	if(navigationBar.value == 'question'){
 		console.log(1);
 	}
@@ -91,6 +90,28 @@ function onNavigationBarItemClick(e){
 		}); 
 		embeapp.redraw();
 	}
+	
+	if(navigationBar.value == 'reportAdmin'){
+		/** @type cpr.controls.EmbeddedApp */ 
+		var embeapp = app.getAppProperty("embe");
+		cpr.core.App.load("embedded/admin/findReportAdminForm", function(/*cpr.core.App*/ loadedApp){
+		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+			if(embeapp.getEmbeddedAppInstance()){
+				embeapp.getEmbeddedAppInstance().dispose();
+			}
+			/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+			if(loadedApp){						
+				/*초기값을 전달합니다.*/			
+				embeapp.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+//					embApp.initValue = voInitValue;
+				})
+				/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+				embeapp.app = loadedApp;
+			}
+		}); 
+		embeapp.redraw();
+	}
+	
 	
 	if(navigationBar.value == 'recipe'){
 		window.location.href='/recipeBoardList';
@@ -136,3 +157,5 @@ function onBodyLoad(e){
 		navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 	}
 }
+
+

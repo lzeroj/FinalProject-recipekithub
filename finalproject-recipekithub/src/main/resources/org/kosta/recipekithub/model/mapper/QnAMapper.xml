@@ -12,7 +12,7 @@
 		<result column="MEMBER_EMAIL" property="memberVO.memberEmail"/>
 	</resultMap>
 	<select id="selectQnaList" resultMap="selectQnaListMap">
-		SELECT * FROM QNA_BOARD qb 
+		SELECT * FROM QNA_BOARD qb order by BOARD_REG_DATE desc
 	</select>
 	
 	<!-- Q&A 선택조회 -->
@@ -38,6 +38,22 @@
 		SELECT * FROM QNA_BOARD qb WHERE BOARD_ID = #{boardId}
 	</select>
 	
+	<!-- Q&A 답변 등록 -->
+	<insert id="insertQnAAnswer" parameterType="org.kosta.recipekithub.model.vo.QnAAnswerVO">
+	    INSERT INTO QNA_BOARD_ANSWER VALUES (BOARD_ANSWER_SEQ.NEXTVAL, #{boardId}, #{boardAnswerTitle}, #{boardAnswerContent}, sysdate, null, 2, #{answerMember})
+	</insert>	
 	
+	<!-- Q&A 답변 등록시 BOARD_RESPONSE_STATUS 상태 변경 -->
+	<update id="updateBoardResponseStatus">
+		UPDATE QNA_BOARD SET BOARD_RESPONSE_STATUS = 'Y' WHERE BOARD_ID = #{boardId}
+	</update>
+	
+	<!-- 선택한 Q & A 에 답변이 있는지 확인한다 -->
+	<select id="selectChkQnAAnswer">
+		SELECT qba.BOARD_ID , qba.BOARD_ANSWER_TITLE , qba.BOARD_ANSWER_CONTENT , qba.BOARD_ANSWER_REG_DATE , qba.ANSWER_MEMBER 
+		FROM QNA_BOARD_ANSWER qba , QNA_BOARD qb 
+		WHERE  qba.BOARD_ID = #{boardId}
+		AND qb.BOARD_RESPONSE_STATUS = 'Y'	
+	</select>
 	
 </mapper>

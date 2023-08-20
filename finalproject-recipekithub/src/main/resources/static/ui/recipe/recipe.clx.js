@@ -19,10 +19,29 @@
 			 ************************************************/
 
 			/*
+			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+			 * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+			 */
+			function onBodyInit(e){
+				var searchParam = cpr.core.Platform.INSTANCE.getParameter("searchValue");
+				console.log(searchParam);
+				var dataMap = app.lookup("dmSearch");
+				if(searchParam !="" && searchParam !=null){
+					app.lookup("headerUdc").searchValue = searchParam;
+					app.lookup("headerUdc").categoryValue = "레시피";
+					dataMap.setValue("searchValue", searchParam);
+				}
+			}
+
+			/*
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e) {
+				app.lookup("type").value = "전체";
+				app.lookup("ingredients").value = "전체";
+				app.lookup("method").value = "전체";
+				app.lookup("sort").value = "최신순";
 				var submission = app.lookup("recipeBoardList");
 				submission.send();
 			}
@@ -97,14 +116,12 @@
 				var xhr = recipeBoardList.xhr;
 				var jsonData = JSON.parse(xhr.responseText);
 				var recipeList = jsonData.recipe_board;
-				var totalPostCount = jsonData.totalPostCount;
+				var totalRecipeCount = jsonData.totalRecipeCount;
 				var likeCounts = jsonData.likeCounts;
 				var container = app.lookup("grp");
 				
-				
-				app.lookup("page").totalRowCount = totalPostCount;
-
-				app.lookup("recipeCount").value = totalPostCount;
+				app.lookup("page").totalRowCount = totalRecipeCount;
+				app.lookup("recipeCount").value = totalRecipeCount;
 				
 				container.removeAllChildren();
 				
@@ -120,7 +137,7 @@
 						recipe.like = likeCounts[i];
 						container.addChild(recipe, {
 							height: "250px",
-							width: "230px",
+							width: "315px",
 							autoSize: "both"
 						});
 						recipe.addEventListener("imgClick", function(e) {
@@ -139,22 +156,48 @@
 				app.lookup("recipeBoardList").send();
 			}
 
+
 			/*
-			 * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
-			 * 아이템 클릭시 발생하는 이벤트.
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
 			 */
-			function onNavigationBarItemClick(e){
-				var navigationBar = e.control;
-				
+			function onTypeSelectionChange(e){
+				var type = e.control;
+				app.lookup("sort").value = "최신순";
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("recipeBoardList").send();
 			}
 
 			/*
-			 * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
-			 * 아이템 클릭시 발생하는 이벤트.
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
 			 */
-			function onNavigationBarItemClick2(e){
-				var navigationBar = e.control;
-				
+			function onIngredientsSelectionChange(e){
+				var ingredients = e.control;
+				app.lookup("sort").value = "최신순";
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("recipeBoardList").send();
+			}
+
+			/*
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onMethodSelectionChange(e){
+				var method = e.control;
+				app.lookup("sort").value = "최신순";
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("recipeBoardList").send();
+			}
+
+			/*
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onSortSelectionChange(e){
+				var sort = e.control;
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("recipeBoardList").send();
 			};
 			// End - User Script
 			
@@ -179,17 +222,40 @@
 				}]
 			});
 			app.register(dataMap_1);
+			
+			var dataMap_2 = new cpr.data.DataMap("dmCategory");
+			dataMap_2.parseData({
+				"columns" : [
+					{"name": "type"},
+					{"name": "ingredients"},
+					{"name": "method"}
+				]
+			});
+			app.register(dataMap_2);
+			
+			var dataMap_3 = new cpr.data.DataMap("dmSort");
+			dataMap_3.parseData({
+				"columns" : [{"name": "sort"}]
+			});
+			app.register(dataMap_3);
+			
+			var dataMap_4 = new cpr.data.DataMap("dmSearch");
+			dataMap_4.parseData({
+				"columns" : [{"name": "searchValue"}]
+			});
+			app.register(dataMap_4);
 			var submission_1 = new cpr.protocols.Submission("recipeBoardList");
 			submission_1.action = "/findRecipeBoardList";
 			submission_1.addRequestData(dataMap_1);
-			if(typeof onRecipeBoardListReceive == "function") {
-				submission_1.addEventListener("receive", onRecipeBoardListReceive);
-			}
+			submission_1.addRequestData(dataMap_2);
+			submission_1.addRequestData(dataMap_3);
+			submission_1.addRequestData(dataMap_4);
 			if(typeof onRecipeBoardListSubmitSuccess == "function") {
 				submission_1.addEventListener("submit-success", onRecipeBoardListSubmitSuccess);
 			}
 			app.register(submission_1);
-			app.supportMedia("all and (min-width: 1024px)", "default");
+			app.supportMedia("all and (min-width: 1920px)", "FHD");
+			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
 			
@@ -253,19 +319,20 @@
 					"height": "60px"
 				});
 				var navigationBar_1 = new cpr.controls.NavigationBar("type");
+				navigationBar_1.bind("value").toDataMap(app.lookup("dmCategory"), "type");
 				(function(navigationBar_1){
-					navigationBar_1.addItem(new cpr.controls.MenuItem("전체", "value1", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("밑반찬", "value2", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("메인반찬", "value3", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("국/탕", "value4", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("디저트", "value5", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("면", "value6", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("샐러드", "value8", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("음료", "value9", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("기타", "value10", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("전체", "전체", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("밑반찬", "밑반찬", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("메인반찬", "메인반찬", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("국/탕", "국/탕", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("디저트", "디저트", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("면", "면", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("샐러드", "샐러드", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("음료", "음료", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("기타", "기타", null));
 				})(navigationBar_1);
-				if(typeof onNavigationBarItemClick == "function") {
-					navigationBar_1.addEventListener("item-click", onNavigationBarItemClick);
+				if(typeof onTypeSelectionChange == "function") {
+					navigationBar_1.addEventListener("selection-change", onTypeSelectionChange);
 				}
 				container.addChild(navigationBar_1, {
 					"top": "10px",
@@ -274,18 +341,19 @@
 					"height": "60px"
 				});
 				var navigationBar_2 = new cpr.controls.NavigationBar("ingredients");
+				navigationBar_2.bind("value").toDataMap(app.lookup("dmCategory"), "ingredients");
 				(function(navigationBar_2){
-					navigationBar_2.addItem(new cpr.controls.MenuItem("전체", "value1", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("육류", "value2", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("채소류", "value3", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("해물류", "value4", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("달걀/유제품", "value5", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("가공식품류", "value6", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("과일류", "value7", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("기타", "value8", null));
+					navigationBar_2.addItem(new cpr.controls.MenuItem("전체", "전체", null));
+					navigationBar_2.addItem(new cpr.controls.MenuItem("육류", "육류", null));
+					navigationBar_2.addItem(new cpr.controls.MenuItem("채소류", "채소류", null));
+					navigationBar_2.addItem(new cpr.controls.MenuItem("해물류", "해물류", null));
+					navigationBar_2.addItem(new cpr.controls.MenuItem("달걀/유제품", "달걀/유제품", null));
+					navigationBar_2.addItem(new cpr.controls.MenuItem("가공식품류", "가공식품류", null));
+					navigationBar_2.addItem(new cpr.controls.MenuItem("과일류", "과일류", null));
+					navigationBar_2.addItem(new cpr.controls.MenuItem("기타", "기타", null));
 				})(navigationBar_2);
-				if(typeof onNavigationBarItemClick2 == "function") {
-					navigationBar_2.addEventListener("item-click", onNavigationBarItemClick2);
+				if(typeof onIngredientsSelectionChange == "function") {
+					navigationBar_2.addEventListener("selection-change", onIngredientsSelectionChange);
 				}
 				container.addChild(navigationBar_2, {
 					"top": "80px",
@@ -294,16 +362,20 @@
 					"height": "60px"
 				});
 				var navigationBar_3 = new cpr.controls.NavigationBar("method");
+				navigationBar_3.bind("value").toDataMap(app.lookup("dmCategory"), "method");
 				(function(navigationBar_3){
-					navigationBar_3.addItem(new cpr.controls.MenuItem("전체", "value1", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("볶음", "value2", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("끓이기", "value3", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("조림", "value4", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("튀김", "value5", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("삶기", "value6", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("굽기", "value7", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("기타", "value8", null));
+					navigationBar_3.addItem(new cpr.controls.MenuItem("전체", "전체", null));
+					navigationBar_3.addItem(new cpr.controls.MenuItem("볶음", "볶음", null));
+					navigationBar_3.addItem(new cpr.controls.MenuItem("끓이기", "끓이기", null));
+					navigationBar_3.addItem(new cpr.controls.MenuItem("조림", "조림", null));
+					navigationBar_3.addItem(new cpr.controls.MenuItem("튀김", "튀김", null));
+					navigationBar_3.addItem(new cpr.controls.MenuItem("삶기", "삶기", null));
+					navigationBar_3.addItem(new cpr.controls.MenuItem("굽기", "굽기", null));
+					navigationBar_3.addItem(new cpr.controls.MenuItem("기타", "기타", null));
 				})(navigationBar_3);
+				if(typeof onMethodSelectionChange == "function") {
+					navigationBar_3.addEventListener("selection-change", onMethodSelectionChange);
+				}
 				container.addChild(navigationBar_3, {
 					"top": "150px",
 					"left": "110px",
@@ -312,10 +384,10 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "20px",
-				"width": "984px",
+				"top": "199px",
+				"width": "1320px",
 				"height": "220px",
-				"left": "calc(50% - 492px)"
+				"left": "calc(50% - 660px)"
 			});
 			
 			var group_2 = new cpr.controls.Container();
@@ -334,30 +406,6 @@
 					"top": "50px",
 					"left": "45px",
 					"width": "18px",
-					"height": "20px"
-				});
-				var button_1 = new cpr.controls.Button();
-				button_1.value = "최신순";
-				container.addChild(button_1, {
-					"top": "50px",
-					"left": "652px",
-					"width": "100px",
-					"height": "20px"
-				});
-				var button_2 = new cpr.controls.Button();
-				button_2.value = "좋아요순";
-				container.addChild(button_2, {
-					"top": "50px",
-					"left": "762px",
-					"width": "100px",
-					"height": "20px"
-				});
-				var button_3 = new cpr.controls.Button();
-				button_3.value = "조회수순";
-				container.addChild(button_3, {
-					"top": "50px",
-					"left": "872px",
-					"width": "100px",
 					"height": "20px"
 				});
 				var output_5 = new cpr.controls.Output("recipeCount");
@@ -383,12 +431,28 @@
 					"width": "247px",
 					"height": "20px"
 				});
+				var navigationBar_4 = new cpr.controls.NavigationBar("sort");
+				navigationBar_4.bind("value").toDataMap(app.lookup("dmSort"), "sort");
+				(function(navigationBar_4){
+					navigationBar_4.addItem(new cpr.controls.MenuItem("최신순", "최신순", null));
+					navigationBar_4.addItem(new cpr.controls.MenuItem("좋아요순", "좋아요순", null));
+					navigationBar_4.addItem(new cpr.controls.MenuItem("조회순", "조회순", null));
+				})(navigationBar_4);
+				if(typeof onSortSelectionChange == "function") {
+					navigationBar_4.addEventListener("selection-change", onSortSelectionChange);
+				}
+				container.addChild(navigationBar_4, {
+					"top": "31px",
+					"left": "735px",
+					"width": "229px",
+					"height": "40px"
+				});
 			})(group_2);
 			container.addChild(group_2, {
-				"top": "250px",
-				"width": "984px",
+				"top": "429px",
+				"width": "1320px",
 				"height": "90px",
-				"left": "calc(50% - 492px)"
+				"left": "calc(50% - 660px)"
 			});
 			
 			var group_3 = new cpr.controls.Container("grp");
@@ -398,10 +462,10 @@
 			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
 			group_3.setLayout(flowLayout_1);
 			container.addChild(group_3, {
-				"top": "350px",
-				"width": "984px",
-				"height": "730px",
-				"left": "calc(50% - 492px)"
+				"top": "529px",
+				"width": "1320px",
+				"height": "731px",
+				"left": "calc(50% - 660px)"
 			});
 			
 			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
@@ -413,13 +477,24 @@
 				pageIndexer_1.addEventListener("selection-change", onPageSelectionChange);
 			}
 			container.addChild(pageIndexer_1, {
-				"top": "1090px",
+				"top": "1269px",
 				"width": "320px",
 				"height": "40px",
 				"left": "calc(50% - 160px)"
 			});
+			
+			var userDefinedControl_1 = new udc.header3("headerUdc");
+			container.addChild(userDefinedControl_1, {
+				"top": "0px",
+				"width": "1920px",
+				"height": "200px",
+				"left": "calc(50% - 960px)"
+			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
+			}
+			if(typeof onBodyInit == "function"){
+				app.addEventListener("init", onBodyInit);
 			}
 		}
 	});
