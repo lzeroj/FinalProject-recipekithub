@@ -10,38 +10,61 @@
           <cl:datacolumn std:sid="d-column-d6077708" name="boardContent"/>
         </cl:datacolumnlist>
       </cl:dataset>
-      <cl:submission std:sid="submission-f0e66d69" id="subqnaselect"/>
+      <cl:datamap std:sid="d-map-e1b2cce2" id="dmboardinfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a0b3f8f2" name="boardId"/>
+          <cl:datacolumn std:sid="d-column-5b3345ec" name="boardTitle"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-d7f12ada" id="dmanswerboardinfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0fa134e9" name="boardId"/>
+          <cl:datacolumn std:sid="d-column-5aaf88fe" name="boardAnswerTitle"/>
+          <cl:datacolumn std:sid="d-column-f0757834" name="boardAnswerContent"/>
+          <cl:datacolumn std:sid="d-column-8d330196" name="boardAnswerId"/>
+          <cl:datacolumn std:sid="d-column-67b5eff0" name="boardAnswerRegDate"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-77ea9d38" id="subchkanswer" action="/selectChkQnAAnswer">
+        <cl:listener std:sid="listener-df9e8f6c" name="submit-success" handler="onSubchkanswerSubmitSuccess"/>
+        <cl:requestdata dataid="dmboardinfo"/>
+        <cl:responsedata dataid="dmanswerboardinfo"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
   <body std:sid="body-4623d88e">
     <cl:listener std:sid="listener-01388302" name="load" handler="onBodyLoad"/>
-    <cl:listener std:sid="listener-40f443f3" name="before-draw" handler="onBodyBeforeDraw"/>
     <cl:group std:sid="group-4fd6728f" id="grp1" style="background-color:#FFFFFF;">
-      <cl:verticaldata std:sid="v-data-d93a7f70" width="709px" height="608px" autosize="height"/>
+      <cl:verticaldata std:sid="v-data-d93a7f70" width="709px" height="688px" autosize="height"/>
       <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="Q &amp; A">
         <cl:verticaldata std:sid="v-data-accb3108" width="709px" height="50px"/>
       </cl:output>
-      <cl:group std:sid="group-050bca7e">
-        <cl:verticaldata std:sid="v-data-7c2b1a2a" width="709px" height="558px"/>
+      <cl:group std:sid="group-050bca7e" id="rootgrp">
+        <cl:verticaldata std:sid="v-data-7c2b1a2a" width="709px" height="648px" autosize="height"/>
         <cl:inputbox std:sid="i-box-38573462" id="ipb1" style="border-radius:10px;" readonly="true" placeholder="제목">
-          <cl:xylayoutdata std:sid="xyl-data-ce51ed4f" top="20px" right="20px" left="20px" height="40px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+          <cl:verticaldata std:sid="v-data-911f6969" width="669px" height="40px"/>
         </cl:inputbox>
         <cl:textarea std:sid="t-area-2f7d60e6" id="txa1" style="border-radius:10px;" readonly="true" value="이메일 :&#xD;&#xA;전화번호 :&#xD;&#xA;---------------------------------------------------------------------------------------&#xD;&#xA;문의내용 :">
-          <cl:xylayoutdata std:sid="xyl-data-9377620e" top="80px" right="20px" bottom="60px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:verticaldata std:sid="v-data-83baae72" width="669px" height="248px"/>
         </cl:textarea>
-        <cl:button std:sid="button-6e95866d" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="수정하기">
-          <cl:listener std:sid="listener-eb9bf78a" name="click" handler="onButtonClick"/>
-          <cl:xylayoutdata std:sid="xyl-data-cc0b5325" right="170px" bottom="20px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
-        </cl:button>
-        <cl:button std:sid="button-d2f92148" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="뒤로가기">
-          <cl:xylayoutdata std:sid="xyl-data-c482bf46" right="20px" bottom="20px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
-        </cl:button>
-        <cl:button std:sid="button-66eedea5" value="답변 달기">
-          <cl:listener std:sid="listener-90ca4909" name="click" handler="onButtonClick2"/>
-          <cl:xylayoutdata std:sid="xyl-data-493aa1f5" top="458px" left="250px" width="140px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-        </cl:button>
-        <cl:xylayout std:sid="xylayout-f91232f8"/>
+        <cl:group std:sid="group-e7058dab" id="answergrp">
+          <cl:verticaldata std:sid="v-data-43c47457" width="400px" height="288px" syncminheight="true" autosize="none"/>
+          <cl:verticallayout std:sid="v-layout-92cbeb57" scrollable="false"/>
+        </cl:group>
+        <cl:group std:sid="group-1c50a8c6" id="buttongrp">
+          <cl:verticaldata std:sid="v-data-dbf174af" width="709px" height="50px" autosize="none"/>
+          <cl:button std:sid="button-6e95866d" id="updatebtn" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="수정하기">
+            <cl:listener std:sid="listener-eb9bf78a" name="click" handler="onButtonClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-d6d371ee" top="10px" right="150px" bottom="10px" width="139px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+          </cl:button>
+          <cl:button std:sid="button-d2f92148" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="뒤로가기">
+            <cl:listener std:sid="listener-e134faf8" name="click" handler="onButtonClick2"/>
+            <cl:xylayoutdata std:sid="xyl-data-dac85209" top="10px" right="0px" bottom="10px" width="140px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-002ef4e8"/>
+        </cl:group>
+        <cl:verticallayout std:sid="v-layout-a85aa1fb"/>
       </cl:group>
       <cl:verticallayout std:sid="v-layout-d9bea495"/>
     </cl:group>

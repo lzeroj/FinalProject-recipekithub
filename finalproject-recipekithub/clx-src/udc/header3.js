@@ -62,7 +62,6 @@ function onMypageClick(e){
  */
 function onNavigationBarItemClick(e){
 	var navigationBar = e.control;
-	console.log(navigationBar.value);
 	if(navigationBar.value == 'question'){
 		console.log(1);
 	}
@@ -136,3 +135,5 @@ function onBodyLoad(e){
 		navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 	}
 }
+
+

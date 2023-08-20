@@ -16,6 +16,12 @@ function onBodyLoad(e){
 	app.lookup("txa1").text = val.boardContent;
 	app.lookup("ipb1").redraw();
 	app.lookup("txa1").redraw();
+	
+	// 답변이 있는지 확인
+	var dataMap = app.lookup("dmboardinfo");
+	dataMap.setValue("boardId", val.boardId);
+	dataMap.setValue("boardTitle", val.boardTitle);
+	app.lookup("subchkanswer").send();
 }
 
 /*
@@ -36,48 +42,72 @@ function onButtonClick(e){
 			}
 		});
     }
-	
 }
 
 /*
- * "답변 달기" 버튼에서 click 이벤트 발생 시 호출.
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSubchkanswerSubmitSuccess(e){
+	var subchkanswer = e.control;
+	var metadata = subchkanswer.getMetadata("chkmessage");
+	var dataMap = app.lookup("dmanswerboardinfo");
+	if(metadata == 1){ // 답변이 존재
+		app.lookup("updatebtn").visible = false; //수정하기 버튼 숨김
+		
+		var vcIpb = new cpr.controls.InputBox();
+		vcIpb.style.css({
+			"borderRadius" : "10px" 
+		});
+		vcIpb.readOnly = true;
+		vcIpb.value = dataMap.getValue("boardAnswerTitle");
+		app.lookup("answergrp").addChild(vcIpb, {
+			width : "669px",
+			height : "40px",
+			autoSize : "none"
+		});
+		
+		// 텍스트 에어리어 추가
+		var textArea = new cpr.controls.TextArea();
+		textArea.style.css({
+			"borderRadius" : "10px" 
+		});
+		textArea.readOnly = true;
+		textArea.value = dataMap.getValue("boardAnswerContent");
+		app.lookup("answergrp").addChild(textArea, {
+			width : "669px",
+			height : "200px",
+			autoSize : "none"
+		});		
+//		moveControl();
+		app.lookup("answergrp").redraw();
+	}
+}
+
+function moveControl(){
+	/* 폼 레이아웃 컨트롤 위치 변경 */
+	app.lookup("rootgrp").updateConstraint(app.lookup("buttongrp"), {
+		top : "",
+		left : "",
+		bottom : "0px",
+		right : "0px",
+		height : "50px",
+		width : "669px"
+	});
+}
+
+/*
+ * "뒤로가기" 버튼에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
 function onButtonClick2(e){
 	var button = e.control;
-	var container1 = app.lookup("grp1");
-	var container = app.getContainer();
+	var host = app.getHost(); // 부모 임베디드 앱
 	
-//	container.updateConstraint(container1, {
-//		
-//	});
-	container1.style.css({
-		"height": "1200px",
-		"bottom": "100px",
-		"background-color": "black"
+	cpr.core.App.load("embedded/myPageQuestion", function(loadedApp){
+		if (loadedApp){
+//			host.initValue = initValue;
+			host.app = loadedApp;
+		}
 	});
-	container1.redraw();
-	
-	var group_3 = new cpr.controls.Container("grp3");
-	var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-	group_3.setLayout(xYLayout_3);
-	var button_3 = new cpr.controls.Button();
-	container.addChild(button_3, {
-		"top":"800px"
-	});
-	container.addChild(group_3, {
-		"top":"600px",
-		"height": "308px"
-	});
-	
-	app.lookup("grp1").redraw();
-}
-
-/*
- * 루트 컨테이너에서 before-draw 이벤트 발생 시 호출.
- * 그룹 컨텐츠가 그려지기 직전에 호출되는 이벤트 입니다. 내부 컨텐츠를 동적으로 구성하기위한 용도로만 사용됩니다.
- */
-function onBodyBeforeDraw(e){
-	var group = e.control;
-
 }
