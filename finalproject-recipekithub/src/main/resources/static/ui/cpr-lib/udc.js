@@ -733,10 +733,10 @@
 					if(navigationBar.value == 'mealkit'){
 						if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
 							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
-								window.location.href="/insertMealkitForm";
+								window.location.href="/mealkitList";
 							}
 						}else{
-						window.location.href="/insertMealkitForm";
+						window.location.href="/mealkitList";
 						}
 					}
 						
@@ -841,73 +841,9 @@
 						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 					}
-					
-					var opbLoginStatus = app.lookup("opbLoginStatus");
-					if(sessionval != null) {
-						opbLoginStatus.text = "[ " + sessionval + " ] \n님이 로그인 상태입니다.";
-					} else {
-						opbLoginStatus.text = "현재 비로그인 상태입니다."
-					}
-				}
-				
-				/*
-				 * 콤보 박스에서 open 이벤트 발생 시 호출.
-				 * 리스트박스를 열때 발생하는 이벤트.
-				 */
-				function onCmb1Open(e){
-					var cmb1 = e.control;
-					var sessionval = getTimedSessionData("memsession");
 	
-					cmb1.clearFilter();
-	
-				    if (sessionval) { 
-				        cmb1.addItem(new cpr.controls.Item("로그아웃", "logout"));
-				        cmb1.addItem(new cpr.controls.Item("프로필", "profile"));
-				    } else {
-				        cmb1.addItem(new cpr.controls.Item("로그인", "login"));
-				    }
 				}
-				
-				/*
-				 * 콤보 박스에서 selection-change 이벤트 발생 시 호출.
-				 * ComboBox Item을 선택하여 선택된 값이 저장된 후에 발생하는 이벤트.
-				 */
-				function onCmb1SelectionChange(e){
-					var cmb1 = e.control;
-				    
-				    if (cmb1.value == "login") { 
-				        //window.location.href = "member/login-form.clx";
-				        cpr.core.App.load("member/login-form", function(loadedApp){
-				        	var newInstance = loadedApp.createNewInstance();
-				        	newInstance.run();
-				        });
-				        
-				    } else if (cmb1.value == "logout") {
-						var event = new cpr.events.CAppEvent("logout");
-						app.dispatchEvent(event);
-				    	/*
-				    	var initValue = "로그아웃 하시겠습니까?";
-						app.openDialog("dialog/registerPopup", {
-							width: 400, height: 300, headerClose: true, resizable: false
-						}, function(dialog) {
-							dialog.ready(function(dialogApp) {
-							dialogApp.initValue = initValue;
-							});
-						}).then(function(returnValue) {
-							var submission = app.lookup("sub_logout");
-							submission.send();
-						});
-				        //window.location.href = "/member/logout";
-				        */
-				    } else if (cmb1.value == "profile") {
-				    	cpr.core.App.load("member/myProfile", function(loadedApp){
-				        	var newInstance = loadedApp.createNewInstance();
-				        	newInstance.run();
-				        });
-				    }
-				};
-				// End - User Script
-				
+	
 				/*
 				 * 서치 인풋에서 search 이벤트 발생 시 호출.
 				 * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트

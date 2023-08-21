@@ -106,10 +106,10 @@ function onNavigationBarItemClick(e){
 	if(navigationBar.value == 'mealkit'){
 		if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
 			if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
-				window.location.href="/insertMealkitForm";
+				window.location.href="/mealkitList";
 			}
 		}else{
-		window.location.href="/insertMealkitForm";
+		window.location.href="/mealkitList";
 		}
 	}
 		
