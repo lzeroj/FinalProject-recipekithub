@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-547ed229" version="1.0.4584">
+  <head std:sid="head-c312bf9d">
+    <screen std:sid="screen-386f56bd" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-46728e7f" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-b4f58bf1" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-15ca286f"/>
+    <cl:appspec>
+      <cl:property name="img" type="string"/>
+      <cl:property name="title" type="string"/>
+      <cl:property name="nick" type="string"/>
+      <cl:property name="star" type="string"/>
+      <cl:property name="hits" type="string"/>
+      <cl:event name="imgClick" type="cpr.events.CAppEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-2c534060" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:listener std:sid="listener-d7578319" name="load" handler="onBodyLoad"/>
+    <cl:img std:sid="image-433f24d8" id="img" style="cursor:pointer;">
+      <cl:listener std:sid="listener-141862f4" name="click" handler="onImgClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-4cc33786" top="0px" left="0px" width="230px" height="150px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:output std:sid="output-5df71c69" id="title" style="font-weight:bold;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-e4fad0bc" top="149px" left="0px" width="230px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-5e4bbe61" id="nick" style="color:#0CA44E;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-7dfee4e7" top="178px" left="0px" width="116px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-ec205da6" value="별점">
+      <cl:xylayoutdata std:sid="xyl-data-59d188a0" top="204px" left="0px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-86c3e89b" id="star" style="color:#0CA44E;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-7a83d067" top="204px" left="49px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-4c9c7b47" value="조회수">
+      <cl:xylayoutdata std:sid="xyl-data-6d6c680b" top="204px" left="98px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-d6d7c904" id="hits" style="color:#0CA44E;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-9a70f666" top="204px" left="147px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:img std:sid="image-9f3a9c26" src="../theme/images/mealkit/free-icon-star-6063500.png">
+      <cl:xylayoutdata std:sid="xyl-data-47f09aa2" top="208px" left="29px" width="21px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:xylayout std:sid="xylayout-7d80c481"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

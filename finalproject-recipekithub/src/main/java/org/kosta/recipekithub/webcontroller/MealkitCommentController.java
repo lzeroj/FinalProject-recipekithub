@@ -61,15 +61,23 @@ public class MealkitCommentController {
 	
 	@PostMapping("/deleteComment")
 	public View deleteMealkitComment(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-		return null;
-	}
-	
-	@GetMapping("/commentList")
-	public View mealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-		ParameterGroup param= dataRequest.getParameterGroup("mealkitNoMap");
-		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo"));
-		List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
-		dataRequest.setResponse("commentListSub", list);
+		ParameterGroup param = dataRequest.getParameterGroup("commentId");
+		int num = Integer.parseInt(param.getValue("mealkitCommentId"));
+		log.info("mealkitCommentId 삭제 = ", num);
+		mealkitCommentService.deleteMealkitComment(num);
 		return new JSONDataView();
 	}
+	
+	@PostMapping("/commentList")
+	public View mealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		ParameterGroup param= dataRequest.getParameterGroup("commentList");
+		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo"));
+		int mealkitCommentNum = mealkitCommentService.mealkitCommentCnt(mealkitNo);
+		List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
+		dataRequest.setResponse("mealkitCommentList", list);
+		dataRequest.setResponse("mealkitCommentNum", mealkitCommentNum);
+		
+		return new JSONDataView();
+	}
+	
 }

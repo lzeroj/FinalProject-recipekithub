@@ -48,12 +48,12 @@
       </cl:datamap>
       <cl:datamap std:sid="d-map-eb607884" id="commentList">
         <cl:datacolumnlist>
-          <cl:datacolumn std:sid="d-column-ed790ba3" name="mealkitNo"/>
+          <cl:datacolumn std:sid="d-column-ed790ba3" name="mealkitNo" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:datamap std:sid="d-map-3608d1d0" id="commentId">
         <cl:datacolumnlist>
-          <cl:datacolumn std:sid="d-column-703ae723" name="mealkitCommentId" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-703ae723" name="mealkitCommentId" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:submission std:sid="submission-b17501d4" id="submealkitlike" action="/showLike" mediatype="application/x-www-form-urlencoded;simple">
@@ -73,9 +73,12 @@
       </cl:submission>
       <cl:submission std:sid="submission-325cac25" id="commentListSub" action="/commentList">
         <cl:listener std:sid="listener-49028342" name="receive" handler="onCommentListSubReceive"/>
+        <cl:listener std:sid="listener-9251b949" name="submit-success" handler="onCommentListSubSubmitSuccess"/>
         <cl:requestdata dataid="commentList"/>
+        <cl:responsedata dataid="commentId"/>
       </cl:submission>
-      <cl:submission std:sid="submission-167b7732" id="deleteComment">
+      <cl:submission std:sid="submission-167b7732" id="deleteComment" action="/deleteComment">
+        <cl:listener std:sid="listener-6c826e89" name="submit-success" handler="onDeleteCommentSubmitSuccess"/>
         <cl:requestdata dataid="commentId"/>
       </cl:submission>
     </cl:model>
@@ -210,30 +213,38 @@
       <cl:xylayout std:sid="xylayout-1e910270"/>
     </cl:group>
     <cl:group std:sid="group-b075a8c4" id="commentgrp">
-      <cl:xylayoutdata std:sid="xyl-data-9449df36" top="1434px" left="29px" width="960px" height="170px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      <cl:verticallayout std:sid="v-layout-03904eea"/>
+      <cl:xylayoutdata std:sid="xyl-data-9449df36" top="1434px" width="963px" height="303px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:verticallayout std:sid="v-layout-03904eea" scrollable="false"/>
     </cl:group>
-    <cl:output std:sid="output-e8c32823" value="댓글">
-      <cl:xylayoutdata std:sid="xyl-data-a3459d07" top="1409px" right="966px" left="29px" height="27px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
-    </cl:output>
-    <cl:output std:sid="output-cc11ff80" value="댓글개수">
-      <cl:xylayoutdata std:sid="xyl-data-237d6efc" top="1409px" right="911px" left="57px" height="27px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
-    </cl:output>
-    <cl:group std:sid="group-cd052328">
-      <cl:xylayoutdata std:sid="xyl-data-45d9c7c9" top="1281px" left="29px" width="960px" height="92px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    <cl:group std:sid="group-cd052328" style="text-align:center;">
+      <cl:xylayoutdata std:sid="xyl-data-45d9c7c9" top="1281px" width="960px" height="43px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:button std:sid="button-bba067fa" style="background-color:#0ca44e; color:white; font-size:16px; background-image:none;" value="등록">
         <cl:listener std:sid="listener-ecd299cb" name="click" handler="onButtonClick5"/>
-        <cl:formdata std:sid="f-data-74d6857c" row="0" col="1" rowspan="1" colspan="1"/>
+        <cl:formdata std:sid="f-data-74d6857c" row="0" col="2" rowspan="1" colspan="1"/>
       </cl:button>
-      <cl:inputbox std:sid="i-box-8bf69832" id="comment">
+      <cl:inputbox std:sid="i-box-8bf69832" id="comment" style="text-align:left;">
         <cl:listener std:sid="listener-2dca2f5a" name="value-change" handler="onIpb1ValueChange"/>
-        <cl:formdata std:sid="f-data-f7ae8f64" row="0" col="0"/>
+        <cl:formdata std:sid="f-data-995b3664" row="0" col="0" rowspan="1" colspan="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-a2ac1660" id="star" style="font-size:12px;" placeholder="별점을 입력해주세요.">
+        <cl:formdata std:sid="f-data-681b0c1a" row="0" col="1"/>
       </cl:inputbox>
       <cl:formlayout std:sid="f-layout-f3d48b90" scrollable="false" hspace="10px" vspace="10px" top-margin="3px" right-margin="3px" bottom-margin="3px" left-margin="3px">
-        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="40" unit="PIXEL"/>
         <cl:columns length="1" unit="FRACTION"/>
         <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="100" unit="PIXEL"/>
       </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-25b8d42b">
+      <cl:xylayoutdata std:sid="xyl-data-81dec5f0" top="1411px" width="961px" height="24px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-e8c32823" value="댓글">
+        <cl:xylayoutdata std:sid="xyl-data-a40e8c71" top="2px" left="2px" width="31px" height="17px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-65ecc615" id="cnt" style="color:#0ca44e; font-weight:bold; font-size:17px;" value="개수">
+        <cl:xylayoutdata std:sid="xyl-data-ffa7b83f" top="-1px" left="32px" width="37px" height="23px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:xylayout std:sid="xylayout-47c32e3b"/>
     </cl:group>
     <cl:xylayout std:sid="xylayout-58a5d367"/>
   </body>

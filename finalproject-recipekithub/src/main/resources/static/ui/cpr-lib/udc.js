@@ -640,6 +640,22 @@
 					return "";
 				};
 	
+				function getTimedSessionData(key) {
+				    var storedData = sessionStorage.getItem(key);
+	
+				    if (storedData) {
+				        var data = JSON.parse(storedData);
+				        var currentTime = new Date().getTime();
+	
+				        if (currentTime < data.expirationTime) {
+				            return data.value;
+				        } else {
+				            sessionStorage.removeItem(key);
+				        }
+				    }
+				    return null;
+				}
+	
 				/*
 				 * 이미지에서 click 이벤트 발생 시 호출.
 				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
@@ -679,12 +695,30 @@
 					}
 					
 					if(navigationBar.value == 'mealkit'){
-						window.location.href='/insertMealkitForm';
+						window.location.href='/mealkitList';
 					}
 						
 					if(navigationBar.value == 'questionAdmin'){
-						window.location.href='/findQnAAdminForm';
+						/** @type cpr.controls.EmbeddedApp */ 
+						var embeapp = app.getAppProperty("embe");
+						cpr.core.App.load("embedded/admin/findQnAAdminForm", function(/*cpr.core.App*/ loadedApp){
+						/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+							if(embeapp.getEmbeddedAppInstance()){
+								embeapp.getEmbeddedAppInstance().dispose();
+							}
+							/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+							if(loadedApp){						
+								/*초기값을 전달합니다.*/			
+								embeapp.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+				//					embApp.initValue = voInitValue;
+								})
+								/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+								embeapp.app = loadedApp;
+							}
+						}); 
+						embeapp.redraw();
 					}
+					
 					if(navigationBar.value == 'recipe'){
 						window.location.href='/recipeBoardList';
 					}
@@ -714,23 +748,25 @@
 				 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 				 */
 				function onBodyLoad(e){
-					var sessionval = getSessionStorage("memsession");
+					var sessionval = getTimedSessionData("memsession");
 					console.log("세션에 담긴값 : "+sessionval);
 					var navigationBar = app.lookup("nav1");
-				//	navigationBar.selectItem(4);
-				//	console.log(navigationBar.value);
+					if(navigationBar.isSelectedByValue("admin") 
+					|| navigationBar.isSelectedByValue("questionAdmin") 
+					|| navigationBar.isSelectedByValue("reportAdmin")){
+						return;
+					}
 					
 					if(sessionval == "shj"){
 						navigationBar.addItem(new cpr.controls.TreeItem("관리자", "admin", "root"));
 						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 					}
-				//	console.log(navigationBar.getItem(4));
-				//	console.log(navigationBar.getChildren());
 				};
 				// End - User Script
 				
 				// Header
+				app.declareAppProperty("embe", null);
 				app.supportMedia("all and (min-width: 1920px)", "FHD");
 				app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -1001,7 +1037,7 @@
 						"colIndex": 0,
 						"rowIndex": 0
 					});
-					var navigationBar_1 = new cpr.controls.NavigationBar("navbar");
+					var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
 					navigationBar_1.menuType = "fullmenu";
 					navigationBar_1.expandTrigger = "click";
 					navigationBar_1.style.setClasses(["indexnav"]);
@@ -1065,6 +1101,9 @@
 						}
 					]
 				});
+				if(typeof onBodyLoad == "function"){
+					app.addEventListener("load", onBodyLoad);
+				}
 			}
 		});
 	internalApp.title = "header3";
@@ -1084,6 +1123,14 @@
 	});
 	
 	// App Properties
+	Object.defineProperty(udc.header3.prototype, "embe", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("embe");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("embe", newValue, true);
+		}
+	});
 	
 	// Register type into the Platform and package
 	cpr.core.Platform.INSTANCE.register(internalApp);
@@ -1282,6 +1329,7 @@
 				app.declareAppProperty("nick", null);
 				app.declareAppProperty("regDate", null);
 				app.declareAppProperty("content", null);
+				app.declareAppProperty("star", null);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 				app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -1303,52 +1351,80 @@
 				var output_1 = new cpr.controls.Output("nick");
 				output_1.value = "Output";
 				container.addChild(output_1, {
-					"top": "7px",
+					"top": "20px",
 					"left": "8px",
 					"width": "100px",
-					"height": "31px"
+					"height": "18px"
 				});
 				
 				var output_2 = new cpr.controls.Output("regDate");
 				output_2.value = "Output";
 				container.addChild(output_2, {
-					"top": "20px",
-					"left": "107px",
+					"top": "21px",
+					"left": "160px",
 					"width": "93px",
 					"height": "18px"
 				});
 				
 				var button_1 = new cpr.controls.Button();
-				button_1.value = "수정";
-				if(typeof onButtonClick == "function") {
-					button_1.addEventListener("click", onButtonClick);
+				button_1.value = "삭제";
+				if(typeof onButtonClick2 == "function") {
+					button_1.addEventListener("click", onButtonClick2);
 				}
 				container.addChild(button_1, {
 					"top": "20px",
-					"left": "434px",
-					"width": "65px",
-					"height": "20px"
-				});
-				
-				var button_2 = new cpr.controls.Button();
-				button_2.value = "삭제";
-				if(typeof onButtonClick2 == "function") {
-					button_2.addEventListener("click", onButtonClick2);
-				}
-				container.addChild(button_2, {
-					"top": "19px",
-					"left": "509px",
+					"left": "252px",
 					"width": "61px",
 					"height": "20px"
 				});
 				
-				var inputBox_1 = new cpr.controls.InputBox("content");
-				inputBox_1.readOnly = true;
-				container.addChild(inputBox_1, {
-					"top": "38px",
+				var output_3 = new cpr.controls.Output("star");
+				output_3.value = "별점";
+				output_3.style.css({
+					"font-size" : "12px"
+				});
+				container.addChild(output_3, {
+					"top": "22px",
+					"left": "125px",
+					"width": "36px",
+					"height": "15px"
+				});
+				
+				var output_4 = new cpr.controls.Output("content");
+				output_4.value = "Output";
+				output_4.style.css({
+					"cursor" : "auto"
+				});
+				container.addChild(output_4, {
+					"top": "39px",
 					"left": "8px",
-					"width": "562px",
-					"height": "93px"
+					"width": "926px",
+					"height": "60px"
+				});
+				
+				var group_1 = new cpr.controls.Container();
+				group_1.style.css({
+					"background-color" : "#f9f9f9"
+				});
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_1.setLayout(xYLayout_2);
+				container.addChild(group_1, {
+					"top": "88px",
+					"left": "8px",
+					"width": "351px",
+					"height": "5px"
+				});
+				
+				var image_1 = new cpr.controls.Image();
+				image_1.src = "theme/images/mealkit/free-icon-star-6063500.png";
+				image_1.style.css({
+					"font-size" : "12px"
+				});
+				container.addChild(image_1, {
+					"top": "22px",
+					"left": "107px",
+					"width": "19px",
+					"height": "15px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);
@@ -1396,11 +1472,252 @@
 			return this.getEmbeddedAppInstance().setAppProperty("content", newValue, true);
 		}
 	});
+	Object.defineProperty(udc.mealkitComment.prototype, "star", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("star");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("star", newValue, true);
+		}
+	});
 	
 	// Register type into the Platform and package
 	cpr.core.Platform.INSTANCE.register(internalApp);
 })();
 /// end - udc.mealkitComment
+/// start - udc.mealkitList
+/*
+ * UDC Qualified Name: udc.mealkitList
+ * App URI: udc/mealkitList
+ * Source Location: udc/mealkitList.clx
+ *
+ * This file was generated by eXBuilder6 compiler(1.0.4584), Don't edit manually.
+ */
+(function(){
+	// App Declaration
+		var internalApp = new cpr.core.App("udc/mealkitList", { 
+			onPrepare: function(loader) {
+			},
+			onCreate: function(/* cpr.core.AppInstance */ app, exports) {
+				var linker = {};
+				// Start - User Script
+				/************************************************
+				 * mealkitList.js
+				 * Created at 2023. 8. 20. 오후 9:38:25.
+				 *
+				 * @author KOSTA
+				 ************************************************/
+	
+				/**
+				 * UDC 컨트롤이 그리드의 뷰 모드에서 표시할 텍스트를 반환합니다.
+				 */
+				exports.getText = function(){
+					// TODO: 그리드의 뷰 모드에서 표시할 텍스트를 반환하는 하는 코드를 작성해야 합니다.
+					return "";
+				};
+	
+				/*
+				 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+				 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+				 */
+				function onBodyLoad(e){
+					app.lookup("img").src = app.getAppProperty("img");
+					app.lookup("title").text = app.getAppProperty("title");
+					app.lookup("nick").text = app.getAppProperty("nick");
+					app.lookup("star").text = app.getAppProperty("star");
+					app.lookup("hits").text = app.getAppProperty("hits");
+				}
+	
+				/*
+				 * 이미지에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onImgClick(e){
+					var img = e.control;
+					var event = new cpr.events.CAppEvent("imgClick");
+					app.dispatchEvent(event);
+				};
+				// End - User Script
+				
+				// Header
+				app.declareAppProperty("img", null);
+				app.declareAppProperty("title", null);
+				app.declareAppProperty("nick", null);
+				app.declareAppProperty("star", null);
+				app.declareAppProperty("hits", null);
+				app.supportMedia("all and (min-width: 1024px)", "default");
+				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
+				app.supportMedia("all and (max-width: 499px)", "mobile");
+				
+				// Configure root container
+				var container = app.getContainer();
+				container.style.css({
+					"width" : "100%",
+					"top" : "0px",
+					"height" : "100%",
+					"left" : "0px"
+				});
+				
+				// Layout
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				container.setLayout(xYLayout_1);
+				
+				// UI Configuration
+				var image_1 = new cpr.controls.Image("img");
+				image_1.style.css({
+					"cursor" : "pointer"
+				});
+				if(typeof onImgClick == "function") {
+					image_1.addEventListener("click", onImgClick);
+				}
+				container.addChild(image_1, {
+					"top": "0px",
+					"left": "0px",
+					"width": "230px",
+					"height": "150px"
+				});
+				
+				var output_1 = new cpr.controls.Output("title");
+				output_1.value = "Output";
+				output_1.style.css({
+					"font-weight" : "bold"
+				});
+				container.addChild(output_1, {
+					"top": "149px",
+					"left": "0px",
+					"width": "230px",
+					"height": "30px"
+				});
+				
+				var output_2 = new cpr.controls.Output("nick");
+				output_2.value = "Output";
+				output_2.style.css({
+					"color" : "#0CA44E"
+				});
+				container.addChild(output_2, {
+					"top": "178px",
+					"left": "0px",
+					"width": "116px",
+					"height": "27px"
+				});
+				
+				var output_3 = new cpr.controls.Output();
+				output_3.value = "별점";
+				container.addChild(output_3, {
+					"top": "204px",
+					"left": "0px",
+					"width": "50px",
+					"height": "27px"
+				});
+				
+				var output_4 = new cpr.controls.Output("star");
+				output_4.value = "Output";
+				output_4.style.css({
+					"color" : "#0CA44E"
+				});
+				container.addChild(output_4, {
+					"top": "204px",
+					"left": "49px",
+					"width": "50px",
+					"height": "27px"
+				});
+				
+				var output_5 = new cpr.controls.Output();
+				output_5.value = "조회수";
+				container.addChild(output_5, {
+					"top": "204px",
+					"left": "98px",
+					"width": "50px",
+					"height": "27px"
+				});
+				
+				var output_6 = new cpr.controls.Output("hits");
+				output_6.value = "Output";
+				output_6.style.css({
+					"color" : "#0CA44E"
+				});
+				container.addChild(output_6, {
+					"top": "204px",
+					"left": "147px",
+					"width": "50px",
+					"height": "27px"
+				});
+				
+				var image_2 = new cpr.controls.Image();
+				image_2.src = "theme/images/mealkit/free-icon-star-6063500.png";
+				container.addChild(image_2, {
+					"top": "208px",
+					"left": "29px",
+					"width": "21px",
+					"height": "20px"
+				});
+				if(typeof onBodyLoad == "function"){
+					app.addEventListener("load", onBodyLoad);
+				}
+			}
+		});
+	internalApp.title = "mealkitList";
+	
+	// Type declaration for mealkitList
+	cpr.utils.Util.ensurePackage("udc").mealkitList = function(id){
+		cpr.controls.UDCBase.call(this, "udc.mealkitList", internalApp, id);
+	};
+	
+	udc.mealkitList.prototype = Object.create(cpr.controls.UDCBase.prototype);
+	Object.defineProperty(udc.mealkitList.prototype, "type", {
+		get : function(){
+			return "udc.mealkitList";
+		},
+		
+		configurable: true
+	});
+	
+	// App Properties
+	Object.defineProperty(udc.mealkitList.prototype, "img", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("img");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("img", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.mealkitList.prototype, "title", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("title");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("title", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.mealkitList.prototype, "nick", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("nick");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("nick", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.mealkitList.prototype, "star", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("star");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("star", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.mealkitList.prototype, "hits", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("hits");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("hits", newValue, true);
+		}
+	});
+	
+	// Register type into the Platform and package
+	cpr.core.Platform.INSTANCE.register(internalApp);
+})();
+/// end - udc.mealkitList
 /// start - udc.recipeCommentudc
 /*
  * UDC Qualified Name: udc.recipeCommentudc

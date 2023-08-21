@@ -103,14 +103,14 @@
         <cl:xylayout std:sid="xylayout-27b0cb22"/>
       </cl:group>
       <cl:button std:sid="button-3f919da4" value="Button">
-        <cl:xylayoutdata std:sid="xyl-data-19a2857d" top="1133px" left="452px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-19a2857d" top="1168px" left="452px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:group std:sid="group-6e55fbbc" id="grp">
-        <cl:xylayoutdata std:sid="xyl-data-9c05ce4d" top="343px" width="968px" height="717px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-9c05ce4d" top="343px" width="968px" height="783px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:flowlayout std:sid="f-layout-3671cf03" scrollable="false"/>
       </cl:group>
       <cl:group std:sid="group-0a2f91f8" style="background-color:#f9f9f9; background-image:none;">
-        <cl:xylayoutdata std:sid="xyl-data-7f73937c" top="1072px" width="974px" height="22px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-7f73937c" top="1136px" width="974px" height="22px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:xylayout std:sid="xylayout-bb7fd84b"/>
       </cl:group>
       <cl:button std:sid="button-068ac482" id="insertBtn" style="background-color:#0ca44e; color:white; font-weight:16; font-family:푸른전남 Medium; background-image:none;" class=".cl-button mealkitbtn" visible="false" value="밀키트 등록">
