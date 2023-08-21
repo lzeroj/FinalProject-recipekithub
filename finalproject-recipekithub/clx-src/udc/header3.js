@@ -67,7 +67,7 @@ function onNavigationBarItemClick(e){
 	}
 	
 	if(navigationBar.value == 'mealkit'){
-		window.location.href='/insertMealkitForm';
+		window.location.href='/mealkitList';
 	}
 		
 	if(navigationBar.value == 'questionAdmin'){
