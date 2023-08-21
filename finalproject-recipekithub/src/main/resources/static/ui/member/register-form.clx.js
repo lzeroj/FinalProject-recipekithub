@@ -184,31 +184,33 @@
 				// 회원가입시 사용가능한 Email 정규식을 체크하는 변수		
 				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,10}$/;
 				
-				if (emailValue === "") { 										//---> 1. email 입력칸이 빈칸인 경우
-					opbCheckEmailResult.style.css("color", "pink");
-					opbCheckEmailResult.value = "email을 입력해주세요.";
-					imgEmail.src = "";
-				} else if (emailValue.length > 30) { 						//---> 2. email로 입력한 값이 30자를 초과한 경우
-					opbCheckEmailResult.style.css("color", "red");
-					opbCheckEmailResult.value = "사용가능한 email은 30자 이하이어야 합니다.";
-					imgEmail.src = "../ui/theme/images/member/cross.png";
-				} else if (metadataFail) { 									//---> 3. 입력한 email이 중복되어 사용할 수 없는 경우
-					opbCheckEmailResult.style.css("color", "red");
-					opbCheckEmailResult.value = "이메일이 중복됩니다.";
-					imgEmail.src = "../ui/theme/images/member/cross.png";
-				} else if (regExp.test(emailValue) == false) { 		//---> 4. 입력한 값이 email 형식에 적합하지 않아 사용할 수 없는 경우
-					opbCheckEmailResult.style.css("color", "red");
-					opbCheckEmailResult.value = "email 형식인지 확인해주시기 바랍니다.";
-					imgEmail.src = "../ui/theme/images/member/cross.png";
-				} else if (emailValue.search(" ") != -1) { 				//---> 5. 입력한 email에 공백이 포함되어 사용할 수 없는 경우
-					opbCheckEmailResult.style.css("color", "red");
-					opbCheckEmailResult.value = "닉네임은 공백을 포함할 수 없습니다.";
-					imgEmail.src = "../ui/theme/images/member/cross.png";
-				} else { 																//---> 6. 입력한 email이 사용 가능한 경우
-					checkEmailFlag = true;
-					opbCheckEmailResult.style.css("color", "blue");
-					opbCheckEmailResult.value = "사용가능한 이메일입니다.";
-					imgEmail.src = "../ui/theme/images/member/checked.png";
+				if (sub_check_email.xhr.readyState == 4 && sub_check_email.xhr.status == 200) {
+					if (emailValue === "") { 										//---> 1. email 입력칸이 빈칸인 경우
+						opbCheckEmailResult.style.css("color", "pink");
+						opbCheckEmailResult.value = "email을 입력해주세요.";
+						imgEmail.src = "";
+					} else if (emailValue.length > 30) { 						//---> 2. email로 입력한 값이 30자를 초과한 경우
+						opbCheckEmailResult.style.css("color", "red");
+						opbCheckEmailResult.value = "사용가능한 email은 30자 이하이어야 합니다.";
+						imgEmail.src = "../ui/theme/images/member/cross.png";
+					} else if (metadataFail) { 									//---> 3. 입력한 email이 중복되어 사용할 수 없는 경우
+						opbCheckEmailResult.style.css("color", "red");
+						opbCheckEmailResult.value = "이메일이 중복됩니다.";
+						imgEmail.src = "../ui/theme/images/member/cross.png";
+					} else if (regExp.test(emailValue) == false) { 		//---> 4. 입력한 값이 email 형식에 적합하지 않아 사용할 수 없는 경우
+						opbCheckEmailResult.style.css("color", "red");
+						opbCheckEmailResult.value = "email 형식인지 확인해주시기 바랍니다.";
+						imgEmail.src = "../ui/theme/images/member/cross.png";
+					} else if (emailValue.search(" ") != -1) { 				//---> 5. 입력한 email에 공백이 포함되어 사용할 수 없는 경우
+						opbCheckEmailResult.style.css("color", "red");
+						opbCheckEmailResult.value = "닉네임은 공백을 포함할 수 없습니다.";
+						imgEmail.src = "../ui/theme/images/member/cross.png";
+					} else { 																//---> 6. 입력한 email이 사용 가능한 경우
+						checkEmailFlag = true;
+						opbCheckEmailResult.style.css("color", "blue");
+						opbCheckEmailResult.value = "사용가능한 이메일입니다.";
+						imgEmail.src = "../ui/theme/images/member/checked.png";
+					}
 				}
 			}
 
@@ -336,30 +338,31 @@
 				var nick = ipbNick.displayText;
 				var nickValue = String(nick); 											// input-box에서 보여지는 HTML Element의 value를 가져와서 String 타입으로 저장.	
 				
-				if (nickValue === "") { 													//---> 1. 닉네임 입력칸이 빈칸인 경우
-					opbCheckNickResult.style.css("color", "pink");
-					opbCheckNickResult.value = "닉네임을 입력해주세요.";
-					imgNick.src = "";
-				} else if (nickValue.length < 2 || nickValue.length > 8) { 		//---> 2. 닉네임으로 입력한 값이 1자 or 9자를 이상인 경우
-					opbCheckNickResult.style.css("color", "red");
-					opbCheckNickResult.value = "닉네임은 2자이상 ~ 8자 이하이어야 합니다.";
-					imgNick.src = "../ui/theme/images/member/cross.png";
-				} else if (metadataFail) { 												//---> 3. 입력한 닉네임이 중복되어 사용할 수 없는 경우
-					opbCheckNickResult.style.css("color", "red");
-					opbCheckNickResult.value = "닉네임이 중복됩니다.";
-					imgNick.src = "../ui/theme/images/member/cross.png";
-				} else if (nickValue.search(" ") != -1) { 								//---> 4. 입력한 닉네임에 공백이 포함되어 사용할 수 없는 경우
-					opbCheckNickResult.style.css("color", "red");
-					opbCheckNickResult.value = "닉네임은 공백을 포함할 수 없습니다.";
-					imgNick.src = "../ui/theme/images/member/cross.png";
-				} else { 																			//---> 5. 입력한 닉네임이 사용 가능한 경우
-					checkNickFlag = true;
-					opbCheckNickResult.style.css("color", "blue");
-					opbCheckNickResult.value = "사용가능한 닉네임입니다.";
-					imgNick.src = "../ui/theme/images/member/checked.png";
+				if (sub_check_nick.xhr.readyState == 4 && sub_check_nick.xhr.status == 200) {
+					if (nickValue === "") { 													//---> 1. 닉네임 입력칸이 빈칸인 경우
+						opbCheckNickResult.style.css("color", "pink");
+						opbCheckNickResult.value = "닉네임을 입력해주세요.";
+						imgNick.src = "";
+					} else if (nickValue.length < 2 || nickValue.length > 8) { 		//---> 2. 닉네임으로 입력한 값이 1자 or 9자를 이상인 경우
+						opbCheckNickResult.style.css("color", "red");
+						opbCheckNickResult.value = "닉네임은 2자이상 ~ 8자 이하이어야 합니다.";
+						imgNick.src = "../ui/theme/images/member/cross.png";
+					} else if (metadataFail) { 												//---> 3. 입력한 닉네임이 중복되어 사용할 수 없는 경우
+						opbCheckNickResult.style.css("color", "red");
+						opbCheckNickResult.value = "닉네임이 중복됩니다.";
+						imgNick.src = "../ui/theme/images/member/cross.png";
+					} else if (nickValue.search(" ") != -1) { 								//---> 4. 입력한 닉네임에 공백이 포함되어 사용할 수 없는 경우
+						opbCheckNickResult.style.css("color", "red");
+						opbCheckNickResult.value = "닉네임은 공백을 포함할 수 없습니다.";
+						imgNick.src = "../ui/theme/images/member/cross.png";
+					} else { 																			//---> 5. 입력한 닉네임이 사용 가능한 경우
+						checkNickFlag = true;
+						opbCheckNickResult.style.css("color", "blue");
+						opbCheckNickResult.value = "사용가능한 닉네임입니다.";
+						imgNick.src = "../ui/theme/images/member/checked.png";
+					}
 				}
 			}
-
 			//=============================================[ 카카오 주소검색 API ]=============================================//
 
 			/*
@@ -948,7 +951,7 @@
 											"rowSpan": 1
 										});
 										var output_5 = new cpr.controls.Output();
-										output_5.value = "❈ 30자 이하의 중복이 불가한 이메일 형식 입니다";
+										output_5.value = "❈ 30자 이하의 중복이 불가한 이메일 형식";
 										output_5.style.css({
 											"font-size" : "14px"
 										});
@@ -1050,9 +1053,9 @@
 											"rowSpan": 1
 										});
 										var output_8 = new cpr.controls.Output();
-										output_8.value = "❈ 1자 이상~25자 이하입니다.";
+										output_8.value = "❈ 8자 이상~25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
 										output_8.style.css({
-											"font-size" : "14px"
+											"font-size" : "12px"
 										});
 										container.addChild(output_8, {
 											"colIndex": 1,
@@ -1143,9 +1146,9 @@
 											"rowSpan": 1
 										});
 										var output_11 = new cpr.controls.Output();
-										output_11.value = "❈ 1자 이상~25자 이하입니다.";
+										output_11.value = "❈ 8자 이상~25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
 										output_11.style.css({
-											"font-size" : "14px"
+											"font-size" : "12px"
 										});
 										container.addChild(output_11, {
 											"colIndex": 1,
@@ -1236,7 +1239,7 @@
 											"rowIndex": 0
 										});
 										var output_14 = new cpr.controls.Output();
-										output_14.value = "❈ 1자 이상~8자 이하이며 중복 불가합니다.";
+										output_14.value = "❈ 중복 불가, 1자 이상~8자 이하.";
 										output_14.style.css({
 											"font-size" : "14px"
 										});

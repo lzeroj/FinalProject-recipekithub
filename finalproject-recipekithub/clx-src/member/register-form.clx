@@ -186,7 +186,7 @@
                       <cl:datamapbind property="value" datacontrolid="dm_register_member" columnname="member_email"/>
                       <cl:formdata std:sid="f-data-ccc0a682" row="0" col="1" rowspan="1" colspan="1"/>
                     </cl:inputbox>
-                    <cl:output std:sid="output-e6eb880f" style="font-size:14px;" value="❈ 30자 이하의 중복이 불가한 이메일 형식 입니다">
+                    <cl:output std:sid="output-e6eb880f" style="font-size:14px;" value="❈ 30자 이하의 중복이 불가한 이메일 형식">
                       <cl:formdata std:sid="f-data-32299cb4" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:img std:sid="image-5be06541" id="imgEmail">
@@ -224,7 +224,7 @@
                     <cl:output std:sid="output-bb64ce6b" id="opbCheckPassword" style="font-size:14px;" value="">
                       <cl:formdata std:sid="f-data-08075def" row="1" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
-                    <cl:output std:sid="output-38bce9e6" style="font-size:14px;" value="❈ 1자 이상~25자 이하입니다.">
+                    <cl:output std:sid="output-38bce9e6" style="font-size:12px;" value="❈ 8자 이상~25자 이하 &#xD;&#xA;(숫자, 대소문자, 특수 문자 모두 포함)">
                       <cl:formdata std:sid="f-data-1577497e" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:formlayout std:sid="f-layout-ab8174a3" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -258,7 +258,7 @@
                     <cl:output std:sid="output-b92eba14" id="opbCheckPassword2" value="">
                       <cl:formdata std:sid="f-data-3c82b791" row="1" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
-                    <cl:output std:sid="output-84eeb228" style="font-size:14px;" value="❈ 1자 이상~25자 이하입니다.">
+                    <cl:output std:sid="output-84eeb228" style="font-size:12px;" value="❈ 8자 이상~25자 이하 &#xD;&#xA;(숫자, 대소문자, 특수 문자 모두 포함)">
                       <cl:formdata std:sid="f-data-d222ce46" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:formlayout std:sid="f-layout-39a15f5f" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -293,7 +293,7 @@
                         <cl:columns length="30" unit="PIXEL"/>
                       </cl:formlayout>
                     </cl:group>
-                    <cl:output std:sid="output-8fdb611f" style="font-size:14px;" value="❈ 1자 이상~8자 이하이며 중복 불가합니다.">
+                    <cl:output std:sid="output-8fdb611f" style="font-size:14px;" value="❈ 중복 불가, 1자 이상~8자 이하.">
                       <cl:formdata std:sid="f-data-f427e434" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:formlayout std:sid="f-layout-8f625d5f" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">

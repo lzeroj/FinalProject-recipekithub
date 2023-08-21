@@ -215,6 +215,12 @@ function onBodyLoad(e){
 		navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 	}
 
+	var opbLoginStatus = app.lookup("opbLoginStatus");
+	if(sessionval != null) {
+		opbLoginStatus.text = "[ " + sessionval + " ] \n님이 로그인 상태입니다.";
+	} else {
+		opbLoginStatus.text = "현재 비로그인 상태입니다."
+	}
 }
 
 /*
@@ -248,7 +254,7 @@ function onCmb1Open(e){
 	var cmb1 = e.control;
 	var sessionval = getTimedSessionData("memsession");
 
-	cmb1.clearFilter();
+	cmb1.deleteAllItems();
 
     if (sessionval) { 
         cmb1.addItem(new cpr.controls.Item("로그아웃", "logout"));
@@ -265,13 +271,12 @@ function onCmb1Open(e){
 function onCmb1SelectionChange(e){
 	var cmb1 = e.control;
     
+    // 비로그인 상태의 경우, 콤보박스에 "로그인" 메뉴 표시
     if (cmb1.value == "login") { 
-        //window.location.href = "member/login-form.clx";
-        cpr.core.App.load("member/login-form", function(loadedApp){
-        	var newInstance = loadedApp.createNewInstance();
-        	newInstance.run();
-        });
-        
+        var httpPostMethod = new cpr.protocols.HttpPostMethod("member/login-form.clx");
+		httpPostMethod.submit();
+		
+	// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
     } else if (cmb1.value == "logout") {
 		var event = new cpr.events.CAppEvent("logout");
 		app.dispatchEvent(event);
@@ -289,10 +294,10 @@ function onCmb1SelectionChange(e){
 		});
         //window.location.href = "/member/logout";
         */
-    } else if (cmb1.value == "profile") {
-    	cpr.core.App.load("member/myProfile", function(loadedApp){
-        	var newInstance = loadedApp.createNewInstance();
-        	newInstance.run();
-        });
+    	
+    // 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+    } else if (cmb1.value == "profile") { 
+	    var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+		httpPostMethod.submit();
     }
 }
