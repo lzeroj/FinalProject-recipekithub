@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosta.recipekithub.model.mapper.ChefMapper">
+
+
+	<select id="findChefListByRecipe" resultType="org.kosta.recipekithub.model.vo.ChefVO">
+		SELECT rb.MEMBER_EMAIL , M.MEMBER_NAME , M.MEMBER_NICK , M.MEMBER_IMAGE , RB.RECIPE_COUNT
+		FROM "MEMBER" m , (SELECT MEMBER_EMAIL ,count(*) RECIPE_COUNT FROM RECIPE_BOARD GROUP BY MEMBER_EMAIL) rb 
+		WHERE m.MEMBER_EMAIL = rb.MEMBER_EMAIL 
+		ORDER BY rb.RECIPE_COUNT DESC , m.MEMBER_EMAIL ASC
+	</select>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-26a57de8" version="1.0.4584">
+  <head std:sid="head-86a9f7bf">
+    <screen std:sid="screen-ee8ec44e" id="new-screen" name="new-screen" minwidth="1880px" width="1880px" height="740px" active="true"/>
+    <screen std:sid="screen-28862687" id="default" name="default" minwidth="1024px" maxwidth="1879px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-ff20484b" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-8b44801c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-bd72779c">
+      <cl:dataset std:sid="d-set-d79e3bc3" id="chefList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-dd069f50" name="memberEmail"/>
+          <cl:datacolumn std:sid="d-column-82111072" name="memberName"/>
+          <cl:datacolumn std:sid="d-column-de78a0fc" name="memberNick"/>
+          <cl:datacolumn std:sid="d-column-23ce94c0" name="memberImage"/>
+          <cl:datacolumn std:sid="d-column-bbdffc68" name="recipeCount" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-4c6bfae3" id="subcheflist" action="/findChefListByRecipe">
+        <cl:listener std:sid="listener-d8915434" name="submit-success" handler="onSubcheflistSubmitSuccess"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-6bf3f8ae">
+    <cl:listener std:sid="listener-36d888bd" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-d72724a4" id="grp">
+      <cl:xylayoutdata std:sid="xyl-data-1672f5a2" top="30px" bottom="30px" width="880px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+      <cl:flowlayout std:sid="f-layout-0895aa16"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-b75e1438"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

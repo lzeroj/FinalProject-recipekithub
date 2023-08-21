@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-b526e8be" version="1.0.4584">
+  <head std:sid="head-82d281da">
+    <screen std:sid="screen-090026d4" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-3993cb9c" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-89910cfa" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-095be45a"/>
+    <cl:appspec>
+      <cl:property name="memberEmail" type="string"/>
+      <cl:property name="memberName" type="string"/>
+      <cl:property name="memberImage" type="string"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-19c4dd72" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:listener std:sid="listener-212302e3" name="load" handler="onBodyLoad"/>
+    <cl:img std:sid="image-715f404c" id="memberImage" style="border-radius:50px;" fallbacksrc="../theme/images/icon/x.png">
+      <cl:xylayoutdata std:sid="xyl-data-548dac70" top="0px" left="0px" width="160px" height="140px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:output std:sid="output-455135a8" id="memberNick" style="font-weight:bold; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-9b1b1d25" top="140px" left="0px" width="160px" height="25px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-e3424226" id="memberEmail" style="font-size:12px; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-9f262350" top="165px" left="0px" width="160px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:xylayout std:sid="xylayout-2a5354ce"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>
