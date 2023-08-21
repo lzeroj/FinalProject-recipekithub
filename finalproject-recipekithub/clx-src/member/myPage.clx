@@ -36,7 +36,7 @@
       <cl:group std:sid="group-3e468ab3" style="background-color:#f4faec;">
         <cl:xylayoutdata std:sid="xyl-data-a87a062c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-13bc8f58" style="text-align:center;">
-          <cl:xylayoutdata std:sid="xyl-data-ba4a6983" top="210px" bottom="0px" width="1230px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+          <cl:xylayoutdata std:sid="xyl-data-ba4a6983" top="210px" bottom="100px" width="1230px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
           <cl:group std:sid="group-3de6e575">
             <cl:responsivexylayoutdata std:sid="rxyl-data-8fed52e1">
               <cl:xylayoutdata std:sid="sxyl-data-30f9770a" top="39px" right="275px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
@@ -48,7 +48,7 @@
             <cl:udc std:sid="ud-control-4ba86f54" type="udc.header3">
               <cl:xylayoutdata std:sid="xyl-data-452b792c" top="-199px" right="-972px" left="-480px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
             </cl:udc>
-            <cl:xylayout std:sid="xylayout-6eef3a02"/>
+            <cl:xylayout std:sid="xylayout-6eef3a02" scrollable="false"/>
           </cl:group>
           <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-bottom-color:#FFFFFF; color:#0ebc59; font-weight:bold; border-bottom-style:0;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click">
             <cl:listener std:sid="listener-cd03793d" name="item-click" handler="onNav1ItemClick"/>
@@ -70,13 +70,16 @@
           </cl:group>
           <cl:responsivexylayout std:sid="r-xylayout-6b15dc6d"/>
         </cl:group>
-        <cl:udc std:sid="ud-control-88abe628" type="udc.header3">
-          <cl:xylayoutdata std:sid="xyl-data-adabf161" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:udc std:sid="ud-control-aeddd20e" style="border-bottom-color:#62a40c; border-bottom-width:3px; border-bottom-style:solid;" type="udc.headerMyPage">
+          <cl:xylayoutdata std:sid="xyl-data-279d7c53" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         </cl:udc>
         <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-832eec77"/>
     </cl:group>
+    <cl:udc std:sid="ud-control-c2834810" type="udc.footer">
+      <cl:xylayoutdata std:sid="xyl-data-1977962e" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+    </cl:udc>
     <cl:xylayout std:sid="xylayout-c3614e7a"/>
   </body>
   <std:studiosetting>

@@ -38,3 +38,23 @@ function onImageClick(e){
 	var image = e.control;
 	window.scrollTo(0,0);
 }
+
+/*
+ * 사용자 정의 컨트롤에서 event 이벤트 발생 시 호출.
+ */
+function onHeader3Event(e){
+	var header3 = e.control;
+	if (cmb1.value == "logout") {
+		var initValue = "로그아웃 하시겠습니까?";
+		app.openDialog("dialog/registerPopup", {
+			width: 400, height: 300, headerClose: true, resizable: false
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+			dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue) {
+			var submission = app.lookup("sub_logout");
+			submission.send();
+		});
+	}
+}

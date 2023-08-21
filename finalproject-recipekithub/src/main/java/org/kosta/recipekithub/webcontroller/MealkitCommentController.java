@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.MealkitCommentService;
+import org.kosta.recipekithub.model.service.MealkitStarScoreService;
 import org.kosta.recipekithub.model.vo.MealkitCommentVO;
+import org.kosta.recipekithub.model.vo.MealkitStarScore;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MealkitCommentController {
 
 	private final MealkitCommentService mealkitCommentService;
+	private final MealkitStarScoreService mealkitStarScoreService;
 	
 	@PostMapping("/insertComment")
 	public View insertMealkitComment(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
@@ -36,12 +39,17 @@ public class MealkitCommentController {
 		ParameterGroup param = dataRequest.getParameterGroup("commentMap");
 		String comment = param.getValue("comment");
 		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo"));
+		double star = Double.parseDouble(param.getValue("star"));
 		
-		log.info("comment, mealkitNo = {}, {} ", comment, mealkitNo);
+		log.info("comment, mealkitNo, star = {}, {},{} ", comment, mealkitNo, star);
 		HttpSession session = request.getSession(false);
 		MemberVO member = (MemberVO)session.getAttribute("member");
 
 		int num = mealkitCommentService.insertMealkitComment(comment, mealkitNo, member);
+		System.out.println("밀키트 등록 번호 = " + num);
+		
+		mealkitStarScoreService.insertMealkitStar(member.getMemberEmail(), num, star);
+		
 		MealkitCommentVO mealkitComment = mealkitCommentService.findCommentByNo(num);
 		dataRequest.setResponse("commentReturn", mealkitComment);
 		dataRequest.setResponse("mealkitReturn", mealkitComment.getMealkitBoard().getMealkitNo());
@@ -61,15 +69,35 @@ public class MealkitCommentController {
 	
 	@PostMapping("/deleteComment")
 	public View deleteMealkitComment(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		ParameterGroup param = dataRequest.getParameterGroup("commentId");
+		int num = Integer.parseInt(param.getValue("mealkitCommentId"));
+		log.info("mealkitCommentId 삭제 = ", num);
+		mealkitCommentService.deleteMealkitComment(num);
+		return new JSONDataView();
+	}
+	
+	@PostMapping("/commentList")
+	public View mealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		ParameterGroup param= dataRequest.getParameterGroup("commentList");
+		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo")); //밀키트 게시판 번호
+		int mealkitCommentNum = mealkitCommentService.mealkitCommentCnt(mealkitNo);//댓글 개수
+		
+		List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
+		//MealkitStarScore mealkitStar = mealkitStarScoreService.findMealkitStar(mealkitComment.getMealkitCommentId());
+		//List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
+		dataRequest.setResponse("mealkitCommentList", list);
+		dataRequest.setResponse("mealkitCommentNum", mealkitCommentNum);
+		return new JSONDataView();
+	}
+	
+	@PostMapping("/commentListV2")
+	public View mealkitListV2(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		//for(MealkitCommentVO comment : list) {
+		//	MealkitStarScore mealkitStar = mealkitStarScoreService.findMealkitStar(comment.getMealkitCommentId());
+		//}
+	
 		return null;
 	}
 	
-	@GetMapping("/commentList")
-	public View mealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-		ParameterGroup param= dataRequest.getParameterGroup("mealkitNoMap");
-		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo"));
-		List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
-		dataRequest.setResponse("commentListSub", list);
-		return new JSONDataView();
-	}
+	
 }

@@ -69,8 +69,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int insertProfileImg(String memberEmail) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertProfileImg(String memberEmail, String memberImage) {
+		return memberMapper.insertProfileImg(memberEmail, memberImage);
 	}
+
 }

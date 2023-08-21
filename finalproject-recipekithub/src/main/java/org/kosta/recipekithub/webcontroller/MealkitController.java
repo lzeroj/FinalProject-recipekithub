@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.MealkitService;
+import org.kosta.recipekithub.model.service.MealkitStarScoreService;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
@@ -37,13 +38,14 @@ import lombok.extern.slf4j.Slf4j;
 public class MealkitController {
 	
 	private final MealkitService mealKitService;
+	private final MealkitStarScoreService mealkitStarScoreService;
 	
 	
 	@RequestMapping("/mealkitList")
 	public View mealkitList(HttpServletRequest request,HttpServletResponse response, DataRequest dataRequst) {
 		HttpSession session = request.getSession(false);
 		String email = null;
-		if(session != null) {
+		if(session != null && session.getAttribute("member") != null) {
 			MemberVO member = (MemberVO)session.getAttribute("member");
 			email = member.getMemberEmail();
 			
@@ -51,9 +53,18 @@ public class MealkitController {
 			email = "guest";
 		}
 		List<MealKitBoard> list = mealKitService.findMealKitList();
+		
+//		Map<Integer, Double> map = new HashMap<>();
+//		for(MealKitBoard mealkit : list) {
+//			double num = mealkitStarScoreService.findMealkitStarList(mealkit.getMealkitNo());
+//			map.put(mealkit.getMealkitNo(), num);
+//			System.out.println(map.get(mealkit.getMealkitNo()));
+//		}
+		
 		Map<String, Object> initParam = new HashMap<String, Object>();
 		initParam.put("mealkitList", list);
 		initParam.put("member", email);
+		//initParam.put("mealkitMap", map);
 		return new UIView("ui/mealkit/mealkitList.clx", initParam);
 		
 	}
@@ -61,18 +72,21 @@ public class MealkitController {
 	
 	@GetMapping("/mealkitDetail/{mealkitNo}") //밀키트 상세 페이지
 	public View mealKit(@PathVariable int mealkitNo, DataRequest dataRequest, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-	
-		String user = "guest";
-		if(session != null) {
+		HttpSession session = request.getSession(false);
+		String user = null;
+		if(session != null && session.getAttribute("member") != null) {
 			MemberVO sessionMember = (MemberVO)session.getAttribute("member");
 			user = sessionMember.getMemberNick();
+		}else {
+			user = "guest";
 		}
 		
 		
 		MealKitBoard mealkit = mealKitService.findMealKitByNo(mealkitNo);
 		log.info("mealKit Controller mealkit의 정보를 알아보자 {} ", mealkit);
 		//MemberVO member = memberService.findMemberByEmail(mealkit.getMemberVO().getMemberEmail());
+		double avg = mealkitStarScoreService.findMealkitStarList(mealkitNo);
+		
 		Map<String, Object> initParam = new HashMap<>();
 		initParam.put("mealkitNo", mealkit.getMealkitNo());
 		initParam.put("mealkitName", mealkit.getMealkitName());
@@ -85,6 +99,7 @@ public class MealkitController {
 		initParam.put("mealkitHits", mealkit.getMealkitHits());
 		initParam.put("mealkitImg", mealkit.getMealkitImage());
 		initParam.put("sessionMember", user);
+		initParam.put("avg", avg);
 		return new UIView("/ui/mealkit/mealkitDetail.clx", initParam);
 	}
 	
@@ -106,14 +121,14 @@ public class MealkitController {
 //		MemberVO sessionMember = (MemberVO)session.getAttribute("member");
 //		if(sessionMember == null) {
 //			return new UIView("/ui/index.clx");	
-//		}
+//		} 
 		
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
 		UploadFile[] uploadFile = uploadFiles.get("image");
 		File orgName = uploadFile[0].getFile();
 		String saveName = uploadFile[0].getFileName();
 		//String savePath = "C:\\Users\\KOSTA\\git\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadmealkitimage\\";
-		String savePath = "C:\\upload\\mealkitUpload\\";
+		String savePath = "C:\\upload\\mealkit\\";
 		String uuid = UUID.randomUUID().toString();
 		FileCopyUtils.copy(orgName, new File(savePath+uuid+"_"+saveName));
 		
@@ -136,11 +151,10 @@ public class MealkitController {
 		
 		//HttpSession session = request.getSession(false);
 		//MemberVO member = (MemberVO)session.getAttribute("mvo");
-		MemberVO member = new MemberVO("hellojava@naver.com", "123", "재헌강", "유스타스캡틴재헌", "12345", "성남", "오리", "01012345678", "1998-01-01", "1", "Y", null);
+		MemberVO member = new MemberVO("hellojava@naver.com", "123", "재헌강", "유스타스캡틴재헌", "12345", "성남", "오리", "01012345678", "1998-01-01", "1", "Y", null, null);
 
 		mealkit.setMemberVO(member);
 		System.out.println("Service mealkit = " + mealkit);
-		
 		
 		int mealkitNo = mealKitService.insertMealKit(mealkit);
 		
@@ -229,7 +243,7 @@ public class MealkitController {
 		HttpSession session = request.getSession(false);
 		MemberVO member = (MemberVO)session.getAttribute("member");	
 		
-		String savePath = "C:\\upload\\mealkitUpload\\";
+		String savePath = "C:\\upload\\mealkit\\";
 		String mealkitImg= mealKitService.findMealKitByNo(mealkitNo).getMealkitImage();
 		File existImageFile = new File(savePath + mealkitImg);
 		if(existImageFile.exists()) {

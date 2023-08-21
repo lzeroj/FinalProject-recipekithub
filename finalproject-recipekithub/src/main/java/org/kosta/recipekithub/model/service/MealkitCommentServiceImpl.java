@@ -51,8 +51,8 @@ public class MealkitCommentServiceImpl implements MealkitCommentService {
 	
 	
 	@Override
-	public void deleteMealkitComment(int mealkitNo) {
-		mealkitCommentMapper.deleteComment(mealkitNo);
+	public void deleteMealkitComment(int commentNo) {
+		mealkitCommentMapper.deleteComment(commentNo);
 		
 	}
 	
@@ -61,5 +61,9 @@ public class MealkitCommentServiceImpl implements MealkitCommentService {
 		return mealkitCommentMapper.findCommentListByMealkit(num);
 	}
 	
+	@Override
+	public int mealkitCommentCnt(int mealkitNo) {
+		return mealkitCommentMapper.mealkitCommentCnt(mealkitNo);
+	}
 	
 }

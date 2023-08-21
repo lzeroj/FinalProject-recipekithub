@@ -81,4 +81,6 @@ SELECT member_password FROM MEMBER WHERE member_email='kjoonie@kakao.com' AND me
 
 ALTER TABLE MEMBER MODIFY member_phone CHAR(11) NOT NULL;
 
-ALTER TABLE MEMBER ADD (member_image BLOB);
+ALTER TABLE MEMBER ADD (member_image VARCHAR2(100));
+
+ALTER TABLE member DROP COLUMN member_image;

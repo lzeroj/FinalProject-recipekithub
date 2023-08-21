@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-327e43da" version="1.0.4584">
   <head std:sid="head-58e951a7">
-    <screen std:sid="screen-64cf9a87" id="default" name="default" width="1024px" height="768px"/>
-    <screen std:sid="screen-0195cd87" id="tablet" name="tablet" width="500px" height="667px"/>
-    <screen std:sid="screen-b1734d6a" id="mobile" name="mobile" width="350px" height="525px"/>
+    <screen std:sid="screen-9064021b" id="new-screen" name="new-screen" minwidth="1860px" width="1860px" height="740px" active="true"/>
+    <screen std:sid="screen-d425ebd2" id="default" name="default" minwidth="1024px" maxwidth="1859px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-6064a902" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-c408f4dd" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <cl:model std:sid="model-7a3b7d0c">
       <cl:dataset std:sid="d-set-ca8b850c" id="cartlist">
         <cl:datacolumnlist>
@@ -59,16 +60,16 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-ea122247" style="background-color:#ebeae8;">
+  <body std:sid="body-ea122247">
     <cl:listener std:sid="listener-bc966f2e" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-b8f6dc4d">
-      <cl:xylayoutdata std:sid="xyl-data-79d5a85f" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:xylayoutdata std:sid="xyl-data-79d5a85f" top="20px" bottom="20px" width="1040px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-5ef8cda1" style="border-radius:30px; background-color:#FFFFFF;" class="cl-form-group">
         <cl:xylayoutdata std:sid="xyl-data-0a61e2ac" top="0px" right="0px" bottom="150px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-        <cl:output std:sid="output-93dc1bf1" style="background-color:#FFFFFF; color:#eb5307; font-weight:bold; font-size:25px; font-family:'Noto Sans KR' , 'Malgun Gothic' , sans-serif;" value="  장바구니">
+        <cl:output std:sid="output-93dc1bf1" style="background-color:#FFFFFF; color:#0ebc59; font-weight:bold; font-size:25px; font-family:'Noto Sans KR' , 'Malgun Gothic' , sans-serif;" value="  장바구니">
           <cl:formdata std:sid="f-data-81ebaa46" row="0" col="1" rowspan="1" colspan="6"/>
         </cl:output>
-        <cl:checkbox std:sid="c-box-3788f6c7" id="cbx1" style="background-color:#e5e5e5; color:#eb5307; font-weight:700;" value="" text="전체상품">
+        <cl:checkbox std:sid="c-box-3788f6c7" id="cbx1" style="background-color:#e5e5e5; color:#0ebc59; font-weight:700;" value="" text="전체상품">
           <cl:formdata std:sid="f-data-79e08a57" row="1" col="0" rowspan="1" colspan="6"/>
         </cl:checkbox>
         <cl:output std:sid="output-74eada54" value="">
@@ -122,7 +123,7 @@
         <cl:img std:sid="image-cae3b2d5" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;" src="../theme/images/cart/trolley.png">
           <cl:formdata std:sid="f-data-a9009691" row="0" col="0" rowspan="1" colspan="1"/>
         </cl:img>
-        <cl:button std:sid="button-a28e6477" style="background-color:#eb5307; color:#FFFFFF; border-bottom-color:#e5e5e5; font-weight:bold; border-left-color:#e5e5e5; border-top-color:#e5e5e5; border-right-color:#e5e5e5; background-image:none;" value="선택 삭제 X">
+        <cl:button std:sid="button-a28e6477" style="background-color:#0ebc59; color:#FFFFFF; border-bottom-color:#0ebc59; font-weight:bold; border-left-color:#0ebc59; border-top-color:#0ebc59; border-right-color:#0ebc59; background-image:none;" value="선택 삭제 X">
           <cl:listener std:sid="listener-837e31b1" name="click" handler="onButtonClick3"/>
           <cl:formdata std:sid="f-data-e1a69184" row="1" col="6"/>
         </cl:button>
@@ -145,11 +146,11 @@
           <cl:columns length="150" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
-      <cl:button std:sid="button-923ccc1b" style="background-color:#eb5307; color:#FFFFFF; white-space:normal; font-weight:bold; background-image:none;" value="전체 상품 주문">
+      <cl:button std:sid="button-923ccc1b" style="background-color:#0ebc59; color:#FFFFFF; white-space:normal; font-weight:bold; background-image:none;" value="전체 상품 주문">
         <cl:listener std:sid="listener-7d528e36" name="click" handler="onButtonClick"/>
         <cl:xylayoutdata std:sid="xyl-data-cc9ccce4" right="0px" bottom="0px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
       </cl:button>
-      <cl:button std:sid="button-41a920fd" style="background-color:#FFFFFF; border-right-style:solid; color:#000000; border-bottom-color:#ffffff; border-left-style:solid; font-weight:bold; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" value="선택 상품 주문">
+      <cl:button std:sid="button-41a920fd" style="background-color:#0ebc59; border-right-style:solid; color:#FFFFFF; border-bottom-color:#ffffff; border-left-style:solid; font-weight:bold; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; background-image:none; border-top-style:solid;" value="선택 상품 주문">
         <cl:listener std:sid="listener-4821ad56" name="click" handler="onButtonClick2"/>
         <cl:xylayoutdata std:sid="xyl-data-9da41d14" right="208px" bottom="0px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
       </cl:button>

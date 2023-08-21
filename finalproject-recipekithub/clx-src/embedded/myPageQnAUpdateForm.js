@@ -18,6 +18,8 @@ function onBodyLoad(e){
 	app.lookup("txa1").redraw();
 	app.lookup("ipb1").focus();
 	
+	app.lookup("updateqna").setValue("boardTitle", app.lookup("ipb1").text);
+	app.lookup("updateqna").setValue("boardContent", app.lookup("txa1").text);
 	app.lookup("updateqna").setValue("boardId", val.boardId);
 }
 
@@ -28,8 +30,6 @@ function onBodyLoad(e){
 function onButtonClick(e){
 	var button = e.control;
 	if(confirm("수정하시겠습니까?")){
-		app.lookup("updateqna").setValue("boardTitle", app.lookup("ipb1").text);
-		app.lookup("updateqna").setValue("boardContent", app.lookup("txa1").text);
 		app.lookup("subupdateqna").send();
 	}
 }
@@ -49,5 +49,27 @@ function onSubupdateqnaSubmitSuccess(e){
 			}
 		});
 	}
+	
+}
+
+/*
+ * "뒤로가기" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick2(e){
+	var button = e.control;
+	var host = app.getHost(); // 부모 임베디드 앱
+	var dataMap = app.lookup("updateqna");
+	var boardId = dataMap.getValue("boardId");
+	var boardTitle = dataMap.getValue("boardTitle");
+	var boardContent = dataMap.getValue("boardContent");
+	
+	var initValue = {"boardId": boardId , "boardTitle" : boardTitle, "boardContent":boardContent};
+	cpr.core.App.load("embedded/myPageQnARegisterSelect", function(loadedApp){
+		if (loadedApp){
+			host.initValue = initValue;
+			host.app = loadedApp;
+		}
+	});
 	
 }

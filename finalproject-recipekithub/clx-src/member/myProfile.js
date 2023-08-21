@@ -1,5 +1,5 @@
 /************************************************
- * mypage.js
+ * myProfile.js
  * Created at 2023. 8. 10. 오후 3:52:23.
  *
  * @author kjoon
@@ -8,8 +8,50 @@
 /*
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+
+function onBodyLoad(e) {
+	//var sessionval = getSessionStorage("memsession");
+	//console.log(sessionval);
+	var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
+	console.log(recipeBoardVO);
+	//if(sessionval ==null || sessionval != recipeBoardVO.memberVO.memberEmail){
+	//	app.lookup("updateBtn").visible = false;
+	//}
+	app.lookup("recipeBoardImage").src = "/upload/recipe/" + recipeBoardVO.recipeBoardImage;
+	app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
+	app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
+	var hTMLSnippet = app.lookup("recipeContent");
+	hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
+	
+	app.lookup("regDate").value = recipeBoardVO.recipeRegDate;
+	if(recipeBoardVO.recipeEditDate ==null){
+		app.lookup("edit").visible = false;
+		app.lookup("editDate").visible = false;
+	}else{
+		app.lookup("editDate").value = recipeBoardVO.recipeEditDate;
+	}
+	app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
+	var recipeCommentsub = app.lookup("recipeCommentList");
+	recipeCommentsub.send();
+	
+	// 현준
+	app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
+	app.lookup("subrecipelikecount").send();
+	
+}
+ */
+
+
+
+
+
+/*
+ * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+ * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e) {
+	//sessionStorage.getItem("memsession");
+	
 	var submission = app.lookup("sub_profile");
 	submission.send();
 }
@@ -21,7 +63,6 @@ function onBodyLoad(e) {
 function onSub_profileSubmitSuccess(e) {
 	var sub_profile = e.control;
 	var dsProfile = app.lookup("ds_profile");
-	//dataMap 형식으로 수정하기  -> 그룹 전체를 redraw하기
 	app.lookup("ipbEmail").text = dsProfile.getValue(0, "memberEmail");
 	app.lookup("ipbPassword1").text = dsProfile.getValue(0, "memberPassword");
 	app.lookup("ipbName").text = dsProfile.getValue(0, "memberName");
@@ -31,6 +72,9 @@ function onSub_profileSubmitSuccess(e) {
 	app.lookup("detailAddress").text = dsProfile.getValue(0, "memberAddressDetail");
 	app.lookup("ipbPhone").mask = dsProfile.getValue(0, "memberPhone");
 	app.lookup("ipbBirthday").value = dsProfile.getValue(0, "memberBirthday");
+	//dataMap 형식으로 수정하기  -> 그룹 전체를 redraw하기
+	//app.lookup("dm_profile");
+	//app.lookup("myProfileForm").redraw();
 }
 
 
@@ -307,15 +351,41 @@ function onSub_logoutSubmitSuccess(e) {
 
 
 /*
- * "프로필 사진 등록" 버튼(btnProfileImg)에서 click 이벤트 발생 시 호출.
+ * "프로필 사진 등록/수정" 버튼(btnInsertProfileImg)에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
-function onBtnProfileImgClick(e){
-	var btnProfileImg = e.control;
+function onBtnInsertProfileImgClick(e){
+	var btnInsertProfileImg = e.control;
+	
+}
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSub_insert_imageSubmitSuccess(e){
+	var sub_insert_image = e.control;
 	
 }
 
 
+/*
+ * "프로필 사진 삭제" 버튼(btnDeleteProfileImg)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onBtnDeleteProfileImgClick(e){
+	var btnDeleteProfileImg = e.control;
+	
+}
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSub_delete_imageSubmitSuccess(e){
+	var sub_delete_image = e.control;
+	
+}
 
 //=============================================[ 카카오 주소검색 API ]=============================================//
 
@@ -407,3 +477,4 @@ function onBodyUnload(e){
 	var appConf = cpr.core.AppConfig.INSTANCE;
 	appConf.getEnvConfig().setValue("appcache", false);
 }
+

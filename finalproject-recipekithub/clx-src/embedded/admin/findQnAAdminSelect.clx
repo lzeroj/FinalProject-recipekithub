@@ -31,11 +31,11 @@
         </cl:output>
         <cl:group std:sid="group-199b7c29" id="grp1" style="background-color:#FFFFFF;">
           <cl:verticaldata std:sid="v-data-91dbc07b" width="860px" height="669px" autosize="height"/>
-          <cl:inputbox std:sid="i-box-98c228af" id="ipb1" style="border-radius:10px;">
+          <cl:inputbox std:sid="i-box-98c228af" id="ipb1" style="border-radius:10px;" readonly="true">
             <cl:datamapbind property="value" datacontrolid="dmqnaselect" columnname="boardAnswerTitle"/>
             <cl:verticaldata std:sid="v-data-710a93ce" width="820px" height="40px"/>
           </cl:inputbox>
-          <cl:textarea std:sid="t-area-8716c9d2" id="txa1" style="border-radius:10px;">
+          <cl:textarea std:sid="t-area-8716c9d2" id="txa1" style="border-radius:10px;" readonly="true">
             <cl:datamapbind property="value" datacontrolid="dmqnaselect" columnname="boardAnswerContent"/>
             <cl:verticaldata std:sid="v-data-1f138d23" width="820px" height="259px"/>
           </cl:textarea>
