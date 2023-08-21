@@ -14,7 +14,7 @@ import lombok.ToString;
 public class MealkitStarScore {
 	
 	private MemberVO memberVO;
-	private MealKitBoard mealkitBoard;
-	private int mealkitStarScore;
+	private MealkitCommentVO mealkitCommentVO;
+	private double mealkitStarScore;
 
 }

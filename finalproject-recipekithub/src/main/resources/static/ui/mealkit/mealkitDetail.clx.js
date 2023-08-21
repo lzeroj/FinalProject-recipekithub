@@ -35,7 +35,10 @@
 				var mealkitHits = cpr.core.Platform.INSTANCE.getParameter("mealkitHits");
 				var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 				var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
+				var avg = cpr.core.Platform.INSTANCE.getParameter("avg");
 				
+				var starAvg = app.lookup("starScore");
+				starAvg.value = avg;
 				
 				var commentList = app.lookup("commentList");
 				commentList.setValue("mealkitNo", (mealkitNo).toString());//string으로 변환
@@ -43,6 +46,12 @@
 				
 
 				console.log("mealkitMember, sessionMember = " + mealkitMember + ", " +sessionMember);
+				
+				if(sessionMember != null && sessionMember != ""){
+					var commentBox = app.lookup("writeComment");
+					commentBox.visible = true;
+				}
+
 
 				if(mealkitMember === sessionMember){
 					var deletebtn = app.lookup("deleBtn");
@@ -266,13 +275,27 @@
 			function onButtonClick5(e){
 				var button = e.control;
 				var comment = app.lookup("comment").value;
-				var dataMap = app.lookup("mealkit");
-				var mealkitNo = dataMap.getValue("mealkitNo");
-				var commentMap = app.lookup("commentMap");
-				commentMap.setValue("comment", comment);
-				commentMap.setValue("mealkitNo", mealkitNo);
+				var star = parseFloat(app.lookup("starpoint").value);
+				if(typeof star != "number" || star < 0 || star > 5 || star == "" || star == null){
+					alert("반드시 별점을 입력해주세요. 숫자 0점 이상 5점 이하로 입력해주세요.");
 				
-				app.lookup("commentSub").send();
+				}else{
+					var commentList = app.lookup("commentList");
+					var mealkitNo = commentList.getValue("mealkitNo");
+					var commentMap = app.lookup("commentMap");
+					commentMap.setValue("comment", comment);
+					commentMap.setValue("mealkitNo", mealkitNo);//string
+					commentMap.setValue("star", star);//string
+					app.lookup("writeComment").redraw();
+					app.lookup("commentSub").send();
+					
+				}
+				//var dataMap = app.lookup("mealkit");
+				//var mealkitNo = dataMap.getValue("mealkitNo");
+				
+				//typeof parseFloat(star) === "number" && star >=0 && star <= 5
+				
+				app.lookup("commentListSub").send();
 				
 			}
 
@@ -285,7 +308,7 @@
 				var commentMap = app.lookup("commentReturn");
 				var memberMap = app.lookup("memberReturn");
 				var mealkitMap = app.lookup("mealkitReturn");
-				//commentMap.
+				onCommentListSubSubmitSuccess(e);
 			}
 
 			///*
@@ -335,7 +358,7 @@
 				//var sessionval = getSessionStorage("memsession");
 				var mealkitComment = jsonData.mealkitCommentList;
 				var totalCommentCount = jsonData.mealkitCommentNum;
-				//console.log("totalCommentCount = " + totalCommentCount);
+				console.log("mealkitComment = " + mealkitComment);
 				app.lookup("cnt").value = totalCommentCount;
 				var container = app.lookup("commentgrp");
 				
@@ -350,7 +373,8 @@
 						comment.nick = mealkitComment[i].memberVO.memberNick;
 						comment.regDate = mealkitComment[i].mealkitCommentDate;
 						comment.content = mealkitComment[i].mealkitCommentContent;
-						//if(sessionval ==null || sessionval != recipeComment[i].memberVO.memberEmail){
+						
+						//if(sessionval ==null || sessionval != mealkitComment[i].memberVO.memberEmail){
 						//	comment.deleteBtn = false;
 						//}
 						container.addChild(comment, {
@@ -430,7 +454,8 @@
 					{
 						"name": "mealkitNo",
 						"dataType": "string"
-					}
+					},
+					{"name": "star"}
 				]
 			});
 			app.register(dataMap_2);
@@ -631,8 +656,8 @@
 						"text-align" : "center"
 					});
 					container.addChild(output_5, {
-						"top": "19px",
-						"left": "-1px",
+						"top": "20px",
+						"left": "214px",
 						"width": "72px",
 						"height": "19px"
 					});
@@ -643,16 +668,36 @@
 					});
 					output_6.bind("value").toDataMap(app.lookup("mealkit"), "mealkitInventory");
 					container.addChild(output_6, {
-						"top": "19px",
-						"left": "81px",
+						"top": "20px",
+						"left": "296px",
 						"width": "135px",
 						"height": "20px"
+					});
+					var image_1 = new cpr.controls.Image();
+					image_1.src = "theme/images/mealkit/free-icon-star-6063500.png";
+					container.addChild(image_1, {
+						"top": "14px",
+						"left": "30px",
+						"width": "31px",
+						"height": "31px"
+					});
+					var output_7 = new cpr.controls.Output("starScore");
+					output_7.value = "";
+					output_7.style.css({
+						"font-weight" : "bolder",
+						"font-size" : "20px"
+					});
+					container.addChild(output_7, {
+						"top": "14px",
+						"left": "71px",
+						"width": "53px",
+						"height": "31px"
 					});
 				})(group_4);
 				container.addChild(group_4, {
 					"top": "177px",
 					"left": "513px",
-					"width": "327px",
+					"width": "451px",
 					"height": "59px"
 				});
 				var group_5 = new cpr.controls.Container();
@@ -663,47 +708,47 @@
 				var xYLayout_6 = new cpr.controls.layouts.XYLayout();
 				group_5.setLayout(xYLayout_6);
 				(function(container){
-					var output_7 = new cpr.controls.Output();
-					output_7.value = "택배배송안내";
-					output_7.style.css({
+					var output_8 = new cpr.controls.Output();
+					output_8.value = "택배배송안내";
+					output_8.style.css({
 						"font-weight" : "bold",
 						"font-size" : "15px",
 						"text-align" : "center"
 					});
-					container.addChild(output_7, {
+					container.addChild(output_8, {
 						"top": "5px",
 						"left": "85px",
 						"width": "135px",
 						"height": "20px"
 					});
-					var output_8 = new cpr.controls.Output();
-					output_8.value = "주문과 동시에 생산하여";
-					output_8.style.css({
+					var output_9 = new cpr.controls.Output();
+					output_9.value = "주문과 동시에 생산하여";
+					output_9.style.css({
 						"color" : "#0CA44E",
 						"font-size" : "13px",
 						"font-style" : "normal",
 						"text-align" : "center"
 					});
-					container.addChild(output_8, {
+					container.addChild(output_9, {
 						"top": "38px",
 						"left": "85px",
 						"width": "146px",
 						"height": "20px"
 					});
-					var output_9 = new cpr.controls.Output();
-					output_9.value = " 다음날 우리집 식탁까지 배송되어요.";
-					output_9.style.css({
+					var output_10 = new cpr.controls.Output();
+					output_10.value = " 다음날 우리집 식탁까지 배송되어요.";
+					output_10.style.css({
 						"font-size" : "13px"
 					});
-					container.addChild(output_9, {
+					container.addChild(output_10, {
 						"top": "38px",
 						"left": "230px",
 						"width": "217px",
 						"height": "20px"
 					});
-					var image_1 = new cpr.controls.Image();
-					image_1.src = "theme/images/mealkit/ship.png";
-					container.addChild(image_1, {
+					var image_2 = new cpr.controls.Image();
+					image_2.src = "theme/images/mealkit/ship.png";
+					container.addChild(image_2, {
 						"top": "24px",
 						"left": "25px",
 						"width": "50px",
@@ -768,36 +813,36 @@
 						"width": "25px",
 						"height": "26px"
 					});
-					var output_10 = new cpr.controls.Output("mealcnt");
-					output_10.value = "1";
-					output_10.style.css({
+					var output_11 = new cpr.controls.Output("mealcnt");
+					output_11.value = "1";
+					output_11.style.css({
 						"text-align" : "center"
 					});
-					container.addChild(output_10, {
+					container.addChild(output_11, {
 						"top": "40px",
 						"left": "44px",
 						"width": "27px",
 						"height": "22px"
 					});
-					var output_11 = new cpr.controls.Output("name2");
-					output_11.style.css({
+					var output_12 = new cpr.controls.Output("name2");
+					output_12.style.css({
 						"font-weight" : "bold",
 						"font-size" : "15px"
 					});
-					output_11.bind("value").toDataMap(app.lookup("mealkit"), "mealkitName");
-					container.addChild(output_11, {
+					output_12.bind("value").toDataMap(app.lookup("mealkit"), "mealkitName");
+					container.addChild(output_12, {
 						"top": "8px",
 						"left": "9px",
 						"width": "195px",
 						"height": "20px"
 					});
-					var output_12 = new cpr.controls.Output("total");
-					output_12.style.css({
+					var output_13 = new cpr.controls.Output("total");
+					output_13.style.css({
 						"font-size" : "15px",
 						"text-align" : "center"
 					});
-					output_12.bind("value").toDataMap(app.lookup("mealkit"), "total");
-					container.addChild(output_12, {
+					output_13.bind("value").toDataMap(app.lookup("mealkit"), "total");
+					container.addChild(output_13, {
 						"top": "41px",
 						"left": "266px",
 						"width": "163px",
@@ -836,9 +881,9 @@
 					"width": "436px",
 					"height": "18px"
 				});
-				var output_13 = new cpr.controls.Output("ingredients");
-				output_13.bind("value").toDataMap(app.lookup("mealkit"), "mealkitIngredients");
-				container.addChild(output_13, {
+				var output_14 = new cpr.controls.Output("ingredients");
+				output_14.bind("value").toDataMap(app.lookup("mealkit"), "mealkitIngredients");
+				container.addChild(output_14, {
 					"top": "353px",
 					"left": "20px",
 					"width": "436px",
@@ -857,33 +902,33 @@
 					"width": "944px",
 					"height": "19px"
 				});
-				var output_14 = new cpr.controls.Output("regDate");
-				output_14.style.css({
+				var output_15 = new cpr.controls.Output("regDate");
+				output_15.style.css({
 					"font-weight" : "normal",
 					"text-align" : "center"
 				});
-				output_14.bind("value").toDataMap(app.lookup("mealkit"), "mealkitRegDate");
-				container.addChild(output_14, {
+				output_15.bind("value").toDataMap(app.lookup("mealkit"), "mealkitRegDate");
+				container.addChild(output_15, {
 					"top": "11px",
 					"left": "850px",
 					"width": "130px",
 					"height": "20px"
 				});
-				var output_15 = new cpr.controls.Output("hits");
-				output_15.style.css({
+				var output_16 = new cpr.controls.Output("hits");
+				output_16.style.css({
 					"font-weight" : "normal",
 					"font-size" : "15px"
 				});
-				output_15.bind("value").toDataMap(app.lookup("mealkit"), "mealkitHits");
-				container.addChild(output_15, {
+				output_16.bind("value").toDataMap(app.lookup("mealkit"), "mealkitHits");
+				container.addChild(output_16, {
 					"top": "29px",
 					"left": "887px",
 					"width": "93px",
 					"height": "21px"
 				});
-				var image_2 = new cpr.controls.Image();
-				image_2.src = "theme/images/mealkit/free-icon-eye-118191.png";
-				container.addChild(image_2, {
+				var image_3 = new cpr.controls.Image();
+				image_3.src = "theme/images/mealkit/free-icon-eye-118191.png";
+				container.addChild(image_3, {
 					"top": "31px",
 					"left": "857px",
 					"width": "26px",
@@ -921,21 +966,21 @@
 					"width": "100px",
 					"height": "20px"
 				});
-				var image_3 = new cpr.controls.Image("mealkitImg");
-				container.addChild(image_3, {
+				var image_4 = new cpr.controls.Image("mealkitImg");
+				container.addChild(image_4, {
 					"top": "41px",
 					"left": "20px",
 					"width": "436px",
 					"height": "250px"
 				});
-				var image_4 = new cpr.controls.Image("likeimg");
-				image_4.style.css({
+				var image_5 = new cpr.controls.Image("likeimg");
+				image_5.style.css({
 					"cursor" : "pointer"
 				});
 				if(typeof onLikeimgClick == "function") {
-					image_4.addEventListener("click", onLikeimgClick);
+					image_5.addEventListener("click", onLikeimgClick);
 				}
-				container.addChild(image_4, {
+				container.addChild(image_5, {
 					"top": "49px",
 					"left": "882px",
 					"width": "90px",
@@ -956,11 +1001,12 @@
 			container.addChild(group_10, {
 				"top": "1434px",
 				"width": "963px",
-				"height": "303px",
+				"height": "668px",
 				"left": "calc(50% - 481px)"
 			});
 			
-			var group_11 = new cpr.controls.Container();
+			var group_11 = new cpr.controls.Container("writeComment");
+			group_11.visible = false;
 			group_11.style.css({
 				"text-align" : "center"
 			});
@@ -1006,7 +1052,7 @@
 					"colSpan": 1,
 					"rowSpan": 1
 				});
-				var inputBox_2 = new cpr.controls.InputBox("star");
+				var inputBox_2 = new cpr.controls.InputBox("starpoint");
 				inputBox_2.placeholder = "별점을 입력해주세요.";
 				inputBox_2.style.css({
 					"font-size" : "12px"
@@ -1027,22 +1073,22 @@
 			var xYLayout_11 = new cpr.controls.layouts.XYLayout();
 			group_12.setLayout(xYLayout_11);
 			(function(container){
-				var output_16 = new cpr.controls.Output();
-				output_16.value = "댓글";
-				container.addChild(output_16, {
+				var output_17 = new cpr.controls.Output();
+				output_17.value = "댓글";
+				container.addChild(output_17, {
 					"top": "2px",
 					"left": "2px",
 					"width": "31px",
 					"height": "17px"
 				});
-				var output_17 = new cpr.controls.Output("cnt");
-				output_17.value = "개수";
-				output_17.style.css({
+				var output_18 = new cpr.controls.Output("cnt");
+				output_18.value = "개수";
+				output_18.style.css({
 					"color" : "#0ca44e",
 					"font-weight" : "bold",
 					"font-size" : "17px"
 				});
-				container.addChild(output_17, {
+				container.addChild(output_18, {
 					"top": "-1px",
 					"left": "32px",
 					"width": "37px",

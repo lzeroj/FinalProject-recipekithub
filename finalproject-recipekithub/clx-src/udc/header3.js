@@ -35,7 +35,13 @@ function getTimedSessionData(key) {
  */
 function onHeaderLogoClick(e){
 	var headerLogo = e.control;
+	if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+		if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+			window.location.href="/";
+		}
+	}else{
 	window.location.href="/";
+	}
 }
 
 /*
@@ -44,6 +50,11 @@ function onHeaderLogoClick(e){
  */
 function onButtonClick(e){
 	var button = e.control;
+	if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+		if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+			window.location.href="/findMyCartForm";
+		}
+	}else{
 //	window.location.href="/findMyCartForm";
 	
 	/** @type cpr.controls.EmbeddedApp */ 
@@ -64,6 +75,7 @@ function onButtonClick(e){
 		}
 	}); 
 	embeapp.redraw();
+	}
 }
 
 /*
@@ -72,7 +84,13 @@ function onButtonClick(e){
  */
 function onMypageClick(e){
 	var mypage = e.control;
+	if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+		if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+			window.location.href="/findMyPageForm";
+		}
+	}else{
 	window.location.href="/findMyPageForm";
+	}
 }
 
 /*
@@ -86,7 +104,13 @@ function onNavigationBarItemClick(e){
 	}
 	
 	if(navigationBar.value == 'mealkit'){
-		window.location.href='/mealkitList';
+		if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+			if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+				window.location.href="/insertMealkitForm";
+			}
+		}else{
+		window.location.href="/insertMealkitForm";
+		}
 	}
 		
 	if(navigationBar.value == 'questionAdmin'){
@@ -133,9 +157,14 @@ function onNavigationBarItemClick(e){
 	
 	
 	if(navigationBar.value == 'recipe'){
-		window.location.href='/recipeBoardList';
+		if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+			if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+				window.location.href="/recipeBoardList";
+			}
+		}else{
+		window.location.href="/recipeBoardList";
+		}		
 	}
-	
 }
 
 /*
@@ -144,7 +173,15 @@ function onNavigationBarItemClick(e){
  */
 function onBtnWriteClick(e){
 	var btnWrite = e.control;
-	
+		if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+			if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+				var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
+				_httpPostMethod.submit();
+			}
+		}else{
+				var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
+				_httpPostMethod.submit();
+		}	
 }
 
 /*
@@ -154,6 +191,8 @@ function onBtnWriteClick(e){
 function onBtnLoginoffClick(e){
 	var btnLoginoff = e.control;
 	window.location.href="/memberUI/loginForm";
+	var event = new cpr.events.CAppEvent("clickEvent");
+	app.dispatchEvent(event);
 }
 
 /*
@@ -175,14 +214,30 @@ function onBodyLoad(e){
 		navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 		navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 	}
-	
-	var opbLoginStatus = app.lookup("opbLoginStatus");
-	if(sessionval != null) {
-		opbLoginStatus.text = "[ " + sessionval + " ] \n님이 로그인 상태입니다.";
-	} else {
-		opbLoginStatus.text = "현재 비로그인 상태입니다."
+
+}
+
+/*
+ * 서치 인풋에서 search 이벤트 발생 시 호출.
+ * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
+ */
+
+function onSearchInputSearch(e){
+	var searchInput = e.control;
+	var comboBox = app.lookup("category");
+	if(comboBox.value =="" || comboBox.value ==null){
+		alert("카테고리 선택하세요");
+		return;
 	}
-	
+	if(comboBox.value =="레시피"){
+		if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+			if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+				window.location.href="/recipeBoardList?search="+ searchInput.value;
+			}
+		}else{
+		window.location.href="/recipeBoardList?search="+ searchInput.value;
+		}	
+	}
 }
 
 /*

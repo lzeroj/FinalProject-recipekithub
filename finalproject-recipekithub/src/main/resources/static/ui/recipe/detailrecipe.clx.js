@@ -154,7 +154,7 @@
 						container.addChild(comment, {
 							height: "120px",
 							width: "100px",
-							autoSize: "both"
+							autoSize: "height"
 						});
 						comment.addEventListener("deleteClick", function(e) {
 							app.lookup("dmRecipeCommentId").setValue("recipeCommentId", recipeComment[index].recipeCommentId);
@@ -554,21 +554,21 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "1171px",
+						"top": "1254px",
 						"width": "1320px",
 						"height": "176px",
 						"left": "calc(50% - 660px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1171px",
+						"top": "1254px",
 						"width": "645px",
 						"height": "176px",
 						"left": "calc(50% - 322px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "1171px",
+						"top": "1254px",
 						"width": "451px",
 						"height": "176px",
 						"left": "calc(50% - 225px)"
@@ -587,52 +587,24 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "1357px",
+						"top": "1440px",
 						"width": "200px",
 						"height": "40px",
 						"left": "calc(50% - 100px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1357px",
+						"top": "1440px",
 						"width": "98px",
 						"height": "40px",
 						"left": "calc(50% - 49px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "1357px",
+						"top": "1440px",
 						"width": "68px",
 						"height": "40px",
 						"left": "calc(50% - 34px)"
-					}
-				]
-			});
-			
-			var hTMLSnippet_1 = new cpr.controls.HTMLSnippet("recipeContent");
-			hTMLSnippet_1.value = "<p>HTML Snippet<\/p>";
-			container.addChild(hTMLSnippet_1, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "562px",
-						"width": "1320px",
-						"height": "430px",
-						"left": "calc(50% - 660px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "562px",
-						"width": "645px",
-						"height": "430px",
-						"left": "calc(50% - 322px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "562px",
-						"width": "451px",
-						"height": "430px",
-						"left": "calc(50% - 225px)"
 					}
 				]
 			});
@@ -670,21 +642,21 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "1085px",
+						"top": "1168px",
 						"width": "1320px",
 						"height": "87px",
 						"left": "calc(50% - 660px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1085px",
+						"top": "1168px",
 						"width": "645px",
 						"height": "87px",
 						"left": "calc(50% - 322px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "1085px",
+						"top": "1168px",
 						"width": "451px",
 						"height": "87px",
 						"left": "calc(50% - 225px)"
@@ -721,21 +693,21 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "1039px",
+						"top": "1122px",
 						"width": "1320px",
 						"height": "38px",
 						"left": "calc(50% - 660px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1039px",
+						"top": "1122px",
 						"width": "645px",
 						"height": "38px",
 						"left": "calc(50% - 322px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "1039px",
+						"top": "1122px",
 						"width": "451px",
 						"height": "38px",
 						"left": "calc(50% - 225px)"
@@ -784,21 +756,21 @@
 				positions: [
 					{
 						"media": "all and (min-width: 1024px)",
-						"top": "1003px",
+						"top": "1086px",
 						"width": "1320px",
 						"height": "37px",
 						"left": "calc(50% - 660px)"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1003px",
+						"top": "1086px",
 						"width": "645px",
 						"height": "37px",
 						"left": "calc(50% - 322px)"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "1003px",
+						"top": "1086px",
 						"width": "451px",
 						"height": "37px",
 						"left": "calc(50% - 225px)"
@@ -829,6 +801,47 @@
 						"right": "0px",
 						"left": "0px",
 						"height": "200px"
+					}
+				]
+			});
+			
+			var group_6 = new cpr.controls.Container();
+			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			group_6.setLayout(verticalLayout_2);
+			(function(container){
+				var hTMLSnippet_1 = new cpr.controls.HTMLSnippet("recipeContent");
+				hTMLSnippet_1.value = "<p>HTML Snippet<\/p>";
+				hTMLSnippet_1.style.css({
+					"cursor" : "auto"
+				});
+				container.addChild(hTMLSnippet_1, {
+					"autoSize": "height",
+					"width": "400px",
+					"height": "515px"
+				});
+			})(group_6);
+			container.addChild(group_6, {
+				positions: [
+					{
+						"media": "all and (min-width: 1024px)",
+						"top": "561px",
+						"width": "1320px",
+						"height": "525px",
+						"left": "calc(50% - 660px)"
+					}, 
+					{
+						"media": "all and (min-width: 500px) and (max-width: 1023px)",
+						"top": "561px",
+						"width": "645px",
+						"height": "525px",
+						"left": "calc(50% - 322px)"
+					}, 
+					{
+						"media": "all and (max-width: 499px)",
+						"top": "561px",
+						"width": "451px",
+						"height": "525px",
+						"left": "calc(50% - 225px)"
 					}
 				]
 			});

@@ -11,6 +11,7 @@ globals.testAlert = function(){
 	
 }
 
+//데이터 가져오기
 //globals.getSessionStorage = // 데이터 가져오기
 //function getTimedSessionData(key) {
 //    var storedData = sessionStorage.getItem(key);

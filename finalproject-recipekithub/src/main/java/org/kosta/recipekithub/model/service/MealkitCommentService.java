@@ -1,6 +1,7 @@
 package org.kosta.recipekithub.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.recipekithub.model.vo.MealkitCommentVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
@@ -19,4 +20,7 @@ public interface MealkitCommentService {
 	List<MealkitCommentVO> findCommentListByMealkit(int num);
 
 	int mealkitCommentCnt(int mealkitNo);
+
+	
+
 }

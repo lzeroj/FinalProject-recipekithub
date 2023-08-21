@@ -24,6 +24,8 @@
 			 */
 			function onBodyLoad(e){
 				var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
+				//var mealkitMap = cpr.core.Platform.INSTANCE.getParameter("mealkitMap");
+				//console.log("mealkitMap =" + mealkitMap);
 				var email = cpr.core.Platform.INSTANCE.getParameter("member");
 				console.log("email = " + email);
 				if(email != "guest"){
@@ -45,7 +47,7 @@
 						mealkit.nick = mealkitList[i].memberVO.memberNick;
 						mealkit.title = mealkitList[i].mealkitName;
 						mealkit.img = mealkitList[i].mealkitImage;
-						//mealkit.star = mealkitStar[i]; 별점 추가 예정
+						//mealkit.star = mealkitMap.get[mealkitList[i].mealkitNo];
 						container.addChild(mealkit, {
 							height: "250px",
 							width: "230px",

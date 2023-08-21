@@ -23,4 +23,6 @@ public interface RecipeBoardMapper {
 	long updateRecipeHits(long id);
 
 	long likeCount(long recipeBoardId);
+
+	List<RecipeBoardVO> likeRecipeList();
 }

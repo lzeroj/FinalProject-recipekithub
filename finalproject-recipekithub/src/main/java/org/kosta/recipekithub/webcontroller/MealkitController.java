@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.MealkitService;
+import org.kosta.recipekithub.model.service.MealkitStarScoreService;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MealkitController {
 	
 	private final MealkitService mealKitService;
+	private final MealkitStarScoreService mealkitStarScoreService;
 	
 	
 	@RequestMapping("/mealkitList")
@@ -51,10 +53,18 @@ public class MealkitController {
 			email = "guest";
 		}
 		List<MealKitBoard> list = mealKitService.findMealKitList();
+		
+//		Map<Integer, Double> map = new HashMap<>();
+//		for(MealKitBoard mealkit : list) {
+//			double num = mealkitStarScoreService.findMealkitStarList(mealkit.getMealkitNo());
+//			map.put(mealkit.getMealkitNo(), num);
+//			System.out.println(map.get(mealkit.getMealkitNo()));
+//		}
+		
 		Map<String, Object> initParam = new HashMap<String, Object>();
 		initParam.put("mealkitList", list);
 		initParam.put("member", email);
-		
+		//initParam.put("mealkitMap", map);
 		return new UIView("ui/mealkit/mealkitList.clx", initParam);
 		
 	}
@@ -75,6 +85,8 @@ public class MealkitController {
 		MealKitBoard mealkit = mealKitService.findMealKitByNo(mealkitNo);
 		log.info("mealKit Controller mealkit의 정보를 알아보자 {} ", mealkit);
 		//MemberVO member = memberService.findMemberByEmail(mealkit.getMemberVO().getMemberEmail());
+		double avg = mealkitStarScoreService.findMealkitStarList(mealkitNo);
+		
 		Map<String, Object> initParam = new HashMap<>();
 		initParam.put("mealkitNo", mealkit.getMealkitNo());
 		initParam.put("mealkitName", mealkit.getMealkitName());
@@ -87,6 +99,7 @@ public class MealkitController {
 		initParam.put("mealkitHits", mealkit.getMealkitHits());
 		initParam.put("mealkitImg", mealkit.getMealkitImage());
 		initParam.put("sessionMember", user);
+		initParam.put("avg", avg);
 		return new UIView("/ui/mealkit/mealkitDetail.clx", initParam);
 	}
 	

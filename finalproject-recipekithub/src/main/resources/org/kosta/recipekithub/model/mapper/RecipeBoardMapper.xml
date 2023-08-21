@@ -62,7 +62,7 @@
 		parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
 		select count(*) from LIKE_RKH where recipe_board_id =
 		#{value}
-	</select>
+	</select>	
 	<insert id="insertRecipeBoard"
 		parameterType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
 		insert into RECIPE_BOARD
@@ -125,5 +125,15 @@
 				and recipe_board_title like '%' || #{searchValue} || '%'
 			</if>
 		</where>
+	</select>
+	<select id="likeRecipeList">
+	SELECT * FROM (
+    			SELECT r.recipe_board_id, COUNT(lr.recipe_board_id) AS like_count, r.recipe_board_image, r.recipe_board_title
+  				 FROM recipe_board r
+   				 INNER JOIN like_rkh lr ON lr.recipe_board_id = r.recipe_board_id
+    			GROUP BY r.recipe_board_id, r.recipe_board_image, r.recipe_board_title
+    			ORDER BY like_count DESC
+					)
+				WHERE 5 >= ROWNUM
 	</select>
 </mapper>

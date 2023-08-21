@@ -43,7 +43,7 @@ function onSmnoteLoad(e) {
 		$('#summernote').summernote({
 			placeholder: '글 작성란',
 			tabsize: 2,
-			height: 300,
+			height: 500,
 			toolbar: [
 				['style', ['style']],
 				['font', ['bold', 'underline', 'clear']],
