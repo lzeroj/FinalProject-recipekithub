@@ -18,7 +18,7 @@
 			var linker = {};
 			// Start - User Script
 			/************************************************
-			 * find-info-form.js
+			 * find-email-pswd.js
 			 * Created at 2023. 8. 11. 오후 2:30:25.
 			 *
 			 * @author kjoon

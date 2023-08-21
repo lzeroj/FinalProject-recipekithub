@@ -10,6 +10,7 @@
     <link std:sid="link-e762ac8c" href="theme/custom-theme.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-d6fbeaed">
       <cl:submission std:sid="submission-9e4ebe14" id="find"/>
+      <cl:submission std:sid="submission-7cdda5fc" id="sub_logout" action="/memberUI/logout"/>
     </cl:model>
     <cl:appspec/>
   </head>
@@ -18,11 +19,12 @@
     <cl:group std:sid="group-3afdffe4">
       <cl:xylayoutdata std:sid="xyl-data-46ab264b" top="0px" left="0px" width="1920px" height="1090px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
-        <cl:xylayoutdata std:sid="xyl-data-a879d1ba" top="0px" left="0px" width="1920px" height="200px"/>
+        <cl:listener std:sid="listener-e6ce5049" name="event" handler="onHeader3Event"/>
+        <cl:xylayoutdata std:sid="xyl-data-a879d1ba" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH"/>
         <cl:property name="embe" value="ea1" type="control"/>
       </cl:udc>
       <cl:group std:sid="group-19106c56" style="background-color:#F4FAEC; background-size:cover; background-image:url(theme/images/common/bgimg10.png); background-position:center;">
-        <cl:xylayoutdata std:sid="xyl-data-22aa6dac" top="205px" left="0px" width="1920px" height="780px"/>
+        <cl:xylayoutdata std:sid="xyl-data-22aa6dac" top="200px" bottom="100px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1">
           <cl:responsivexylayoutdata std:sid="rxyl-data-dd351d24">
             <cl:xylayoutdata std:sid="sxyl-data-61d0bbd5" right="20px" left="20px" height="720px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="FHD"/>
@@ -44,7 +46,7 @@
         <cl:responsivexylayout std:sid="r-xylayout-b1999951"/>
       </cl:group>
       <cl:udc std:sid="ud-control-6c3a3fe8" type="udc.footer">
-        <cl:xylayoutdata std:sid="xyl-data-1c5d6085" top="990px" left="0px" width="1920px" height="100px"/>
+        <cl:xylayoutdata std:sid="xyl-data-1c5d6085" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
       </cl:udc>
       <cl:xylayout std:sid="xylayout-c9b9125c"/>
     </cl:group>

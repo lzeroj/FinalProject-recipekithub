@@ -43,7 +43,7 @@ public class MealkitController {
 	public View mealkitList(HttpServletRequest request,HttpServletResponse response, DataRequest dataRequst) {
 		HttpSession session = request.getSession(false);
 		String email = null;
-		if(session != null) {
+		if(session != null && session.getAttribute("member") != null) {
 			MemberVO member = (MemberVO)session.getAttribute("member");
 			email = member.getMemberEmail();
 			
@@ -61,12 +61,13 @@ public class MealkitController {
 	
 	@GetMapping("/mealkitDetail/{mealkitNo}") //밀키트 상세 페이지
 	public View mealKit(@PathVariable int mealkitNo, DataRequest dataRequest, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-	
-		String user = "guest";
-		if(session != null) {
+		HttpSession session = request.getSession(false);
+		String user = null;
+		if(session != null && session.getAttribute("member") != null) {
 			MemberVO sessionMember = (MemberVO)session.getAttribute("member");
 			user = sessionMember.getMemberNick();
+		}else {
+			user = "guest";
 		}
 		
 		
@@ -113,7 +114,7 @@ public class MealkitController {
 		File orgName = uploadFile[0].getFile();
 		String saveName = uploadFile[0].getFileName();
 		//String savePath = "C:\\Users\\KOSTA\\git\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadmealkitimage\\";
-		String savePath = "C:\\upload\\mealkitUpload\\";
+		String savePath = "C:\\upload\\mealkit\\";
 		String uuid = UUID.randomUUID().toString();
 		FileCopyUtils.copy(orgName, new File(savePath+uuid+"_"+saveName));
 		
@@ -136,11 +137,10 @@ public class MealkitController {
 		
 		//HttpSession session = request.getSession(false);
 		//MemberVO member = (MemberVO)session.getAttribute("mvo");
-		MemberVO member = new MemberVO("hellojava@naver.com", "123", "재헌강", "유스타스캡틴재헌", "12345", "성남", "오리", "01012345678", "1998-01-01", "1", "Y", null);
+		MemberVO member = new MemberVO("hellojava@naver.com", "123", "재헌강", "유스타스캡틴재헌", "12345", "성남", "오리", "01012345678", "1998-01-01", "1", "Y", null, null);
 
 		mealkit.setMemberVO(member);
 		System.out.println("Service mealkit = " + mealkit);
-		
 		
 		int mealkitNo = mealKitService.insertMealKit(mealkit);
 		
@@ -229,7 +229,7 @@ public class MealkitController {
 		HttpSession session = request.getSession(false);
 		MemberVO member = (MemberVO)session.getAttribute("member");	
 		
-		String savePath = "C:\\upload\\mealkitUpload\\";
+		String savePath = "C:\\upload\\mealkit\\";
 		String mealkitImg= mealKitService.findMealKitByNo(mealkitNo).getMealkitImage();
 		File existImageFile = new File(savePath + mealkitImg);
 		if(existImageFile.exists()) {
