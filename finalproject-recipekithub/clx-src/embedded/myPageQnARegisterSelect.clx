@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-fc0cd491" version="1.0.4584">
   <head std:sid="head-6f6b3cc6">
-    <screen std:sid="screen-d8c82a56" id="new-screen" name="new-screen" width="709px" height="791px" active="true"/>
+    <screen std:sid="screen-45736f8b" id="new-screen3" name="new-screen3" minwidth="709px" width="709px" height="710px"/>
+    <screen std:sid="screen-b74fbd0e" id="new-screen2" name="new-screen2" minwidth="709px" maxwidth="708px" width="709px" height="668px" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-881e98c6" id="new-screen" name="new-screen" maxwidth="708px" width="709px" height="791px" customHeight="600" customWidth="800" active="false"/>
     <cl:model std:sid="model-d37a594b">
       <cl:dataset std:sid="d-set-c8372a2f" id="responseqnaselect">
         <cl:datacolumnlist>
@@ -33,10 +35,10 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-4623d88e">
+  <body std:sid="body-4623d88e" style="background-color:#FFFFFF;">
     <cl:listener std:sid="listener-01388302" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-4fd6728f" id="grp1" style="background-color:#FFFFFF;">
-      <cl:verticaldata std:sid="v-data-d93a7f70" width="709px" height="688px" autosize="height"/>
+      <cl:verticaldata std:sid="v-data-d93a7f70" width="709px" height="710px" autosize="height"/>
       <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="Q &amp; A">
         <cl:verticaldata std:sid="v-data-accb3108" width="709px" height="50px"/>
       </cl:output>
