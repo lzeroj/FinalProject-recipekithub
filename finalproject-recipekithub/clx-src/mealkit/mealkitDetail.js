@@ -22,7 +22,10 @@ function onBodyLoad(e){
 	var mealkitHits = cpr.core.Platform.INSTANCE.getParameter("mealkitHits");
 	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 	var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
+	var avg = cpr.core.Platform.INSTANCE.getParameter("avg");
 	
+	var starAvg = app.lookup("starScore");
+	starAvg.value = avg;
 	
 	var commentList = app.lookup("commentList");
 	commentList.setValue("mealkitNo", (mealkitNo).toString());//string으로 변환
@@ -30,6 +33,12 @@ function onBodyLoad(e){
 	
 
 	console.log("mealkitMember, sessionMember = " + mealkitMember + ", " +sessionMember);
+	
+	if(sessionMember != null && sessionMember != ""){
+		var commentBox = app.lookup("writeComment");
+		commentBox.visible = true;
+	}
+
 
 	if(mealkitMember === sessionMember){
 		var deletebtn = app.lookup("deleBtn");
@@ -253,13 +262,27 @@ function onSubcreatmycartSubmitSuccess(e){
 function onButtonClick5(e){
 	var button = e.control;
 	var comment = app.lookup("comment").value;
-	var dataMap = app.lookup("mealkit");
-	var mealkitNo = dataMap.getValue("mealkitNo");
-	var commentMap = app.lookup("commentMap");
-	commentMap.setValue("comment", comment);
-	commentMap.setValue("mealkitNo", mealkitNo);
+	var star = parseFloat(app.lookup("starpoint").value);
+	if(typeof star != "number" || star < 0 || star > 5 || star == "" || star == null){
+		alert("반드시 별점을 입력해주세요. 숫자 0점 이상 5점 이하로 입력해주세요.");
 	
-	app.lookup("commentSub").send();
+	}else{
+		var commentList = app.lookup("commentList");
+		var mealkitNo = commentList.getValue("mealkitNo");
+		var commentMap = app.lookup("commentMap");
+		commentMap.setValue("comment", comment);
+		commentMap.setValue("mealkitNo", mealkitNo);//string
+		commentMap.setValue("star", star);//string
+		app.lookup("writeComment").redraw();
+		app.lookup("commentSub").send();
+		
+	}
+	//var dataMap = app.lookup("mealkit");
+	//var mealkitNo = dataMap.getValue("mealkitNo");
+	
+	//typeof parseFloat(star) === "number" && star >=0 && star <= 5
+	
+	app.lookup("commentListSub").send();
 	
 }
 
@@ -272,7 +295,7 @@ function onCommentSubSubmitSuccess(e){
 	var commentMap = app.lookup("commentReturn");
 	var memberMap = app.lookup("memberReturn");
 	var mealkitMap = app.lookup("mealkitReturn");
-	//commentMap.
+	onCommentListSubSubmitSuccess(e);
 }
 
 ///*
@@ -322,7 +345,7 @@ function onCommentListSubSubmitSuccess(e){
 	//var sessionval = getSessionStorage("memsession");
 	var mealkitComment = jsonData.mealkitCommentList;
 	var totalCommentCount = jsonData.mealkitCommentNum;
-	//console.log("totalCommentCount = " + totalCommentCount);
+	console.log("mealkitComment = " + mealkitComment);
 	app.lookup("cnt").value = totalCommentCount;
 	var container = app.lookup("commentgrp");
 	
@@ -337,7 +360,8 @@ function onCommentListSubSubmitSuccess(e){
 			comment.nick = mealkitComment[i].memberVO.memberNick;
 			comment.regDate = mealkitComment[i].mealkitCommentDate;
 			comment.content = mealkitComment[i].mealkitCommentContent;
-			//if(sessionval ==null || sessionval != recipeComment[i].memberVO.memberEmail){
+			
+			//if(sessionval ==null || sessionval != mealkitComment[i].memberVO.memberEmail){
 			//	comment.deleteBtn = false;
 			//}
 			container.addChild(comment, {

@@ -1408,6 +1408,7 @@
 				app.declareAppProperty("regDate", null);
 				app.declareAppProperty("content", null);
 				app.declareAppProperty("star", null);
+				app.declareAppProperty("deleteBtn", null);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 				app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -1556,6 +1557,14 @@
 		},
 		set: function(newValue){
 			return this.getEmbeddedAppInstance().setAppProperty("star", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.mealkitComment.prototype, "deleteBtn", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("deleteBtn");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("deleteBtn", newValue, true);
 		}
 	});
 	
