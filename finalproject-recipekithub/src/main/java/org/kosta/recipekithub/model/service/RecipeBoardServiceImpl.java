@@ -45,4 +45,8 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	public long likeCount(long recipeBoardId) {
 		return recipeBoardMapper.likeCount(recipeBoardId);
 	}
+	@Override
+	public List<RecipeBoardVO> likeRecipeList() {
+		return recipeBoardMapper.likeRecipeList();
+	}
 }

@@ -662,7 +662,13 @@
 				 */
 				function onHeaderLogoClick(e){
 					var headerLogo = e.control;
+					if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+						if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+							window.location.href="/";
+						}
+					}else{
 					window.location.href="/";
+					}
 				}
 	
 				/*
@@ -671,7 +677,13 @@
 				 */
 				function onButtonClick(e){
 					var button = e.control;
+					if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+						if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+							window.location.href="/findMyCartForm";
+						}
+					}else{
 					window.location.href="/findMyCartForm";
+					}
 				}
 	
 				/*
@@ -680,7 +692,13 @@
 				 */
 				function onMypageClick(e){
 					var mypage = e.control;
+					if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+						if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+							window.location.href="/findMyPageForm";
+						}
+					}else{
 					window.location.href="/findMyPageForm";
+					}
 				}
 	
 				/*
@@ -694,7 +712,13 @@
 					}
 					
 					if(navigationBar.value == 'mealkit'){
-						window.location.href='/insertMealkitForm';
+						if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+								window.location.href="/insertMealkitForm";
+							}
+						}else{
+						window.location.href="/insertMealkitForm";
+						}
 					}
 						
 					if(navigationBar.value == 'questionAdmin'){
@@ -740,25 +764,14 @@
 					}
 					
 					
-					if (navigationBar.value == 'recipe') {
-						window.location.href = '/recipeBoardList';
-						//		var appProperty = app.getAppProperty("recipeApp");
-						//				cpr.core.App.load("recipe/recipe", function(/*cpr.core.App*/ loadedApp){
-						//		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-						//			if(appProperty.getEmbeddedAppInstance()){
-						//				appProperty.getEmbeddedAppInstance().dispose();
-						//			}
-						//			/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
-						//			if(loadedApp){						
-						//				/*초기값을 전달합니다.*/			
-						//				appProperty.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
-						////					embApp.initValue = voInitValue;
-						//				})
-						//				/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
-						//				appProperty.app = loadedApp;
-						//			}
-						//		}); 
-						//		appProperty.redraw();
+					if(navigationBar.value == 'recipe'){
+						if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+								window.location.href="/recipeBoardList";
+							}
+						}else{
+						window.location.href="/recipeBoardList";
+						}		
 					}
 				}
 	
@@ -768,7 +781,15 @@
 				 */
 				function onBtnWriteClick(e){
 					var btnWrite = e.control;
-					window.location.href = "/insertRecipeForm";
+						if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+								var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
+								_httpPostMethod.submit();
+							}
+						}else{
+								var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
+								_httpPostMethod.submit();
+						}	
 				}
 	
 				/*
@@ -778,6 +799,8 @@
 				function onBtnLoginoffClick(e){
 					var btnLoginoff = e.control;
 					window.location.href="/memberUI/loginForm";
+					var event = new cpr.events.CAppEvent("clickEvent");
+					app.dispatchEvent(event);
 				}
 	
 				/*
@@ -799,26 +822,31 @@
 						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 					}
-					
-					app.lookup("category").value = app.getAppProperty("categoryValue");
-					app.lookup("searchInput").value = app.getAppProperty("searchValue");
+	
 				}
 	
 				/*
 				 * 서치 인풋에서 search 이벤트 발생 시 호출.
 				 * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
 				 */
-				function onSearchInputSearch(e) {
+	
+				function onSearchInputSearch(e){
 					var searchInput = e.control;
 					var comboBox = app.lookup("category");
-					if (comboBox.value == "" || comboBox.value == null) {
+					if(comboBox.value =="" || comboBox.value ==null){
 						alert("카테고리 선택하세요");
 						return;
 					}
-					if (comboBox.value == "레시피") {	
-						window.location.href = "/recipeBoardList?search=" + searchInput.value;
+					if(comboBox.value =="레시피"){
+						if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+								window.location.href="/recipeBoardList?search="+ searchInput.value;
+							}
+						}else{
+						window.location.href="/recipeBoardList?search="+ searchInput.value;
+						}	
 					}
-				}
+				};
 				// End - User Script
 				
 				// Header
@@ -1707,6 +1735,143 @@
 	cpr.core.Platform.INSTANCE.register(internalApp);
 })();
 /// end - udc.recipeCommentudc
+/// start - udc.recipeLikeudc
+/*
+ * UDC Qualified Name: udc.recipeLikeudc
+ * App URI: udc/recipeLikeudc
+ * Source Location: udc/recipeLikeudc.clx
+ *
+ * This file was generated by eXBuilder6 compiler(1.0.4584), Don't edit manually.
+ */
+(function(){
+	// App Declaration
+		var internalApp = new cpr.core.App("udc/recipeLikeudc", { 
+			onPrepare: function(loader) {
+			},
+			onCreate: function(/* cpr.core.AppInstance */ app, exports) {
+				var linker = {};
+				// Start - User Script
+				/************************************************
+				 * recipeLikeudc.js
+				 * Created at 2023. 8. 21. 오후 4:05:24.
+				 *
+				 * @author user
+				 ************************************************/
+	
+				/**
+				 * UDC 컨트롤이 그리드의 뷰 모드에서 표시할 텍스트를 반환합니다.
+				 */
+				exports.getText = function(){
+					// TODO: 그리드의 뷰 모드에서 표시할 텍스트를 반환하는 하는 코드를 작성해야 합니다.
+					return "";
+				};
+	
+				/*
+				 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+				 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+				 */
+				function onBodyLoad(e){
+					app.lookup("img").src = app.getAppProperty("img");
+					app.lookup("title").text = app.getAppProperty("title");
+				}
+	
+				/*
+				 * 이미지에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onImgClick(e){
+					var img = e.control;
+					var event = new cpr.events.CAppEvent("imgClick");
+					app.dispatchEvent(event);
+				};
+				// End - User Script
+				
+				// Header
+				app.declareAppProperty("img", null);
+				app.declareAppProperty("title", null);
+				app.supportMedia("all and (min-width: 1024px)", "default");
+				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
+				app.supportMedia("all and (max-width: 499px)", "mobile");
+				
+				// Configure root container
+				var container = app.getContainer();
+				container.style.css({
+					"width" : "100%",
+					"top" : "0px",
+					"height" : "100%",
+					"left" : "0px"
+				});
+				
+				// Layout
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				container.setLayout(xYLayout_1);
+				
+				// UI Configuration
+				var image_1 = new cpr.controls.Image("img");
+				image_1.style.css({
+					"cursor" : "pointer"
+				});
+				if(typeof onImgClick == "function") {
+					image_1.addEventListener("click", onImgClick);
+				}
+				container.addChild(image_1, {
+					"top": "0px",
+					"left": "0px",
+					"width": "300px",
+					"height": "250px"
+				});
+				
+				var output_1 = new cpr.controls.Output("title");
+				output_1.value = "Output";
+				container.addChild(output_1, {
+					"top": "250px",
+					"left": "0px",
+					"width": "300px",
+					"height": "50px"
+				});
+				if(typeof onBodyLoad == "function"){
+					app.addEventListener("load", onBodyLoad);
+				}
+			}
+		});
+	internalApp.title = "recipeLikeudc";
+	
+	// Type declaration for recipeLikeudc
+	cpr.utils.Util.ensurePackage("udc").recipeLikeudc = function(id){
+		cpr.controls.UDCBase.call(this, "udc.recipeLikeudc", internalApp, id);
+	};
+	
+	udc.recipeLikeudc.prototype = Object.create(cpr.controls.UDCBase.prototype);
+	Object.defineProperty(udc.recipeLikeudc.prototype, "type", {
+		get : function(){
+			return "udc.recipeLikeudc";
+		},
+		
+		configurable: true
+	});
+	
+	// App Properties
+	Object.defineProperty(udc.recipeLikeudc.prototype, "img", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("img");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("img", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.recipeLikeudc.prototype, "title", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("title");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("title", newValue, true);
+		}
+	});
+	
+	// Register type into the Platform and package
+	cpr.core.Platform.INSTANCE.register(internalApp);
+})();
+/// end - udc.recipeLikeudc
 /// start - udc.recipeListudc
 
 /*

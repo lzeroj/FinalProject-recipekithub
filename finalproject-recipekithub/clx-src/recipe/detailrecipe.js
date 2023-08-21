@@ -141,7 +141,7 @@ function onRecipeCommentListSubmitSuccess(e) {
 			container.addChild(comment, {
 				height: "120px",
 				width: "100px",
-				autoSize: "both"
+				autoSize: "height"
 			});
 			comment.addEventListener("deleteClick", function(e) {
 				app.lookup("dmRecipeCommentId").setValue("recipeCommentId", recipeComment[index].recipeCommentId);

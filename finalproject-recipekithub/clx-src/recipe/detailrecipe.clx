@@ -106,7 +106,7 @@
     </cl:group>
     <cl:group std:sid="group-e5507d1a" id="commentgrp">
       <cl:responsivexylayoutdata std:sid="rxyl-data-544c1766">
-        <cl:xylayoutdata std:sid="sxyl-data-3116a2bb" top="1171px" width="1320px" height="176px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-3116a2bb" top="1254px" width="1320px" height="176px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:verticallayout std:sid="v-layout-369a8229"/>
     </cl:group>
@@ -114,17 +114,12 @@
       <cl:listener std:sid="listener-af5aa1ca" name="selection-change" handler="onPageSelectionChange"/>
       <cl:datamapbind property="currentPageIndex" datacontrolid="dmPage" columnname="pageNo"/>
       <cl:responsivexylayoutdata std:sid="rxyl-data-0e718f55">
-        <cl:xylayoutdata std:sid="sxyl-data-06ff2aaf" top="1357px" width="200px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-06ff2aaf" top="1440px" width="200px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
     </cl:pageindexer>
-    <cl:htmlsnippet std:sid="htmlsnippet-bf27aa3e" id="recipeContent" value="&lt;p>HTML Snippet&lt;/p>">
-      <cl:responsivexylayoutdata std:sid="rxyl-data-efa31114">
-        <cl:xylayoutdata std:sid="sxyl-data-7e9d47f5" top="562px" width="1320px" height="430px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
-      </cl:responsivexylayoutdata>
-    </cl:htmlsnippet>
     <cl:group std:sid="group-e9187c3c">
       <cl:responsivexylayoutdata std:sid="rxyl-data-39a26a86">
-        <cl:xylayoutdata std:sid="sxyl-data-ce45f3c8" top="1085px" width="1320px" height="87px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-ce45f3c8" top="1168px" width="1320px" height="87px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:inputbox std:sid="i-box-bb4a5b42" id="commentInput">
         <cl:datamapbind property="value" datacontrolid="dmInsertValue" columnname="recipeCommentContent"/>
@@ -142,7 +137,7 @@
     </cl:group>
     <cl:group std:sid="group-a32172ec">
       <cl:responsivexylayoutdata std:sid="rxyl-data-05941be1">
-        <cl:xylayoutdata std:sid="sxyl-data-7cf61f1d" top="1039px" width="1320px" height="38px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-7cf61f1d" top="1122px" width="1320px" height="38px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:output std:sid="output-e8c32823" value="댓글">
         <cl:xylayoutdata std:sid="xyl-data-dda329cb" top="9px" left="4px" width="41px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -154,7 +149,7 @@
     </cl:group>
     <cl:group std:sid="group-3511dc92">
       <cl:responsivexylayoutdata std:sid="rxyl-data-696def2a">
-        <cl:xylayoutdata std:sid="sxyl-data-e173d436" top="1003px" width="1320px" height="37px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-e173d436" top="1086px" width="1320px" height="37px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:output std:sid="output-0617601f" id="reg" value="등록일">
         <cl:xylayoutdata std:sid="xyl-data-395b46a0" top="9px" left="0px" width="51px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -175,6 +170,15 @@
         <cl:xylayoutdata std:sid="sxyl-data-161b6a96" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
     </cl:udc>
+    <cl:group std:sid="group-0e137c40">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-c80b176a">
+        <cl:xylayoutdata std:sid="sxyl-data-288ec63a" top="561px" width="1320px" height="525px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+      </cl:responsivexylayoutdata>
+      <cl:htmlsnippet std:sid="htmlsnippet-bf27aa3e" id="recipeContent" style="cursor:auto;" value="&lt;p>HTML Snippet&lt;/p>">
+        <cl:verticaldata std:sid="v-data-0da9c780" width="400px" height="515px" autosize="height"/>
+      </cl:htmlsnippet>
+      <cl:verticallayout std:sid="v-layout-87db10ee"/>
+    </cl:group>
     <cl:responsivexylayout std:sid="r-xylayout-089b2778"/>
   </body>
   <std:studiosetting>

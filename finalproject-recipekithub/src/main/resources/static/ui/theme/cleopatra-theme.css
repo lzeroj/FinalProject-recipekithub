@@ -1789,3 +1789,41 @@ body.cl-has-modal {
 .cl-grid-cell:focus {
   /* 웹 접근성 개선 목적으로 포커스 링을 표시하려면 아래 주석을 해제 하십시오. */
 }
+.cl-button.slide-button {
+  background-image: none;
+  background-color: transparent;
+  border-radius: 0px;
+  border: none;
+  color: white;
+  text-shadow: none;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.cl-button.slide-button:hover,
+.cl-button.slide-button.cl-hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0px;
+  border: none;
+  color: white;
+  text-shadow: none;
+}
+.cl-button.slide-button:active,
+.cl-button.slide-button.cl-ativated {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0px;
+  border: none;
+  color: white;
+  text-shadow: none;
+}
+.cl-button.slide-page-button {
+  background-image: none;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  min-width: 5px;
+  min-height: 5px;
+  max-height: 5px;
+  border-radius: 5px;
+}
+.cl-button.slide-page-button.active {
+  background-color: rgba(0, 0, 0, 0.8);
+}

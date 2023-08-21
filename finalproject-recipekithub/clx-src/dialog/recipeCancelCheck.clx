@@ -8,13 +8,16 @@
     <cl:appspec/>
   </head>
   <body std:sid="body-ec2d908b">
+    <cl:listener std:sid="listener-2db55477" name="load" handler="onBodyLoad"/>
     <cl:output std:sid="output-4e1be60a" id="optValue" style="text-align:center;" value="">
       <cl:xylayoutdata std:sid="xyl-data-541d1959" top="0px" left="0px" width="400px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:button std:sid="button-c18b893e" id="btnSubmit" style="border-right-style:none; background-color:#0078d7; border-radius:0px; text-shadow:none; color:white; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;" value="확인">
+      <cl:listener std:sid="listener-b63868f6" name="click" handler="onBtnSubmitClick"/>
       <cl:xylayoutdata std:sid="xyl-data-2b532195" top="200px" left="0px" width="200px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:button>
     <cl:button std:sid="button-7f8d59c0" id="btnCancel" style="border-right-style:none; border-radius:0px; text-shadow:none; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;" value="취소">
+      <cl:listener std:sid="listener-5c2cb2cb" name="click" handler="onBtnCancelClick"/>
       <cl:xylayoutdata std:sid="xyl-data-d5517282" top="200px" left="200px" width="200px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:button>
     <cl:xylayout std:sid="xylayout-c2139697"/>

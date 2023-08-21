@@ -36,9 +36,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class RecipeBoardController {
-
+       
 	private final RecipeBoardService recipeBoardService;
-
+            
 	@RequestMapping("/recipeBoardList")
 	public View recipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
@@ -48,8 +48,8 @@ public class RecipeBoardController {
 			searchParam.put("searchValue", search); 
 		}
 		return new UIView("ui/recipe/recipe.clx",searchParam);
-	}            
-          
+	}                 
+            
 	@RequestMapping("/findRecipeBoardList")
 	public View findRecipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
@@ -67,15 +67,15 @@ public class RecipeBoardController {
 		// 검색 바 값
 		ParameterGroup searchParam = dataRequest.getParameterGroup("dmSearch");
 		String searchValue = searchParam.getValue("searchValue"); 
-		
+		 
 		log.info("검색 창  : {}",searchValue);
 		log.info("type, ingredients, method, sort : {}, {}, {}, {}",type,ingredients,method,sort); 
-		    
+		      
 		RecipePagination pagination = null;
 		long totalRecipeCount = recipeBoardService.findTotalPostCount(type, ingredients, method, searchValue);
 		if(pageNo==null) {
 			pagination = new RecipePagination(totalRecipeCount);   
-		}else {
+		}else {  
 			pagination = new RecipePagination(totalRecipeCount,Long.parseLong(pageNo));
 		}
 		 
@@ -94,21 +94,28 @@ public class RecipeBoardController {
 		dataRequest.setResponse("totalRecipeCount", totalRecipeCount);
 		return new JSONDataView();
 	}		 
-	
-	@RequestMapping("/insertRecipeForm")
+	//메인 화면 추천 레시피
+	@RequestMapping("/likeRecipeList")
+	public View likeRecipeList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
+			throws IOException {
+		List<RecipeBoardVO> list = recipeBoardService.likeRecipeList();
+		dataRequest.setResponse("likeRecipeList", list);
+		return new JSONDataView();
+	}		 
+	@RequestMapping("/insertRecipeForm") 
 	public View insertRecipeForm(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
 		return new UIView("/ui/recipe/insertrecipe.clx");
 	}
 	
-	@RequestMapping("/insertRecipe")
+	@PostMapping("/insertRecipe")
 	public View insertRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("비인증");
 			return new UIView("/ui/index.clx");
-		} 
+		}  
 		
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipe");
 		String title = initParam.getValue("RECIPE_BOARD_TITLE");
@@ -116,7 +123,7 @@ public class RecipeBoardController {
 		String type = initParam.getValue("CATEGORY_TYPE"); 
 		String ingredients = initParam.getValue("CATEGORY_INGREDIENTS");
 		String method = initParam.getValue("CATEGORY_METHOD");
-
+ 
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
 		UploadFile[] uploadFile = uploadFiles.get("image");
 		File orgName = uploadFile[0].getFile();
@@ -184,12 +191,12 @@ public class RecipeBoardController {
 				newCookie.setPath("/");
 				response.addCookie(newCookie);
 			}
-
+ 
 		Map<String, Object> initParam = new HashMap<String, Object>();
 		initParam.put("recipeBoardVO", recipeBoardVO);
 		return new UIView("ui/recipe/detailrecipe.clx", initParam);
 	}
-
+ 
 	/*
 	 * @RequestMapping("/detailRecipe") public View detailRecipe(HttpServletRequest
 	 * request, HttpServletResponse response, DataRequest dataRequest) {
@@ -239,7 +246,7 @@ public class RecipeBoardController {
 		String savePath = "C:\\upload\\recipe\\";
 		String recipeBoardImage = recipeBoardService.findDetailRecipe(recipeBoardId).getRecipeBoardImage();
 		RecipeBoardVO recipeBoardVO = new RecipeBoardVO();
-
+    
 		// 사진을 변경했으면 삭제 후 저장
 		if (uploadFiles.size() != 0) {
 			if (recipeBoardImage != null) {
@@ -269,7 +276,7 @@ public class RecipeBoardController {
 
 		return new JSONDataView();
 	}
-    
+                                    
 	@RequestMapping("/deleteRecipe")
 	public View deleteRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
@@ -277,7 +284,7 @@ public class RecipeBoardController {
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("비인증");
 			return new UIView("/ui/index.clx");
-		}
+		}  
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipeBoardId");
 		long recipeBoardId = Long.parseLong(initParam.getValue("RECIPE_BOARD_ID"));
 		String savePath = "C:\\upload\\recipe\\";

@@ -23,4 +23,6 @@ public interface RecipeBoardService {
 
 	long likeCount(long recipeBoardId);
 
+	List<RecipeBoardVO> likeRecipeList();
+
 }
