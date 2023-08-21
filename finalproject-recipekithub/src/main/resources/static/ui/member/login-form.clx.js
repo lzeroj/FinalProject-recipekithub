@@ -79,7 +79,7 @@
 			        value: value,
 			        expirationTime: expirationTime
 			    };
-
+				
 			    sessionStorage.setItem(key, JSON.stringify(data));
 			}
 			/*

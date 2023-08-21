@@ -44,7 +44,26 @@ function onHeaderLogoClick(e){
  */
 function onButtonClick(e){
 	var button = e.control;
-	window.location.href="/findMyCartForm";
+//	window.location.href="/findMyCartForm";
+	
+	/** @type cpr.controls.EmbeddedApp */ 
+	var embeapp = app.getAppProperty("embe");
+	cpr.core.App.load("cart/cartForm", function(/*cpr.core.App*/ loadedApp){
+	/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+		if(embeapp.getEmbeddedAppInstance()){
+			embeapp.getEmbeddedAppInstance().dispose();
+		}
+		/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+		if(loadedApp){						
+			/*초기값을 전달합니다.*/			
+			embeapp.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+//					embApp.initValue = voInitValue;
+			})
+			/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+			embeapp.app = loadedApp;
+		}
+	}); 
+	embeapp.redraw();
 }
 
 /*
@@ -67,7 +86,7 @@ function onNavigationBarItemClick(e){
 	}
 	
 	if(navigationBar.value == 'mealkit'){
-		window.location.href='/insertMealkitForm';
+		window.location.href='/mealkitList';
 	}
 		
 	if(navigationBar.value == 'questionAdmin'){

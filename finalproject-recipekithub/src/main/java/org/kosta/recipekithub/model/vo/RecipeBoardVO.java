@@ -19,4 +19,5 @@ public class RecipeBoardVO {
 	private String categoryIngredients;
 	private String categoryMethod;
 	private String recipeBoardImage;
+	private String memberEmail;
 }

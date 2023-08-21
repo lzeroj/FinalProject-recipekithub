@@ -159,7 +159,7 @@
 				formLayout_1.horizontalSpacing = "0px";
 				formLayout_1.verticalSpacing = "0px";
 				formLayout_1.setColumns(["1fr", "160px"]);
-				formLayout_1.setRows(["50px", "20px", "1fr", "20px", "50px"]);
+				formLayout_1.setRows(["50px", "20px", "1fr", "20px", "40px"]);
 				group_2.setLayout(formLayout_1);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
@@ -167,9 +167,12 @@
 					output_1.style.css({
 						"background-color" : "#FFFFFF",
 						"color" : "#0fd465",
+						"border-bottom-color" : "#0ebc59",
 						"font-weight" : "bold",
+						"border-bottom-width" : "1px",
 						"font-size" : "18px",
 						"font-family" : "푸른전남",
+						"border-bottom-style" : "solid",
 						"text-align" : "center"
 					});
 					container.addChild(output_1, {
