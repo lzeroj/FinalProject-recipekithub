@@ -62,5 +62,4 @@ function onNav1ItemClick(e){
 		}
 	}); 
 	app.lookup("ea1").redraw();	
-	
 }

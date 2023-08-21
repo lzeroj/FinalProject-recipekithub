@@ -1,9 +1,12 @@
 package org.kosta.recipekithub.test;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.kosta.recipekithub.model.service.DeclarationService;
 import org.kosta.recipekithub.model.vo.DeclarationVO;
+import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -31,4 +34,23 @@ public class UnitTestDeclaration {
 		int result = declarationService.insertDeclaration(dvo);
 		Assertions.assertEquals(1, result);
 	}
+	
+	@Test
+	public void selectAllReportList() {
+		List<RecipeBoardVO> recipelist = declarationService.selectAllReportList();
+		for(int i=0;i<recipelist.size();i++) {
+			System.out.println(recipelist.get(i));
+		}
+	}
+	
+	@Test
+	public void selectReportListByRecipeBoardId() {
+		int recipeBoardId = 39; 
+		List<DeclarationVO> selectReportList = declarationService.selectReportListByRecipeBoardId(recipeBoardId);
+		for(int i=0;i<selectReportList.size();i++) {
+			System.out.println(selectReportList.get(i));
+		}
+	}
+	
+
 }

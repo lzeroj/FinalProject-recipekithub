@@ -48,6 +48,9 @@ select c.mealkit_comment_id, b.member_email, b.member_nick, c.mealkit_comment_co
  	from mealkit_comment c inner join member b on c.member_email = b.member_email where c.mealkit_no = #{value}
 </select>
 
+<select id="mealkitCommentCnt" resultType="int">
+	select count(*) from mealkit_comment where mealkit_no = #{value}
+</select>
 
 
 </mapper>

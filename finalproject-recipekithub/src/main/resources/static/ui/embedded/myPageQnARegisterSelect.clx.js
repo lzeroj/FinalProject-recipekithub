@@ -164,11 +164,14 @@
 				submission_1.addEventListener("submit-success", onSubchkanswerSubmitSuccess);
 			}
 			app.register(submission_1);
-			app.supportMedia("all", "new-screen");
+			app.supportMedia("all and (min-width: 709px)", "new-screen");
+			app.supportMedia("all and (min-width: 709px) and (max-width: 708px)", "new-screen2");
+			app.supportMedia("all and (max-width: 708px)", "new-screen3");
 			
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"background-color" : "#FFFFFF",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -287,7 +290,7 @@
 			container.addChild(group_1, {
 				"autoSize": "height",
 				"width": "709px",
-				"height": "688px"
+				"height": "710px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

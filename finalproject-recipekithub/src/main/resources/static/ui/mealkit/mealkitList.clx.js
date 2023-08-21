@@ -26,23 +26,26 @@
 				var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
 				var email = cpr.core.Platform.INSTANCE.getParameter("member");
 				console.log("email = " + email);
-				if(email !== "guest"){
+				if(email != "guest"){
 					var button = app.lookup("insertBtn");
 					button.visible = true;
 					button.redraw();
 				}
+
 				var cnt = app.lookup("mealkitCnt");
 				cnt.value = mealkitList.length;
 				console.log("mealkitList = " + mealkitList);
 				var container = app.lookup("grp");
 				for (var i = 0; i < mealkitList.length; i++) {
 					(function(index) {
-						var mealkit = new udc.recipeListudc();
-						mealkit.img = "/upload/meaklkitUpload/" + mealkitList[i].recipeBoardImage;
+						var mealkit = new udc.mealkitList();
+						mealkit.img = "/upload/mealkit/" + mealkitList[i].mealkitImage;
 						console.log(mealkitList.img);
 						mealkit.hits = mealkitList[i].mealkitHits;
 						mealkit.nick = mealkitList[i].memberVO.memberNick;
 						mealkit.title = mealkitList[i].mealkitName;
+						mealkit.img = mealkitList[i].mealkitImage;
+						//mealkit.star = mealkitStar[i]; 별점 추가 예정
 						container.addChild(mealkit, {
 							height: "250px",
 							width: "230px",
@@ -53,6 +56,8 @@
 						});
 					})(i);
 				}
+
+
 			}
 
 			/*
@@ -282,7 +287,7 @@
 				var button_4 = new cpr.controls.Button();
 				button_4.value = "Button";
 				container.addChild(button_4, {
-					"top": "1133px",
+					"top": "1168px",
 					"left": "452px",
 					"width": "100px",
 					"height": "20px"
@@ -294,7 +299,7 @@
 				container.addChild(group_5, {
 					"top": "343px",
 					"width": "968px",
-					"height": "717px",
+					"height": "783px",
 					"left": "calc(50% - 484px)"
 				});
 				var group_6 = new cpr.controls.Container();
@@ -305,7 +310,7 @@
 				var xYLayout_6 = new cpr.controls.layouts.XYLayout();
 				group_6.setLayout(xYLayout_6);
 				container.addChild(group_6, {
-					"top": "1072px",
+					"top": "1136px",
 					"width": "974px",
 					"height": "22px",
 					"left": "calc(50% - 487px)"

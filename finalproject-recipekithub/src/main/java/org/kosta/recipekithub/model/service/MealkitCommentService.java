@@ -17,4 +17,6 @@ public interface MealkitCommentService {
 	int updateCommentByNo(MealkitCommentVO mealkit);
 	
 	List<MealkitCommentVO> findCommentListByMealkit(int num);
+
+	int mealkitCommentCnt(int mealkitNo);
 }

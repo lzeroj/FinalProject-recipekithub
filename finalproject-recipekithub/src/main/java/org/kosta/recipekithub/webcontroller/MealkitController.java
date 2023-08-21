@@ -54,6 +54,7 @@ public class MealkitController {
 		Map<String, Object> initParam = new HashMap<String, Object>();
 		initParam.put("mealkitList", list);
 		initParam.put("member", email);
+		
 		return new UIView("ui/mealkit/mealkitList.clx", initParam);
 		
 	}
@@ -107,7 +108,7 @@ public class MealkitController {
 //		MemberVO sessionMember = (MemberVO)session.getAttribute("member");
 //		if(sessionMember == null) {
 //			return new UIView("/ui/index.clx");	
-//		}
+//		} 
 		
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
 		UploadFile[] uploadFile = uploadFiles.get("image");
