@@ -62,7 +62,7 @@ function setTimedSessionData(key, value, expirationMinutes) {
         value: value,
         expirationTime: expirationTime
     };
-
+	
     sessionStorage.setItem(key, JSON.stringify(data));
 }
 /*

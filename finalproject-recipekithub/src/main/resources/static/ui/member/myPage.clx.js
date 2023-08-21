@@ -75,7 +75,6 @@
 					}
 				}); 
 				app.lookup("ea1").redraw();	
-				
 			};
 			// End - User Script
 			

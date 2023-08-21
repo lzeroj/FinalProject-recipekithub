@@ -39,6 +39,7 @@
           <cl:xylayoutdata std:sid="xyl-data-cc0b5325" right="170px" bottom="20px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
         </cl:button>
         <cl:button std:sid="button-d2f92148" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="뒤로가기">
+          <cl:listener std:sid="listener-a00607a9" name="click" handler="onButtonClick2"/>
           <cl:xylayoutdata std:sid="xyl-data-c482bf46" right="20px" bottom="20px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
         </cl:button>
         <cl:xylayout std:sid="xylayout-f91232f8"/>

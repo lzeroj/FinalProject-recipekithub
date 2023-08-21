@@ -671,7 +671,26 @@
 				 */
 				function onButtonClick(e){
 					var button = e.control;
-					window.location.href="/findMyCartForm";
+				//	window.location.href="/findMyCartForm";
+					
+					/** @type cpr.controls.EmbeddedApp */ 
+					var embeapp = app.getAppProperty("embe");
+					cpr.core.App.load("cart/cartForm", function(/*cpr.core.App*/ loadedApp){
+					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+						if(embeapp.getEmbeddedAppInstance()){
+							embeapp.getEmbeddedAppInstance().dispose();
+						}
+						/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+						if(loadedApp){						
+							/*초기값을 전달합니다.*/			
+							embeapp.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+				//					embApp.initValue = voInitValue;
+							})
+							/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+							embeapp.app = loadedApp;
+						}
+					}); 
+					embeapp.redraw();
 				}
 	
 				/*
@@ -740,26 +759,10 @@
 					}
 					
 					
-					if (navigationBar.value == 'recipe') {
-						window.location.href = '/recipeBoardList';
-						//		var appProperty = app.getAppProperty("recipeApp");
-						//				cpr.core.App.load("recipe/recipe", function(/*cpr.core.App*/ loadedApp){
-						//		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-						//			if(appProperty.getEmbeddedAppInstance()){
-						//				appProperty.getEmbeddedAppInstance().dispose();
-						//			}
-						//			/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
-						//			if(loadedApp){						
-						//				/*초기값을 전달합니다.*/			
-						//				appProperty.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
-						////					embApp.initValue = voInitValue;
-						//				})
-						//				/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
-						//				appProperty.app = loadedApp;
-						//			}
-						//		}); 
-						//		appProperty.redraw();
+					if(navigationBar.value == 'recipe'){
+						window.location.href='/recipeBoardList';
 					}
+					
 				}
 	
 				/*
@@ -768,7 +771,7 @@
 				 */
 				function onBtnWriteClick(e){
 					var btnWrite = e.control;
-					window.location.href = "/insertRecipeForm";
+					
 				}
 	
 				/*
@@ -799,26 +802,7 @@
 						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 					}
-					
-					app.lookup("category").value = app.getAppProperty("categoryValue");
-					app.lookup("searchInput").value = app.getAppProperty("searchValue");
-				}
-	
-				/*
-				 * 서치 인풋에서 search 이벤트 발생 시 호출.
-				 * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
-				 */
-				function onSearchInputSearch(e) {
-					var searchInput = e.control;
-					var comboBox = app.lookup("category");
-					if (comboBox.value == "" || comboBox.value == null) {
-						alert("카테고리 선택하세요");
-						return;
-					}
-					if (comboBox.value == "레시피") {	
-						window.location.href = "/recipeBoardList?search=" + searchInput.value;
-					}
-				}
+				};
 				// End - User Script
 				
 				// Header

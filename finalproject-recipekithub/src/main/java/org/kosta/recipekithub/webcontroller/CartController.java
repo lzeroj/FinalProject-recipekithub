@@ -1,6 +1,5 @@
 package org.kosta.recipekithub.webcontroller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,14 +14,12 @@ import org.kosta.recipekithub.model.vo.CartdetailVO;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.spring.JSONDataView;
-import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,11 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class CartController {
 	
 	private final CartService cartService;
-	
-	@RequestMapping("/findMyCartForm")
-	public View findMyCartForm(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {	
-		return new UIView("ui/cart/cartForm.clx"); 
-	}
 	
 	@RequestMapping("/selectMyCart")
 	public View selectMyCart(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {

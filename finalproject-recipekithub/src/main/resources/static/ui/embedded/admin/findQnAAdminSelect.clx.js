@@ -175,6 +175,7 @@
 					group_3.setLayout(verticalLayout_2);
 					(function(container){
 						var inputBox_1 = new cpr.controls.InputBox("ipb1");
+						inputBox_1.readOnly = true;
 						inputBox_1.style.css({
 							"border-radius" : "10px"
 						});
@@ -184,6 +185,7 @@
 							"height": "40px"
 						});
 						var textArea_1 = new cpr.controls.TextArea("txa1");
+						textArea_1.readOnly = true;
 						textArea_1.style.css({
 							"border-radius" : "10px"
 						});
