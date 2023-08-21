@@ -75,7 +75,6 @@
 					}
 				}); 
 				app.lookup("ea1").redraw();	
-				
 			};
 			// End - User Script
 			
@@ -130,6 +129,7 @@
 					(function(container){
 						var group_4 = new cpr.controls.Container();
 						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+						xYLayout_4.scrollable = false;
 						group_4.setLayout(xYLayout_4);
 						(function(container){
 							var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
@@ -287,11 +287,16 @@
 					})(group_3);
 					container.addChild(group_3, {
 						"top": "210px",
-						"bottom": "0px",
+						"bottom": "100px",
 						"width": "1230px",
 						"left": "calc(50% - 615px)"
 					});
-					var userDefinedControl_2 = new udc.header3();
+					var userDefinedControl_2 = new udc.headerMyPage();
+					userDefinedControl_2.style.css({
+						"border-bottom-color" : "#62a40c",
+						"border-bottom-width" : "3px",
+						"border-bottom-style" : "solid"
+					});
 					container.addChild(userDefinedControl_2, {
 						"top": "0px",
 						"right": "0px",
@@ -311,6 +316,14 @@
 				"right": "0px",
 				"bottom": "0px",
 				"left": "0px"
+			});
+			
+			var userDefinedControl_3 = new udc.footer();
+			container.addChild(userDefinedControl_3, {
+				"right": "0px",
+				"bottom": "0px",
+				"left": "0px",
+				"height": "100px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

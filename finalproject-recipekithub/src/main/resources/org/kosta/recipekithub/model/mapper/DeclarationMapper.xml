@@ -14,5 +14,22 @@
 		)
 	</insert>
 	
+	<!-- 초기 리포트 리스트를 출력한다(3개이상 신고당한) -->
+	<select id="selectAllReportList" resultType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
+		SELECT DISTINCT rb.MEMBER_EMAIL, rb.RECIPE_BOARD_ID, rb.RECIPE_BOARD_TITLE, rb.CATEGORY_INGREDIENTS, rb.CATEGORY_METHOD
+		FROM RECIPE_BOARD rb
+		JOIN (
+		    SELECT RECIPE_BOARD_ID, COUNT(*) AS report_count
+		    FROM REPORT
+		    GROUP BY RECIPE_BOARD_ID
+		    HAVING COUNT(*) >= 3
+		) r ON rb.RECIPE_BOARD_ID = r.RECIPE_BOARD_ID
+	</select>
+	
+	<select id="selectReportListByRecipeBoardId" resultType="org.kosta.recipekithub.model.vo.DeclarationVO">
+		SELECT MEMBER_EMAIL ,RECIPE_BOARD_ID ,REPORT_DATE ,REPORT_TITLE ,REPORT_CONTENT ,DECLARATION_TYPE 
+		FROM REPORT r 
+		WHERE RECIPE_BOARD_ID = #{recipeBoardId}
+	</select>
 	
 </mapper>

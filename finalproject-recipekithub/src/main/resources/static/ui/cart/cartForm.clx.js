@@ -378,14 +378,14 @@
 				submission_5.addEventListener("submit-success", onDeleteMyCartSubmitSuccess);
 			}
 			app.register(submission_5);
-			app.supportMedia("all and (min-width: 1024px)", "default");
+			app.supportMedia("all and (min-width: 1860px)", "new-screen");
+			app.supportMedia("all and (min-width: 1024px) and (max-width: 1859px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
 			
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
-				"background-color" : "#ebeae8",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -428,7 +428,7 @@
 					output_1.value = "  장바구니";
 					output_1.style.css({
 						"background-color" : "#FFFFFF",
-						"color" : "#eb5307",
+						"color" : "#0ebc59",
 						"font-weight" : "bold",
 						"font-size" : "25px",
 						"font-family" : "'Noto Sans KR' , 'Malgun Gothic' , sans-serif"
@@ -444,7 +444,7 @@
 					checkBox_1.text = "전체상품";
 					checkBox_1.style.css({
 						"background-color" : "#e5e5e5",
-						"color" : "#eb5307",
+						"color" : "#0ebc59",
 						"font-weight" : "700"
 					});
 					container.addChild(checkBox_1, {
@@ -654,13 +654,13 @@
 					var button_1 = new cpr.controls.Button();
 					button_1.value = "선택 삭제 X";
 					button_1.style.css({
-						"background-color" : "#eb5307",
+						"background-color" : "#0ebc59",
 						"color" : "#FFFFFF",
-						"border-bottom-color" : "#e5e5e5",
+						"border-bottom-color" : "#0ebc59",
 						"font-weight" : "bold",
-						"border-left-color" : "#e5e5e5",
-						"border-top-color" : "#e5e5e5",
-						"border-right-color" : "#e5e5e5",
+						"border-left-color" : "#0ebc59",
+						"border-top-color" : "#0ebc59",
+						"border-right-color" : "#0ebc59",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick3 == "function") {
@@ -693,7 +693,7 @@
 				var button_2 = new cpr.controls.Button();
 				button_2.value = "전체 상품 주문";
 				button_2.style.css({
-					"background-color" : "#eb5307",
+					"background-color" : "#0ebc59",
 					"color" : "#FFFFFF",
 					"white-space" : "normal",
 					"font-weight" : "bold",
@@ -711,9 +711,9 @@
 				var button_3 = new cpr.controls.Button();
 				button_3.value = "선택 상품 주문";
 				button_3.style.css({
-					"background-color" : "#FFFFFF",
+					"background-color" : "#0ebc59",
 					"border-right-style" : "solid",
-					"color" : "#000000",
+					"color" : "#FFFFFF",
 					"border-bottom-color" : "#ffffff",
 					"border-left-style" : "solid",
 					"font-weight" : "bold",
@@ -721,6 +721,7 @@
 					"border-top-color" : "#ffffff",
 					"border-bottom-style" : "solid",
 					"border-right-color" : "#ffffff",
+					"background-image" : "none",
 					"border-top-style" : "solid"
 				});
 				if(typeof onButtonClick2 == "function") {
@@ -816,9 +817,9 @@
 			})(group_1);
 			container.addChild(group_1, {
 				"top": "20px",
-				"right": "20px",
 				"bottom": "20px",
-				"left": "20px"
+				"width": "1040px",
+				"left": "calc(50% - 520px)"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

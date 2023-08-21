@@ -30,6 +30,6 @@ public interface MemberMapper {
 
 	String findPswdByEmailNamePhone(String memberEmail, String memberName, String memberPhone);
 
-	int insertProfileImg(String memberEmail);
+	int insertProfileImg(String memberEmail, String memberImage);
 
 }

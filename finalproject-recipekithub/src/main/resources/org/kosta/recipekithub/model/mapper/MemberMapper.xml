@@ -53,9 +53,7 @@
 		SELECT member_password FROM MEMBER WHERE member_email=#{memberEmail} AND member_name=#{memberName} AND member_phone=#{memberPhone} 
 	</select>
 	
-	<!-- 
 	<insert id="insertProfileImg " parameterType="string">
 		INSERT INTO MEMBER(member_image) VALUES(#{memberImage}) WHERE member_email=#{memberEmail} 
 	</insert>
-	-->
 </mapper>
