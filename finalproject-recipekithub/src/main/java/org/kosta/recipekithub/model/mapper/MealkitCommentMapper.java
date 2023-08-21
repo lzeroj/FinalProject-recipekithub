@@ -12,11 +12,13 @@ public interface MealkitCommentMapper {
 
 	MealkitCommentVO findCommentByNo(int num);
 
-	void deleteComment(int mealkitNo);
+	void deleteComment(int commentNo);
 
 	int updateCommentByNo(MealkitCommentVO mealkit);
 	
 	List<MealkitCommentVO> findCommentListByMealkit(int num);
+
+	int mealkitCommentCnt(int mealkitNo);
 
 
 }
