@@ -5,14 +5,17 @@
     <screen std:sid="screen-1d50ba2d" id="default" name="default" minwidth="1024px" maxwidth="1919px" width="1024px" height="768px" customHeight="600" customWidth="800" active="true"/>
     <screen std:sid="screen-951ce033" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
     <screen std:sid="screen-08fc027b" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
-    <cl:model std:sid="model-28488ec7"/>
+    <cl:model std:sid="model-28488ec7">
+      <cl:submission std:sid="submission-fa633981" id="sub_logout" action="/memberUI/logout"/>
+    </cl:model>
     <cl:appspec>
       <cl:property name="embe" type="control"/>
       <cl:property name="categoryValue" type="string"/>
       <cl:property name="searchValue" type="string"/>
+      <cl:event name="event" type="cpr.events.CAppEvent"/>
     </cl:appspec>
   </head>
-  <body std:sid="body-ae9875e0" style="top:0px; left:0px; width:1920px; height:200px;">
+  <body std:sid="body-ae9875e0" style="background-color:#F4FAEC; top:0px; left:0px; width:1920px; height:200px;">
     <cl:listener std:sid="listener-f9bc07a0" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-8f018fbd" style="box-shadow:0 0 10px #333;">
       <cl:responsivexylayoutdata std:sid="rxyl-data-86effc39">
@@ -25,12 +28,12 @@
           <cl:formdata std:sid="f-data-e13beb71" row="0" col="0" rowspan="1" colspan="1"/>
         </cl:img>
         <cl:group std:sid="group-dc6f4edc">
-          <cl:formdata std:sid="f-data-eed2089b" row="0" col="1"/>
+          <cl:formdata std:sid="f-data-970d69c9" row="0" col="1" rowspan="1" colspan="1"/>
           <cl:group std:sid="group-7180dd82" style="border-right-style:solid; border-bottom-color:#b4b4b4; border-top-width:2px; border-right-width:2px; border-left-color:#b4b4b4; border-right-color:#b4b4b4; border-left-width:2px; border-top-style:solid; border-radius:15px; border-left-style:solid; border-bottom-width:2px; border-top-color:#b4b4b4; border-bottom-style:solid;" class="cl-form-group">
             <cl:formdata std:sid="f-data-4d984b76" row="0" col="0"/>
             <cl:searchinput std:sid="s-input-ff13a668" id="searchInput" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" searchbuttonimage="../theme/images/com/main/icon-search-line.svg">
               <cl:listener std:sid="listener-89ad9453" name="search" handler="onSearchInputSearch"/>
-              <cl:formdata std:sid="f-data-b77244b4" row="0" col="1" rowspan="1" colspan="1"/>
+              <cl:formdata std:sid="f-data-00802766" row="0" col="1" rowspan="1" colspan="2"/>
             </cl:searchinput>
             <cl:combobox std:sid="c-box-6246d40e" id="category" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
               <cl:formdata std:sid="f-data-74e6790f" row="0" col="0"/>
@@ -51,7 +54,7 @@
           </cl:formlayout>
         </cl:group>
         <cl:group std:sid="group-51ad9e6c">
-          <cl:formdata std:sid="f-data-a234cef6" row="0" col="2"/>
+          <cl:formdata std:sid="f-data-a234cef6" row="0" col="3"/>
           <cl:button std:sid="button-d282e823" id="mypage" style="border-right-style:none; background-color:#F4FAEC; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/common/mypage.png); background-position:center; border-top-style:none;" class="login" value="" icon="">
             <cl:listener std:sid="listener-9fd2881a" name="click" handler="onMypageClick"/>
             <cl:formdata std:sid="f-data-35f716bb" row="0" col="0"/>
@@ -60,15 +63,18 @@
             <cl:listener std:sid="listener-5fd27508" name="click" handler="onButtonClick"/>
             <cl:formdata std:sid="f-data-c69171a1" row="0" col="1"/>
           </cl:button>
-          <cl:button std:sid="button-6101b717" id="btnLoginoff" style="background-color:transparent; border-right-style:none; background-repeat:no-repeat; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/common/loginoff.png); background-position:center; border-top-style:none;" value="">
-            <cl:listener std:sid="listener-7af3db55" name="click" handler="onBtnLoginoffClick"/>
-            <cl:formdata std:sid="f-data-25a7309e" row="0" col="3"/>
-          </cl:button>
           <cl:button std:sid="button-d588a414" id="btnWrite" style="border-right-style:none; background-size:cover; border-bottom-color:none; border-left-color:none; border-right-color:none; background-position:center; border-top-style:none; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-top-color:none; border-bottom-style:none; background-image:url(../theme/images/common/write.png);" value="">
             <cl:listener std:sid="listener-aace7466" name="click" handler="onBtnWriteClick"/>
             <cl:formdata std:sid="f-data-49c286d3" row="0" col="2"/>
           </cl:button>
-          <cl:formlayout std:sid="f-layout-2bec6cb4" scrollable="false" hspace="50px" vspace="50px" top-margin="30px" right-margin="30px" bottom-margin="30px" left-margin="30px">
+          <cl:combobox std:sid="c-box-4a527f50" id="cmb1" style="border-right-style:none; background-color:#F4FAEC; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/common/loginoff.png); background-position:center; border-top-style:none;" preventinput="true">
+            <cl:listener std:sid="listener-004ce1a5" name="selection-change" handler="onCmb1SelectionChange"/>
+            <cl:listener std:sid="listener-2c042a1b" name="open" handler="onCmb1Open"/>
+            <cl:formdata std:sid="f-data-0a5f2441" row="0" col="3"/>
+            <cl:liststyle style="padding-top:10px; padding-left:10px; vertical-align:middle; padding-bottom:10px; padding-right:10px; text-align:left;"/>
+            <cl:itemstyle style="font-weight:bolder; font-family:푸른전남 Medium; text-align:left; padding-right:10px;"/>
+          </cl:combobox>
+          <cl:formlayout std:sid="f-layout-2bec6cb4" scrollable="false" hspace="50px" vspace="20px" top-margin="30px" right-margin="30px" bottom-margin="30px" left-margin="30px">
             <cl:rows length="50" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
             <cl:columns length="50" unit="PIXEL"/>
             <cl:columns length="50" unit="PIXEL"/>
@@ -76,10 +82,18 @@
             <cl:columns length="50" unit="PIXEL"/>
           </cl:formlayout>
         </cl:group>
-        <cl:formlayout std:sid="f-layout-fcc63257" scrollable="false" hspace="50px" vspace="0px" top-margin="20px" right-margin="30px" bottom-margin="0px" left-margin="50px">
+        <cl:group std:sid="group-d74ec65d">
+          <cl:formdata std:sid="f-data-f5f5d103" row="0" col="2"/>
+          <cl:output std:sid="output-33b374ed" id="opbLoginStatus" style="font-weight:bold; font-size:14px;" value="">
+            <cl:xylayoutdata std:sid="xyl-data-598d514c" top="20px" left="20px" width="210px" height="70px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-51be152f"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-fcc63257" scrollable="false" hspace="40px" vspace="0px" top-margin="20px" right-margin="30px" bottom-margin="0px" left-margin="50px">
           <cl:rows length="110" unit="PIXEL"/>
           <cl:columns length="330" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-          <cl:columns length="2" unit="FRACTION"/>
+          <cl:columns length="2" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="250" unit="PIXEL"/>
           <cl:columns length="420" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         </cl:formlayout>
       </cl:group>

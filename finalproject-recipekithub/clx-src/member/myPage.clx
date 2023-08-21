@@ -81,6 +81,8 @@
   </body>
   <std:studiosetting>
     <std:hruler/>
-    <std:vruler/>
+    <std:vruler>
+      <std:guide position="749"/>
+    </std:vruler>
   </std:studiosetting>
 </html>

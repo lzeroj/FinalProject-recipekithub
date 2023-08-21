@@ -53,12 +53,36 @@
 			function onImageClick(e){
 				var image = e.control;
 				window.scrollTo(0,0);
+			}
+
+			/*
+			 * 사용자 정의 컨트롤에서 event 이벤트 발생 시 호출.
+			 */
+			function onHeader3Event(e){
+				var header3 = e.control;
+				if (cmb1.value == "logout") {
+					var initValue = "로그아웃 하시겠습니까?";
+					app.openDialog("dialog/registerPopup", {
+						width: 400, height: 300, headerClose: true, resizable: false
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+						dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						var submission = app.lookup("sub_logout");
+						submission.send();
+					});
+				}
 			};
 			// End - User Script
 			
 			// Header
 			var submission_1 = new cpr.protocols.Submission("find");
 			app.register(submission_1);
+			
+			var submission_2 = new cpr.protocols.Submission("sub_logout");
+			submission_2.action = "/memberUI/logout";
+			app.register(submission_2);
 			app.supportMedia("all and (min-width: 1920px)", "FHD");
 			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -82,10 +106,13 @@
 			group_1.setLayout(xYLayout_2);
 			(function(container){
 				var userDefinedControl_1 = linker.userDefinedControl_1 = new udc.header3();
+				if(typeof onHeader3Event == "function") {
+					userDefinedControl_1.addEventListener("event", onHeader3Event);
+				}
 				container.addChild(userDefinedControl_1, {
 					"top": "0px",
+					"right": "0px",
 					"left": "0px",
-					"width": "1920px",
 					"height": "200px"
 				});
 				var group_2 = new cpr.controls.Container();
@@ -188,16 +215,16 @@
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "205px",
-					"left": "0px",
+					"top": "200px",
+					"bottom": "100px",
 					"width": "1920px",
-					"height": "780px"
+					"left": "calc(50% - 960px)"
 				});
 				var userDefinedControl_2 = new udc.footer();
 				container.addChild(userDefinedControl_2, {
-					"top": "990px",
+					"right": "0px",
+					"bottom": "0px",
 					"left": "0px",
-					"width": "1920px",
 					"height": "100px"
 				});
 			})(group_1);

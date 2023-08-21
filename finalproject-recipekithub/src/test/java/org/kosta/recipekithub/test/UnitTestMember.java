@@ -144,6 +144,7 @@ public class UnitTestMember {
 	@Test 
 	public void insertProfileImg() {
 		String memberEmail = "";
-		int result = memberService.insertProfileImg(memberEmail);
+		String memberImage="";
+		int result = memberService.insertProfileImg(memberEmail, memberImage);
 	}
 }

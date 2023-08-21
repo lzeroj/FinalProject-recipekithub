@@ -740,26 +740,10 @@
 					}
 					
 					
-					if (navigationBar.value == 'recipe') {
-						window.location.href = '/recipeBoardList';
-						//		var appProperty = app.getAppProperty("recipeApp");
-						//				cpr.core.App.load("recipe/recipe", function(/*cpr.core.App*/ loadedApp){
-						//		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-						//			if(appProperty.getEmbeddedAppInstance()){
-						//				appProperty.getEmbeddedAppInstance().dispose();
-						//			}
-						//			/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
-						//			if(loadedApp){						
-						//				/*초기값을 전달합니다.*/			
-						//				appProperty.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
-						////					embApp.initValue = voInitValue;
-						//				})
-						//				/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
-						//				appProperty.app = loadedApp;
-						//			}
-						//		}); 
-						//		appProperty.redraw();
+					if(navigationBar.value == 'recipe'){
+						window.location.href='/recipeBoardList';
 					}
+					
 				}
 	
 				/*
@@ -768,7 +752,7 @@
 				 */
 				function onBtnWriteClick(e){
 					var btnWrite = e.control;
-					window.location.href = "/insertRecipeForm";
+					
 				}
 	
 				/*
@@ -800,31 +784,80 @@
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 					}
 					
-					app.lookup("category").value = app.getAppProperty("categoryValue");
-					app.lookup("searchInput").value = app.getAppProperty("searchValue");
+					var opbLoginStatus = app.lookup("opbLoginStatus");
+					if(sessionval != null) {
+						opbLoginStatus.text = "[ " + sessionval + " ] \n님이 로그인 상태입니다.";
+					} else {
+						opbLoginStatus.text = "현재 비로그인 상태입니다."
+					}
+					
 				}
 	
 				/*
-				 * 서치 인풋에서 search 이벤트 발생 시 호출.
-				 * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
+				 * 콤보 박스에서 open 이벤트 발생 시 호출.
+				 * 리스트박스를 열때 발생하는 이벤트.
 				 */
-				function onSearchInputSearch(e) {
-					var searchInput = e.control;
-					var comboBox = app.lookup("category");
-					if (comboBox.value == "" || comboBox.value == null) {
-						alert("카테고리 선택하세요");
-						return;
-					}
-					if (comboBox.value == "레시피") {	
-						window.location.href = "/recipeBoardList?search=" + searchInput.value;
-					}
+				function onCmb1Open(e){
+					var cmb1 = e.control;
+					var sessionval = getTimedSessionData("memsession");
+	
+					cmb1.clearFilter();
+	
+				    if (sessionval) { 
+				        cmb1.addItem(new cpr.controls.Item("로그아웃", "logout"));
+				        cmb1.addItem(new cpr.controls.Item("프로필", "profile"));
+				    } else {
+				        cmb1.addItem(new cpr.controls.Item("로그인", "login"));
+				    }
 				}
+	
+				/*
+				 * 콤보 박스에서 selection-change 이벤트 발생 시 호출.
+				 * ComboBox Item을 선택하여 선택된 값이 저장된 후에 발생하는 이벤트.
+				 */
+				function onCmb1SelectionChange(e){
+					var cmb1 = e.control;
+				    
+				    if (cmb1.value == "login") { 
+				        //window.location.href = "member/login-form.clx";
+				        cpr.core.App.load("member/login-form", function(loadedApp){
+				        	var newInstance = loadedApp.createNewInstance();
+				        	newInstance.run();
+				        });
+				        
+				    } else if (cmb1.value == "logout") {
+						var event = new cpr.events.CAppEvent("logout");
+						app.dispatchEvent(event);
+				    	/*
+				    	var initValue = "로그아웃 하시겠습니까?";
+						app.openDialog("dialog/registerPopup", {
+							width: 400, height: 300, headerClose: true, resizable: false
+						}, function(dialog) {
+							dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+							});
+						}).then(function(returnValue) {
+							var submission = app.lookup("sub_logout");
+							submission.send();
+						});
+				        //window.location.href = "/member/logout";
+				        */
+				    } else if (cmb1.value == "profile") {
+				    	cpr.core.App.load("member/myProfile", function(loadedApp){
+				        	var newInstance = loadedApp.createNewInstance();
+				        	newInstance.run();
+				        });
+				    }
+				};
 				// End - User Script
 				
 				// Header
 				app.declareAppProperty("embe", null);
 				app.declareAppProperty("categoryValue", null);
 				app.declareAppProperty("searchValue", null);
+				var submission_1 = new cpr.protocols.Submission("sub_logout");
+				submission_1.action = "/memberUI/logout";
+				app.register(submission_1);
 				app.supportMedia("all and (min-width: 1920px)", "FHD");
 				app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -833,6 +866,7 @@
 				// Configure root container
 				var container = app.getContainer();
 				container.style.css({
+					"background-color" : "#F4FAEC",
 					"width" : "100%",
 					"top" : "0px",
 					"height" : "100%",
@@ -871,9 +905,9 @@
 					formLayout_2.rightMargin = "30px";
 					formLayout_2.bottomMargin = "0px";
 					formLayout_2.leftMargin = "50px";
-					formLayout_2.horizontalSpacing = "50px";
+					formLayout_2.horizontalSpacing = "40px";
 					formLayout_2.verticalSpacing = "0px";
-					formLayout_2.setColumns(["330px", "2fr", "420px"]);
+					formLayout_2.setColumns(["330px", "2fr", "250px", "420px"]);
 					formLayout_2.setRows(["110px"]);
 					group_2.setLayout(formLayout_2);
 					(function(container){
@@ -950,7 +984,7 @@
 								container.addChild(searchInput_1, {
 									"colIndex": 1,
 									"rowIndex": 0,
-									"colSpan": 1,
+									"colSpan": 2,
 									"rowSpan": 1
 								});
 								var comboBox_1 = new cpr.controls.ComboBox("category");
@@ -991,7 +1025,9 @@
 						})(group_3);
 						container.addChild(group_3, {
 							"colIndex": 1,
-							"rowIndex": 0
+							"rowIndex": 0,
+							"colSpan": 1,
+							"rowSpan": 1
 						});
 						var group_5 = new cpr.controls.Container();
 						var formLayout_5 = new cpr.controls.layouts.FormLayout();
@@ -1001,7 +1037,7 @@
 						formLayout_5.bottomMargin = "30px";
 						formLayout_5.leftMargin = "30px";
 						formLayout_5.horizontalSpacing = "50px";
-						formLayout_5.verticalSpacing = "50px";
+						formLayout_5.verticalSpacing = "20px";
 						formLayout_5.setColumns(["50px", "50px", "50px", "50px"]);
 						formLayout_5.setRows(["50px"]);
 						group_5.setLayout(formLayout_5);
@@ -1045,29 +1081,9 @@
 								"colIndex": 1,
 								"rowIndex": 0
 							});
-							var button_3 = new cpr.controls.Button("btnLoginoff");
+							var button_3 = new cpr.controls.Button("btnWrite");
 							button_3.value = "";
 							button_3.style.css({
-								"background-color" : "transparent",
-								"border-right-style" : "none",
-								"background-repeat" : "no-repeat",
-								"background-size" : "cover",
-								"border-left-style" : "none",
-								"border-bottom-style" : "none",
-								"background-image" : "url('theme/images/common/loginoff.png')",
-								"background-position" : "center",
-								"border-top-style" : "none"
-							});
-							if(typeof onBtnLoginoffClick == "function") {
-								button_3.addEventListener("click", onBtnLoginoffClick);
-							}
-							container.addChild(button_3, {
-								"colIndex": 3,
-								"rowIndex": 0
-							});
-							var button_4 = new cpr.controls.Button("btnWrite");
-							button_4.value = "";
-							button_4.style.css({
 								"border-right-style" : "none",
 								"background-size" : "cover",
 								"border-bottom-color" : "none",
@@ -1083,14 +1099,71 @@
 								"background-image" : "url('theme/images/common/write.png')"
 							});
 							if(typeof onBtnWriteClick == "function") {
-								button_4.addEventListener("click", onBtnWriteClick);
+								button_3.addEventListener("click", onBtnWriteClick);
 							}
-							container.addChild(button_4, {
+							container.addChild(button_3, {
 								"colIndex": 2,
+								"rowIndex": 0
+							});
+							var comboBox_2 = new cpr.controls.ComboBox("cmb1");
+							comboBox_2.preventInput = true;
+							comboBox_2.style.css({
+								"border-right-style" : "none",
+								"background-color" : "#F4FAEC",
+								"background-size" : "cover",
+								"border-left-style" : "none",
+								"border-bottom-style" : "none",
+								"background-image" : "url('theme/images/common/loginoff.png')",
+								"background-position" : "center",
+								"border-top-style" : "none"
+							});
+							comboBox_2.style.list.css({
+								"padding-top" : "10px",
+								"padding-left" : "10px",
+								"vertical-align" : "middle",
+								"padding-bottom" : "10px",
+								"padding-right" : "10px",
+								"text-align" : "left"
+							});
+							comboBox_2.style.item.css({
+								"font-weight" : "bolder",
+								"font-family" : "푸른전남 Medium",
+								"text-align" : "left",
+								"padding-right" : "10px"
+							});
+							if(typeof onCmb1SelectionChange == "function") {
+								comboBox_2.addEventListener("selection-change", onCmb1SelectionChange);
+							}
+							if(typeof onCmb1Open == "function") {
+								comboBox_2.addEventListener("open", onCmb1Open);
+							}
+							container.addChild(comboBox_2, {
+								"colIndex": 3,
 								"rowIndex": 0
 							});
 						})(group_5);
 						container.addChild(group_5, {
+							"colIndex": 3,
+							"rowIndex": 0
+						});
+						var group_6 = new cpr.controls.Container();
+						var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+						group_6.setLayout(xYLayout_1);
+						(function(container){
+							var output_1 = new cpr.controls.Output("opbLoginStatus");
+							output_1.value = "";
+							output_1.style.css({
+								"font-weight" : "bold",
+								"font-size" : "14px"
+							});
+							container.addChild(output_1, {
+								"top": "20px",
+								"left": "20px",
+								"width": "210px",
+								"height": "70px"
+							});
+						})(group_6);
+						container.addChild(group_6, {
 							"colIndex": 2,
 							"rowIndex": 0
 						});
@@ -1527,7 +1600,6 @@
 })();
 /// end - udc.mealkitComment
 /// start - udc.recipeCommentudc
-
 /*
  * UDC Qualified Name: udc.recipeCommentudc
  * App URI: udc/recipeCommentudc

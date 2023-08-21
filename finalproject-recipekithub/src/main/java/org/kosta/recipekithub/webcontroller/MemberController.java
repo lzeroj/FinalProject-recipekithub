@@ -1,9 +1,11 @@
 package org.kosta.recipekithub.webcontroller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,12 +14,14 @@ import javax.servlet.http.HttpSession;
 import org.kosta.recipekithub.model.service.MemberService;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
+import com.cleopatra.protocol.data.UploadFile;
 import com.cleopatra.spring.JSONDataView;
 import com.cleopatra.spring.UIView;
 
@@ -260,4 +264,58 @@ public class MemberController {
 			//dataRequest.setResponse("ds_member", memberPassword); 
 			return new JSONDataView();
 		}
+		
+		
+		@RequestMapping("/insertProfileImage")
+		public View insertProfileImg(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+			HttpSession session = request.getSession(false);
+			if(session == null || session.getAttribute("member") == null) {
+				System.out.println("---[로그인 상태가 아니므로 회원 정보 수정이 불가합니다.]---");
+				return new UIView("ui/member/login-form.clx");
+			}
+			
+			ParameterGroup param = dataRequest.getParameterGroup("dm_insert_profile_img");
+			String memberEmail = param.getValue("member_email");
+			String memberImage = param.getValue("member_image");
+			
+			Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
+			UploadFile[] uploadFile = uploadFiles.get("image");
+			File orgName = uploadFile[0].getFile();
+			String saveName = uploadFile[0].getFileName();
+			// String savePath =
+			// "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
+			String savePath = "C:\\upload\\profile\\";
+			String uuid = UUID.randomUUID().toString();
+			FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
+			
+			MemberVO member = (MemberVO) session.getAttribute("member");
+			member.setMemberImage(uuid + "_" + saveName);
+			
+			int result = memberService.insertProfileImg(memberEmail, memberImage);
+			log.debug("member 프로필 사진 등록/수정 성공여부(if '1' succes) : {}", result);
+			
+			dataRequest.setResponse("ds_member", member); 
+
+			return new JSONDataView();
+		}
+		
+/*		
+		// 사진을 변경했으면 삭제 후 저장
+		if (uploadFiles.size() != 0) {
+			if (recipeBoardImage != null) {
+				File existImageFile = new File(savePath + recipeBoardImage);
+				if (existImageFile.exists()) {
+					existImageFile.delete(); 
+				}
+			}
+			UploadFile[] uploadFile = uploadFiles.get("image");
+			File orgName = uploadFile[0].getFile();
+			String saveName = uploadFile[0].getFileName();
+			String uuid = UUID.randomUUID().toString();
+			FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
+			recipeBoardVO.setRecipeBoardImage(uuid + "_" + saveName);
+		}
+*/
+		
+		
 }

@@ -59,7 +59,10 @@
 			 */
 			function onSub_loginSubmitSuccess(e) {
 				// 현준
+				
 				var sub_login = e.control;
+				alert(sub_login.xhr.status);
+				
 				var checkBox = app.lookup("cbx1");
 				var memberEmail = app.lookup("dm_login").getValue("member_email");
 				if(checkBox.checked){

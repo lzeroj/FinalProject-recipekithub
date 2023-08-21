@@ -136,11 +136,10 @@ public class MealkitController {
 		
 		//HttpSession session = request.getSession(false);
 		//MemberVO member = (MemberVO)session.getAttribute("mvo");
-		MemberVO member = new MemberVO("hellojava@naver.com", "123", "재헌강", "유스타스캡틴재헌", "12345", "성남", "오리", "01012345678", "1998-01-01", "1", "Y", null);
+		MemberVO member = new MemberVO("hellojava@naver.com", "123", "재헌강", "유스타스캡틴재헌", "12345", "성남", "오리", "01012345678", "1998-01-01", "1", "Y", null, null);
 
 		mealkit.setMemberVO(member);
 		System.out.println("Service mealkit = " + mealkit);
-		
 		
 		int mealkitNo = mealKitService.insertMealKit(mealkit);
 		
