@@ -215,6 +215,12 @@ function onBodyLoad(e) {
 	}
 	app.lookup("category").value = app.getAppProperty("categoryValue");
 	app.lookup("searchInput").value = app.getAppProperty("searchValue");
+	var opbLoginStatus = app.lookup("opbLoginStatus");
+	if(sessionval != null) {
+		opbLoginStatus.text = "[ " + sessionval + " ] \n님이 로그인 상태입니다.";
+	} else {
+		opbLoginStatus.text = "현재 비로그인 상태입니다."
+	}
 }
 
 /*
@@ -248,7 +254,7 @@ function onCmb1Open(e) {
 	var cmb1 = e.control;
 	var sessionval = getTimedSessionData("memsession");
 	
-	cmb1.clearFilter();
+	cmb1.deleteAllItems();
 	
 	if (sessionval) {
 		cmb1.addItem(new cpr.controls.Item("로그아웃", "logout"));

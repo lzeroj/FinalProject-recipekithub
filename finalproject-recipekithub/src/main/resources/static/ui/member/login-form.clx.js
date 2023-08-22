@@ -58,22 +58,22 @@
 			 * 통신이 성공하면 발생합니다.
 			 */
 			function onSub_loginSubmitSuccess(e) {
-				// 현준
-				
 				var sub_login = e.control;
-				alert(sub_login.xhr.status);
-				
+				//alert(sub_login.xhr.status);
 				var checkBox = app.lookup("cbx1");
 				var memberEmail = app.lookup("dm_login").getValue("member_email");
+				
+				// 현준
 				if(checkBox.checked){
 					localStorage.setItem("memberEmail", memberEmail);
 				}
 				setTimedSessionData("memsession", memberEmail,30);
+				
 				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
 				httpPostMethod.submit();
 			}
 
-			// 데이터 저장과 만료 시간 설정
+			// 데이터 저장과 만료 시간 설정	// 현준
 			function setTimedSessionData(key, value, expirationMinutes) {
 			    var currentTime = new Date().getTime();
 			    var expirationTime = currentTime + (expirationMinutes * 60 * 1000); // milliseconds
@@ -82,7 +82,6 @@
 			        value: value,
 			        expirationTime: expirationTime
 			    };
-				
 			    sessionStorage.setItem(key, JSON.stringify(data));
 			}
 			/*

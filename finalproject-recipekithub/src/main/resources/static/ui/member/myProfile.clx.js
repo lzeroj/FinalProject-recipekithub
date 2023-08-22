@@ -787,27 +787,34 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
+			container.setLayout(flowLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
-			group_1.style.css({
-				"background-color" : "#F4FAEC",
-				"background-size" : "cover",
-				"background-image" : "url('theme/images/common/bgimg11.png')",
-				"background-position" : "center"
-			});
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_1.setLayout(xYLayout_2);
+			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_1);
 			(function(container){
+				var userDefinedControl_1 = new udc.header3();
+				container.addChild(userDefinedControl_1, {
+					"top": "0px",
+					"right": "0px",
+					"left": "0px",
+					"height": "200px"
+				});
 				var group_2 = new cpr.controls.Container();
-				var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-				group_2.setLayout(responsiveXYLayout_1);
+				group_2.style.css({
+					"background-color" : "#F4FAEC",
+					"background-size" : "cover",
+					"background-image" : "url('theme/images/common/bgimg10.png')",
+					"background-position" : "center"
+				});
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_2);
 				(function(container){
 					var group_3 = new cpr.controls.Container();
-					var responsiveXYLayout_2 = new cpr.controls.layouts.ResponsiveXYLayout();
-					group_3.setLayout(responsiveXYLayout_2);
+					var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+					group_3.setLayout(xYLayout_3);
 					(function(container){
 						var tabFolder_1 = new cpr.controls.TabFolder();
 						tabFolder_1.style.css({
@@ -1175,9 +1182,9 @@
 											"rowSpan": 1
 										});
 										var output_5 = new cpr.controls.Output();
-										output_5.value = "❈ 비밀번호는 1자 이상~25자 이하입니다.";
+										output_5.value = "❈ 8자 이상~25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
 										output_5.style.css({
-											"font-size" : "10px"
+											"font-size" : "12px"
 										});
 										container.addChild(output_5, {
 											"colIndex": 1,
@@ -1249,9 +1256,9 @@
 											"rowSpan": 1
 										});
 										var output_8 = new cpr.controls.Output();
-										output_8.value = "❈ 비밀번호는 1자 이상~25자 이하입니다.";
+										output_8.value = "❈ 8자 이상~25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
 										output_8.style.css({
-											"font-size" : "10px"
+											"font-size" : "12px"
 										});
 										container.addChild(output_8, {
 											"colIndex": 1,
@@ -1319,9 +1326,9 @@
 											"rowSpan": 1
 										});
 										var output_11 = new cpr.controls.Output();
-										output_11.value = "❈ 닉네임은 1자 이상~8자 이하입니다.";
+										output_11.value = "❈ 중복 불가, 1자 이상~8자 이하.";
 										output_11.style.css({
-											"font-size" : "10px"
+											"font-size" : "14px"
 										});
 										container.addChild(output_11, {
 											"colIndex": 1,
@@ -1481,83 +1488,36 @@
 						tabFolder_1.addTabItem(tabItem_1);
 						tabFolder_1.setSelectedTabItem(tabItem_1);
 						container.addChild(tabFolder_1, {
-							positions: [
-								{
-									"media": "all and (min-width: 1920px)",
-									"width": "820px",
-									"height": "740px",
-									"left": "calc(50% - 410px)",
-									"top": "calc(50% - 370px)"
-								}, 
-								{
-									"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-									"width": "820px",
-									"height": "740px",
-									"left": "calc(50% - 410px)",
-									"top": "calc(50% - 370px)"
-								}, 
-								{
-									"media": "all and (min-width: 500px) and (max-width: 1023px)",
-									"width": "400px",
-									"height": "740px",
-									"left": "calc(50% - 200px)",
-									"top": "calc(50% - 370px)"
-								}, 
-								{
-									"media": "all and (max-width: 499px)",
-									"width": "280px",
-									"height": "740px",
-									"left": "calc(50% - 140px)",
-									"top": "calc(50% - 370px)"
-								}
-							]
+							"width": "820px",
+							"height": "740px",
+							"left": "calc(50% - 410px)",
+							"top": "calc(50% - 370px)"
 						});
 					})(group_3);
 					container.addChild(group_3, {
-						positions: [
-							{
-								"media": "all and (min-width: 1920px)",
-								"width": "820px",
-								"height": "740px",
-								"left": "calc(50% - 410px)",
-								"top": "calc(50% - 370px)"
-							}, 
-							{
-								"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-								"width": "820px",
-								"height": "740px",
-								"left": "calc(50% - 410px)",
-								"top": "calc(50% - 370px)"
-							}, 
-							{
-								"media": "all and (min-width: 500px) and (max-width: 1023px)",
-								"width": "400px",
-								"height": "740px",
-								"left": "calc(50% - 200px)",
-								"top": "calc(50% - 370px)"
-							}, 
-							{
-								"media": "all and (max-width: 499px)",
-								"width": "280px",
-								"height": "740px",
-								"left": "calc(50% - 140px)",
-								"top": "calc(50% - 370px)"
-							}
-						]
+						"width": "820px",
+						"height": "740px",
+						"left": "calc(50% - 410px)",
+						"top": "calc(50% - 370px)"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"width": "1880px",
-					"height": "740px",
-					"left": "calc(50% - 940px)",
-					"top": "calc(50% - 370px)"
+					"top": "200px",
+					"bottom": "100px",
+					"width": "1920px",
+					"left": "calc(50% - 960px)"
+				});
+				var userDefinedControl_2 = new udc.footer();
+				container.addChild(userDefinedControl_2, {
+					"right": "0px",
+					"bottom": "0px",
+					"left": "0px",
+					"height": "100px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "0px",
-				"right": "0px",
-				"bottom": "0px",
-				"left": "0px"
+				"width": "1920px",
+				"height": "1080px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
