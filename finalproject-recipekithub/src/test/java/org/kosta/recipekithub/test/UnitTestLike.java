@@ -85,10 +85,12 @@ public class UnitTestLike {
 		Assertions.assertEquals(0, result);
 	}
 	
-//	@Test
-//	public void findRecipeLikeList() {
-//		List<RecipeBoardVO> result = likeService.findRecipeLikeList();
-//		Assertions.assertEquals(0, result);
-//	}
+	@Test
+	public void findRecipeLikeList() {
+		List<RecipeBoardVO> result = likeService.findRecipeLikeList("shj");
+		for(int i=0;i<result.size();i++) {
+			System.out.println(result.get(i).toString());
+		}
+	}
 
 }

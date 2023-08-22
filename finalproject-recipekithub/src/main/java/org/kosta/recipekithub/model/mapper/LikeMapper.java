@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
+import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 
 @Mapper
 public interface LikeMapper {
@@ -23,6 +24,8 @@ public interface LikeMapper {
 	int deleteRecipeLike(int recipeBoardId, String memberEmail);
 
 	int showRecipeLike(int recipeBoardId, String memberEmail);
+
+	List<RecipeBoardVO> findRecipeLikeList(String memberEmail);
 
 
 }

@@ -1119,6 +1119,12 @@
 				 */
 				function onMypageClick(e){
 					var mypage = e.control;
+					var sessionval = getTimedSessionData("memsession");
+					if(sessionval == null || sessionval == ''){
+						alert("로그인이 필요한 작업입니다");
+						return;
+					}
+					
 					if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
 						if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
 							window.location.href="/findMyPageForm";
@@ -1173,6 +1179,28 @@
 						/** @type cpr.controls.EmbeddedApp */ 
 						var embeapp = app.getAppProperty("embe");
 						cpr.core.App.load("embedded/admin/findReportAdminForm", function(/*cpr.core.App*/ loadedApp){
+						/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+							if(embeapp.getEmbeddedAppInstance()){
+								embeapp.getEmbeddedAppInstance().dispose();
+							}
+							/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+							if(loadedApp){						
+								/*초기값을 전달합니다.*/			
+								embeapp.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
+				//					embApp.initValue = voInitValue;
+								})
+								/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+								embeapp.app = loadedApp;
+							}
+						}); 
+						embeapp.redraw();
+					}
+					
+					//salesAdmin
+					if(navigationBar.value == 'salesAdmin'){
+						/** @type cpr.controls.EmbeddedApp */ 
+						var embeapp = app.getAppProperty("embe");
+						cpr.core.App.load("embedded/admin/findSalesAdminForm", function(/*cpr.core.App*/ loadedApp){
 						/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
 							if(embeapp.getEmbeddedAppInstance()){
 								embeapp.getEmbeddedAppInstance().dispose();
@@ -1269,6 +1297,7 @@
 						navigationBar.addItem(new cpr.controls.TreeItem("관리자", "admin", "root"));
 						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
+						navigationBar.addItem(new cpr.controls.TreeItem("매출관리", "salesAdmin", "admin"));
 					}
 	
 					var opbLoginStatus = app.lookup("opbLoginStatus");

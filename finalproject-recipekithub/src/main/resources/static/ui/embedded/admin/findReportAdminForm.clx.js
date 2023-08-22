@@ -282,6 +282,13 @@
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 6},
 								"configurator": function(cell){
+									cell.text = "레시피 삭제";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold",
+										"background-image" : "none"
+									});
 								}
 							}
 						]

@@ -54,7 +54,7 @@
           <cl:gridcell std:sid="gh-cell-16ee7d9d" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="레시피 작성자"/>
           <cl:gridcell std:sid="gh-cell-1313303c" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="categoryIngredients" sortable="false" filterable="false" text="분류 방법"/>
           <cl:gridcell std:sid="gh-cell-ef6c8309" rowindex="0" colindex="5" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="categoryMethod" sortable="false" filterable="false" text="분류 재료"/>
-          <cl:gridcell std:sid="gh-cell-a224b49b" rowindex="0" colindex="6"/>
+          <cl:gridcell std:sid="gh-cell-a224b49b" rowindex="0" colindex="6" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; background-image:none;" text="레시피 삭제"/>
         </cl:gridheader>
         <cl:griddetail std:sid="gd-band-69eed158">
           <cl:gridrow std:sid="g-row-311546d0" height="39px"/>

@@ -39,11 +39,13 @@ function onNav1ItemClick(e){
 	var nav1 = e.control;
 	var src = null;
 	if(nav1.value == '4'){ // QnA 게시판
-		src = "embedded/myPageQuestion"
+		src = "embedded/myPageQuestion";
 	}else if(nav1.value == '2'){
-		src = "embedded/myPagePaymentInfo"
+		src = "embedded/myPagePaymentInfo";
 	}else if(nav1.value == '3'){
-		src = "embedded/myPageMealkitLike"
+		src = "embedded/myPageMealkitLike";
+	}else if(nav1.value == '1'){
+		src = "embedded/myPageRecipeLike";
 	}
 	var vcEmb = app.lookup("ea1");
 	cpr.core.App.load(src, function(/*cpr.core.App*/ loadedApp){

@@ -42,7 +42,7 @@
               <cl:xylayoutdata std:sid="sxyl-data-30f9770a" top="39px" right="275px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
               <cl:xylayoutdata std:sid="sxyl-data-162a05da" top="39px" right="516px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="new-screen"/>
             </cl:responsivexylayoutdata>
-            <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1" style="border-right-style:solid; border-bottom-color:#dddddd; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-left-color:#dddddd; border-bottom-width:1px; border-top-color:#dddddd; border-bottom-style:solid; border-right-color:#dddddd; border-left-width:1px; border-top-style:solid;" src="../embedded/myPagePaymentInfo.clx">
+            <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1" style="border-right-style:solid; border-bottom-color:#dddddd; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-left-color:#dddddd; border-bottom-width:1px; border-top-color:#dddddd; border-bottom-style:solid; border-right-color:#dddddd; border-left-width:1px; border-top-style:solid;" src="../embedded/myPageRecipeLike.clx">
               <cl:xylayoutdata std:sid="xyl-data-1467882b" top="0px" right="0px" bottom="30px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
             </cl:embeddedapp>
             <cl:udc std:sid="ud-control-4ba86f54" type="udc.header3">
@@ -50,7 +50,7 @@
             </cl:udc>
             <cl:xylayout std:sid="xylayout-6eef3a02" scrollable="false"/>
           </cl:group>
-          <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-bottom-color:#FFFFFF; color:#0ebc59; font-weight:bold; border-bottom-style:0;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click">
+          <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-bottom-color:#FFFFFF; color:#0ebc59; font-weight:bold; border-bottom-style:0;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click" baritemwidths="equal">
             <cl:listener std:sid="listener-cd03793d" name="item-click" handler="onNav1ItemClick"/>
             <cl:responsivexylayoutdata std:sid="rxyl-data-3331906f">
               <cl:xylayoutdata std:sid="sxyl-data-5f0aca76" top="0px" right="629px" width="355px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
