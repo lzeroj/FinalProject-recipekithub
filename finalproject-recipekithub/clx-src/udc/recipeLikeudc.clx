@@ -17,7 +17,7 @@
       <cl:listener std:sid="listener-9084d6a3" name="click" handler="onImgClick"/>
       <cl:xylayoutdata std:sid="xyl-data-d86f217a" top="0px" left="0px" width="300px" height="250px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:img>
-    <cl:output std:sid="output-f3f95abc" id="title" value="Output">
+    <cl:output std:sid="output-f3f95abc" id="title" style="font-weight:bold; font-size:30px;" value="Output">
       <cl:xylayoutdata std:sid="xyl-data-e932a410" top="250px" left="0px" width="300px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:xylayout std:sid="xylayout-28fc77e4"/>

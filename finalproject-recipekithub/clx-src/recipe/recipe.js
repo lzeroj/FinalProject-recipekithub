@@ -121,10 +121,11 @@ function onRecipeBoardListSubmitSuccess(e){
 			recipe.hits = recipeList[i].recipeBoardHits;
 			recipe.nick = recipeList[i].memberVO.memberNick;
 			recipe.title = recipeList[i].recipeBoardTitle;
+			recipe.profile = "/upload/profile/" + recipeList[i].memberVO.memberImage;
 			recipe.like = likeCounts[i];
 			container.addChild(recipe, {
 				height: "250px",
-				width: "315px",
+				width: "300px",
 				autoSize: "both"
 			});
 			recipe.addEventListener("imgClick", function(e) {

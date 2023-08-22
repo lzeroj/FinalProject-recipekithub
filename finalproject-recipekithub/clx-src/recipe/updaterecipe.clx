@@ -32,22 +32,22 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-6c7088e3" style="background-color:#F0F0F0;">
+  <body std:sid="body-6c7088e3" style="background-color:#F4FAEC;">
     <cl:listener std:sid="listener-bfc3c259" name="init" handler="onBodyInit"/>
     <cl:listener std:sid="listener-da5cb7a7" name="load" handler="onBodyLoad"/>
     <cl:uicontrolshell std:sid="uic-shell-d808a028" id="smnote">
       <cl:listener std:sid="listener-42a0ca91" name="load" handler="onSmnoteLoad"/>
-      <cl:xylayoutdata std:sid="xyl-data-85b759de" top="554px" width="1320px" height="415px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-85b759de" top="554px" width="1200px" height="450px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
     </cl:uicontrolshell>
     <cl:group std:sid="group-1943b338" style="background-color:#E7E7E7; background-image:none;">
-      <cl:xylayoutdata std:sid="xyl-data-43e5e510" top="199px" width="1320px" height="52px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-43e5e510" top="199px" width="1200px" height="52px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:output std:sid="output-faee3c9b" style="font-weight:bold; font-size:20px; font-family:@HY엽서L;" value="레시피 등록">
         <cl:xylayoutdata std:sid="xyl-data-0211ebb4" top="0px" left="0px" width="127px" height="52px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:xylayout std:sid="xylayout-6bab63cf"/>
     </cl:group>
     <cl:group std:sid="group-128185d3">
-      <cl:xylayoutdata std:sid="xyl-data-f0012c31" top="1130px" width="400px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-f0012c31" top="1340px" width="400px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:button std:sid="button-3bc0000e" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; background-image:none;" value="저장">
         <cl:listener std:sid="listener-ca6d2038" name="click" handler="onButtonClick"/>
         <cl:formdata std:sid="f-data-69fd5ecb" row="0" col="0"/>
@@ -68,16 +68,16 @@
       </cl:formlayout>
     </cl:group>
     <cl:group std:sid="group-f73b5c0b" style="background-color:#FFFFFF;">
-      <cl:xylayoutdata std:sid="xyl-data-0323647b" top="258px" width="1260px" height="268px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-0323647b" top="258px" width="1200px" height="268px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:group std:sid="group-7de198a2" style="background-color:#FFFFFF;">
-        <cl:xylayoutdata std:sid="xyl-data-8b22d7d3" right="535px" left="5px" height="268px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
-        <cl:output std:sid="output-9ea77193" style="font-weight:bolder; text-align:center;" value="레시피 제목">
+        <cl:xylayoutdata std:sid="xyl-data-8b22d7d3" right="543px" left="5px" height="268px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+        <cl:output std:sid="output-9ea77193" style="color:#90be70; font-weight:bolder; text-align:center;" value="레시피 제목">
           <cl:formdata std:sid="f-data-d4afe374" row="0" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-7dec2197" style="font-weight:bolder; text-align:center;" value="대표 사진">
+        <cl:output std:sid="output-7dec2197" style="color:#90be70; font-weight:bolder; text-align:center;" value="대표 사진">
           <cl:formdata std:sid="f-data-dc1ce872" row="1" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-f07304ae" style="font-weight:bolder; text-align:center;" value="카테고리">
+        <cl:output std:sid="output-f07304ae" style="color:#90be70; font-weight:bolder; text-align:center;" value="카테고리">
           <cl:formdata std:sid="f-data-9c41bf70" row="2" col="0"/>
         </cl:output>
         <cl:inputbox std:sid="i-box-6229cdab" id="ipb1" style="font-size:18px;">
@@ -139,20 +139,23 @@
           <cl:rows length="1" unit="FRACTION"/>
           <cl:rows length="1" unit="FRACTION"/>
           <cl:columns length="100" unit="PIXEL"/>
-          <cl:columns length="595" unit="PIXEL"/>
+          <cl:columns length="531" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
       <cl:img std:sid="image-4a5fee11" id="uploadImg">
-        <cl:xylayoutdata std:sid="xyl-data-9c701889" top="0px" right="235px" left="735px" height="268px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-9c701889" top="0px" right="235px" left="680px" height="268px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:img>
       <cl:button std:sid="button-cc4a9f4f" id="deleteImg" style="background-size:cover; background-image:url('../theme/images/recipe/xbutton.png'); background-position:center;" value="">
         <cl:listener std:sid="listener-a207f99a" name="click" handler="onDeleteImgClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-877b9ebd" top="0px" left="999px" width="25px" height="25px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-877b9ebd" top="0px" left="940px" width="25px" height="25px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:xylayout std:sid="xylayout-9937190d"/>
     </cl:group>
     <cl:udc std:sid="ud-control-382ccecc" type="udc.header3">
       <cl:xylayoutdata std:sid="xyl-data-1588b225" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:udc>
+    <cl:udc std:sid="ud-control-bd651ef3" type="udc.footer">
+      <cl:xylayoutdata std:sid="xyl-data-7045c621" top="1400px" left="0px" width="1920px" height="100px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:udc>
     <cl:xylayout std:sid="xylayout-7510a7a8"/>
   </body>

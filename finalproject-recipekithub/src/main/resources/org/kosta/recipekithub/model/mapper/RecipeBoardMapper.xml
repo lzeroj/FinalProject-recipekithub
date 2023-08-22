@@ -7,9 +7,10 @@
 		type="org.kosta.recipekithub.model.vo.RecipeBoardVO" id="member">
 		<result column="member_nick" property="memberVO.memberNick"></result>
 		<result column="member_Email" property="memberVO.memberEmail"></result>
+		<result column="member_image" property="memberVO.memberImage"></result>
 	</resultMap>
 	<select id="findAllRecipeBoard" resultMap="member">
-		SELECT rnum, r.recipe_board_id, m.member_nick, r.recipe_board_title,
+		SELECT rnum, r.recipe_board_id, m.member_nick, r.recipe_board_title, m.member_image,
 		r.recipe_board_image, r.recipe_board_hits
 		FROM (
 		SELECT
@@ -77,7 +78,7 @@
 
 	<select id="findDetailRecipe" resultMap="member">
 		select
-		r.recipe_board_id, r.member_email, m.member_nick,
+		r.recipe_board_id, r.member_email, m.member_nick, m.member_image,
 		r.recipe_board_title, r.recipe_board_image, r.recipe_board_content,
 		r.category_type, r.category_ingredients, r.category_method,
 		r.recipe_reg_date, r.recipe_edit_date
@@ -134,6 +135,6 @@
     			GROUP BY r.recipe_board_id, r.recipe_board_image, r.recipe_board_title
     			ORDER BY like_count DESC
 					)
-				WHERE 5 >= ROWNUM
+				WHERE 6 >= ROWNUM
 	</select>
 </mapper>

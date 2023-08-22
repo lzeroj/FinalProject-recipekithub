@@ -17,7 +17,6 @@
 			 *
 			 * @author user
 			 ************************************************/
-			var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
 			/*
 			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
 			 * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
@@ -56,7 +55,7 @@
 					$('#summernote').summernote({
 						placeholder: '글 작성란',
 						tabsize: 2,
-						height: 500,
+						height: 700,
 						toolbar: [
 							['style', ['style']],
 							['font', ['bold', 'underline', 'clear']],
@@ -80,23 +79,23 @@
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 				var imagePath = cpr.core.Platform.INSTANCE.getParameter("imagePath");
 				// 파일명에 uuid 값 제거하기 위함.
-				var  uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\_/i;
+				var uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\_/i;
 				
 				app.lookup("ipb1").value = recipeBoardVO.recipeBoardTitle;
 				app.lookup("lcb1").value = recipeBoardVO.categoryType;
 				app.lookup("lcb2").value = recipeBoardVO.categoryIngredients;
 				app.lookup("lcb3").value = recipeBoardVO.categoryMethod;
-				app.lookup("uploadImg").src = "/upload/recipe/"+imagePath;
+				app.lookup("uploadImg").src = "/upload/recipe/" + imagePath;
 				var fileInput = app.lookup("fi1");
 				
 				// 파일인풋에 이름만 넣기 
-				var  orgFileName = imagePath.replace(uuid, "");
-				fileInput.value=orgFileName;
+				var orgFileName = imagePath.replace(uuid, "");
+				fileInput.value = orgFileName;
 				
 				// 실제로 파일 넣는 것 사용 X
 				//var imageFile = new File([""], imagePath);
 				//fileInput.files = [imageFile];
-
+				
 			}
 
 			/*
@@ -111,16 +110,16 @@
 				//var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 				if (fileInput.files && fileInput.files[0]) {
 					var reader = new FileReader();
-			//		if (allowedExtensions.test(fileInput.files[0].name)) {
-						reader.onload = function(e) {
-							image.src = e.target.result;
-						};
-						reader.readAsDataURL(fileInput.files[0]);
-			//		} 
-			//		else {
-			//		alert("이미지 파일만 업로드 가능합니다.");
-			//		fileInput.clear();
-			//		}
+					//		if (allowedExtensions.test(fileInput.files[0].name)) {
+					reader.onload = function(e) {
+						image.src = e.target.result;
+					};
+					reader.readAsDataURL(fileInput.files[0]);
+					//		} 
+					//		else {
+					//		alert("이미지 파일만 업로드 가능합니다.");
+					//		fileInput.clear();
+					//		}
 				}
 			}
 			/*
@@ -131,9 +130,9 @@
 				var deleteImg = e.control;
 				var fileInput = app.lookup("fi1");
 				var image = app.lookup("uploadImg");
-				if(confirm("사진을 삭제하시겠습니까?")){
-				fileInput.clear();
-				image.src = "";
+				if (confirm("사진을 삭제하시겠습니까?")) {
+					fileInput.clear();
+					image.src = "";
 				}
 			}
 
@@ -143,7 +142,7 @@
 			 */
 			function onButtonClick(e) {
 				var button = e.control;
-				
+				var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
 				var vsOpt = app.lookup("smnote");
 				var dataMap = app.lookup("recipe");
 				vsOpt.value = $('#summernote').summernote('code');
@@ -152,24 +151,36 @@
 				
 				var fileInput = app.lookup("fi1");
 				var file = fileInput.file;
-				
 				var image = app.lookup("uploadImg");
 				var value = dataMap.getValue("RECIPE_BOARD_TITLE");
 				var value2 = dataMap.getValue("CATEGORY_TYPE");
 				var value3 = dataMap.getValue("CATEGORY_INGREDIENTS");
 				var value4 = dataMap.getValue("CATEGORY_METHOD");
 				var value5 = dataMap.setValue("RECIPE_BOARD_ID", recipeBoardId);
-				if (confirm("등록 하시겠습니까?")) {
-					if (value == ""){
-						alert("제목을 작성하세요");
-					} else if(value2 == "" || value3 == "" || value4 == ""){
-						alert("카테고리를 등록하세요");
-					} else if(image.src == null) {
-						alert("사진을 등록하세요");
-					} else {
-						submission.addFileParameter("image", file);
-						submission.send();
+				if (value == "") {
+					alert("제목을 작성하세요");
+				} else if (value2 == "" || value3 == "" || value4 == "") {
+					alert("카테고리를 등록하세요");
+				} else if (image.src == null) {
+					alert("사진을 등록하세요");
+				} else {
+					var initValue = {
+						"msg": "레시피 수정하시겠습니까?"
 					}
+					app.openDialog("dialog/recipeCheck", {
+						width: 405,
+						height: 300
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							submission.addFileParameter("image", file);
+							submission.send();
+						}
+					});
 				}
 			}
 
@@ -188,8 +199,7 @@
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onUpdateRecipeSubmitSuccess(e){
-				alert("레시피가 수정되었습니다.");
+			function onUpdateRecipeSubmitSuccess(e) {
 				var updateRecipe = e.control;
 				var recipeBoardId = updateRecipe.getMetadata("recipeBoardId");
 				if (recipeBoardId != null) {
@@ -201,21 +211,35 @@
 			 * "삭제" 버튼에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onButtonClick2(e){
+			function onButtonClick2(e) {
 				var button = e.control;
-				if(confirm("정말 삭제하시겠습니까?")){
-					var dataMap = app.lookup("recipeBoardId");
-					dataMap.setValue("RECIPE_BOARD_ID", recipeBoardId);
-					var submission = app.lookup("deleteRecipe");
-					submission.send();
+				var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
+				var dataMap = app.lookup("recipeBoardId");
+				dataMap.setValue("RECIPE_BOARD_ID", recipeBoardId);
+				var initValue = {
+					"msg": "레시피 삭제하시겠습니까?"
 				}
+				app.openDialog("dialog/recipeCheck", {
+					width: 405,
+					height: 300
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					if (returnValue == true) {
+						var submission = app.lookup("deleteRecipe");
+						submission.send();
+					}
+				});
 			}
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onDeleteRecipeSubmitSuccess(e){
+			function onDeleteRecipeSubmitSuccess(e) {
 				var deleteRecipe = e.control;
 				window.location.href = "/recipeBoardList";
 			}
@@ -224,12 +248,26 @@
 			 * "취소" 버튼에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onButtonClick3(e){
+			function onButtonClick3(e) {
 				var button = e.control;
-				if(confirm("취소하시겠습니까?")){
-					window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
+				var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
+				var initValue = {
+					"msg": "변경사항이 저장되지 않습니다.\n 취소하시겠습니까?"
 				}
-			};
+				app.openDialog("dialog/recipeCheck", {
+					width: 405,
+					height: 300
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					if (returnValue == true) {
+						window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
+					}
+				});
+			}
 			// End - User Script
 			
 			// Header
@@ -293,7 +331,7 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
-				"background-color" : "#F0F0F0",
+				"background-color" : "#F4FAEC",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -309,9 +347,9 @@
 			}
 			container.addChild(uIControlShell_1, {
 				"top": "554px",
-				"width": "1320px",
-				"height": "415px",
-				"left": "calc(50% - 660px)"
+				"width": "1200px",
+				"height": "450px",
+				"left": "calc(50% - 600px)"
 			});
 			
 			var group_1 = new cpr.controls.Container();
@@ -338,9 +376,9 @@
 			})(group_1);
 			container.addChild(group_1, {
 				"top": "199px",
-				"width": "1320px",
+				"width": "1200px",
 				"height": "52px",
-				"left": "calc(50% - 660px)"
+				"left": "calc(50% - 600px)"
 			});
 			
 			var group_2 = new cpr.controls.Container();
@@ -403,7 +441,7 @@
 				});
 			})(group_2);
 			container.addChild(group_2, {
-				"top": "1130px",
+				"top": "1340px",
 				"width": "400px",
 				"height": "50px",
 				"left": "calc(50% - 200px)"
@@ -428,13 +466,14 @@
 				formLayout_2.leftMargin = "5px";
 				formLayout_2.horizontalSpacing = "10px";
 				formLayout_2.verticalSpacing = "10px";
-				formLayout_2.setColumns(["100px", "595px"]);
+				formLayout_2.setColumns(["100px", "531px"]);
 				formLayout_2.setRows(["1fr", "1fr", "1fr"]);
 				group_4.setLayout(formLayout_2);
 				(function(container){
 					var output_2 = new cpr.controls.Output();
 					output_2.value = "레시피 제목";
 					output_2.style.css({
+						"color" : "#90be70",
 						"font-weight" : "bolder",
 						"text-align" : "center"
 					});
@@ -445,6 +484,7 @@
 					var output_3 = new cpr.controls.Output();
 					output_3.value = "대표 사진";
 					output_3.style.css({
+						"color" : "#90be70",
 						"font-weight" : "bolder",
 						"text-align" : "center"
 					});
@@ -455,6 +495,7 @@
 					var output_4 = new cpr.controls.Output();
 					output_4.value = "카테고리";
 					output_4.style.css({
+						"color" : "#90be70",
 						"font-weight" : "bolder",
 						"text-align" : "center"
 					});
@@ -561,7 +602,7 @@
 					});
 				})(group_4);
 				container.addChild(group_4, {
-					"right": "535px",
+					"right": "543px",
 					"left": "5px",
 					"height": "268px",
 					"top": "calc(50% - 134px)"
@@ -570,7 +611,7 @@
 				container.addChild(image_1, {
 					"top": "0px",
 					"right": "235px",
-					"left": "735px",
+					"left": "680px",
 					"height": "268px"
 				});
 				var button_4 = new cpr.controls.Button("deleteImg");
@@ -585,16 +626,16 @@
 				}
 				container.addChild(button_4, {
 					"top": "0px",
-					"left": "999px",
+					"left": "940px",
 					"width": "25px",
 					"height": "25px"
 				});
 			})(group_3);
 			container.addChild(group_3, {
 				"top": "258px",
-				"width": "1260px",
+				"width": "1200px",
 				"height": "268px",
-				"left": "calc(50% - 630px)"
+				"left": "calc(50% - 600px)"
 			});
 			
 			var userDefinedControl_1 = new udc.header3();
@@ -603,6 +644,14 @@
 				"right": "0px",
 				"left": "0px",
 				"height": "200px"
+			});
+			
+			var userDefinedControl_2 = new udc.footer();
+			container.addChild(userDefinedControl_2, {
+				"top": "1400px",
+				"left": "0px",
+				"width": "1920px",
+				"height": "100px"
 			});
 			if(typeof onBodyInit == "function"){
 				app.addEventListener("init", onBodyInit);

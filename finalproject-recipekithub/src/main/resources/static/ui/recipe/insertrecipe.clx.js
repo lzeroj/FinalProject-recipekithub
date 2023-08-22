@@ -35,11 +35,8 @@
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
-			function onBodyLoad(e){
+			function onBodyLoad(e) {
 				var image = app.lookup("uploadImg");
-				if(image.src ==null){
-					app.lookup("deleteImg").visible = false;
-				}
 			}
 			/*
 			 * 쉘에서 load 이벤트 발생 시 호출.
@@ -64,7 +61,7 @@
 					$('#summernote').summernote({
 						placeholder: '글 작성란',
 						tabsize: 2,
-						height: 500,
+						height: 700,
 						toolbar: [
 							['style', ['style']],
 							['font', ['bold', 'underline', 'clear']],
@@ -107,8 +104,8 @@
 					var initValue = {
 						"msg": "레시피 등록하시겠습니까?"
 					}
-					app.openDialog("dialog/recipeSaveCheck", {
-						width: 400,
+					app.openDialog("dialog/recipeCheck", {
+						width: 405,
 						height: 300
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -121,7 +118,7 @@
 							submission.send();
 						}
 					});
-				}	
+				}
 			}
 
 			/*
@@ -131,21 +128,21 @@
 			function onButtonClick2(e) {
 				var button = e.control;
 				var initValue = {
-						"msg": "취소 시 작성한 데이터는 저장되지 않습니다.	\n 취소하시겠습니까?"
-					}
-					app.openDialog("dialog/recipeSaveCheck", {
-						width: 400,
-						height: 300
-					}, function(dialog) {
-						dialog.ready(function(dialogApp) {
-							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
-							dialogApp.initValue = initValue;
-						});
-					}).then(function(returnValue) {
-						if (returnValue == true) {
-							window.location.href="/";
-						}
+					"msg": "변경사항이 저장되지 않습니다.\n 취소하시겠습니까?"
+				}
+				app.openDialog("dialog/recipeCheck", {
+					width: 405,
+					height: 300
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+						dialogApp.initValue = initValue;
 					});
+				}).then(function(returnValue) {
+					if (returnValue == true) {
+						window.location.href = "/";
+					}
+				});
 			}
 
 			/*
@@ -190,7 +187,7 @@
 					fileInput.clear();
 					image.src = "";
 				}
-			};
+			}
 			// End - User Script
 			
 			// Header
@@ -238,7 +235,7 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
-				"background-color" : "#F0F0F0",
+				"background-color" : "#F4FAEC",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -254,9 +251,9 @@
 			}
 			container.addChild(uIControlShell_1, {
 				"top": "554px",
-				"width": "1320px",
-				"height": "415px",
-				"left": "calc(50% - 660px)"
+				"width": "1200px",
+				"height": "450px",
+				"left": "calc(50% - 600px)"
 			});
 			
 			var group_1 = new cpr.controls.Container();
@@ -283,9 +280,9 @@
 			})(group_1);
 			container.addChild(group_1, {
 				"top": "199px",
-				"width": "1320px",
+				"width": "1200px",
 				"height": "52px",
-				"left": "calc(50% - 660px)"
+				"left": "calc(50% - 600px)"
 			});
 			
 			var group_2 = new cpr.controls.Container();
@@ -333,7 +330,7 @@
 				});
 			})(group_2);
 			container.addChild(group_2, {
-				"top": "1130px",
+				"top": "1340px",
 				"width": "400px",
 				"height": "48px",
 				"left": "calc(50% - 200px)"
@@ -358,13 +355,14 @@
 				formLayout_2.leftMargin = "5px";
 				formLayout_2.horizontalSpacing = "10px";
 				formLayout_2.verticalSpacing = "10px";
-				formLayout_2.setColumns(["100px", "596px"]);
+				formLayout_2.setColumns(["100px", "531px"]);
 				formLayout_2.setRows(["1fr", "1fr", "1fr"]);
 				group_4.setLayout(formLayout_2);
 				(function(container){
 					var output_2 = new cpr.controls.Output();
 					output_2.value = "레시피 제목";
 					output_2.style.css({
+						"color" : "#90be70",
 						"font-weight" : "bolder",
 						"text-align" : "center"
 					});
@@ -375,6 +373,7 @@
 					var output_3 = new cpr.controls.Output();
 					output_3.value = "대표 사진";
 					output_3.style.css({
+						"color" : "#90be70",
 						"font-weight" : "bolder",
 						"text-align" : "center"
 					});
@@ -385,6 +384,7 @@
 					var output_4 = new cpr.controls.Output();
 					output_4.value = "카테고리";
 					output_4.style.css({
+						"color" : "#90be70",
 						"font-weight" : "bolder",
 						"text-align" : "center"
 					});
@@ -399,7 +399,9 @@
 					inputBox_1.bind("value").toDataMap(app.lookup("recipe"), "RECIPE_BOARD_TITLE");
 					container.addChild(inputBox_1, {
 						"colIndex": 1,
-						"rowIndex": 0
+						"rowIndex": 0,
+						"colSpan": 1,
+						"rowSpan": 1
 					});
 					var group_5 = new cpr.controls.Container();
 					var formLayout_3 = new cpr.controls.layouts.FormLayout();
@@ -489,7 +491,7 @@
 					});
 				})(group_4);
 				container.addChild(group_4, {
-					"right": "535px",
+					"right": "543px",
 					"left": "5px",
 					"height": "268px",
 					"top": "calc(50% - 134px)"
@@ -498,7 +500,7 @@
 				container.addChild(image_1, {
 					"top": "0px",
 					"right": "235px",
-					"left": "735px",
+					"left": "680px",
 					"height": "268px"
 				});
 				var button_3 = new cpr.controls.Button("deleteImg");
@@ -513,16 +515,16 @@
 				}
 				container.addChild(button_3, {
 					"top": "0px",
-					"left": "999px",
+					"left": "940px",
 					"width": "25px",
 					"height": "25px"
 				});
 			})(group_3);
 			container.addChild(group_3, {
 				"top": "262px",
-				"width": "1260px",
+				"width": "1200px",
 				"height": "268px",
-				"left": "calc(50% - 630px)"
+				"left": "calc(50% - 600px)"
 			});
 			
 			var userDefinedControl_1 = new udc.header3("headerUdc");
@@ -531,6 +533,14 @@
 				"right": "0px",
 				"left": "0px",
 				"height": "200px"
+			});
+			
+			var userDefinedControl_2 = new udc.footer();
+			container.addChild(userDefinedControl_2, {
+				"top": "1400px",
+				"left": "0px",
+				"width": "1920px",
+				"height": "100px"
 			});
 			if(typeof onBodyInit == "function"){
 				app.addEventListener("init", onBodyInit);

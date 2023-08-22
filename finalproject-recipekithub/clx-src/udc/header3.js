@@ -155,6 +155,16 @@ function onNavigationBarItemClick(e) {
 		embeapp.redraw();
 	}
 	
+	if (navigationBar.value == 'recommend') {
+		if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+			if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+				window.location.href = "/";
+			}
+		} else {
+			window.location.href = "/";
+		}
+	}
+	
 	if (navigationBar.value == 'recipe') {
 		if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
 			if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
@@ -178,8 +188,14 @@ function onBtnWriteClick(e) {
 			_httpPostMethod.submit();
 		}
 	} else {
-		var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
-		_httpPostMethod.submit();
+		var sessionval = getTimedSessionData("memsession");
+		if (sessionval == null) {
+			alert("로그인이 필요합니다. \n로그인 페이지로 이동합니다.");
+			window.location.href = "/memberUI/loginForm";
+		} else {
+			var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
+			_httpPostMethod.submit();
+		}
 	}
 }
 
@@ -216,7 +232,7 @@ function onBodyLoad(e) {
 	app.lookup("category").value = app.getAppProperty("categoryValue");
 	app.lookup("searchInput").value = app.getAppProperty("searchValue");
 	var opbLoginStatus = app.lookup("opbLoginStatus");
-	if(sessionval != null) {
+	if (sessionval != null) {
 		opbLoginStatus.text = "[ " + sessionval + " ] \n님이 로그인 상태입니다.";
 	} else {
 		opbLoginStatus.text = "현재 비로그인 상태입니다."
@@ -271,13 +287,13 @@ function onCmb1Open(e) {
 function onCmb1SelectionChange(e) {
 	var cmb1 = e.control;
 	
-    // 비로그인 상태의 경우, 콤보박스에 "로그인" 메뉴 표시
-    if (cmb1.value == "login") { 
-        var httpPostMethod = new cpr.protocols.HttpPostMethod("member/login-form.clx");
+	// 비로그인 상태의 경우, 콤보박스에 "로그인" 메뉴 표시
+	if (cmb1.value == "login") {
+		var httpPostMethod = new cpr.protocols.HttpPostMethod("member/login-form.clx");
 		httpPostMethod.submit();
 		
-	// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
-    } else if (cmb1.value == "logout") {
+		// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
+	} else if (cmb1.value == "logout") {
 		var event = new cpr.events.CAppEvent("logout");
 		app.dispatchEvent(event);
 		/*
@@ -294,10 +310,10 @@ function onCmb1SelectionChange(e) {
 		});
         //window.location.href = "/member/logout";
         */
-        
-    // 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
-    } else if (cmb1.value == "profile") { 
-	    var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+		
+		// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+	} else if (cmb1.value == "profile") {
+		var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
 		httpPostMethod.submit();
-    }
+	}
 }

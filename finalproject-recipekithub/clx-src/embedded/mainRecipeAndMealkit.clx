@@ -17,13 +17,16 @@
     <cl:listener std:sid="listener-8a1ba4ce" name="init" handler="onBodyInit"/>
     <cl:listener std:sid="listener-b73e3327" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-aba46556" id="grp">
-      <cl:xylayoutdata std:sid="xyl-data-bc56107e" top="120px" width="1120px" height="328px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-bc56107e" top="120px" width="1120px" height="300px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:flowlayout std:sid="f-layout-4d475f85"/>
     </cl:group>
     <cl:group std:sid="group-5dca4c1c">
       <cl:xylayoutdata std:sid="xyl-data-a00d25e9" top="53px" width="1120px" height="47px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
-      <cl:output std:sid="output-d0a525bb" style="font-weight:bold; font-size:20px; background-image:none;" value="추천 레시피">
-        <cl:xylayoutdata std:sid="xyl-data-bb84c3ab" top="9px" left="0px" width="272px" height="38px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-d0a525bb" style="font-weight:bold; font-size:20px; background-image:none;" value="추천">
+        <cl:xylayoutdata std:sid="xyl-data-bb84c3ab" top="9px" left="0px" width="46px" height="38px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:output std:sid="output-a3d5edba" style="color:#0ca44e; font-weight:bold; font-size:20px;" value="레시피">
+        <cl:xylayoutdata std:sid="xyl-data-81ca3521" top="9px" left="45px" width="100px" height="38px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:xylayout std:sid="xylayout-83db2496"/>
     </cl:group>
