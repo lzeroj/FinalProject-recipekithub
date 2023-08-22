@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -52,6 +53,8 @@ public class MealkitController {
 		}else {
 			email = "guest";
 		}
+		String search = dataRequst.getParameter("search");
+		log.info("search = " + search);
 		List<MealKitBoard> list = mealKitService.findMealKitList();
 		
 //		Map<Integer, Double> map = new HashMap<>();
@@ -64,6 +67,7 @@ public class MealkitController {
 		Map<String, Object> initParam = new HashMap<String, Object>();
 		initParam.put("mealkitList", list);
 		initParam.put("member", email);
+		initParam.put("searchMealkit", search);
 		//initParam.put("mealkitMap", map);
 		return new UIView("ui/mealkit/mealkitList.clx", initParam);
 		
@@ -71,7 +75,7 @@ public class MealkitController {
 	
 	
 	@GetMapping("/mealkitDetail/{mealkitNo}") //밀키트 상세 페이지
-	public View mealKit(@PathVariable int mealkitNo, DataRequest dataRequest, HttpServletRequest request) {
+	public View mealKit(@PathVariable int mealkitNo, DataRequest dataRequest, HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(false);
 		String user = null;
 		if(session != null && session.getAttribute("member") != null) {
@@ -84,8 +88,35 @@ public class MealkitController {
 		
 		MealKitBoard mealkit = mealKitService.findMealKitByNo(mealkitNo);
 		log.info("mealKit Controller mealkit의 정보를 알아보자 {} ", mealkit);
-		//MemberVO member = memberService.findMemberByEmail(mealkit.getMemberVO().getMemberEmail());
 		double avg = mealkitStarScoreService.findMealkitStarList(mealkitNo);
+		
+		///////////////////////////////////////////////////
+		//조회수 중복방지 구현
+				Cookie reCookie = null;
+				Cookie[] cookies = request.getCookies();
+				if (cookies != null && cookies.length > 0) {
+					for (Cookie cookie : cookies) {
+						if (cookie.getName().equals("mealkitHits")) {
+							reCookie = cookie;
+						}
+					}
+				}
+				if (reCookie != null) {
+					if (!reCookie.getValue().contains("[" + mealkitNo + "]")) {
+						mealKitService.increaseHits(mealkitNo);
+						reCookie.setValue(reCookie.getValue() + "_[" + mealkitNo + "]");
+						reCookie.setPath("/"); 
+						response.addCookie(reCookie);
+						}
+					} else {
+						mealKitService.increaseHits(mealkitNo);
+						Cookie newCookie = new Cookie("mealkitHits", "[" + mealkitNo + "]"); 
+						newCookie.setPath("/");
+						response.addCookie(newCookie);
+					}
+		 //////////////////////////////////////////////////////////
+	
+		
 		
 		Map<String, Object> initParam = new HashMap<>();
 		initParam.put("mealkitNo", mealkit.getMealkitNo());
@@ -96,10 +127,11 @@ public class MealkitController {
 		initParam.put("mealkitIngredients", mealkit.getMealkitIngredients());
 		initParam.put("mealkitMember", mealkit.getMemberVO().getMemberNick());	
 		initParam.put("mealkitRegDate", mealkit.getMealkitRegDate());
-		initParam.put("mealkitHits", mealkit.getMealkitHits());
+		initParam.put("mealkitHits", mealkit.getMealkitBoardHits());
 		initParam.put("mealkitImg", mealkit.getMealkitImage());
 		initParam.put("sessionMember", user);
 		initParam.put("avg", avg);
+		System.out.println("조회수 : "+ mealkit.getMealkitBoardHits());
 		return new UIView("/ui/mealkit/mealkitDetail.clx", initParam);
 	}
 	
@@ -149,10 +181,15 @@ public class MealkitController {
 		mealkit.setMealkitCategory(mealkitCategory);
 		mealkit.setMealkitImage(uuid+"_"+saveName);
 		
-		//HttpSession session = request.getSession(false);
-		//MemberVO member = (MemberVO)session.getAttribute("mvo");
-		MemberVO member = new MemberVO("hellojava@naver.com", "123", "재헌강", "유스타스캡틴재헌", "12345", "성남", "오리", "01012345678", "1998-01-01", "1", "Y", null, null);
-
+		HttpSession session = request.getSession(false);
+		MemberVO member = null;
+		if(session != null && session.getAttribute("member") != null) {
+			member = (MemberVO)session.getAttribute("mvo");
+		}else {
+			member = new MemberVO();
+			member.setMemberNick("guest");
+		}
+		
 		mealkit.setMemberVO(member);
 		System.out.println("Service mealkit = " + mealkit);
 		
@@ -202,8 +239,8 @@ public class MealkitController {
 		String name = param.getValue("mealkitName");
 		String info = param.getValue("mealkitInfo");
 		String ingredients = param.getValue("mealkitIngredients");
-		int price = Integer.parseInt(param.getValue("mealkitPrice"));
-		int inventory = Integer.parseInt(param.getValue("mealkitInventory"));
+		String price = param.getValue("mealkitPrice");
+		String inventory = param.getValue("mealkitInventory");
 		String category = param.getValue("mealkitCategory");
 		String email = param.getValue("mealkitMember");
 		log.info("mealkitNo = {}", mealkitNo);
@@ -220,8 +257,8 @@ public class MealkitController {
 		mealkit.setMealkitName(name);
 		mealkit.setMealkitInfo(info);
 		mealkit.setMealkitIngredients(ingredients);
-		mealkit.setMealkitPrice(price);
-		mealkit.setMealkitInventory(inventory);
+		mealkit.setMealkitPrice(Integer.parseInt(price));
+		mealkit.setMealkitInventory(Integer.parseInt(inventory));
 		mealkit.setMealkitCategory(category);
 		MemberVO member = new MemberVO();
 		member.setMemberEmail(email);
@@ -230,10 +267,10 @@ public class MealkitController {
 		//HttpSession session = request.getSession(false);
 		//MemberVO sessionMember = (MemberVO)session.getAttribute("mvo");
 		//if(sessionMember.getMemberEmail().equals(mealkit.getMemberVO().getMemberEmail())) {
-			MealKitBoard updatedMealkit = mealKitService.updateMealkit(mealkit);
-			Map<String, Object> returnMealkitNo = new HashMap<>();
-			returnMealkitNo.put("result", mealkit.getMealkitNo());
-			dataRequest.setMetadata(true, returnMealkitNo);
+		MealKitBoard updatedMealkit = mealKitService.updateMealkit(mealkit);
+		Map<String, Object> returnMealkitNo = new HashMap<>();
+		returnMealkitNo.put("result", mealkit.getMealkitNo());
+		dataRequest.setMetadata(true, returnMealkitNo);
 		//}
 		return new JSONDataView();
 	}

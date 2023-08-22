@@ -36,9 +36,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class RecipeBoardController {
-       
+      
 	private final RecipeBoardService recipeBoardService;
-            
+                
 	@RequestMapping("/recipeBoardList")
 	public View recipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
@@ -102,9 +102,14 @@ public class RecipeBoardController {
 		dataRequest.setResponse("likeRecipeList", list);
 		return new JSONDataView();
 	}		 
-	@RequestMapping("/insertRecipeForm") 
+	@PostMapping("/insertRecipeForm") 
 	public View insertRecipeForm(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("member") == null) {
+			log.debug("비인증");
+			return new UIView("/");
+		}  
 		return new UIView("/ui/recipe/insertrecipe.clx");
 	}
 	
@@ -114,7 +119,6 @@ public class RecipeBoardController {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("비인증");
-			return new UIView("/ui/index.clx");
 		}  
 		
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipe");
@@ -128,7 +132,6 @@ public class RecipeBoardController {
 		UploadFile[] uploadFile = uploadFiles.get("image");
 		File orgName = uploadFile[0].getFile();
 		String saveName = uploadFile[0].getFileName();
-		// String savePath =
 		// "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
 		String savePath = "C:\\upload\\recipe\\";
 		String uuid = UUID.randomUUID().toString();
@@ -212,7 +215,7 @@ public class RecipeBoardController {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("비인증");
-			return new UIView("/ui/index.clx");
+			return new UIView("/");
 		}
 		long recipeBoardId = Long.parseLong(dataRequest.getParameter("recipeBoardId"));   
 		RecipeBoardVO recipeBoardVO = recipeBoardService.findDetailRecipe(recipeBoardId);
@@ -223,14 +226,13 @@ public class RecipeBoardController {
 		initParam.put("recipeBoardId", recipeBoardId);
 		return new UIView("ui/recipe/updaterecipe.clx", initParam);   
 	}
-
+ 
 	@RequestMapping("/updateSaveRecipe")
 	public View updateRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("비인증");
-			return new UIView("/ui/index.clx");
 		}
 		
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipe");
@@ -246,7 +248,7 @@ public class RecipeBoardController {
 		String savePath = "C:\\upload\\recipe\\";
 		String recipeBoardImage = recipeBoardService.findDetailRecipe(recipeBoardId).getRecipeBoardImage();
 		RecipeBoardVO recipeBoardVO = new RecipeBoardVO();
-    
+     
 		// 사진을 변경했으면 삭제 후 저장
 		if (uploadFiles.size() != 0) {
 			if (recipeBoardImage != null) {
@@ -275,16 +277,15 @@ public class RecipeBoardController {
 		dataRequest.setMetadata(true, message);
 
 		return new JSONDataView();
-	}
-                                    
+	}      
+    
 	@RequestMapping("/deleteRecipe")
 	public View deleteRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("비인증");
-			return new UIView("/ui/index.clx");
-		}  
+		}         
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipeBoardId");
 		long recipeBoardId = Long.parseLong(initParam.getValue("RECIPE_BOARD_ID"));
 		String savePath = "C:\\upload\\recipe\\";

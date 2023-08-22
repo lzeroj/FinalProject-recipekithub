@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-b9190c3f" version="1.0.4584">
   <head std:sid="head-7d8106b0">
-    <screen std:sid="screen-36cc330f" id="default" name="default" width="1024px" height="768px"/>
-    <screen std:sid="screen-ca06a9e1" id="tablet" name="tablet" width="500px" height="667px"/>
-    <screen std:sid="screen-6312b5c2" id="mobile" name="mobile" width="350px" height="525px"/>
+    <screen std:sid="screen-63d6a495" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1080" customWidth="1920" active="true"/>
+    <screen std:sid="screen-88b9b089" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-d276f76c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <cl:model std:sid="model-be07dac7">
       <cl:dataset std:sid="d-set-55c33be3" id="ds1"/>
       <cl:datamap std:sid="d-map-a2c29a86" id="updateMealkit">
@@ -47,7 +47,7 @@
     <cl:listener std:sid="listener-76a265cc" name="init" handler="onBodyInit2"/>
     <cl:listener std:sid="listener-2aec8081" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-fc26d059">
-      <cl:xylayoutdata std:sid="xyl-data-bbcf1eee" top="20px" width="984px" height="970px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-bbcf1eee" top="209px" width="984px" height="970px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:group std:sid="group-79300f65" style="background-color:#F9F9F9;">
         <cl:xylayoutdata std:sid="xyl-data-31215747" top="39px" width="864px" height="81px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:output std:sid="output-7b3ee401" style="color:#0CA44E; font-weight:bolder; font-size:20px; font-style:normal;" value="밀키트 수정">
@@ -197,6 +197,35 @@
         <cl:xylayout std:sid="xylayout-b63c3446"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-9ecb7632"/>
+    </cl:group>
+    <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
+      <cl:xylayoutdata std:sid="xyl-data-f0e0c718" top="-1px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:udc>
+    <cl:group std:sid="group-53fdc39a" style="background-color:#6A8B41;">
+      <cl:xylayoutdata std:sid="xyl-data-8a2a9d28" bottom="-535px" width="1920px" height="70px" horizontalAnchor="CENTER" verticalAnchor="BOTTOM"/>
+      <cl:img std:sid="image-0dc9370c" src="../theme/images/common/footerLogo3.png">
+        <cl:formdata std:sid="f-data-eeb1aa08" row="0" col="0"/>
+      </cl:img>
+      <cl:group std:sid="group-dbf01117">
+        <cl:formdata std:sid="f-data-39030415" row="0" col="2"/>
+        <cl:output std:sid="output-b9ac6351" style="border-right-style:none; color:#F4FAEC; border-bottom-color:#ffffff; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:solid; border-top-style:none;" value="Team HI-FIVE">
+          <cl:formdata std:sid="f-data-8627a0eb" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-dbc9a072" style="color:#F4FAEC; font-weight:bolder;" value="금동준&#x9; 심현준&#x9; 엄용식&#x9;  임영준">
+          <cl:formdata std:sid="f-data-49939140" row="1" col="0" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-b6500cc2" scrollable="false" hspace="10px" vspace="5px" top-margin="5px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="330" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-86f5bd20" scrollable="false" hspace="50px" vspace="30px" top-margin="0px" right-margin="50px" bottom-margin="0px" left-margin="50px">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="400" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="400" unit="PIXEL"/>
+      </cl:formlayout>
     </cl:group>
     <cl:xylayout std:sid="xylayout-01adf7b6"/>
   </body>

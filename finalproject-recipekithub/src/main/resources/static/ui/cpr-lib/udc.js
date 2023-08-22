@@ -2363,7 +2363,7 @@
 					"top": "88px",
 					"left": "8px",
 					"width": "351px",
-					"height": "5px"
+					"height": "2px"
 				});
 				
 				var image_1 = new cpr.controls.Image();

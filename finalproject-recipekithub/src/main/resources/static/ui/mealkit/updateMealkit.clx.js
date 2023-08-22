@@ -91,23 +91,29 @@
 				var dataMap = app.lookup("updateMealkit");	
 			  	vsOpt.value = $('#summernote').summernote('code');
 			   	var message = vsOpt.value;
-			   	 var submission = app.lookup("updateMealkitSub");
+			   	var submission = app.lookup("updateMealkitSub");
 			   	
 			   	var name = app.lookup("ipb1");
 			   	var ingredients = app.lookup("ipb2");
 			   	var price = app.lookup("ipb3");
 			   	var inven = app.lookup("ipb4");
+			   	var updatedIngredients= ingredients.value;
+			   	var updatedName = name.value;
+			   	var updatedPrice = price.value;
+			   	var updatedInven = inven.value;
+			   	console.log("updatedPrice, updatedInven = " + updatedPrice + ", "+ updatedInven);
+			   	console.log("price = "+ price.value +", " + typeof Number(price.value));
 			   	
 			   	var combo1 = app.lookup("cmb1").text;
 			   	var combo2 = app.lookup("cmb2").text;
 			   	var combo3 = app.lookup("cmb3").text;
 			   	var category = combo1+"/"+combo2+"/"+combo3;
 			   	
-				dataMap.setValue("mealkitName", name);
+				dataMap.setValue("mealkitName", updatedName);
 				dataMap.setValue("mealkitInfo", message);
-				dataMap.setValue("mealkitIngredients", ingredients);
-				dataMap.setValue("mealkitPrice", price);
-				dataMap.setValue("mealkitInventory", inven);
+				dataMap.setValue("mealkitIngredients", updatedIngredients);
+				dataMap.setValue("mealkitPrice", updatedPrice);
+				dataMap.setValue("mealkitInventory", updatedInven);
 				dataMap.setValue("mealkitCategory", category);
 				var fileInput = app.lookup("file2");
 				var file = fileInput.file;
@@ -138,24 +144,20 @@
 			 			price.focus();
 			 			return;
 			 		
-			 		}else if(Number(price.value) <= 0 || isNaN(price.value)){
-			 			alert("밀키트 가격은 숫자만 입력이 가능합니다. 다시 확인해주세요.");
-			 			price.value = "";
-			 			price.focus();
-			 			return;
+			 		
 			 		}else if(inven.value == null || inven.value == ""){
 			 			alert("밀키트 수량을 입력해주세요.");
 			 			inven.focus();
 			 			return;
 			 		
-			 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
-			 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
-			 			inven.value = "";
-			 			inven.focus();
-			 			return;
+			// 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
+			// 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
+			// 			inven.value = "";
+			// 			inven.focus();
+			// 			return;
 			 		}else{
 			 			submission.addFileParameter("image", file);
-						submission = app.lookup("updateMealkitSub").send();
+						app.lookup("updateMealkitSub").send();
 			 		}
 			 	}
 				
@@ -739,10 +741,94 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "20px",
+				"top": "209px",
 				"width": "984px",
 				"height": "970px",
 				"left": "calc(50% - 492px)"
+			});
+			
+			var userDefinedControl_1 = new udc.header3();
+			container.addChild(userDefinedControl_1, {
+				"top": "-1px",
+				"right": "0px",
+				"left": "0px",
+				"height": "200px"
+			});
+			
+			var group_9 = new cpr.controls.Container();
+			group_9.style.css({
+				"background-color" : "#6A8B41"
+			});
+			var formLayout_1 = new cpr.controls.layouts.FormLayout();
+			formLayout_1.scrollable = false;
+			formLayout_1.topMargin = "0px";
+			formLayout_1.rightMargin = "50px";
+			formLayout_1.bottomMargin = "0px";
+			formLayout_1.leftMargin = "50px";
+			formLayout_1.horizontalSpacing = "50px";
+			formLayout_1.verticalSpacing = "30px";
+			formLayout_1.setColumns(["400px", "1fr", "400px"]);
+			formLayout_1.setRows(["1fr"]);
+			group_9.setLayout(formLayout_1);
+			(function(container){
+				var image_2 = new cpr.controls.Image();
+				image_2.src = "theme/images/common/footerLogo3.png";
+				container.addChild(image_2, {
+					"colIndex": 0,
+					"rowIndex": 0
+				});
+				var group_10 = new cpr.controls.Container();
+				var formLayout_2 = new cpr.controls.layouts.FormLayout();
+				formLayout_2.scrollable = false;
+				formLayout_2.topMargin = "5px";
+				formLayout_2.rightMargin = "0px";
+				formLayout_2.bottomMargin = "0px";
+				formLayout_2.leftMargin = "0px";
+				formLayout_2.horizontalSpacing = "10px";
+				formLayout_2.verticalSpacing = "5px";
+				formLayout_2.setColumns(["330px"]);
+				formLayout_2.setRows(["30px", "1fr"]);
+				group_10.setLayout(formLayout_2);
+				(function(container){
+					var output_9 = new cpr.controls.Output();
+					output_9.value = "Team HI-FIVE";
+					output_9.style.css({
+						"border-right-style" : "none",
+						"color" : "#F4FAEC",
+						"border-bottom-color" : "#ffffff",
+						"font-weight" : "bolder",
+						"border-left-style" : "none",
+						"font-size" : "20px",
+						"border-bottom-style" : "solid",
+						"border-top-style" : "none"
+					});
+					container.addChild(output_9, {
+						"colIndex": 0,
+						"rowIndex": 0
+					});
+					var output_10 = new cpr.controls.Output();
+					output_10.value = "금동준\t 심현준\t 엄용식\t  임영준";
+					output_10.style.css({
+						"color" : "#F4FAEC",
+						"font-weight" : "bolder"
+					});
+					container.addChild(output_10, {
+						"colIndex": 0,
+						"rowIndex": 1,
+						"colSpan": 1,
+						"rowSpan": 1
+					});
+				})(group_10);
+				container.addChild(group_10, {
+					"colIndex": 2,
+					"rowIndex": 0
+				});
+			})(group_9);
+			container.addChild(group_9, {
+				"bottom": "-535px",
+				"width": "1920px",
+				"height": "70px",
+				"left": "calc(50% - 960px)"
 			});
 			if(typeof onBodyInit2 == "function"){
 				app.addEventListener("init", onBodyInit2);

@@ -24,6 +24,6 @@ public class MealKitBoard {
 	private int mealkitInventory;
 	private String mealkitCategory;
 	private String mealkitImage;
-	private int mealkitHits;
+	private int mealkitBoardHits;
 	private MemberVO memberVO;
 }
