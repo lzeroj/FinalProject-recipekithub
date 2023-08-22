@@ -108,7 +108,8 @@ function onSub_registerSubmitSuccess(e) {
 			dialogApp.initValue = initValue;
 		});
 	}).then(function(returnValue) {
-		window.location.href = "index.clx";
+		var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+		httpPostMethod.submit();
 	});
 }
 
@@ -131,6 +132,22 @@ function onButtonClick2(e) {
 	});
 }
 
+
+function debounce(func, wait) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            func.apply(context, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+
+
 /*
  * 인풋 박스에서 keyup 이벤트 발생 시 호출.
  * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
@@ -143,7 +160,13 @@ function onIpbEmailKeyup(e) {
 	
 	var subCheckEmail = app.lookup("sub_check_email");
 	subCheckEmail.send();
+	app.lookup("ipbEmail").addEventListener('keyup', debounce(onIpbEmailKeyup, 300));  // 300ms 후에 서버 요청을 보냅니다.
+	
 }
+
+
+
+
 
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -152,7 +175,6 @@ function onIpbEmailKeyup(e) {
 //---[ email이 변경될 때마다 호출되어 email 유효성을 확인 ]---//
 function onSub_check_emailSubmitSuccess(e) {
 	var sub_check_email = e.control;
-	
 	var checkEmailFlag = false; 	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 	
 	var metadataOk = sub_check_email.getMetadata("ok"); 		// Controller측에서 Email 중복 여부를 체크하여 ok(사용 가능)인 경우
@@ -188,7 +210,7 @@ function onSub_check_emailSubmitSuccess(e) {
 			opbCheckEmailResult.style.css("color", "red");
 			opbCheckEmailResult.value = "닉네임은 공백을 포함할 수 없습니다.";
 			imgEmail.src = "../ui/theme/images/member/cross.png";
-		} else { 																//---> 6. 입력한 email이 사용 가능한 경우
+		} else if (metadataOk) { 																//---> 6. 입력한 email이 사용 가능한 경우
 			checkEmailFlag = true;
 			opbCheckEmailResult.style.css("color", "blue");
 			opbCheckEmailResult.value = "사용가능한 이메일입니다.";
@@ -346,6 +368,9 @@ function onSub_check_nickSubmitSuccess(e) {
 		}
 	}
 }
+
+
+
 //=============================================[ 카카오 주소검색 API ]=============================================//
 
 /*

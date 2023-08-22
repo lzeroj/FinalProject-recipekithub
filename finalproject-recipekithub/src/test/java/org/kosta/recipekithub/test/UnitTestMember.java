@@ -36,8 +36,9 @@ public class UnitTestMember {
 	
 	@Test
 	public void findMemberByEmail() {
-		String memberEmail = "kjooniewetwet@kakao.com";
+		String memberEmail = "kjoonie@naver.com";
 		MemberVO member = memberService.findMemberByEmail(memberEmail);
+		log.debug(member.toString());
 		Assertions.assertNotNull(member);
 	}
 	
@@ -141,10 +142,12 @@ public class UnitTestMember {
 		Assertions.assertNotNull(memberPassword);
 	}
 	
+	/*
 	@Test 
 	public void insertProfileImg() {
 		String memberEmail = "";
 		String memberImage="";
 		int result = memberService.insertProfileImg(memberEmail, memberImage);
 	}
+	*/
 }

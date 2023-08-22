@@ -125,7 +125,8 @@
 						dialogApp.initValue = initValue;
 					});
 				}).then(function(returnValue) {
-					window.location.href = "index.clx";
+					var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+					httpPostMethod.submit();
 				});
 			}
 
@@ -148,6 +149,22 @@
 				});
 			}
 
+
+			function debounce(func, wait) {
+			    var timeout;
+			    return function() {
+			        var context = this, args = arguments;
+			        var later = function() {
+			            timeout = null;
+			            func.apply(context, args);
+			        };
+			        clearTimeout(timeout);
+			        timeout = setTimeout(later, wait);
+			    };
+			}
+
+
+
 			/*
 			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
 			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
@@ -160,7 +177,13 @@
 				
 				var subCheckEmail = app.lookup("sub_check_email");
 				subCheckEmail.send();
+				app.lookup("ipbEmail").addEventListener('keyup', debounce(onIpbEmailKeyup, 300));  // 300ms 후에 서버 요청을 보냅니다.
+				
 			}
+
+
+
+
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -169,7 +192,6 @@
 			//---[ email이 변경될 때마다 호출되어 email 유효성을 확인 ]---//
 			function onSub_check_emailSubmitSuccess(e) {
 				var sub_check_email = e.control;
-				
 				var checkEmailFlag = false; 	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 				
 				var metadataOk = sub_check_email.getMetadata("ok"); 		// Controller측에서 Email 중복 여부를 체크하여 ok(사용 가능)인 경우
@@ -205,7 +227,7 @@
 						opbCheckEmailResult.style.css("color", "red");
 						opbCheckEmailResult.value = "닉네임은 공백을 포함할 수 없습니다.";
 						imgEmail.src = "../ui/theme/images/member/cross.png";
-					} else { 																//---> 6. 입력한 email이 사용 가능한 경우
+					} else if (metadataOk) { 																//---> 6. 입력한 email이 사용 가능한 경우
 						checkEmailFlag = true;
 						opbCheckEmailResult.style.css("color", "blue");
 						opbCheckEmailResult.value = "사용가능한 이메일입니다.";
@@ -363,6 +385,9 @@
 					}
 				}
 			}
+
+
+
 			//=============================================[ 카카오 주소검색 API ]=============================================//
 
 			/*
@@ -605,6 +630,7 @@
 			app.register(submission_3);
 			
 			var submission_4 = new cpr.protocols.Submission("sub_check_nick");
+			submission_4.async = true;
 			submission_4.action = "/member/checkNick";
 			submission_4.addRequestData(dataMap_4);
 			if(typeof onSub_check_nickReceiveJson == "function") {
@@ -629,22 +655,26 @@
 			});
 			
 			// Layout
-			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-			container.setLayout(responsiveXYLayout_1);
+			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
+			container.setLayout(flowLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
+				"background-color" : "#6A8B41",
 				"background-size" : "cover",
-				"background-image" : "url('theme/images/common/bgimg8_1920.png')",
 				"background-position" : "center"
 			});
-			var responsiveXYLayout_2 = new cpr.controls.layouts.ResponsiveXYLayout();
-			group_1.setLayout(responsiveXYLayout_2);
+			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_1);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
-				var responsiveXYLayout_3 = new cpr.controls.layouts.ResponsiveXYLayout();
-				group_2.setLayout(responsiveXYLayout_3);
+				group_2.style.css({
+					"border-radius" : "5px",
+					"background-image" : "url('theme/images/common/bgimg8_1920.png')"
+				});
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_2);
 				(function(container){
 					var tabFolder_1 = new cpr.controls.TabFolder();
 					tabFolder_1.style.item.css({
@@ -668,16 +698,16 @@
 						var tabItem_1 = new cpr.controls.TabItem();
 						tabItem_1.text = "회원가입";
 						var group_3 = new cpr.controls.Container();
-						var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-						group_3.setLayout(xYLayout_1);
+						var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+						group_3.setLayout(xYLayout_3);
 						(function(container){
 							var group_4 = new cpr.controls.Container();
-							var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-							group_4.setLayout(xYLayout_2);
+							var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+							group_4.setLayout(xYLayout_4);
 							(function(container){
 								var group_5 = new cpr.controls.Container();
-								var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-								group_5.setLayout(xYLayout_3);
+								var xYLayout_5 = new cpr.controls.layouts.XYLayout();
+								group_5.setLayout(xYLayout_5);
 								(function(container){
 									var group_6 = new cpr.controls.Container();
 									var formLayout_1 = new cpr.controls.layouts.FormLayout();
@@ -1318,123 +1348,22 @@
 					tabFolder_1.addTabItem(tabItem_1);
 					tabFolder_1.setSelectedTabItem(tabItem_1);
 					container.addChild(tabFolder_1, {
-						positions: [
-							{
-								"media": "all and (min-width: 1920px)",
-								"width": "520px",
-								"height": "901px",
-								"left": "calc(50% - 260px)",
-								"top": "calc(50% - 450px)"
-							}, 
-							{
-								"media": "all and (min-width: 1440px) and (max-width: 1919px)",
-								"width": "520px",
-								"height": "900px",
-								"left": "calc(50% - 260px)",
-								"top": "calc(50% - 450px)"
-							}, 
-							{
-								"media": "all and (min-width: 1024px) and (max-width: 1439px)",
-								"width": "520px",
-								"height": "900px",
-								"left": "calc(50% - 260px)",
-								"top": "calc(50% - 450px)"
-							}, 
-							{
-								"media": "all and (min-width: 500px) and (max-width: 1023px)",
-								"width": "254px",
-								"height": "900px",
-								"left": "calc(50% - 127px)",
-								"top": "calc(50% - 450px)"
-							}, 
-							{
-								"media": "all and (max-width: 499px)",
-								"width": "178px",
-								"height": "900px",
-								"left": "calc(50% - 89px)",
-								"top": "calc(50% - 450px)"
-							}
-						]
+						"width": "520px",
+						"height": "901px",
+						"left": "calc(50% - 260px)",
+						"top": "calc(50% - 450px)"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					positions: [
-						{
-							"media": "all and (min-width: 1920px)",
-							"top": "0px",
-							"left": "0px",
-							"width": "1869px",
-							"height": "1080px"
-						}, 
-						{
-							"media": "all and (min-width: 1440px) and (max-width: 1919px)",
-							"top": "0px",
-							"right": "0px",
-							"bottom": "0px",
-							"left": "0px"
-						}, 
-						{
-							"media": "all and (min-width: 1024px) and (max-width: 1439px)",
-							"top": "0px",
-							"right": "0px",
-							"bottom": "0px",
-							"left": "0px"
-						}, 
-						{
-							"media": "all and (min-width: 500px) and (max-width: 1023px)",
-							"top": "0px",
-							"right": "0px",
-							"bottom": "0px",
-							"left": "0px"
-						}, 
-						{
-							"media": "all and (max-width: 499px)",
-							"top": "0px",
-							"right": "0px",
-							"bottom": "0px",
-							"left": "0px"
-						}
-					]
+					"top": "20px",
+					"right": "20px",
+					"bottom": "20px",
+					"left": "20px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				positions: [
-					{
-						"media": "all and (min-width: 1920px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (min-width: 1440px) and (max-width: 1919px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (min-width: 1024px) and (max-width: 1439px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}
-				]
+				"width": "1920px",
+				"height": "1080px"
 			});
 			if(typeof onBodyInit == "function"){
 				app.addEventListener("init", onBodyInit);

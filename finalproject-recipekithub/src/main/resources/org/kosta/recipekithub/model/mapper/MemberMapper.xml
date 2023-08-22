@@ -3,7 +3,7 @@
 <mapper namespace="org.kosta.recipekithub.model.mapper.MemberMapper">
 
 	<sql id="selectMember">
-		SELECT member_email, member_password, member_name, member_nick, member_address, member_phone, member_birthday, member_type, member_status, member_reg_date, member_postcode, member_address_detail FROM MEMBER
+		SELECT member_email, member_password, member_name, member_nick, member_address, member_phone, member_birthday, member_type, member_status, member_reg_date, member_postcode, member_address_detail, member_image FROM MEMBER
 	</sql>
 	
 	<select id="getTotalMemberCount" resultType="int">
@@ -25,7 +25,7 @@
 	</insert>
 	
 	<update id="updateMember" parameterType="org.kosta.recipekithub.model.vo.MemberVO">
-		UPDATE MEMBER SET member_password=#{memberPassword}, member_name=#{memberName}, member_nick=#{memberNick}, member_address=#{memberAddress}, member_phone=#{memberPhone}, member_birthday=to_date(#{memberBirthday}, 'YYYY-MM-DD HH24:MI:SS'), member_postcode=#{memberPostcode}, member_address_detail=#{memberAddressDetail} WHERE member_email=#{memberEmail}
+		UPDATE MEMBER SET member_password=#{memberPassword}, member_name=#{memberName}, member_nick=#{memberNick}, member_address=#{memberAddress}, member_phone=#{memberPhone}, member_birthday=to_date(#{memberBirthday}, 'YYYY-MM-DD HH24:MI:SS'), member_postcode=#{memberPostcode}, member_address_detail=#{memberAddressDetail}, member_image=#{memberImage} WHERE member_email=#{memberEmail}
 	</update>
 
 	<delete id="deleteMember" parameterType="string">
@@ -53,7 +53,14 @@
 		SELECT member_password FROM MEMBER WHERE member_email=#{memberEmail} AND member_name=#{memberName} AND member_phone=#{memberPhone} 
 	</select>
 	
-	<insert id="insertProfileImg " parameterType="string">
-		INSERT INTO MEMBER(member_image) VALUES(#{memberImage}) WHERE member_email=#{memberEmail} 
-	</insert>
+	<!--  
+	<update id="insertProfileImg " parameterType="string">
+		UPDATE MEMBER SET member_image=#{memberImage} WHERE member_email=#{memberEmail}
+	</update>
+	-->
+	
+	<update id="deleteProfileImg" parameterType="string">
+		UPDATE MEMBER SET member_image = NULL WHERE member_email=#{memberEmail}
+	</update>
+	
 </mapper>

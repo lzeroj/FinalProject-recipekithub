@@ -23,17 +23,6 @@ function onBodyLoad(e) {
 	var hTMLSnippet = app.lookup("recipeContent");
 	hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 	
-	app.lookup("regDate").value = recipeBoardVO.recipeRegDate;
-	if(recipeBoardVO.recipeEditDate ==null){
-		app.lookup("edit").visible = false;
-		app.lookup("editDate").visible = false;
-	}else{
-		app.lookup("editDate").value = recipeBoardVO.recipeEditDate;
-	}
-	app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
-	var recipeCommentsub = app.lookup("recipeCommentList");
-	recipeCommentsub.send();
-	
 	// 현준
 	app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 	app.lookup("subrecipelikecount").send();
@@ -43,15 +32,12 @@ function onBodyLoad(e) {
 
 
 
-
-
 /*
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e) {
 	//sessionStorage.getItem("memsession");
-	
 	var submission = app.lookup("sub_profile");
 	submission.send();
 }
@@ -72,6 +58,13 @@ function onSub_profileSubmitSuccess(e) {
 	app.lookup("detailAddress").text = dsProfile.getValue(0, "memberAddressDetail");
 	app.lookup("ipbPhone").mask = dsProfile.getValue(0, "memberPhone");
 	app.lookup("ipbBirthday").value = dsProfile.getValue(0, "memberBirthday");
+	
+	app.lookup("profileImg").src = "/upload/profile/" + dsProfile.getValue(0, "memberImage");
+	
+	//var memberVO = cpr.core.Platform.INSTANCE.getParameter("ds_profile");
+	//alert(memberVO.memberImage);
+	//app.lookup("profileImg").src = "/upload/profile/" + memberVO.memberImage;
+	
 	//dataMap 형식으로 수정하기  -> 그룹 전체를 redraw하기
 	//app.lookup("dm_profile");
 	//app.lookup("myProfileForm").redraw();
@@ -233,28 +226,79 @@ function onSub_check_nickSubmitSuccess(e) {
  */
 function onBtnMemUpdateClick(e){
 	var btnMemUpdate = e.control;
-	var dataMap = app.lookup("dm_update");
-	dataMap.setValue("memberEmail", app.lookup("ipbEmail").value);
-	dataMap.setValue("memberPassword", app.lookup("ipbPassword1").value);
-	dataMap.setValue("memberName", app.lookup("ipbName").value);
-	dataMap.setValue("memberNick", app.lookup("ipbNick").value);
-	dataMap.setValue("memberBirthday", app.lookup("ipbBirthday").value);
-	dataMap.setValue("memberPhone", app.lookup("ipbPhone").value);
-	dataMap.setValue("memberPostcode", app.lookup("postCode").value);
-	dataMap.setValue("memberAddress", app.lookup("address").value);
-	dataMap.setValue("memberAddressDetail", app.lookup("detailAddress").value);
 	
-	var initValue = "정말로 수정하시겠습니까?";
-	app.openDialog("dialog/registerPopup", {
-		width: 400, height: 300, headerClose: true, resizable: false
-	}, function(dialog) {
-		dialog.ready(function(dialogApp) {
-			dialogApp.initValue = initValue;
+	var memberEmail = app.lookup("ipbEmail").value;
+	var memberPassword = app.lookup("ipbPassword1").value;
+	var memberPassword2 = app.lookup("ipbPassword2").value;
+	var memberName = app.lookup("ipbName").value;
+	var memberNick = app.lookup("ipbNick").value;
+	var memberBirthday = app.lookup("ipbBirthday").value;
+	var memberPhone = app.lookup("ipbPhone").value;
+	var memberPostcode = app.lookup("postCode").value;
+	var memberAddress = app.lookup("address").value;
+	var memberAddressDetail = app.lookup("detailAddress").value;
+	var memberImage = app.lookup("profileImg").src;
+	
+	var dataMap = app.lookup("dm_update");
+	dataMap.setValue("memberEmail", memberEmail);
+	dataMap.setValue("memberPassword", memberPassword);
+	dataMap.setValue("memberName", memberName);
+	dataMap.setValue("memberNick", memberNick);
+	dataMap.setValue("memberBirthday", memberBirthday);
+	dataMap.setValue("memberPhone", memberPhone);
+	dataMap.setValue("memberPostcode", memberPostcode);
+	dataMap.setValue("memberAddress", memberAddress);
+	dataMap.setValue("memberAddressDetail", memberAddressDetail);
+	dataMap.setValue("memberImage", memberImage);
+	
+	var fileInput = app.lookup("fi1");
+	var file = fileInput.file;
+	
+	// 다이얼로그창에 표시할 메시지
+	var initValue = null;		
+	// 회원가입 양식에서 빈칸으로 남아 있는 input-box가 있는 체크
+	if (memberPassword === "") {
+		initValue = "비밀번호를 입력해주세요";
+	} else if (memberPassword2 === "") {
+		initValue = "비밀번호를 확인해주세요";
+	} else if (memberName === "") {
+		initValue = "성명을 확인해주세요";
+	} else if (memberNick === "") {
+		initValue = "닉네임을 확인해주세요";
+	} else if (memberBirthday === "") {
+		initValue = "생년월일을 확인해주세요";
+	} else if (memberPhone === "") {
+		initValue = "전화번호를 확인해주세요";
+	} else if (memberPostcode === "") {
+		initValue = "주소를 확인해주세요";
+	}
+	
+	// 1. 프로필 조회/수정 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
+	if (initValue) {		
+		app.openDialog("dialog/registerChkPopup", {
+			width: 400, height: 300, headerClose: true
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				dialogApp.initValue = initValue;
+			});
 		});
-	}).then(function(returnValue) {
-		var submission = app.lookup("sub_update");
-		submission.send();
-	});
+	// 2. 프로필 조회/수정 양식이 전부 유효하게 작성되어 있는 경우, 프로필 수정 서브미션 전송	
+	} else {		
+		initValue = "회원정보를 수정하시겠습니까?";
+		app.openDialog("dialog/registerPopup", {
+			width: 400, height: 300, headerClose: true, resizable: false
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue) {
+			var subUpdate = app.lookup("sub_update");
+			//var submission = app.lookup("sub_insert_image");
+			subUpdate.addFileParameter("memberImage", file);
+			subUpdate.send();
+			//submission.send();
+		});
+	}
 }
 
 /*
@@ -271,7 +315,8 @@ function onSub_updateSubmitSuccess(e) {
 			dialogApp.initValue = initValue;
 		});
 	}).then(function(returnValue) {
-		window.location.href = "index.clx";
+		var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+		httpPostMethod.submit();
 	});
 }
 
@@ -313,7 +358,8 @@ function onSub_deleteSubmitSuccess(e) {
 			dialogApp.initValue = initValue;
 		});
 	}).then(function(returnValue) {
-		window.location.href = "index.clx";
+		var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+		httpPostMethod.submit();
 	});
 }
 
@@ -344,28 +390,59 @@ function onButtonClick(e) {
 function onSub_logoutSubmitSuccess(e) {
 	var sub_logout = e.control;
 	alert("로그아웃이 완료되었습니다!")
-	//var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-	//httpPostMethod.submit();
-	window.location.href = "index.clx";
+	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+	httpPostMethod.submit();
 }
 
 
 /*
- * "프로필 사진 등록/수정" 버튼(btnInsertProfileImg)에서 click 이벤트 발생 시 호출.
+ * "프로필 사진 등록/변경" 버튼(btnInsertProfileImg)에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
- */
+ 
 function onBtnInsertProfileImgClick(e){
 	var btnInsertProfileImg = e.control;
-	
+	var submission = app.lookup("sub_insert_image");
+	submission.addFileParameter("image", file);
+	submission.send();
 }
+*/
 
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
  * 통신이 성공하면 발생합니다.
- */
+
 function onSub_insert_imageSubmitSuccess(e){
 	var sub_insert_image = e.control;
-	
+	var initValue = "프로필 사진을 '등록/변경' 하시겠습니까?";
+	app.openDialog("dialog/registerChkPopup", {
+		width: 400, height: 300, resizable: false, headerMovable: false
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			dialogApp.initValue = initValue;
+		});
+	}).then(function(returnValue) {
+		var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+		httpPostMethod.submit();
+	});
+}
+*/
+
+/*
+ * 파일 인풋에서 value-change 이벤트 발생 시 호출.
+ * FileInput의 value를 변경하여 변경된 값이 저장된 후에 발생하는 이벤트.
+ */
+function onFi1ValueChange(e) {
+	var fi1 = e.control;
+	//app.lookup("deleteImg").redraw();
+	var image = app.lookup("profileImg");
+	var fileInput = app.lookup("fi1");
+	if (fileInput.files && fileInput.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			image.src = e.target.result;
+		};
+		reader.readAsDataURL(fileInput.files[0]);
+	}
 }
 
 
@@ -375,7 +452,8 @@ function onSub_insert_imageSubmitSuccess(e){
  */
 function onBtnDeleteProfileImgClick(e){
 	var btnDeleteProfileImg = e.control;
-	
+	var submission = app.lookup("sub_delete_image");
+	submission.send();
 }
 
 /*
@@ -384,8 +462,25 @@ function onBtnDeleteProfileImgClick(e){
  */
 function onSub_delete_imageSubmitSuccess(e){
 	var sub_delete_image = e.control;
-	
+	var fileInput = app.lookup("fi1");
+	var image = app.lookup("profileImg");
+	var initValue = "현재 프로필 사진을 '삭제' 하시겠습니까?";
+	app.openDialog("dialog/registerChkPopup", {
+		width: 400, height: 300, resizable: false, headerMovable: false
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			dialogApp.initValue = initValue;
+		});
+	}).then(function(returnValue) {
+		fileInput.clear();
+		image.src = "";
+		var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+		httpPostMethod.submit();
+	});
 }
+
+
+
 
 //=============================================[ 카카오 주소검색 API ]=============================================//
 
@@ -477,4 +572,3 @@ function onBodyUnload(e){
 	var appConf = cpr.core.AppConfig.INSTANCE;
 	appConf.getEnvConfig().setValue("appcache", false);
 }
-

@@ -109,6 +109,17 @@
               <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
             </cl:formlayout>
           </cl:group>
+          <cl:group std:sid="group-f9976b94">
+            <cl:xylayoutdata std:sid="xyl-data-a45aeb16" top="20px" right="14px" width="20px" height="20px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+            <cl:button std:sid="button-34eff9ec" style="background-color:#FFFFFF; border-right-style:none; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/member/ic_home.png); background-position:center; border-top-style:none;" value="">
+              <cl:listener std:sid="listener-bb599020" name="click" handler="onButtonClick"/>
+              <cl:formdata std:sid="f-data-5b705d42" row="0" col="0"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-92dd1ac7" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
           <cl:xylayout std:sid="xylayout-6adfc418"/>
         </cl:group>
         <cl:responsivexylayout std:sid="r-xylayout-72d5b393"/>

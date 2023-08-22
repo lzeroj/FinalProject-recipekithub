@@ -174,4 +174,9 @@ function onDeleteImgClick(e) {
 		fileInput.clear();
 		image.src = "";
 	}
+<<<<<<< HEAD
 }
+
+=======
+}
+>>>>>>> branch 'develop-branch' of https://github.com/lzeroj/FinalProject-recipekithub.git

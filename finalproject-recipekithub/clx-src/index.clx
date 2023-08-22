@@ -20,6 +20,7 @@
       <cl:xylayoutdata std:sid="xyl-data-46ab264b" top="0px" left="0px" width="1920px" height="1090px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
         <cl:listener std:sid="listener-e6ce5049" name="event" handler="onHeader3Event"/>
+        <cl:listener std:sid="listener-93fc2d39" name="logout" handler="onHeader3Event"/>
         <cl:xylayoutdata std:sid="xyl-data-a879d1ba" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH"/>
         <cl:property name="embe" value="ea1" type="control"/>
       </cl:udc>

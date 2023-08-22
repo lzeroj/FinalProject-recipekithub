@@ -120,6 +120,15 @@
 				app.lookup("emailInput").text = item;
 				app.lookup("pswdInput").focus();
 			}
+
+			/*
+			 * 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick(e){
+				var button = e.control;
+				window.location.href = "index.clx";
+			};
 			// End - User Script
 			
 			// Header
@@ -432,6 +441,45 @@
 							"width": "304px",
 							"height": "188px",
 							"left": "calc(50% - 152px)"
+						});
+						var group_8 = new cpr.controls.Container();
+						var formLayout_3 = new cpr.controls.layouts.FormLayout();
+						formLayout_3.scrollable = false;
+						formLayout_3.topMargin = "0px";
+						formLayout_3.rightMargin = "0px";
+						formLayout_3.bottomMargin = "0px";
+						formLayout_3.leftMargin = "0px";
+						formLayout_3.horizontalSpacing = "0px";
+						formLayout_3.verticalSpacing = "0px";
+						formLayout_3.setColumns(["1fr"]);
+						formLayout_3.setRows(["1fr"]);
+						group_8.setLayout(formLayout_3);
+						(function(container){
+							var button_4 = new cpr.controls.Button();
+							button_4.value = "";
+							button_4.style.css({
+								"background-color" : "#FFFFFF",
+								"border-right-style" : "none",
+								"background-size" : "cover",
+								"border-left-style" : "none",
+								"border-bottom-style" : "none",
+								"background-image" : "url('theme/images/member/ic_home.png')",
+								"background-position" : "center",
+								"border-top-style" : "none"
+							});
+							if(typeof onButtonClick == "function") {
+								button_4.addEventListener("click", onButtonClick);
+							}
+							container.addChild(button_4, {
+								"colIndex": 0,
+								"rowIndex": 0
+							});
+						})(group_8);
+						container.addChild(group_8, {
+							"top": "20px",
+							"right": "14px",
+							"width": "20px",
+							"height": "20px"
 						});
 					})(group_3);
 					container.addChild(group_3, {

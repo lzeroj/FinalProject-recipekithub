@@ -6,63 +6,8 @@
     <screen std:sid="screen-72d3591a" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
     <screen std:sid="screen-e0120e6c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <link std:sid="link-4252a4d7" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-d86ac235" href="../theme/controls/accordion.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-8f7e506b" href="../theme/controls/apptitle.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-64d7d6e6" href="../theme/controls/audio.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-87237215" href="../theme/controls/button.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-f6abf453" href="../theme/controls/calendar.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-a401c656" href="../theme/controls/checkbox.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-c8554fe1" href="../theme/controls/combo-box.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-cbd7610f" href="../theme/controls/common.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-9894bb33" href="../theme/controls/date-input.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-79a55db3" href="../theme/controls/dialog.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-a3d8ff1c" href="../theme/controls/file-input.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-7cca2de8" href="../theme/controls/file-upload.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-7b6098f4" href="../theme/controls/focus.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-28ca24e0" href="../theme/controls/form-layout.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-4df1ef0e" href="../theme/controls/grid.part.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-92cdfae9" href="../theme/controls/htmlobject.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-42510510" href="../theme/controls/htmlobject.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-85568406" href="../theme/controls/input.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-90ce6785" href="../theme/controls/linked-combo-box.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-e9a08594" href="../theme/controls/linked-listbox.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-dab4fde2" href="../theme/controls/listbox.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-205bca46" href="../theme/controls/mask-editor.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-5e85c4ca" href="../theme/controls/menu.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-e7d618f9" href="../theme/controls/nav-bar.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-4e19ae67" href="../theme/controls/notifier.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-446ada32" href="../theme/controls/number-editor.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-e7061d03" href="../theme/controls/output.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-87d0d147" href="../theme/controls/page-indexer.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-5eb92c48" href="../theme/controls/progress-bar.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-b322a97e" href="../theme/controls/radio-button.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-266c57d8" href="../theme/controls/searchinput.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-1bb004a5" href="../theme/controls/side-nav.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-88089217" href="../theme/controls/slider.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-bbfa87f6" href="../theme/controls/statecell.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-55d39c59" href="../theme/controls/tabfolder.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-b88ce542" href="../theme/controls/textarea.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-e396f9d9" href="../theme/controls/tree.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-6df561b2" href="../theme/controls/treecell.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-4213391f" href="../theme/controls/video.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-fd16b0aa" href="../theme/custom-settings.part.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-85831bc4" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-f70a7089" href="../theme/custom/badge.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-29b06ab0" href="../theme/custom/breadcrumb.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-65f2005b" href="../theme/custom/button.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-abe59549" href="../theme/custom/card.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-3fe310c3" href="../theme/custom/dropdown.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-c7bba428" href="../theme/custom/extensions.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-ec640f98" href="../theme/custom/fonts.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-65ea1c54" href="../theme/custom/globals.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-f054ad11" href="../theme/custom/main.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-e2a73e14" href="../theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-ab0c0a7c" href="../theme/custom/navigation.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-723222d1" href="../theme/custom/search-box.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-f3f8f5c1" href="../theme/custom/spinner.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-7e9fafa1" href="../theme/custom/status.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-75f9ba51" href="../theme/custom/table.part.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-14bfae72" href="../theme/custom/typography.part.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-6db5d72d" href="../theme/settings.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-026b268b">
       <cl:dataset std:sid="d-set-80185aa1" id="ds_profile">
@@ -79,6 +24,7 @@
           <cl:datacolumn std:sid="d-column-f274cb6e" name="memberRegDate" datatype="string"/>
           <cl:datacolumn std:sid="d-column-4a5abdf9" name="memberPostcode" datatype="string"/>
           <cl:datacolumn std:sid="d-column-5a9b1971" name="memberAddressDetail" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-869da431" name="memberImage" datatype="string"/>
         </cl:datacolumnlist>
       </cl:dataset>
       <cl:datamap std:sid="d-map-cc577ebd" id="dm_profile">
@@ -95,6 +41,7 @@
           <cl:datacolumn std:sid="d-column-9887ddeb" name="memberRegDate" datatype="string"/>
           <cl:datacolumn std:sid="d-column-e9ad475d" name="memberPostcode" datatype="string"/>
           <cl:datacolumn std:sid="d-column-e86bb527" name="memberAddressDetail" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-732d1164" name="memberImage" datatype="string" defaultvalue=""/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:datamap std:sid="d-map-684e7f1f" id="dm_update">
@@ -108,6 +55,7 @@
           <cl:datacolumn std:sid="d-column-4512b251" name="memberBirthday" datatype="string"/>
           <cl:datacolumn std:sid="d-column-0a8ebc85" name="memberPostcode" datatype="string"/>
           <cl:datacolumn std:sid="d-column-8d5c1b7c" name="memberAddressDetail" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-9a5e2bfd" name="memberImage" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:datamap std:sid="d-map-ae272d85" id="dm_delete">
@@ -120,12 +68,11 @@
           <cl:datacolumn std:sid="d-column-962a4969" name="member_nick" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
-      <cl:datamap std:sid="d-map-03417419" id="dm_profile_img"/>
       <cl:submission std:sid="submission-fc8d20e1" id="sub_profile" action="/member/profileInfo">
         <cl:listener std:sid="listener-86c6f206" name="submit-success" handler="onSub_profileSubmitSuccess"/>
         <cl:responsedata dataid="ds_profile"/>
       </cl:submission>
-      <cl:submission std:sid="submission-ab199ee6" id="sub_update" action="/member/updateMember">
+      <cl:submission std:sid="submission-ab199ee6" id="sub_update" action="/member/updateMember" mediatype="multipart/form-data">
         <cl:listener std:sid="listener-93c1fbf7" name="submit-success" handler="onSub_updateSubmitSuccess"/>
         <cl:requestdata dataid="dm_update"/>
         <cl:responsedata dataid="ds_profile"/>
@@ -141,11 +88,13 @@
         <cl:listener std:sid="listener-adb91cad" name="submit-success" handler="onSub_check_nickSubmitSuccess"/>
         <cl:requestdata dataid="dm_check_nick"/>
       </cl:submission>
-      <cl:submission std:sid="submission-c74b7ae9" id="sub_insert_image">
+      <cl:submission std:sid="submission-c74b7ae9" id="sub_insert_image" action="/member/insertProfileImage" mediatype="multipart/form-data">
         <cl:listener std:sid="listener-9fab877e" name="submit-success" handler="onSub_insert_imageSubmitSuccess"/>
+        <cl:requestdata dataid="dm_profile"/>
       </cl:submission>
-      <cl:submission std:sid="submission-b5f62cb2" id="sub_delete_image">
+      <cl:submission std:sid="submission-b5f62cb2" id="sub_delete_image" action="/member/deleteProfileImage" mediatype="multipart/form-data">
         <cl:listener std:sid="listener-dc373097" name="submit-success" handler="onSub_delete_imageSubmitSuccess"/>
+        <cl:requestdata dataid="dm_profile"/>
       </cl:submission>
     </cl:model>
     <cl:appspec>
@@ -229,19 +178,20 @@
                       <cl:columns length="1" unit="FRACTION"/>
                     </cl:formlayout>
                   </cl:group>
-                  <cl:img std:sid="image-7e3a7f36" id="profileImg" src="../theme/images/common/mypageIcon.png">
+                  <cl:img std:sid="image-7e3a7f36" id="profileImg">
+                    <cl:datasetbind property="src" datacontrolid="ds_profile" columnname="memberImage" rowindex="0"/>
                     <cl:formdata std:sid="f-data-958d5805" row="0" col="0"/>
                   </cl:img>
                   <cl:group std:sid="group-94f239e7">
                     <cl:formdata std:sid="f-data-690c73a3" row="1" col="0"/>
-                    <cl:button std:sid="button-36ee6cc3" id="btnInsertProfileImg" style="background-color:none; text-shadow:none; background-image:none;" class="btn-outline-secondary" value="프로필 사진 등록/수정">
-                      <cl:listener std:sid="listener-92f22656" name="click" handler="onBtnInsertProfileImgClick"/>
-                      <cl:formdata std:sid="f-data-1257d694" row="0" col="0"/>
-                    </cl:button>
-                    <cl:button std:sid="button-8c35ea48" id="btnDeleteProfileImg" style="background-color:none; text-shadow:none; background-image:none;" class="btn-outline-secondary" value="프로필 사진 삭제">
+                    <cl:button std:sid="button-8c35ea48" id="btnDeleteProfileImg" style="background-color:none; border-radius:10px; text-shadow:none; background-image:none;" class="btn-outline-secondary" value="프로필 사진 삭제">
                       <cl:listener std:sid="listener-a9b3566d" name="click" handler="onBtnDeleteProfileImgClick"/>
                       <cl:formdata std:sid="f-data-fde3d12e" row="0" col="1"/>
                     </cl:button>
+                    <cl:fileinput std:sid="f-input-79fecf45" id="fi1" style="border-radius:10px; border-bottom-color:#a0a0a0; border-left-color:#a0a0a0; border-top-color:#a0a0a0; border-right-color:#a0a0a0;" placeholder="프로필 사진 등록/변경">
+                      <cl:listener std:sid="listener-d618f770" name="value-change" handler="onFi1ValueChange"/>
+                      <cl:formdata std:sid="f-data-16b7bbda" row="0" col="0"/>
+                    </cl:fileinput>
                     <cl:formlayout std:sid="f-layout-f4484ddb" scrollable="false" hspace="20px" vspace="20px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
                       <cl:rows length="1" unit="FRACTION"/>
                       <cl:columns length="1" unit="FRACTION"/>
