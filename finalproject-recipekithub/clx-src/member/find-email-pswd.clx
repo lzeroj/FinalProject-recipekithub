@@ -47,13 +47,11 @@
   </head>
   <body std:sid="body-c044c821">
     <cl:group std:sid="group-1fde106f">
-      <cl:responsivexylayoutdata std:sid="rxyl-data-a8b21137">
-        <cl:xylayoutdata std:sid="sxyl-data-bb35dc2e" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="FHD"/>
-      </cl:responsivexylayoutdata>
+      <cl:flowlayoutdata std:sid="f-data-39acee2e" width="1920px" height="1080px"/>
       <cl:udc std:sid="ud-control-c123483e" type="udc.header3">
-        <cl:xylayoutdata std:sid="xyl-data-970ae750" top="0px" left="0px" width="1920px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-970ae750" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:udc>
-      <cl:group std:sid="group-cb9a5a54" style="background-size:cover; background-image:url(../theme/images/common/bgimg8_1920.png); background-position:center;">
+      <cl:group std:sid="group-cb9a5a54" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg10.png); background-position:center;">
         <cl:xylayoutdata std:sid="xyl-data-b4887c6c" top="200px" bottom="100px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-e743ec30">
           <cl:xylayoutdata std:sid="xyl-data-007b248e" top="20px" left="20px" width="1880px" height="740px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -203,11 +201,11 @@
         <cl:xylayout std:sid="xylayout-3e1bbfd9"/>
       </cl:group>
       <cl:udc std:sid="ud-control-101e92b1" type="udc.footer">
-        <cl:xylayoutdata std:sid="xyl-data-0bcc2f5b" top="990px" left="0px" width="1920px" height="100px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-0bcc2f5b" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
       </cl:udc>
       <cl:xylayout std:sid="xylayout-79bdcb39"/>
     </cl:group>
-    <cl:responsivexylayout std:sid="r-xylayout-9f7b8363"/>
+    <cl:flowlayout std:sid="f-layout-58fae0ab"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

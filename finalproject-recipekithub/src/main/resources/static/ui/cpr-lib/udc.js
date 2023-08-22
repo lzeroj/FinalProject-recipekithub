@@ -905,22 +905,9 @@
 						
 					// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
 				    } else if (cmb1.value == "logout") {
-						var event = new cpr.events.CAppEvent("logout");
-						app.dispatchEvent(event);
-				    	/*
-				    	var initValue = "로그아웃 하시겠습니까?";
-						app.openDialog("dialog/registerPopup", {
-							width: 400, height: 300, headerClose: true, resizable: false
-						}, function(dialog) {
-							dialog.ready(function(dialogApp) {
-							dialogApp.initValue = initValue;
-							});
-						}).then(function(returnValue) {
-							var submission = app.lookup("sub_logout");
-							submission.send();
-						});
-				        //window.location.href = "/member/logout";
-				        */
+						//var logout = new cpr.events.CAppEvent("logout");
+						var logout = new cpr.events.CUIEvent("logout");
+						app.dispatchEvent(logout);
 				    	
 				    // 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
 				    } else if (cmb1.value == "profile") { 
@@ -934,6 +921,7 @@
 				app.declareAppProperty("embe", null);
 				app.declareAppProperty("categoryValue", null);
 				app.declareAppProperty("searchValue", null);
+				app.declareAppProperty("cmb1", null);
 				var submission_1 = new cpr.protocols.Submission("sub_logout");
 				submission_1.action = "/memberUI/logout";
 				app.register(submission_1);
@@ -1290,28 +1278,28 @@
 							"top": "0px",
 							"right": "0px",
 							"left": "0px",
-							"height": "200px"
+							"height": "652px"
 						}, 
 						{
 							"media": "all and (min-width: 1024px) and (max-width: 1919px)",
 							"top": "0px",
 							"right": "0px",
 							"left": "0px",
-							"height": "200px"
+							"height": "652px"
 						}, 
 						{
 							"media": "all and (min-width: 500px) and (max-width: 1023px)",
 							"top": "0px",
 							"right": "0px",
 							"left": "0px",
-							"height": "200px"
+							"height": "652px"
 						}, 
 						{
 							"media": "all and (max-width: 499px)",
 							"top": "0px",
 							"right": "0px",
 							"left": "0px",
-							"height": "200px"
+							"height": "652px"
 						}
 					]
 				});
@@ -1359,6 +1347,14 @@
 		},
 		set: function(newValue){
 			return this.getEmbeddedAppInstance().setAppProperty("searchValue", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.header3.prototype, "cmb1", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("cmb1");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("cmb1", newValue, true);
 		}
 	});
 	
@@ -2203,7 +2199,6 @@
 })();
 /// end - udc.mealkitList
 /// start - udc.recipeCommentudc
-
 /*
  * UDC Qualified Name: udc.recipeCommentudc
  * App URI: udc/recipeCommentudc
@@ -2521,7 +2516,6 @@
 })();
 /// end - udc.recipeLikeudc
 /// start - udc.recipeListudc
-
 /*
  * UDC Qualified Name: udc.recipeListudc
  * App URI: udc/recipeListudc

@@ -191,7 +191,7 @@
 					opbFindPswdNotice.text = "등록된 정보가 없습니다. 입력하신 정보를 다시 확인해주세요.";
 				} else {						//---> 2. 입력한 정보에 따른 비밀번호를 조회하는데 성공한 경우
 					opbFindPswdNotice.style.css("color", "black");
-					opbFindPswdNotice.text = "입력하신 회원정보에 해당하는 비밀번호 정보는 다음과 같습니다."
+					opbFindPswdNotice.text = "입력하신 회원정보에 해당하는 비밀번호 정보는 다음과 같습니다.\n보안을 위해 비밀번호를 수정해주시길 바랍니다."
 					app.lookup("opbFindPswdResult").text = metadataOk;
 				}
 			}
@@ -280,8 +280,8 @@
 			});
 			
 			// Layout
-			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-			container.setLayout(responsiveXYLayout_1);
+			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
+			container.setLayout(flowLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
@@ -291,14 +291,15 @@
 				var userDefinedControl_1 = new udc.header3();
 				container.addChild(userDefinedControl_1, {
 					"top": "0px",
+					"right": "0px",
 					"left": "0px",
-					"width": "1920px",
 					"height": "200px"
 				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
+					"background-color" : "#F4FAEC",
 					"background-size" : "cover",
-					"background-image" : "url('theme/images/common/bgimg8_1920.png')",
+					"background-image" : "url('theme/images/common/bgimg10.png')",
 					"background-position" : "center"
 				});
 				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
@@ -844,43 +845,15 @@
 				});
 				var userDefinedControl_2 = new udc.footer();
 				container.addChild(userDefinedControl_2, {
-					"top": "990px",
+					"right": "0px",
+					"bottom": "0px",
 					"left": "0px",
-					"width": "1920px",
 					"height": "100px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				positions: [
-					{
-						"media": "all and (min-width: 1920px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "0px",
-						"right": "0px",
-						"bottom": "0px",
-						"left": "0px"
-					}
-				]
+				"width": "1920px",
+				"height": "1080px"
 			});
 		}
 	});

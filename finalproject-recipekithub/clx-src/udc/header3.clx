@@ -12,14 +12,15 @@
       <cl:property name="embe" type="control"/>
       <cl:property name="categoryValue" type="string"/>
       <cl:property name="searchValue" type="string"/>
-      <cl:event name="event" type="cpr.events.CAppEvent"/>
+      <cl:property name="cmb1" type="control"/>
+      <cl:event name="logout" type="cpr.events.CAppEvent"/>
     </cl:appspec>
   </head>
   <body std:sid="body-ae9875e0" style="background-color:#F4FAEC; top:0px; left:0px; width:1920px; height:200px;">
     <cl:listener std:sid="listener-f9bc07a0" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-8f018fbd" style="box-shadow:0 0 10px #333;">
       <cl:responsivexylayoutdata std:sid="rxyl-data-86effc39">
-        <cl:xylayoutdata std:sid="sxyl-data-71e9ad10" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-71e9ad10" top="0px" right="0px" left="0px" height="652px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:group std:sid="group-5ee10563" id="grp1" style="background-color:#F4FAEC;" overscrollbehavior="none">
         <cl:formdata std:sid="f-data-51c2bc79" row="0" col="0"/>

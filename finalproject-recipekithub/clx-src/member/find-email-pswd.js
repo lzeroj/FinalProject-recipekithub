@@ -172,7 +172,7 @@ function onSub_findPswdSubmitSuccess(e){
 		opbFindPswdNotice.text = "등록된 정보가 없습니다. 입력하신 정보를 다시 확인해주세요.";
 	} else {						//---> 2. 입력한 정보에 따른 비밀번호를 조회하는데 성공한 경우
 		opbFindPswdNotice.style.css("color", "black");
-		opbFindPswdNotice.text = "입력하신 회원정보에 해당하는 비밀번호 정보는 다음과 같습니다."
+		opbFindPswdNotice.text = "입력하신 회원정보에 해당하는 비밀번호 정보는 다음과 같습니다.\n보안을 위해 비밀번호를 수정해주시길 바랍니다."
 		app.lookup("opbFindPswdResult").text = metadataOk;
 	}
 }

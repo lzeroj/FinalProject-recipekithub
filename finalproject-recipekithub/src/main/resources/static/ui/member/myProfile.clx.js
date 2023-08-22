@@ -8,63 +8,8 @@
 	var app = new cpr.core.App("member/myProfile", { 
 		onPrepare: function(loader) {
 			loader.addCSS("theme/cleopatra-theme.css");
-			loader.addCSS("theme/controls/accordion.part.css");
-			loader.addCSS("theme/controls/apptitle.part.css");
-			loader.addCSS("theme/controls/audio.part.css");
-			loader.addCSS("theme/controls/button.part.css");
-			loader.addCSS("theme/controls/calendar.part.css");
-			loader.addCSS("theme/controls/checkbox.part.css");
-			loader.addCSS("theme/controls/combo-box.part.css");
-			loader.addCSS("theme/controls/common.part.css");
-			loader.addCSS("theme/controls/date-input.part.css");
-			loader.addCSS("theme/controls/dialog.part.css");
-			loader.addCSS("theme/controls/file-input.part.css");
-			loader.addCSS("theme/controls/file-upload.part.css");
-			loader.addCSS("theme/controls/focus.part.css");
-			loader.addCSS("theme/controls/form-layout.part.css");
-			loader.addCSS("theme/controls/grid.part.css");
 			loader.addCSS("theme/controls/htmlobject.css");
-			loader.addCSS("theme/controls/htmlobject.part.css");
-			loader.addCSS("theme/controls/input.part.css");
-			loader.addCSS("theme/controls/linked-combo-box.part.css");
-			loader.addCSS("theme/controls/linked-listbox.part.css");
-			loader.addCSS("theme/controls/listbox.part.css");
-			loader.addCSS("theme/controls/mask-editor.part.css");
-			loader.addCSS("theme/controls/menu.part.css");
-			loader.addCSS("theme/controls/nav-bar.part.css");
-			loader.addCSS("theme/controls/notifier.part.css");
-			loader.addCSS("theme/controls/number-editor.part.css");
-			loader.addCSS("theme/controls/output.part.css");
-			loader.addCSS("theme/controls/page-indexer.part.css");
-			loader.addCSS("theme/controls/progress-bar.part.css");
-			loader.addCSS("theme/controls/radio-button.part.css");
-			loader.addCSS("theme/controls/searchinput.part.css");
-			loader.addCSS("theme/controls/side-nav.part.css");
-			loader.addCSS("theme/controls/slider.part.css");
-			loader.addCSS("theme/controls/statecell.part.css");
-			loader.addCSS("theme/controls/tabfolder.part.css");
-			loader.addCSS("theme/controls/textarea.part.css");
-			loader.addCSS("theme/controls/tree.part.css");
-			loader.addCSS("theme/controls/treecell.part.css");
-			loader.addCSS("theme/controls/video.part.css");
-			loader.addCSS("theme/custom-settings.part.css");
 			loader.addCSS("theme/custom-theme.css");
-			loader.addCSS("theme/custom/badge.part.css");
-			loader.addCSS("theme/custom/breadcrumb.part.css");
-			loader.addCSS("theme/custom/button.part.css");
-			loader.addCSS("theme/custom/card.part.css");
-			loader.addCSS("theme/custom/dropdown.part.css");
-			loader.addCSS("theme/custom/extensions.part.css");
-			loader.addCSS("theme/custom/fonts.part.css");
-			loader.addCSS("theme/custom/globals.part.css");
-			loader.addCSS("theme/custom/main.part.css");
-			loader.addCSS("theme/custom/member.part.css");
-			loader.addCSS("theme/custom/navigation.part.css");
-			loader.addCSS("theme/custom/search-box.part.css");
-			loader.addCSS("theme/custom/spinner.part.css");
-			loader.addCSS("theme/custom/status.part.css");
-			loader.addCSS("theme/custom/table.part.css");
-			loader.addCSS("theme/custom/typography.part.css");
 			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
@@ -95,17 +40,6 @@
 				var hTMLSnippet = app.lookup("recipeContent");
 				hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 				
-				app.lookup("regDate").value = recipeBoardVO.recipeRegDate;
-				if(recipeBoardVO.recipeEditDate ==null){
-					app.lookup("edit").visible = false;
-					app.lookup("editDate").visible = false;
-				}else{
-					app.lookup("editDate").value = recipeBoardVO.recipeEditDate;
-				}
-				app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
-				var recipeCommentsub = app.lookup("recipeCommentList");
-				recipeCommentsub.send();
-				
 				// 현준
 				app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 				app.lookup("subrecipelikecount").send();
@@ -115,15 +49,12 @@
 
 
 
-
-
 			/*
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e) {
 				//sessionStorage.getItem("memsession");
-				
 				var submission = app.lookup("sub_profile");
 				submission.send();
 			}
@@ -144,6 +75,13 @@
 				app.lookup("detailAddress").text = dsProfile.getValue(0, "memberAddressDetail");
 				app.lookup("ipbPhone").mask = dsProfile.getValue(0, "memberPhone");
 				app.lookup("ipbBirthday").value = dsProfile.getValue(0, "memberBirthday");
+				
+				app.lookup("profileImg").src = "/upload/profile/" + dsProfile.getValue(0, "memberImage");
+				
+				//var memberVO = cpr.core.Platform.INSTANCE.getParameter("ds_profile");
+				//alert(memberVO.memberImage);
+				//app.lookup("profileImg").src = "/upload/profile/" + memberVO.memberImage;
+				
 				//dataMap 형식으로 수정하기  -> 그룹 전체를 redraw하기
 				//app.lookup("dm_profile");
 				//app.lookup("myProfileForm").redraw();
@@ -305,28 +243,79 @@
 			 */
 			function onBtnMemUpdateClick(e){
 				var btnMemUpdate = e.control;
-				var dataMap = app.lookup("dm_update");
-				dataMap.setValue("memberEmail", app.lookup("ipbEmail").value);
-				dataMap.setValue("memberPassword", app.lookup("ipbPassword1").value);
-				dataMap.setValue("memberName", app.lookup("ipbName").value);
-				dataMap.setValue("memberNick", app.lookup("ipbNick").value);
-				dataMap.setValue("memberBirthday", app.lookup("ipbBirthday").value);
-				dataMap.setValue("memberPhone", app.lookup("ipbPhone").value);
-				dataMap.setValue("memberPostcode", app.lookup("postCode").value);
-				dataMap.setValue("memberAddress", app.lookup("address").value);
-				dataMap.setValue("memberAddressDetail", app.lookup("detailAddress").value);
 				
-				var initValue = "정말로 수정하시겠습니까?";
-				app.openDialog("dialog/registerPopup", {
-					width: 400, height: 300, headerClose: true, resizable: false
-				}, function(dialog) {
-					dialog.ready(function(dialogApp) {
-						dialogApp.initValue = initValue;
+				var memberEmail = app.lookup("ipbEmail").value;
+				var memberPassword = app.lookup("ipbPassword1").value;
+				var memberPassword2 = app.lookup("ipbPassword2").value;
+				var memberName = app.lookup("ipbName").value;
+				var memberNick = app.lookup("ipbNick").value;
+				var memberBirthday = app.lookup("ipbBirthday").value;
+				var memberPhone = app.lookup("ipbPhone").value;
+				var memberPostcode = app.lookup("postCode").value;
+				var memberAddress = app.lookup("address").value;
+				var memberAddressDetail = app.lookup("detailAddress").value;
+				var memberImage = app.lookup("profileImg").src;
+				
+				var dataMap = app.lookup("dm_update");
+				dataMap.setValue("memberEmail", memberEmail);
+				dataMap.setValue("memberPassword", memberPassword);
+				dataMap.setValue("memberName", memberName);
+				dataMap.setValue("memberNick", memberNick);
+				dataMap.setValue("memberBirthday", memberBirthday);
+				dataMap.setValue("memberPhone", memberPhone);
+				dataMap.setValue("memberPostcode", memberPostcode);
+				dataMap.setValue("memberAddress", memberAddress);
+				dataMap.setValue("memberAddressDetail", memberAddressDetail);
+				dataMap.setValue("memberImage", memberImage);
+				
+				var fileInput = app.lookup("fi1");
+				var file = fileInput.file;
+				
+				// 다이얼로그창에 표시할 메시지
+				var initValue = null;		
+				// 회원가입 양식에서 빈칸으로 남아 있는 input-box가 있는 체크
+				if (memberPassword === "") {
+					initValue = "비밀번호를 입력해주세요";
+				} else if (memberPassword2 === "") {
+					initValue = "비밀번호를 확인해주세요";
+				} else if (memberName === "") {
+					initValue = "성명을 확인해주세요";
+				} else if (memberNick === "") {
+					initValue = "닉네임을 확인해주세요";
+				} else if (memberBirthday === "") {
+					initValue = "생년월일을 확인해주세요";
+				} else if (memberPhone === "") {
+					initValue = "전화번호를 확인해주세요";
+				} else if (memberPostcode === "") {
+					initValue = "주소를 확인해주세요";
+				}
+				
+				// 1. 프로필 조회/수정 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
+				if (initValue) {		
+					app.openDialog("dialog/registerChkPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+						});
 					});
-				}).then(function(returnValue) {
-					var submission = app.lookup("sub_update");
-					submission.send();
-				});
+				// 2. 프로필 조회/수정 양식이 전부 유효하게 작성되어 있는 경우, 프로필 수정 서브미션 전송	
+				} else {		
+					initValue = "회원정보를 수정하시겠습니까?";
+					app.openDialog("dialog/registerPopup", {
+						width: 400, height: 300, headerClose: true, resizable: false
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						var subUpdate = app.lookup("sub_update");
+						//var submission = app.lookup("sub_insert_image");
+						subUpdate.addFileParameter("memberImage", file);
+						subUpdate.send();
+						//submission.send();
+					});
+				}
 			}
 
 			/*
@@ -343,7 +332,8 @@
 						dialogApp.initValue = initValue;
 					});
 				}).then(function(returnValue) {
-					window.location.href = "index.clx";
+					var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+					httpPostMethod.submit();
 				});
 			}
 
@@ -385,7 +375,8 @@
 						dialogApp.initValue = initValue;
 					});
 				}).then(function(returnValue) {
-					window.location.href = "index.clx";
+					var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+					httpPostMethod.submit();
 				});
 			}
 
@@ -416,28 +407,59 @@
 			function onSub_logoutSubmitSuccess(e) {
 				var sub_logout = e.control;
 				alert("로그아웃이 완료되었습니다!")
-				//var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-				//httpPostMethod.submit();
-				window.location.href = "index.clx";
+				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+				httpPostMethod.submit();
 			}
 
 
 			/*
-			 * "프로필 사진 등록/수정" 버튼(btnInsertProfileImg)에서 click 이벤트 발생 시 호출.
+			 * "프로필 사진 등록/변경" 버튼(btnInsertProfileImg)에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-			 */
+			 
 			function onBtnInsertProfileImgClick(e){
 				var btnInsertProfileImg = e.control;
-				
+				var submission = app.lookup("sub_insert_image");
+				submission.addFileParameter("image", file);
+				submission.send();
 			}
+			*/
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
-			 */
+
 			function onSub_insert_imageSubmitSuccess(e){
 				var sub_insert_image = e.control;
-				
+				var initValue = "프로필 사진을 '등록/변경' 하시겠습니까?";
+				app.openDialog("dialog/registerChkPopup", {
+					width: 400, height: 300, resizable: false, headerMovable: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+					httpPostMethod.submit();
+				});
+			}
+			*/
+
+			/*
+			 * 파일 인풋에서 value-change 이벤트 발생 시 호출.
+			 * FileInput의 value를 변경하여 변경된 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onFi1ValueChange(e) {
+				var fi1 = e.control;
+				//app.lookup("deleteImg").redraw();
+				var image = app.lookup("profileImg");
+				var fileInput = app.lookup("fi1");
+				if (fileInput.files && fileInput.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						image.src = e.target.result;
+					};
+					reader.readAsDataURL(fileInput.files[0]);
+				}
 			}
 
 
@@ -447,7 +469,8 @@
 			 */
 			function onBtnDeleteProfileImgClick(e){
 				var btnDeleteProfileImg = e.control;
-				
+				var submission = app.lookup("sub_delete_image");
+				submission.send();
 			}
 
 			/*
@@ -456,8 +479,25 @@
 			 */
 			function onSub_delete_imageSubmitSuccess(e){
 				var sub_delete_image = e.control;
-				
+				var fileInput = app.lookup("fi1");
+				var image = app.lookup("profileImg");
+				var initValue = "현재 프로필 사진을 '삭제' 하시겠습니까?";
+				app.openDialog("dialog/registerChkPopup", {
+					width: 400, height: 300, resizable: false, headerMovable: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					fileInput.clear();
+					image.src = "";
+					var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+					httpPostMethod.submit();
+				});
 			}
+
+
+
 
 			//=============================================[ 카카오 주소검색 API ]=============================================//
 
@@ -603,6 +643,10 @@
 					{
 						"name": "memberAddressDetail",
 						"dataType": "string"
+					},
+					{
+						"name": "memberImage",
+						"dataType": "string"
 					}
 				]
 			});
@@ -657,6 +701,11 @@
 					{
 						"name": "memberAddressDetail",
 						"dataType": "string"
+					},
+					{
+						"name": "memberImage",
+						"dataType": "string",
+						"defaultValue": ""
 					}
 				]
 			});
@@ -697,6 +746,10 @@
 					{
 						"name": "memberAddressDetail",
 						"dataType": "string"
+					},
+					{
+						"name": "memberImage",
+						"dataType": "string"
 					}
 				]
 			});
@@ -719,10 +772,6 @@
 				}]
 			});
 			app.register(dataMap_4);
-			
-			var dataMap_5 = new cpr.data.DataMap("dm_profile_img");
-			dataMap_5.parseData({});
-			app.register(dataMap_5);
 			var submission_1 = new cpr.protocols.Submission("sub_profile");
 			submission_1.action = "/member/profileInfo";
 			submission_1.addResponseData(dataSet_1, false);
@@ -733,6 +782,7 @@
 			
 			var submission_2 = new cpr.protocols.Submission("sub_update");
 			submission_2.action = "/member/updateMember";
+			submission_2.mediaType = "multipart/form-data";
 			submission_2.addRequestData(dataMap_2);
 			submission_2.addResponseData(dataSet_1, false);
 			if(typeof onSub_updateSubmitSuccess == "function") {
@@ -764,12 +814,18 @@
 			app.register(submission_5);
 			
 			var submission_6 = new cpr.protocols.Submission("sub_insert_image");
+			submission_6.action = "/member/insertProfileImage";
+			submission_6.mediaType = "multipart/form-data";
+			submission_6.addRequestData(dataMap_1);
 			if(typeof onSub_insert_imageSubmitSuccess == "function") {
 				submission_6.addEventListener("submit-success", onSub_insert_imageSubmitSuccess);
 			}
 			app.register(submission_6);
 			
 			var submission_7 = new cpr.protocols.Submission("sub_delete_image");
+			submission_7.action = "/member/deleteProfileImage";
+			submission_7.mediaType = "multipart/form-data";
+			submission_7.addRequestData(dataMap_1);
 			if(typeof onSub_delete_imageSubmitSuccess == "function") {
 				submission_7.addEventListener("submit-success", onSub_delete_imageSubmitSuccess);
 			}
@@ -1047,7 +1103,7 @@
 										"rowIndex": 4
 									});
 									var image_1 = new cpr.controls.Image("profileImg");
-									image_1.src = "theme/images/common/mypageIcon.png";
+									image_1.bind("src").toDataSet(app.lookup("ds_profile"), "memberImage", 0);
 									container.addChild(image_1, {
 										"colIndex": 0,
 										"rowIndex": 0
@@ -1065,34 +1121,36 @@
 									formLayout_6.setRows(["1fr"]);
 									group_9.setLayout(formLayout_6);
 									(function(container){
-										var button_4 = new cpr.controls.Button("btnInsertProfileImg");
-										button_4.value = "프로필 사진 등록/수정";
+										var button_4 = new cpr.controls.Button("btnDeleteProfileImg");
+										button_4.value = "프로필 사진 삭제";
 										button_4.style.setClasses(["btn-outline-secondary"]);
 										button_4.style.css({
 											"background-color" : "none",
-											"text-shadow" : "none",
-											"background-image" : "none"
-										});
-										if(typeof onBtnInsertProfileImgClick == "function") {
-											button_4.addEventListener("click", onBtnInsertProfileImgClick);
-										}
-										container.addChild(button_4, {
-											"colIndex": 0,
-											"rowIndex": 0
-										});
-										var button_5 = new cpr.controls.Button("btnDeleteProfileImg");
-										button_5.value = "프로필 사진 삭제";
-										button_5.style.setClasses(["btn-outline-secondary"]);
-										button_5.style.css({
-											"background-color" : "none",
+											"border-radius" : "10px",
 											"text-shadow" : "none",
 											"background-image" : "none"
 										});
 										if(typeof onBtnDeleteProfileImgClick == "function") {
-											button_5.addEventListener("click", onBtnDeleteProfileImgClick);
+											button_4.addEventListener("click", onBtnDeleteProfileImgClick);
 										}
-										container.addChild(button_5, {
+										container.addChild(button_4, {
 											"colIndex": 1,
+											"rowIndex": 0
+										});
+										var fileInput_1 = new cpr.controls.FileInput("fi1");
+										fileInput_1.placeholder = "프로필 사진 등록/변경";
+										fileInput_1.style.css({
+											"border-radius" : "10px",
+											"border-bottom-color" : "#a0a0a0",
+											"border-left-color" : "#a0a0a0",
+											"border-top-color" : "#a0a0a0",
+											"border-right-color" : "#a0a0a0"
+										});
+										if(typeof onFi1ValueChange == "function") {
+											fileInput_1.addEventListener("value-change", onFi1ValueChange);
+										}
+										container.addChild(fileInput_1, {
+											"colIndex": 0,
 											"rowIndex": 0
 										});
 									})(group_9);
@@ -1423,15 +1481,15 @@
 									formLayout_11.setRows(["35px", "35px", "35px"]);
 									group_14.setLayout(formLayout_11);
 									(function(container){
-										var button_6 = new cpr.controls.Button("btnPostcode");
-										button_6.value = "주소 검색";
-										button_6.style.css({
+										var button_5 = new cpr.controls.Button("btnPostcode");
+										button_5.value = "주소 검색";
+										button_5.style.css({
 											"font-size" : "15px"
 										});
 										if(typeof onBtnPostcodeClick == "function") {
-											button_6.addEventListener("click", onBtnPostcodeClick);
+											button_5.addEventListener("click", onBtnPostcodeClick);
 										}
-										container.addChild(button_6, {
+										container.addChild(button_5, {
 											"colIndex": 1,
 											"rowIndex": 0
 										});
