@@ -46,8 +46,8 @@
 						recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
 						recipe.title = recipeList[i].recipeBoardTitle;
 						container.addChild(recipe, {
-							height: "300px",
-							width: "300px",
+							height: "500px",
+							width: "500px",
 							autoSize: "both"
 						});
 						recipe.addEventListener("imgClick", function(e) {
@@ -101,9 +101,9 @@
 			group_1.setLayout(flowLayout_1);
 			container.addChild(group_1, {
 				"top": "120px",
-				"width": "1220px",
+				"width": "1120px",
 				"height": "328px",
-				"left": "calc(50% - 610px)"
+				"left": "calc(50% - 560px)"
 			});
 			
 			var group_2 = new cpr.controls.Container();
@@ -126,9 +126,9 @@
 			})(group_2);
 			container.addChild(group_2, {
 				"top": "53px",
-				"width": "1220px",
+				"width": "1120px",
 				"height": "47px",
-				"left": "calc(50% - 610px)"
+				"left": "calc(50% - 560px)"
 			});
 			if(typeof onBodyInit == "function"){
 				app.addEventListener("init", onBodyInit);

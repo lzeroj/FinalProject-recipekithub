@@ -33,8 +33,8 @@ function onLikeRecipeListReceive(e){
 			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
 			recipe.title = recipeList[i].recipeBoardTitle;
 			container.addChild(recipe, {
-				height: "300px",
-				width: "300px",
+				height: "500px",
+				width: "500px",
 				autoSize: "both"
 			});
 			recipe.addEventListener("imgClick", function(e) {
