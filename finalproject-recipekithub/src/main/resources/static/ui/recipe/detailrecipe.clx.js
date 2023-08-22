@@ -493,7 +493,7 @@
 					"text-align" : "center"
 				});
 				container.addChild(output_1, {
-					"top": "277px",
+					"top": "303px",
 					"width": "128px",
 					"height": "34px",
 					"left": "calc(50% - 64px)"
@@ -552,7 +552,7 @@
 				});
 				var image_4 = new cpr.controls.Image("memberProfile");
 				container.addChild(image_4, {
-					"top": "200px",
+					"top": "227px",
 					"width": "146px",
 					"height": "77px",
 					"left": "calc(50% - 73px)"

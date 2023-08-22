@@ -82,7 +82,7 @@
         <cl:xylayoutdata std:sid="xyl-data-f2fbe13b" top="42px" width="642px" height="201px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:img>
       <cl:output std:sid="output-4175a2ee" id="memberNick" style="color:#0CA44E; font-weight:lighter; font-size:18px; text-align:center;" value="닉네임">
-        <cl:xylayoutdata std:sid="xyl-data-f7c51adc" top="277px" width="128px" height="34px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-f7c51adc" top="303px" width="128px" height="34px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:output>
       <cl:output std:sid="output-10e92904" id="recipeBoardTitle" style="font-weight:bold; font-size:20px; text-align:center;" value="타이틀">
         <cl:xylayoutdata std:sid="xyl-data-75d8834d" top="277px" left="95px" width="384px" height="58px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -99,7 +99,7 @@
         <cl:xylayoutdata std:sid="xyl-data-0eac82ec" top="295px" left="939px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:img std:sid="image-6d843c03" id="memberProfile">
-        <cl:xylayoutdata std:sid="xyl-data-2f8fcd36" top="200px" width="146px" height="77px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-2f8fcd36" top="227px" width="146px" height="77px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:img>
       <cl:group std:sid="group-3511dc92" style="background-color:#FFFFFF;">
         <cl:xylayoutdata std:sid="xyl-data-16208fb1" top="0px" left="4px" width="399px" height="26px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
