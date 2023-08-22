@@ -19,10 +19,32 @@
 			 ************************************************/
 
 			/*
+			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+			 * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+			 */
+			function onBodyInit(e){
+				var param = cpr.core.Platform.INSTANCE.getParameter("searchMealkit");
+				console.log("param = " + param);
+				var dataMap = app.lookup("meSearch");
+				if(param != null && param != ""){
+					app.lookup("headerUdc").searchValue = param;
+					app.lookup("headerUdc").categoryValue = "밀키트";
+					dataMap.setValue("searchMealkit", param);
+				}
+			}
+
+			/*
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
+				app.lookup("sort").value = "전체";
+				app.lookup("ingre").value = "전체";
+				app.lookup("way").value = "전체";
+				app.lookup("category").value = "최신순";
+				
+				
+				
 				var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
 				//var mealkitMap = cpr.core.Platform.INSTANCE.getParameter("mealkitMap");
 				//console.log("mealkitMap =" + mealkitMap);
@@ -46,7 +68,7 @@
 						mealkit.hits = mealkitList[i].mealkitBoardHits;
 						mealkit.nick = mealkitList[i].memberVO.memberNick;
 						mealkit.title = mealkitList[i].mealkitName;
-						mealkit.img = mealkitList[i].mealkitImage;
+						//mealkit.img = mealkitList[i].mealkitImage;
 						//mealkit.star = mealkitMap.get[mealkitList[i].mealkitNo];
 						container.addChild(mealkit, {
 							height: "250px",
@@ -69,10 +91,24 @@
 			function onButtonClick2(e){
 				var button = e.control;
 				window.location.href='/insertMealkitForm';
+			}
+
+			/*
+			 * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
+			 * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
+			 */
+			function onPageIndexerSelectionChange(e){
+				var pageIndexer = e.control;
+				
 			};
 			// End - User Script
 			
 			// Header
+			var dataMap_1 = new cpr.data.DataMap("meSearch");
+			dataMap_1.parseData({
+				"columns" : [{"name": "searchMealkit"}]
+			});
+			app.register(dataMap_1);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -94,7 +130,7 @@
 			xYLayout_2.scrollable = false;
 			group_1.setLayout(xYLayout_2);
 			(function(container){
-				var navigationBar_1 = new cpr.controls.NavigationBar();
+				var navigationBar_1 = new cpr.controls.NavigationBar("sort");
 				navigationBar_1.style.css({
 					"font-size" : "13px"
 				});
@@ -115,17 +151,17 @@
 					navigationBar_1.addItem(new cpr.controls.MenuItem("샐러드", "샐러드", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("스프", "스프", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("빵", "빵", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("과자", "과자", null));
+					navigationBar_1.addItem(new cpr.controls.MenuItem("", "과자", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("차/음료/술", "차/음료/술", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("기타", "기타", null));
 				})(navigationBar_1);
 				container.addChild(navigationBar_1, {
 					"top": "20px",
-					"width": "1124px",
+					"width": "1094px",
 					"height": "36px",
-					"left": "calc(50% - 562px)"
+					"left": "calc(50% - 547px)"
 				});
-				var navigationBar_2 = new cpr.controls.NavigationBar();
+				var navigationBar_2 = new cpr.controls.NavigationBar("ingre");
 				(function(navigationBar_2){
 					navigationBar_2.addItem(new cpr.controls.MenuItem("재료별", "재료별", null));
 					navigationBar_2.addItem(new cpr.controls.MenuItem("전체", "전체", null));
@@ -147,11 +183,11 @@
 				})(navigationBar_2);
 				container.addChild(navigationBar_2, {
 					"top": "55px",
-					"width": "1124px",
+					"width": "1081px",
 					"height": "32px",
-					"left": "calc(50% - 562px)"
+					"left": "calc(50% - 540px)"
 				});
-				var navigationBar_3 = new cpr.controls.NavigationBar();
+				var navigationBar_3 = new cpr.controls.NavigationBar("way");
 				(function(navigationBar_3){
 					navigationBar_3.addItem(new cpr.controls.MenuItem("방법별", "방법별", null));
 					navigationBar_3.addItem(new cpr.controls.MenuItem("전체", "전체", null));
@@ -194,37 +230,15 @@
 						"width": "18px",
 						"height": "20px"
 					});
-					var button_1 = new cpr.controls.Button();
+					var button_1 = new cpr.controls.Button("newBtn");
 					button_1.value = "최신순";
 					button_1.style.css({
 						"background-color" : "#ffbb3f",
 						"background-image" : "none"
 					});
 					container.addChild(button_1, {
-						"top": "34px",
-						"left": "652px",
-						"width": "100px",
-						"height": "30px"
-					});
-					var button_2 = new cpr.controls.Button();
-					button_2.value = "별점순";
-					button_2.style.css({
-						"background-color" : "white"
-					});
-					container.addChild(button_2, {
-						"top": "35px",
-						"left": "762px",
-						"width": "100px",
-						"height": "30px"
-					});
-					var button_3 = new cpr.controls.Button();
-					button_3.value = "조회수순";
-					button_3.style.css({
-						"background-color" : "white"
-					});
-					container.addChild(button_3, {
-						"top": "35px",
-						"left": "872px",
+						"top": "25px",
+						"left": "543px",
 						"width": "100px",
 						"height": "30px"
 					});
@@ -253,6 +267,18 @@
 						"width": "49px",
 						"height": "39px"
 					});
+					var navigationBar_4 = new cpr.controls.NavigationBar("category");
+					(function(navigationBar_4){
+						navigationBar_4.addItem(new cpr.controls.MenuItem("최신순", "최신순", null));
+						navigationBar_4.addItem(new cpr.controls.MenuItem("별점순", "별점순", null));
+						navigationBar_4.addItem(new cpr.controls.MenuItem("조회수순", "조회수순", null));
+					})(navigationBar_4);
+					container.addChild(navigationBar_4, {
+						"top": "20px",
+						"left": "769px",
+						"width": "202px",
+						"height": "40px"
+					});
 				})(group_2);
 				container.addChild(group_2, {
 					"top": "176px",
@@ -270,7 +296,7 @@
 				container.addChild(group_3, {
 					"top": "136px",
 					"width": "974px",
-					"height": "31px",
+					"height": "15px",
 					"left": "calc(50% - 487px)"
 				});
 				var group_4 = new cpr.controls.Container();
@@ -283,45 +309,14 @@
 				container.addChild(group_4, {
 					"top": "256px",
 					"width": "974px",
-					"height": "33px",
+					"height": "15px",
 					"left": "calc(50% - 487px)"
 				});
-				var button_4 = new cpr.controls.Button();
-				button_4.value = "Button";
-				container.addChild(button_4, {
-					"top": "1168px",
-					"left": "452px",
-					"width": "100px",
-					"height": "20px"
-				});
-				var group_5 = new cpr.controls.Container("grp");
-				var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
-				flowLayout_1.scrollable = false;
-				group_5.setLayout(flowLayout_1);
-				container.addChild(group_5, {
-					"top": "343px",
-					"width": "968px",
-					"height": "783px",
-					"left": "calc(50% - 484px)"
-				});
-				var group_6 = new cpr.controls.Container();
-				group_6.style.css({
-					"background-color" : "#f9f9f9",
-					"background-image" : "none"
-				});
-				var xYLayout_6 = new cpr.controls.layouts.XYLayout();
-				group_6.setLayout(xYLayout_6);
-				container.addChild(group_6, {
-					"top": "1136px",
-					"width": "974px",
-					"height": "22px",
-					"left": "calc(50% - 487px)"
-				});
-				var button_5 = new cpr.controls.Button("insertBtn");
-				button_5.visible = false;
-				button_5.value = "밀키트 등록";
-				button_5.style.setClasses([".cl-button", "mealkitbtn"]);
-				button_5.style.css({
+				var button_2 = new cpr.controls.Button("insertBtn");
+				button_2.visible = false;
+				button_2.value = "밀키트 등록";
+				button_2.style.setClasses([".cl-button", "mealkitbtn"]);
+				button_2.style.css({
 					"background-color" : "#0ca44e",
 					"color" : "white",
 					"font-weight" : "16",
@@ -329,23 +324,132 @@
 					"background-image" : "none"
 				});
 				if(typeof onButtonClick2 == "function") {
-					button_5.addEventListener("click", onButtonClick2);
+					button_2.addEventListener("click", onButtonClick2);
 				}
-				container.addChild(button_5, {
+				container.addChild(button_2, {
 					"top": "299px",
-					"right": "20px",
+					"right": "73px",
 					"width": "104px",
 					"height": "34px"
 				});
+				var group_5 = new cpr.controls.Container("grp");
+				var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
+				flowLayout_1.scrollable = false;
+				group_5.setLayout(flowLayout_1);
+				container.addChild(group_5, {
+					"top": "355px",
+					"width": "968px",
+					"height": "1045px",
+					"left": "calc(50% - 484px)"
+				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "20px",
-				"bottom": "-557px",
-				"width": "1004px",
-				"left": "calc(50% - 502px)"
+				"top": "244px",
+				"bottom": "-993px",
+				"width": "1114px",
+				"left": "calc(50% - 557px)"
+			});
+			
+			var userDefinedControl_1 = new udc.header3("headerUdc");
+			container.addChild(userDefinedControl_1, {
+				"top": "-1px",
+				"right": "0px",
+				"left": "0px",
+				"height": "200px"
+			});
+			
+			var group_6 = new cpr.controls.Container();
+			group_6.style.css({
+				"background-color" : "#6A8B41"
+			});
+			var formLayout_1 = new cpr.controls.layouts.FormLayout();
+			formLayout_1.scrollable = false;
+			formLayout_1.topMargin = "0px";
+			formLayout_1.rightMargin = "50px";
+			formLayout_1.bottomMargin = "0px";
+			formLayout_1.leftMargin = "50px";
+			formLayout_1.horizontalSpacing = "50px";
+			formLayout_1.verticalSpacing = "30px";
+			formLayout_1.setColumns(["400px", "1fr", "400px"]);
+			formLayout_1.setRows(["1fr"]);
+			group_6.setLayout(formLayout_1);
+			(function(container){
+				var image_1 = new cpr.controls.Image();
+				image_1.src = "theme/images/common/footerLogo3.png";
+				container.addChild(image_1, {
+					"colIndex": 0,
+					"rowIndex": 0
+				});
+				var group_7 = new cpr.controls.Container();
+				var formLayout_2 = new cpr.controls.layouts.FormLayout();
+				formLayout_2.scrollable = false;
+				formLayout_2.topMargin = "5px";
+				formLayout_2.rightMargin = "0px";
+				formLayout_2.bottomMargin = "0px";
+				formLayout_2.leftMargin = "0px";
+				formLayout_2.horizontalSpacing = "10px";
+				formLayout_2.verticalSpacing = "5px";
+				formLayout_2.setColumns(["330px"]);
+				formLayout_2.setRows(["30px", "1fr"]);
+				group_7.setLayout(formLayout_2);
+				(function(container){
+					var output_4 = new cpr.controls.Output();
+					output_4.value = "Team HI-FIVE";
+					output_4.style.css({
+						"border-right-style" : "none",
+						"color" : "#F4FAEC",
+						"border-bottom-color" : "#ffffff",
+						"font-weight" : "bolder",
+						"border-left-style" : "none",
+						"font-size" : "20px",
+						"border-bottom-style" : "solid",
+						"border-top-style" : "none"
+					});
+					container.addChild(output_4, {
+						"colIndex": 0,
+						"rowIndex": 0
+					});
+					var output_5 = new cpr.controls.Output();
+					output_5.value = "금동준\t 심현준\t 엄용식\t  임영준";
+					output_5.style.css({
+						"color" : "#F4FAEC",
+						"font-weight" : "bolder"
+					});
+					container.addChild(output_5, {
+						"colIndex": 0,
+						"rowIndex": 1,
+						"colSpan": 1,
+						"rowSpan": 1
+					});
+				})(group_7);
+				container.addChild(group_7, {
+					"colIndex": 2,
+					"rowIndex": 0
+				});
+			})(group_6);
+			container.addChild(group_6, {
+				"right": "1px",
+				"bottom": "-1100px",
+				"left": "0px",
+				"height": "70px"
+			});
+			
+			var pageIndexer_1 = new cpr.controls.PageIndexer();
+			pageIndexer_1.init(1, 1, 1);
+			if(typeof onPageIndexerSelectionChange == "function") {
+				pageIndexer_1.addEventListener("selection-change", onPageIndexerSelectionChange);
+			}
+			container.addChild(pageIndexer_1, {
+				"top": "1694px",
+				"width": "321px",
+				"height": "40px",
+				"left": "calc(50% - 160px)"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
+			}
+			if(typeof onBodyInit == "function"){
+				app.addEventListener("init", onBodyInit);
 			}
 		}
 	});

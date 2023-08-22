@@ -53,6 +53,8 @@ public class MealkitController {
 		}else {
 			email = "guest";
 		}
+		String search = dataRequst.getParameter("search");
+		log.info("search = " + search);
 		List<MealKitBoard> list = mealKitService.findMealKitList();
 		
 //		Map<Integer, Double> map = new HashMap<>();
@@ -65,6 +67,7 @@ public class MealkitController {
 		Map<String, Object> initParam = new HashMap<String, Object>();
 		initParam.put("mealkitList", list);
 		initParam.put("member", email);
+		initParam.put("searchMealkit", search);
 		//initParam.put("mealkitMap", map);
 		return new UIView("ui/mealkit/mealkitList.clx", initParam);
 		
@@ -178,10 +181,15 @@ public class MealkitController {
 		mealkit.setMealkitCategory(mealkitCategory);
 		mealkit.setMealkitImage(uuid+"_"+saveName);
 		
-		//HttpSession session = request.getSession(false);
-		//MemberVO member = (MemberVO)session.getAttribute("mvo");
-		MemberVO member = new MemberVO("hellojava@naver.com", "123", "재헌강", "유스타스캡틴재헌", "12345", "성남", "오리", "01012345678", "1998-01-01", "1", "Y", null, null);
-
+		HttpSession session = request.getSession(false);
+		MemberVO member = null;
+		if(session != null && session.getAttribute("member") != null) {
+			member = (MemberVO)session.getAttribute("mvo");
+		}else {
+			member = new MemberVO();
+			member.setMemberNick("guest");
+		}
+		
 		mealkit.setMemberVO(member);
 		System.out.println("Service mealkit = " + mealkit);
 		

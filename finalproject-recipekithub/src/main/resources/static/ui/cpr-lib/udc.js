@@ -871,6 +871,9 @@
 						window.location.href="/recipeBoardList?search="+ searchInput.value;
 						}	
 					}
+					if(comboBox.value =="밀키트"){
+						window.location.href="/mealkitList?search="+searchInput.value;
+					}
 				}
 	
 				/*
@@ -1888,7 +1891,7 @@
 					"top": "88px",
 					"left": "8px",
 					"width": "351px",
-					"height": "5px"
+					"height": "2px"
 				});
 				
 				var image_1 = new cpr.controls.Image();
@@ -2134,6 +2137,19 @@
 					"left": "29px",
 					"width": "21px",
 					"height": "20px"
+				});
+				
+				var group_1 = new cpr.controls.Container();
+				group_1.style.css({
+					"background-color" : "#f9f9f9"
+				});
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_1.setLayout(xYLayout_2);
+				container.addChild(group_1, {
+					"top": "241px",
+					"left": "0px",
+					"width": "230px",
+					"height": "5px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);

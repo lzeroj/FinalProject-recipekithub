@@ -34,7 +34,7 @@
       <cl:xylayoutdata std:sid="xyl-data-368f5382" top="39px" left="8px" width="926px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:group std:sid="group-0bcdaeea" style="background-color:#f9f9f9;">
-      <cl:xylayoutdata std:sid="xyl-data-7be460cc" top="88px" left="8px" width="351px" height="5px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-7be460cc" top="88px" left="8px" width="351px" height="2px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       <cl:xylayout std:sid="xylayout-bb04f25f"/>
     </cl:group>
     <cl:img std:sid="image-16e903ef" style="font-size:12px;" src="../theme/images/mealkit/free-icon-star-6063500.png">

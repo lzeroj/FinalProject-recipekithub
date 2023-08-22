@@ -244,6 +244,9 @@ function onSearchInputSearch(e){
 		window.location.href="/recipeBoardList?search="+ searchInput.value;
 		}	
 	}
+	if(comboBox.value =="밀키트"){
+		window.location.href="/mealkitList?search="+searchInput.value;
+	}
 }
 
 /*
