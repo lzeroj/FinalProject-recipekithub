@@ -250,7 +250,7 @@ public class MemberController {
 					orgName = uploadFile[0].getFile();
 					saveName = uploadFile[0].getFileName();
 					System.out.println(saveName);
-					uuid = UUID.randomUUID().toString();
+					//uuid = UUID.randomUUID().toString();
 					FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
 					member.setMemberImage(uuid + "_" + saveName);
 				}
