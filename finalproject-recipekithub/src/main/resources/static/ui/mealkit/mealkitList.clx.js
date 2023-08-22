@@ -43,7 +43,7 @@
 						var mealkit = new udc.mealkitList();
 						mealkit.img = "/upload/mealkit/" + mealkitList[i].mealkitImage;
 						console.log(mealkitList.img);
-						mealkit.hits = mealkitList[i].mealkitHits;
+						mealkit.hits = mealkitList[i].mealkitBoardHits;
 						mealkit.nick = mealkitList[i].memberVO.memberNick;
 						mealkit.title = mealkitList[i].mealkitName;
 						mealkit.img = mealkitList[i].mealkitImage;

@@ -23,7 +23,7 @@ function onBodyLoad(e){
 	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 	var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
 	var avg = cpr.core.Platform.INSTANCE.getParameter("avg");
-	
+	console.log("mealkitHits = " + mealkitHits);
 	var starAvg = app.lookup("starScore");
 	starAvg.value = avg;
 	
@@ -31,10 +31,12 @@ function onBodyLoad(e){
 	commentList.setValue("mealkitNo", (mealkitNo).toString());//string으로 변환
 	app.lookup("commentListSub").send();
 	
+	var hitsBox = app.lookup("hits");
+	hitsBox.value = mealkitHits;
 
 	console.log("mealkitMember, sessionMember = " + mealkitMember + ", " +sessionMember);
 	
-	if(sessionMember != null && sessionMember != ""){
+	if(sessionMember != "guest"){
 		var commentBox = app.lookup("writeComment");
 		commentBox.visible = true;
 	}
@@ -88,6 +90,7 @@ function onBodyLoad(e){
 	app.lookup("mealkitImg").src = "/upload/mealkit/"+mealkitImg;
 	var hTMLSnippet = app.lookup("info");
 	hTMLSnippet.value = mealkitInfo;	
+	
 	
 	hTMLSnippet.redraw();
 	reg.redraw();

@@ -55,6 +55,11 @@ public class MealkitServiceImpl implements MealkitService {
 		mealKitMapper.deleteMealkit(mealkitNo);
 		
 	}
+	
+	@Override
+	public void increaseHits(int mealkitNo) {
+		mealKitMapper.increaseMealkitHits(mealkitNo);
+	}
 
 
 }

@@ -91,23 +91,29 @@
 				var dataMap = app.lookup("updateMealkit");	
 			  	vsOpt.value = $('#summernote').summernote('code');
 			   	var message = vsOpt.value;
-			   	 var submission = app.lookup("updateMealkitSub");
+			   	var submission = app.lookup("updateMealkitSub");
 			   	
 			   	var name = app.lookup("ipb1");
 			   	var ingredients = app.lookup("ipb2");
 			   	var price = app.lookup("ipb3");
 			   	var inven = app.lookup("ipb4");
+			   	var updatedIngredients= ingredients.value;
+			   	var updatedName = name.value;
+			   	var updatedPrice = price.value;
+			   	var updatedInven = inven.value;
+			   	console.log("updatedPrice, updatedInven = " + updatedPrice + ", "+ updatedInven);
+			   	console.log("price = "+ price.value +", " + typeof Number(price.value));
 			   	
 			   	var combo1 = app.lookup("cmb1").text;
 			   	var combo2 = app.lookup("cmb2").text;
 			   	var combo3 = app.lookup("cmb3").text;
 			   	var category = combo1+"/"+combo2+"/"+combo3;
 			   	
-				dataMap.setValue("mealkitName", name);
+				dataMap.setValue("mealkitName", updatedName);
 				dataMap.setValue("mealkitInfo", message);
-				dataMap.setValue("mealkitIngredients", ingredients);
-				dataMap.setValue("mealkitPrice", price);
-				dataMap.setValue("mealkitInventory", inven);
+				dataMap.setValue("mealkitIngredients", updatedIngredients);
+				dataMap.setValue("mealkitPrice", updatedPrice);
+				dataMap.setValue("mealkitInventory", updatedInven);
 				dataMap.setValue("mealkitCategory", category);
 				var fileInput = app.lookup("file2");
 				var file = fileInput.file;
@@ -138,24 +144,20 @@
 			 			price.focus();
 			 			return;
 			 		
-			 		}else if(Number(price.value) <= 0 || isNaN(price.value)){
-			 			alert("밀키트 가격은 숫자만 입력이 가능합니다. 다시 확인해주세요.");
-			 			price.value = "";
-			 			price.focus();
-			 			return;
+			 		
 			 		}else if(inven.value == null || inven.value == ""){
 			 			alert("밀키트 수량을 입력해주세요.");
 			 			inven.focus();
 			 			return;
 			 		
-			 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
-			 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
-			 			inven.value = "";
-			 			inven.focus();
-			 			return;
+			// 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
+			// 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
+			// 			inven.value = "";
+			// 			inven.focus();
+			// 			return;
 			 		}else{
 			 			submission.addFileParameter("image", file);
-						submission = app.lookup("updateMealkitSub").send();
+						app.lookup("updateMealkitSub").send();
 			 		}
 			 	}
 				
