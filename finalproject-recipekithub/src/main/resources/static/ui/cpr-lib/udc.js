@@ -1070,12 +1070,12 @@
 				 */
 				function onHeaderLogoClick(e){
 					var headerLogo = e.control;
-					if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
-						if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
-							window.location.href="/";
+					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+							window.location.href = "/";
 						}
-					}else{
-					window.location.href="/";
+					} else {
+						window.location.href = "/";
 					}
 				}
 	
@@ -1085,31 +1085,31 @@
 				 */
 				function onButtonClick(e){
 					var button = e.control;
-					if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
-						if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
-							window.location.href="/findMyCartForm";
+					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+							window.location.href = "/findMyCartForm";
 						}
-					}else{
-				//	window.location.href="/findMyCartForm";
-					
-					/** @type cpr.controls.EmbeddedApp */ 
-					var embeapp = app.getAppProperty("embe");
-					cpr.core.App.load("cart/cartForm", function(/*cpr.core.App*/ loadedApp){
-					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-						if(embeapp.getEmbeddedAppInstance()){
-							embeapp.getEmbeddedAppInstance().dispose();
-						}
-						/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
-						if(loadedApp){						
-							/*초기값을 전달합니다.*/			
-							embeapp.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
-				//					embApp.initValue = voInitValue;
-							})
-							/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
-							embeapp.app = loadedApp;
-						}
-					}); 
-					embeapp.redraw();
+					} else {
+						//	window.location.href="/findMyCartForm";
+						
+						/** @type cpr.controls.EmbeddedApp */
+						var embeapp = app.getAppProperty("embe");
+						cpr.core.App.load("cart/cartForm", function( /*cpr.core.App*/ loadedApp) {
+							/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+							if (embeapp.getEmbeddedAppInstance()) {
+								embeapp.getEmbeddedAppInstance().dispose();
+							}
+							/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+							if (loadedApp) {
+								/*초기값을 전달합니다.*/
+								embeapp.ready(function( /*cpr.controls.EmbeddedApp*/ embApp) {
+									//					embApp.initValue = voInitValue;
+								})
+								/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+								embeapp.app = loadedApp;
+							}
+						});
+						embeapp.redraw();
 					}
 				}
 	
@@ -1125,12 +1125,12 @@
 						return;
 					}
 					
-					if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
-						if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
-							window.location.href="/findMyPageForm";
+					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+							window.location.href = "/findMyPageForm";
 						}
-					}else{
-					window.location.href="/findMyPageForm";
+					} else {
+						window.location.href = "/findMyPageForm";
 					}
 				}
 	
@@ -1138,49 +1138,49 @@
 				 * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
 				 * 아이템 클릭시 발생하는 이벤트.
 				 */
-				function onNavigationBarItemClick(e){
+				function onNavigationBarItemClick(e) {
 					var navigationBar = e.control;
-					if(navigationBar.value == 'question'){
+					if (navigationBar.value == 'question') {
 						console.log(1);
 					}
 					
-					if(navigationBar.value == 'mealkit'){
-						if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
-							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
-								window.location.href="/mealkitList";
+					if (navigationBar.value == 'mealkit') {
+						if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+							if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+								window.location.href = "/mealkitList";
 							}
-						}else{
-						window.location.href="/mealkitList";
+						} else {
+							window.location.href = "/mealkitList";
 						}
 					}
-						
-					if(navigationBar.value == 'questionAdmin'){
-						/** @type cpr.controls.EmbeddedApp */ 
+					
+					if (navigationBar.value == 'questionAdmin') {
+						/** @type cpr.controls.EmbeddedApp */
 						var embeapp = app.getAppProperty("embe");
-						cpr.core.App.load("embedded/admin/findQnAAdminForm", function(/*cpr.core.App*/ loadedApp){
-						/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-							if(embeapp.getEmbeddedAppInstance()){
+						cpr.core.App.load("embedded/admin/findQnAAdminForm", function( /*cpr.core.App*/ loadedApp) {
+							/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+							if (embeapp.getEmbeddedAppInstance()) {
 								embeapp.getEmbeddedAppInstance().dispose();
 							}
 							/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
-							if(loadedApp){						
-								/*초기값을 전달합니다.*/			
-								embeapp.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
-				//					embApp.initValue = voInitValue;
+							if (loadedApp) {
+								/*초기값을 전달합니다.*/
+								embeapp.ready(function( /*cpr.controls.EmbeddedApp*/ embApp) {
+									//					embApp.initValue = voInitValue;
 								})
 								/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
 								embeapp.app = loadedApp;
 							}
-						}); 
+						});
 						embeapp.redraw();
 					}
 					
-					if(navigationBar.value == 'reportAdmin'){
-						/** @type cpr.controls.EmbeddedApp */ 
+					if (navigationBar.value == 'reportAdmin') {
+						/** @type cpr.controls.EmbeddedApp */
 						var embeapp = app.getAppProperty("embe");
-						cpr.core.App.load("embedded/admin/findReportAdminForm", function(/*cpr.core.App*/ loadedApp){
-						/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-							if(embeapp.getEmbeddedAppInstance()){
+						cpr.core.App.load("embedded/admin/findReportAdminForm", function( /*cpr.core.App*/ loadedApp) {
+							/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+							if (embeapp.getEmbeddedAppInstance()) {
 								embeapp.getEmbeddedAppInstance().dispose();
 							}
 							/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
@@ -1192,7 +1192,7 @@
 								/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
 								embeapp.app = loadedApp;
 							}
-						}); 
+						});
 						embeapp.redraw();
 					}
 					
@@ -1218,7 +1218,16 @@
 						embeapp.redraw();
 					}
 					
-					if(navigationBar.value == 'chef'){
+					if (navigationBar.value == 'recommend') {
+						if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+							if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+								window.location.href = "/";
+							}
+						} else {
+							window.location.href = "/";
+						}
+					}
+						if(navigationBar.value == 'chef'){
 						/** @type cpr.controls.EmbeddedApp */ 
 						var embeapp = app.getAppProperty("embe");
 						cpr.core.App.load("embedded/findChefList", function(/*cpr.core.App*/ loadedApp){
@@ -1238,16 +1247,14 @@
 						}); 
 						embeapp.redraw();
 					}
-					
-					
-					if(navigationBar.value == 'recipe'){
-						if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
-							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
-								window.location.href="/recipeBoardList";
+					if (navigationBar.value == 'recipe') {
+						if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+							if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+								window.location.href = "/recipeBoardList";
 							}
-						}else{
-						window.location.href="/recipeBoardList";
-						}		
+						} else {
+							window.location.href = "/recipeBoardList";
+						}
 					}
 				}
 	
@@ -1255,26 +1262,32 @@
 				 * 버튼(btnWrite)에서 click 이벤트 발생 시 호출.
 				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 				 */
-				function onBtnWriteClick(e){
+				function onBtnWriteClick(e) {
 					var btnWrite = e.control;
-						if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
-							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
-								var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
-								_httpPostMethod.submit();
-							}
-						}else{
-								var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
-								_httpPostMethod.submit();
-						}	
+					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+							var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
+							_httpPostMethod.submit();
+						}
+					} else {
+						var sessionval = getTimedSessionData("memsession");
+						if (sessionval == null) {
+							alert("로그인이 필요합니다. \n로그인 페이지로 이동합니다.");
+							window.location.href = "/memberUI/loginForm";
+						} else {
+							var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
+							_httpPostMethod.submit();
+						}
+					}
 				}
 	
 				/*
 				 * 버튼(btnLoginoff)에서 click 이벤트 발생 시 호출.
 				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 				 */
-				function onBtnLoginoffClick(e){
+				function onBtnLoginoffClick(e) {
 					var btnLoginoff = e.control;
-					window.location.href="/memberUI/loginForm";
+					window.location.href = "/memberUI/loginForm";
 					var event = new cpr.events.CAppEvent("clickEvent");
 					app.dispatchEvent(event);
 				}
@@ -1283,25 +1296,26 @@
 				 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 				 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 				 */
-				function onBodyLoad(e){
+				function onBodyLoad(e) {
 					var sessionval = getTimedSessionData("memsession");
-					console.log("세션에 담긴값 : "+sessionval);
+					console.log("세션에 담긴값 : " + sessionval);
 					var navigationBar = app.lookup("nav1");
-					if(navigationBar.isSelectedByValue("admin") 
-					|| navigationBar.isSelectedByValue("questionAdmin") 
-					|| navigationBar.isSelectedByValue("reportAdmin")){
+					if (navigationBar.isSelectedByValue("admin") ||
+						navigationBar.isSelectedByValue("questionAdmin") ||
+						navigationBar.isSelectedByValue("reportAdmin")) {
 						return;
 					}
 					
-					if(sessionval == "shj"){
+					if (sessionval == "shj") {
 						navigationBar.addItem(new cpr.controls.TreeItem("관리자", "admin", "root"));
 						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("매출관리", "salesAdmin", "admin"));
 					}
-	
+					app.lookup("category").value = app.getAppProperty("categoryValue");
+					app.lookup("searchInput").value = app.getAppProperty("searchValue");
 					var opbLoginStatus = app.lookup("opbLoginStatus");
-					if(sessionval != null) {
+					if (sessionval != null) {
 						opbLoginStatus.text = "[ " + sessionval + " ] \n님이 로그인 상태입니다.";
 					} else {
 						opbLoginStatus.text = "현재 비로그인 상태입니다."
@@ -1313,7 +1327,7 @@
 				 * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
 				 */
 	
-				function onSearchInputSearch(e){
+				function onSearchInputSearch(e) {
 					var searchInput = e.control;
 					var comboBox = app.lookup("category");
 					if(comboBox.value =="" || comboBox.value ==null){
@@ -1325,9 +1339,12 @@
 							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
 								window.location.href="/recipeBoardList?search="+ searchInput.value;
 							}
-						}else{
-						window.location.href="/recipeBoardList?search="+ searchInput.value;
-						}	
+						} else {
+							window.location.href = "/recipeBoardList?search=" + searchInput.value;
+						}
+					}
+					if(comboBox.value =="밀키트"){
+						window.location.href="/mealkitList?search="+searchInput.value;
 					}
 				}
 	
@@ -1379,10 +1396,10 @@
 						});
 				        //window.location.href = "/member/logout";
 				        */
-				    	
-				    // 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
-				    } else if (cmb1.value == "profile") { 
-					    var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+						
+						// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+					} else if (cmb1.value == "profile") {
+						var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
 						httpPostMethod.submit();
 				    }
 				};
@@ -1728,7 +1745,7 @@
 						"text-align" : "center"
 					});
 					(function(navigationBar_1){
-						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "value1", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "recommend", null));
 						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "recipe", null));
 						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "mealkit", null));
 						navigationBar_1.addItem(new cpr.controls.MenuItem("셰프", "chef", null));
@@ -2593,6 +2610,19 @@
 					"width": "21px",
 					"height": "20px"
 				});
+				
+				var group_1 = new cpr.controls.Container();
+				group_1.style.css({
+					"background-color" : "#f9f9f9"
+				});
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_1.setLayout(xYLayout_2);
+				container.addChild(group_1, {
+					"top": "241px",
+					"left": "0px",
+					"width": "230px",
+					"height": "5px"
+				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);
 				}
@@ -2661,7 +2691,6 @@
 })();
 /// end - udc.mealkitList
 /// start - udc.recipeCommentudc
-
 /*
  * UDC Qualified Name: udc.recipeCommentudc
  * App URI: udc/recipeCommentudc
@@ -2701,6 +2730,7 @@
 					app.lookup("regDate").text = app.getAppProperty("regDate");
 					app.lookup("content").text = app.getAppProperty("content");
 					app.lookup("deleteBtn").visible = app.getAppProperty("deleteBtn");
+					app.lookup("profile").src = app.getAppProperty("profile");
 				}
 	
 	
@@ -2720,6 +2750,7 @@
 				app.declareAppProperty("regDate", null);
 				app.declareAppProperty("content", null);
 				app.declareAppProperty("deleteBtn", null);
+				app.declareAppProperty("profile", null);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 				app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -2745,7 +2776,7 @@
 				});
 				container.addChild(output_1, {
 					"top": "3px",
-					"left": "3px",
+					"left": "40px",
 					"width": "80px",
 					"height": "31px"
 				});
@@ -2755,8 +2786,8 @@
 				container.addChild(output_2, {
 					"top": "33px",
 					"left": "3px",
-					"width": "285px",
-					"height": "66px"
+					"width": "296px",
+					"height": "35px"
 				});
 				
 				var output_3 = new cpr.controls.Output("regDate");
@@ -2766,21 +2797,38 @@
 				});
 				container.addChild(output_3, {
 					"top": "9px",
-					"left": "82px",
-					"width": "132px",
+					"left": "119px",
+					"width": "143px",
 					"height": "20px"
 				});
 				
 				var button_1 = new cpr.controls.Button("deleteBtn");
 				button_1.value = "삭제";
+				button_1.style.css({
+					"border-right-style" : "none",
+					"background-color" : "transparent",
+					"color" : "#CBCBCB",
+					"border-left-style" : "none",
+					"border-bottom-style" : "none",
+					"background-image" : "none",
+					"border-top-style" : "none"
+				});
 				if(typeof onButtonClick2 == "function") {
 					button_1.addEventListener("click", onButtonClick2);
 				}
 				container.addChild(button_1, {
 					"top": "9px",
-					"left": "213px",
+					"left": "261px",
 					"width": "38px",
 					"height": "20px"
+				});
+				
+				var image_1 = new cpr.controls.Image("profile");
+				container.addChild(image_1, {
+					"top": "3px",
+					"left": "3px",
+					"width": "38px",
+					"height": "31px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);
@@ -2834,6 +2882,14 @@
 		},
 		set: function(newValue){
 			return this.getEmbeddedAppInstance().setAppProperty("deleteBtn", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.recipeCommentudc.prototype, "profile", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("profile");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("profile", newValue, true);
 		}
 	});
 	
@@ -2929,6 +2985,10 @@
 				
 				var output_1 = new cpr.controls.Output("title");
 				output_1.value = "Output";
+				output_1.style.css({
+					"font-weight" : "bold",
+					"font-size" : "30px"
+				});
 				container.addChild(output_1, {
 					"top": "250px",
 					"left": "0px",
@@ -2979,7 +3039,6 @@
 })();
 /// end - udc.recipeLikeudc
 /// start - udc.recipeListudc
-
 /*
  * UDC Qualified Name: udc.recipeListudc
  * App URI: udc/recipeListudc
@@ -3020,6 +3079,7 @@
 					app.lookup("nick").text = app.getAppProperty("nick");
 					app.lookup("like").text = app.getAppProperty("like");
 					app.lookup("hits").text = app.getAppProperty("hits");
+					app.lookup("profile").src = app.getAppProperty("profile");
 				}
 	
 				/*
@@ -3039,6 +3099,7 @@
 				app.declareAppProperty("nick", null);
 				app.declareAppProperty("like", null);
 				app.declareAppProperty("hits", null);
+				app.declareAppProperty("profile", null);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 				app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -3057,87 +3118,102 @@
 				container.setLayout(xYLayout_1);
 				
 				// UI Configuration
-				var image_1 = new cpr.controls.Image("img");
-				image_1.style.css({
-					"cursor" : "pointer"
+				var group_1 = new cpr.controls.Container();
+				group_1.style.css({
+					"background-color" : "#FFFFFF"
 				});
-				if(typeof onImgItemClick2 == "function") {
-					image_1.addEventListener("item-click", onImgItemClick2);
-				}
-				if(typeof onImgClick == "function") {
-					image_1.addEventListener("click", onImgClick);
-				}
-				container.addChild(image_1, {
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_1.setLayout(xYLayout_2);
+				(function(container){
+					var image_1 = new cpr.controls.Image("img");
+					image_1.style.css({
+						"cursor" : "pointer"
+					});
+					if(typeof onImgItemClick2 == "function") {
+						image_1.addEventListener("item-click", onImgItemClick2);
+					}
+					if(typeof onImgClick == "function") {
+						image_1.addEventListener("click", onImgClick);
+					}
+					container.addChild(image_1, {
+						"top": "2px",
+						"left": "0px",
+						"width": "294px",
+						"height": "140px"
+					});
+					var output_1 = new cpr.controls.Output("title");
+					output_1.value = "Output";
+					output_1.style.css({
+						"font-weight" : "bold"
+					});
+					container.addChild(output_1, {
+						"top": "141px",
+						"left": "0px",
+						"width": "294px",
+						"height": "41px"
+					});
+					var output_2 = new cpr.controls.Output("nick");
+					output_2.value = "Output";
+					output_2.style.css({
+						"color" : "#0CA44E"
+					});
+					container.addChild(output_2, {
+						"top": "181px",
+						"left": "44px",
+						"width": "116px",
+						"height": "27px"
+					});
+					var output_3 = new cpr.controls.Output("like");
+					output_3.value = "Output";
+					output_3.style.css({
+						"color" : "#0CA44E"
+					});
+					container.addChild(output_3, {
+						"top": "211px",
+						"left": "28px",
+						"width": "39px",
+						"height": "27px"
+					});
+					var output_4 = new cpr.controls.Output();
+					output_4.value = "조회수";
+					container.addChild(output_4, {
+						"top": "211px",
+						"left": "66px",
+						"width": "50px",
+						"height": "27px"
+					});
+					var output_5 = new cpr.controls.Output("hits");
+					output_5.value = "Output";
+					output_5.style.css({
+						"color" : "#0CA44E"
+					});
+					container.addChild(output_5, {
+						"top": "211px",
+						"left": "115px",
+						"width": "50px",
+						"height": "27px"
+					});
+					var image_2 = new cpr.controls.Image();
+					image_2.src = "theme/images/recipe/heartcolor.png";
+					container.addChild(image_2, {
+						"top": "212px",
+						"left": "0px",
+						"width": "29px",
+						"height": "25px"
+					});
+					var image_3 = new cpr.controls.Image("profile");
+					container.addChild(image_3, {
+						"top": "181px",
+						"left": "0px",
+						"width": "37px",
+						"height": "32px"
+					});
+				})(group_1);
+				container.addChild(group_1, {
 					"top": "0px",
 					"left": "0px",
-					"width": "230px",
-					"height": "150px"
-				});
-				
-				var output_1 = new cpr.controls.Output("title");
-				output_1.value = "Output";
-				output_1.style.css({
-					"font-weight" : "bold"
-				});
-				container.addChild(output_1, {
-					"top": "150px",
-					"left": "0px",
-					"width": "230px",
-					"height": "30px"
-				});
-				
-				var output_2 = new cpr.controls.Output("nick");
-				output_2.value = "Output";
-				output_2.style.css({
-					"color" : "#0CA44E"
-				});
-				container.addChild(output_2, {
-					"top": "179px",
-					"left": "0px",
-					"width": "116px",
-					"height": "27px"
-				});
-				
-				var output_3 = new cpr.controls.Output();
-				output_3.value = "좋아요";
-				container.addChild(output_3, {
-					"top": "205px",
-					"left": "0px",
-					"width": "50px",
-					"height": "27px"
-				});
-				
-				var output_4 = new cpr.controls.Output("like");
-				output_4.value = "Output";
-				output_4.style.css({
-					"color" : "#0CA44E"
-				});
-				container.addChild(output_4, {
-					"top": "205px",
-					"left": "49px",
-					"width": "50px",
-					"height": "27px"
-				});
-				
-				var output_5 = new cpr.controls.Output();
-				output_5.value = "조회수";
-				container.addChild(output_5, {
-					"top": "205px",
-					"left": "100px",
-					"width": "50px",
-					"height": "27px"
-				});
-				
-				var output_6 = new cpr.controls.Output("hits");
-				output_6.value = "Output";
-				output_6.style.css({
-					"color" : "#0CA44E"
-				});
-				container.addChild(output_6, {
-					"top": "205px",
-					"left": "149px",
-					"width": "50px",
-					"height": "27px"
+					"width": "295px",
+					"height": "240px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);
@@ -3199,6 +3275,14 @@
 		},
 		set: function(newValue){
 			return this.getEmbeddedAppInstance().setAppProperty("hits", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.recipeListudc.prototype, "profile", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("profile");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("profile", newValue, true);
 		}
 	});
 	
