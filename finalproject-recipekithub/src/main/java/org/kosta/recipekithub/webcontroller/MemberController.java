@@ -215,10 +215,6 @@ public class MemberController {
 					orgName = uploadFile[0].getFile();
 					saveName = uploadFile[0].getFileName();
 					System.out.println(saveName);
-<<<<<<< HEAD
-=======
-					//uuid = UUID.randomUUID().toString();
->>>>>>> branch 'develop-branch' of https://github.com/lzeroj/FinalProject-recipekithub.git
 					FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
 					member.setMemberImage(uuid + "_" + saveName);
 				}
