@@ -212,6 +212,11 @@
 								"configurator": function(cell){
 									cell.filterable = false;
 									cell.sortable = false;
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -221,6 +226,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "recipeBoardId";
 									cell.text = "레시피 번호";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -230,6 +240,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "reportTitle";
 									cell.text = "신고 제목";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -239,6 +254,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "memberEmail";
 									cell.text = "작성자 이름";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -248,6 +268,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "reportDate";
 									cell.text = "신고 일자";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -257,6 +282,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "declarationType";
 									cell.text = "신고 타입";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							}
 						]

@@ -48,12 +48,12 @@
         <cl:gridcolumn std:sid="g-column-5a0945bd"/>
         <cl:gridheader std:sid="gh-band-91d65a66">
           <cl:gridrow std:sid="g-row-2534e2c2"/>
-          <cl:gridcell std:sid="gh-cell-89d83d29" rowindex="0" colindex="0" sortable="false" filterable="false"/>
-          <cl:gridcell std:sid="gh-cell-1a0320b2" rowindex="0" colindex="1" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
-          <cl:gridcell std:sid="gh-cell-02c0fccf" rowindex="0" colindex="2" targetcolumnname="recipeBoardTitle" sortable="false" filterable="false" text="레시피 제목"/>
-          <cl:gridcell std:sid="gh-cell-16ee7d9d" rowindex="0" colindex="3" targetcolumnname="memberEmail" sortable="false" filterable="false" text="레시피 작성자"/>
-          <cl:gridcell std:sid="gh-cell-1313303c" rowindex="0" colindex="4" targetcolumnname="categoryIngredients" sortable="false" filterable="false" text="분류 방법"/>
-          <cl:gridcell std:sid="gh-cell-ef6c8309" rowindex="0" colindex="5" targetcolumnname="categoryMethod" sortable="false" filterable="false" text="분류 재료"/>
+          <cl:gridcell std:sid="gh-cell-89d83d29" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-1a0320b2" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
+          <cl:gridcell std:sid="gh-cell-02c0fccf" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardTitle" sortable="false" filterable="false" text="레시피 제목"/>
+          <cl:gridcell std:sid="gh-cell-16ee7d9d" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="레시피 작성자"/>
+          <cl:gridcell std:sid="gh-cell-1313303c" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="categoryIngredients" sortable="false" filterable="false" text="분류 방법"/>
+          <cl:gridcell std:sid="gh-cell-ef6c8309" rowindex="0" colindex="5" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="categoryMethod" sortable="false" filterable="false" text="분류 재료"/>
           <cl:gridcell std:sid="gh-cell-a224b49b" rowindex="0" colindex="6"/>
         </cl:gridheader>
         <cl:griddetail std:sid="gd-band-69eed158">

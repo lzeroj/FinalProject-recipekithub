@@ -202,6 +202,11 @@
 								"configurator": function(cell){
 									cell.filterable = false;
 									cell.sortable = false;
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -211,6 +216,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "recipeBoardId";
 									cell.text = "레시피 번호";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -220,6 +230,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "recipeBoardTitle";
 									cell.text = "레시피 제목";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -229,6 +244,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "memberEmail";
 									cell.text = "레시피 작성자";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -238,6 +258,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "categoryIngredients";
 									cell.text = "분류 방법";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -247,6 +272,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "categoryMethod";
 									cell.text = "분류 재료";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{

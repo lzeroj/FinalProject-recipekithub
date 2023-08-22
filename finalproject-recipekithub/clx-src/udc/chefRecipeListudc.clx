@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-10edc637" version="1.0.4584">
+  <head std:sid="head-1bff9df5">
+    <screen std:sid="screen-0cece01d" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-c3d8d8d0" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-ac84d80c" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-d64b5b4a"/>
+    <cl:appspec>
+      <cl:property name="recipeBoardTitle" type="string"/>
+      <cl:property name="recipeBoardImage" type="string"/>
+      <cl:property name="memberNick" type="string"/>
+      <cl:event name="memberImageClick" type="cpr.events.CAppEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-4b571fba" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:listener std:sid="listener-3cfaff70" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-d7ec1f61" style="border-right-style:solid; border-bottom-color:#b2b2b2; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-left-color:#b2b2b2; border-bottom-width:1px; border-top-color:#b2b2b2; border-bottom-style:solid; border-right-color:#b2b2b2; border-left-width:1px; border-top-style:solid;">
+      <cl:xylayoutdata std:sid="xyl-data-52388d49" top="0px" left="0px" width="200px" height="260px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:img std:sid="image-d24f5214" id="recipeBoardImage">
+        <cl:listener std:sid="listener-357095c7" name="click" handler="onRecipeBoardImageClick"/>
+        <cl:formdata std:sid="f-data-71ecca52" row="0" col="0" rowspan="1" colspan="2"/>
+      </cl:img>
+      <cl:output std:sid="output-c3f1b6fc" id="recipeBoardTitle" style="font-weight:bold; font-size:16px; text-align:center;" value="Output">
+        <cl:formdata std:sid="f-data-349beba9" row="1" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:output std:sid="output-43d08aab" id="memberNick" style="color:#909090; text-align:center;" value="Output">
+        <cl:formdata std:sid="f-data-951bb8bd" row="2" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-ecfb0c50" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="200" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="100" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-5bd99748"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

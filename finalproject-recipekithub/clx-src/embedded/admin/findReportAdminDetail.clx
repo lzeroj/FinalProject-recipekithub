@@ -50,12 +50,12 @@
         <cl:gridcolumn std:sid="g-column-bea8c623" width="111px"/>
         <cl:gridheader std:sid="gh-band-a56b0acf">
           <cl:gridrow std:sid="g-row-b2854aab"/>
-          <cl:gridcell std:sid="gh-cell-614f0cb5" rowindex="0" colindex="0" sortable="false" filterable="false"/>
-          <cl:gridcell std:sid="gh-cell-1223a89b" rowindex="0" colindex="1" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
-          <cl:gridcell std:sid="gh-cell-eff16e22" rowindex="0" colindex="2" targetcolumnname="reportTitle" sortable="false" filterable="false" text="신고 제목"/>
-          <cl:gridcell std:sid="gh-cell-f93665d4" rowindex="0" colindex="3" targetcolumnname="memberEmail" sortable="false" filterable="false" text="작성자 이름"/>
-          <cl:gridcell std:sid="gh-cell-24c9077e" rowindex="0" colindex="4" targetcolumnname="reportDate" sortable="false" filterable="false" text="신고 일자"/>
-          <cl:gridcell std:sid="gh-cell-85895411" rowindex="0" colindex="5" targetcolumnname="declarationType" sortable="false" filterable="false" text="신고 타입"/>
+          <cl:gridcell std:sid="gh-cell-614f0cb5" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-1223a89b" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
+          <cl:gridcell std:sid="gh-cell-eff16e22" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="reportTitle" sortable="false" filterable="false" text="신고 제목"/>
+          <cl:gridcell std:sid="gh-cell-f93665d4" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="작성자 이름"/>
+          <cl:gridcell std:sid="gh-cell-24c9077e" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="reportDate" sortable="false" filterable="false" text="신고 일자"/>
+          <cl:gridcell std:sid="gh-cell-85895411" rowindex="0" colindex="5" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="declarationType" sortable="false" filterable="false" text="신고 타입"/>
         </cl:gridheader>
         <cl:griddetail std:sid="gd-band-28b51e4f">
           <cl:gridrow std:sid="g-row-83f28c07"/>
