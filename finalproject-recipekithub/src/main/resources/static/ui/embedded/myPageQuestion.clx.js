@@ -198,6 +198,11 @@
 								"configurator": function(cell){
 									cell.filterable = false;
 									cell.sortable = false;
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -207,6 +212,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "boardTitle";
 									cell.text = "글 제목";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -216,12 +226,22 @@
 									cell.sortable = false;
 									cell.targetColumnName = "boardRegDate";
 									cell.text = "작성 일시";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 3},
 								"configurator": function(cell){
 									cell.text = "작성 여부";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							}
 						]

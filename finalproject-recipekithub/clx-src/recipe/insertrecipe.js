@@ -22,11 +22,8 @@ function onBodyInit(e) {
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
-function onBodyLoad(e){
+function onBodyLoad(e) {
 	var image = app.lookup("uploadImg");
-	if(image.src ==null){
-		app.lookup("deleteImg").visible = false;
-	}
 }
 /*
  * 쉘에서 load 이벤트 발생 시 호출.
@@ -51,7 +48,7 @@ function onShl1Load(e) {
 		$('#summernote').summernote({
 			placeholder: '글 작성란',
 			tabsize: 2,
-			height: 500,
+			height: 700,
 			toolbar: [
 				['style', ['style']],
 				['font', ['bold', 'underline', 'clear']],
@@ -94,8 +91,8 @@ function onButtonClick(e) {
 		var initValue = {
 			"msg": "레시피 등록하시겠습니까?"
 		}
-		app.openDialog("dialog/recipeSaveCheck", {
-			width: 400,
+		app.openDialog("dialog/recipeCheck", {
+			width: 405,
 			height: 300
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -108,7 +105,7 @@ function onButtonClick(e) {
 				submission.send();
 			}
 		});
-	}	
+	}
 }
 
 /*
@@ -118,21 +115,21 @@ function onButtonClick(e) {
 function onButtonClick2(e) {
 	var button = e.control;
 	var initValue = {
-			"msg": "취소 시 작성한 데이터는 저장되지 않습니다.	\n 취소하시겠습니까?"
-		}
-		app.openDialog("dialog/recipeSaveCheck", {
-			width: 400,
-			height: 300
-		}, function(dialog) {
-			dialog.ready(function(dialogApp) {
-				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
-				dialogApp.initValue = initValue;
-			});
-		}).then(function(returnValue) {
-			if (returnValue == true) {
-				window.location.href="/";
-			}
+		"msg": "변경사항이 저장되지 않습니다.\n 취소하시겠습니까?"
+	}
+	app.openDialog("dialog/recipeCheck", {
+		width: 405,
+		height: 300
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+			dialogApp.initValue = initValue;
 		});
+	}).then(function(returnValue) {
+		if (returnValue == true) {
+			window.location.href = "/";
+		}
+	});
 }
 
 /*
@@ -177,5 +174,9 @@ function onDeleteImgClick(e) {
 		fileInput.clear();
 		image.src = "";
 	}
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> branch 'develop-branch' of https://github.com/lzeroj/FinalProject-recipekithub.git

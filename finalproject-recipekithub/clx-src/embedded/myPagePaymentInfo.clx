@@ -75,10 +75,10 @@
           <cl:gridcolumn std:sid="g-column-a3e28c95"/>
           <cl:gridheader std:sid="gh-band-6cd212db">
             <cl:gridrow std:sid="g-row-71bea12e"/>
-            <cl:gridcell std:sid="gh-cell-12efc04f" rowindex="0" colindex="0" style="background-color:#90be70; color:#FFFFFF;" sortable="false" filterable="false"/>
-            <cl:gridcell std:sid="gh-cell-0c2ecefa" rowindex="0" colindex="1" style="background-color:#90be70; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false" text="주문 목록"/>
-            <cl:gridcell std:sid="gh-cell-08e06b21" rowindex="0" colindex="2" style="background-color:#90be70; color:#FFFFFF; font-weight:bold;" targetcolumnname="paymentDate" sortable="false" filterable="false" text="주문 날짜"/>
-            <cl:gridcell std:sid="gh-cell-20018625" rowindex="0" colindex="3" style="background-color:#90be70; color:#FFFFFF; font-weight:bold;" targetcolumnname="paymentTotal" sortable="false" filterable="false" text="총 가격"/>
+            <cl:gridcell std:sid="gh-cell-12efc04f" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-0c2ecefa" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; background-image:none;" sortable="false" filterable="false" text="주문 목록"/>
+            <cl:gridcell std:sid="gh-cell-08e06b21" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; background-image:none;" targetcolumnname="paymentDate" sortable="false" filterable="false" text="주문 날짜"/>
+            <cl:gridcell std:sid="gh-cell-20018625" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; background-image:none;" targetcolumnname="paymentTotal" sortable="false" filterable="false" text="총 가격"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-e563b250">
             <cl:gridrow std:sid="g-row-8cb67276"/>

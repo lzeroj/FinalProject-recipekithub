@@ -166,7 +166,7 @@
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"border-radius" : "20px",
-					"background-color" : "#F6F6F6"
+					"background-color" : "#F7F7F7"
 				});
 				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
 				group_2.setLayout(xYLayout_3);
@@ -192,6 +192,11 @@
 									"configurator": function(cell){
 										cell.filterable = false;
 										cell.sortable = false;
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -201,6 +206,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "mealkitName";
 										cell.text = "밀키트명";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -210,6 +220,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "mealkitIngredients";
 										cell.text = "성분";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -219,6 +234,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "mealkitCategory";
 										cell.text = "카테고리";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -228,11 +248,21 @@
 										cell.sortable = false;
 										cell.targetColumnName = "memberEmail";
 										cell.text = "등록자명";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 5},
 									"configurator": function(cell){
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								}
 							]

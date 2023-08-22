@@ -47,7 +47,7 @@
 						recipe.title = recipeList[i].recipeBoardTitle;
 						container.addChild(recipe, {
 							height: "300px",
-							width: "300px",
+							width: "280px",
 							autoSize: "both"
 						});
 						recipe.addEventListener("imgClick", function(e) {
@@ -64,6 +64,11 @@
 				var slidify = cpr.core.Module.require("Slidify").slidify;
 				//슬라이드 기능을 사용할 컨트롤에 적용시킨후 start 시킵니다. (아래의 두 코드는 필수로 작성하셔야 합니다.)
 				var slide = slidify(app.lookup("grp"));
+				slide.showCount = 3;
+				slide.showPaginition = true;
+				slide.autoPlayDelay = 1;
+				slide.initialPage = 0;
+				slide.useInfiniteScroll = true;
 				slide.autoPlay();
 				slide.start();
 			};
@@ -101,9 +106,9 @@
 			group_1.setLayout(flowLayout_1);
 			container.addChild(group_1, {
 				"top": "120px",
-				"width": "1220px",
-				"height": "328px",
-				"left": "calc(50% - 610px)"
+				"width": "1120px",
+				"height": "300px",
+				"left": "calc(50% - 560px)"
 			});
 			
 			var group_2 = new cpr.controls.Container();
@@ -111,7 +116,7 @@
 			group_2.setLayout(xYLayout_2);
 			(function(container){
 				var output_1 = new cpr.controls.Output();
-				output_1.value = "추천 레시피";
+				output_1.value = "추천";
 				output_1.style.css({
 					"font-weight" : "bold",
 					"font-size" : "20px",
@@ -120,15 +125,28 @@
 				container.addChild(output_1, {
 					"top": "9px",
 					"left": "0px",
-					"width": "272px",
+					"width": "46px",
+					"height": "38px"
+				});
+				var output_2 = new cpr.controls.Output();
+				output_2.value = "레시피";
+				output_2.style.css({
+					"color" : "#0ca44e",
+					"font-weight" : "bold",
+					"font-size" : "20px"
+				});
+				container.addChild(output_2, {
+					"top": "9px",
+					"left": "45px",
+					"width": "100px",
 					"height": "38px"
 				});
 			})(group_2);
 			container.addChild(group_2, {
 				"top": "53px",
-				"width": "1220px",
+				"width": "1120px",
 				"height": "47px",
-				"left": "calc(50% - 610px)"
+				"left": "calc(50% - 560px)"
 			});
 			if(typeof onBodyInit == "function"){
 				app.addEventListener("init", onBodyInit);

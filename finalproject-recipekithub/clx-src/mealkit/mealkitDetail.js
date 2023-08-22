@@ -23,7 +23,7 @@ function onBodyLoad(e){
 	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 	var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
 	var avg = cpr.core.Platform.INSTANCE.getParameter("avg");
-	
+	console.log("mealkitHits = " + mealkitHits);
 	var starAvg = app.lookup("starScore");
 	starAvg.value = avg;
 	
@@ -31,10 +31,12 @@ function onBodyLoad(e){
 	commentList.setValue("mealkitNo", (mealkitNo).toString());//string으로 변환
 	app.lookup("commentListSub").send();
 	
+	var hitsBox = app.lookup("hits");
+	hitsBox.value = mealkitHits;
 
 	console.log("mealkitMember, sessionMember = " + mealkitMember + ", " +sessionMember);
 	
-	if(sessionMember != null && sessionMember != ""){
+	if(sessionMember != "guest"){
 		var commentBox = app.lookup("writeComment");
 		commentBox.visible = true;
 	}
@@ -85,9 +87,12 @@ function onBodyLoad(e){
 	var hits = app.lookup("hits");
 	var seller = app.lookup("seller");
 	
+	app.lookup("impInfo").redraw();
+	
 	app.lookup("mealkitImg").src = "/upload/mealkit/"+mealkitImg;
 	var hTMLSnippet = app.lookup("info");
 	hTMLSnippet.value = mealkitInfo;	
+	
 	
 	hTMLSnippet.redraw();
 	reg.redraw();
@@ -263,9 +268,13 @@ function onButtonClick5(e){
 	var button = e.control;
 	var comment = app.lookup("comment").value;
 	var star = parseFloat(app.lookup("starpoint").value);
-	if(typeof star != "number" || star < 0 || star > 5 || star == "" || star == null){
-		alert("반드시 별점을 입력해주세요. 숫자 0점 이상 5점 이하로 입력해주세요.");
 	
+	if(isNaN(star) || star < 0 || star > 5 || star === "" || star === null){
+		alert("반드시 별점을 입력해주세요. 숫자 0점 이상 5점 이하로 입력해주세요.");
+		app.lookup("comment").value = "";
+		app.lookup("starpoint").value = "";
+		app.lookup("comment").redraw();
+		app.lookup("starpoint").redraw();
 	}else{
 		var commentList = app.lookup("commentList");
 		var mealkitNo = commentList.getValue("mealkitNo");
@@ -275,14 +284,17 @@ function onButtonClick5(e){
 		commentMap.setValue("star", star);//string
 		app.lookup("writeComment").redraw();
 		app.lookup("commentSub").send();
-		
+		app.lookup("commentListSub").send();
+		app.lookup("comment").value = "";
+		app.lookup("starpoint").value = "";
+		app.lookup("comment").redraw();
+		app.lookup("starpoint").redraw();
 	}
 	//var dataMap = app.lookup("mealkit");
 	//var mealkitNo = dataMap.getValue("mealkitNo");
 	
 	//typeof parseFloat(star) === "number" && star >=0 && star <= 5
-	
-	app.lookup("commentListSub").send();
+
 	
 }
 
@@ -295,7 +307,9 @@ function onCommentSubSubmitSuccess(e){
 	var commentMap = app.lookup("commentReturn");
 	var memberMap = app.lookup("memberReturn");
 	var mealkitMap = app.lookup("mealkitReturn");
-	onCommentListSubSubmitSuccess(e);
+	
+	
+	app.lookup("commentListSub").send();
 }
 
 ///*
@@ -345,7 +359,7 @@ function onCommentListSubSubmitSuccess(e){
 	//var sessionval = getSessionStorage("memsession");
 	var mealkitComment = jsonData.mealkitCommentList;
 	var totalCommentCount = jsonData.mealkitCommentNum;
-	console.log("mealkitComment = " + mealkitComment);
+	//console.log("mealkitComment = " + mealkitComment.mealkitEmail);
 	app.lookup("cnt").value = totalCommentCount;
 	var container = app.lookup("commentgrp");
 	
@@ -367,7 +381,7 @@ function onCommentListSubSubmitSuccess(e){
 			container.addChild(comment, {
 				height: "100px",
 				width: "150px",
-				autoSize: "height"
+				autoSize: "both"
 			});
 			comment.addEventListener("deleteClick", function(e) {
 				app.lookup("commentId").setValue("mealkitCommentId", mealkitComment[index].mealkitCommentId);

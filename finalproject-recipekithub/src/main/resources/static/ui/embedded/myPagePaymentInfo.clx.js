@@ -318,8 +318,9 @@
 										cell.filterable = false;
 										cell.sortable = false;
 										cell.style.css({
-											"background-color" : "#90be70",
-											"color" : "#FFFFFF"
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"background-image" : "none"
 										});
 									}
 								},
@@ -330,9 +331,10 @@
 										cell.sortable = false;
 										cell.text = "주문 목록";
 										cell.style.css({
-											"background-color" : "#90be70",
+											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"background-image" : "none"
 										});
 									}
 								},
@@ -344,9 +346,10 @@
 										cell.targetColumnName = "paymentDate";
 										cell.text = "주문 날짜";
 										cell.style.css({
-											"background-color" : "#90be70",
+											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"background-image" : "none"
 										});
 									}
 								},
@@ -358,9 +361,10 @@
 										cell.targetColumnName = "paymentTotal";
 										cell.text = "총 가격";
 										cell.style.css({
-											"background-color" : "#90be70",
+											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"background-image" : "none"
 										});
 									}
 								}

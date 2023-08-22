@@ -22,6 +22,7 @@ function onBodyLoad(e){
 	app.lookup("regDate").text = app.getAppProperty("regDate");
 	app.lookup("content").text = app.getAppProperty("content");
 	app.lookup("deleteBtn").visible = app.getAppProperty("deleteBtn");
+	app.lookup("profile").src = app.getAppProperty("profile");
 }
 
 

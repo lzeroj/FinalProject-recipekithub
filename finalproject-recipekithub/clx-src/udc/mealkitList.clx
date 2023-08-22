@@ -41,6 +41,10 @@
     <cl:img std:sid="image-9f3a9c26" src="../theme/images/mealkit/free-icon-star-6063500.png">
       <cl:xylayoutdata std:sid="xyl-data-47f09aa2" top="208px" left="29px" width="21px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:img>
+    <cl:group std:sid="group-8d63a404" style="background-color:#f9f9f9;">
+      <cl:xylayoutdata std:sid="xyl-data-5f0dfbde" top="241px" left="0px" width="230px" height="5px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayout std:sid="xylayout-de4618e0"/>
+    </cl:group>
     <cl:xylayout std:sid="xylayout-7d80c481"/>
   </body>
   <std:studiosetting>

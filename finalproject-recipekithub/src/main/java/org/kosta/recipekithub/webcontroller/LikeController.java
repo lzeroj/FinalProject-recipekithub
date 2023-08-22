@@ -6,16 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.LikeService;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.spring.JSONDataView;
+import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -132,13 +135,12 @@ public class LikeController {
 	public View clickRecipeLike(HttpServletRequest request,DataRequest dataRequest,int recipeBoardId) {
 		
 		// 세션 적용
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = session.getAttribute("member");
-//		String memberEmail = memberVO.getMemberEmail();
-//		if(memberEmail == null || memberEmail == "") {
-//			return new UIView();
-//		}
-		String memberEmail = "shj";
+		HttpSession session = request.getSession(false);
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String memberEmail = memberVO.getMemberEmail();
+		if(memberEmail == null || memberEmail == "") {
+			return new UIView();
+		}
 //		System.out.println("mealkitNo : "+mealkitNo);
 		int result = likeService.showRecipeLike(recipeBoardId,memberEmail);
 		if(result == 0) {
@@ -153,6 +155,23 @@ public class LikeController {
 		message.put("likeresult", result);
 		return new JSONDataView(true, message);
 	}
+	
+	@RequestMapping("/findRecipeLikeList")
+	public View findRecipeLikeList(HttpServletRequest request,DataRequest dataRequest) {
+		// 세션 적용
+		HttpSession session = request.getSession(false);
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String memberEmail = memberVO.getMemberEmail();
+		if(memberEmail == null || memberEmail == "") {
+			return new UIView();
+		}
+		List<RecipeBoardVO> result = likeService.findRecipeLikeList(memberEmail);
+		System.out.println(result.get(0).toString());
+		dataRequest.setResponse("dsrecipelikelist", result);
+		return new JSONDataView();
+	}
+	
+	
 
 	
 }

@@ -52,11 +52,13 @@
 				var nav1 = e.control;
 				var src = null;
 				if(nav1.value == '4'){ // QnA 게시판
-					src = "embedded/myPageQuestion"
+					src = "embedded/myPageQuestion";
 				}else if(nav1.value == '2'){
-					src = "embedded/myPagePaymentInfo"
+					src = "embedded/myPagePaymentInfo";
 				}else if(nav1.value == '3'){
-					src = "embedded/myPageMealkitLike"
+					src = "embedded/myPageMealkitLike";
+				}else if(nav1.value == '1'){
+					src = "embedded/myPageRecipeLike";
 				}
 				var vcEmb = app.lookup("ea1");
 				cpr.core.App.load(src, function(/*cpr.core.App*/ loadedApp){
@@ -147,7 +149,7 @@
 								"border-left-width" : "1px",
 								"border-top-style" : "solid"
 							});
-							cpr.core.App.load("embedded/myPagePaymentInfo", function(app) {
+							cpr.core.App.load("embedded/myPageRecipeLike", function(app) {
 								if(app){
 									embeddedApp_1.app = app;
 								}
@@ -201,6 +203,7 @@
 						var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
 						navigationBar_1.menuType = "fullmenu";
 						navigationBar_1.expandTrigger = "click";
+						navigationBar_1.barItemWidths = "equal";
 						navigationBar_1.style.setClasses(["cl-navigationbar", "my-navi"]);
 						navigationBar_1.style.css({
 							"border-bottom-color" : "#FFFFFF",

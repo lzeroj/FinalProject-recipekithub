@@ -3,6 +3,7 @@ package org.kosta.recipekithub.model.service;
 import java.util.List;
 
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
+import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 
 public interface LikeService {
 	// 밀키트 좋아요
@@ -22,5 +23,7 @@ public interface LikeService {
 	int deleteRecipeLike(int recipeBoardId, String memberEmail);
 
 	int showRecipeLike(int recipeBoardId, String memberEmail);
+
+	List<RecipeBoardVO> findRecipeLikeList(String memberEmail);
 
 }

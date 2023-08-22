@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-bcc003de" version="1.0.4584">
+  <head std:sid="head-6bf7a080">
+    <screen std:sid="screen-b0544b6c" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="791" customWidth="709" active="true"/>
+    <screen std:sid="screen-502a9be5" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-bd6f9f95" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-f3e34864">
+      <cl:dataset std:sid="d-set-a9bdedfd" id="dsrecipelikelist">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-32cb88c0" name="recipeBoardId" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a1f3f1c9" name="memberEmail"/>
+          <cl:datacolumn std:sid="d-column-6ce3b251" name="recipeBoardTitle"/>
+          <cl:datacolumn std:sid="d-column-c1aed249" name="categoryType"/>
+          <cl:datacolumn std:sid="d-column-80b7a8ff" name="categoryIngredients"/>
+          <cl:datacolumn std:sid="d-column-896acd05" name="categoryMethod"/>
+          <cl:datacolumn std:sid="d-column-a00d64f5" name="recipeBoardImage"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-9df5ef10" id="dmdeleteRecipeLike">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5e80df5d" name="recipeBoardId" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-6e8220e8" id="subfindRecipeLikeList" action="/findRecipeLikeList">
+        <cl:responsedata dataid="dsrecipelikelist"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-76fa397e" id="subdeleteRecipeLike" action="/clickRecipeLike" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-5c72a5d0" name="submit-success" handler="onSubdeleteRecipeLikeSubmitSuccess"/>
+        <cl:requestdata dataid="dmdeleteRecipeLike"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-e643e39d">
+    <cl:listener std:sid="listener-a6563308" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-30cd9745" style="background-color:#FFFFFF;">
+      <cl:xylayoutdata std:sid="xyl-data-3b630b72" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="레시피 좋아요 목록">
+        <cl:xylayoutdata std:sid="xyl-data-d40823b2" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      </cl:output>
+      <cl:group std:sid="group-33d5e94e" style="border-radius:20px; background-color:#F7F7F7;">
+        <cl:xylayoutdata std:sid="xyl-data-b3a813f8" top="60px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:grid std:sid="grid-8b296a2e" id="grd1" readonly="true" datasetid="dsrecipelikelist" selectionunit="cell">
+          <cl:listener std:sid="listener-7a12bdc3" name="cell-click" handler="onGrd1CellClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-e2fe0166" top="15px" right="15px" bottom="15px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:gridcolumn std:sid="g-column-4abecd04" width="30px"/>
+          <cl:gridcolumn std:sid="g-column-92379872" width="51px"/>
+          <cl:gridcolumn std:sid="g-column-a4f5daae" width="54px"/>
+          <cl:gridcolumn std:sid="g-column-9bda8641" width="94px"/>
+          <cl:gridcolumn std:sid="g-column-e8a49252" width="46px"/>
+          <cl:gridcolumn std:sid="g-column-14b2076f" width="46px"/>
+          <cl:gridcolumn std:sid="g-column-cd253469" width="46px"/>
+          <cl:gridcolumn std:sid="g-column-762ae4ea" width="69px"/>
+          <cl:gridheader std:sid="gh-band-66502553">
+            <cl:gridrow std:sid="g-row-a54e4e33"/>
+            <cl:gridcell std:sid="gh-cell-3d90bad8" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-4ac74973" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
+            <cl:gridcell std:sid="gh-cell-6fae05e1" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardImage" sortable="false" filterable="false" text="이미지"/>
+            <cl:gridcell std:sid="gh-cell-a7109569" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardTitle" sortable="false" filterable="false" text="제목"/>
+            <cl:gridcell std:sid="gh-cell-0669df4a" rowindex="0" colindex="4" rowspan="1" colspan="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="categoryType" sortable="false" filterable="false" text="카테고리"/>
+            <cl:gridcell std:sid="gh-cell-66be3e1a" rowindex="0" colindex="7" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" text="좋아요"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-96a29bfa">
+            <cl:gridrow std:sid="g-row-0c79f617" height="67px"/>
+            <cl:gridcell std:sid="gd-cell-dfbffcb1" rowindex="0" colindex="0" columntype="rowindex"/>
+            <cl:gridcell std:sid="gd-cell-4f1a064d" rowindex="0" colindex="1" columnname="recipeBoardId"/>
+            <cl:gridcell std:sid="gd-cell-4984bf10" rowindex="0" colindex="2" columnname="recipeBoardImage">
+              <cl:img std:sid="image-145f6358">
+                <cl:celldata halign="CENTER" valign="CENTER" width="60" height="60"/>
+              </cl:img>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-c50002b3" rowindex="0" colindex="3" columnname="recipeBoardTitle"/>
+            <cl:gridcell std:sid="gd-cell-70dd80e6" rowindex="0" colindex="4" columnname="categoryType"/>
+            <cl:gridcell std:sid="gd-cell-cf2b4920" rowindex="0" colindex="5" columnname="categoryIngredients"/>
+            <cl:gridcell std:sid="gd-cell-1ab84948" rowindex="0" colindex="6" columnname="categoryMethod"/>
+            <cl:gridcell std:sid="gd-cell-a1ced44f" rowindex="0" colindex="7">
+              <cl:img std:sid="image-c17244d0" id="likeimg" style="cursor:pointer;" src="../theme/images/mealkit/heart_fill.png">
+                <cl:celldata halign="CENTER" valign="CENTER" width="60" height="60"/>
+              </cl:img>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:xylayout std:sid="xylayout-9a2135bd"/>
+      </cl:group>
+      <cl:xylayout std:sid="xylayout-2b100e0d"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-eb11f289"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

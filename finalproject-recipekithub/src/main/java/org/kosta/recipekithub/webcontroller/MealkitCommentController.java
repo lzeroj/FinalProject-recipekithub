@@ -16,6 +16,7 @@ import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import com.cleopatra.protocol.data.DataRequest;
@@ -33,7 +34,7 @@ public class MealkitCommentController {
 	private final MealkitCommentService mealkitCommentService;
 	private final MealkitStarScoreService mealkitStarScoreService;
 	
-	@PostMapping("/insertComment")
+	@RequestMapping("/insertComment")
 	public View insertMealkitComment(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		
 		ParameterGroup param = dataRequest.getParameterGroup("commentMap");
@@ -53,7 +54,7 @@ public class MealkitCommentController {
 		MealkitCommentVO mealkitComment = mealkitCommentService.findCommentByNo(num);
 		dataRequest.setResponse("commentReturn", mealkitComment);
 		dataRequest.setResponse("mealkitReturn", mealkitComment.getMealkitBoard().getMealkitNo());
-		dataRequest.setResponse("memberReturn", mealkitComment.getMemberVO().getMemberEmail());
+		dataRequest.setResponse("memberReturn", member.getMemberEmail());
 		
 		/*
 		Map<String, Object> initParam = new HashMap<>();
@@ -67,9 +68,10 @@ public class MealkitCommentController {
 		return new JSONDataView();
 	}
 	
-	@PostMapping("/deleteComment")
+	@RequestMapping("/deleteComment")
 	public View deleteMealkitComment(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		ParameterGroup param = dataRequest.getParameterGroup("commentId");
+		System.out.println("댓글 번호 = "+param.getValue("mealkitCommentId"));
 		int num = Integer.parseInt(param.getValue("mealkitCommentId"));
 		log.info("mealkitCommentId 삭제 = ", num);
 		mealkitCommentService.deleteMealkitComment(num);
@@ -98,6 +100,7 @@ public class MealkitCommentController {
 	
 		return null;
 	}
+
 	
 	
 }

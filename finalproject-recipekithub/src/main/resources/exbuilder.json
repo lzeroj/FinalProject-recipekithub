@@ -19,6 +19,8 @@
     "/resource/conf/defaults.js",
     "ui/cpr-lib/udc.js",
     "ui/cpr-lib/user-modules.js",
+    "ui/thirdparty/echarts/echarts.min.js",
+    "ui/thirdparty/echarts/d3.min.js",
      "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js",
 	"https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js",	
 	"https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"

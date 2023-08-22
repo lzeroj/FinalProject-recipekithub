@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-b526e8be" version="1.0.4584">
+  <head std:sid="head-82d281da">
+    <screen std:sid="screen-090026d4" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-3993cb9c" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-89910cfa" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-095be45a"/>
+    <cl:appspec>
+      <cl:property name="memberEmail" type="string"/>
+      <cl:property name="memberName" type="string"/>
+      <cl:property name="memberImage" type="string"/>
+      <cl:property name="memberNick" type="string"/>
+      <cl:property name="rank" type="number"/>
+      <cl:event name="memberImageClick" type="cpr.events.CAppEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-19c4dd72" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:listener std:sid="listener-212302e3" name="load" handler="onBodyLoad"/>
+    <cl:img std:sid="image-715f404c" id="memberImage" style="border-radius:100px; cursor:pointer;" fallbacksrc="../theme/images/icon/x.png">
+      <cl:listener std:sid="listener-e9e4b455" name="click" handler="onMemberImageClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-548dac70" top="0px" left="0px" width="180px" height="160px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:output std:sid="output-455135a8" id="memberNick" style="font-weight:bold; font-size:18px; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-9b1b1d25" top="160px" left="0px" width="180px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-e3424226" id="memberEmail" style="font-size:15px; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-9f262350" top="190px" left="0px" width="180px" height="25px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-6e2e17d6" id="rank" style="border-right-style:solid; border-bottom-color:#b3b3b3; border-top-width:1px; border-right-width:1px; font-weight:bold; border-left-color:#b3b3b3; border-right-color:#b3b3b3; border-left-width:1px; border-top-style:solid; border-radius:50px; background-color:#FFFFFF; border-left-style:solid; border-bottom-width:1px; border-top-color:#b3b3b3; border-bottom-style:solid; background-image:none; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-797ccd39" top="0px" left="0px" width="30px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:xylayout std:sid="xylayout-2a5354ce"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

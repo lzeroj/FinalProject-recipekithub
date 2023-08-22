@@ -4,30 +4,45 @@
  *
  * @author user
  ************************************************/
-
+function getTimedSessionData(key) {
+	var storedData = sessionStorage.getItem(key);
+	
+	if (storedData) {
+		var data = JSON.parse(storedData);
+		var currentTime = new Date().getTime();
+		
+		if (currentTime < data.expirationTime) {
+			return data.value;
+		} else {
+			sessionStorage.removeItem(key);
+		}
+	}
+	return null;
+}
 /*
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e) {
-	//var sessionval = getSessionStorage("memsession");
-	//console.log(sessionval);
+	var sessionval = getTimedSessionData("memsession");
+	console.log(sessionval);
 	var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 	console.log(recipeBoardVO);
-	//if(sessionval ==null || sessionval != recipeBoardVO.memberVO.memberEmail){
-	//	app.lookup("updateBtn").visible = false;
-	//}
+	if (sessionval == null || sessionval != recipeBoardVO.memberVO.memberEmail) {
+		app.lookup("updateBtn").visible = false;
+	}
 	app.lookup("recipeBoardImage").src = "/upload/recipe/" + recipeBoardVO.recipeBoardImage;
 	app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 	app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
+	app.lookup("memberProfile").src = "/upload/profile/" + recipeBoardVO.memberVO.memberImage;
 	var hTMLSnippet = app.lookup("recipeContent");
 	hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 	
 	app.lookup("regDate").value = recipeBoardVO.recipeRegDate;
-	if(recipeBoardVO.recipeEditDate ==null){
+	if (recipeBoardVO.recipeEditDate == null) {
 		app.lookup("edit").visible = false;
 		app.lookup("editDate").visible = false;
-	}else{
+	} else {
 		app.lookup("editDate").value = recipeBoardVO.recipeEditDate;
 	}
 	app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
@@ -116,7 +131,7 @@ function onRecipeCommentListSubmitSuccess(e) {
 	var recipeCommentList = e.control;
 	var xhr = recipeCommentList.xhr;
 	var jsonData = JSON.parse(xhr.responseText);
-	//var sessionval = getSessionStorage("memsession");
+	var sessionval = getTimedSessionData("memsession");
 	var recipeComment = jsonData.recipeCommentList;
 	var totalCommentCount = jsonData.totalCommentCount;
 	app.lookup("commentCount").value = totalCommentCount;
@@ -135,11 +150,12 @@ function onRecipeCommentListSubmitSuccess(e) {
 			comment.nick = recipeComment[i].memberVO.memberNick;
 			comment.regDate = recipeComment[i].recipeCommentDate;
 			comment.content = recipeComment[i].recipeCommentContent;
-			//if(sessionval ==null || sessionval != recipeComment[i].memberVO.memberEmail){
-			//	comment.deleteBtn = false;
-			//}
+			comment.profile = recipeComment[i].memberVO.memberImage;
+			if (sessionval == null || sessionval != recipeComment[i].memberVO.memberEmail) {
+				comment.deleteBtn = false;
+			}
 			container.addChild(comment, {
-				height: "120px",
+				height: "75px",
 				width: "100px",
 				autoSize: "height"
 			});
@@ -169,10 +185,17 @@ function onDeleteCommentSubmitSuccess(e) {
  */
 function onButtonClick2(e) {
 	var button = e.control;
+	var sessionval = getTimedSessionData("memsession");
 	var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
-	app.lookup("dmInsertValue").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
-	var insertComment = app.lookup("insertComment");
-	insertComment.send();
+	console.log(recipeBoardVO);
+	if (sessionval == null || sessionval != recipeBoardVO.memberVO.memberEmail) {
+		alert("로그인이 필요합니다");
+		app.lookup("commentInput").focus();
+	} else {
+		app.lookup("dmInsertValue").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
+		var insertComment = app.lookup("insertComment");
+		insertComment.send();
+	}
 }
 
 /*
@@ -182,7 +205,7 @@ function onButtonClick2(e) {
 function onInsertCommentSubmitSuccess(e) {
 	var insertComment = e.control;
 	app.lookup("recipeCommentList").send();
-	app.lookup("commentInput").clear();
+	app.lookup("commentInput").text = "";
 }
 
 /*
@@ -287,7 +310,7 @@ function onSubinsertDeclarationSubmitSuccess(e) {
  * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
  * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
  */
-function onPageSelectionChange(e){
+function onPageSelectionChange(e) {
 	var page = e.control;
 	app.lookup("recipeCommentList").send();
 }

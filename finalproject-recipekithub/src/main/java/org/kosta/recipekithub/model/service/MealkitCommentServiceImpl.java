@@ -65,5 +65,4 @@ public class MealkitCommentServiceImpl implements MealkitCommentService {
 	public int mealkitCommentCnt(int mealkitNo) {
 		return mealkitCommentMapper.mealkitCommentCnt(mealkitNo);
 	}
-	
 }
