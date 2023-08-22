@@ -999,7 +999,7 @@
 					container.addChild(hTMLSnippet_1, {
 						"autoSize": "both",
 						"width": "929px",
-						"height": "374px"
+						"height": "386px"
 					});
 				})(group_9);
 				container.addChild(group_9, {

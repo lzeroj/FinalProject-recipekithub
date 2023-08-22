@@ -216,7 +216,7 @@
         <cl:xylayoutdata std:sid="xyl-data-3d254f04" top="539px" left="20px" width="946px" height="386px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:htmlsnippet std:sid="htmlsnippet-fd52013a" id="info">
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitInfo"/>
-          <cl:verticaldata std:sid="v-data-9317a77e" width="929px" height="374px" autosize="both"/>
+          <cl:verticaldata std:sid="v-data-9317a77e" width="929px" height="386px" autosize="both"/>
         </cl:htmlsnippet>
         <cl:verticallayout std:sid="v-layout-da2d1580"/>
       </cl:group>
