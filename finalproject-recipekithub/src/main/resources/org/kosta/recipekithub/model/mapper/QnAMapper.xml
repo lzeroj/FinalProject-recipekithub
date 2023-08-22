@@ -52,7 +52,8 @@
 	<select id="selectChkQnAAnswer">
 		SELECT qba.BOARD_ID , qba.BOARD_ANSWER_TITLE , qba.BOARD_ANSWER_CONTENT , qba.BOARD_ANSWER_REG_DATE , qba.ANSWER_MEMBER 
 		FROM QNA_BOARD_ANSWER qba , QNA_BOARD qb 
-		WHERE  qba.BOARD_ID = #{boardId}
+		WHERE qba.BOARD_ID = qb.BOARD_ID 
+		AND qba.BOARD_ID = #{boardId}
 		AND qb.BOARD_RESPONSE_STATUS = 'Y'	
 	</select>
 	

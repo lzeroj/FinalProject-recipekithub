@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.kosta.recipekithub.model.mapper.LikeMapper;
 import org.kosta.recipekithub.model.service.LikeService;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
+import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -83,6 +84,11 @@ public class UnitTestLike {
 		int result = likeService.showRecipeLike(recipeBoardId,memberEmail);
 		Assertions.assertEquals(0, result);
 	}
-
+	
+//	@Test
+//	public void findRecipeLikeList() {
+//		List<RecipeBoardVO> result = likeService.findRecipeLikeList();
+//		Assertions.assertEquals(0, result);
+//	}
 
 }

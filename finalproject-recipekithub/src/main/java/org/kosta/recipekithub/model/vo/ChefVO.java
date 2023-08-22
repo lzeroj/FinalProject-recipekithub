@@ -13,4 +13,7 @@ public class ChefVO {
 	private String memberNick;
 	private String memberImage;
 	private int recipeCount;
+	private int recipeBoardId;
+	private String recipeBoardTitle;
+	private String recipeBoardImage;
 }

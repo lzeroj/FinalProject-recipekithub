@@ -30,18 +30,33 @@ function onSubcheflistSubmitSuccess(e){
 		(function(index) {
 			//udc 동적 생성
 			var chef = new udc.chefListudc();
+			chef.style.css({
+				"paddingLeft":"30px",
+				"padding-right":"30px",
+				"padding-bottom":"30px",
+				"padding-top":"30px"
+			});
 			//udc에서 출판한 이미지 경로 앱 속성 지정
-//			chef.memberImage = "/upload/profile/" + chefList[i].memberImage;
-			chef.memberName = chefList[i].memberName;
+			if(chefList[i].memberImage == null || chefList[i].memberImage == ''){
+				chef.memberImage = "theme/images/icon/chefimg.png";
+			}else{
+				chef.memberImage = "/upload/profile/" + chefList[i].memberImage;
+			}
+			chef.memberNick = chefList[i].memberNick;
 			chef.memberEmail = chefList[i].memberEmail;
+			chef.rank = i+1;
 			container.addChild(chef, {
-				height: "185px",
-				width: "160px",
+				height: "215px",
+				width: "180px",
 				autoSize: "none"
 			});
-			chef.addEventListener("imgClick", function(e) {
+			chef.addEventListener("memberImageClick", function(e) {
 				var host = app.getHost(); // 부모 임베디드 앱
-				var initvalue = {"memberEmail":chefList[index].memberEmail};
+				var initvalue = {
+					"memberEmail":chefList[index].memberEmail,
+					"memberNick":chefList[index].memberNick,
+					"memberImage":"theme/images/icon/chefimg.png"
+				};
 				cpr.core.App.load("embedded/chefRecipeList", function(loadedApp){
 					if (loadedApp){
 						host.initValue = initvalue;

@@ -253,10 +253,10 @@
 							button_1.addEventListener("click", onButtonClick);
 						}
 						container.addChild(button_1, {
-							"top": "10px",
 							"right": "150px",
 							"bottom": "10px",
-							"width": "139px"
+							"width": "140px",
+							"height": "30px"
 						});
 						var button_2 = new cpr.controls.Button();
 						button_2.value = "뒤로가기";
@@ -269,10 +269,10 @@
 							button_2.addEventListener("click", onButtonClick2);
 						}
 						container.addChild(button_2, {
-							"top": "10px",
 							"right": "0px",
 							"bottom": "10px",
-							"width": "140px"
+							"width": "140px",
+							"height": "30px"
 						});
 					})(group_4);
 					container.addChild(group_4, {

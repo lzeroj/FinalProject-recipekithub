@@ -10,4 +10,6 @@ public interface ChefMapper {
 
 	List<ChefVO> findChefListByRecipe();
 
+	List<ChefVO> findChefRecipeListByMemberEmail(String memberEmail);
+
 }

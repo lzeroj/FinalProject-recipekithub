@@ -9,5 +9,12 @@
 		WHERE m.MEMBER_EMAIL = rb.MEMBER_EMAIL 
 		ORDER BY rb.RECIPE_COUNT DESC , m.MEMBER_EMAIL ASC
 	</select>
+	
+	<select id="findChefRecipeListByMemberEmail">
+		SELECT rb.RECIPE_BOARD_ID ,rb.RECIPE_BOARD_TITLE ,rb.RECIPE_BOARD_IMAGE 
+		FROM "MEMBER" m , RECIPE_BOARD rb 
+		WHERE m.MEMBER_EMAIL = rb.MEMBER_EMAIL 
+		AND m.MEMBER_EMAIL = #{memberEmail}
+	</select>
 
 </mapper>

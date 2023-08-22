@@ -20,4 +20,14 @@ public class UnitTestChef {
 			System.out.println(chefList.get(i).toString());
 		}
 	}
+	
+	@Test
+	public void findChefRecipeListByMemberEmail() {
+		String memberEmail = "test@naver.com";
+		List<ChefVO> chefList = chefService.findChefRecipeListByMemberEmail(memberEmail);
+		for(int i=0;i<chefList.size();i++) {
+			System.out.println(chefList.get(i).toString());
+		}
+	}
+
 }

@@ -8,4 +8,6 @@ public interface ChefService {
 
 	List<ChefVO> findChefListByRecipe();
 
+	List<ChefVO> findChefRecipeListByMemberEmail(String memberEmail);
+
 }

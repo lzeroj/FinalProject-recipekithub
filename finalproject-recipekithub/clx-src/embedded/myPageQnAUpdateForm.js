@@ -30,6 +30,8 @@ function onBodyLoad(e){
 function onButtonClick(e){
 	var button = e.control;
 	if(confirm("수정하시겠습니까?")){
+		app.lookup("updateqna").setValue("boardTitle", app.lookup("ipb1").value);
+		app.lookup("updateqna").setValue("boardContent", app.lookup("txa1").text);
 		app.lookup("subupdateqna").send();
 	}
 }

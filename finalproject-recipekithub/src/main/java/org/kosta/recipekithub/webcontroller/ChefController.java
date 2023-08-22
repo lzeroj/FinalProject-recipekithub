@@ -21,10 +21,15 @@ public class ChefController {
 	@RequestMapping("/findChefListByRecipe")
 	public View findChefListByRecipe(DataRequest dataRequest) {
 		List<ChefVO> chefList = chefService.findChefListByRecipe();
-		for(int i=0;i<chefList.size();i++) {
-			System.out.println(chefList.get(i).toString());
-		}
 		dataRequest.setResponse("chefList", chefList);
 		return new JSONDataView();
 	}
+
+	@RequestMapping("/findChefRecipeListByMemberEmail")
+	public View findChefRecipeListByMemberEmail(DataRequest dataRequest,String memberEmail) {
+		List<ChefVO> recipeList = chefService.findChefRecipeListByMemberEmail(memberEmail);
+		dataRequest.setResponse("recipeList", recipeList);
+		return new JSONDataView();
+	}
+
 }

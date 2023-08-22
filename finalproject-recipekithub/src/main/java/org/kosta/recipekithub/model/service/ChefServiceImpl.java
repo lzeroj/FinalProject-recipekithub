@@ -19,4 +19,9 @@ public class ChefServiceImpl implements ChefService {
 		return chefMapper.findChefListByRecipe();
 	}
 
+	@Override
+	public List<ChefVO> findChefRecipeListByMemberEmail(String memberEmail) {
+		return chefMapper.findChefRecipeListByMemberEmail(memberEmail);
+	}
+
 }
