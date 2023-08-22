@@ -265,14 +265,13 @@ function onCmb1Open(e) {
 function onCmb1SelectionChange(e) {
 	var cmb1 = e.control;
 	
-	if (cmb1.value == "login") {
-		//window.location.href = "member/login-form.clx";
-		cpr.core.App.load("member/login-form", function(loadedApp) {
-			var newInstance = loadedApp.createNewInstance();
-			newInstance.run();
-		});
+    // 비로그인 상태의 경우, 콤보박스에 "로그인" 메뉴 표시
+    if (cmb1.value == "login") { 
+        var httpPostMethod = new cpr.protocols.HttpPostMethod("member/login-form.clx");
+		httpPostMethod.submit();
 		
-	} else if (cmb1.value == "logout") {
+	// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
+    } else if (cmb1.value == "logout") {
 		var event = new cpr.events.CAppEvent("logout");
 		app.dispatchEvent(event);
 		/*
@@ -289,10 +288,10 @@ function onCmb1SelectionChange(e) {
 		});
         //window.location.href = "/member/logout";
         */
-	} else if (cmb1.value == "profile") {
-		cpr.core.App.load("member/myProfile", function(loadedApp) {
-			var newInstance = loadedApp.createNewInstance();
-			newInstance.run();
-		});
-	}
+        
+    // 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+    } else if (cmb1.value == "profile") { 
+	    var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+		httpPostMethod.submit();
+    }
 }
