@@ -372,7 +372,7 @@
 				//var sessionval = getSessionStorage("memsession");
 				var mealkitComment = jsonData.mealkitCommentList;
 				var totalCommentCount = jsonData.mealkitCommentNum;
-				//console.log("mealkitComment = " + mealkitComment.mealkitEmail);
+				var commentStar = jsonData.mealkitStarList;
 				app.lookup("cnt").value = totalCommentCount;
 				var container = app.lookup("commentgrp");
 				
@@ -387,7 +387,7 @@
 						comment.nick = mealkitComment[i].memberVO.memberNick;
 						comment.regDate = mealkitComment[i].mealkitCommentDate;
 						comment.content = mealkitComment[i].mealkitCommentContent;
-						
+						comment.star = commentStar[i].mealkitStarScore;
 						//if(sessionval ==null || sessionval != mealkitComment[i].memberVO.memberEmail){
 						//	comment.deleteBtn = false;
 						//}

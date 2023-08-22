@@ -78,17 +78,19 @@ public class MealkitCommentController {
 		return new JSONDataView();
 	}
 	
-	@PostMapping("/commentList")
+	@RequestMapping("/commentList")
 	public View mealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		ParameterGroup param= dataRequest.getParameterGroup("commentList");
 		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo")); //밀키트 게시판 번호
 		int mealkitCommentNum = mealkitCommentService.mealkitCommentCnt(mealkitNo);//댓글 개수
 		
 		List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
+		List<MealkitStarScore> starList= mealkitStarScoreService.findCommentStarList(mealkitNo);
 		//MealkitStarScore mealkitStar = mealkitStarScoreService.findMealkitStar(mealkitComment.getMealkitCommentId());
 		//List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
 		dataRequest.setResponse("mealkitCommentList", list);
 		dataRequest.setResponse("mealkitCommentNum", mealkitCommentNum);
+		dataRequest.setResponse("mealkitStarList", starList);
 		return new JSONDataView();
 	}
 	

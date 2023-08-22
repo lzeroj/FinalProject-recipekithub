@@ -2248,6 +2248,7 @@
 					app.lookup("nick").text = app.getAppProperty("nick");
 					app.lookup("regDate").text = app.getAppProperty("regDate");
 					app.lookup("content").text = app.getAppProperty("content");
+					app.lookup("star").text = app.getAppProperty("star");
 				}
 	
 				/*
@@ -2358,8 +2359,8 @@
 				container.addChild(group_1, {
 					"top": "88px",
 					"left": "8px",
-					"width": "351px",
-					"height": "2px"
+					"width": "926px",
+					"height": "1px"
 				});
 				
 				var image_1 = new cpr.controls.Image();
@@ -2481,6 +2482,7 @@
 					app.lookup("nick").text = app.getAppProperty("nick");
 					app.lookup("star").text = app.getAppProperty("star");
 					app.lookup("hits").text = app.getAppProperty("hits");
+					app.lookup("count").text = app.getAppProperty("count");
 				}
 	
 				/*
@@ -2500,6 +2502,7 @@
 				app.declareAppProperty("nick", null);
 				app.declareAppProperty("star", null);
 				app.declareAppProperty("hits", null);
+				app.declareAppProperty("count", null);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 				app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -2556,44 +2559,37 @@
 					"height": "27px"
 				});
 				
-				var output_3 = new cpr.controls.Output();
-				output_3.value = "별점";
+				var output_3 = new cpr.controls.Output("star");
+				output_3.value = "Output";
+				output_3.style.css({
+					"color" : "#0CA44E",
+					"font-weight" : "bold",
+					"font-size" : "14px"
+				});
 				container.addChild(output_3, {
-					"top": "204px",
-					"left": "0px",
-					"width": "50px",
-					"height": "27px"
+					"top": "206px",
+					"left": "55px",
+					"width": "26px",
+					"height": "24px"
 				});
 				
-				var output_4 = new cpr.controls.Output("star");
-				output_4.value = "Output";
-				output_4.style.css({
-					"color" : "#0CA44E"
-				});
+				var output_4 = new cpr.controls.Output();
+				output_4.value = "조회수";
 				container.addChild(output_4, {
 					"top": "204px",
-					"left": "49px",
+					"left": "104px",
 					"width": "50px",
 					"height": "27px"
 				});
 				
-				var output_5 = new cpr.controls.Output();
-				output_5.value = "조회수";
-				container.addChild(output_5, {
-					"top": "204px",
-					"left": "98px",
-					"width": "50px",
-					"height": "27px"
-				});
-				
-				var output_6 = new cpr.controls.Output("hits");
-				output_6.value = "Output";
-				output_6.style.css({
+				var output_5 = new cpr.controls.Output("hits");
+				output_5.value = "Output";
+				output_5.style.css({
 					"color" : "#0CA44E"
 				});
-				container.addChild(output_6, {
+				container.addChild(output_5, {
 					"top": "204px",
-					"left": "147px",
+					"left": "153px",
 					"width": "50px",
 					"height": "27px"
 				});
@@ -2601,10 +2597,10 @@
 				var image_2 = new cpr.controls.Image();
 				image_2.src = "theme/images/mealkit/free-icon-star-6063500.png";
 				container.addChild(image_2, {
-					"top": "208px",
-					"left": "29px",
-					"width": "21px",
-					"height": "20px"
+					"top": "206px",
+					"left": "0px",
+					"width": "27px",
+					"height": "23px"
 				});
 				
 				var group_1 = new cpr.controls.Container();
@@ -2618,6 +2614,15 @@
 					"left": "0px",
 					"width": "230px",
 					"height": "5px"
+				});
+				
+				var output_6 = new cpr.controls.Output("count");
+				output_6.value = "Output";
+				container.addChild(output_6, {
+					"top": "208px",
+					"left": "26px",
+					"width": "30px",
+					"height": "20px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);
@@ -2679,6 +2684,14 @@
 		},
 		set: function(newValue){
 			return this.getEmbeddedAppInstance().setAppProperty("hits", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.mealkitList.prototype, "count", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("count");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("count", newValue, true);
 		}
 	});
 	

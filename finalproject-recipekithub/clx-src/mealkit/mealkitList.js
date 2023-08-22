@@ -33,7 +33,8 @@ function onBodyLoad(e){
 	
 	
 	var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
-	//var mealkitMap = cpr.core.Platform.INSTANCE.getParameter("mealkitMap");
+	var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
+	var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
 	//console.log("mealkitMap =" + mealkitMap);
 	var email = cpr.core.Platform.INSTANCE.getParameter("member");
 	console.log("email = " + email);
@@ -55,8 +56,8 @@ function onBodyLoad(e){
 			mealkit.hits = mealkitList[i].mealkitBoardHits;
 			mealkit.nick = mealkitList[i].memberVO.memberNick;
 			mealkit.title = mealkitList[i].mealkitName;
-			//mealkit.img = mealkitList[i].mealkitImage;
-			//mealkit.star = mealkitMap.get[mealkitList[i].mealkitNo];
+			mealkit.star = mealkitStarList[i];
+			mealkit.count = "("+commentCount[i]+")";
 			container.addChild(mealkit, {
 				height: "250px",
 				width: "230px",

@@ -2,6 +2,7 @@ package org.kosta.recipekithub.webcontroller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.recipekithub.model.service.MealkitCommentService;
 import org.kosta.recipekithub.model.service.MealkitService;
 import org.kosta.recipekithub.model.service.MealkitStarScoreService;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
+import org.kosta.recipekithub.model.vo.MealkitCommentVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -40,6 +43,7 @@ public class MealkitController {
 	
 	private final MealkitService mealKitService;
 	private final MealkitStarScoreService mealkitStarScoreService;
+	private final MealkitCommentService mealkitCommentService;
 	
 	
 	@RequestMapping("/mealkitList")
@@ -56,7 +60,15 @@ public class MealkitController {
 		String search = dataRequst.getParameter("search");
 		log.info("search = " + search);
 		List<MealKitBoard> list = mealKitService.findMealKitList();
+		////////////////////////////////////////
+		List<Double> mealkitStarList = new ArrayList<>();
+		List<Integer> commentCount = new ArrayList<>();
+		for(MealKitBoard mealkit : list) {
+			mealkitStarList.add(mealkitStarScoreService.findMealkitStarList(mealkit.getMealkitNo()));
+			commentCount.add(mealkitCommentService.mealkitCommentCnt(mealkit.getMealkitNo()));
+		}
 		
+		/////////////////////////////////
 //		Map<Integer, Double> map = new HashMap<>();
 //		for(MealKitBoard mealkit : list) {
 //			double num = mealkitStarScoreService.findMealkitStarList(mealkit.getMealkitNo());
@@ -68,6 +80,8 @@ public class MealkitController {
 		initParam.put("mealkitList", list);
 		initParam.put("member", email);
 		initParam.put("searchMealkit", search);
+		initParam.put("mealkitStarList", mealkitStarList);
+		initParam.put("commentCount", commentCount);
 		//initParam.put("mealkitMap", map);
 		return new UIView("ui/mealkit/mealkitList.clx", initParam);
 		

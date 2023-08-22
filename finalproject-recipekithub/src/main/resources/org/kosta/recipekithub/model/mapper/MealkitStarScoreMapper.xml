@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="org.kosta.recipekithub.model.mapper.MealkitStarScoreMapper">
+<mapper namespace="org.kosta.recipekithub.model.mapper.MealkitStarScoreMapper">
 
 <resultMap type="org.kosta.recipekithub.model.vo.MealkitStarScore" id="mealkitStarMap">
-	<result column="mealkit_comment_id" property="mealkitCommentVO.mealkitCommentId"/>
+	<id property="mealkitCommentVO.mealkitCommentId" column="mealkit_comment_id"/>
+    <result property="mealkitCommentVO.mealkitBoard.mealkitNo" column="mealkit_no"/>
+    <result property="mealkitStarScore" column="mealkit_star_score"/>
 </resultMap>
-	
+
 <insert id="insertMealkitStar">
 	insert into mealkit_star_score values(#{memberEmail}, #{mealkitCommentNo}, #{mealkitStar})	
 </insert>
@@ -20,5 +21,13 @@
 <select id="mealkitStarCnt">
 	select count(*) from mealkit_comment;
 </select>
+
+
+<select id="findCommentStarList" resultMap="mealkitStarMap">
+select m.mealkit_comment_id, m.mealkit_no ,s.mealkit_star_score, m.member_email, m.mealkit_comment_content,
+ mealkit_comment_date from mealkit_comment m 
+ left outer join mealkit_star_score s on m.mealkit_comment_id = s.mealkit_comment_id where m.mealkit_no = #{value} order by m.mealkit_no desc
+</select>
+
 
 </mapper>
