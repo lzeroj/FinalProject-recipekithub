@@ -51,10 +51,10 @@
         <cl:gridcolumn std:sid="g-column-db250291" width="54px"/>
         <cl:gridheader std:sid="gh-band-f2c6a622">
           <cl:gridrow std:sid="g-row-7f7ec297"/>
-          <cl:gridcell std:sid="gh-cell-c215da8d" rowindex="0" colindex="0" sortable="false" filterable="false"/>
-          <cl:gridcell std:sid="gh-cell-26693a72" rowindex="0" colindex="1" targetcolumnname="boardTitle" sortable="false" filterable="false" text="글 제목"/>
-          <cl:gridcell std:sid="gh-cell-d0288eb1" rowindex="0" colindex="2" targetcolumnname="boardRegDate" sortable="false" filterable="false" text="작성 일시"/>
-          <cl:gridcell std:sid="gh-cell-6d638098" rowindex="0" colindex="3" text="작성 여부"/>
+          <cl:gridcell std:sid="gh-cell-c215da8d" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-26693a72" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="boardTitle" sortable="false" filterable="false" text="글 제목"/>
+          <cl:gridcell std:sid="gh-cell-d0288eb1" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="boardRegDate" sortable="false" filterable="false" text="작성 일시"/>
+          <cl:gridcell std:sid="gh-cell-6d638098" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" text="작성 여부"/>
         </cl:gridheader>
         <cl:griddetail std:sid="gd-band-384fa961">
           <cl:gridrow std:sid="g-row-f88b21d3" height="48px"/>

@@ -43,6 +43,8 @@
 			function onButtonClick(e){
 				var button = e.control;
 				if(confirm("수정하시겠습니까?")){
+					app.lookup("updateqna").setValue("boardTitle", app.lookup("ipb1").value);
+					app.lookup("updateqna").setValue("boardContent", app.lookup("txa1").text);
 					app.lookup("subupdateqna").send();
 				}
 			}
@@ -161,9 +163,9 @@
 						"border-radius" : "10px"
 					});
 					container.addChild(inputBox_1, {
-						"top": "20px",
-						"right": "20px",
-						"left": "20px",
+						"top": "5px",
+						"right": "0px",
+						"left": "0px",
 						"height": "40px"
 					});
 					var textArea_1 = new cpr.controls.TextArea("txa1");
@@ -173,10 +175,10 @@
 						"border-radius" : "10px"
 					});
 					container.addChild(textArea_1, {
-						"top": "80px",
-						"right": "20px",
-						"bottom": "60px",
-						"left": "20px"
+						"top": "50px",
+						"right": "0px",
+						"left": "0px",
+						"height": "248px"
 					});
 					var button_1 = new cpr.controls.Button();
 					button_1.value = "수정";
@@ -189,7 +191,7 @@
 						button_1.addEventListener("click", onButtonClick);
 					}
 					container.addChild(button_1, {
-						"right": "170px",
+						"right": "150px",
 						"bottom": "20px",
 						"width": "140px",
 						"height": "30px"
@@ -205,7 +207,7 @@
 						button_2.addEventListener("click", onButtonClick2);
 					}
 					container.addChild(button_2, {
-						"right": "20px",
+						"right": "0px",
 						"bottom": "20px",
 						"width": "140px",
 						"height": "30px"

@@ -34,7 +34,7 @@ function onLikeRecipeListReceive(e){
 			recipe.title = recipeList[i].recipeBoardTitle;
 			container.addChild(recipe, {
 				height: "300px",
-				width: "300px",
+				width: "280px",
 				autoSize: "both"
 			});
 			recipe.addEventListener("imgClick", function(e) {
@@ -51,6 +51,11 @@ function onLikeRecipeListSubmitSuccess(e){
 	var slidify = cpr.core.Module.require("Slidify").slidify;
 	//슬라이드 기능을 사용할 컨트롤에 적용시킨후 start 시킵니다. (아래의 두 코드는 필수로 작성하셔야 합니다.)
 	var slide = slidify(app.lookup("grp"));
+	slide.showCount = 3;
+	slide.showPaginition = true;
+	slide.autoPlayDelay = 1;
+	slide.initialPage = 0;
+	slide.useInfiniteScroll = true;
 	slide.autoPlay();
 	slide.start();
 }

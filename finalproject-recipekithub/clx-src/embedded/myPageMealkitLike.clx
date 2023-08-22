@@ -34,7 +34,7 @@
       <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="밀키트찜 목록">
         <cl:xylayoutdata std:sid="xyl-data-da28a6e7" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:group std:sid="group-92690e5f" style="border-radius:20px; background-color:#F6F6F6;">
+      <cl:group std:sid="group-92690e5f" style="border-radius:20px; background-color:#F7F7F7;">
         <cl:xylayoutdata std:sid="xyl-data-efd923e8" top="60px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:grid std:sid="grid-df701717" id="grd1" readonly="true" datasetid="mealkitLikeList" selectionunit="cell">
           <cl:listener std:sid="listener-831d0e17" name="cell-click" handler="onGrd1CellClick"/>
@@ -47,12 +47,12 @@
           <cl:gridcolumn std:sid="g-column-e5c2aa16" width="42px"/>
           <cl:gridheader std:sid="gh-band-548dfad2">
             <cl:gridrow std:sid="g-row-7591f77c"/>
-            <cl:gridcell std:sid="gh-cell-544fc2d5" rowindex="0" colindex="0" sortable="false" filterable="false"/>
-            <cl:gridcell std:sid="gh-cell-d08d52cc" rowindex="0" colindex="1" targetcolumnname="mealkitName" sortable="false" filterable="false" text="밀키트명"/>
-            <cl:gridcell std:sid="gh-cell-1b1b603e" rowindex="0" colindex="2" targetcolumnname="mealkitIngredients" sortable="false" filterable="false" text="성분"/>
-            <cl:gridcell std:sid="gh-cell-fce6aec0" rowindex="0" colindex="3" targetcolumnname="mealkitCategory" sortable="false" filterable="false" text="카테고리"/>
-            <cl:gridcell std:sid="gh-cell-37fa085d" rowindex="0" colindex="4" targetcolumnname="memberEmail" sortable="false" filterable="false" text="등록자명"/>
-            <cl:gridcell std:sid="gh-cell-d7b220bb" rowindex="0" colindex="5"/>
+            <cl:gridcell std:sid="gh-cell-544fc2d5" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-d08d52cc" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="mealkitName" sortable="false" filterable="false" text="밀키트명"/>
+            <cl:gridcell std:sid="gh-cell-1b1b603e" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="mealkitIngredients" sortable="false" filterable="false" text="성분"/>
+            <cl:gridcell std:sid="gh-cell-fce6aec0" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="mealkitCategory" sortable="false" filterable="false" text="카테고리"/>
+            <cl:gridcell std:sid="gh-cell-37fa085d" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="등록자명"/>
+            <cl:gridcell std:sid="gh-cell-d7b220bb" rowindex="0" colindex="5" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-ca15c3d7">
             <cl:gridrow std:sid="g-row-c85a221d" height="42px"/>

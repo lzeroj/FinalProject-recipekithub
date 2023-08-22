@@ -134,10 +134,11 @@
 						recipe.hits = recipeList[i].recipeBoardHits;
 						recipe.nick = recipeList[i].memberVO.memberNick;
 						recipe.title = recipeList[i].recipeBoardTitle;
+						recipe.profile = "/upload/profile/" + recipeList[i].memberVO.memberImage;
 						recipe.like = likeCounts[i];
 						container.addChild(recipe, {
 							height: "250px",
-							width: "315px",
+							width: "300px",
 							autoSize: "both"
 						});
 						recipe.addEventListener("imgClick", function(e) {
@@ -262,7 +263,7 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
-				"background-color" : "#E8E8E8",
+				"background-color" : "#F4FAEC",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -279,46 +280,13 @@
 			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
 			group_1.setLayout(xYLayout_2);
 			(function(container){
-				var output_1 = new cpr.controls.Output();
-				output_1.value = "종류별";
-				output_1.style.css({
-					"color" : "#000000",
-					"font-weight" : "bold",
-					"text-align" : "center"
-				});
-				container.addChild(output_1, {
-					"top": "10px",
-					"left": "10px",
-					"width": "90px",
-					"height": "60px"
-				});
-				var output_2 = new cpr.controls.Output();
-				output_2.value = "재료별";
-				output_2.style.css({
-					"color" : "#000000",
-					"font-weight" : "bold",
-					"text-align" : "center"
-				});
-				container.addChild(output_2, {
-					"top": "80px",
-					"left": "10px",
-					"width": "90px",
-					"height": "60px"
-				});
-				var output_3 = new cpr.controls.Output();
-				output_3.value = "방법별";
-				output_3.style.css({
-					"color" : "#000000",
-					"font-weight" : "bold",
-					"text-align" : "center"
-				});
-				container.addChild(output_3, {
-					"top": "150px",
-					"left": "10px",
-					"width": "90px",
-					"height": "60px"
-				});
 				var navigationBar_1 = new cpr.controls.NavigationBar("type");
+				navigationBar_1.style.css({
+					"border-right-style" : "none",
+					"border-left-style" : "none",
+					"border-bottom-style" : "none",
+					"border-top-style" : "none"
+				});
 				navigationBar_1.bind("value").toDataMap(app.lookup("dmCategory"), "type");
 				(function(navigationBar_1){
 					navigationBar_1.addItem(new cpr.controls.MenuItem("전체", "전체", null));
@@ -341,6 +309,12 @@
 					"height": "60px"
 				});
 				var navigationBar_2 = new cpr.controls.NavigationBar("ingredients");
+				navigationBar_2.style.css({
+					"border-right-style" : "none",
+					"border-left-style" : "none",
+					"border-bottom-style" : "none",
+					"border-top-style" : "none"
+				});
 				navigationBar_2.bind("value").toDataMap(app.lookup("dmCategory"), "ingredients");
 				(function(navigationBar_2){
 					navigationBar_2.addItem(new cpr.controls.MenuItem("전체", "전체", null));
@@ -362,6 +336,12 @@
 					"height": "60px"
 				});
 				var navigationBar_3 = new cpr.controls.NavigationBar("method");
+				navigationBar_3.style.css({
+					"border-right-style" : "none",
+					"border-left-style" : "none",
+					"border-bottom-style" : "none",
+					"border-top-style" : "none"
+				});
 				navigationBar_3.bind("value").toDataMap(app.lookup("dmCategory"), "method");
 				(function(navigationBar_3){
 					navigationBar_3.addItem(new cpr.controls.MenuItem("전체", "전체", null));
@@ -382,20 +362,74 @@
 					"width": "854px",
 					"height": "60px"
 				});
+				var group_2 = new cpr.controls.Container();
+				group_2.style.css({
+					"border-right-style" : "solid",
+					"border-right-color" : "#F9F9F9"
+				});
+				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_3);
+				(function(container){
+					var output_1 = new cpr.controls.Output();
+					output_1.value = "종류별";
+					output_1.style.css({
+						"color" : "#90be70",
+						"font-weight" : "bold",
+						"text-align" : "center"
+					});
+					container.addChild(output_1, {
+						"top": "9px",
+						"left": "0px",
+						"width": "92px",
+						"height": "60px"
+					});
+					var output_2 = new cpr.controls.Output();
+					output_2.value = "재료별";
+					output_2.style.css({
+						"color" : "#90be70",
+						"font-weight" : "bold",
+						"text-align" : "center"
+					});
+					container.addChild(output_2, {
+						"top": "80px",
+						"left": "0px",
+						"width": "92px",
+						"height": "60px"
+					});
+					var output_3 = new cpr.controls.Output();
+					output_3.value = "방법별";
+					output_3.style.css({
+						"color" : "#90be70",
+						"font-weight" : "bold",
+						"text-align" : "center"
+					});
+					container.addChild(output_3, {
+						"top": "150px",
+						"left": "0px",
+						"width": "92px",
+						"height": "59px"
+					});
+				})(group_2);
+				container.addChild(group_2, {
+					"top": "0px",
+					"left": "10px",
+					"width": "95px",
+					"height": "219px"
+				});
 			})(group_1);
 			container.addChild(group_1, {
 				"top": "199px",
-				"width": "1320px",
+				"width": "1262px",
 				"height": "220px",
-				"left": "calc(50% - 660px)"
+				"left": "calc(50% - 631px)"
 			});
 			
-			var group_2 = new cpr.controls.Container();
-			group_2.style.css({
+			var group_3 = new cpr.controls.Container();
+			group_3.style.css({
 				"background-color" : "#FFFFFF"
 			});
-			var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-			group_2.setLayout(xYLayout_3);
+			var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+			group_3.setLayout(xYLayout_4);
 			(function(container){
 				var output_4 = new cpr.controls.Output();
 				output_4.value = "총";
@@ -432,6 +466,12 @@
 					"height": "20px"
 				});
 				var navigationBar_4 = new cpr.controls.NavigationBar("sort");
+				navigationBar_4.style.css({
+					"border-right-style" : "none",
+					"border-left-style" : "none",
+					"border-bottom-style" : "none",
+					"border-top-style" : "none"
+				});
 				navigationBar_4.bind("value").toDataMap(app.lookup("dmSort"), "sort");
 				(function(navigationBar_4){
 					navigationBar_4.addItem(new cpr.controls.MenuItem("최신순", "최신순", null));
@@ -442,30 +482,30 @@
 					navigationBar_4.addEventListener("selection-change", onSortSelectionChange);
 				}
 				container.addChild(navigationBar_4, {
-					"top": "31px",
-					"left": "735px",
-					"width": "229px",
-					"height": "40px"
+					"top": "40px",
+					"left": "1038px",
+					"width": "204px",
+					"height": "39px"
 				});
-			})(group_2);
-			container.addChild(group_2, {
+			})(group_3);
+			container.addChild(group_3, {
 				"top": "429px",
-				"width": "1320px",
+				"width": "1262px",
 				"height": "90px",
-				"left": "calc(50% - 660px)"
+				"left": "calc(50% - 631px)"
 			});
 			
-			var group_3 = new cpr.controls.Container("grp");
-			group_3.style.css({
-				"background-color" : "#FFFFFF"
+			var group_4 = new cpr.controls.Container("grp");
+			group_4.style.css({
+				"background-color" : "transparent"
 			});
 			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
-			group_3.setLayout(flowLayout_1);
-			container.addChild(group_3, {
-				"top": "529px",
-				"width": "1320px",
-				"height": "731px",
-				"left": "calc(50% - 660px)"
+			group_4.setLayout(flowLayout_1);
+			container.addChild(group_4, {
+				"top": "525px",
+				"width": "1220px",
+				"height": "768px",
+				"left": "calc(50% - 610px)"
 			});
 			
 			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
@@ -477,7 +517,7 @@
 				pageIndexer_1.addEventListener("selection-change", onPageSelectionChange);
 			}
 			container.addChild(pageIndexer_1, {
-				"top": "1269px",
+				"top": "1307px",
 				"width": "320px",
 				"height": "40px",
 				"left": "calc(50% - 160px)"
@@ -489,6 +529,14 @@
 				"width": "1920px",
 				"height": "200px",
 				"left": "calc(50% - 960px)"
+			});
+			
+			var userDefinedControl_2 = new udc.footer();
+			container.addChild(userDefinedControl_2, {
+				"top": "1357px",
+				"left": "0px",
+				"width": "1920px",
+				"height": "100px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

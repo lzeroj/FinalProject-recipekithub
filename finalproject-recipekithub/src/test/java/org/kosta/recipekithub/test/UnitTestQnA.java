@@ -65,7 +65,7 @@ public class UnitTestQnA {
 	
 	@Test
 	public void selectChkQnAAnswer() {
-		int boardId = 5;
+		int boardId = 8;
 		
 		QnAAnswerVO answerVO = qnAService.selectChkQnAAnswer(boardId);
 		System.out.println(answerVO.toString());
