@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5d28e75c" version="1.0.4584">
   <head std:sid="head-fead5c58">
-    <screen std:sid="screen-b424b7bb" id="FHD" name="FHD" minwidth="1920px" width="1920px" height="1080px" customHeight="600" customWidth="800" active="false"/>
-    <screen std:sid="screen-9d1b9405" id="default" name="default" minwidth="1024px" maxwidth="1919px" width="1024px" height="768px" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-b424b7bb" id="FHD" name="FHD" minwidth="1920px" width="1920px" height="1080px" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-9d1b9405" id="default" name="default" minwidth="1024px" maxwidth="1919px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
     <screen std:sid="screen-72d3591a" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
     <screen std:sid="screen-e0120e6c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <link std:sid="link-4252a4d7" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
@@ -156,20 +156,17 @@
     <cl:listener std:sid="listener-5f6c31dc" name="load" handler="onBodyLoad"/>
     <cl:listener std:sid="listener-805342de" name="init" handler="onBodyInit"/>
     <cl:listener std:sid="listener-bc04d8b6" name="unload" handler="onBodyUnload"/>
-    <cl:group std:sid="group-1fde106f" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg11.png); background-position:center;">
-      <cl:xylayoutdata std:sid="xyl-data-2751e6a5" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:group std:sid="group-e743ec30">
-        <cl:xylayoutdata std:sid="xyl-data-81dedf0c" width="1880px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+    <cl:group std:sid="group-1fde106f">
+      <cl:flowlayoutdata std:sid="f-data-eabc98cd" width="1920px" height="1080px"/>
+      <cl:udc std:sid="ud-control-9483e93d" type="udc.header3">
+        <cl:xylayoutdata std:sid="xyl-data-d28fbe20" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      </cl:udc>
+      <cl:group std:sid="group-e743ec30" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg10.png); background-position:center;">
+        <cl:xylayoutdata std:sid="xyl-data-32506c42" top="200px" bottom="100px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-b68ee0a0">
-          <cl:responsivexylayoutdata std:sid="rxyl-data-2df0057d">
-            <cl:xylayoutdata std:sid="sxyl-data-b87275d4" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="FHD"/>
-            <cl:xylayoutdata std:sid="sxyl-data-afe1c80b" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="default"/>
-          </cl:responsivexylayoutdata>
+          <cl:xylayoutdata std:sid="xyl-data-24e8ad5e" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
           <cl:tabfolder std:sid="t-folder-1b30262a" style="font-size:28px;">
-            <cl:responsivexylayoutdata std:sid="rxyl-data-bc786b87">
-              <cl:xylayoutdata std:sid="sxyl-data-ca8d4a50" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="FHD"/>
-              <cl:xylayoutdata std:sid="sxyl-data-99379155" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="default"/>
-            </cl:responsivexylayoutdata>
+            <cl:xylayoutdata std:sid="xyl-data-f2febb63" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
             <cl:tabitem std:sid="t-item-4e3873ee" selected="true" text="MyProfile">
               <std:metadata>
                 <std:property key="is-active-item" value="true"/>
@@ -278,7 +275,7 @@
                     <cl:output std:sid="output-bb64ce6b" id="opbCheckPassword" value="">
                       <cl:formdata std:sid="f-data-ead06923" row="1" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
-                    <cl:output std:sid="output-7ce0a65c" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
+                    <cl:output std:sid="output-7ce0a65c" style="font-size:12px;" value="❈ 8자 이상~25자 이하 &#xD;&#xA;(숫자, 대소문자, 특수 문자 모두 포함)">
                       <cl:formdata std:sid="f-data-3494a357" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:formlayout std:sid="f-layout-2da4d9fa" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -305,7 +302,7 @@
                     <cl:output std:sid="output-b92eba14" id="opbCheckPassword2" value="">
                       <cl:formdata std:sid="f-data-c62b1034" row="1" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
-                    <cl:output std:sid="output-38bce9e6" style="font-size:10px;" value="❈ 비밀번호는 1자 이상~25자 이하입니다.">
+                    <cl:output std:sid="output-38bce9e6" style="font-size:12px;" value="❈ 8자 이상~25자 이하 &#xD;&#xA;(숫자, 대소문자, 특수 문자 모두 포함)">
                       <cl:formdata std:sid="f-data-d05f7be8" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:formlayout std:sid="f-layout-cb5a3e95" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -330,7 +327,7 @@
                     <cl:output std:sid="output-147cb024" id="opbCheckNick" value="">
                       <cl:formdata std:sid="f-data-bb2f5d0f" row="1" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
-                    <cl:output std:sid="output-de90e3f9" style="font-size:10px;" value="❈ 닉네임은 1자 이상~8자 이하입니다.">
+                    <cl:output std:sid="output-de90e3f9" style="font-size:14px;" value="❈ 중복 불가, 1자 이상~8자 이하.">
                       <cl:formdata std:sid="f-data-9c8c8d34" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:img std:sid="image-30a70019" id="imgNickChk">
@@ -409,13 +406,16 @@
             <cl:item-style style="background-color:#0CA44E; border-radius:20 20 0 0; padding-top:10px; font-weight:bolder; padding-left:50px; padding-bottom:10px; font-size:30px; font-family:푸른전남 Medium; padding-right:50px;"/>
             <cl:body-style style="border-radius:0 10 20 20;"/>
           </cl:tabfolder>
-          <cl:responsivexylayout std:sid="r-xylayout-0268ddfd"/>
+          <cl:xylayout std:sid="xylayout-efe83e9a"/>
         </cl:group>
-        <cl:responsivexylayout std:sid="r-xylayout-926f3e30"/>
+        <cl:xylayout std:sid="xylayout-6caf7d2a"/>
       </cl:group>
-      <cl:xylayout std:sid="xylayout-a46ad782"/>
+      <cl:udc std:sid="ud-control-51995e03" type="udc.footer">
+        <cl:xylayoutdata std:sid="xyl-data-5d464271" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+      </cl:udc>
+      <cl:xylayout std:sid="xylayout-89e2b51f"/>
     </cl:group>
-    <cl:xylayout std:sid="xylayout-800650e4"/>
+    <cl:flowlayout std:sid="f-layout-f15b38f8"/>
   </body>
   <std:studiosetting>
     <std:hruler/>
