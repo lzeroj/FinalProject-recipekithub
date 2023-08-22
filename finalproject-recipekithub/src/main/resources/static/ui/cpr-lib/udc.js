@@ -1753,28 +1753,28 @@
 							"top": "0px",
 							"right": "0px",
 							"left": "0px",
-							"height": "200px"
+							"height": "652px"
 						}, 
 						{
 							"media": "all and (min-width: 1024px) and (max-width: 1919px)",
 							"top": "0px",
 							"right": "0px",
 							"left": "0px",
-							"height": "200px"
+							"height": "652px"
 						}, 
 						{
 							"media": "all and (min-width: 500px) and (max-width: 1023px)",
 							"top": "0px",
 							"right": "0px",
 							"left": "0px",
-							"height": "200px"
+							"height": "652px"
 						}, 
 						{
 							"media": "all and (max-width: 499px)",
 							"top": "0px",
 							"right": "0px",
 							"left": "0px",
-							"height": "200px"
+							"height": "652px"
 						}
 					]
 				});
