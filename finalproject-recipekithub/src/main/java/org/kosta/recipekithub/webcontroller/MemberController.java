@@ -104,8 +104,7 @@ public class MemberController {
 	// ---[ 회원가입시 이메일 중복 체크 ]---//
 	@RequestMapping("/checkEmail")
 	@ResponseBody
-	public View checkEmail(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View checkEmail(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_check_email");
 		// ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
 		String memberEmail = param.getValue("member_email");
@@ -290,6 +289,7 @@ public class MemberController {
 
 		dataRequest.setMetadata(true, email);
 		// dataRequest.setResponse("ds_member", memberEmail);
+		
 		return new JSONDataView();
 	}
 

@@ -445,7 +445,8 @@
 				// End - User Script
 				
 				// Header
-				app.supportMedia("all and (min-width: 1024px)", "default");
+				app.supportMedia("all and (min-width: 1920px)", "FHD");
+				app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 				app.supportMedia("all and (max-width: 499px)", "mobile");
 				
@@ -572,7 +573,14 @@
 					container.addChild(group_2, {
 						positions: [
 							{
-								"media": "all and (min-width: 1024px)",
+								"media": "all and (min-width: 1920px)",
+								"right": "0px",
+								"bottom": "0px",
+								"left": "0px",
+								"height": "100px"
+							}, 
+							{
+								"media": "all and (min-width: 1024px) and (max-width: 1919px)",
 								"right": "0px",
 								"bottom": "0px",
 								"left": "0px",
@@ -598,7 +606,14 @@
 				container.addChild(group_1, {
 					positions: [
 						{
-							"media": "all and (min-width: 1024px)",
+							"media": "all and (min-width: 1920px)",
+							"right": "0px",
+							"bottom": "0px",
+							"left": "0px",
+							"height": "100px"
+						}, 
+						{
+							"media": "all and (min-width: 1024px) and (max-width: 1919px)",
 							"right": "0px",
 							"bottom": "0px",
 							"left": "0px",
@@ -1306,12 +1321,13 @@
 						return;
 					}
 					
-					if (sessionval == "shj") {
+					if (sessionval == "shj" || sessionval == "kjoonie@naver.com") {		
 						navigationBar.addItem(new cpr.controls.TreeItem("관리자", "admin", "root"));
 						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("매출관리", "salesAdmin", "admin"));
 					}
+					
 					app.lookup("category").value = app.getAppProperty("categoryValue");
 					app.lookup("searchInput").value = app.getAppProperty("searchValue");
 					var opbLoginStatus = app.lookup("opbLoginStatus");
@@ -1380,11 +1396,21 @@
 						
 					// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
 				    } else if (cmb1.value == "logout") {
-						//var logout = new cpr.events.CAppEvent("logout");
-						var logout = new cpr.events.CUIEvent("logout");
-						app.dispatchEvent(logout);
+				    	var initValue = "로그아웃 하시겠습니까?";
+						app.getRootAppInstance().openDialog("dialog/registerPopup", {
+							width: 400, height: 300, headerClose: true, resizable: false
+						}, function(dialog) {
+							dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+							});
+						}).then(function(returnValue) {
+							var submission = app.lookup("sub_logout");
+							submission.send();
+						});
+				        //window.location.href = "/member/logout";
+				        
 						
-						// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+					// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
 					} else if (cmb1.value == "profile") {
 						var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
 						httpPostMethod.submit();
@@ -1416,8 +1442,8 @@
 				});
 				
 				// Layout
-				var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-				container.setLayout(responsiveXYLayout_1);
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				container.setLayout(xYLayout_1);
 				
 				// UI Configuration
 				var group_1 = new cpr.controls.Container();
@@ -1520,6 +1546,14 @@
 									"border-right-color" : "#ffffff",
 									"border-top-style" : "solid"
 								});
+								searchInput_1.style.search.css({
+									"width" : "30px",
+									"padding-right" : "15px"
+								});
+								searchInput_1.style.clear.css({
+									"width" : "20px",
+									"padding-right" : "10px"
+								});
 								if(typeof onSearchInputSearch == "function") {
 									searchInput_1.addEventListener("search", onSearchInputSearch);
 								}
@@ -1536,6 +1570,9 @@
 									"border-left-style" : "none",
 									"border-bottom-style" : "none",
 									"border-top-style" : "none"
+								});
+								comboBox_1.style.button.css({
+									"padding-right" : "10px"
 								});
 								comboBox_1.style.item.css({
 									"border-right-style" : "solid",
@@ -1578,9 +1615,9 @@
 						formLayout_5.rightMargin = "30px";
 						formLayout_5.bottomMargin = "30px";
 						formLayout_5.leftMargin = "30px";
-						formLayout_5.horizontalSpacing = "50px";
+						formLayout_5.horizontalSpacing = "50px, 30px, 20px, 10px";
 						formLayout_5.verticalSpacing = "20px";
-						formLayout_5.setColumns(["50px", "50px", "50px", "50px"]);
+						formLayout_5.setColumns(["200px", "50px", "50px", "50px", "50px"]);
 						formLayout_5.setRows(["50px"]);
 						group_5.setLayout(formLayout_5);
 						(function(container){
@@ -1601,7 +1638,7 @@
 								button_1.addEventListener("click", onMypageClick);
 							}
 							container.addChild(button_1, {
-								"colIndex": 0,
+								"colIndex": 1,
 								"rowIndex": 0
 							});
 							var button_2 = new cpr.controls.Button("cartbtn");
@@ -1620,7 +1657,7 @@
 								button_2.addEventListener("click", onButtonClick);
 							}
 							container.addChild(button_2, {
-								"colIndex": 1,
+								"colIndex": 2,
 								"rowIndex": 0
 							});
 							var button_3 = new cpr.controls.Button("btnWrite");
@@ -1644,7 +1681,7 @@
 								button_3.addEventListener("click", onBtnWriteClick);
 							}
 							container.addChild(button_3, {
-								"colIndex": 2,
+								"colIndex": 3,
 								"rowIndex": 0
 							});
 							var comboBox_2 = new cpr.controls.ComboBox("cmb1");
@@ -1680,34 +1717,29 @@
 								comboBox_2.addEventListener("open", onCmb1Open);
 							}
 							container.addChild(comboBox_2, {
-								"colIndex": 3,
+								"colIndex": 4,
 								"rowIndex": 0
 							});
-						})(group_5);
-						container.addChild(group_5, {
-							"colIndex": 3,
-							"rowIndex": 0
-						});
-						var group_6 = new cpr.controls.Container();
-						var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-						group_6.setLayout(xYLayout_1);
-						(function(container){
 							var output_1 = new cpr.controls.Output("opbLoginStatus");
 							output_1.value = "";
 							output_1.style.css({
 								"font-weight" : "bold",
-								"font-size" : "14px"
+								"font-size" : "14px",
+								"line-height" : "1.5"
 							});
 							container.addChild(output_1, {
-								"top": "20px",
-								"left": "20px",
-								"width": "210px",
-								"height": "70px"
+								"colIndex": 0,
+								"rowIndex": 0,
+								"colSpan": 1,
+								"rowSpan": 1,
+								"ignoreLayoutSpacing": true
 							});
-						})(group_6);
-						container.addChild(group_6, {
+						})(group_5);
+						container.addChild(group_5, {
 							"colIndex": 2,
-							"rowIndex": 0
+							"rowIndex": 0,
+							"colSpan": 2,
+							"rowSpan": 1
 						});
 					})(group_2);
 					container.addChild(group_2, {
@@ -1747,36 +1779,10 @@
 					});
 				})(group_1);
 				container.addChild(group_1, {
-					positions: [
-						{
-							"media": "all and (min-width: 1920px)",
-							"top": "0px",
-							"right": "0px",
-							"left": "0px",
-							"height": "200px"
-						}, 
-						{
-							"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-							"top": "0px",
-							"right": "0px",
-							"left": "0px",
-							"height": "200px"
-						}, 
-						{
-							"media": "all and (min-width: 500px) and (max-width: 1023px)",
-							"top": "0px",
-							"right": "0px",
-							"left": "0px",
-							"height": "200px"
-						}, 
-						{
-							"media": "all and (max-width: 499px)",
-							"top": "0px",
-							"right": "0px",
-							"left": "0px",
-							"height": "200px"
-						}
-					]
+					"top": "0px",
+					"right": "0px",
+					"left": "0px",
+					"height": "200px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);

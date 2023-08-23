@@ -888,7 +888,7 @@
 							"padding-right" : "50px"
 						});
 						tabFolder_1.style.body.css({
-							"border-radius" : "0 10 20 20"
+							"border-radius" : "0px 10px 20px 20px"
 						});
 						
 						var tabItem_1 = (function(tabFolder){
@@ -1103,6 +1103,15 @@
 										"rowIndex": 4
 									});
 									var image_1 = new cpr.controls.Image("profileImg");
+									image_1.src = "theme/images/common/user-darker.png";
+									image_1.style.css({
+										"border-right-style" : "none",
+										"background-size" : "contain",
+										"border-left-style" : "none",
+										"border-bottom-style" : "none",
+										"background-image" : "url('theme/images/common/mypageIcon.png')",
+										"border-top-style" : "none"
+									});
 									image_1.bind("src").toDataSet(app.lookup("ds_profile"), "memberImage", 0);
 									container.addChild(image_1, {
 										"colIndex": 0,
@@ -1216,7 +1225,8 @@
 										inputBox_3.spellCheck = false;
 										inputBox_3.style.css({
 											"border-radius" : "5px",
-											"font-size" : "15px"
+											"font-size" : "15px",
+											"background-image" : "none"
 										});
 										inputBox_3.bind("value").toDataSet(app.lookup("ds_profile"), "memberPassword", 0);
 										if(typeof onIpbPassword1Keyup == "function") {

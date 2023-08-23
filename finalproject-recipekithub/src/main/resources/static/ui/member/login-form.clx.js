@@ -260,7 +260,7 @@
 						group_4.style.css({
 							"background-size" : "cover",
 							"background-position" : "center",
-							"background-image" : "url('theme/images/common/logo.png')"
+							"background-image" : "url('theme/images/icon/recipekithubLog.png')"
 						});
 						var xYLayout_2 = new cpr.controls.layouts.XYLayout();
 						group_4.setLayout(xYLayout_2);

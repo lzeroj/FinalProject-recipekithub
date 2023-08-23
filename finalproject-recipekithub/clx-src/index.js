@@ -31,65 +31,10 @@ function onBodyLoad(e) {
 }
 
 /*
- * 이미지에서 click 이벤트 발생 시 호출.
+ * 버튼에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
-function onImageClick(e) {
-	var image = e.control;
+function onButtonClick(e){
+	var button = e.control;
 	window.scrollTo(0, 0);
-}
-
-/*
- * 사용자 정의 컨트롤에서 event 이벤트 발생 시 호출.
- */
-function onHeader3Event(e) {
-	var header3 = e.control;
-	//var comboBox = app.getAppProperty("cmb1");
-	
-	//var comboBox = header3.cmb1;
-	
-	//alert("logout1");
-	
-	//comboBox.addEventListener("logout", function(e) {
-	
-	//alert("logout2");
-	
-	/*
-	//if (comboBox.value == "logout") {
-	if (comboBox.hasOwnProperty("logout")) {
-		var initValue = "로그아웃 하시겠습니까?";
-		app.openDialog("dialog/registerPopup", {
-			width: 400,
-			height: 300,
-			headerClose: true,
-			resizable: false
-		}, function(dialog) {
-			dialog.ready(function(dialogApp) {
-				dialogApp.initValue = initValue;
-			});
-		}).then(function(returnValue) {
-			var submission = app.lookup("sub_logout");
-			submission.send();
-		});
-	*/
-	
-	/*
-	app.openDialog("dialog/registerPopup", {
-			width: 400,
-			height: 300,
-			headerClose: true,
-			resizable: false
-		}, function(dialog) {
-			dialog.ready(function(dialogApp) {
-				//dialogApp.initValue = initValue;
-			});
-		}).then(function(returnValue) {
-			var submission = app.lookup("sub_logout");
-			submission.send();
-		});
-	*/
-	
-	//}
-	
-	//});
 }

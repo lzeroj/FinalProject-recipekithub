@@ -271,12 +271,13 @@ function onBodyLoad(e) {
 		return;
 	}
 	
-	if (sessionval == "shj") {
+	if (sessionval == "shj" || sessionval == "kjoonie@naver.com") {		
 		navigationBar.addItem(new cpr.controls.TreeItem("관리자", "admin", "root"));
 		navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 		navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
 		navigationBar.addItem(new cpr.controls.TreeItem("매출관리", "salesAdmin", "admin"));
 	}
+	
 	app.lookup("category").value = app.getAppProperty("categoryValue");
 	app.lookup("searchInput").value = app.getAppProperty("searchValue");
 	var opbLoginStatus = app.lookup("opbLoginStatus");
@@ -345,11 +346,21 @@ function onCmb1SelectionChange(e){
 		
 	// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
     } else if (cmb1.value == "logout") {
-		//var logout = new cpr.events.CAppEvent("logout");
-		var logout = new cpr.events.CUIEvent("logout");
-		app.dispatchEvent(logout);
+    	var initValue = "로그아웃 하시겠습니까?";
+		app.getRootAppInstance().openDialog("dialog/registerPopup", {
+			width: 400, height: 300, headerClose: true, resizable: false
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+			dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue) {
+			var submission = app.lookup("sub_logout");
+			submission.send();
+		});
+        //window.location.href = "/member/logout";
+        
 		
-		// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+	// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
 	} else if (cmb1.value == "profile") {
 		var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
 		httpPostMethod.submit();

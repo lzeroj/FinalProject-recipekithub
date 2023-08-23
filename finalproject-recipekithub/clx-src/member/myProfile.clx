@@ -178,7 +178,7 @@
                       <cl:columns length="1" unit="FRACTION"/>
                     </cl:formlayout>
                   </cl:group>
-                  <cl:img std:sid="image-7e3a7f36" id="profileImg">
+                  <cl:img std:sid="image-7e3a7f36" id="profileImg" style="border-right-style:none; background-size:contain; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/common/mypageIcon.png); border-top-style:none;" src="../theme/images/common/user-darker.png">
                     <cl:datasetbind property="src" datacontrolid="ds_profile" columnname="memberImage" rowindex="0"/>
                     <cl:formdata std:sid="f-data-958d5805" row="0" col="0"/>
                   </cl:img>
@@ -214,7 +214,7 @@
                     <cl:output std:sid="output-80de58cb" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - 비밀번호">
                       <cl:formdata std:sid="f-data-afe68c0d" row="0" col="0" rowspan="3" colspan="1"/>
                     </cl:output>
-                    <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; font-size:15px;" secret="true" showclearbutton="false" maxlength="25" spellcheck="false">
+                    <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; font-size:15px; background-image:none;" secret="true" showclearbutton="false" maxlength="25" spellcheck="false">
                       <cl:listener std:sid="listener-d203ed5c" name="keyup" handler="onIpbPassword1Keyup"/>
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberPassword" rowindex="0"/>
                       <cl:formdata std:sid="f-data-003590f1" row="0" col="1"/>
@@ -354,7 +354,7 @@
               </cl:group>
             </cl:tabitem>
             <cl:item-style style="background-color:#0CA44E; border-radius:20 20 0 0; padding-top:10px; font-weight:bolder; padding-left:50px; padding-bottom:10px; font-size:30px; font-family:푸른전남 Medium; padding-right:50px;"/>
-            <cl:body-style style="border-radius:0 10 20 20;"/>
+            <cl:body-style style="border-radius:0px 10px 20px 20px;"/>
           </cl:tabfolder>
           <cl:xylayout std:sid="xylayout-efe83e9a"/>
         </cl:group>
