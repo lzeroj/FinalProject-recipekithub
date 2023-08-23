@@ -2801,12 +2801,13 @@
 				var output_1 = new cpr.controls.Output("nick");
 				output_1.value = "Output";
 				output_1.style.css({
-					"color" : "#3C00FF"
+					"color" : "#3C00FF",
+					"font-weight" : "normal"
 				});
 				container.addChild(output_1, {
 					"top": "3px",
-					"left": "40px",
-					"width": "80px",
+					"left": "51px",
+					"width": "73px",
 					"height": "31px"
 				});
 				
@@ -2815,7 +2816,7 @@
 				container.addChild(output_2, {
 					"top": "33px",
 					"left": "3px",
-					"width": "296px",
+					"width": "333px",
 					"height": "35px"
 				});
 				
@@ -2826,7 +2827,7 @@
 				});
 				container.addChild(output_3, {
 					"top": "9px",
-					"left": "119px",
+					"left": "123px",
 					"width": "143px",
 					"height": "20px"
 				});
@@ -2847,12 +2848,13 @@
 				}
 				container.addChild(button_1, {
 					"top": "9px",
-					"left": "261px",
+					"left": "265px",
 					"width": "38px",
 					"height": "20px"
 				});
 				
 				var image_1 = new cpr.controls.Image("profile");
+				image_1.fallbackSrc = "theme/images/icon/chefimg.png";
 				container.addChild(image_1, {
 					"top": "3px",
 					"left": "3px",
@@ -3231,6 +3233,7 @@
 						"height": "25px"
 					});
 					var image_3 = new cpr.controls.Image("profile");
+					image_3.fallbackSrc = "theme/images/icon/chefimg.png";
 					container.addChild(image_3, {
 						"top": "181px",
 						"left": "0px",

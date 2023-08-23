@@ -183,16 +183,7 @@
 					fileInput.clear();
 					image.src = "";
 				}
-<<<<<<< HEAD
 			};
-=======
-			<<<<<<< HEAD
-			}
-
-			=======
-			}
-			>>>>>>> branch 'develop-branch' of https://github.com/lzeroj/FinalProject-recipekithub.git;
->>>>>>> branch 'develop-branch' of https://github.com/lzeroj/FinalProject-recipekithub.git
 			// End - User Script
 			
 			// Header
