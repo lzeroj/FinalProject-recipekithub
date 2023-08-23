@@ -10,51 +10,48 @@
     <link std:sid="link-e762ac8c" href="theme/custom-theme.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-d6fbeaed">
       <cl:submission std:sid="submission-9e4ebe14" id="find"/>
-      <cl:submission std:sid="submission-7cdda5fc" id="sub_logout" action="/memberUI/logout"/>
     </cl:model>
     <cl:appspec/>
   </head>
   <body std:sid="body-742fa205" style="background-color:#F4FAEC;">
     <cl:listener std:sid="listener-def95c39" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-3afdffe4">
-      <cl:xylayoutdata std:sid="xyl-data-46ab264b" top="0px" left="0px" width="1920px" height="1090px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-92d90e44" top="0px" left="0px" width="1920px" height="1090px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
         <cl:listener std:sid="listener-e6ce5049" name="event" handler="onHeader3Event"/>
-        <cl:listener std:sid="listener-93fc2d39" name="logout" handler="onHeader3Event"/>
-        <cl:xylayoutdata std:sid="xyl-data-a879d1ba" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH"/>
+        <cl:listener std:sid="listener-d9a38060" name="logout" handler="onHeader3Logout"/>
+        <cl:xylayoutdata std:sid="xyl-data-0544e65b" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         <cl:property name="embe" value="ea1" type="control"/>
       </cl:udc>
-      <cl:group std:sid="group-19106c56" style="background-color:#F4FAEC; background-size:cover; background-image:url(theme/images/common/bgimg10.png); background-position:center;">
-        <cl:xylayoutdata std:sid="xyl-data-22aa6dac" top="200px" bottom="100px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-19106c56" style="background-color:transparent; background-size:cover; background-image:url(theme/images/common/bgimg10.png); background-position:center;">
+        <cl:xylayoutdata std:sid="xyl-data-361dddf3" top="200px" bottom="100px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1">
-          <cl:responsivexylayoutdata std:sid="rxyl-data-dd351d24">
-            <cl:xylayoutdata std:sid="sxyl-data-61d0bbd5" right="20px" left="20px" height="720px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="FHD"/>
-          </cl:responsivexylayoutdata>
+          <cl:xylayoutdata std:sid="xyl-data-3edebd12" right="20px" left="20px" height="720px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
         </cl:embeddedapp>
         <cl:group std:sid="group-faa92370">
-          <cl:responsivexylayoutdata std:sid="rxyl-data-0d0c7fe0">
-            <cl:xylayoutdata std:sid="sxyl-data-560680a0" right="20px" bottom="0px" width="30px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM" screenid="FHD"/>
-          </cl:responsivexylayoutdata>
-          <cl:img std:sid="image-bbda04f5" src="theme/images/pivot/field/arrow-up-circle.svg">
-            <cl:listener std:sid="listener-aef89b4a" name="click" handler="onImageClick"/>
-            <cl:formdata std:sid="f-data-220eb14a" row="0" col="0"/>
-          </cl:img>
+          <cl:xylayoutdata std:sid="xyl-data-ad7686de" right="20px" bottom="0px" width="30px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+          <cl:button std:sid="button-82c18c7b" style="background-color:transparent; border-right-style:none; background-size:cover; border-left-style:none; border-bottom-style:none; background-position:center; background-image:url(theme/images/pivot/field/arrow-up-circle.svg); border-top-style:none;" value="">
+            <cl:listener std:sid="listener-c8d97075" name="click" handler="onButtonClick"/>
+            <cl:formdata std:sid="f-data-db1516f9" row="0" col="0"/>
+          </cl:button>
           <cl:formlayout std:sid="f-layout-99156463" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
             <cl:rows length="1" unit="FRACTION"/>
             <cl:columns length="1" unit="FRACTION"/>
           </cl:formlayout>
         </cl:group>
-        <cl:responsivexylayout std:sid="r-xylayout-b1999951"/>
+        <cl:xylayout std:sid="xylayout-879b2d8d"/>
       </cl:group>
       <cl:udc std:sid="ud-control-6c3a3fe8" type="udc.footer">
-        <cl:xylayoutdata std:sid="xyl-data-1c5d6085" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+        <cl:xylayoutdata std:sid="xyl-data-ef6990fa" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
       </cl:udc>
-      <cl:xylayout std:sid="xylayout-c9b9125c"/>
+      <cl:xylayout std:sid="xylayout-e4d9b86a"/>
     </cl:group>
-    <cl:xylayout std:sid="xylayout-bc755070"/>
+    <cl:xylayout std:sid="xylayout-addfe2df"/>
   </body>
   <std:studiosetting>
     <std:hruler/>
-    <std:vruler/>
+    <std:vruler>
+      <std:guide position="290"/>
+    </std:vruler>
   </std:studiosetting>
 </html>

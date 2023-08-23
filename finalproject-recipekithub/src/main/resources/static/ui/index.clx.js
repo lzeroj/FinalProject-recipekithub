@@ -47,77 +47,18 @@
 			}
 
 			/*
-			 * 이미지에서 click 이벤트 발생 시 호출.
+			 * 버튼에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onImageClick(e) {
-				var image = e.control;
+			function onButtonClick(e){
+				var button = e.control;
 				window.scrollTo(0, 0);
-			}
-
-			/*
-			 * 사용자 정의 컨트롤에서 event 이벤트 발생 시 호출.
-			 */
-			function onHeader3Event(e) {
-				var header3 = e.control;
-				//var comboBox = app.getAppProperty("cmb1");
-				
-				//var comboBox = header3.cmb1;
-				
-				//alert("logout1");
-				
-				//comboBox.addEventListener("logout", function(e) {
-				
-				//alert("logout2");
-				
-				/*
-				//if (comboBox.value == "logout") {
-				if (comboBox.hasOwnProperty("logout")) {
-					var initValue = "로그아웃 하시겠습니까?";
-					app.openDialog("dialog/registerPopup", {
-						width: 400,
-						height: 300,
-						headerClose: true,
-						resizable: false
-					}, function(dialog) {
-						dialog.ready(function(dialogApp) {
-							dialogApp.initValue = initValue;
-						});
-					}).then(function(returnValue) {
-						var submission = app.lookup("sub_logout");
-						submission.send();
-					});
-				*/
-				
-				/*
-				app.openDialog("dialog/registerPopup", {
-						width: 400,
-						height: 300,
-						headerClose: true,
-						resizable: false
-					}, function(dialog) {
-						dialog.ready(function(dialogApp) {
-							//dialogApp.initValue = initValue;
-						});
-					}).then(function(returnValue) {
-						var submission = app.lookup("sub_logout");
-						submission.send();
-					});
-				*/
-				
-				//}
-				
-				//});
-			}
+			};
 			// End - User Script
 			
 			// Header
 			var submission_1 = new cpr.protocols.Submission("find");
 			app.register(submission_1);
-			
-			var submission_2 = new cpr.protocols.Submission("sub_logout");
-			submission_2.action = "/memberUI/logout";
-			app.register(submission_2);
 			app.supportMedia("all and (min-width: 1920px)", "FHD");
 			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -144,8 +85,8 @@
 				if(typeof onHeader3Event == "function") {
 					userDefinedControl_1.addEventListener("event", onHeader3Event);
 				}
-				if(typeof onHeader3Event == "function") {
-					userDefinedControl_1.addEventListener("logout", onHeader3Event);
+				if(typeof onHeader3Logout == "function") {
+					userDefinedControl_1.addEventListener("logout", onHeader3Logout);
 				}
 				container.addChild(userDefinedControl_1, {
 					"top": "0px",
@@ -155,46 +96,20 @@
 				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
-					"background-color" : "#F4FAEC",
+					"background-color" : "transparent",
 					"background-size" : "cover",
 					"background-image" : "url('theme/images/common/bgimg10.png')",
 					"background-position" : "center"
 				});
-				var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-				group_2.setLayout(responsiveXYLayout_1);
+				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_3);
 				(function(container){
 					var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
 					container.addChild(embeddedApp_1, {
-						positions: [
-							{
-								"media": "all and (min-width: 1920px)",
-								"right": "20px",
-								"left": "20px",
-								"height": "720px",
-								"top": "calc(50% - 360px)"
-							}, 
-							{
-								"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-								"right": "20px",
-								"left": "20px",
-								"height": "720px",
-								"top": "calc(50% - 360px)"
-							}, 
-							{
-								"media": "all and (min-width: 500px) and (max-width: 1023px)",
-								"right": "10px",
-								"left": "10px",
-								"height": "720px",
-								"top": "calc(50% - 360px)"
-							}, 
-							{
-								"media": "all and (max-width: 499px)",
-								"right": "7px",
-								"left": "7px",
-								"height": "720px",
-								"top": "calc(50% - 360px)"
-							}
-						]
+						"right": "20px",
+						"left": "20px",
+						"height": "720px",
+						"top": "calc(50% - 360px)"
 					});
 					var group_3 = new cpr.controls.Container();
 					var formLayout_1 = new cpr.controls.layouts.FormLayout();
@@ -209,47 +124,31 @@
 					formLayout_1.setRows(["1fr"]);
 					group_3.setLayout(formLayout_1);
 					(function(container){
-						var image_1 = new cpr.controls.Image();
-						image_1.src = "theme/images/pivot/field/arrow-up-circle.svg";
-						if(typeof onImageClick == "function") {
-							image_1.addEventListener("click", onImageClick);
+						var button_1 = new cpr.controls.Button();
+						button_1.value = "";
+						button_1.style.css({
+							"background-color" : "transparent",
+							"border-right-style" : "none",
+							"background-size" : "cover",
+							"border-left-style" : "none",
+							"border-bottom-style" : "none",
+							"background-position" : "center",
+							"background-image" : "url('theme/images/pivot/field/arrow-up-circle.svg')",
+							"border-top-style" : "none"
+						});
+						if(typeof onButtonClick == "function") {
+							button_1.addEventListener("click", onButtonClick);
 						}
-						container.addChild(image_1, {
+						container.addChild(button_1, {
 							"colIndex": 0,
 							"rowIndex": 0
 						});
 					})(group_3);
 					container.addChild(group_3, {
-						positions: [
-							{
-								"media": "all and (min-width: 1920px)",
-								"right": "20px",
-								"bottom": "0px",
-								"width": "30px",
-								"height": "30px"
-							}, 
-							{
-								"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-								"right": "20px",
-								"bottom": "0px",
-								"width": "30px",
-								"height": "30px"
-							}, 
-							{
-								"media": "all and (min-width: 500px) and (max-width: 1023px)",
-								"right": "10px",
-								"bottom": "0px",
-								"width": "15px",
-								"height": "30px"
-							}, 
-							{
-								"media": "all and (max-width: 499px)",
-								"right": "7px",
-								"bottom": "0px",
-								"width": "10px",
-								"height": "30px"
-							}
-						]
+						"right": "20px",
+						"bottom": "0px",
+						"width": "30px",
+						"height": "30px"
 					});
 				})(group_2);
 				container.addChild(group_2, {

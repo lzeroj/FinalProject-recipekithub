@@ -27,6 +27,20 @@
 			}
 
 			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubfindRecipeLikeListSubmitSuccess(e){
+				var subfindRecipeLikeList = e.control;
+				var dataSet = app.lookup("dsrecipelikelist");
+				for(var i=0;i<dataSet.getRowCount();i++){
+					var recipeimage = dataSet.getValue(i, "recipeBoardImage");
+					var imgpath = "/upload/recipe/"+recipeimage;
+					dataSet.setValue(i, "recipeBoardImage", imgpath);
+				}
+			}
+
+			/*
 			 * 그리드에서 cell-click 이벤트 발생 시 호출.
 			 * Grid의 Cell 클릭시 발생하는 이벤트.
 			 */
@@ -53,14 +67,6 @@
 			function onSubdeleteRecipeLikeSubmitSuccess(e){
 				var subdeleteRecipeLike = e.control;
 				app.lookup("grd1").redraw();
-			//	var metadata = subdeleteRecipeLike.getMetadata("likeresult");
-			//	if(metadata == 1){ //insert 
-			//		app.lookup("likeimg").src = "theme/images/mealkit/heart_fill.png";
-			//	}else{ //delete
-			//		app.lookup("likeimg").src = "theme/images/mealkit/heart.png";
-			//	}
-			//	app.lookup("likeimg").redraw();
-			//	app.lookup("grd1").redraw();
 			};
 			// End - User Script
 			
@@ -92,6 +98,9 @@
 			var submission_1 = new cpr.protocols.Submission("subfindRecipeLikeList");
 			submission_1.action = "/findRecipeLikeList";
 			submission_1.addResponseData(dataSet_1, false);
+			if(typeof onSubfindRecipeLikeListSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onSubfindRecipeLikeListSubmitSuccess);
+			}
 			app.register(submission_1);
 			
 			var submission_2 = new cpr.protocols.Submission("subdeleteRecipeLike");
@@ -159,13 +168,13 @@
 						"selectionUnit": "cell",
 						"columns": [
 							{"width": "30px"},
-							{"width": "51px"},
-							{"width": "54px"},
+							{"width": "57px"},
+							{"width": "60px"},
 							{"width": "94px"},
-							{"width": "46px"},
-							{"width": "46px"},
-							{"width": "46px"},
-							{"width": "69px"}
+							{"width": "55px"},
+							{"width": "55px"},
+							{"width": "61px"},
+							{"width": "53px"}
 						],
 						"header": {
 							"rows": [{"height": "24px"}],
@@ -252,7 +261,7 @@
 							]
 						},
 						"detail": {
-							"rows": [{"height": "67px"}],
+							"rows": [{"height": "61px"}],
 							"cells": [
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 0},
@@ -279,7 +288,7 @@
 											"horizontalAlign": "center",
 											"verticalAlign": "center",
 											"width": 60,
-											"height": 60
+											"height": 50
 										};
 									}
 								},
@@ -321,8 +330,8 @@
 										cell.controlConstraint = {
 											"horizontalAlign": "center",
 											"verticalAlign": "center",
-											"width": 60,
-											"height": 60
+											"width": 30,
+											"height": 30
 										};
 									}
 								}

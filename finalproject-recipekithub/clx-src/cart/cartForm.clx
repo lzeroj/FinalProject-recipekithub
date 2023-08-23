@@ -75,8 +75,11 @@
         <cl:output std:sid="output-74eada54" value="">
           <cl:formdata std:sid="f-data-94a828c9" row="2" col="0" rowspan="1" colspan="7"/>
         </cl:output>
-        <cl:output std:sid="output-0fabbde3" style="border-right-style:solid; border-right-color:white;" value="    &lt; 쇼핑 계속하기">
-          <cl:formdata std:sid="f-data-6684d753" row="5" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-0fabbde3" id="shopcon" style="border-right-style:solid; cursor:pointer; border-right-color:white;" value="    &lt; 쇼핑 계속하기">
+          <cl:listener std:sid="listener-c900aea1" name="click" handler="onOutputClick"/>
+          <cl:listener std:sid="listener-b378229a" name="mousemove" handler="onOutputMousemove"/>
+          <cl:listener std:sid="listener-9ae8f2d6" name="mouseleave" handler="onShopconMouseleave"/>
+          <cl:formdata std:sid="f-data-6e7eb832" row="5" col="0" rowspan="1" colspan="2"/>
         </cl:output>
         <cl:grid std:sid="grid-6d67e65a" id="grd1" style="background-color:#FFFFFF; background-image:none;" datasetid="cartlist" autofit="all" autorowheight="all" nodatamessage="장바구니에 목록이없습니다 " wheelrowcount="1" resizablecolumns="all">
           <cl:listener std:sid="listener-3961564a" name="row-uncheck" handler="onGrd1RowUncheck"/>
@@ -100,11 +103,11 @@
             <cl:gridrow std:sid="g-row-113804dd" height="158px"/>
             <cl:gridcell std:sid="gd-cell-fd628508" rowindex="0" colindex="0" columntype="checkbox" columnname="isChecked"/>
             <cl:gridcell std:sid="gd-cell-dd3899cc" rowindex="0" colindex="1" columnname="mealkitImage">
-              <cl:img std:sid="image-a09ed00f" id="imggrd">
+              <cl:img std:sid="image-a09ed00f" id="imggrd" fallbacksrc="../theme/images/icon/chefimg.png">
                 <cl:celldata std:sid="c-data-7b107fab"/>
               </cl:img>
             </cl:gridcell>
-            <cl:gridcell std:sid="gd-cell-11577796" rowindex="0" colindex="2" columnname="mealkitName"/>
+            <cl:gridcell std:sid="gd-cell-11577796" rowindex="0" colindex="2" style="font-size:20px;" columnname="mealkitName"/>
             <cl:gridcell std:sid="gd-cell-acc780a8" rowindex="0" colindex="3" columnname="mealkitPrice"/>
             <cl:gridcell std:sid="gd-cell-c9cafc2b" rowindex="0" colindex="4" columnname="cartDetailQuantity">
               <cl:numbereditor std:sid="n-editor-adb0f60c" id="nbe2" min="1" upbuttonimage="">
@@ -113,7 +116,7 @@
               </cl:numbereditor>
             </cl:gridcell>
             <cl:gridcell std:sid="gd-cell-657bceb5" rowindex="0" colindex="5">
-              <cl:output std:sid="output-3bcb187c" id="sumex">
+              <cl:output std:sid="output-3bcb187c" id="sumex" style="text-align:center;">
                 <cl:expbind property="value" category="PROPERTY" expression="mealkitPrice * cartDetailQuantity"/>
                 <cl:celldata std:sid="c-data-429b5924"/>
               </cl:output>
@@ -138,7 +141,7 @@
           <cl:rows length="1" unit="FRACTION"/>
           <cl:rows length="25" unit="PIXEL"/>
           <cl:columns length="100" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
-          <cl:columns length="34" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
+          <cl:columns length="30" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
           <cl:columns length="1" unit="FRACTION"/>
           <cl:columns length="100" unit="PIXEL" shadetype="CUSTOM" shadecolor="#FFFFFF"/>
           <cl:columns length="120" unit="PIXEL"/>
@@ -160,7 +163,7 @@
           <cl:formdata std:sid="f-data-2411d5be" row="0" col="1" rowspan="1" colspan="1"/>
         </cl:output>
         <cl:output std:sid="output-d695ad09" style="background-color:#FFFFFF; border-top-width:3px; border-bottom-color:#e5e5e5; border-left-style:solid; border-left-color:#e5e5e5; border-bottom-width:3px; border-top-color:#e5e5e5; border-bottom-style:solid; background-image:none; border-left-width:3px; border-top-style:solid; text-align:right;" value="총 결제할 금액은 ">
-          <cl:formdata std:sid="f-data-17f8107c" row="0" col="0" rowspan="1" colspan="1"/>
+          <cl:formdata std:sid="f-data-703e49cd" row="0" col="0"/>
         </cl:output>
         <cl:output std:sid="output-84edf401" style="border-right-style:solid; background-color:#FFFFFF; border-top-width:3px; border-bottom-color:#e5e5e5; border-right-width:3px; border-bottom-width:3px; border-top-color:#e5e5e5; border-right-color:#e5e5e5; border-bottom-style:solid; background-image:none; border-top-style:solid;" value="원 입니다">
           <cl:formdata std:sid="f-data-dbc74ddd" row="0" col="2"/>

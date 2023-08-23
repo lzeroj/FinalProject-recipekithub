@@ -26,13 +26,24 @@
           </cl:datarow>
         </cl:datarowlist>
       </cl:dataset>
+      <cl:dataset std:sid="d-set-ff6051c2" id="ds_profile">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-14afc955" name="memberEmail" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-e5965182" name="memberNick" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-e6e08b1a" name="memberImage" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-41fc5808" id="sub_profile" action="/member/profileInfo">
+        <cl:listener std:sid="listener-caadbb5c" name="submit-success" handler="onSub_profileSubmitSuccess"/>
+        <cl:responsedata dataid="ds_profile"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
   <body std:sid="body-075178bb">
     <cl:listener std:sid="listener-b0b3e7df" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-d198e5ec">
-      <cl:xylayoutdata std:sid="xyl-data-cdd958c9" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:verticaldata std:sid="v-data-4dabbcea" width="1920px" height="1080px"/>
       <cl:group std:sid="group-3e468ab3" style="background-color:#f4faec;">
         <cl:xylayoutdata std:sid="xyl-data-a87a062c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-13bc8f58" style="text-align:center;">
@@ -42,15 +53,12 @@
               <cl:xylayoutdata std:sid="sxyl-data-30f9770a" top="39px" right="275px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
               <cl:xylayoutdata std:sid="sxyl-data-162a05da" top="39px" right="516px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="new-screen"/>
             </cl:responsivexylayoutdata>
-            <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1" style="border-right-style:solid; border-bottom-color:#dddddd; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-left-color:#dddddd; border-bottom-width:1px; border-top-color:#dddddd; border-bottom-style:solid; border-right-color:#dddddd; border-left-width:1px; border-top-style:solid;" src="../embedded/myPageRecipeLike.clx">
-              <cl:xylayoutdata std:sid="xyl-data-1467882b" top="0px" right="0px" bottom="30px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1" style="border-right-style:solid; border-bottom-color:#dddddd; border-top-width:1px; border-right-width:1px; border-left-color:#dddddd; border-right-color:#dddddd; border-left-width:1px; border-top-style:solid; border-radius:0px 0px 20px 20px; border-left-style:solid; border-bottom-width:1px; border-top-color:#dddddd; border-bottom-style:solid;" src="../embedded/myPageRecipeLike.clx">
+              <cl:verticaldata std:sid="v-data-996574b1" width="714px" height="701px" autosize="height"/>
             </cl:embeddedapp>
-            <cl:udc std:sid="ud-control-4ba86f54" type="udc.header3">
-              <cl:xylayoutdata std:sid="xyl-data-452b792c" top="-199px" right="-972px" left="-480px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
-            </cl:udc>
-            <cl:xylayout std:sid="xylayout-6eef3a02" scrollable="false"/>
+            <cl:verticallayout std:sid="v-layout-d29cbcea"/>
           </cl:group>
-          <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-bottom-color:#FFFFFF; color:#0ebc59; font-weight:bold; border-bottom-style:0;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click" baritemwidths="equal">
+          <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-radius:20px 20px 0px 0px; border-right-style:solid; border-bottom-color:#FFFFFF; color:#0ebc59; font-weight:bold; border-left-style:solid; border-left-color:#dddddd; border-bottom-width:0px; border-top-color:#dddddd; border-right-color:#dddddd; border-top-style:solid;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click" baritemwidths="equal">
             <cl:listener std:sid="listener-cd03793d" name="item-click" handler="onNav1ItemClick"/>
             <cl:responsivexylayoutdata std:sid="rxyl-data-3331906f">
               <cl:xylayoutdata std:sid="sxyl-data-5f0aca76" top="0px" right="629px" width="355px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
@@ -61,26 +69,75 @@
             <cl:menuitem std:sid="m-item-daee6a4f" label="밀키트찜" value="3"/>
             <cl:menuitem std:sid="m-item-437c11be" label="문의하기" value="4"/>
           </cl:navigationbar>
-          <cl:group std:sid="group-8003b2a0">
-            <cl:responsivexylayoutdata std:sid="rxyl-data-bf0473b5">
-              <cl:xylayoutdata std:sid="sxyl-data-d752227b" top="0px" right="0px" width="270px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
-              <cl:xylayoutdata std:sid="sxyl-data-b3ffb3d7" top="0px" right="0px" width="450px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="new-screen"/>
-            </cl:responsivexylayoutdata>
-            <cl:xylayout std:sid="xylayout-ac8d4db3"/>
+          <cl:group std:sid="group-64d720f3">
+            <cl:xylayoutdata std:sid="xyl-data-9ba166c7" top="39px" left="770px" width="420px" height="370px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+            <cl:group std:sid="group-1ed10915" style="border-radius:50px; background-color:#0A8C43;">
+              <cl:xylayoutdata std:sid="xyl-data-b140bb4b" top="0px" left="0px" width="420px" height="370px"/>
+              <cl:group std:sid="group-8003b2a0" style="background-color:#FFFFFF; border-radius:40px;">
+                <cl:xylayoutdata std:sid="xyl-data-5817fe4c" top="10px" right="10px" width="400px" height="350px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+                <cl:group std:sid="group-80d6fea2" style="border-radius:40px 40px 0px 0px; background-size:cover; background-image:url(../theme/images/member/2.png); background-position:center;">
+                  <cl:xylayoutdata std:sid="xyl-data-c854013c" top="0px" right="0px" left="0px" height="150px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+                  <cl:xylayout std:sid="xylayout-2df208e7"/>
+                </cl:group>
+                <cl:group std:sid="group-2e7d93e3">
+                  <cl:xylayoutdata std:sid="xyl-data-828a4f20" right="0px" bottom="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+                  <cl:xylayout std:sid="xylayout-2bb9aa2f"/>
+                </cl:group>
+                <cl:xylayout std:sid="xylayout-ac8d4db3"/>
+              </cl:group>
+              <cl:xylayout std:sid="xylayout-ceff05c7"/>
+            </cl:group>
+            <cl:group std:sid="group-4dd27e56">
+              <cl:xylayoutdata std:sid="xyl-data-eaf641d9" top="10px" right="10px" width="400px" height="350px" horizontalAnchor="RIGHT"/>
+              <cl:group std:sid="group-668cd1ae">
+                <cl:formdata std:sid="f-data-b38ca9e1" row="1" col="1"/>
+                <cl:img std:sid="image-eb10e8af" id="profileImg" fallbacksrc="../theme/images/icon/chefimg.png">
+                  <cl:datasetbind property="src" datacontrolid="ds_profile" columnname="memberImage" rowindex="0"/>
+                  <cl:xylayoutdata std:sid="xyl-data-9f957c73" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                </cl:img>
+                <cl:xylayout std:sid="xylayout-9f5fab5f"/>
+              </cl:group>
+              <cl:group std:sid="group-881ef166">
+                <cl:formdata std:sid="f-data-ec93c7b0" row="2" col="0" rowspan="1" colspan="3"/>
+                <cl:output std:sid="output-d575ac9f" id="opbNick" style="color:#EC631D; font-weight:bolder; font-size:18px; text-align:center;">
+                  <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberNick" rowindex="0"/>
+                  <cl:formdata std:sid="f-data-aff8c1cb" row="0" col="0" rowspan="1" colspan="2"/>
+                </cl:output>
+                <cl:output std:sid="output-7bfb1bb7" id="opbEmail" style="font-weight:bolder; font-size:18px; text-align:center;">
+                  <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberEmail" rowindex="0"/>
+                  <cl:formdata std:sid="f-data-48b9c5da" row="1" col="0" rowspan="1" colspan="2"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-7ac671cb" scrollable="false" hspace="20px" vspace="20px" top-margin="20px" right-margin="10px" bottom-margin="10px" left-margin="10px">
+                  <cl:rows length="50" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                  <cl:rows length="50" unit="PIXEL"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-8db01e7b" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="50" unit="PIXEL"/>
+                <cl:rows length="150" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="150" unit="PIXEL"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-59c102ee"/>
           </cl:group>
-          <cl:responsivexylayout std:sid="r-xylayout-6b15dc6d"/>
+          <cl:xylayout std:sid="xylayout-d15693db"/>
         </cl:group>
         <cl:udc std:sid="ud-control-aeddd20e" style="border-bottom-color:#62a40c; border-bottom-width:3px; border-bottom-style:solid;" type="udc.headerMyPage">
           <cl:xylayoutdata std:sid="xyl-data-279d7c53" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-c2834810" type="udc.footer">
+          <cl:xylayoutdata std:sid="xyl-data-f0467958" top="973px" bottom="0px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         </cl:udc>
         <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-832eec77"/>
     </cl:group>
-    <cl:udc std:sid="ud-control-c2834810" type="udc.footer">
-      <cl:xylayoutdata std:sid="xyl-data-1977962e" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
-    </cl:udc>
-    <cl:xylayout std:sid="xylayout-c3614e7a"/>
+    <cl:verticallayout std:sid="v-layout-bb0615c1" distribution="center"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

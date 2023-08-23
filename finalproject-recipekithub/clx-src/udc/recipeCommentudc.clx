@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-cd9e96ab" version="1.0.4584">
   <head std:sid="head-ebc1b7e0">
-    <screen std:sid="screen-529c7662" id="default" name="default" width="1024px" height="768px"/>
-    <screen std:sid="screen-a6770678" id="tablet" name="tablet" width="500px" height="667px"/>
-    <screen std:sid="screen-686a44ca" id="mobile" name="mobile" width="350px" height="525px"/>
+    <screen std:sid="screen-dca1bbd6" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-3b4d763e" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-79e383a8" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <cl:model std:sid="model-850f3c19"/>
     <cl:appspec>
       <cl:property name="nick" type="string"/>
@@ -15,22 +15,22 @@
       <cl:event name="deleteClick" type="cpr.events.CAppEvent"/>
     </cl:appspec>
   </head>
-  <body std:sid="body-9b6c5f59" style="top:0px; left:0px; width:300px; height:300px;">
+  <body std:sid="body-9b6c5f59" style="top:0px; left:0px; width:400px; height:400px;">
     <cl:listener std:sid="listener-bbd39aa8" name="load" handler="onBodyLoad"/>
-    <cl:output std:sid="output-9eff9e1f" id="nick" style="color:#3C00FF;" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-23f6ed8c" top="3px" left="40px" width="80px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    <cl:output std:sid="output-9eff9e1f" id="nick" style="color:#3C00FF; font-weight:normal;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-23f6ed8c" top="3px" left="51px" width="73px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:output std:sid="output-d76eb8b9" id="content" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-bcec8dbb" top="33px" left="3px" width="296px" height="35px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-bcec8dbb" top="33px" left="3px" width="333px" height="35px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:output std:sid="output-dbe608d7" id="regDate" style="color:#CBCBCB;" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-a128355f" top="9px" left="119px" width="143px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-a128355f" top="9px" left="123px" width="143px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:button std:sid="button-8f320a4c" id="deleteBtn" style="border-right-style:none; background-color:transparent; color:#CBCBCB; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;" value="삭제">
       <cl:listener std:sid="listener-f2b8e9e6" name="click" handler="onButtonClick2"/>
-      <cl:xylayoutdata std:sid="xyl-data-73d01a4e" top="9px" left="261px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-73d01a4e" top="9px" left="265px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:button>
-    <cl:img std:sid="image-1bd2811a" id="profile">
+    <cl:img std:sid="image-1bd2811a" id="profile" fallbacksrc="../theme/images/icon/chefimg.png">
       <cl:xylayoutdata std:sid="xyl-data-510ac70d" top="3px" left="3px" width="38px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:img>
     <cl:xylayout std:sid="xylayout-b3acc76d"/>

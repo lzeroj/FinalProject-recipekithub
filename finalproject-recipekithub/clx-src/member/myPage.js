@@ -10,6 +10,9 @@
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e){
+	var submission = app.lookup("sub_profile");
+	submission.send();
+	
 	console.log(sessionStorage.getItem("memsession"));
 	var vcEmb = app.lookup("ea1");
 	cpr.core.App.load("embedded/myPagePaymentInfo", function(/*cpr.core.App*/ loadedApp){
@@ -28,7 +31,6 @@ function onBodyLoad(e){
 		}
 	}); 
 	app.lookup("ea1").redraw();
-	
 }
 
 /*
@@ -64,4 +66,21 @@ function onNav1ItemClick(e){
 		}
 	}); 
 	app.lookup("ea1").redraw();	
+}
+
+
+
+
+
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSub_profileSubmitSuccess(e){
+	var sub_profile = e.control;
+	var dsProfile = app.lookup("ds_profile");
+	app.lookup("opbEmail").text = dsProfile.getValue(0, "memberEmail");
+	app.lookup("opbNick").text = dsProfile.getValue(0, "memberNick");
+	app.lookup("profileImg").src = "/upload/profile/" + dsProfile.getValue(0, "memberImage");
 }

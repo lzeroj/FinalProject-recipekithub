@@ -50,6 +50,12 @@ function onHeaderLogoClick(e){
  */
 function onButtonClick(e){
 	var button = e.control;
+	var sessionstrg = getTimedSessionData("memsession");
+	console.log("sessionstrg : "+sessionstrg);
+	if(sessionstrg == null || sessionstrg == ''){
+		alert("로그인이 필요한 작업입니다");
+		location.href="member/login-form.clx";
+	}
 	if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
 		if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
 			window.location.href = "/findMyCartForm";
@@ -271,7 +277,7 @@ function onBodyLoad(e) {
 		return;
 	}
 	
-	if (sessionval == "shj") {
+	if (sessionval == "shj" || sessionval == "kjoonie@naver.com") {
 		navigationBar.addItem(new cpr.controls.TreeItem("관리자", "admin", "root"));
 		navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 		navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
@@ -345,11 +351,22 @@ function onCmb1SelectionChange(e){
 		
 	// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
     } else if (cmb1.value == "logout") {
-		//var logout = new cpr.events.CAppEvent("logout");
-		var logout = new cpr.events.CUIEvent("logout");
-		app.dispatchEvent(logout);
+    	var initValue = "로그아웃 하시겠습니까?";
+		app.getRootAppInstance().openDialog("dialog/registerPopup", {
+			width: 400, height: 300, headerClose: true, resizable: false
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+			dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue) {
+			sessionStorage.clear();
+			var submission = app.lookup("sub_logout");
+			submission.send();
+			var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+			httpPostMethod.submit();
+		});
 		
-		// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+	// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
 	} else if (cmb1.value == "profile") {
 		var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
 		httpPostMethod.submit();

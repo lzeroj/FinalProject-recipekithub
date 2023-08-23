@@ -7,6 +7,9 @@
 (function() {
 	var app = new cpr.core.App("recipe/recipe", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/controls/htmlobject.part.css");
+			loader.addCSS("theme/custom-theme.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -269,16 +272,23 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.distribution = "center";
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
+			var userDefinedControl_1 = new udc.header3("headerUdc");
+			container.addChild(userDefinedControl_1, {
+				"width": "1920px",
+				"height": "200px"
+			});
+			
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
 				"background-color" : "#FFFFFF"
 			});
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_1.setLayout(xYLayout_2);
+			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_1);
 			(function(container){
 				var navigationBar_1 = new cpr.controls.NavigationBar("type");
 				navigationBar_1.style.css({
@@ -367,8 +377,8 @@
 					"border-right-style" : "solid",
 					"border-right-color" : "#F9F9F9"
 				});
-				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_3);
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_2);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
 					output_1.value = "종류별";
@@ -418,18 +428,16 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "199px",
 				"width": "1262px",
-				"height": "220px",
-				"left": "calc(50% - 631px)"
+				"height": "220px"
 			});
 			
 			var group_3 = new cpr.controls.Container();
 			group_3.style.css({
 				"background-color" : "#FFFFFF"
 			});
-			var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-			group_3.setLayout(xYLayout_4);
+			var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+			group_3.setLayout(xYLayout_3);
 			(function(container){
 				var output_4 = new cpr.controls.Output();
 				output_4.value = "총";
@@ -489,10 +497,8 @@
 				});
 			})(group_3);
 			container.addChild(group_3, {
-				"top": "429px",
 				"width": "1262px",
-				"height": "90px",
-				"left": "calc(50% - 631px)"
+				"height": "90px"
 			});
 			
 			var group_4 = new cpr.controls.Container("grp");
@@ -502,10 +508,9 @@
 			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
 			group_4.setLayout(flowLayout_1);
 			container.addChild(group_4, {
-				"top": "525px",
+				"autoSize": "height",
 				"width": "1220px",
-				"height": "768px",
-				"left": "calc(50% - 610px)"
+				"height": "768px"
 			});
 			
 			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
@@ -517,24 +522,12 @@
 				pageIndexer_1.addEventListener("selection-change", onPageSelectionChange);
 			}
 			container.addChild(pageIndexer_1, {
-				"top": "1307px",
 				"width": "320px",
-				"height": "40px",
-				"left": "calc(50% - 160px)"
-			});
-			
-			var userDefinedControl_1 = new udc.header3("headerUdc");
-			container.addChild(userDefinedControl_1, {
-				"top": "0px",
-				"width": "1920px",
-				"height": "200px",
-				"left": "calc(50% - 960px)"
+				"height": "40px"
 			});
 			
 			var userDefinedControl_2 = new udc.footer();
 			container.addChild(userDefinedControl_2, {
-				"top": "1357px",
-				"left": "0px",
 				"width": "1920px",
 				"height": "100px"
 			});

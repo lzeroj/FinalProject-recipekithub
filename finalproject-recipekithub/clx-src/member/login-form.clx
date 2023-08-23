@@ -51,7 +51,7 @@
           <cl:responsivexylayoutdata std:sid="rxyl-data-d8d32916">
             <cl:xylayoutdata std:sid="sxyl-data-90598300" width="384px" height="628px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="default"/>
           </cl:responsivexylayoutdata>
-          <cl:group std:sid="group-ce6b1f97" style="background-size:cover; background-position:center; background-image:url(../theme/images/common/logo.png);">
+          <cl:group std:sid="group-ce6b1f97" style="background-size:cover; background-position:center; background-image:url(../theme/images/icon/recipekithubLog.png);">
             <cl:xylayoutdata std:sid="xyl-data-43d0b3cb" top="20px" width="356px" height="209px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
             <cl:xylayout std:sid="xylayout-53ee5a1d"/>
           </cl:group>

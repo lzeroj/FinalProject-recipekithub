@@ -52,15 +52,13 @@ public class LikeController {
 	public View clickLike(HttpServletRequest request,DataRequest dataRequest,int mealkitNo) {
 		
 		// 세션 적용
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = session.getAttribute("member");
-//		String memberEmail = memberVO.getMemberEmail();
-//		if(memberEmail == null || memberEmail == "") {
-//			return new UIView();
-//		}
+		HttpSession session = request.getSession(false);
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String memberEmail = memberVO.getMemberEmail();
+		if(memberEmail == null || memberEmail == "") {
+			return new UIView();
+		}
 		System.out.println("mealkitNo : "+mealkitNo);
-		String memberEmail = "shj";
-//		System.out.println("mealkitNo : "+mealkitNo);
 		int result = likeService.showLike(memberEmail, mealkitNo);
 		if(result == 0) {
 			likeService.insertLike(mealkitNo, memberEmail);

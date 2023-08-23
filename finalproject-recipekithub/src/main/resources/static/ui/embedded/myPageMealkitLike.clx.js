@@ -178,8 +178,7 @@
 						"selectionUnit": "cell",
 						"columns": [
 							{"width": "20px"},
-							{"width": "125px"},
-							{"width": "115px"},
+							{"width": "140px"},
 							{"width": "115px"},
 							{"width": "100px"},
 							{"width": "42px"}
@@ -218,8 +217,8 @@
 									"configurator": function(cell){
 										cell.filterable = false;
 										cell.sortable = false;
-										cell.targetColumnName = "mealkitIngredients";
-										cell.text = "성분";
+										cell.targetColumnName = "mealkitCategory";
+										cell.text = "카테고리";
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
@@ -232,8 +231,8 @@
 									"configurator": function(cell){
 										cell.filterable = false;
 										cell.sortable = false;
-										cell.targetColumnName = "mealkitCategory";
-										cell.text = "카테고리";
+										cell.targetColumnName = "memberEmail";
+										cell.text = "밀키트 등록자";
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
@@ -243,20 +242,6 @@
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 4},
-									"configurator": function(cell){
-										cell.filterable = false;
-										cell.sortable = false;
-										cell.targetColumnName = "memberEmail";
-										cell.text = "등록자명";
-										cell.style.css({
-											"background-color" : "#0ebc59",
-											"color" : "#FFFFFF",
-											"font-weight" : "bold"
-										});
-									}
-								},
-								{
-									"constraint": {"rowIndex": 0, "colIndex": 5},
 									"configurator": function(cell){
 										cell.style.css({
 											"background-color" : "#0ebc59",
@@ -285,23 +270,17 @@
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 2},
 									"configurator": function(cell){
-										cell.columnName = "mealkitIngredients";
+										cell.columnName = "mealkitCategory";
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 3},
 									"configurator": function(cell){
-										cell.columnName = "mealkitCategory";
-									}
-								},
-								{
-									"constraint": {"rowIndex": 0, "colIndex": 4},
-									"configurator": function(cell){
 										cell.columnName = "memberEmail";
 									}
 								},
 								{
-									"constraint": {"rowIndex": 0, "colIndex": 5},
+									"constraint": {"rowIndex": 0, "colIndex": 4},
 									"configurator": function(cell){
 										cell.control = (function(){
 											var image_1 = new cpr.controls.Image("likeimg");
