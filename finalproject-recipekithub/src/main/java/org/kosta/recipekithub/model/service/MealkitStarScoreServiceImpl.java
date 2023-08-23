@@ -36,6 +36,11 @@ public class MealkitStarScoreServiceImpl implements MealkitStarScoreService {
 		double result = Math.round(avg * 10.0) / 10.0;
 		return result;
 	}
+	
+	@Override
+	public List<MealkitStarScore> findCommentStarList(int num) {
+		return mealkitStarScoreMapper.findCommentStarList(num);
+	}
 
 	
 }

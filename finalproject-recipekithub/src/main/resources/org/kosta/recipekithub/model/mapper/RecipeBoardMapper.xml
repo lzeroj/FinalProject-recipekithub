@@ -9,7 +9,7 @@
 		<result column="member_Email" property="memberVO.memberEmail"></result>
 		<result column="member_image" property="memberVO.memberImage"></result>
 	</resultMap>
-	<select id="findAllRecipeBoard" resultMap="member">
+	<select id="findAllRecipeBoard" resultMap="member"> 
 		SELECT rnum, r.recipe_board_id, m.member_nick, r.recipe_board_title, m.member_image,
 		r.recipe_board_image, r.recipe_board_hits
 		FROM (

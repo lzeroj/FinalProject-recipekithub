@@ -9,7 +9,7 @@
       <cl:property name="nick" type="string"/>
       <cl:property name="regDate" type="string"/>
       <cl:property name="content" type="string"/>
-      <cl:property name="star" type="string"/>
+      <cl:property name="star" type="number"/>
       <cl:property name="deleteBtn" type="control"/>
       <cl:event name="deleteClick" type="cpr.events.CAppEvent"/>
       <cl:event name="updateClick" type="cpr.events.CAppEvent"/>

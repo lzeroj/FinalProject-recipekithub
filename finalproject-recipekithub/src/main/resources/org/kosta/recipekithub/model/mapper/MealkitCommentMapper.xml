@@ -63,7 +63,7 @@ select c.mealkit_comment_id, b.member_email, b.member_nick, c.mealkit_comment_co
     <result property="mealkitStarScore" column="mealkit_star_score"/>
 </resultMap>
 
-<select id="findCommentStarList">
+<select id="findCommentStarList"> 
 select m.mealkit_comment_id, m.mealkit_no ,s.mealkit_star_score, m.member_email, m.mealkit_comment_content,
  mealkit_comment_date from mealkit_comment m 
  left outer join mealkit_star_score s on m.mealkit_comment_id = s.mealkit_comment_id

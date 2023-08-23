@@ -14,4 +14,5 @@ public interface MealkitStarScoreMapper {
 	
 	int mealkitStarCnt();
 
+	List<MealkitStarScore> findCommentStarList(int num);
 }

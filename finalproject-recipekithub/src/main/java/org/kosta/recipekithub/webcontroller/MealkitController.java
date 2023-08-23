@@ -2,6 +2,7 @@ package org.kosta.recipekithub.webcontroller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.recipekithub.model.service.MealkitCommentService;
 import org.kosta.recipekithub.model.service.MealkitService;
 import org.kosta.recipekithub.model.service.MealkitStarScoreService;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
+import org.kosta.recipekithub.model.vo.MealkitCommentVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +44,7 @@ public class MealkitController {
 	
 	private final MealkitService mealKitService;
 	private final MealkitStarScoreService mealkitStarScoreService;
+	private final MealkitCommentService mealkitCommentService;
 	
 	
 	@RequestMapping("/mealkitList")
@@ -56,7 +61,15 @@ public class MealkitController {
 		String search = dataRequst.getParameter("search");
 		log.info("search = " + search);
 		List<MealKitBoard> list = mealKitService.findMealKitList();
+		////////////////////////////////////////
+		List<Double> mealkitStarList = new ArrayList<>();
+		List<Integer> commentCount = new ArrayList<>();
+		for(MealKitBoard mealkit : list) {
+			mealkitStarList.add(mealkitStarScoreService.findMealkitStarList(mealkit.getMealkitNo()));
+			commentCount.add(mealkitCommentService.mealkitCommentCnt(mealkit.getMealkitNo()));
+		}
 		
+		/////////////////////////////////
 //		Map<Integer, Double> map = new HashMap<>();
 //		for(MealKitBoard mealkit : list) {
 //			double num = mealkitStarScoreService.findMealkitStarList(mealkit.getMealkitNo());
@@ -68,9 +81,52 @@ public class MealkitController {
 		initParam.put("mealkitList", list);
 		initParam.put("member", email);
 		initParam.put("searchMealkit", search);
+		initParam.put("mealkitStarList", mealkitStarList);
+		initParam.put("commentCount", commentCount);
 		//initParam.put("mealkitMap", map);
 		return new UIView("ui/mealkit/mealkitList.clx", initParam);
 		
+	}
+	
+	@RequestMapping("/findMealkitList")
+	public View findMealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		//페이지 번호 값
+		ParameterGroup pageParam = dataRequest.getParameterGroup("mePage");
+		String pageNo = pageParam.getValue("pageNo");
+		//카테고리별
+		ParameterGroup categoryParam = dataRequest.getParameterGroup("meCategory");
+		String category = categoryParam.getValue("category");
+		String ingre = categoryParam.getValue("ingre");
+		String way = categoryParam.getValue("way");
+		//분류별
+		ParameterGroup sortParam = dataRequest.getParameterGroup("meSort");
+		String sort = sortParam.getValue("sort");
+		//검색바
+		ParameterGroup searchParam = dataRequest.getParameterGroup("meSearch");
+		String searchMealkit = searchParam.getValue("searchMealkit");
+		
+		String mealkitCategory = category+"/"+ingre+"/"+way;
+		
+		log.info("pageNo = {} ", pageNo);
+		log.info("sort = {} ", sort);
+		log.info("category = {} ", category);
+		log.info("ingre = {} ", ingre);
+		log.info("way = {} ", way);
+		log.info("searchMealkit = {} ", searchMealkit);
+		log.info("mealkitCategory = {} ", mealkitCategory);
+		
+		RecipePagination pagination = null;
+		long totalMealkitCnt = mealKitService.findTotalPostCount(mealkitCategory, searchMealkit);
+		if(pageNo == null) {
+			pagination = new RecipePagination(totalMealkitCnt);
+		}else {
+			pagination = new RecipePagination(totalMealkitCnt, Integer.parseInt(pageNo));
+		}
+		
+		List<MealKitBoard> list = mealKitService.findAllMealkitBoard(mealkitCategory, sort, searchMealkit, pagination);
+		System.out.println(list);
+		dataRequest.setResponse("mealkitAllList", list);
+		return new JSONDataView();
 	}
 	
 	

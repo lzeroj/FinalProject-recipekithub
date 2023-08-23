@@ -21,6 +21,7 @@ function onBodyLoad(e){
 	app.lookup("nick").text = app.getAppProperty("nick");
 	app.lookup("regDate").text = app.getAppProperty("regDate");
 	app.lookup("content").text = app.getAppProperty("content");
+	app.lookup("star").text = app.getAppProperty("star");
 }
 
 /*

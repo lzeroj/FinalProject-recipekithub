@@ -7,6 +7,9 @@
 (function() {
 	var app = new cpr.core.App("mealkit/mealkitList", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/controls/htmlobject.part.css");
+			loader.addCSS("theme/custom-theme.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -38,15 +41,18 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
-				app.lookup("sort").value = "전체";
+				app.lookup("category").value = "전체";
 				app.lookup("ingre").value = "전체";
 				app.lookup("way").value = "전체";
-				app.lookup("category").value = "최신순";
-				
+				app.lookup("sort").value = "최신순";
+				app.lookup("mealkitBoardList").send();
 				
 				
 				var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
-				//var mealkitMap = cpr.core.Platform.INSTANCE.getParameter("mealkitMap");
+				var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
+				var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
+				var mealkitAllList = cpr.core.Platform.INSTANCE.getParameter("mealkitAllList");
+				console.log("ㅌㅌㅌ" + mealkitAllList.length);
 				//console.log("mealkitMap =" + mealkitMap);
 				var email = cpr.core.Platform.INSTANCE.getParameter("member");
 				console.log("email = " + email);
@@ -55,31 +61,57 @@
 					button.visible = true;
 					button.redraw();
 				}
-
+				
 				var cnt = app.lookup("mealkitCnt");
-				cnt.value = mealkitList.length;
+				cnt.value = mealkitAllList.lengthmealkitAllList
 				console.log("mealkitList = " + mealkitList);
 				var container = app.lookup("grp");
-				for (var i = 0; i < mealkitList.length; i++) {
+				for (var i = 0; i < mealkitAllList.length; i++) {
 					(function(index) {
 						var mealkit = new udc.mealkitList();
-						mealkit.img = "/upload/mealkit/" + mealkitList[i].mealkitImage;
-						console.log(mealkitList.img);
-						mealkit.hits = mealkitList[i].mealkitBoardHits;
-						mealkit.nick = mealkitList[i].memberVO.memberNick;
-						mealkit.title = mealkitList[i].mealkitName;
-						//mealkit.img = mealkitList[i].mealkitImage;
-						//mealkit.star = mealkitMap.get[mealkitList[i].mealkitNo];
+						mealkit.img = "/upload/mealkit/" + mealkitAllList[i].mealkitImage;
+						console.log(mealkitAllList.img);
+						mealkit.hits = mealkitAllList[i].mealkitBoardHits;
+						mealkit.nick = mealkitAllList[i].memberVO.memberNick;
+						mealkit.title = mealkitAllList[i].mealkitName;
+						mealkit.star = mealkitStarList[i];
+						mealkit.count = "("+commentCount[i]+")";
 						container.addChild(mealkit, {
 							height: "250px",
 							width: "230px",
 							autoSize: "both"
 						});
 						mealkit.addEventListener("imgClick", function(e) {
-							window.location.href = "/mealkitDetail/" + mealkitList[index].mealkitNo;
+							window.location.href = "/mealkitDetail/" + mealkitAllList[index].mealkitNo;
 						});
 					})(i);
 				}
+				
+
+			//	var cnt = app.lookup("mealkitCnt");
+			//	cnt.value = mealkitList.length;
+			//	console.log("mealkitList = " + mealkitList);
+			//	var container = app.lookup("grp");
+			//	for (var i = 0; i < mealkitList.length; i++) {
+			//		(function(index) {
+			//			var mealkit = new udc.mealkitList();
+			//			mealkit.img = "/upload/mealkit/" + mealkitList[i].mealkitImage;
+			//			console.log(mealkitList.img);
+			//			mealkit.hits = mealkitList[i].mealkitBoardHits;
+			//			mealkit.nick = mealkitList[i].memberVO.memberNick;
+			//			mealkit.title = mealkitList[i].mealkitName;
+			//			mealkit.star = mealkitStarList[i];
+			//			mealkit.count = "("+commentCount[i]+")";
+			//			container.addChild(mealkit, {
+			//				height: "250px",
+			//				width: "230px",
+			//				autoSize: "both"
+			//			});
+			//			mealkit.addEventListener("imgClick", function(e) {
+			//				window.location.href = "/mealkitDetail/" + mealkitList[index].mealkitNo;
+			//			});
+			//		})(i);
+			//	}
 
 
 			}
@@ -99,7 +131,52 @@
 			 */
 			function onPageIndexerSelectionChange(e){
 				var pageIndexer = e.control;
+				app.lookup("mealkitBoardList").send();
+			}
+
+			/*
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onSortSelectionChange(e){
+				var sort = e.control;
+				app.lookup("sort").value = "최신순";
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("mealkitBoardList").send();
+			}
+
+			/*
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onIngreSelectionChange(e){
+				var ingre = e.control;
+				app.lookup("sort").value = "최신순";
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("mealkitBoardList").send();
 				
+			}
+
+			/*
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onWaySelectionChange(e){
+				var way = e.control;
+				app.lookup("sort").value = "최신순";
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("mealkitBoardList").send();
+				
+			}
+
+			/*
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onCategorySelectionChange(e){
+				var category = e.control;
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("mealkitBoardList").send();
 			};
 			// End - User Script
 			
@@ -109,6 +186,38 @@
 				"columns" : [{"name": "searchMealkit"}]
 			});
 			app.register(dataMap_1);
+			
+			var dataMap_2 = new cpr.data.DataMap("mePage");
+			dataMap_2.parseData({
+				"columns" : [{
+					"name": "pageNo",
+					"defaultValue": "1"
+				}]
+			});
+			app.register(dataMap_2);
+			
+			var dataMap_3 = new cpr.data.DataMap("meCategory");
+			dataMap_3.parseData({
+				"columns" : [
+					{"name": "category"},
+					{"name": "ingre"},
+					{"name": "way"}
+				]
+			});
+			app.register(dataMap_3);
+			
+			var dataMap_4 = new cpr.data.DataMap("meSort");
+			dataMap_4.parseData({
+				"columns" : [{"name": "sort"}]
+			});
+			app.register(dataMap_4);
+			var submission_1 = new cpr.protocols.Submission("mealkitBoardList");
+			submission_1.action = "/findMealkitList";
+			submission_1.addRequestData(dataMap_1);
+			submission_1.addRequestData(dataMap_2);
+			submission_1.addRequestData(dataMap_3);
+			submission_1.addRequestData(dataMap_4);
+			app.register(submission_1);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -130,10 +239,11 @@
 			xYLayout_2.scrollable = false;
 			group_1.setLayout(xYLayout_2);
 			(function(container){
-				var navigationBar_1 = new cpr.controls.NavigationBar("sort");
+				var navigationBar_1 = new cpr.controls.NavigationBar("category");
 				navigationBar_1.style.css({
 					"font-size" : "13px"
 				});
+				navigationBar_1.bind("value").toDataMap(app.lookup("meCategory"), "category");
 				(function(navigationBar_1){
 					navigationBar_1.addItem(new cpr.controls.MenuItem("종류별", "종류별", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("전체", "전체", null));
@@ -151,10 +261,12 @@
 					navigationBar_1.addItem(new cpr.controls.MenuItem("샐러드", "샐러드", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("스프", "스프", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("빵", "빵", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("", "과자", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("차/음료/술", "차/음료/술", null));
 					navigationBar_1.addItem(new cpr.controls.MenuItem("기타", "기타", null));
 				})(navigationBar_1);
+				if(typeof onSortSelectionChange == "function") {
+					navigationBar_1.addEventListener("selection-change", onSortSelectionChange);
+				}
 				container.addChild(navigationBar_1, {
 					"top": "20px",
 					"width": "1094px",
@@ -162,6 +274,7 @@
 					"left": "calc(50% - 547px)"
 				});
 				var navigationBar_2 = new cpr.controls.NavigationBar("ingre");
+				navigationBar_2.bind("value").toDataMap(app.lookup("meCategory"), "ingre");
 				(function(navigationBar_2){
 					navigationBar_2.addItem(new cpr.controls.MenuItem("재료별", "재료별", null));
 					navigationBar_2.addItem(new cpr.controls.MenuItem("전체", "전체", null));
@@ -181,6 +294,9 @@
 					navigationBar_2.addItem(new cpr.controls.MenuItem("곡류", "곡류", null));
 					navigationBar_2.addItem(new cpr.controls.MenuItem("기타", "기타", null));
 				})(navigationBar_2);
+				if(typeof onIngreSelectionChange == "function") {
+					navigationBar_2.addEventListener("selection-change", onIngreSelectionChange);
+				}
 				container.addChild(navigationBar_2, {
 					"top": "55px",
 					"width": "1081px",
@@ -188,6 +304,7 @@
 					"left": "calc(50% - 540px)"
 				});
 				var navigationBar_3 = new cpr.controls.NavigationBar("way");
+				navigationBar_3.bind("value").toDataMap(app.lookup("meCategory"), "way");
 				(function(navigationBar_3){
 					navigationBar_3.addItem(new cpr.controls.MenuItem("방법별", "방법별", null));
 					navigationBar_3.addItem(new cpr.controls.MenuItem("전체", "전체", null));
@@ -206,6 +323,9 @@
 					navigationBar_3.addItem(new cpr.controls.MenuItem("회", "회", null));
 					navigationBar_3.addItem(new cpr.controls.MenuItem("기타", "기타", null));
 				})(navigationBar_3);
+				if(typeof onWaySelectionChange == "function") {
+					navigationBar_3.addEventListener("selection-change", onWaySelectionChange);
+				}
 				container.addChild(navigationBar_3, {
 					"top": "86px",
 					"width": "791px",
@@ -229,18 +349,6 @@
 						"left": "45px",
 						"width": "18px",
 						"height": "20px"
-					});
-					var button_1 = new cpr.controls.Button("newBtn");
-					button_1.value = "최신순";
-					button_1.style.css({
-						"background-color" : "#ffbb3f",
-						"background-image" : "none"
-					});
-					container.addChild(button_1, {
-						"top": "25px",
-						"left": "543px",
-						"width": "100px",
-						"height": "30px"
 					});
 					var output_2 = new cpr.controls.Output();
 					output_2.value = "개의 밀키트가 있습니다.";
@@ -267,15 +375,19 @@
 						"width": "49px",
 						"height": "39px"
 					});
-					var navigationBar_4 = new cpr.controls.NavigationBar("category");
+					var navigationBar_4 = new cpr.controls.NavigationBar("sort");
+					navigationBar_4.bind("value").toDataMap(app.lookup("meSort"), "sort");
 					(function(navigationBar_4){
 						navigationBar_4.addItem(new cpr.controls.MenuItem("최신순", "최신순", null));
 						navigationBar_4.addItem(new cpr.controls.MenuItem("별점순", "별점순", null));
 						navigationBar_4.addItem(new cpr.controls.MenuItem("조회수순", "조회수순", null));
 					})(navigationBar_4);
+					if(typeof onCategorySelectionChange == "function") {
+						navigationBar_4.addEventListener("selection-change", onCategorySelectionChange);
+					}
 					container.addChild(navigationBar_4, {
 						"top": "20px",
-						"left": "769px",
+						"left": "775px",
 						"width": "202px",
 						"height": "40px"
 					});
@@ -312,11 +424,11 @@
 					"height": "15px",
 					"left": "calc(50% - 487px)"
 				});
-				var button_2 = new cpr.controls.Button("insertBtn");
-				button_2.visible = false;
-				button_2.value = "밀키트 등록";
-				button_2.style.setClasses([".cl-button", "mealkitbtn"]);
-				button_2.style.css({
+				var button_1 = new cpr.controls.Button("insertBtn");
+				button_1.visible = false;
+				button_1.value = "밀키트 등록";
+				button_1.style.setClasses([".cl-button", "mealkitbtn"]);
+				button_1.style.css({
 					"background-color" : "#0ca44e",
 					"color" : "white",
 					"font-weight" : "16",
@@ -324,9 +436,9 @@
 					"background-image" : "none"
 				});
 				if(typeof onButtonClick2 == "function") {
-					button_2.addEventListener("click", onButtonClick2);
+					button_1.addEventListener("click", onButtonClick2);
 				}
-				container.addChild(button_2, {
+				container.addChild(button_1, {
 					"top": "299px",
 					"right": "73px",
 					"width": "104px",
@@ -434,7 +546,7 @@
 				"height": "70px"
 			});
 			
-			var pageIndexer_1 = new cpr.controls.PageIndexer();
+			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
 			pageIndexer_1.init(1, 1, 1);
 			if(typeof onPageIndexerSelectionChange == "function") {
 				pageIndexer_1.addEventListener("selection-change", onPageIndexerSelectionChange);

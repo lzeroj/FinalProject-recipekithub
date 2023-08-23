@@ -14,7 +14,11 @@
 	<result column="member_email" property="memberVO.memberEmail" />
 	<result column="member_name" property="memberVO.memberName" />
 	<result column="member_nick" property="memberVO.memberNick" />
+	<result column="member_image" property="memberVO.memberImage"/>
 </resultMap>
+<!--  -->
+
+
 <select id="findMealKitByNo" parameterType="int" resultMap="memberInfo">
 SELECT M.MEALKIT_NO, M.MEALKIT_INFO , M.MEMBER_EMAIL, M.MEALKIT_NAME, M.MEALKIT_INGREDIENTS, M.MEALKIT_PRICE, to_char(M.MEALKIT_REG_DATE, 'yyyy-mm-dd hh24:mi')as MEALKIT_REG_DATE,
 M.MEALKIT_INVENTORY, M.MEALKIT_CATEGORY, M.MEALKIT_IMAGE, M.MEALKIT_BOARD_HITS , U.MEMBER_EMAIL,U.MEMBER_NAME, U.MEMBER_NICK FROM MEALKIT_BOARD M INNER JOIN MEMBER U
@@ -39,8 +43,68 @@ ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 </update>
 
 <update id="increaseMealkitHits" parameterType="int">
-update mealkit_board set mealkit_board_hits = mealkit_board_hits + 1 where mealkit_no = #{value}
+	update mealkit_board set mealkit_board_hits = mealkit_board_hits + 1 where mealkit_no = #{value}
 </update>
+
+<select id="findTotalPostCount">
+		select count(*) from mealkit_board
+		<where>
+			status = 'Y'
+			<if test="mealkitCategory != '전체/전체/전체'">
+				and mealkit_category = #{mealkitCategory}
+			</if>
+			<if test="searchMealkit != null || searchMealkit != ''">
+				and mealkit_name like '%' || #{searchMealkit} || '%'
+			</if>
+		</where>
+	</select>
+
+
+<select id="findAllMealkitBoard" resultMap="memberInfo">
+SELECT rnum, mk.mealkit_no, mk.mealkit_name, mk.mealkit_board_hits, m.member_image,m.member_nick 
+FROM (
+	SELECT ROW_NUMBER() OVER(ORDER BY 
+	<if test="sort == '최신순'">   
+	 mealkit_reg_date DESC
+	</if>
+
+	<if test="sort == '별점순'">
+	COALESCE(r.av, 0) DESC, mealkit_reg_date DESC
+	</if>
+	<if test="sort == '조회수순'">
+	mealkit_board_hits DESC, mealkit_reg_date desc
+	</if>
+	 )AS rnum,
+	<if test = "sort == '최신순' || sort == '조회수순'">	
+	mkb.mealkit_no, mkb.mealkit_name, mkb.member_email, mkb.mealkit_board_hits
+	FROM mealkit_board mkb
+	</if>
+	 <if test = "sort == '별점순'">
+	m.mealkit_no, COALESCE(r.av, 0), m.member_email,m.mealkit_board_hits,
+	m.mealkit_name
+	from mealkit_board m
+	left join(
+	SELECT MEALKIT_NO, ROUND(SUM(MEALKIT_STAR_SCORE) / COUNT(MEALKIT_NO),1) as av
+	FROM MEALKIT_COMMENT MC
+	INNER JOIN MEALKIT_STAR_SCORE MS ON MC.MEALKIT_COMMENT_ID = MS.MEALKIT_COMMENT_ID 
+	group by MC.mealkit_no
+	) r on m.mealkit_no = r.mealkit_no
+	where m.status = 'Y'
+	order by COALESCE(r.av, 0) desc
+	</if>
+	<where>
+		<if test="mealkitCategory != '전체/전체/전체'">
+			and mealkit_category like '%' || #{mealkitCategory} || '%'
+		</if>
+		<if test="searchMealkit != null || searchMealkit == ''">
+			and mealkit_name like '%' || #{searchMealkit} || '%'
+		</if>
+	</where>
+	) mk 
+	INNER JOIN member m ON mk.member_email = m.member_email
+	AND rnum BETWEEN 1 AND 10
+	ORDER BY rnum
+</select>
 
 
 

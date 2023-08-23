@@ -11,4 +11,6 @@ public interface MealkitStarScoreService {
 	 double findMealkitStarList(int mealkitCommentId);
 	 
 	 //int mealkitStarCnt();
+	 
+	 List<MealkitStarScore> findCommentStarList(int num);
 }
