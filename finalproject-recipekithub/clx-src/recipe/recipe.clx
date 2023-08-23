@@ -51,7 +51,7 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-eca35059" style="background-color:#F4FAEC;">
+  <body std:sid="body-eca35059" style="background-color:#F4FAEC; font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-e680d378" name="load" handler="onBodyLoad"/>
     <cl:listener std:sid="listener-2f51f4b3" name="init" handler="onBodyInit"/>
     <cl:udc std:sid="ud-control-8a3475f2" id="headerUdc" type="udc.header3">
@@ -59,7 +59,7 @@
     </cl:udc>
     <cl:group std:sid="group-29a6ab6a" style="background-color:#FFFFFF;">
       <cl:verticaldata std:sid="v-data-db728d2f" width="1262px" height="220px"/>
-      <cl:navigationbar std:sid="n-bar-fd2fcc6f" id="type" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+      <cl:navigationbar std:sid="n-bar-fd2fcc6f" id="type" style="border-right-style:none; border-left-style:none; border-bottom-style:none; font-family:'푸른 전남' , 'Malgun Gothic' , sans-serif; border-top-style:none;">
         <cl:listener std:sid="listener-5f49e437" name="selection-change" handler="onTypeSelectionChange"/>
         <cl:datamapbind property="value" datacontrolid="dmCategory" columnname="type"/>
         <cl:xylayoutdata std:sid="xyl-data-ba8bd6dd" top="10px" left="110px" width="854px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -73,7 +73,7 @@
         <cl:menuitem std:sid="m-item-b56a3f4f" label="음료" value="음료"/>
         <cl:menuitem std:sid="m-item-1aaab860" label="기타" value="기타"/>
       </cl:navigationbar>
-      <cl:navigationbar std:sid="n-bar-92ff7ec1" id="ingredients" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+      <cl:navigationbar std:sid="n-bar-92ff7ec1" id="ingredients" style="border-right-style:none; border-left-style:none; border-bottom-style:none; font-family:'푸른 전남' , 'Malgun Gothic' , sans-serif; border-top-style:none;">
         <cl:listener std:sid="listener-a44ee853" name="selection-change" handler="onIngredientsSelectionChange"/>
         <cl:datamapbind property="value" datacontrolid="dmCategory" columnname="ingredients"/>
         <cl:xylayoutdata std:sid="xyl-data-d03b956e" top="80px" left="110px" width="854px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -86,7 +86,7 @@
         <cl:menuitem std:sid="m-item-584296fd" label="과일류" value="과일류"/>
         <cl:menuitem std:sid="m-item-7da4fcc2" label="기타" value="기타"/>
       </cl:navigationbar>
-      <cl:navigationbar std:sid="n-bar-5fbda7e7" id="method" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+      <cl:navigationbar std:sid="n-bar-5fbda7e7" id="method" style="border-right-style:none; border-left-style:none; border-bottom-style:none; font-family:'푸른 전남' , 'Malgun Gothic' , sans-serif; border-top-style:none;">
         <cl:listener std:sid="listener-e9cadd9a" name="selection-change" handler="onMethodSelectionChange"/>
         <cl:datamapbind property="value" datacontrolid="dmCategory" columnname="method"/>
         <cl:xylayoutdata std:sid="xyl-data-439ef08d" top="150px" left="110px" width="854px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>

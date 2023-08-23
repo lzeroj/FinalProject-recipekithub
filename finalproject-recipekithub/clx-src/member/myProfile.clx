@@ -116,7 +116,7 @@
           <cl:xylayoutdata std:sid="xyl-data-24e8ad5e" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
           <cl:tabfolder std:sid="t-folder-1b30262a" style="font-size:28px;">
             <cl:xylayoutdata std:sid="xyl-data-f2febb63" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
-            <cl:tabitem std:sid="t-item-4e3873ee" selected="true" text="MyProfile">
+            <cl:tabitem std:sid="t-item-4e3873ee" selected="true" text="My Profile">
               <std:metadata>
                 <std:property key="is-active-item" value="true"/>
               </std:metadata>
@@ -178,7 +178,7 @@
                       <cl:columns length="1" unit="FRACTION"/>
                     </cl:formlayout>
                   </cl:group>
-                  <cl:img std:sid="image-7e3a7f36" id="profileImg" style="border-right-style:none; background-size:contain; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/common/mypageIcon.png); border-top-style:none;" src="../theme/images/common/user-darker.png" fallbacksrc="../theme/images/icon/chefimg.png">
+                  <cl:img std:sid="image-7e3a7f36" id="profileImg" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" src="../theme/images/common/user-darker.png" fallbacksrc="../theme/images/icon/chefimg.png">
                     <cl:datasetbind property="src" datacontrolid="ds_profile" columnname="memberImage" rowindex="0"/>
                     <cl:formdata std:sid="f-data-958d5805" row="0" col="0"/>
                   </cl:img>
@@ -353,7 +353,7 @@
                 </cl:formlayout>
               </cl:group>
             </cl:tabitem>
-            <cl:item-style style="background-color:#0CA44E; border-radius:20 20 0 0; padding-top:10px; font-weight:bolder; padding-left:50px; padding-bottom:10px; font-size:30px; font-family:푸른전남 Medium; padding-right:50px;"/>
+            <cl:item-style style="background-color:#0CA44E; border-radius:20px 20px 0px 0px; padding-top:10px; font-weight:bolder; padding-left:50px; padding-bottom:10px; font-size:30px; font-family:푸른전남 Medium; padding-right:50px;"/>
             <cl:body-style style="border-radius:0px 10px 20px 20px;"/>
           </cl:tabfolder>
           <cl:xylayout std:sid="xylayout-efe83e9a"/>

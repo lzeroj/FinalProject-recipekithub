@@ -1281,6 +1281,8 @@
 	// App Declaration
 		var internalApp = new cpr.core.App("udc/header3", { 
 			onPrepare: function(loader) {
+				loader.addCSS("theme/cleopatra-theme.css");
+				loader.addCSS("theme/custom-theme.css");
 			},
 			onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 				var linker = {};
@@ -2633,22 +2635,41 @@
 									"border-bottom-style" : "none",
 									"border-top-style" : "none"
 								});
+								comboBox_1.style.list.css({
+									"border-radius" : "10px",
+									"border-right-style" : "none",
+									"box-shadow" : "3px 3px 5px 5px gray",
+									"white-space" : "normal",
+									"border-left-style" : "none",
+									"border-bottom-style" : "none",
+									"border-top-style" : "none"
+								});
 								comboBox_1.style.button.css({
 									"padding-right" : "10px"
 								});
 								comboBox_1.style.item.css({
 									"border-right-style" : "solid",
+									"padding-top" : "20px",
 									"border-bottom-color" : "#ffffff",
 									"border-top-width" : "0px",
-									"border-left-style" : "solid",
+									"white-space" : "normal",
 									"border-right-width" : "0px",
+									"font-weight" : "bolder",
+									"padding-left" : "30px",
 									"border-left-color" : "#ffffff",
+									"padding-bottom" : "20px",
+									"font-size" : "20px",
+									"border-right-color" : "#ffffff",
+									"border-left-width" : "0px",
+									"border-top-style" : "solid",
+									"border-radius" : "10px",
+									"border-left-style" : "solid",
 									"border-bottom-width" : "0px",
 									"border-top-color" : "#ffffff",
 									"border-bottom-style" : "solid",
-									"border-right-color" : "#ffffff",
-									"border-left-width" : "0px",
-									"border-top-style" : "solid"
+									"font-family" : "푸른전남 Medium",
+									"padding-right" : "20px",
+									"text-align" : "left"
 								});
 								(function(comboBox_1){
 									comboBox_1.addItem(new cpr.controls.Item("레시피", "레시피"));
@@ -2677,7 +2698,7 @@
 						formLayout_5.rightMargin = "30px";
 						formLayout_5.bottomMargin = "30px";
 						formLayout_5.leftMargin = "30px";
-						formLayout_5.horizontalSpacing = "50px, 30px, 20px, 10px";
+						formLayout_5.horizontalSpacing = "50px";
 						formLayout_5.verticalSpacing = "20px";
 						formLayout_5.setColumns(["200px", "50px", "50px", "50px", "50px"]);
 						formLayout_5.setRows(["50px"]);
@@ -2759,7 +2780,9 @@
 								"border-top-style" : "none"
 							});
 							comboBox_2.style.list.css({
+								"border-radius" : "10px",
 								"padding-top" : "10px",
+								"box-shadow" : "3px 3px 5px 5px gray",
 								"padding-left" : "10px",
 								"vertical-align" : "middle",
 								"padding-bottom" : "10px",
@@ -2767,10 +2790,15 @@
 								"text-align" : "left"
 							});
 							comboBox_2.style.item.css({
+								"border-radius" : "10px",
+								"padding-top" : "20px",
 								"font-weight" : "bolder",
+								"padding-left" : "20px",
+								"padding-bottom" : "20px",
+								"font-size" : "20px",
 								"font-family" : "푸른전남 Medium",
 								"text-align" : "left",
-								"padding-right" : "10px"
+								"padding-right" : "20px"
 							});
 							if(typeof onCmb1SelectionChange == "function") {
 								comboBox_2.addEventListener("selection-change", onCmb1SelectionChange);
@@ -2786,8 +2814,8 @@
 							output_1.value = "";
 							output_1.style.css({
 								"font-weight" : "bold",
-								"font-size" : "14px",
-								"line-height" : "1.5"
+								"font-size" : "16px",
+								"line-height" : "2.0"
 							});
 							container.addChild(output_1, {
 								"colIndex": 0,
@@ -2814,17 +2842,33 @@
 					navigationBar_1.style.setClasses(["indexnav"]);
 					navigationBar_1.style.css({
 						"background-color" : "#90be70",
-						"box-shadow" : "5px 5px 10px",
+						"box-shadow" : "10px 10px 5px 5px gray",
+						"text-shadow" : "2px 2px 4px gray",
 						"color" : "#F4FAEC",
 						"font-weight" : "bolder",
 						"font-size" : "24px",
 						"font-family" : "푸른전남 Medium"
 					});
 					navigationBar_1.style.bar.css({
+						"box-shadow" : "10px 10px 5px 5px gray",
 						"text-align" : "center"
 					});
 					navigationBar_1.style.item.css({
 						"text-align" : "center"
+					});
+					navigationBar_1.style.list.css({
+						"background-color" : "transparent",
+						"border-right-style" : "none",
+						"border-left-style" : "none",
+						"border-bottom-style" : "none",
+						"border-top-style" : "none"
+					});
+					navigationBar_1.style.listitem.css({
+						"padding-top" : "20px",
+						"font-weight" : "bolder",
+						"font-size" : "20px",
+						"padding-bottom" : "20px",
+						"font-family" : "푸른전남 Medium"
 					});
 					(function(navigationBar_1){
 						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "recommend", null));
