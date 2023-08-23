@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.kosta.recipekithub.model.mapper.CartMapper;
 import org.kosta.recipekithub.model.service.CartService;
 import org.kosta.recipekithub.model.vo.CartVO;
+import org.kosta.recipekithub.model.vo.ChartVO;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
+import org.kosta.recipekithub.model.vo.SalesVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -173,4 +175,29 @@ public class UnitTestCart {
 		int duplicatecount = cartService.updateCartDetailQuantity(cartDetailQuantity,mealkitNo,cartNo);
 		System.out.println(duplicatecount);
 	}
+	
+	@Test
+	public void findSalesRankAdmin() {
+		List<SalesVO> salesRankList = cartService.findSalesRankAdmin();
+		for(int i=0;i<salesRankList.size();i++) {
+			System.out.println(salesRankList.get(i).toString());
+		}
+	}
+	
+	@Test
+	public void findTotalLikeRecipe() {
+		List<ChartVO> recipeLikeRankList = cartService.findTotalLikeRecipe();
+		for(int i=0;i<recipeLikeRankList.size();i++) {
+			System.out.println(recipeLikeRankList.get(i).toString());
+		}
+	}
+
+	@Test
+	public void findTotalLikeMealkit() {
+		List<ChartVO> mealkitLikeRankList = cartService.findTotalLikeMealkit();
+		for(int i=0;i<mealkitLikeRankList.size();i++) {
+			System.out.println(mealkitLikeRankList.get(i).toString());
+		}
+	}
+
 }

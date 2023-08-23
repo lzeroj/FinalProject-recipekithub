@@ -5,6 +5,7 @@
  * @author shj22k
  ************************************************/
 
+
 /*
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
@@ -25,7 +26,7 @@ function onSelectMyCartSubmitSuccess(e){
 	var dscartlist = app.lookup("cartlist");
 	
 	for(var i=0;i<metadata.length;i++){
-		dscartlist.setValue(i, "mealkitImage", 'theme/images/mealkit/'+metadata[i].mealkitImage);
+		dscartlist.setValue(i, "mealkitImage", '/upload/mealkit/'+metadata[i].mealkitImage);
 		dscartlist.setValue(i, "mealkitName", metadata[i].mealkitName);
 		dscartlist.setValue(i, "mealkitPrice", metadata[i].mealkitPrice);
 		dscartlist.setValue(i, "cartDetailQuantity", cartDetailMeta[i].cartDetailQuantity);
@@ -262,3 +263,48 @@ function onDeleteMyCartSubmitSuccess(e){
 	app.lookup("selectMyCart").send();
 	app.lookup("grd1").redraw();
 }
+
+/*
+ * "    < 쇼핑 계속하기" 아웃풋에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onOutputClick(e){
+	var output = e.control;
+	window.location.href = "/mealkitList";
+}
+
+/*
+ * "    < 쇼핑 계속하기" 아웃풋에서 mousemove 이벤트 발생 시 호출.
+ * 사용자가 컨트롤 위에 포인터를 이동할 때 발생하는 이벤트.
+ */
+function onOutputMousemove(e){
+	var output = e.control;
+	var shopcon = app.lookup("shopcon");
+	shopcon.style.css({
+		"border-style":"solid",
+		"border-width":"2px",
+		"border-color":"azure"
+//		"box-shadow":"inset 0 0 2px 2px #EFA2A2"
+	});
+}
+
+/*
+ * "    < 쇼핑 계속하기" 아웃풋(shopcon)에서 mouseleave 이벤트 발생 시 호출.
+ * 사용자가 컨트롤 및 컨트롤의 자식 영역 바깥으로 마우스 포인터를 이동할 때 발생하는 이벤트.
+ */
+function onShopconMouseleave(e){
+	var shopcon = e.control;
+	var shopcon = app.lookup("shopcon");
+	shopcon.style.css({
+		"border-style":"none",
+		"border-width":"0px",
+		"border-color":"white"
+	});
+//	shopcon.style.css({
+//		"border-right":"solid",
+//		"border-width":"0px",
+//		"border-color":"white"
+//	});
+	
+}
+

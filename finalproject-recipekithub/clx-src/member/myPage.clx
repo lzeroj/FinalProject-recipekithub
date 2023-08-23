@@ -32,7 +32,7 @@
   <body std:sid="body-075178bb">
     <cl:listener std:sid="listener-b0b3e7df" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-d198e5ec">
-      <cl:xylayoutdata std:sid="xyl-data-cdd958c9" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:verticaldata std:sid="v-data-4dabbcea" width="1920px" height="1080px"/>
       <cl:group std:sid="group-3e468ab3" style="background-color:#f4faec;">
         <cl:xylayoutdata std:sid="xyl-data-a87a062c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-13bc8f58" style="text-align:center;">
@@ -42,15 +42,12 @@
               <cl:xylayoutdata std:sid="sxyl-data-30f9770a" top="39px" right="275px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
               <cl:xylayoutdata std:sid="sxyl-data-162a05da" top="39px" right="516px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="new-screen"/>
             </cl:responsivexylayoutdata>
-            <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1" style="border-right-style:solid; border-bottom-color:#dddddd; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-left-color:#dddddd; border-bottom-width:1px; border-top-color:#dddddd; border-bottom-style:solid; border-right-color:#dddddd; border-left-width:1px; border-top-style:solid;" src="../embedded/myPageRecipeLike.clx">
-              <cl:xylayoutdata std:sid="xyl-data-1467882b" top="0px" right="0px" bottom="30px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:embeddedapp std:sid="e-app-cfc347cd" id="ea1" style="border-right-style:solid; border-bottom-color:#dddddd; border-top-width:1px; border-right-width:1px; border-left-color:#dddddd; border-right-color:#dddddd; border-left-width:1px; border-top-style:solid; border-radius:0px 0px 20px 20px; border-left-style:solid; border-bottom-width:1px; border-top-color:#dddddd; border-bottom-style:solid;" src="../embedded/myPageRecipeLike.clx">
+              <cl:verticaldata std:sid="v-data-996574b1" width="714px" height="701px" autosize="height"/>
             </cl:embeddedapp>
-            <cl:udc std:sid="ud-control-4ba86f54" type="udc.header3">
-              <cl:xylayoutdata std:sid="xyl-data-452b792c" top="-199px" right="-972px" left="-480px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
-            </cl:udc>
-            <cl:xylayout std:sid="xylayout-6eef3a02" scrollable="false"/>
+            <cl:verticallayout std:sid="v-layout-d29cbcea"/>
           </cl:group>
-          <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-bottom-color:#FFFFFF; color:#0ebc59; font-weight:bold; border-bottom-style:0;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click" baritemwidths="equal">
+          <cl:navigationbar std:sid="n-bar-c5e3bc2f" id="nav1" style="border-radius:20px 20px 0px 0px; border-right-style:solid; border-bottom-color:#FFFFFF; color:#0ebc59; font-weight:bold; border-left-style:solid; border-left-color:#dddddd; border-bottom-width:0px; border-top-color:#dddddd; border-right-color:#dddddd; border-top-style:solid;" class="cl-navigationbar my-navi" menutype="fullmenu" expandtrigger="click" baritemwidths="equal">
             <cl:listener std:sid="listener-cd03793d" name="item-click" handler="onNav1ItemClick"/>
             <cl:responsivexylayoutdata std:sid="rxyl-data-3331906f">
               <cl:xylayoutdata std:sid="sxyl-data-5f0aca76" top="0px" right="629px" width="355px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
@@ -73,14 +70,14 @@
         <cl:udc std:sid="ud-control-aeddd20e" style="border-bottom-color:#62a40c; border-bottom-width:3px; border-bottom-style:solid;" type="udc.headerMyPage">
           <cl:xylayoutdata std:sid="xyl-data-279d7c53" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         </cl:udc>
+        <cl:udc std:sid="ud-control-c2834810" type="udc.footer">
+          <cl:xylayoutdata std:sid="xyl-data-f0467958" top="973px" bottom="0px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+        </cl:udc>
         <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-832eec77"/>
     </cl:group>
-    <cl:udc std:sid="ud-control-c2834810" type="udc.footer">
-      <cl:xylayoutdata std:sid="xyl-data-1977962e" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
-    </cl:udc>
-    <cl:xylayout std:sid="xylayout-c3614e7a"/>
+    <cl:verticallayout std:sid="v-layout-bb0615c1" distribution="center"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

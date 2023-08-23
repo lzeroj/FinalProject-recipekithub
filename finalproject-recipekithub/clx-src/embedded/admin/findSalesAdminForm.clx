@@ -1,26 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ac62b09d" version="1.0.4584">
   <head std:sid="head-541e375a">
-    <screen std:sid="screen-89b54d1a" id="default" name="default" width="1024px" height="768px"/>
-    <screen std:sid="screen-55eec3f8" id="tablet" name="tablet" width="500px" height="667px"/>
-    <screen std:sid="screen-b91124cb" id="mobile" name="mobile" width="350px" height="525px"/>
+    <screen std:sid="screen-6abd1965" id="new-screen" name="new-screen" minwidth="1880px" width="1880px" height="720px" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-9b2b1d8a" id="default" name="default" minwidth="1024px" maxwidth="1879px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-35a6f0da" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-19170057" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <cl:model std:sid="model-b6ede674">
       <cl:dataset std:sid="d-set-0f746746" id="dsmealkitSalesAdmin">
         <cl:datacolumnlist>
           <cl:datacolumn std:sid="d-column-5da2d414" name="mealkitNo" datatype="number"/>
           <cl:datacolumn std:sid="d-column-7acec8de" name="mealkitTotalPrice" datatype="number"/>
           <cl:datacolumn std:sid="d-column-39a34f3b" name="cartDetailQuantity" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9c7540a9" name="mealkitName"/>
         </cl:datacolumnlist>
       </cl:dataset>
+      <cl:dataset std:sid="d-set-dc79dfaf" id="dsrecipeLikeAdmin">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-26c80d02" name="recipeBoardTitle"/>
+          <cl:datacolumn std:sid="d-column-cbbc754c" name="memberEmail"/>
+          <cl:datacolumn std:sid="d-column-5f23a236" name="recipeLikeCount" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-5771fb1a" id="dsmealkitLikeAdmin">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2047e784" name="mealkitName"/>
+          <cl:datacolumn std:sid="d-column-f9dec265" name="mealkitCount" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-f1d0bfcc" id="subfindSalesRankAdmin" action="/findSalesRankAdmin">
+        <cl:listener std:sid="listener-0eb88a76" name="submit-success" handler="onSubfindSalesRankAdminSubmitSuccess"/>
+        <cl:listener std:sid="listener-9f90e1de" name="submit-done" handler="onSubfindSalesRankAdminSubmitDone"/>
+        <cl:responsedata dataid="dsmealkitSalesAdmin"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d5d08310" id="subfindTotalLikeRecipe" action="/findTotalLikeRecipe">
+        <cl:listener std:sid="listener-765e3bcb" name="submit-success" handler="onSubfindTotalLikeRecipeSubmitSuccess"/>
+        <cl:listener std:sid="listener-7b8ec7d7" name="submit-done" handler="onSubfindTotalLikeRecipeSubmitDone"/>
+        <cl:responsedata dataid="dsrecipeLikeAdmin"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a84ac62e" id="subfindTotalLikeMealkit" action="/findTotalLikeMealkit">
+        <cl:listener std:sid="listener-d679a15b" name="submit-success" handler="onSubfindTotalLikeMealkitSubmitSuccess"/>
+        <cl:listener std:sid="listener-254a21aa" name="submit-done" handler="onSubfindTotalLikeMealkitSubmitDone"/>
+        <cl:responsedata dataid="dsmealkitLikeAdmin"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
   <body std:sid="body-879cd73f">
-    <cl:uicontrolshell std:sid="uic-shell-3c7a84b2" id="shl1">
-      <cl:listener std:sid="listener-08626514" name="load" handler="onShl1Load"/>
-      <cl:xylayoutdata std:sid="xyl-data-86294e0f" top="102px" left="108px" width="759px" height="374px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:uicontrolshell>
-    <cl:xylayout std:sid="xylayout-69450dc6"/>
+    <cl:listener std:sid="listener-a60a4feb" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-73aa01fd">
+      <cl:verticaldata std:sid="v-data-434671a3" width="1024px" height="720px"/>
+      <cl:group std:sid="group-5d2d1e4e" id="grp">
+        <cl:verticaldata std:sid="v-data-f49f0500" width="1024px" height="450px" autosize="both"/>
+        <cl:verticallayout std:sid="v-layout-e48c2ca4"/>
+      </cl:group>
+      <cl:group std:sid="group-c1e3a473">
+        <cl:verticaldata std:sid="v-data-226477ae" width="400px" height="250px"/>
+        <cl:group std:sid="group-f5842947" style="background-color:#FFFFFF;" class="cl-form-group">
+          <cl:xylayoutdata std:sid="xyl-data-242ff24b" top="100px" right="630px" bottom="5px" left="630px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:output std:sid="output-9e51d3be" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-size:18px; background-image:none; text-align:center;" value="확인하고 싶은 정보">
+            <cl:formdata std:sid="f-data-6ba63ec0" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-e0027c1d" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-size:18px; background-image:none; text-align:center;" value="확인하기">
+            <cl:formdata std:sid="f-data-23ded4b6" row="0" col="1"/>
+          </cl:output>
+          <cl:combobox std:sid="c-box-72fbbf5f" id="cmb1" readonly="false" preventinput="true">
+            <cl:formdata std:sid="f-data-f1512ba0" halign="CENTER" valign="CENTER" width="300" height="50" row="1" col="0"/>
+            <cl:item std:sid="t-item-ae98cfa0" label="밀키트별 매출 정보" value="salesMealkit"/>
+            <cl:item std:sid="t-item-9c3e297a" label="좋아요가 많은 레시피" value="totalLikeRecipe"/>
+            <cl:item std:sid="t-item-a5789170" label="찜이 많은 밀키트" value="totalLikeMealkit"/>
+          </cl:combobox>
+          <cl:button std:sid="button-1d165926" style="background-color:#0ebc59; font-size:16px;" value="실행">
+            <cl:listener std:sid="listener-799707d5" name="click" handler="onButtonClick"/>
+            <cl:formdata std:sid="f-data-45798d6a" halign="CENTER" valign="CENTER" width="130" height="50" row="1" col="1"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-af5271eb" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
+            <cl:rows length="50" unit="PIXEL"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:xylayout std:sid="xylayout-ca9ebf3d"/>
+      </cl:group>
+      <cl:verticallayout std:sid="v-layout-2eb2526b"/>
+    </cl:group>
+    <cl:verticallayout std:sid="v-layout-32c58de9"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

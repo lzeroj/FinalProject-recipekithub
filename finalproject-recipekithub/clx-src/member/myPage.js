@@ -28,7 +28,6 @@ function onBodyLoad(e){
 		}
 	}); 
 	app.lookup("ea1").redraw();
-	
 }
 
 /*

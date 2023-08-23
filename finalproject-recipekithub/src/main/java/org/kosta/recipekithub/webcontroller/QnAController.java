@@ -31,7 +31,7 @@ public class QnAController {
 	@RequestMapping("/findQnAAdminForm")
 	public View findQnAAdminForm() {
 		return new UIView("ui/embedded/admin/findQnAAdminForm.clx");
-	}
+	} 
 	
 	@RequestMapping("/insertQnaForm")
 	public View insertQnaForm() {

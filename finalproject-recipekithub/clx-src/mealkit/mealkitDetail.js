@@ -247,7 +247,7 @@ function onButtonClick4(e){
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
  * 통신이 성공하면 발생합니다.
  */
-function onSubcreatmycartSubmitSuccess(e){
+function onSubcreatmycartSubmitSuccess2(e){
 	var subcreatmycart = e.control;
 	var resultDetail = subcreatmycart.getMetadata("resultDetail");
 	if(!confirm("장바구니에 상품을 추가하시겠습니까?")){
@@ -403,3 +403,5 @@ function onDeleteCommentSubmitSuccess(e){
 	var deleteComment = e.control;
 	app.lookup("commentListSub").send();
 }
+
+
