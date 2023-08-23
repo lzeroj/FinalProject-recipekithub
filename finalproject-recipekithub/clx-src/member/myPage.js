@@ -10,9 +10,6 @@
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e){
-	var submission = app.lookup("sub_profile");
-	submission.send();
-	
 	console.log(sessionStorage.getItem("memsession"));
 	var vcEmb = app.lookup("ea1");
 	cpr.core.App.load("embedded/myPagePaymentInfo", function(/*cpr.core.App*/ loadedApp){
@@ -31,6 +28,9 @@ function onBodyLoad(e){
 		}
 	}); 
 	app.lookup("ea1").redraw();
+	
+	var submission = app.lookup("sub_profile");
+	submission.send();
 }
 
 /*
@@ -67,11 +67,6 @@ function onNav1ItemClick(e){
 	}); 
 	app.lookup("ea1").redraw();	
 }
-
-
-
-
-
 
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.

@@ -267,6 +267,7 @@
 			var container = app.getContainer();
 			container.style.css({
 				"background-color" : "#F4FAEC",
+				"font-family" : "푸른전남 Medium",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -295,6 +296,7 @@
 					"border-right-style" : "none",
 					"border-left-style" : "none",
 					"border-bottom-style" : "none",
+					"font-family" : "'푸른 전남' , 'Malgun Gothic' , sans-serif",
 					"border-top-style" : "none"
 				});
 				navigationBar_1.bind("value").toDataMap(app.lookup("dmCategory"), "type");
@@ -323,6 +325,7 @@
 					"border-right-style" : "none",
 					"border-left-style" : "none",
 					"border-bottom-style" : "none",
+					"font-family" : "'푸른 전남' , 'Malgun Gothic' , sans-serif",
 					"border-top-style" : "none"
 				});
 				navigationBar_2.bind("value").toDataMap(app.lookup("dmCategory"), "ingredients");
@@ -350,6 +353,7 @@
 					"border-right-style" : "none",
 					"border-left-style" : "none",
 					"border-bottom-style" : "none",
+					"font-family" : "'푸른 전남' , 'Malgun Gothic' , sans-serif",
 					"border-top-style" : "none"
 				});
 				navigationBar_3.bind("value").toDataMap(app.lookup("dmCategory"), "method");
