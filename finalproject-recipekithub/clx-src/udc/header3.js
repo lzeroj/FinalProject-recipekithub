@@ -354,11 +354,12 @@ function onCmb1SelectionChange(e){
 			dialogApp.initValue = initValue;
 			});
 		}).then(function(returnValue) {
+			sessionStorage.clear();
 			var submission = app.lookup("sub_logout");
 			submission.send();
+			var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+			httpPostMethod.submit();
 		});
-        //window.location.href = "/member/logout";
-        
 		
 	// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
 	} else if (cmb1.value == "profile") {

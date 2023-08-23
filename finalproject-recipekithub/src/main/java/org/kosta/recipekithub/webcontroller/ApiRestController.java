@@ -1,3 +1,52 @@
+//package org.kosta.recipekithub.webcontroller;
+//
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//
+//import org.kosta.recipekithub.model.vo.GoogleLoginResponse;
+//import org.kosta.recipekithub.model.vo.GoogleOAuthRequest;
+//import org.kosta.recipekithub.model.service.GoogleOAuthService;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.util.UriComponentsBuilder;
+//import org.springframework.web.servlet.View;
+//import com.cleopatra.spring.JSONDataView;
+//
+//import lombok.RequiredArgsConstructor;
+//import lombok.extern.slf4j.Slf4j;
+//
+//@Controller
+//@RequiredArgsConstructor
+//@Slf4j
+//@RequestMapping("/login")
+//public class ApiRestController {
+//
+//    private final GoogleOAuthService googleOAuthService;
+//
+//    // ---[ Get Google Auth URL ]---//
+//    @RequestMapping("/getGoogleAuthUrl")
+//    public View getGoogleAuthUrl(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        String reqUrl = googleOAuthService.getAuthUrl();
+//        
+//        log.info("myLog-LoginUrl : {}", reqUrl);
+//        // Logic to set the response and redirect...
+//        return new JSONDataView();
+//    }
+//
+//    // ---[ OAuth Google Check ]---//
+//    @RequestMapping("/oauth_google_check")
+//    public View oauth_google_check(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        String authCode = request.getParameter("code");
+//        String resultJson = googleOAuthService.authenticateUser(authCode);
+//        
+//        log.info("responseBody {}", resultJson);
+//        // Logic to set the response...
+//        return new JSONDataView();
+//    }
+//}
+
+
+
 package org.kosta.recipekithub.webcontroller;
 
 import java.net.URI;

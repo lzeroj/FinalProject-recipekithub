@@ -7,6 +7,11 @@
 (function() {
 	var app = new cpr.core.App("recipe/recipe", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/controls/htmlobject.part.css");
+			loader.addCSS("theme/custom-theme.css");
+			loader.addCSS("theme/settings.part.css");
+			loader.addCSS("theme/custom-settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -523,20 +528,20 @@
 				"left": "calc(50% - 160px)"
 			});
 			
-			var userDefinedControl_1 = new udc.header3("headerUdc");
+			var userDefinedControl_1 = new udc.footer();
 			container.addChild(userDefinedControl_1, {
-				"top": "0px",
-				"width": "1920px",
-				"height": "200px",
-				"left": "calc(50% - 960px)"
-			});
-			
-			var userDefinedControl_2 = new udc.footer();
-			container.addChild(userDefinedControl_2, {
 				"top": "1357px",
 				"left": "0px",
 				"width": "1920px",
 				"height": "100px"
+			});
+			
+			var userDefinedControl_2 = new udc.header3();
+			container.addChild(userDefinedControl_2, {
+				"top": "0px",
+				"right": "0px",
+				"left": "0px",
+				"height": "200px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

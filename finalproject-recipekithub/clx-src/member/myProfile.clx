@@ -178,7 +178,7 @@
                       <cl:columns length="1" unit="FRACTION"/>
                     </cl:formlayout>
                   </cl:group>
-                  <cl:img std:sid="image-7e3a7f36" id="profileImg" style="border-right-style:none; background-size:contain; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/common/mypageIcon.png); border-top-style:none;" src="../theme/images/common/user-darker.png">
+                  <cl:img std:sid="image-7e3a7f36" id="profileImg" style="border-right-style:none; background-size:contain; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/common/mypageIcon.png); border-top-style:none;" src="../theme/images/common/user-darker.png" fallbacksrc="../theme/images/icon/chefimg.png">
                     <cl:datasetbind property="src" datacontrolid="ds_profile" columnname="memberImage" rowindex="0"/>
                     <cl:formdata std:sid="f-data-958d5805" row="0" col="0"/>
                   </cl:img>

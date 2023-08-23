@@ -1404,11 +1404,12 @@
 							dialogApp.initValue = initValue;
 							});
 						}).then(function(returnValue) {
+							sessionStorage.clear();
 							var submission = app.lookup("sub_logout");
 							submission.send();
+							var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+							httpPostMethod.submit();
 						});
-				        //window.location.href = "/member/logout";
-				        
 						
 					// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
 					} else if (cmb1.value == "profile") {
@@ -1424,7 +1425,7 @@
 				app.declareAppProperty("searchValue", null);
 				app.declareAppProperty("cmb1", null);
 				var submission_1 = new cpr.protocols.Submission("sub_logout");
-				submission_1.action = "/memberUI/logout";
+				submission_1.action = "/member/logout";
 				app.register(submission_1);
 				app.supportMedia("all and (min-width: 1920px)", "FHD");
 				app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");

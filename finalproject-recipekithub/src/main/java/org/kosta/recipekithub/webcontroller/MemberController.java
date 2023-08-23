@@ -38,8 +38,7 @@ public class MemberController {
 	// ---[ 전체 회원 정보 조회 ]---//
 	// ---> 아직 사용하지 않음
 	@RequestMapping("/memberlist")
-	public View findMemberList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View findMemberList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) 	throws Exception {
 		List<MemberVO> findMemberList = memberService.findMemberList();
 		dataRequest.setResponse("memberList", findMemberList);
 		return new JSONDataView();
@@ -47,9 +46,7 @@ public class MemberController {
 
 	// ---[ 로그인 ]---//
 	@RequestMapping("/login")
-	public View login(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
-
+	public View login(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		// `DataRequest`: 서브미션 통신에 대한 데이터
 		// `ParameterGroup` : 서브미션 request 데이터를 받음
 		ParameterGroup param = dataRequest.getParameterGroup("dm_login");
@@ -73,8 +70,7 @@ public class MemberController {
 
 	// ---[ 회원가입 ]---//
 	@RequestMapping("/register")
-	public View registerMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View registerMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
 		String memberEmail = param.getValue("member_email");
 
@@ -254,8 +250,7 @@ public class MemberController {
 
 	// ---[ 로그아웃 -> 메인 화면으로 이동 ]---//
 	@RequestMapping("/logout")
-	public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			session.invalidate();
@@ -344,5 +339,4 @@ public class MemberController {
 		
 		return new JSONDataView();
 	}
-
 }
