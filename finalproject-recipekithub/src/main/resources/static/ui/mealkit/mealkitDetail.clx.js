@@ -260,7 +260,7 @@
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onSubcreatmycartSubmitSuccess(e){
+			function onSubcreatmycartSubmitSuccess2(e){
 				var subcreatmycart = e.control;
 				var resultDetail = subcreatmycart.getMetadata("resultDetail");
 				if(!confirm("장바구니에 상품을 추가하시겠습니까?")){
@@ -453,7 +453,11 @@
 						"dataType": "number"
 					},
 					{"name": "sessionMember"},
-					{"name": "mealkitMember"}
+					{"name": "mealkitMember"},
+					{
+						"name": "cartDetailQuantity",
+						"dataType": "number"
+					}
 				]
 			});
 			if(typeof onMealkitUpdate == "function") {
@@ -568,6 +572,14 @@
 				submission_5.addEventListener("submit-success", onDeleteCommentSubmitSuccess);
 			}
 			app.register(submission_5);
+			
+			var submission_6 = new cpr.protocols.Submission("subcreatmycart");
+			submission_6.action = "/creatMyCart";
+			submission_6.addRequestData(dataMap_1);
+			if(typeof onSubcreatmycartSubmitSuccess2 == "function") {
+				submission_6.addEventListener("submit-success", onSubcreatmycartSubmitSuccess2);
+			}
+			app.register(submission_6);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -808,6 +820,9 @@
 					"font-size" : "17px",
 					"background-image" : "none"
 				});
+				if(typeof onButtonClick4 == "function") {
+					button_1.addEventListener("click", onButtonClick4);
+				}
 				container.addChild(button_1, {
 					"top": "406px",
 					"left": "515px",
@@ -999,7 +1014,7 @@
 					container.addChild(hTMLSnippet_1, {
 						"autoSize": "both",
 						"width": "929px",
-						"height": "386px"
+						"height": "374px"
 					});
 				})(group_9);
 				container.addChild(group_9, {
