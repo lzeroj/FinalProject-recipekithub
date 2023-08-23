@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RecipeBoardController {
       
 	private final RecipeBoardService recipeBoardService;
-                
+                 
 	@RequestMapping("/recipeBoardList")
 	public View recipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
@@ -49,7 +49,7 @@ public class RecipeBoardController {
 		}
 		return new UIView("ui/recipe/recipe.clx",searchParam);
 	}                 
-            
+             
 	@RequestMapping("/findRecipeBoardList")
 	public View findRecipeBoardList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
@@ -78,7 +78,7 @@ public class RecipeBoardController {
 		}else {  
 			pagination = new RecipePagination(totalRecipeCount,Long.parseLong(pageNo));
 		}
-		 
+		   
 		List<RecipeBoardVO> list = recipeBoardService.findAllRecipeBoard(type, ingredients, method,  sort, searchValue, pagination);
 		
 		//각 레시피별 좋아요 값
@@ -186,15 +186,17 @@ public class RecipeBoardController {
 				recipeBoardService.updateRecipeHits(id);
 				reCookie.setValue(reCookie.getValue() + "_[" + id + "]");
 				reCookie.setPath("/"); 
+				reCookie.setMaxAge(60*60*24);
 				response.addCookie(reCookie);
 				}
 			} else {
 				recipeBoardService.updateRecipeHits(id);
 				Cookie newCookie = new Cookie("hitsRecipe", "[" + id + "]"); 
 				newCookie.setPath("/");
+				newCookie.setMaxAge(60*60*24);
 				response.addCookie(newCookie);
 			}
- 
+  
 		Map<String, Object> initParam = new HashMap<String, Object>();
 		initParam.put("recipeBoardVO", recipeBoardVO);
 		return new UIView("ui/recipe/detailrecipe.clx", initParam);

@@ -7,6 +7,9 @@
 (function() {
 	var app = new cpr.core.App("recipe/detailrecipe", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/controls/htmlobject.part.css");
+			loader.addCSS("theme/custom-theme.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -48,6 +51,7 @@
 				app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 				app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
 				app.lookup("memberProfile").src = "/upload/profile/" + recipeBoardVO.memberVO.memberImage;
+
 				var hTMLSnippet = app.lookup("recipeContent");
 				hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 				
@@ -163,7 +167,9 @@
 						comment.nick = recipeComment[i].memberVO.memberNick;
 						comment.regDate = recipeComment[i].recipeCommentDate;
 						comment.content = recipeComment[i].recipeCommentContent;
-						comment.profile = recipeComment[i].memberVO.memberImage;
+						comment.profile = "/upload/profile/" + recipeComment[i].memberVO.memberImage;
+
+					console.log(comment.profile);
 						if (sessionval == null || sessionval != recipeComment[i].memberVO.memberEmail) {
 							comment.deleteBtn = false;
 						}
@@ -200,15 +206,14 @@
 				var button = e.control;
 				var sessionval = getTimedSessionData("memsession");
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
-				console.log(recipeBoardVO);
-				if (sessionval == null || sessionval != recipeBoardVO.memberVO.memberEmail) {
+				if (sessionval == null) {
 					alert("로그인이 필요합니다");
 					app.lookup("commentInput").focus();
-				} else {
+				} else{
 					app.lookup("dmInsertValue").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 					var insertComment = app.lookup("insertComment");
 					insertComment.send();
-				}
+					}
 			}
 
 			/*
@@ -267,7 +272,13 @@
 			 */
 			function onLikeimgClick(e) {
 				var likeimg = e.control;
+				var sessionval = getTimedSessionData("memsession");
+				if (sessionval == null) {
+					alert("로그인이 필요합니다");
+					app.lookup("commentInput").focus();
+				} else{
 				app.lookup("subinsertrecipelike").send();
+				}
 			}
 
 			/*
@@ -326,7 +337,7 @@
 			function onPageSelectionChange(e) {
 				var page = e.control;
 				app.lookup("recipeCommentList").send();
-			}
+			};
 			// End - User Script
 			
 			// Header
@@ -466,10 +477,17 @@
 			});
 			
 			// Layout
-			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-			container.setLayout(responsiveXYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.distribution = "center";
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
+			var userDefinedControl_1 = new udc.header3();
+			container.addChild(userDefinedControl_1, {
+				"width": "1920px",
+				"height": "200px"
+			});
+			
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
 				"background-color" : "#FFFFFF"
@@ -551,6 +569,10 @@
 					"height": "40px"
 				});
 				var image_4 = new cpr.controls.Image("memberProfile");
+				image_4.fallbackSrc = "theme/images/icon/chefimg.png";
+				image_4.style.css({
+					"border-radius" : "100px"
+				});
 				container.addChild(image_4, {
 					"top": "227px",
 					"width": "146px",
@@ -638,165 +660,28 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "199px",
-						"width": "1200px",
-						"height": "353px",
-						"left": "calc(50% - 600px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "199px",
-						"width": "586px",
-						"height": "353px",
-						"left": "calc(50% - 293px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "199px",
-						"width": "410px",
-						"height": "353px",
-						"left": "calc(50% - 205px)"
-					}
-				]
+				"width": "1200px",
+				"height": "353px"
 			});
 			
-			var group_3 = new cpr.controls.Container("commentgrp");
+			var hTMLSnippet_1 = new cpr.controls.HTMLSnippet("recipeContent");
+			hTMLSnippet_1.value = "<p>HTML Snippet<\/p>";
+			hTMLSnippet_1.style.css({
+				"cursor" : "auto",
+				"background-color" : "#FFFFFF"
+			});
+			container.addChild(hTMLSnippet_1, {
+				"autoSize": "height",
+				"width": "1200px",
+				"height": "515px"
+			});
+			
+			var group_3 = new cpr.controls.Container();
 			group_3.style.css({
 				"background-color" : "#FFFFFF"
 			});
-			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
-			group_3.setLayout(verticalLayout_1);
-			container.addChild(group_3, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "1255px",
-						"width": "1200px",
-						"height": "241px",
-						"left": "calc(50% - 600px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1255px",
-						"width": "586px",
-						"height": "241px",
-						"left": "calc(50% - 293px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "1255px",
-						"width": "410px",
-						"height": "241px",
-						"left": "calc(50% - 205px)"
-					}
-				]
-			});
-			
-			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
-			pageIndexer_1.pageRowCount = 10;
-			pageIndexer_1.bind("currentPageIndex").toDataMap(app.lookup("dmPage"), "pageNo");
-			pageIndexer_1.init(1, 1, 1);
-			if(typeof onPageSelectionChange == "function") {
-				pageIndexer_1.addEventListener("selection-change", onPageSelectionChange);
-			}
-			container.addChild(pageIndexer_1, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "1504px",
-						"width": "200px",
-						"height": "40px",
-						"left": "calc(50% - 100px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1504px",
-						"width": "98px",
-						"height": "40px",
-						"left": "calc(50% - 49px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "1504px",
-						"width": "68px",
-						"height": "40px",
-						"left": "calc(50% - 34px)"
-					}
-				]
-			});
-			
-			var group_4 = new cpr.controls.Container();
-			group_4.style.css({
-				"background-color" : "#FFFFFF"
-			});
-			var formLayout_1 = new cpr.controls.layouts.FormLayout();
-			formLayout_1.scrollable = false;
-			formLayout_1.topMargin = "5px";
-			formLayout_1.rightMargin = "5px";
-			formLayout_1.bottomMargin = "5px";
-			formLayout_1.leftMargin = "5px";
-			formLayout_1.horizontalSpacing = "10px";
-			formLayout_1.verticalSpacing = "10px";
-			formLayout_1.setColumns(["1fr", "100px"]);
-			formLayout_1.setRows(["1fr"]);
-			group_4.setLayout(formLayout_1);
-			(function(container){
-				var button_2 = new cpr.controls.Button();
-				button_2.value = "등록";
-				button_2.style.css({
-					"background-color" : "#0CA44E",
-					"color" : "white",
-					"background-image" : "none"
-				});
-				if(typeof onButtonClick2 == "function") {
-					button_2.addEventListener("click", onButtonClick2);
-				}
-				container.addChild(button_2, {
-					"colIndex": 1,
-					"rowIndex": 0
-				});
-				var textArea_1 = new cpr.controls.TextArea("commentInput");
-				textArea_1.bind("value").toDataMap(app.lookup("dmInsertValue"), "recipeCommentContent");
-				container.addChild(textArea_1, {
-					"colIndex": 0,
-					"rowIndex": 0
-				});
-			})(group_4);
-			container.addChild(group_4, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "1169px",
-						"width": "1200px",
-						"height": "87px",
-						"left": "calc(50% - 600px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1169px",
-						"width": "586px",
-						"height": "87px",
-						"left": "calc(50% - 293px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "1169px",
-						"width": "410px",
-						"height": "87px",
-						"left": "calc(50% - 205px)"
-					}
-				]
-			});
-			
-			var group_5 = new cpr.controls.Container();
-			group_5.style.css({
-				"background-color" : "#FFFFFF"
-			});
 			var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-			group_5.setLayout(xYLayout_3);
+			group_3.setLayout(xYLayout_3);
 			(function(container){
 				var output_8 = new cpr.controls.Output();
 				output_8.value = "댓글";
@@ -804,7 +689,7 @@
 					"font-size" : "25px"
 				});
 				container.addChild(output_8, {
-					"top": "0px",
+					"top": "11px",
 					"left": "4px",
 					"width": "58px",
 					"height": "36px"
@@ -816,135 +701,71 @@
 					"font-size" : "25px"
 				});
 				container.addChild(output_9, {
-					"top": "0px",
+					"top": "11px",
 					"left": "61px",
 					"width": "129px",
 					"height": "36px"
 				});
-			})(group_5);
-			container.addChild(group_5, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "1132px",
-						"width": "1200px",
-						"height": "38px",
-						"left": "calc(50% - 600px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1132px",
-						"width": "586px",
-						"height": "38px",
-						"left": "calc(50% - 293px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "1132px",
-						"width": "410px",
-						"height": "38px",
-						"left": "calc(50% - 205px)"
-					}
-				]
+				var button_2 = new cpr.controls.Button("commentBtn");
+				button_2.value = "등록";
+				button_2.style.css({
+					"background-color" : "#0CA44E",
+					"color" : "white",
+					"background-image" : "none"
+				});
+				if(typeof onButtonClick2 == "function") {
+					button_2.addEventListener("click", onButtonClick2);
+				}
+				container.addChild(button_2, {
+					"top": "46px",
+					"left": "1094px",
+					"width": "100px",
+					"height": "77px"
+				});
+				var textArea_1 = new cpr.controls.TextArea("commentInput");
+				textArea_1.placeholder = "50자 내로 작성해주세요";
+				textArea_1.maxLength = 50;
+				textArea_1.bind("value").toDataMap(app.lookup("dmInsertValue"), "recipeCommentContent");
+				container.addChild(textArea_1, {
+					"top": "46px",
+					"left": "4px",
+					"width": "1080px",
+					"height": "77px"
+				});
+			})(group_3);
+			container.addChild(group_3, {
+				"width": "1200px",
+				"height": "125px"
 			});
 			
-			var userDefinedControl_1 = new udc.header3();
-			container.addChild(userDefinedControl_1, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "0px",
-						"right": "0px",
-						"left": "0px",
-						"height": "200px"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "0px",
-						"right": "0px",
-						"left": "0px",
-						"height": "200px"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "0px",
-						"right": "0px",
-						"left": "0px",
-						"height": "200px"
-					}
-				]
-			});
-			
-			var group_6 = new cpr.controls.Container();
-			group_6.style.css({
+			var group_4 = new cpr.controls.Container("commentgrp");
+			group_4.style.css({
 				"background-color" : "#FFFFFF"
 			});
 			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
-			group_6.setLayout(verticalLayout_2);
-			(function(container){
-				var hTMLSnippet_1 = new cpr.controls.HTMLSnippet("recipeContent");
-				hTMLSnippet_1.value = "<p>HTML Snippet<\/p>";
-				hTMLSnippet_1.style.css({
-					"cursor" : "auto",
-					"background-color" : "transparent"
-				});
-				container.addChild(hTMLSnippet_1, {
-					"autoSize": "height",
-					"width": "400px",
-					"height": "515px"
-				});
-			})(group_6);
-			container.addChild(group_6, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "581px",
-						"width": "1200px",
-						"height": "525px",
-						"left": "calc(50% - 600px)"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "581px",
-						"width": "586px",
-						"height": "525px",
-						"left": "calc(50% - 293px)"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "581px",
-						"width": "410px",
-						"height": "525px",
-						"left": "calc(50% - 205px)"
-					}
-				]
+			group_4.setLayout(verticalLayout_2);
+			container.addChild(group_4, {
+				"autoSize": "height",
+				"width": "1200px",
+				"height": "241px"
+			});
+			
+			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
+			pageIndexer_1.pageRowCount = 10;
+			pageIndexer_1.bind("currentPageIndex").toDataMap(app.lookup("dmPage"), "pageNo");
+			pageIndexer_1.init(1, 1, 1);
+			if(typeof onPageSelectionChange == "function") {
+				pageIndexer_1.addEventListener("selection-change", onPageSelectionChange);
+			}
+			container.addChild(pageIndexer_1, {
+				"width": "200px",
+				"height": "40px"
 			});
 			
 			var userDefinedControl_2 = new udc.footer();
 			container.addChild(userDefinedControl_2, {
-				positions: [
-					{
-						"media": "all and (min-width: 1024px)",
-						"top": "1601px",
-						"left": "0px",
-						"width": "1920px",
-						"height": "100px"
-					}, 
-					{
-						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "1601px",
-						"left": "0px",
-						"width": "938px",
-						"height": "100px"
-					}, 
-					{
-						"media": "all and (max-width: 499px)",
-						"top": "1601px",
-						"left": "0px",
-						"width": "656px",
-						"height": "100px"
-					}
-				]
+				"width": "1920px",
+				"height": "100px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

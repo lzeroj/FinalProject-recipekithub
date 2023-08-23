@@ -35,6 +35,7 @@ function onBodyLoad(e) {
 	app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 	app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
 	app.lookup("memberProfile").src = "/upload/profile/" + recipeBoardVO.memberVO.memberImage;
+
 	var hTMLSnippet = app.lookup("recipeContent");
 	hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 	
@@ -150,7 +151,9 @@ function onRecipeCommentListSubmitSuccess(e) {
 			comment.nick = recipeComment[i].memberVO.memberNick;
 			comment.regDate = recipeComment[i].recipeCommentDate;
 			comment.content = recipeComment[i].recipeCommentContent;
-			comment.profile = recipeComment[i].memberVO.memberImage;
+			comment.profile = "/upload/profile/" + recipeComment[i].memberVO.memberImage;
+
+		console.log(comment.profile);
 			if (sessionval == null || sessionval != recipeComment[i].memberVO.memberEmail) {
 				comment.deleteBtn = false;
 			}
@@ -187,15 +190,14 @@ function onButtonClick2(e) {
 	var button = e.control;
 	var sessionval = getTimedSessionData("memsession");
 	var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
-	console.log(recipeBoardVO);
-	if (sessionval == null || sessionval != recipeBoardVO.memberVO.memberEmail) {
+	if (sessionval == null) {
 		alert("로그인이 필요합니다");
 		app.lookup("commentInput").focus();
-	} else {
+	} else{
 		app.lookup("dmInsertValue").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 		var insertComment = app.lookup("insertComment");
 		insertComment.send();
-	}
+		}
 }
 
 /*
@@ -254,7 +256,13 @@ function onSubinsertrecipelikeSubmitSuccess(e) {
  */
 function onLikeimgClick(e) {
 	var likeimg = e.control;
+	var sessionval = getTimedSessionData("memsession");
+	if (sessionval == null) {
+		alert("로그인이 필요합니다");
+		app.lookup("commentInput").focus();
+	} else{
 	app.lookup("subinsertrecipelike").send();
+	}
 }
 
 /*
@@ -314,3 +322,4 @@ function onPageSelectionChange(e) {
 	var page = e.control;
 	app.lookup("recipeCommentList").send();
 }
+

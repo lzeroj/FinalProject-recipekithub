@@ -42,7 +42,7 @@
       <cl:img std:sid="image-494e8683" src="../theme/images/recipe/heartcolor.png">
         <cl:xylayoutdata std:sid="xyl-data-e62fd16b" top="212px" left="0px" width="29px" height="25px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
-      <cl:img std:sid="image-96dc0477" id="profile">
+      <cl:img std:sid="image-96dc0477" id="profile" fallbacksrc="../theme/images/icon/chefimg.png">
         <cl:xylayoutdata std:sid="xyl-data-122eb9aa" top="181px" left="0px" width="37px" height="32px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:xylayout std:sid="xylayout-e1c24bc1"/>
