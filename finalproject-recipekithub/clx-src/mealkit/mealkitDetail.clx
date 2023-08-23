@@ -20,6 +20,7 @@
           <cl:datacolumn std:sid="d-column-8ae709f0" name="mealkitHits" datatype="number"/>
           <cl:datacolumn std:sid="d-column-ac0a03ae" name="sessionMember"/>
           <cl:datacolumn std:sid="d-column-0807fcbf" name="mealkitMember"/>
+          <cl:datacolumn std:sid="d-column-a1233ddc" name="cartDetailQuantity" datatype="number"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:datamap std:sid="d-map-b9128f29" id="commentMap">
@@ -81,6 +82,10 @@
       <cl:submission std:sid="submission-167b7732" id="deleteComment" action="/deleteComment">
         <cl:listener std:sid="listener-6c826e89" name="submit-success" handler="onDeleteCommentSubmitSuccess"/>
         <cl:requestdata dataid="commentId"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-aa8bc018" id="subcreatmycart" action="/creatMyCart">
+        <cl:listener std:sid="listener-a81d7290" name="submit-success" handler="onSubcreatmycartSubmitSuccess2"/>
+        <cl:requestdata dataid="mealkit"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -153,6 +158,7 @@
         <cl:xylayout std:sid="xylayout-3b8bbb0d"/>
       </cl:group>
       <cl:button std:sid="button-e8f1c6b8" style="background-color:#0ca44e; color:white; font-weight:bolder; font-size:17px; background-image:none;" value="바로 구매">
+        <cl:listener std:sid="listener-143fc6bb" name="click" handler="onButtonClick4"/>
         <cl:xylayoutdata std:sid="xyl-data-56a566ba" top="406px" left="515px" width="449px" height="52px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:group std:sid="group-c24af64e" style="background-color:#F9F9F9;">

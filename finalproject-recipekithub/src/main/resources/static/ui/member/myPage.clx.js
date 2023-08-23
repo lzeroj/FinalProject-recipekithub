@@ -23,6 +23,9 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
+				var submission = app.lookup("sub_profile");
+				submission.send();
+				
 				console.log(sessionStorage.getItem("memsession"));
 				var vcEmb = app.lookup("ea1");
 				cpr.core.App.load("embedded/myPagePaymentInfo", function(/*cpr.core.App*/ loadedApp){
@@ -41,7 +44,6 @@
 					}
 				}); 
 				app.lookup("ea1").redraw();
-				
 			}
 
 			/*
@@ -77,6 +79,23 @@
 					}
 				}); 
 				app.lookup("ea1").redraw();	
+			}
+
+
+
+
+
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSub_profileSubmitSuccess(e){
+				var sub_profile = e.control;
+				var dsProfile = app.lookup("ds_profile");
+				app.lookup("opbEmail").text = dsProfile.getValue(0, "memberEmail");
+				app.lookup("opbNick").text = dsProfile.getValue(0, "memberNick");
+				app.lookup("profileImg").src = "/upload/profile/" + dsProfile.getValue(0, "memberImage");
 			};
 			// End - User Script
 			
@@ -94,6 +113,32 @@
 				]
 			});
 			app.register(dataSet_1);
+			
+			var dataSet_2 = new cpr.data.DataSet("ds_profile");
+			dataSet_2.parseData({
+				"columns" : [
+					{
+						"name": "memberEmail",
+						"dataType": "string"
+					},
+					{
+						"name": "memberNick",
+						"dataType": "string"
+					},
+					{
+						"name": "memberImage",
+						"dataType": "string"
+					}
+				]
+			});
+			app.register(dataSet_2);
+			var submission_1 = new cpr.protocols.Submission("sub_profile");
+			submission_1.action = "/member/profileInfo";
+			submission_1.addResponseData(dataSet_2, false);
+			if(typeof onSub_profileSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onSub_profileSubmitSuccess);
+			}
+			app.register(submission_1);
 			app.supportMedia("all and (min-width: 1920px)", "new-screen");
 			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -107,8 +152,9 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.distribution = "center";
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
@@ -126,13 +172,15 @@
 					group_3.style.css({
 						"text-align" : "center"
 					});
-					var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-					group_3.setLayout(responsiveXYLayout_1);
+					var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+					group_3.setLayout(xYLayout_4);
 					(function(container){
 						var group_4 = new cpr.controls.Container();
-						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-						xYLayout_4.scrollable = false;
-						group_4.setLayout(xYLayout_4);
+						var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+						group_4.setLayout(verticalLayout_2);
+						var xYLayout_5 = new cpr.controls.layouts.XYLayout();
+						xYLayout_5.scrollable = false;
+						group_4.setLayout(xYLayout_5);
 						(function(container){
 							var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
 							embeddedApp_1.style.css({
@@ -142,12 +190,14 @@
 								"border-left-style" : "solid",
 								"border-right-width" : "1px",
 								"border-left-color" : "#dddddd",
-								"border-bottom-width" : "1px",
-								"border-top-color" : "#dddddd",
-								"border-bottom-style" : "solid",
 								"border-right-color" : "#dddddd",
 								"border-left-width" : "1px",
-								"border-top-style" : "solid"
+								"border-top-style" : "solid",
+								"border-radius" : "0px 0px 20px 20px",
+								"border-left-style" : "solid",
+								"border-bottom-width" : "1px",
+								"border-top-color" : "#dddddd",
+								"border-bottom-style" : "solid"
 							});
 							cpr.core.App.load("embedded/myPageRecipeLike", function(app) {
 								if(app){
@@ -155,50 +205,16 @@
 								}
 							});
 							container.addChild(embeddedApp_1, {
-								"top": "0px",
-								"right": "0px",
-								"bottom": "30px",
-								"left": "0px"
-							});
-							var userDefinedControl_1 = new udc.header3();
-							container.addChild(userDefinedControl_1, {
-								"top": "-199px",
-								"right": "-972px",
-								"left": "-480px",
-								"height": "200px"
+								"autoSize": "height",
+								"width": "714px",
+								"height": "701px"
 							});
 						})(group_4);
 						container.addChild(group_4, {
-							positions: [
-								{
-									"media": "all and (min-width: 1920px)",
-									"top": "39px",
-									"right": "516px",
-									"bottom": "0px",
-									"left": "0px"
-								}, 
-								{
-									"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-									"top": "39px",
-									"right": "275px",
-									"bottom": "0px",
-									"left": "0px"
-								}, 
-								{
-									"media": "all and (min-width: 500px) and (max-width: 1023px)",
-									"top": "39px",
-									"right": "134px",
-									"bottom": "0px",
-									"left": "0px"
-								}, 
-								{
-									"media": "all and (max-width: 499px)",
-									"top": "39px",
-									"right": "94px",
-									"bottom": "0px",
-									"left": "0px"
-								}
-							]
+							"top": "39px",
+							"right": "516px",
+							"bottom": "0px",
+							"left": "0px"
 						});
 						var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
 						navigationBar_1.menuType = "fullmenu";
@@ -206,10 +222,17 @@
 						navigationBar_1.barItemWidths = "equal";
 						navigationBar_1.style.setClasses(["cl-navigationbar", "my-navi"]);
 						navigationBar_1.style.css({
+							"border-radius" : "20px 20px 0px 0px",
+							"border-right-style" : "solid",
 							"border-bottom-color" : "#FFFFFF",
 							"color" : "#0ebc59",
 							"font-weight" : "bold",
-							"border-bottom-style" : "0"
+							"border-left-style" : "solid",
+							"border-left-color" : "#dddddd",
+							"border-bottom-width" : "0px",
+							"border-top-color" : "#dddddd",
+							"border-right-color" : "#dddddd",
+							"border-top-style" : "solid"
 						});
 						(function(navigationBar_1){
 							navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "1", null));
@@ -253,39 +276,156 @@
 							]
 						});
 						var group_5 = new cpr.controls.Container();
-						var xYLayout_5 = new cpr.controls.layouts.XYLayout();
-						group_5.setLayout(xYLayout_5);
+						var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+						group_5.setLayout(xYLayout_3);
+						var xYLayout_6 = new cpr.controls.layouts.XYLayout();
+						group_5.setLayout(xYLayout_6);
+						(function(container){
+							var group_6 = new cpr.controls.Container();
+							group_6.style.css({
+								"border-radius" : "50px",
+								"background-color" : "#0A8C43"
+							});
+							var xYLayout_7 = new cpr.controls.layouts.XYLayout();
+							group_6.setLayout(xYLayout_7);
+							(function(container){
+								var group_7 = new cpr.controls.Container();
+								group_7.style.css({
+									"background-color" : "#FFFFFF",
+									"border-radius" : "40px"
+								});
+								var xYLayout_8 = new cpr.controls.layouts.XYLayout();
+								group_7.setLayout(xYLayout_8);
+								(function(container){
+									var group_8 = new cpr.controls.Container();
+									group_8.style.css({
+										"border-radius" : "40px 40px 0px 0px",
+										"background-size" : "cover",
+										"background-image" : "url('theme/images/member/2.png')",
+										"background-position" : "center"
+									});
+									var xYLayout_9 = new cpr.controls.layouts.XYLayout();
+									group_8.setLayout(xYLayout_9);
+									container.addChild(group_8, {
+										"top": "0px",
+										"right": "0px",
+										"left": "0px",
+										"height": "150px"
+									});
+									var group_9 = new cpr.controls.Container();
+									var xYLayout_10 = new cpr.controls.layouts.XYLayout();
+									group_9.setLayout(xYLayout_10);
+									container.addChild(group_9, {
+										"right": "0px",
+										"bottom": "0px",
+										"left": "0px",
+										"height": "200px"
+									});
+								})(group_7);
+								container.addChild(group_7, {
+									"top": "10px",
+									"right": "10px",
+									"width": "400px",
+									"height": "350px"
+								});
+							})(group_6);
+							container.addChild(group_6, {
+								"top": "0px",
+								"left": "0px",
+								"width": "420px",
+								"height": "370px"
+							});
+							var group_10 = new cpr.controls.Container();
+							var formLayout_1 = new cpr.controls.layouts.FormLayout();
+							formLayout_1.scrollable = false;
+							formLayout_1.topMargin = "0px";
+							formLayout_1.rightMargin = "0px";
+							formLayout_1.bottomMargin = "0px";
+							formLayout_1.leftMargin = "0px";
+							formLayout_1.horizontalSpacing = "0px";
+							formLayout_1.verticalSpacing = "0px";
+							formLayout_1.setColumns(["1fr", "150px", "1fr"]);
+							formLayout_1.setRows(["50px", "150px", "1fr"]);
+							group_10.setLayout(formLayout_1);
+							(function(container){
+								var group_11 = new cpr.controls.Container();
+								var xYLayout_11 = new cpr.controls.layouts.XYLayout();
+								group_11.setLayout(xYLayout_11);
+								(function(container){
+									var image_1 = new cpr.controls.Image("profileImg");
+									image_1.fallbackSrc = "theme/images/icon/chefimg.png";
+									image_1.bind("src").toDataSet(app.lookup("ds_profile"), "memberImage", 0);
+									container.addChild(image_1, {
+										"top": "0px",
+										"right": "0px",
+										"bottom": "0px",
+										"left": "0px"
+									});
+								})(group_11);
+								container.addChild(group_11, {
+									"colIndex": 1,
+									"rowIndex": 1
+								});
+								var group_12 = new cpr.controls.Container();
+								var formLayout_2 = new cpr.controls.layouts.FormLayout();
+								formLayout_2.scrollable = false;
+								formLayout_2.topMargin = "20px";
+								formLayout_2.rightMargin = "10px";
+								formLayout_2.bottomMargin = "10px";
+								formLayout_2.leftMargin = "10px";
+								formLayout_2.horizontalSpacing = "20px";
+								formLayout_2.verticalSpacing = "20px";
+								formLayout_2.setColumns(["1fr", "1fr"]);
+								formLayout_2.setRows(["50px", "50px"]);
+								group_12.setLayout(formLayout_2);
+								(function(container){
+									var output_1 = new cpr.controls.Output("opbNick");
+									output_1.style.css({
+										"color" : "#EC631D",
+										"font-weight" : "bolder",
+										"font-size" : "18px",
+										"text-align" : "center"
+									});
+									output_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberNick", 0);
+									container.addChild(output_1, {
+										"colIndex": 0,
+										"rowIndex": 0,
+										"colSpan": 2,
+										"rowSpan": 1
+									});
+									var output_2 = new cpr.controls.Output("opbEmail");
+									output_2.style.css({
+										"font-weight" : "bolder",
+										"font-size" : "18px",
+										"text-align" : "center"
+									});
+									output_2.bind("value").toDataSet(app.lookup("ds_profile"), "memberEmail", 0);
+									container.addChild(output_2, {
+										"colIndex": 0,
+										"rowIndex": 1,
+										"colSpan": 2,
+										"rowSpan": 1
+									});
+								})(group_12);
+								container.addChild(group_12, {
+									"colIndex": 0,
+									"rowIndex": 2,
+									"colSpan": 3,
+									"rowSpan": 1
+								});
+							})(group_10);
+							container.addChild(group_10, {
+								"top": "10px",
+								"right": "10px",
+								"width": "400px",
+								"height": "350px"
+							});
+						})(group_5);
 						container.addChild(group_5, {
-							positions: [
-								{
-									"media": "all and (min-width: 1920px)",
-									"top": "0px",
-									"right": "0px",
-									"width": "450px",
-									"height": "200px"
-								}, 
-								{
-									"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-									"top": "0px",
-									"right": "0px",
-									"width": "270px",
-									"height": "200px"
-								}, 
-								{
-									"media": "all and (min-width: 500px) and (max-width: 1023px)",
-									"top": "0px",
-									"right": "0px",
-									"width": "132px",
-									"height": "200px"
-								}, 
-								{
-									"media": "all and (max-width: 499px)",
-									"top": "0px",
-									"right": "0px",
-									"width": "92px",
-									"height": "200px"
-								}
-							]
+							"top": "39px",
+							"left": "770px",
+							"width": "420px",
+							"height": "370px"
 						});
 					})(group_3);
 					container.addChild(group_3, {
@@ -294,17 +434,24 @@
 						"width": "1230px",
 						"left": "calc(50% - 615px)"
 					});
-					var userDefinedControl_2 = new udc.headerMyPage();
-					userDefinedControl_2.style.css({
+					var userDefinedControl_1 = new udc.headerMyPage();
+					userDefinedControl_1.style.css({
 						"border-bottom-color" : "#62a40c",
 						"border-bottom-width" : "3px",
 						"border-bottom-style" : "solid"
 					});
-					container.addChild(userDefinedControl_2, {
+					container.addChild(userDefinedControl_1, {
 						"top": "0px",
 						"right": "0px",
 						"left": "0px",
 						"height": "200px"
+					});
+					var userDefinedControl_2 = new udc.footer();
+					container.addChild(userDefinedControl_2, {
+						"top": "973px",
+						"bottom": "0px",
+						"width": "1920px",
+						"left": "calc(50% - 960px)"
 					});
 				})(group_2);
 				container.addChild(group_2, {
@@ -315,18 +462,8 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "0px",
-				"right": "0px",
-				"bottom": "0px",
-				"left": "0px"
-			});
-			
-			var userDefinedControl_3 = new udc.footer();
-			container.addChild(userDefinedControl_3, {
-				"right": "0px",
-				"bottom": "0px",
-				"left": "0px",
-				"height": "100px"
+				"width": "1920px",
+				"height": "1080px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

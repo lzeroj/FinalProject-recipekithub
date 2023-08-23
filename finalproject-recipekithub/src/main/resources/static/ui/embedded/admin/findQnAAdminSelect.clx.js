@@ -29,7 +29,6 @@
 				app.lookup("txa1").text = val.boardContent;
 				app.lookup("ipb1").redraw();
 				app.lookup("txa1").redraw();
-				
 			}
 
 			/*
@@ -149,6 +148,9 @@
 			group_1.setLayout(xYLayout_2);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
+				group_2.style.css({
+					"background-color" : "#FFFFFF"
+				});
 				var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
 				group_2.setLayout(verticalLayout_1);
 				(function(container){

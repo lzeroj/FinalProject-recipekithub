@@ -100,6 +100,27 @@
 		DELETE FROM CART_DETAIL WHERE MEALKIT_NO = #{mealkitNo} AND CART_NO = #{cartNo}
 	</delete>
 	
-	
-
+	<!-- d3 chart list -->
+	<select id="findSalesRankAdmin" resultType="org.kosta.recipekithub.model.vo.SalesVO">
+		SELECT mb.MEALKIT_NO , mb.MEALKIT_NAME, SUM(cd.CART_DETAIL_QUANTITY ) AS CART_DETAIL_QUANTITY , SUM(cd.CART_DETAIL_QUANTITY ) * mb.MEALKIT_PRICE AS mealkitTotalPrice
+		FROM MEALKIT_BOARD mb ,CART_DETAIL cd 
+		WHERE mb.MEALKIT_NO = cd.MEALKIT_NO 
+		AND cd.IS_ORDERED_DATAIL = 'Y'
+		GROUP BY mb.MEALKIT_NO,mb.MEALKIT_NAME ,mb.MEALKIT_PRICE
+		ORDER BY mealkitTotalPrice desc
+	</select>
+	<select id="findTotalLikeRecipe" resultType="org.kosta.recipekithub.model.vo.ChartVO">
+		SELECT RB.RECIPE_BOARD_TITLE,RB.MEMBER_EMAIL,COUNT(LR.RECIPE_BOARD_ID) RECIPE_LIKE_COUNT
+		FROM RECIPE_BOARD rb , LIKE_RKH lr
+		WHERE RB.RECIPE_BOARD_ID = LR.RECIPE_BOARD_ID 
+		GROUP BY RB.RECIPE_BOARD_TITLE, RB.MEMBER_EMAIL
+		ORDER BY RECIPE_LIKE_COUNT DESC 
+	</select>
+	<select id="findTotalLikeMealkit" resultType="org.kosta.recipekithub.model.vo.ChartVO">
+		SELECT mb2.MEALKIT_NAME ,COUNT(mb2.MEALKIT_NO) mealkitCount
+		FROM MEALKIT_BOOKMARK mb , MEALKIT_BOARD mb2
+		WHERE mb.MEALKIT_NO = mb2.MEALKIT_NO 
+		GROUP BY mb2.MEALKIT_NAME
+		order BY mealkitCount
+	</select>
 </mapper>

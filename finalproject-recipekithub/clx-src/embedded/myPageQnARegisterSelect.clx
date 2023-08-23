@@ -51,7 +51,7 @@
           <cl:verticaldata std:sid="v-data-83baae72" width="669px" height="248px"/>
         </cl:textarea>
         <cl:group std:sid="group-e7058dab" id="answergrp">
-          <cl:verticaldata std:sid="v-data-43c47457" width="400px" height="288px" syncminheight="true" autosize="none"/>
+          <cl:verticaldata std:sid="v-data-43c47457" width="400px" height="288px" syncminheight="false" autosize="height"/>
           <cl:verticallayout std:sid="v-layout-92cbeb57" scrollable="false"/>
         </cl:group>
         <cl:group std:sid="group-1c50a8c6" id="buttongrp">

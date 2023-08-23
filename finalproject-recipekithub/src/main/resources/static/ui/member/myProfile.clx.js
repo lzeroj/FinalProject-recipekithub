@@ -22,32 +22,6 @@
 			 * @author kjoon
 			 ************************************************/
 
-			/*
-			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
-			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
-
-			function onBodyLoad(e) {
-				//var sessionval = getSessionStorage("memsession");
-				//console.log(sessionval);
-				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
-				console.log(recipeBoardVO);
-				//if(sessionval ==null || sessionval != recipeBoardVO.memberVO.memberEmail){
-				//	app.lookup("updateBtn").visible = false;
-				//}
-				app.lookup("recipeBoardImage").src = "/upload/recipe/" + recipeBoardVO.recipeBoardImage;
-				app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
-				app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
-				var hTMLSnippet = app.lookup("recipeContent");
-				hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
-				
-				// 현준
-				app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
-				app.lookup("subrecipelikecount").send();
-				
-			}
-			 */
-
-
 
 			/*
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
@@ -888,7 +862,7 @@
 							"padding-right" : "50px"
 						});
 						tabFolder_1.style.body.css({
-							"border-radius" : "0 10 20 20"
+							"border-radius" : "0px 10px 20px 20px"
 						});
 						
 						var tabItem_1 = (function(tabFolder){
@@ -1103,6 +1077,16 @@
 										"rowIndex": 4
 									});
 									var image_1 = new cpr.controls.Image("profileImg");
+									image_1.src = "theme/images/common/user-darker.png";
+									image_1.fallbackSrc = "theme/images/icon/chefimg.png";
+									image_1.style.css({
+										"border-right-style" : "none",
+										"background-size" : "contain",
+										"border-left-style" : "none",
+										"border-bottom-style" : "none",
+										"background-image" : "url('theme/images/common/mypageIcon.png')",
+										"border-top-style" : "none"
+									});
 									image_1.bind("src").toDataSet(app.lookup("ds_profile"), "memberImage", 0);
 									container.addChild(image_1, {
 										"colIndex": 0,
@@ -1216,7 +1200,8 @@
 										inputBox_3.spellCheck = false;
 										inputBox_3.style.css({
 											"border-radius" : "5px",
-											"font-size" : "15px"
+											"font-size" : "15px",
+											"background-image" : "none"
 										});
 										inputBox_3.bind("value").toDataSet(app.lookup("ds_profile"), "memberPassword", 0);
 										if(typeof onIpbPassword1Keyup == "function") {
