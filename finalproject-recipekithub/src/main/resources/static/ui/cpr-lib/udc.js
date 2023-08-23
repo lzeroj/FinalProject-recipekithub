@@ -2567,8 +2567,8 @@
 					"font-size" : "14px"
 				});
 				container.addChild(output_3, {
-					"top": "206px",
-					"left": "55px",
+					"top": "204px",
+					"left": "45px",
 					"width": "26px",
 					"height": "24px"
 				});
@@ -2577,7 +2577,7 @@
 				output_4.value = "조회수";
 				container.addChild(output_4, {
 					"top": "204px",
-					"left": "104px",
+					"left": "81px",
 					"width": "50px",
 					"height": "27px"
 				});
@@ -2589,7 +2589,7 @@
 				});
 				container.addChild(output_5, {
 					"top": "204px",
-					"left": "153px",
+					"left": "130px",
 					"width": "50px",
 					"height": "27px"
 				});
@@ -2619,10 +2619,10 @@
 				var output_6 = new cpr.controls.Output("count");
 				output_6.value = "Output";
 				container.addChild(output_6, {
-					"top": "208px",
+					"top": "204px",
 					"left": "26px",
-					"width": "30px",
-					"height": "20px"
+					"width": "32px",
+					"height": "24px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);

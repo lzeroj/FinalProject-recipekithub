@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.kosta.recipekithub.model.mapper.MealkitMapper;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -60,6 +61,15 @@ public class MealkitServiceImpl implements MealkitService {
 	public void increaseHits(int mealkitNo) {
 		mealKitMapper.increaseMealkitHits(mealkitNo);
 	}
+	
+	@Override
+	public long findTotalPostCount(String mealkitCategory, String searchMealkit) {
+		return mealKitMapper.findTotalPostCount(mealkitCategory, searchMealkit);
+	}
 
-
+	@Override
+	public List<MealKitBoard> findAllMealkitBoard(String mealkitCategory, String sort, String searchMealkit,
+			RecipePagination pagination) {
+		return mealKitMapper.findAllMealkitBoard(mealkitCategory, sort, searchMealkit, pagination);
+	}
 }

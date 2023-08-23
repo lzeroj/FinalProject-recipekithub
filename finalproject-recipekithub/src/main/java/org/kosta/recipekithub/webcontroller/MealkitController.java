@@ -19,6 +19,7 @@ import org.kosta.recipekithub.model.service.MealkitStarScoreService;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MealkitCommentVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,6 +86,47 @@ public class MealkitController {
 		//initParam.put("mealkitMap", map);
 		return new UIView("ui/mealkit/mealkitList.clx", initParam);
 		
+	}
+	
+	@RequestMapping("/findMealkitList")
+	public View findMealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
+		//페이지 번호 값
+		ParameterGroup pageParam = dataRequest.getParameterGroup("mePage");
+		String pageNo = pageParam.getValue("pageNo");
+		//카테고리별
+		ParameterGroup categoryParam = dataRequest.getParameterGroup("meCategory");
+		String category = categoryParam.getValue("category");
+		String ingre = categoryParam.getValue("ingre");
+		String way = categoryParam.getValue("way");
+		//분류별
+		ParameterGroup sortParam = dataRequest.getParameterGroup("meSort");
+		String sort = sortParam.getValue("sort");
+		//검색바
+		ParameterGroup searchParam = dataRequest.getParameterGroup("meSearch");
+		String searchMealkit = searchParam.getValue("searchMealkit");
+		
+		String mealkitCategory = category+"/"+ingre+"/"+way;
+		
+		log.info("pageNo = {} ", pageNo);
+		log.info("sort = {} ", sort);
+		log.info("category = {} ", category);
+		log.info("ingre = {} ", ingre);
+		log.info("way = {} ", way);
+		log.info("searchMealkit = {} ", searchMealkit);
+		log.info("mealkitCategory = {} ", mealkitCategory);
+		
+		RecipePagination pagination = null;
+		long totalMealkitCnt = mealKitService.findTotalPostCount(mealkitCategory, searchMealkit);
+		if(pageNo == null) {
+			pagination = new RecipePagination(totalMealkitCnt);
+		}else {
+			pagination = new RecipePagination(totalMealkitCnt, Integer.parseInt(pageNo));
+		}
+		
+		List<MealKitBoard> list = mealKitService.findAllMealkitBoard(mealkitCategory, sort, searchMealkit, pagination);
+		System.out.println(list);
+		dataRequest.setResponse("mealkitAllList", list);
+		return new JSONDataView();
 	}
 	
 	

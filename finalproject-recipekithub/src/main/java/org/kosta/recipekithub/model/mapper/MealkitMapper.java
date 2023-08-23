@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 
 @Mapper
 public interface MealkitMapper {
@@ -20,5 +21,9 @@ public interface MealkitMapper {
 	void deleteMealkit(int mealkitNo);
 
 	long increaseMealkitHits(int mealkitNo);
+
+	long findTotalPostCount(String mealkitCategory, String searchMealkit);
+
+	List<MealKitBoard> findAllMealkitBoard(String mealkitCategory, String sort, String searchMealkit,RecipePagination pagination);
 
 }
