@@ -14,6 +14,20 @@ function onBodyLoad(e){
 }
 
 /*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSubfindRecipeLikeListSubmitSuccess(e){
+	var subfindRecipeLikeList = e.control;
+	var dataSet = app.lookup("dsrecipelikelist");
+	for(var i=0;i<dataSet.getRowCount();i++){
+		var recipeimage = dataSet.getValue(i, "recipeBoardImage");
+		var imgpath = "/upload/recipe/"+recipeimage;
+		dataSet.setValue(i, "recipeBoardImage", imgpath);
+	}
+}
+
+/*
  * 그리드에서 cell-click 이벤트 발생 시 호출.
  * Grid의 Cell 클릭시 발생하는 이벤트.
  */
@@ -40,13 +54,6 @@ function onGrd1CellClick(e){
 function onSubdeleteRecipeLikeSubmitSuccess(e){
 	var subdeleteRecipeLike = e.control;
 	app.lookup("grd1").redraw();
-//	var metadata = subdeleteRecipeLike.getMetadata("likeresult");
-//	if(metadata == 1){ //insert 
-//		app.lookup("likeimg").src = "theme/images/mealkit/heart_fill.png";
-//	}else{ //delete
-//		app.lookup("likeimg").src = "theme/images/mealkit/heart.png";
-//	}
-//	app.lookup("likeimg").redraw();
-//	app.lookup("grd1").redraw();
 }
+
 

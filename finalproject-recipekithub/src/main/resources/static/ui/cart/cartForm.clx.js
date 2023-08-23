@@ -18,6 +18,7 @@
 			 * @author shj22k
 			 ************************************************/
 
+
 			/*
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
@@ -38,7 +39,7 @@
 				var dscartlist = app.lookup("cartlist");
 				
 				for(var i=0;i<metadata.length;i++){
-					dscartlist.setValue(i, "mealkitImage", 'theme/images/mealkit/'+metadata[i].mealkitImage);
+					dscartlist.setValue(i, "mealkitImage", '/upload/mealkit/'+metadata[i].mealkitImage);
 					dscartlist.setValue(i, "mealkitName", metadata[i].mealkitName);
 					dscartlist.setValue(i, "mealkitPrice", metadata[i].mealkitPrice);
 					dscartlist.setValue(i, "cartDetailQuantity", cartDetailMeta[i].cartDetailQuantity);
@@ -274,6 +275,50 @@
 				var deleteMyCart = e.control;
 				app.lookup("selectMyCart").send();
 				app.lookup("grd1").redraw();
+			}
+
+			/*
+			 * "    < 쇼핑 계속하기" 아웃풋에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onOutputClick(e){
+				var output = e.control;
+				window.location.href = "/mealkitList";
+			}
+
+			/*
+			 * "    < 쇼핑 계속하기" 아웃풋에서 mousemove 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤 위에 포인터를 이동할 때 발생하는 이벤트.
+			 */
+			function onOutputMousemove(e){
+				var output = e.control;
+				var shopcon = app.lookup("shopcon");
+				shopcon.style.css({
+					"border-style":"solid",
+					"border-width":"2px",
+					"border-color":"azure"
+			//		"box-shadow":"inset 0 0 2px 2px #EFA2A2"
+				});
+			}
+
+			/*
+			 * "    < 쇼핑 계속하기" 아웃풋(shopcon)에서 mouseleave 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤 및 컨트롤의 자식 영역 바깥으로 마우스 포인터를 이동할 때 발생하는 이벤트.
+			 */
+			function onShopconMouseleave(e){
+				var shopcon = e.control;
+				var shopcon = app.lookup("shopcon");
+				shopcon.style.css({
+					"border-style":"none",
+					"border-width":"0px",
+					"border-color":"white"
+				});
+			//	shopcon.style.css({
+			//		"border-right":"solid",
+			//		"border-width":"0px",
+			//		"border-color":"white"
+			//	});
+				
 			};
 			// End - User Script
 			
@@ -415,7 +460,7 @@
 				formLayout_1.verticalSpacing = "0px";
 				formLayout_1.horizontalSeparatorWidth = 1;
 				formLayout_1.verticalSeparatorWidth = 1;
-				formLayout_1.setColumns(["100px", "34px", "1fr", "100px", "120px", "100px", "150px"]);
+				formLayout_1.setColumns(["100px", "30px", "1fr", "100px", "120px", "100px", "150px"]);
 				formLayout_1.setCustomColumnShade(0, "#FFFFFF");
 				formLayout_1.setCustomColumnShade(1, "#FFFFFF");
 				formLayout_1.setCustomColumnShade(3, "#FFFFFF");
@@ -461,12 +506,22 @@
 						"colSpan": 7,
 						"rowSpan": 1
 					});
-					var output_3 = new cpr.controls.Output();
+					var output_3 = new cpr.controls.Output("shopcon");
 					output_3.value = "    < 쇼핑 계속하기";
 					output_3.style.css({
 						"border-right-style" : "solid",
+						"cursor" : "pointer",
 						"border-right-color" : "white"
 					});
+					if(typeof onOutputClick == "function") {
+						output_3.addEventListener("click", onOutputClick);
+					}
+					if(typeof onOutputMousemove == "function") {
+						output_3.addEventListener("mousemove", onOutputMousemove);
+					}
+					if(typeof onShopconMouseleave == "function") {
+						output_3.addEventListener("mouseleave", onShopconMouseleave);
+					}
 					container.addChild(output_3, {
 						"colIndex": 0,
 						"rowIndex": 5,
@@ -570,6 +625,7 @@
 										cell.columnName = "mealkitImage";
 										cell.control = (function(){
 											var image_1 = new cpr.controls.Image("imggrd");
+											image_1.fallbackSrc = "theme/images/icon/chefimg.png";
 											image_1.bind("value").toDataColumn("mealkitImage");
 											return image_1;
 										})();
@@ -580,6 +636,9 @@
 									"constraint": {"rowIndex": 0, "colIndex": 2},
 									"configurator": function(cell){
 										cell.columnName = "mealkitName";
+										cell.style.css({
+											"font-size" : "20px"
+										});
 									}
 								},
 								{
@@ -612,6 +671,9 @@
 									"configurator": function(cell){
 										cell.control = (function(){
 											var output_4 = new cpr.controls.Output("sumex");
+											output_4.style.css({
+												"text-align" : "center"
+											});
 											output_4.bind("value").toExpression("mealkitPrice * cartDetailQuantity");
 											return output_4;
 										})();
@@ -784,9 +846,7 @@
 					});
 					container.addChild(output_7, {
 						"colIndex": 0,
-						"rowIndex": 0,
-						"colSpan": 1,
-						"rowSpan": 1
+						"rowIndex": 0
 					});
 					var output_8 = new cpr.controls.Output();
 					output_8.value = "원 입니다";

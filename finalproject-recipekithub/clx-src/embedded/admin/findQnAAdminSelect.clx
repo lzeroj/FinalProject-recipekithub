@@ -24,7 +24,7 @@
     <cl:listener std:sid="listener-62bb3491" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-98d122db">
       <cl:xylayoutdata std:sid="xyl-data-2719d8a9" top="0px" left="0px" width="1860px" height="739px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      <cl:group std:sid="group-4364fe1b">
+      <cl:group std:sid="group-4364fe1b" style="background-color:#FFFFFF;">
         <cl:xylayoutdata std:sid="xyl-data-541f3e73" top="10px" bottom="10px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:output std:sid="output-062cce4d" style="background-color:#FFFFFF; color:#0fd465; font-weight:bold; font-size:18px; font-family:푸른전남; text-align:center;" value="Q &amp; A 답변">
           <cl:verticaldata std:sid="v-data-3de4fa28" width="860px" height="50px"/>

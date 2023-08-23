@@ -7,9 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SalesVO {
-	private int mealkitNo;
-	private int mealkitTotalPrice;
-	private int cartDetailQuantity;
+public class ChartVO {
+	//LIKE COUNT CHART RECIPE
+	private String recipeBoardTitle;
+	private String memberEmail;
+	private int recipeLikeCount;
+	
+	//LIKE COUNT CHART MEALKIT
 	private String mealkitName;
+	private int mealkitCount;
 }

@@ -234,7 +234,7 @@
 					verticalLayout_4.scrollable = false;
 					group_3.setLayout(verticalLayout_4);
 					container.addChild(group_3, {
-						"autoSize": "none",
+						"autoSize": "height",
 						"width": "400px",
 						"height": "288px"
 					});

@@ -16,7 +16,6 @@ function onBodyLoad(e){
 	app.lookup("txa1").text = val.boardContent;
 	app.lookup("ipb1").redraw();
 	app.lookup("txa1").redraw();
-	
 }
 
 /*

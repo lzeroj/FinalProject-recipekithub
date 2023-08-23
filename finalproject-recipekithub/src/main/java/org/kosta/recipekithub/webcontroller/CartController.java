@@ -7,12 +7,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.CartService;
 import org.kosta.recipekithub.model.vo.CartVO;
 import org.kosta.recipekithub.model.vo.CartdetailVO;
+import org.kosta.recipekithub.model.vo.ChartVO;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.SalesVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
@@ -20,6 +23,7 @@ import org.springframework.web.servlet.View;
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.spring.JSONDataView;
+import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,11 +36,16 @@ public class CartController {
 	@RequestMapping("/selectMyCart")
 	public View selectMyCart(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
 		
-		MemberVO mvo = new MemberVO();
-		mvo.setMemberEmail("shj");
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("member") == null) {
+			return new UIView("ui/member/login-form.clx");
+		}
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+
+		
 		List<CartVO> myCartInfo = new ArrayList<>();
-		if(mvo != null) {
-			myCartInfo = cartService.selectMyCart(mvo.getMemberEmail());
+		if(memberVO != null) {
+			myCartInfo = cartService.selectMyCart(memberVO.getMemberEmail());
 			
 			// 밀키트 데이터
 			List<MealkitboardVO> mlkitlist = new ArrayList<>();
@@ -96,12 +105,14 @@ public class CartController {
 	public View deleteMyCart(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
 		ParameterGroup param = dataRequest.getParameterGroup("selectList");
 		String ary[] = param.getValues("mealkitName");
-//		HttpSession session = request.getSession(false);
-//		session.getAttribute("member");
-		MemberVO mvo = new MemberVO();
-		mvo.setMemberEmail("shj");
 		
-		CartVO cvo = cartService.findCartNoByMemberEmail(mvo.getMemberEmail());
+		HttpSession session = request.getSession(false);
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		if(memberVO == null || memberVO.getMemberEmail() == "") {
+			return new UIView(("ui/member/index.clx"));
+		}
+		
+		CartVO cvo = cartService.findCartNoByMemberEmail(memberVO.getMemberEmail());
 		for(int i=0;i<ary.length;i++) {
 			System.out.println(ary[i]);
 			MealkitboardVO mlvo = cartService.findMealkitBoardByMealkitName(ary[i]);
@@ -161,6 +172,38 @@ public class CartController {
 		
 		return new JSONDataView(true,message);
 	}
+	
+	// 차트
+	@RequestMapping("/findSalesRankAdmin")
+	public View findSalesRankAdmin(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
+		List<SalesVO> salesRankList = cartService.findSalesRankAdmin();
+//		List<SalesVO> mealkitTotalPrice = new ArrayList<>();
+//		SalesVO shartVO = null;
+//		for(int i=0;i<salesRankList.size();i++) {
+//			shartVO = new SalesVO();
+//			shartVO.setMealkitTotalPrice(salesRankList.get(i).getMealkitTotalPrice()+"원");
+//			mealkitTotalPrice.add(shartVO);
+//			System.out.println(mealkitTotalPrice.get(i).toString());
+//		}
+		dataRequest.setResponse("dsmealkitSalesAdmin", salesRankList);
+//		dataRequest.setResponse("dsmealkitTotalPrice", mealkitTotalPrice);
+		return new JSONDataView();
+	}
+	
+	@RequestMapping("/findTotalLikeRecipe")
+	public View findTotalLikeRecipe(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
+		List<ChartVO> recipeLikeRankList = cartService.findTotalLikeRecipe();
+		dataRequest.setResponse("dsrecipeLikeAdmin", recipeLikeRankList);
+		return new JSONDataView();
+	}
+	
+	@RequestMapping("/findTotalLikeMealkit")
+	public View findTotalLikeMealkit(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
+		List<ChartVO> mealkitLikeRankList = cartService.findTotalLikeMealkit();
+		dataRequest.setResponse("dsmealkitLikeAdmin", mealkitLikeRankList);
+		return new JSONDataView();
+	}
+	
 	
 	
 }

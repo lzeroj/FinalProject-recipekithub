@@ -1085,6 +1085,12 @@
 				 */
 				function onButtonClick(e){
 					var button = e.control;
+					var sessionstrg = getTimedSessionData("memsession");
+					console.log("sessionstrg : "+sessionstrg);
+					if(sessionstrg == null || sessionstrg == ''){
+						alert("로그인이 필요한 작업입니다");
+						location.href="member/login-form.clx";
+					}
 					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
 						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
 							window.location.href = "/findMyCartForm";
@@ -1306,7 +1312,7 @@
 						return;
 					}
 					
-					if (sessionval == "shj") {
+					if (sessionval == "shj" || sessionval == "kjoonie@naver.com") {
 						navigationBar.addItem(new cpr.controls.TreeItem("관리자", "admin", "root"));
 						navigationBar.addItem(new cpr.controls.TreeItem("Q&A관리", "questionAdmin", "admin"));
 						navigationBar.addItem(new cpr.controls.TreeItem("신고관리", "reportAdmin", "admin"));
@@ -1893,6 +1899,15 @@
 				function onBtnLoginoffClick(e){
 					var btnLoginoff = e.control;
 					window.location.href="/memberUI/loginForm";
+				}
+	
+				/*
+				 * 버튼(cartbtn)에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onCartbtnClick(e){
+					var cartbtn = e.control;
+					window.location.href = "/mealkitList";
 				};
 				// End - User Script
 				
@@ -1984,6 +1999,9 @@
 							"background-image" : "url('theme/images/icon/shopping-basket.png')",
 							"border-top-style" : "none"
 						});
+						if(typeof onCartbtnClick == "function") {
+							button_2.addEventListener("click", onCartbtnClick);
+						}
 						container.addChild(button_2, {
 							"colIndex": 1,
 							"rowIndex": 0

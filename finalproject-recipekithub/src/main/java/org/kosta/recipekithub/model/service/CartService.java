@@ -3,7 +3,9 @@ package org.kosta.recipekithub.model.service;
 import java.util.List;
 
 import org.kosta.recipekithub.model.vo.CartVO;
+import org.kosta.recipekithub.model.vo.ChartVO;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
+import org.kosta.recipekithub.model.vo.SalesVO;
 
 public interface CartService {
 
@@ -34,5 +36,10 @@ public interface CartService {
 	int findDuplicateMealkitCount(String memberEmail, int mealkitNo);
 
 	int updateCartDetailQuantity(int cartDetailQuantity, int mealkitNo, int cartNo);
+
+	// 차트
+	List<SalesVO> findSalesRankAdmin();
+	List<ChartVO> findTotalLikeRecipe();
+	List<ChartVO> findTotalLikeMealkit();
 
 }

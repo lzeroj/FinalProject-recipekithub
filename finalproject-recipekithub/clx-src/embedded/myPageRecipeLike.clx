@@ -22,6 +22,7 @@
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:submission std:sid="submission-6e8220e8" id="subfindRecipeLikeList" action="/findRecipeLikeList">
+        <cl:listener std:sid="listener-932e53cf" name="submit-success" handler="onSubfindRecipeLikeListSubmitSuccess"/>
         <cl:responsedata dataid="dsrecipelikelist"/>
       </cl:submission>
       <cl:submission std:sid="submission-76fa397e" id="subdeleteRecipeLike" action="/clickRecipeLike" mediatype="application/x-www-form-urlencoded;simple">
@@ -44,13 +45,13 @@
           <cl:listener std:sid="listener-7a12bdc3" name="cell-click" handler="onGrd1CellClick"/>
           <cl:xylayoutdata std:sid="xyl-data-e2fe0166" top="15px" right="15px" bottom="15px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
           <cl:gridcolumn std:sid="g-column-4abecd04" width="30px"/>
-          <cl:gridcolumn std:sid="g-column-92379872" width="51px"/>
-          <cl:gridcolumn std:sid="g-column-a4f5daae" width="54px"/>
+          <cl:gridcolumn std:sid="g-column-92379872" width="57px"/>
+          <cl:gridcolumn std:sid="g-column-a4f5daae" width="60px"/>
           <cl:gridcolumn std:sid="g-column-9bda8641" width="94px"/>
-          <cl:gridcolumn std:sid="g-column-e8a49252" width="46px"/>
-          <cl:gridcolumn std:sid="g-column-14b2076f" width="46px"/>
-          <cl:gridcolumn std:sid="g-column-cd253469" width="46px"/>
-          <cl:gridcolumn std:sid="g-column-762ae4ea" width="69px"/>
+          <cl:gridcolumn std:sid="g-column-e8a49252" width="55px"/>
+          <cl:gridcolumn std:sid="g-column-14b2076f" width="55px"/>
+          <cl:gridcolumn std:sid="g-column-cd253469" width="61px"/>
+          <cl:gridcolumn std:sid="g-column-762ae4ea" width="53px"/>
           <cl:gridheader std:sid="gh-band-66502553">
             <cl:gridrow std:sid="g-row-a54e4e33"/>
             <cl:gridcell std:sid="gh-cell-3d90bad8" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
@@ -61,12 +62,12 @@
             <cl:gridcell std:sid="gh-cell-66be3e1a" rowindex="0" colindex="7" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" text="좋아요"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-96a29bfa">
-            <cl:gridrow std:sid="g-row-0c79f617" height="67px"/>
+            <cl:gridrow std:sid="g-row-0c79f617" height="61px"/>
             <cl:gridcell std:sid="gd-cell-dfbffcb1" rowindex="0" colindex="0" columntype="rowindex"/>
             <cl:gridcell std:sid="gd-cell-4f1a064d" rowindex="0" colindex="1" columnname="recipeBoardId"/>
             <cl:gridcell std:sid="gd-cell-4984bf10" rowindex="0" colindex="2" columnname="recipeBoardImage">
               <cl:img std:sid="image-145f6358">
-                <cl:celldata halign="CENTER" valign="CENTER" width="60" height="60"/>
+                <cl:celldata std:sid="c-data-76386092" halign="CENTER" valign="CENTER" width="60" height="50"/>
               </cl:img>
             </cl:gridcell>
             <cl:gridcell std:sid="gd-cell-c50002b3" rowindex="0" colindex="3" columnname="recipeBoardTitle"/>
@@ -75,7 +76,7 @@
             <cl:gridcell std:sid="gd-cell-1ab84948" rowindex="0" colindex="6" columnname="categoryMethod"/>
             <cl:gridcell std:sid="gd-cell-a1ced44f" rowindex="0" colindex="7">
               <cl:img std:sid="image-c17244d0" id="likeimg" style="cursor:pointer;" src="../theme/images/mealkit/heart_fill.png">
-                <cl:celldata halign="CENTER" valign="CENTER" width="60" height="60"/>
+                <cl:celldata std:sid="c-data-4cf5cba7" halign="CENTER" valign="CENTER" width="30" height="30"/>
               </cl:img>
             </cl:gridcell>
           </cl:griddetail>
