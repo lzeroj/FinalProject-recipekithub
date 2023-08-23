@@ -41,6 +41,7 @@ public class MemberUIController {
 		return new UIView("ui/embedded/myPageProfile.clx");
 	}
 
+	/*
 	//---[ 로그아웃 -> 메인 화면으로 이동 ]---//
 	@RequestMapping("/logout")
 	public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
@@ -55,4 +56,5 @@ public class MemberUIController {
 		
 		return new UIView("ui/index.clx");
 	}
+	*/
 }

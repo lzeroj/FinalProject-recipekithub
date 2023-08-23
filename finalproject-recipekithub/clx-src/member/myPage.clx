@@ -26,6 +26,17 @@
           </cl:datarow>
         </cl:datarowlist>
       </cl:dataset>
+      <cl:dataset std:sid="d-set-ff6051c2" id="ds_profile">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-14afc955" name="memberEmail" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-e5965182" name="memberNick" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-e6e08b1a" name="memberImage" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-41fc5808" id="sub_profile" action="/member/profileInfo">
+        <cl:listener std:sid="listener-caadbb5c" name="submit-success" handler="onSub_profileSubmitSuccess"/>
+        <cl:responsedata dataid="ds_profile"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
@@ -58,14 +69,63 @@
             <cl:menuitem std:sid="m-item-daee6a4f" label="밀키트찜" value="3"/>
             <cl:menuitem std:sid="m-item-437c11be" label="문의하기" value="4"/>
           </cl:navigationbar>
-          <cl:group std:sid="group-8003b2a0">
-            <cl:responsivexylayoutdata std:sid="rxyl-data-bf0473b5">
-              <cl:xylayoutdata std:sid="sxyl-data-d752227b" top="0px" right="0px" width="270px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
-              <cl:xylayoutdata std:sid="sxyl-data-b3ffb3d7" top="0px" right="0px" width="450px" height="200px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="new-screen"/>
-            </cl:responsivexylayoutdata>
-            <cl:xylayout std:sid="xylayout-ac8d4db3"/>
+          <cl:group std:sid="group-64d720f3">
+            <cl:xylayoutdata std:sid="xyl-data-9ba166c7" top="39px" left="770px" width="420px" height="370px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+            <cl:group std:sid="group-1ed10915" style="border-radius:50px; background-color:#0A8C43;">
+              <cl:xylayoutdata std:sid="xyl-data-b140bb4b" top="0px" left="0px" width="420px" height="370px"/>
+              <cl:group std:sid="group-8003b2a0" style="background-color:#FFFFFF; border-radius:40px;">
+                <cl:xylayoutdata std:sid="xyl-data-5817fe4c" top="10px" right="10px" width="400px" height="350px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+                <cl:group std:sid="group-80d6fea2" style="border-radius:40px 40px 0px 0px; background-size:cover; background-image:url(../theme/images/member/2.png); background-position:center;">
+                  <cl:xylayoutdata std:sid="xyl-data-c854013c" top="0px" right="0px" left="0px" height="150px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+                  <cl:xylayout std:sid="xylayout-2df208e7"/>
+                </cl:group>
+                <cl:group std:sid="group-2e7d93e3">
+                  <cl:xylayoutdata std:sid="xyl-data-828a4f20" right="0px" bottom="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+                  <cl:xylayout std:sid="xylayout-2bb9aa2f"/>
+                </cl:group>
+                <cl:xylayout std:sid="xylayout-ac8d4db3"/>
+              </cl:group>
+              <cl:xylayout std:sid="xylayout-ceff05c7"/>
+            </cl:group>
+            <cl:group std:sid="group-4dd27e56">
+              <cl:xylayoutdata std:sid="xyl-data-eaf641d9" top="10px" right="10px" width="400px" height="350px" horizontalAnchor="RIGHT"/>
+              <cl:group std:sid="group-668cd1ae">
+                <cl:formdata std:sid="f-data-b38ca9e1" row="1" col="1"/>
+                <cl:img std:sid="image-eb10e8af" id="profileImg" fallbacksrc="../theme/images/icon/chefimg.png">
+                  <cl:datasetbind property="src" datacontrolid="ds_profile" columnname="memberImage" rowindex="0"/>
+                  <cl:xylayoutdata std:sid="xyl-data-9f957c73" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                </cl:img>
+                <cl:xylayout std:sid="xylayout-9f5fab5f"/>
+              </cl:group>
+              <cl:group std:sid="group-881ef166">
+                <cl:formdata std:sid="f-data-ec93c7b0" row="2" col="0" rowspan="1" colspan="3"/>
+                <cl:output std:sid="output-d575ac9f" id="opbNick" style="color:#EC631D; font-weight:bolder; font-size:18px; text-align:center;">
+                  <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberNick" rowindex="0"/>
+                  <cl:formdata std:sid="f-data-aff8c1cb" row="0" col="0" rowspan="1" colspan="2"/>
+                </cl:output>
+                <cl:output std:sid="output-7bfb1bb7" id="opbEmail" style="font-weight:bolder; font-size:18px; text-align:center;">
+                  <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberEmail" rowindex="0"/>
+                  <cl:formdata std:sid="f-data-48b9c5da" row="1" col="0" rowspan="1" colspan="2"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-7ac671cb" scrollable="false" hspace="20px" vspace="20px" top-margin="20px" right-margin="10px" bottom-margin="10px" left-margin="10px">
+                  <cl:rows length="50" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                  <cl:rows length="50" unit="PIXEL"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-8db01e7b" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="50" unit="PIXEL"/>
+                <cl:rows length="150" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="150" unit="PIXEL"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-59c102ee"/>
           </cl:group>
-          <cl:responsivexylayout std:sid="r-xylayout-6b15dc6d"/>
+          <cl:xylayout std:sid="xylayout-d15693db"/>
         </cl:group>
         <cl:udc std:sid="ud-control-aeddd20e" style="border-bottom-color:#62a40c; border-bottom-width:3px; border-bottom-style:solid;" type="udc.headerMyPage">
           <cl:xylayoutdata std:sid="xyl-data-279d7c53" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>

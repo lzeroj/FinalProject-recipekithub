@@ -351,11 +351,22 @@ function onCmb1SelectionChange(e){
 		
 	// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
     } else if (cmb1.value == "logout") {
-		//var logout = new cpr.events.CAppEvent("logout");
-		var logout = new cpr.events.CUIEvent("logout");
-		app.dispatchEvent(logout);
+    	var initValue = "로그아웃 하시겠습니까?";
+		app.getRootAppInstance().openDialog("dialog/registerPopup", {
+			width: 400, height: 300, headerClose: true, resizable: false
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+			dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue) {
+			sessionStorage.clear();
+			var submission = app.lookup("sub_logout");
+			submission.send();
+			var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+			httpPostMethod.submit();
+		});
 		
-		// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+	// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
 	} else if (cmb1.value == "profile") {
 		var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
 		httpPostMethod.submit();
