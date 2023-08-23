@@ -166,41 +166,6 @@ public class MemberController {
 		return new JSONDataView();
 	}
 
-	/*
-	// ---[ 회원정보 수정 ]---//
-	@RequestMapping("/updateMember")
-	public View updateMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest,
-			String cartDetailQuantity, String mealkitName) throws Exception {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			System.out.println("---[로그인 상태가 아니므로 회원 정보 수정이 불가합니다.]---");
-			return new UIView("ui/member/login-form.clx");
-		}
-
-		//MemberVO member = (MemberVO) session.getAttribute("member");
-
-		ParameterGroup param = dataRequest.getParameterGroup("dm_update");
-		String memberEmail = param.getValue("memberEmail");
-		String memberPassword = param.getValue("memberPassword");
-		String memberName = param.getValue("memberName");
-		String memberNick = param.getValue("memberNick");
-		String memberBirthday = param.getValue("memberBirthday");
-		String memberPhone = param.getValue("memberPhone");
-		String memberPostcode = param.getValue("memberPostcode");
-		String memberAddress = param.getValue("memberAddress");
-		String memberAddressDetail = param.getValue("memberAddressDetail");
-		MemberVO member = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode,
-				memberAddress, memberAddressDetail, memberPhone, memberBirthday);
-
-		if (member != null) {
-			int result = memberService.updateMember(member);
-			log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
-		}
-
-		dataRequest.setResponse("ds_profile", member);
-		return new JSONDataView();
-	}
-	*/
 	
 	// ---[ 회원정보 수정 ]---//
 	@RequestMapping("/updateMember")
@@ -250,7 +215,6 @@ public class MemberController {
 					orgName = uploadFile[0].getFile();
 					saveName = uploadFile[0].getFileName();
 					System.out.println(saveName);
-					//uuid = UUID.randomUUID().toString();
 					FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
 					member.setMemberImage(uuid + "_" + saveName);
 				}
@@ -353,60 +317,7 @@ public class MemberController {
 		return new JSONDataView();
 	}
 
-	/*
-	@RequestMapping("/insertProfileImage")
-	public View insertProfileImg(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			System.out.println("---[로그인 상태가 아니므로 프로필 사진 등록/변경이 불가합니다.]---");
-			return new UIView("ui/member/login-form.clx");
-		}
-		
-		MemberVO member = (MemberVO) session.getAttribute("member");
-
-		ParameterGroup param = dataRequest.getParameterGroup("dm_profile");
-		String memberEmail = param.getValue("memberEmail");
-
-		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
-		UploadFile[] uploadFile = uploadFiles.get("image");
-		File orgName = uploadFile[0].getFile();
-		String saveName = uploadFile[0].getFileName();
-		// String savePath =
-		// "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
-		String savePath = "C:\\upload\\profile\\";
-		String uuid = UUID.randomUUID().toString();
-		FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-
-		member.setMemberImage(uuid + "_" + saveName);
-		String memberImage = member.getMemberImage();
-		
-		// 사진을 변경했으면 삭제 후 저장
-		if (uploadFiles.size() != 0) {
-			if (memberImage != null) {
-				File existImageFile = new File(savePath + memberImage);
-				if (existImageFile.exists()) {
-					existImageFile.delete();
-				}
-			}
-			uploadFile = uploadFiles.get("image");
-			orgName = uploadFile[0].getFile();
-			saveName = uploadFile[0].getFileName();
-			uuid = UUID.randomUUID().toString();
-			FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-			member.setMemberImage(uuid + "_" + saveName);
-		}
-
-		int result = memberService.insertProfileImg(memberEmail, memberImage);
-		log.debug("member 프로필 사진 등록/수정 성공여부(if '1' succes) : {}", result);
-
-		dataRequest.setResponse("dm_member", member);
-		log.debug("member 정보 : {}", member);
-
-		return new JSONDataView();
-	}
-	*/
-
+	
 	@RequestMapping("/deleteProfileImage")
 	public View deleteProfileImg(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
