@@ -282,10 +282,10 @@
 			function onButtonClick5(e){
 				var button = e.control;
 				var comment = app.lookup("comment").value;
-				var star = parseFloat(app.lookup("starpoint").value);
+				var star = app.lookup("starpoint").value;
 				
-				if(isNaN(star) || star < 0 || star > 5 || star === "" || star === null){
-					alert("반드시 별점을 입력해주세요. 숫자 0점 이상 5점 이하로 입력해주세요.");
+				if(star == "" || star == null){
+					alert("반드시 별점을 선택해주세요.");
 					app.lookup("comment").value = "";
 					app.lookup("starpoint").value = "";
 					app.lookup("comment").redraw();
@@ -1035,19 +1035,19 @@
 				});
 				var group_9 = new cpr.controls.Container();
 				var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+				verticalLayout_2.distribution = "center";
 				group_9.setLayout(verticalLayout_2);
 				(function(container){
 					var hTMLSnippet_1 = new cpr.controls.HTMLSnippet("info");
 					hTMLSnippet_1.bind("value").toDataMap(app.lookup("mealkit"), "mealkitInfo");
 					container.addChild(hTMLSnippet_1, {
-						"autoSize": "both",
 						"width": "929px",
 						"height": "374px"
 					});
 				})(group_9);
 				container.addChild(group_9, {
-					"top": "539px",
-					"left": "20px",
+					"top": "528px",
+					"left": "22px",
 					"width": "946px",
 					"height": "386px"
 				});
@@ -1226,7 +1226,7 @@
 			formLayout_2.leftMargin = "3px";
 			formLayout_2.horizontalSpacing = "10px";
 			formLayout_2.verticalSpacing = "10px";
-			formLayout_2.setColumns(["1fr", "100px", "100px"]);
+			formLayout_2.setColumns(["1fr", "130px", "70px"]);
 			formLayout_2.setRows(["50px"]);
 			group_13.setLayout(formLayout_2);
 			(function(container){
@@ -1258,14 +1258,23 @@
 					"colIndex": 0,
 					"rowIndex": 0
 				});
-				var inputBox_2 = new cpr.controls.InputBox("starpoint");
-				inputBox_2.placeholder = "별점을 입력해주세요.";
-				inputBox_2.style.css({
-					"font-size" : "12px"
+				var comboBox_1 = new cpr.controls.ComboBox("starpoint");
+				comboBox_1.placeholder = "별점 선택";
+				comboBox_1.style.css({
+					"font-size" : "14px"
 				});
-				container.addChild(inputBox_2, {
+				(function(comboBox_1){
+					comboBox_1.addItem(new cpr.controls.Item("1", "1"));
+					comboBox_1.addItem(new cpr.controls.Item("2", "2"));
+					comboBox_1.addItem(new cpr.controls.Item("3", "3"));
+					comboBox_1.addItem(new cpr.controls.Item("4", "4"));
+					comboBox_1.addItem(new cpr.controls.Item("5", "5"));
+				})(comboBox_1);
+				container.addChild(comboBox_1, {
 					"colIndex": 1,
-					"rowIndex": 0
+					"rowIndex": 0,
+					"colSpan": 1,
+					"rowSpan": 1
 				});
 			})(group_13);
 			container.addChild(group_13, {

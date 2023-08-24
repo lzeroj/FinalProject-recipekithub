@@ -229,12 +229,12 @@
         <cl:xylayoutdata std:sid="xyl-data-0aa79dec" top="41px" left="20px" width="436px" height="250px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:group std:sid="group-291e835c">
-        <cl:xylayoutdata std:sid="xyl-data-3d254f04" top="539px" left="20px" width="946px" height="386px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-3d254f04" top="528px" left="22px" width="946px" height="386px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:htmlsnippet std:sid="htmlsnippet-fd52013a" id="info">
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitInfo"/>
-          <cl:verticaldata std:sid="v-data-9317a77e" width="929px" height="374px" autosize="both"/>
+          <cl:verticaldata std:sid="v-data-9317a77e" width="929px" height="374px"/>
         </cl:htmlsnippet>
-        <cl:verticallayout std:sid="v-layout-da2d1580"/>
+        <cl:verticallayout std:sid="v-layout-da2d1580" distribution="center"/>
       </cl:group>
       <cl:output std:sid="output-4c9f0d7a" style="font-weight:bold; font-size:16px; text-align:center;" value="필수표기정보">
         <cl:xylayoutdata std:sid="xyl-data-41fdf1ff" top="935px" left="20px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -310,14 +310,19 @@
         <cl:listener std:sid="listener-2dca2f5a" name="value-change" handler="onIpb1ValueChange"/>
         <cl:formdata std:sid="f-data-559525e5" row="0" col="0"/>
       </cl:inputbox>
-      <cl:inputbox std:sid="i-box-a2ac1660" id="starpoint" style="font-size:12px;" placeholder="별점을 입력해주세요.">
-        <cl:formdata std:sid="f-data-681b0c1a" row="0" col="1"/>
-      </cl:inputbox>
+      <cl:combobox std:sid="c-box-b3d1e4a9" id="starpoint" style="font-size:14px;" placeholder="별점 선택">
+        <cl:formdata std:sid="f-data-da3c264f" row="0" col="1" rowspan="1" colspan="1"/>
+        <cl:item std:sid="t-item-cc08e9d2" label="1" value="1"/>
+        <cl:item std:sid="t-item-85bf3ab0" label="2" value="2"/>
+        <cl:item std:sid="t-item-5479f563" label="3" value="3"/>
+        <cl:item std:sid="t-item-64c6e51c" label="4" value="4"/>
+        <cl:item std:sid="t-item-379209b9" label="5" value="5"/>
+      </cl:combobox>
       <cl:formlayout std:sid="f-layout-f3d48b90" scrollable="false" hspace="10px" vspace="10px" top-margin="3px" right-margin="3px" bottom-margin="3px" left-margin="3px">
         <cl:rows length="50" unit="PIXEL"/>
         <cl:columns length="1" unit="FRACTION"/>
-        <cl:columns length="100" unit="PIXEL"/>
-        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="130" unit="PIXEL"/>
+        <cl:columns length="70" unit="PIXEL"/>
       </cl:formlayout>
     </cl:group>
     <cl:group std:sid="group-c6e17c15" style="background-color:black; background-image:none;">

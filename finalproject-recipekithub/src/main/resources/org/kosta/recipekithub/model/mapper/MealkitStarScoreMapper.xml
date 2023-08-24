@@ -56,7 +56,7 @@
 	<result column="mealkit_star_score" property="mealkitStarScore"/>
 </resultMap>
 
-<select id="findMealkitStarAvg">
+<select id="findMealkitStarAvg" parameterType="int" resultType="double">
 select COALESCE(r.av, 0) AS mealkit_Star_Avg
 from
 mealkit_board m

@@ -108,6 +108,7 @@ function onMealkitBoardListSubmitSuccess(e){
 	var totalMealkitCnt = jsonData.totalMealkitCnt;
 	var findMealkitByName= jsonData.findMealkitByName;
 	var findStarAvgByNo= jsonData.findStarAvgByNo;
+	var commentCnt= jsonData.commentCnt;
 	var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
 	var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
 	var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
@@ -141,7 +142,7 @@ function onMealkitBoardListSubmitSuccess(e){
 			mealkit.nick = mealkitAllList[i].memberVO.memberNick;
 			mealkit.title = mealkitAllList[i].mealkitName;
 			mealkit.star = findStarAvgByNo[i];
-			mealkit.count = "("+commentCount[i]+")";
+			mealkit.count = "("+commentCnt[i]+")";
 			container.addChild(mealkit, {
 				height: "250px",
 				width: "230px",

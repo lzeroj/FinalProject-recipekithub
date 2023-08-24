@@ -2771,8 +2771,8 @@
 				});
 				container.addChild(output_3, {
 					"top": "204px",
-					"left": "45px",
-					"width": "26px",
+					"left": "57px",
+					"width": "34px",
 					"height": "24px"
 				});
 				
@@ -2780,7 +2780,7 @@
 				output_4.value = "조회수";
 				container.addChild(output_4, {
 					"top": "204px",
-					"left": "81px",
+					"left": "90px",
 					"width": "50px",
 					"height": "27px"
 				});
@@ -2792,7 +2792,7 @@
 				});
 				container.addChild(output_5, {
 					"top": "204px",
-					"left": "130px",
+					"left": "141px",
 					"width": "50px",
 					"height": "27px"
 				});
