@@ -52,4 +52,22 @@
 	order by mealkitStarScore desc, mealkit_reg_date desc
 </select>
 
+<resultMap type="org.kosta.recipekithub.model.vo.MealkitStarScore" id="mealkitStar">
+	<result column="mealkit_star_score" property="mealkitStarScore"/>
+</resultMap>
+
+<select id="findMealkitStarAvg">
+select COALESCE(r.av, 0) AS mealkit_Star_Avg
+from
+mealkit_board m
+left join(
+SELECT MEALKIT_NO, ROUND(SUM(MEALKIT_STAR_SCORE) / COUNT(MEALKIT_NO),1) as av
+FROM MEALKIT_COMMENT MC
+INNER JOIN MEALKIT_STAR_SCORE MS ON MC.MEALKIT_COMMENT_ID = MS.MEALKIT_COMMENT_ID 
+group by MC.mealkit_no
+) r on m.mealkit_no = r.mealkit_no
+where m.status = 'Y'and m.mealkit_no = #{value}
+</select>
+
+
 </mapper>

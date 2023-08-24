@@ -123,13 +123,14 @@
 				var mealkitAllList = jsonData.mealkitAllList;
 				var totalMealkitCnt = jsonData.totalMealkitCnt;
 				var findMealkitByName= jsonData.findMealkitByName;
+				var findStarAvgByNo= jsonData.findStarAvgByNo;
 				var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
 				var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
 				var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
 				//alert("mealkitList = " + mealkitList);
 				//alert("mealkitAllList = " + mealkitAllList);
 				//console.log("ㅌㅌㅌ" + mealkitAllList.length);
-				//console.log("mealkitMap =" + mealkitMap);
+				console.log("findStarAvgByNo =" + findStarAvgByNo);
 				
 				//app.lookup(id)	
 				var email = cpr.core.Platform.INSTANCE.getParameter("member");
@@ -151,11 +152,11 @@
 					(function(index) {
 						var mealkit = new udc.mealkitList();
 						mealkit.img = "/upload/mealkit/" + mealkitAllList[i].mealkitImage;
-						console.log(mealkitAllList.img);
+						var mealkitNo = mealkitAllList[i].mealkitNo
 						mealkit.hits = mealkitAllList[i].mealkitBoardHits;
 						mealkit.nick = mealkitAllList[i].memberVO.memberNick;
 						mealkit.title = mealkitAllList[i].mealkitName;
-						mealkit.star = mealkitStarList[i];
+						mealkit.star = findStarAvgByNo[i];
 						mealkit.count = "("+commentCount[i]+")";
 						container.addChild(mealkit, {
 							height: "250px",

@@ -20,4 +20,7 @@ public class MealkitCommentVO {
 	private String mealkitCommentContent;
 	private String mealkitCommentDate;
 	private String mealkitCommentEditDate;
+	
+	//별점 평균을 위한
+	//private double mealkitStarAvg;
 }
