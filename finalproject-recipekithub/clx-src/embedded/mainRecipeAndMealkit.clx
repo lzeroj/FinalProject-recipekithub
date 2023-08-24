@@ -14,7 +14,10 @@
         <cl:listener std:sid="listener-cab43591" name="submit-success" handler="onStarMealkitListSubmitSuccess"/>
         <cl:listener std:sid="listener-00d90fe5" name="receive" handler="onStarMealkitListReceive"/>
       </cl:submission>
-      <cl:submission std:sid="submission-4eecd1f4" id="likeChefList" action="/findChefListByRecipe"/>
+      <cl:submission std:sid="submission-4eecd1f4" id="likeChefList" action="/findChefListByRecipe">
+        <cl:listener std:sid="listener-b6dfc7f4" name="submit-success" handler="onLikeChefListSubmitSuccess"/>
+        <cl:listener std:sid="listener-5d77b6c7" name="receive" handler="onLikeChefListReceive"/>
+      </cl:submission>
     </cl:model>
     <cl:appspec/>
   </head>
@@ -26,11 +29,14 @@
       <cl:group std:sid="group-5dca4c1c">
         <cl:verticaldata std:sid="v-data-47ed3bf7" width="1120px" height="60px" autosize="none"/>
         <cl:output std:sid="output-d0a525bb" style="font-weight:bold; font-size:20px; background-image:none;" value="화제의">
-          <cl:xylayoutdata std:sid="xyl-data-bb84c3ab" top="20px" left="0px" width="73px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-bb84c3ab" top="18px" left="49px" width="73px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:output std:sid="output-a3d5edba" style="color:#0ca44e; font-weight:bold; font-size:20px;" value="레시피">
-          <cl:xylayoutdata std:sid="xyl-data-81ca3521" top="20px" left="72px" width="100px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-81ca3521" top="18px" left="121px" width="64px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
+        <cl:img std:sid="image-748c2345" src="../theme/images/icon/recipe-book.png">
+          <cl:xylayoutdata std:sid="xyl-data-16e018ac" top="18px" left="8px" width="30px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:img>
         <cl:xylayout std:sid="xylayout-83db2496" scrollable="false"/>
       </cl:group>
       <cl:group std:sid="group-aba46556" id="grp">
@@ -44,11 +50,14 @@
       <cl:group std:sid="group-de4b5320">
         <cl:verticaldata std:sid="v-data-92ad9645" width="1120px" height="60px" autosize="none"/>
         <cl:output std:sid="output-08a96ec4" style="font-weight:bold; font-size:20px; background-image:none;" value="인기있는">
-          <cl:xylayoutdata std:sid="xyl-data-18075207" top="20px" left="0px" width="92px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-18075207" top="18px" left="47px" width="92px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:output std:sid="output-ffc126a5" style="color:#0ca44e; font-weight:bold; font-size:20px;" value="밀키트">
-          <cl:xylayoutdata std:sid="xyl-data-6760088e" top="20px" left="91px" width="100px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-6760088e" top="18px" left="138px" width="60px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
+        <cl:img std:sid="image-7dd2f2f8" src="../theme/images/icon/mealkit-icecream.png">
+          <cl:xylayoutdata std:sid="xyl-data-564884c9" top="18px" left="8px" width="30px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:img>
         <cl:xylayout std:sid="xylayout-ee0288be"/>
       </cl:group>
       <cl:group std:sid="group-36d6da8b" id="mealkitgrp">
@@ -57,20 +66,23 @@
       </cl:group>
       <cl:verticallayout std:sid="v-layout-41f6687c" scrollable="true" distribution="center"/>
     </cl:group>
-    <cl:group std:sid="group-b4a5e4c0">
-      <cl:verticaldata std:sid="v-data-056a305b" width="1200px" height="332px" autosize="height"/>
+    <cl:group std:sid="group-b4a5e4c0" style="background-color:#FFFFFF; border-radius:20px;">
+      <cl:verticaldata std:sid="v-data-056a305b" width="1200px" height="292px" autosize="height"/>
       <cl:group std:sid="group-8add28e8">
         <cl:verticaldata std:sid="v-data-90ffd7ed" width="1120px" height="60px" autosize="none"/>
         <cl:output std:sid="output-cc67abed" style="font-weight:bold; font-size:20px; background-image:none;" value="최고의">
-          <cl:xylayoutdata std:sid="xyl-data-77670328" top="20px" left="0px" width="72px" height="28px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-77670328" top="18px" left="47px" width="72px" height="28px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:output std:sid="output-260da09f" style="color:#0ca44e; font-weight:bold; font-size:20px;" value="쉐프!">
-          <cl:xylayoutdata std:sid="xyl-data-cd2069d7" top="20px" left="71px" width="100px" height="28px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-cd2069d7" top="18px" left="118px" width="49px" height="28px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
+        <cl:img std:sid="image-96d0e201" src="../theme/images/icon/chef-old.png">
+          <cl:xylayoutdata std:sid="xyl-data-8bd28c42" top="18px" left="8px" width="30px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:img>
         <cl:xylayout std:sid="xylayout-c8b51aec"/>
       </cl:group>
-      <cl:group std:sid="group-d057114e">
-        <cl:verticaldata std:sid="v-data-ee806e12" width="1120px" height="250px" autosize="none"/>
+      <cl:group std:sid="group-d057114e" id="chefgrp">
+        <cl:verticaldata std:sid="v-data-ee806e12" width="1120px" height="210px" autosize="height"/>
         <cl:flowlayout std:sid="f-layout-3037ae0a"/>
       </cl:group>
       <cl:verticallayout std:sid="v-layout-276a755a" distribution="center"/>

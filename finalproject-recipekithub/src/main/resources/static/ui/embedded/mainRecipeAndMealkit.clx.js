@@ -25,6 +25,7 @@
 			function onBodyLoad(e){
 				app.lookup("likeRecipeList").send();
 				app.lookup("starMealkitList").send();
+				app.lookup("likeChefList").send();
 			}
 
 			/*
@@ -93,6 +94,25 @@
 			}
 
 			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onLikeChefListSubmitSuccess(e){
+				var likeChefList = e.control;
+				var slidify = cpr.core.Module.require("Slidify").slidify;
+				//슬라이드 기능을 사용할 컨트롤에 적용시킨후 start 시킵니다. (아래의 두 코드는 필수로 작성하셔야 합니다.)
+				var slide = slidify(app.lookup("mealkitgrp"));
+				slide.showCount = 7;
+				slide.showPaginition = true;
+				slide.autoPlayDelay = 1;
+				slide.initialPage = 0;
+				slide.useInfiniteScroll = true;
+			//	slide.autoPlay();
+				slide.start();
+			}
+
+
+			/*
 			 * 서브미션에서 receive 이벤트 발생 시 호출.
 			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
 			 */
@@ -101,8 +121,6 @@
 				var xhr = starMealkitList.xhr;
 				var jsonData = JSON.parse(xhr.responseText);
 				var starList = jsonData.findMealkitStarList;
-				
-				console.log(starList[1].mealkitNo+" "+starList[1].mealkitName);
 				var container = app.lookup("mealkitgrp");
 				
 				for (var i = 0; i < starList.length; i++) {
@@ -119,7 +137,52 @@
 							autoSize: "both"
 						});
 						mealkit.addEventListener("imgClick", function(e) {
-							window.location.href = "/mealkitDetail?mealkitNo=" + starList[index].mealkitNo;
+							window.location.href = "/mealkitDetail/" + starList[index].mealkitNo;
+						});
+					})(i);
+				}
+				
+			}
+
+
+			/*
+			 * 서브미션에서 receive 이벤트 발생 시 호출.
+			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+			 */
+			function onLikeChefListReceive(e){
+				var likeChefList = e.control;
+				var xhr = likeChefList.xhr;
+				var jsonData = JSON.parse(xhr.responseText);
+				var chefList = jsonData.chefList;
+				
+				var container = app.lookup("chefgrp");
+				
+				for (var i = 0; i < chefList.length; i++) {
+					(function(index) {
+						//udc 동적 생성
+						var chef = new udc.chefListIndexudc();
+						//udc에서 출판한 이미지 경로 앱 속성 지정
+						chef.memberImage = "/upload/profile/" + chefList[i].mealkitImage;
+						chef.memberEmail = chefList[i].memberEmail;
+						chef.memberNick = chefList[i].memberNick;
+						container.addChild(chef, {
+							height: "210px",
+							width: "160px",
+							autoSize: "both"
+						});
+						chef.addEventListener("memberImageClick", function(e) {
+							var host = app.getHost(); // 부모 임베디드 앱
+							var initvalue = {
+								"memberEmail":chefList[index].memberEmail,
+								"memberNick":chefList[index].memberNick,
+								"memberImage":"/upload/profile/"+chefList[index].mealkitImage
+							};
+							cpr.core.App.load("embedded/chefRecipeList", function(loadedApp){
+								if (loadedApp){
+									host.initValue = initvalue;
+									host.app = loadedApp;
+								}
+							});
 						});
 					})(i);
 				}
@@ -150,6 +213,12 @@
 			
 			var submission_3 = new cpr.protocols.Submission("likeChefList");
 			submission_3.action = "/findChefListByRecipe";
+			if(typeof onLikeChefListSubmitSuccess == "function") {
+				submission_3.addEventListener("submit-success", onLikeChefListSubmitSuccess);
+			}
+			if(typeof onLikeChefListReceive == "function") {
+				submission_3.addEventListener("receive", onLikeChefListReceive);
+			}
 			app.register(submission_3);
 			app.supportMedia("all and (min-width: 1920px)", "FHD");
 			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
@@ -191,8 +260,8 @@
 						"background-image" : "none"
 					});
 					container.addChild(output_1, {
-						"top": "20px",
-						"left": "0px",
+						"top": "18px",
+						"left": "49px",
 						"width": "73px",
 						"height": "30px"
 					});
@@ -204,9 +273,17 @@
 						"font-size" : "20px"
 					});
 					container.addChild(output_2, {
-						"top": "20px",
-						"left": "72px",
-						"width": "100px",
+						"top": "18px",
+						"left": "121px",
+						"width": "64px",
+						"height": "30px"
+					});
+					var image_1 = new cpr.controls.Image();
+					image_1.src = "theme/images/icon/recipe-book.png";
+					container.addChild(image_1, {
+						"top": "18px",
+						"left": "8px",
+						"width": "30px",
 						"height": "30px"
 					});
 				})(group_2);
@@ -252,8 +329,8 @@
 						"background-image" : "none"
 					});
 					container.addChild(output_3, {
-						"top": "20px",
-						"left": "0px",
+						"top": "18px",
+						"left": "47px",
 						"width": "92px",
 						"height": "30px"
 					});
@@ -265,9 +342,17 @@
 						"font-size" : "20px"
 					});
 					container.addChild(output_4, {
-						"top": "20px",
-						"left": "91px",
-						"width": "100px",
+						"top": "18px",
+						"left": "138px",
+						"width": "60px",
+						"height": "30px"
+					});
+					var image_2 = new cpr.controls.Image();
+					image_2.src = "theme/images/icon/mealkit-icecream.png";
+					container.addChild(image_2, {
+						"top": "18px",
+						"left": "8px",
+						"width": "30px",
 						"height": "30px"
 					});
 				})(group_5);
@@ -292,6 +377,10 @@
 			});
 			
 			var group_7 = new cpr.controls.Container();
+			group_7.style.css({
+				"background-color" : "#FFFFFF",
+				"border-radius" : "20px"
+			});
 			var verticalLayout_4 = new cpr.controls.layouts.VerticalLayout();
 			verticalLayout_4.distribution = "center";
 			group_7.setLayout(verticalLayout_4);
@@ -308,8 +397,8 @@
 						"background-image" : "none"
 					});
 					container.addChild(output_5, {
-						"top": "20px",
-						"left": "0px",
+						"top": "18px",
+						"left": "47px",
 						"width": "72px",
 						"height": "28px"
 					});
@@ -321,10 +410,18 @@
 						"font-size" : "20px"
 					});
 					container.addChild(output_6, {
-						"top": "20px",
-						"left": "71px",
-						"width": "100px",
+						"top": "18px",
+						"left": "118px",
+						"width": "49px",
 						"height": "28px"
+					});
+					var image_3 = new cpr.controls.Image();
+					image_3.src = "theme/images/icon/chef-old.png";
+					container.addChild(image_3, {
+						"top": "18px",
+						"left": "8px",
+						"width": "30px",
+						"height": "30px"
 					});
 				})(group_8);
 				container.addChild(group_8, {
@@ -332,19 +429,19 @@
 					"width": "1120px",
 					"height": "60px"
 				});
-				var group_9 = new cpr.controls.Container();
+				var group_9 = new cpr.controls.Container("chefgrp");
 				var flowLayout_3 = new cpr.controls.layouts.FlowLayout();
 				group_9.setLayout(flowLayout_3);
 				container.addChild(group_9, {
-					"autoSize": "none",
+					"autoSize": "height",
 					"width": "1120px",
-					"height": "250px"
+					"height": "210px"
 				});
 			})(group_7);
 			container.addChild(group_7, {
 				"autoSize": "height",
 				"width": "1200px",
-				"height": "332px"
+				"height": "292px"
 			});
 			if(typeof onBodyInit == "function"){
 				app.addEventListener("init", onBodyInit);

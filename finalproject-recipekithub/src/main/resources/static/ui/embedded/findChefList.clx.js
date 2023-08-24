@@ -68,7 +68,7 @@
 							var initvalue = {
 								"memberEmail":chefList[index].memberEmail,
 								"memberNick":chefList[index].memberNick,
-								"memberImage":"theme/images/icon/chefimg.png"
+								"memberImage":"/upload/profile/"+chefList[index].mealkitImage
 							};
 							cpr.core.App.load("embedded/chefRecipeList", function(loadedApp){
 								if (loadedApp){
