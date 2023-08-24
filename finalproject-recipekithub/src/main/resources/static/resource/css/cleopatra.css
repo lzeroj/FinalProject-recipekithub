@@ -483,8 +483,8 @@ body {
   font-style: italic;
 }
 .cl-grid-row.cl-selected {
-  background-color: rgba(32, 138, 237, 0.5);
-  color: #FFFFFF;
+  background-color: #F0F0F0;
+  color: black;
 }
 .cl-grid-row.cl-selected .cl-merged {
   color: #333;

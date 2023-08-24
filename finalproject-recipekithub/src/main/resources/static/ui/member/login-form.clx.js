@@ -319,9 +319,12 @@
 							group_6.setLayout(formLayout_1);
 							(function(container){
 								var inputBox_1 = new cpr.controls.InputBox("emailInput");
+								inputBox_1.showClearButton = true;
 								inputBox_1.placeholder = " Email";
+								inputBox_1.spellCheck = false;
 								inputBox_1.style.css({
 									"border-radius" : "10px",
+									"padding-left" : "10px",
 									"font-size" : "16px"
 								});
 								inputBox_1.bind("value").toDataMap(app.lookup("dm_login"), "member_email");
@@ -331,9 +334,13 @@
 									"rowIndex": 0
 								});
 								var inputBox_2 = new cpr.controls.InputBox("pswdInput");
+								inputBox_2.secret = true;
+								inputBox_2.showClearButton = true;
 								inputBox_2.placeholder = " Password";
+								inputBox_2.spellCheck = false;
 								inputBox_2.style.css({
 									"border-radius" : "10px",
+									"padding-left" : "10px",
 									"font-size" : "16px"
 								});
 								inputBox_2.bind("value").toDataMap(app.lookup("dm_login"), "member_password");

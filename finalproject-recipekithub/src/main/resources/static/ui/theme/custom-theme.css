@@ -2915,10 +2915,6 @@ code,
   font-weight: 500;
   padding-left: 20px;
 }
-.btnLogin {
-  background-image: ;
-  background-color: ;
-}
 .memberIcon {
   filter: brightness(0.5) saturate(0%);
 }
@@ -2974,9 +2970,6 @@ code,
   border-right: 69px solid transparent;
 }
 */
-.abc {
-  border-radius: 0px 60px 0px 0px;
-}
 .btn-login {
   display: flex;
   /* 텍스트와 심플한 화살표를 가로로 배열 */
@@ -3082,6 +3075,13 @@ code,
   box-shadow: 0 1px #696969;
   top: 1px;
 }
+.navbar1 {
+  background-color: rgba(19, 157, 79, 0.9);
+  box-shadow: 10px 10px 5px 5px gray;
+}
+.footer-top {
+  background-color: rgba(19, 157, 79, 0.9);
+}
 .footer-bottom {
-  background: linear-gradient(to top, transparent, #6A8B41);
+  background: linear-gradient(to top, transparent, rgba(19, 157, 79, 0.9));
 }

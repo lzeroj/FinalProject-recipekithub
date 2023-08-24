@@ -7,6 +7,7 @@
     <screen std:sid="screen-08fc027b" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <link std:sid="link-fe0d603a" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-ac88697d" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-7cc987fe" href="../theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-28488ec7">
       <cl:submission std:sid="submission-fa633981" id="sub_logout" action="/member/logout"/>
     </cl:model>
@@ -17,7 +18,7 @@
       <cl:property name="cmb1" type="control"/>
     </cl:appspec>
   </head>
-  <body std:sid="body-ae9875e0" style="background-color:#F4FAEC; top:0px; left:0px; width:1920px; height:200px;">
+  <body std:sid="body-ae9875e0" style="top:0px; left:0px; width:1920px; height:200px;">
     <cl:listener std:sid="listener-f9bc07a0" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-8f018fbd" style="box-shadow:0 0 10px #333;">
       <cl:xylayoutdata std:sid="xyl-data-92032e49" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
@@ -98,14 +99,14 @@
           <cl:columns length="420" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         </cl:formlayout>
       </cl:group>
-      <cl:navigationbar std:sid="n-bar-5ad827de" id="nav1" style="background-color:#90be70; box-shadow:10px 10px 5px 5px gray; text-shadow:2px 2px 4px gray; color:#F4FAEC; font-weight:bolder; font-size:24px; font-family:푸른전남 Medium;" class="indexnav" menutype="fullmenu" listarrowimage="" expandtrigger="click">
+      <cl:navigationbar std:sid="n-bar-5ad827de" id="nav1" style="box-shadow:10px 10px 5px 5px gray; text-shadow:2px 2px 4px gray; color:#F4FAEC; font-weight:bolder; font-size:24px; font-family:푸른전남 Medium;" class="navbar1" menutype="fullmenu" listarrowimage="" expandtrigger="click">
         <cl:listener std:sid="listener-d5b72761" name="item-click" handler="onNavigationBarItemClick"/>
         <cl:formdata std:sid="f-data-79c669b9" row="1" col="0"/>
         <cl:menuitem std:sid="m-item-27ee7474" label="추천" value="recommend"/>
         <cl:menuitem std:sid="m-item-2b69ecc0" label="레시피" value="recipe"/>
         <cl:menuitem std:sid="m-item-9a247b1f" label="밀키트" value="mealkit"/>
         <cl:menuitem std:sid="m-item-fe761a4d" label="셰프" value="chef"/>
-        <cl:barstyle style="box-shadow:10px 10px 5px 5px gray; text-align:center;"/>
+        <cl:barstyle style="box-shadow:10px 10px 5px 5px gray; text-align:center;" class="navbar1"/>
         <cl:itemstyle style="text-align:center;"/>
         <cl:liststyle style="background-color:transparent; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;"/>
         <cl:listitemstyle style="padding-top:20px; font-weight:bolder; font-size:20px; padding-bottom:20px; font-family:푸른전남 Medium;"/>

@@ -7,6 +7,7 @@
     <screen std:sid="screen-e8b8ac97" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <link std:sid="link-9e0ca717" href="theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-e762ac8c" href="theme/custom-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-415e1bf8" href="theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-d6fbeaed">
       <cl:submission std:sid="submission-9e4ebe14" id="find"/>
     </cl:model>
@@ -22,7 +23,7 @@
         <cl:xylayoutdata std:sid="xyl-data-0544e65b" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         <cl:property name="embe" value="ea1" type="control"/>
       </cl:udc>
-      <cl:group std:sid="group-19106c56" style="background-color:transparent; background-size:cover; background-image:url(theme/images/common/bgimg10.png); background-position:center;">
+      <cl:group std:sid="group-19106c56" style="background-size:cover; background-image:url(theme/images/common/bgimgfinal.png); background-position:center;">
         <cl:xylayoutdata std:sid="xyl-data-361dddf3" top="200px" bottom="100px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1">
           <cl:xylayoutdata std:sid="xyl-data-3edebd12" right="20px" left="20px" height="720px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>

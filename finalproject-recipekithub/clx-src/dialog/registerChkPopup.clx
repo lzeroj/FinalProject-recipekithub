@@ -22,7 +22,7 @@
         <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
       </cl:formlayout>
     </cl:group>
-    <cl:output std:sid="output-4e1be60a" id="opbMessage" style="text-align:center;" value="">
+    <cl:output std:sid="output-4e1be60a" id="opbMessage" style="font-size:20px; text-align:center;" value="">
       <cl:formdata std:sid="f-data-71130b1c" row="0" col="0"/>
     </cl:output>
     <cl:formlayout std:sid="f-layout-ed24ec84" hspace="0px" vspace="0px">

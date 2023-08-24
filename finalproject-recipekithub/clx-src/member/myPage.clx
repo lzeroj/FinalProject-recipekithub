@@ -67,9 +67,9 @@
             <cl:menuitem std:sid="m-item-437c11be" label="문의하기" value="4"/>
           </cl:navigationbar>
           <cl:group std:sid="group-1ed10915" style="border-radius:50px; background-color:#0A8C43;">
-            <cl:xylayoutdata std:sid="xyl-data-ba8a8324" top="41px" right="36px" width="420px" height="370px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+            <cl:xylayoutdata std:sid="xyl-data-ba8a8324" top="41px" right="36px" width="400px" height="350px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
             <cl:group std:sid="group-8003b2a0" style="background-color:#FFFFFF; border-radius:40px;">
-              <cl:xylayoutdata std:sid="xyl-data-5817fe4c" top="10px" right="10px" width="400px" height="350px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+              <cl:xylayoutdata std:sid="xyl-data-5817fe4c" top="10px" right="10px" width="380px" height="330px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
               <cl:group std:sid="group-80d6fea2" style="border-radius:40px 40px 0px 0px; background-size:cover; background-image:url(../theme/images/member/2.png); background-position:center;">
                 <cl:xylayoutdata std:sid="xyl-data-c854013c" top="0px" right="0px" left="0px" height="150px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
                 <cl:xylayout std:sid="xylayout-2df208e7"/>
@@ -83,7 +83,7 @@
             <cl:xylayout std:sid="xylayout-ceff05c7"/>
           </cl:group>
           <cl:group std:sid="group-4dd27e56">
-            <cl:xylayoutdata std:sid="xyl-data-e3839137" top="50px" right="45px" width="400px" height="350px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+            <cl:xylayoutdata std:sid="xyl-data-e3839137" top="50px" right="45px" width="380px" height="330px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
             <cl:group std:sid="group-668cd1ae">
               <cl:formdata std:sid="f-data-b38ca9e1" row="1" col="1"/>
               <cl:img std:sid="image-eb10e8af" id="profileImg" fallbacksrc="../theme/images/icon/chefimg.png">
@@ -94,15 +94,15 @@
             </cl:group>
             <cl:group std:sid="group-881ef166">
               <cl:formdata std:sid="f-data-ec93c7b0" row="2" col="0" rowspan="1" colspan="3"/>
-              <cl:output std:sid="output-d575ac9f" id="opbNick" style="color:#EC631D; font-weight:bolder; font-size:18px; text-align:center;">
+              <cl:output std:sid="output-d575ac9f" id="opbNick" style="color:#EC631D; font-weight:bolder; font-size:24px; text-align:center;">
                 <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberNick" rowindex="0"/>
                 <cl:formdata std:sid="f-data-aff8c1cb" row="0" col="0" rowspan="1" colspan="2"/>
               </cl:output>
-              <cl:output std:sid="output-7bfb1bb7" id="opbEmail" style="font-weight:bolder; font-size:18px; text-align:center;">
+              <cl:output std:sid="output-7bfb1bb7" id="opbEmail" style="font-weight:bolder; font-size:20px; text-align:center;">
                 <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberEmail" rowindex="0"/>
                 <cl:formdata std:sid="f-data-48b9c5da" row="1" col="0" rowspan="1" colspan="2"/>
               </cl:output>
-              <cl:formlayout std:sid="f-layout-7ac671cb" scrollable="false" hspace="20px" vspace="20px" top-margin="20px" right-margin="10px" bottom-margin="10px" left-margin="10px">
+              <cl:formlayout std:sid="f-layout-7ac671cb" scrollable="false" hspace="20px" vspace="10px" top-margin="20px" right-margin="10px" bottom-margin="10px" left-margin="10px">
                 <cl:rows length="50" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
                 <cl:rows length="50" unit="PIXEL"/>
                 <cl:columns length="1" unit="FRACTION"/>

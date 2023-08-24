@@ -13,11 +13,11 @@
     <cl:listener std:sid="listener-4cc7edc6" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-0c75a1f4">
       <cl:formdata std:sid="f-data-fb8002eb" row="1" col="0"/>
-      <cl:button std:sid="button-7f8d59c0" id="btnSubmit" style="border-right-style:none; border-radius:0px; background-color:#0ca44e; text-shadow:none; color:#FFFFFF; border-left-style:none; font-weight:bolder; font-size:20px; border-bottom-style:none; background-image:none; border-top-style:none;" value="확인">
+      <cl:button std:sid="button-7f8d59c0" id="btnSubmit" style="border-right-style:none; background-color:#0ca44e; text-shadow:none; color:#FFFFFF; border-left-style:none; font-weight:bolder; font-size:20px; border-bottom-style:none; background-image:none; border-top-style:none;" value="확인">
         <cl:listener std:sid="listener-bf1ca889" name="click" handler="onBtnSubmitClick"/>
         <cl:formdata std:sid="f-data-48e2ec64" row="0" col="0"/>
       </cl:button>
-      <cl:button std:sid="button-c18b893e" id="btnCancel" style="border-right-style:none; border-radius:0px; background-color:#E5F2E3; text-shadow:none; color:#696969; border-left-style:none; font-weight:bolder; font-size:20px; border-bottom-style:none; background-image:none; border-top-style:none;" value="취소">
+      <cl:button std:sid="button-c18b893e" id="btnCancel" style="border-right-style:none; background-color:#E5F2E3; text-shadow:none; color:#696969; border-left-style:none; font-weight:bolder; font-size:20px; border-bottom-style:none; background-image:none; border-top-style:none;" value="취소">
         <cl:listener std:sid="listener-0091785a" name="click" handler="onBtnCancelClick"/>
         <cl:formdata std:sid="f-data-84b805ae" row="0" col="1"/>
       </cl:button>
@@ -27,7 +27,7 @@
         <cl:columns length="1" unit="FRACTION"/>
       </cl:formlayout>
     </cl:group>
-    <cl:output std:sid="output-4e1be60a" id="opbMessage" style="text-align:center;" value="">
+    <cl:output std:sid="output-4e1be60a" id="opbMessage" style="font-size:20px; text-align:center;" value="">
       <cl:formdata std:sid="f-data-71130b1c" row="0" col="0"/>
     </cl:output>
     <cl:formlayout std:sid="f-layout-ed24ec84" hspace="0px" vspace="0px">

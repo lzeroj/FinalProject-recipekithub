@@ -113,6 +113,7 @@
 			var output_1 = new cpr.controls.Output("opbMessage");
 			output_1.value = "";
 			output_1.style.css({
+				"font-size" : "20px",
 				"text-align" : "center"
 			});
 			container.addChild(output_1, {
