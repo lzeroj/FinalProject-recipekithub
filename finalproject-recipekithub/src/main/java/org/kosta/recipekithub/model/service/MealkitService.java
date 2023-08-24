@@ -20,11 +20,10 @@ public interface MealkitService {
 	
 	void increaseHits(int mealkitNo);
 
-	long findTotalPostCount(String mealkitCategory, String searchMealkit);
+	long findTotalPostCount(String mealkitType, String searchMealkit);
 
-	List<MealKitBoard> findAllMealkitBoard(String mealkitCategory, String sort, String searchMealkit,RecipePagination pagination);
+	List<MealKitBoard> findAllMealkitBoard(String mealkitType, String sort, String searchMealkit,RecipePagination pagination);
 	
-	
-
+	List<MealKitBoard> findMealkitByName(String mealkitName);
 }
 
