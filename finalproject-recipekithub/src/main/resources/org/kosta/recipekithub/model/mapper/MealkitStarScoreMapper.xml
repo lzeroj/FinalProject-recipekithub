@@ -35,8 +35,6 @@
  where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
  order by rnum
 </select>
-<<<<<<< HEAD
-=======
 
 <!-- 현준 : 밀키트 번호찾기 -->
 <select id="findMealkitNoList" resultType="org.kosta.recipekithub.model.vo.MealkitboardVO">
@@ -54,6 +52,4 @@
 	order by mealkitStarScore desc, mealkit_reg_date desc
 </select>
 
-
->>>>>>> branch 'develop-branch' of https://github.com/lzeroj/FinalProject-recipekithub.git
 </mapper>
