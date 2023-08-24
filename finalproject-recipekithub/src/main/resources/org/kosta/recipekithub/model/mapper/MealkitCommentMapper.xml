@@ -73,5 +73,4 @@ select m.mealkit_comment_id, m.mealkit_no ,s.mealkit_star_score, m.member_email,
  left outer join mealkit_star_score s on m.mealkit_comment_id = s.mealkit_comment_id
 </select>
 
-
 </mapper>
