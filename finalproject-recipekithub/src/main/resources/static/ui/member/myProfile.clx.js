@@ -852,7 +852,7 @@
 						});
 						tabFolder_1.style.item.css({
 							"background-color" : "#0CA44E",
-							"border-radius" : "20 20 0 0",
+							"border-radius" : "20px 20px 0px 0px",
 							"padding-top" : "10px",
 							"font-weight" : "bolder",
 							"padding-left" : "50px",
@@ -867,7 +867,7 @@
 						
 						var tabItem_1 = (function(tabFolder){
 							var tabItem_1 = new cpr.controls.TabItem();
-							tabItem_1.text = "MyProfile";
+							tabItem_1.text = "My Profile";
 							var group_4 = new cpr.controls.Container("myProfileForm");
 							var dataMapContext_1 = new cpr.bind.DataMapContext(app.lookup("dm_profile"));
 							group_4.setBindContext(dataMapContext_1);
@@ -1081,10 +1081,8 @@
 									image_1.fallbackSrc = "theme/images/icon/chefimg.png";
 									image_1.style.css({
 										"border-right-style" : "none",
-										"background-size" : "contain",
 										"border-left-style" : "none",
 										"border-bottom-style" : "none",
-										"background-image" : "url('theme/images/common/mypageIcon.png')",
 										"border-top-style" : "none"
 									});
 									image_1.bind("src").toDataSet(app.lookup("ds_profile"), "memberImage", 0);

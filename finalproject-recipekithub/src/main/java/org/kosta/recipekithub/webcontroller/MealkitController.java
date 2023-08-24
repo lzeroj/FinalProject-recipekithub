@@ -18,6 +18,7 @@ import org.kosta.recipekithub.model.service.MealkitService;
 import org.kosta.recipekithub.model.service.MealkitStarScoreService;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MealkitCommentVO;
+import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.springframework.stereotype.Controller;
@@ -95,9 +96,7 @@ public class MealkitController {
 		String pageNo = pageParam.getValue("pageNo");
 		//카테고리별
 		ParameterGroup categoryParam = dataRequest.getParameterGroup("meCategory");
-		String category = categoryParam.getValue("category");
-		String ingre = categoryParam.getValue("ingre");
-		String way = categoryParam.getValue("way");
+		String mealkitType = categoryParam.getValue("mealkitType");
 		//분류별
 		ParameterGroup sortParam = dataRequest.getParameterGroup("meSort");
 		String sort = sortParam.getValue("sort");
@@ -105,27 +104,26 @@ public class MealkitController {
 		ParameterGroup searchParam = dataRequest.getParameterGroup("meSearch");
 		String searchMealkit = searchParam.getValue("searchMealkit");
 		
-		String mealkitCategory = category+"/"+ingre+"/"+way;
 		
+		System.out.println("sort = " + sort);
 		log.info("pageNo = {} ", pageNo);
 		log.info("sort = {} ", sort);
-		log.info("category = {} ", category);
-		log.info("ingre = {} ", ingre);
-		log.info("way = {} ", way);
+		log.info("type = {} ", mealkitType);
 		log.info("searchMealkit = {} ", searchMealkit);
-		log.info("mealkitCategory = {} ", mealkitCategory);
 		
 		RecipePagination pagination = null;
-		long totalMealkitCnt = mealKitService.findTotalPostCount(mealkitCategory, searchMealkit);
+		long totalMealkitCnt = mealKitService.findTotalPostCount(mealkitType, searchMealkit);
 		if(pageNo == null) {
 			pagination = new RecipePagination(totalMealkitCnt);
 		}else {
 			pagination = new RecipePagination(totalMealkitCnt, Integer.parseInt(pageNo));
 		}
-		
-		List<MealKitBoard> list = mealKitService.findAllMealkitBoard(mealkitCategory, sort, searchMealkit, pagination);
-		System.out.println(list);
+		//List<MealKitBoard> findMealkitByName = mealKitService.findMealkitByName(searchMealkit);
+		List<MealKitBoard> list = mealKitService.findAllMealkitBoard(mealkitType, sort, searchMealkit, pagination);
+
 		dataRequest.setResponse("mealkitAllList", list);
+		dataRequest.setResponse("totalMealkitCnt", totalMealkitCnt);
+		//dataRequest.setResponse("findMealkitByName", findMealkitByName);
 		return new JSONDataView();
 	}
 	
@@ -185,6 +183,7 @@ public class MealkitController {
 		initParam.put("mealkitRegDate", mealkit.getMealkitRegDate());
 		initParam.put("mealkitHits", mealkit.getMealkitBoardHits());
 		initParam.put("mealkitImg", mealkit.getMealkitImage());
+		initParam.put("mealkitCategory", mealkit.getMealkitCategory());		
 		initParam.put("sessionMember", user);
 		initParam.put("avg", avg);
 		System.out.println("조회수 : "+ mealkit.getMealkitBoardHits());
@@ -212,11 +211,13 @@ public class MealkitController {
 //		} 
 		
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
+		System.out.println("uploadFiles = " + uploadFiles);
 		UploadFile[] uploadFile = uploadFiles.get("image");
+		System.out.println(uploadFile[0]);
 		File orgName = uploadFile[0].getFile();
 		String saveName = uploadFile[0].getFileName();
-		//String savePath = "C:\\Users\\KOSTA\\git\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadmealkitimage\\";
 		String savePath = "C:\\upload\\mealkit\\";
+		
 		String uuid = UUID.randomUUID().toString();
 		FileCopyUtils.copy(orgName, new File(savePath+uuid+"_"+saveName));
 		
@@ -227,6 +228,7 @@ public class MealkitController {
 		int mealkitPrice = Integer.parseInt(param.getValue("mealkitPrice"));
 		int mealkitInventory = Integer.parseInt(param.getValue("mealkitInventory"));
 		String mealkitCategory = param.getValue("mealkitCategory");
+		String mealkitType = param.getValue("mealkitType");
 		System.out.println("mealkitInfo = " + mealkitInfo);
 		MealKitBoard mealkit = new MealKitBoard();
 		mealkit.setMealkitName(mealkitName);
@@ -236,11 +238,13 @@ public class MealkitController {
 		mealkit.setMealkitInventory(mealkitInventory);
 		mealkit.setMealkitCategory(mealkitCategory);
 		mealkit.setMealkitImage(uuid+"_"+saveName);
+		mealkit.setStatus("Y");
+		mealkit.setMealkitType(mealkitType);
 		
 		HttpSession session = request.getSession(false);
 		MemberVO member = null;
 		if(session != null && session.getAttribute("member") != null) {
-			member = (MemberVO)session.getAttribute("mvo");
+			member = (MemberVO)session.getAttribute("member");
 		}else {
 			member = new MemberVO();
 			member.setMemberNick("guest");
@@ -254,7 +258,6 @@ public class MealkitController {
 		Map<String, Object> mealkitMap = new HashMap<>();
 		mealkitMap.put("result", mealkitNo);
 		dataRequest.setMetadata(true, mealkitMap);
-		//dataRequest.setResponse("member", member);
 		return new JSONDataView();
 	}
 	
@@ -354,8 +357,18 @@ public class MealkitController {
 	@GetMapping("/deleteMealkit/{mealkitNo}")
 	public View deleteMealkitGet(@PathVariable int mealkitNo, HttpServletRequest request) {
 		return new UIView("/ui/index.clx");
-		
 	}
+	
+	// 현준
+	@RequestMapping("/findMealkitStarNO")
+	public View findMealkitStarNO(DataRequest dataRequest) {
+		// 번호에 관한 star 리스트뽑기
+		List<MealkitboardVO> starScore = mealkitStarScoreService.findMealkitNoList();
+		dataRequest.setResponse("findMealkitStarList", starScore);
+		
+		return new JSONDataView();
+	}
+	
 
 
 }

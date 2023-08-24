@@ -13,12 +13,12 @@
   </head>
   <body std:sid="body-f926677e" style="top:0px; left:0px; width:300px; height:300px;">
     <cl:listener std:sid="listener-f08d1bdb" name="load" handler="onBodyLoad"/>
-    <cl:img std:sid="image-16a6a544" id="img" style="cursor:pointer;">
+    <cl:img std:sid="image-16a6a544" id="img" style="cursor:pointer; border-radius:10px 10px 0px 0px;">
       <cl:listener std:sid="listener-9084d6a3" name="click" handler="onImgClick"/>
-      <cl:xylayoutdata std:sid="xyl-data-d86f217a" top="0px" left="0px" width="300px" height="250px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-d86f217a" top="0px" left="0px" width="250px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:img>
-    <cl:output std:sid="output-f3f95abc" id="title" style="font-weight:bold; font-size:30px;" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-e932a410" top="250px" left="0px" width="300px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    <cl:output std:sid="output-f3f95abc" id="title" style="border-radius:0px 0px 10px 10px; font-weight:bold; font-size:20px; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-e932a410" top="200px" left="0px" width="250px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:xylayout std:sid="xylayout-28fc77e4"/>
   </body>

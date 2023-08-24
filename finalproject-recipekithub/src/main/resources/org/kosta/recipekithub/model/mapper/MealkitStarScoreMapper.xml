@@ -35,4 +35,25 @@
  where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
  order by rnum
 </select>
+<<<<<<< HEAD
+=======
+
+<!-- 현준 : 밀키트 번호찾기 -->
+<select id="findMealkitNoList" resultType="org.kosta.recipekithub.model.vo.MealkitboardVO">
+	select m.mealkit_no, COALESCE(r.av, 0) mealkitStarScore, m.mealkit_name,  m.MEALKIT_IMAGE ,m.MEALKIT_PRICE 
+	from
+	mealkit_board m
+	left join(
+	SELECT MEALKIT_NO, ROUND(SUM(MEALKIT_STAR_SCORE) / COUNT(MEALKIT_NO),1) as av
+	FROM MEALKIT_COMMENT MC
+	INNER JOIN MEALKIT_STAR_SCORE MS ON MC.MEALKIT_COMMENT_ID = MS.MEALKIT_COMMENT_ID 
+	group by MC.mealkit_no
+	) r on m.mealkit_no = r.mealkit_no
+	where m.status = 'Y'
+	and 6 >= rownum
+	order by mealkitStarScore desc, mealkit_reg_date desc
+</select>
+
+
+>>>>>>> branch 'develop-branch' of https://github.com/lzeroj/FinalProject-recipekithub.git
 </mapper>

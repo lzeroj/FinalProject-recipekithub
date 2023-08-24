@@ -19,4 +19,5 @@ public class MealkitboardVO {
 	private int mealkitInventory;
 	private String mealkitImage;
 	private MemberVO memberVO;
+	private int mealkitStarScore;
 }

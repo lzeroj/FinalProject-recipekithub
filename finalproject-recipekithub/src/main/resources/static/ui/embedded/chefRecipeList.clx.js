@@ -136,8 +136,8 @@
 			formLayout_1.leftMargin = "0px";
 			formLayout_1.horizontalSpacing = "0px";
 			formLayout_1.verticalSpacing = "0px";
-			formLayout_1.setColumns(["20px", "100px", "1fr"]);
-			formLayout_1.setRows(["100px", "40px", "1fr"]);
+			formLayout_1.setColumns(["20px", "100px", "100px", "1fr", "1fr"]);
+			formLayout_1.setRows(["30px", "100px", "40px", "1fr"]);
 			group_1.setLayout(formLayout_1);
 			(function(container){
 				var group_2 = new cpr.controls.Container("grp");
@@ -145,8 +145,8 @@
 				group_2.setLayout(flowLayout_1);
 				container.addChild(group_2, {
 					"colIndex": 0,
-					"rowIndex": 2,
-					"colSpan": 3,
+					"rowIndex": 3,
+					"colSpan": 5,
 					"rowSpan": 1
 				});
 				var image_1 = new cpr.controls.Image("memberimg");
@@ -154,8 +154,8 @@
 					"border-radius" : "100px"
 				});
 				container.addChild(image_1, {
-					"colIndex": 1,
-					"rowIndex": 0,
+					"colIndex": 2,
+					"rowIndex": 1,
 					"horizontalAlign": "center",
 					"verticalAlign": "center",
 					"width": 100,
@@ -168,8 +168,10 @@
 					"font-size" : "20px"
 				});
 				container.addChild(output_1, {
-					"colIndex": 2,
-					"rowIndex": 0
+					"colIndex": 3,
+					"rowIndex": 1,
+					"colSpan": 2,
+					"rowSpan": 1
 				});
 			})(group_1);
 			container.addChild(group_1, {

@@ -25,77 +25,10 @@ function onBodyInit(e){
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e){
-	app.lookup("category").value = "전체";
-	app.lookup("ingre").value = "전체";
-	app.lookup("way").value = "전체";
+	app.lookup("mealkitType").value = "전체";
 	app.lookup("sort").value = "최신순";
 	app.lookup("mealkitBoardList").send();
 	
-	
-	var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
-	var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
-	var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
-	var mealkitAllList = cpr.core.Platform.INSTANCE.getParameter("mealkitAllList");
-	console.log("ㅌㅌㅌ" + mealkitAllList.length);
-	//console.log("mealkitMap =" + mealkitMap);
-	var email = cpr.core.Platform.INSTANCE.getParameter("member");
-	console.log("email = " + email);
-	if(email != "guest"){
-		var button = app.lookup("insertBtn");
-		button.visible = true;
-		button.redraw();
-	}
-	
-	var cnt = app.lookup("mealkitCnt");
-	cnt.value = mealkitAllList.lengthmealkitAllList
-	console.log("mealkitList = " + mealkitList);
-	var container = app.lookup("grp");
-	for (var i = 0; i < mealkitAllList.length; i++) {
-		(function(index) {
-			var mealkit = new udc.mealkitList();
-			mealkit.img = "/upload/mealkit/" + mealkitAllList[i].mealkitImage;
-			console.log(mealkitAllList.img);
-			mealkit.hits = mealkitAllList[i].mealkitBoardHits;
-			mealkit.nick = mealkitAllList[i].memberVO.memberNick;
-			mealkit.title = mealkitAllList[i].mealkitName;
-			mealkit.star = mealkitStarList[i];
-			mealkit.count = "("+commentCount[i]+")";
-			container.addChild(mealkit, {
-				height: "250px",
-				width: "230px",
-				autoSize: "both"
-			});
-			mealkit.addEventListener("imgClick", function(e) {
-				window.location.href = "/mealkitDetail/" + mealkitAllList[index].mealkitNo;
-			});
-		})(i);
-	}
-	
-
-//	var cnt = app.lookup("mealkitCnt");
-//	cnt.value = mealkitList.length;
-//	console.log("mealkitList = " + mealkitList);
-//	var container = app.lookup("grp");
-//	for (var i = 0; i < mealkitList.length; i++) {
-//		(function(index) {
-//			var mealkit = new udc.mealkitList();
-//			mealkit.img = "/upload/mealkit/" + mealkitList[i].mealkitImage;
-//			console.log(mealkitList.img);
-//			mealkit.hits = mealkitList[i].mealkitBoardHits;
-//			mealkit.nick = mealkitList[i].memberVO.memberNick;
-//			mealkit.title = mealkitList[i].mealkitName;
-//			mealkit.star = mealkitStarList[i];
-//			mealkit.count = "("+commentCount[i]+")";
-//			container.addChild(mealkit, {
-//				height: "250px",
-//				width: "230px",
-//				autoSize: "both"
-//			});
-//			mealkit.addEventListener("imgClick", function(e) {
-//				window.location.href = "/mealkitDetail/" + mealkitList[index].mealkitNo;
-//			});
-//		})(i);
-//	}
 
 
 }
@@ -162,3 +95,115 @@ function onCategorySelectionChange(e){
 	app.lookup("page").currentPageIndex = 1;
 	app.lookup("mealkitBoardList").send();
 }
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onMealkitBoardListSubmitSuccess(e){
+	var mealkitBoardList = e.control;
+    var xhr = mealkitBoardList.xhr;
+	var jsonData = JSON.parse(xhr.responseText);
+	var mealkitAllList = jsonData.mealkitAllList;
+	var totalMealkitCnt = jsonData.totalMealkitCnt;
+	var findMealkitByName= jsonData.findMealkitByName;
+	var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
+	var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
+	var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
+	//alert("mealkitList = " + mealkitList);
+	//alert("mealkitAllList = " + mealkitAllList);
+	//console.log("ㅌㅌㅌ" + mealkitAllList.length);
+	//console.log("mealkitMap =" + mealkitMap);
+	
+	//app.lookup(id)	
+	var email = cpr.core.Platform.INSTANCE.getParameter("member");
+	console.log("email = " + email);
+	if(email != "guest"){
+		var button = app.lookup("insertBtn");
+		button.visible = true;
+		button.redraw();
+	}
+	
+	//app.lookup("page").totalRowCount = ;
+	app.lookup("grp").removeAllChildren();
+	
+	app.lookup("mealkitCnt").value = totalMealkitCnt;
+	app.lookup("page").totalRowCount = totalMealkitCnt;
+	//console.log("mealkitList = " + mealkitList);
+	var container = app.lookup("grp");
+	for (var i = 0; i < mealkitAllList.length; i++) {
+		(function(index) {
+			var mealkit = new udc.mealkitList();
+			mealkit.img = "/upload/mealkit/" + mealkitAllList[i].mealkitImage;
+			console.log(mealkitAllList.img);
+			mealkit.hits = mealkitAllList[i].mealkitBoardHits;
+			mealkit.nick = mealkitAllList[i].memberVO.memberNick;
+			mealkit.title = mealkitAllList[i].mealkitName;
+			mealkit.star = mealkitStarList[i];
+			mealkit.count = "("+commentCount[i]+")";
+			container.addChild(mealkit, {
+				height: "250px",
+				width: "230px",
+				autoSize: "both"
+			});
+			mealkit.addEventListener("imgClick", function(e) {
+				window.location.href = "/mealkitDetail/" + mealkitAllList[index].mealkitNo;
+			});
+		})(i);
+	}
+/* 초기
+	var cnt = app.lookup("mealkitCnt");
+	cnt.value = mealkitList.length;
+	console.log("mealkitList = " + mealkitList);
+	var container = app.lookup("grp");
+	for (var i = 0; i < mealkitList.length; i++) {
+		(function(index) {
+			var mealkit = new udc.mealkitList();
+			mealkit.img = "/upload/mealkit/" + mealkitList[i].mealkitImage;
+			console.log(mealkitList.img);
+			mealkit.hits = mealkitList[i].mealkitBoardHits;
+			mealkit.nick = mealkitList[i].memberVO.memberNick;
+			mealkit.title = mealkitList[i].mealkitName;
+			mealkit.star = mealkitStarList[i];
+			mealkit.count = "("+commentCount[i]+")";
+			container.addChild(mealkit, {
+				height: "250px",
+				width: "230px",
+				autoSize: "both"
+			});
+			mealkit.addEventListener("imgClick", function(e) {
+				window.location.href = "/mealkitDetail/" + mealkitList[index].mealkitNo;
+			});
+		})(i);
+	}
+*/	
+}	
+	
+//function filterMealkit(e){
+//	var filter = e.control;
+//	var cnt = app.lookup("mealkitCnt");
+//	cnt.value = filter.length;
+//	console.log("filter = " + filter);
+//	var container = app.lookup("grp");
+//	for (var i = 0; i < filter.length; i++) {
+//		(function(index) {
+//			var mealkit = new udc.mealkitList();
+//			mealkit.img = "/upload/mealkit/" + mealkitList[i].mealkitImage;
+//			console.log(filter.img);
+//			mealkit.hits = filter[i].mealkitBoardHits;
+//			mealkit.nick = filter[i].memberVO.memberNick;
+//			mealkit.title = filter[i].mealkitName;
+//			mealkit.star = filter[i];
+//			mealkit.count = "("+commentCount[i]+")";
+//			container.addChild(mealkit, {
+//				height: "250px",
+//				width: "230px",
+//				autoSize: "both"
+//			});
+//			mealkit.addEventListener("imgClick", function(e) {
+//				window.location.href = "/mealkitDetail/" + filter[index].mealkitNo;
+//			});
+//		})(i);
+//	}
+//}
+

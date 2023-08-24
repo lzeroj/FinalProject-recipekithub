@@ -308,3 +308,37 @@ function onShopconMouseleave(e){
 	
 }
 
+/*
+ * 체크 박스에서 value-change 이벤트 발생 시 호출.
+ */
+function onCbx1ValueChange(e){
+	var cbx1 = e.control;
+	if(cbx1.checked){
+		app.lookup("grd1").checkAllRow();
+	}else{
+		app.lookup("grd1").clearAllCheck();
+	}
+	getSumPrice();
+}
+
+/*
+ * 그리드에서 header-check 이벤트 발생 시 호출.
+ * Grid의 Header Checkbox가 체크 되었을 때 발생하는 이벤트. (columnType=checkbox)
+ */
+function onGrd1HeaderCheck(e){
+	var grd1 = e.control;
+	app.lookup("cbx1").checked = true;
+	app.lookup("cbx1").redraw();
+	getSumPrice();
+}
+
+/*
+ * 그리드에서 header-uncheck 이벤트 발생 시 호출.
+ * Grid의 Header Checkbox가 체크 해제되었을 때 발생하는 이벤트. (columnType=checkbox)
+ */
+function onGrd1HeaderUncheck(e){
+	var grd1 = e.control;
+	app.lookup("cbx1").checked = false;
+	app.lookup("cbx1").redraw();
+	getSumPrice();
+}

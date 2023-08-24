@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-0e207cb9" version="1.0.4584">
+  <head std:sid="head-7349b175">
+    <screen std:sid="screen-513afc69" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-c65efd01" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-0ddde51c" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-402df396"/>
+    <cl:appspec>
+      <cl:property name="memberEmail" type="string"/>
+      <cl:property name="memberImage" type="string"/>
+      <cl:property name="memberNick" type="string"/>
+      <cl:event name="memberImageClick" type="cpr.events.CAppEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-8576130b" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:listener std:sid="listener-b0413b5e" name="load" handler="onBodyLoad"/>
+    <cl:img std:sid="image-c5690ada" id="chefimg" style="border-radius:100px; cursor:pointer;" fallbacksrc="../theme/images/icon/chefimg.png">
+      <cl:listener std:sid="listener-89b8e9e2" name="click" handler="onChefimgClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-0ca9b71d" top="0px" left="0px" width="160px" height="160px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:output std:sid="output-130f039b" id="chefnick" style="font-weight:bold; font-size:14px; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-64e43ca3" top="160px" left="0px" width="160px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-1e2854fa" id="chefemail" style="color:#9C9C9C; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-070437f1" top="190px" left="0px" width="160px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:xylayout std:sid="xylayout-1467be23"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

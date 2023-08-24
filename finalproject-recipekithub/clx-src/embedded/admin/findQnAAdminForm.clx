@@ -40,13 +40,13 @@
     <cl:listener std:sid="listener-087fd3cf" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-e98afb90">
       <cl:xylayoutdata std:sid="xyl-data-01dc0c93" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:group std:sid="group-67002643" style="background-color:#FFFFFF;">
+      <cl:group std:sid="group-67002643" style="background-color:#FFFFFF; border-radius:20px;">
         <cl:xylayoutdata std:sid="xyl-data-8c30d336" top="30px" bottom="30px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:output std:sid="output-dfed24b2" style="background-color:#FFFFFF; color:#0fd465; border-bottom-color:#0ebc59; font-weight:bold; border-bottom-width:1px; font-size:18px; font-family:푸른전남; border-bottom-style:solid; text-align:center;" value="Q &amp; A 리스트">
-          <cl:formdata std:sid="f-data-5129b7a0" row="0" col="0" rowspan="1" colspan="2"/>
+          <cl:formdata std:sid="f-data-ce7e57a0" row="0" col="0" rowspan="1" colspan="3"/>
         </cl:output>
         <cl:grid std:sid="grid-6b88455a" id="grd1" style="background-color:#FFFFFF; border-right-style:solid; border-top-width:0px; border-left-style:solid; border-right-width:0px; border-bottom-width:0px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" readonly="true" datasetid="qnalistadmin">
-          <cl:formdata std:sid="f-data-966c20bb" row="2" col="0" rowspan="1" colspan="2"/>
+          <cl:formdata std:sid="f-data-607283ad" row="2" col="0" rowspan="1" colspan="3"/>
           <cl:gridcolumn std:sid="g-column-f08b842a" width="30px"/>
           <cl:gridcolumn std:sid="g-column-1bdea98a" width="121px"/>
           <cl:gridcolumn std:sid="g-column-c568d50d" width="74px"/>
@@ -83,8 +83,10 @@
           <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
           <cl:rows length="20" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
           <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="10" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
           <cl:columns length="1" unit="FRACTION"/>
           <cl:columns length="160" unit="PIXEL"/>
+          <cl:columns length="10" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
       <cl:xylayout std:sid="xylayout-032c94f6"/>

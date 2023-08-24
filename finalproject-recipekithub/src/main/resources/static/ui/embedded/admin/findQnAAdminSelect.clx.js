@@ -29,6 +29,12 @@
 				app.lookup("txa1").text = val.boardContent;
 				app.lookup("ipb1").redraw();
 				app.lookup("txa1").redraw();
+				
+				// 답변이 있는지 확인
+				var dataMap = app.lookup("dmboardinfo");
+				dataMap.setValue("boardId", val.boardId);
+				dataMap.setValue("boardTitle", val.boardTitle);
+				app.lookup("subchkanswer").send();
 			}
 
 			/*
@@ -100,6 +106,73 @@
 				if(metadata == 1){
 					alert("등록에 성공하였습니다");
 				}
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubchkanswerSubmitSuccess(e){
+				var subchkanswer = e.control;
+				var metadata = subchkanswer.getMetadata("chkmessage");
+				var dataMap = app.lookup("dmanswerboardinfo");
+				if(metadata == 1){ // 답변이 존재
+			//		app.lookup("btn1").visible = false; //수정하기 버튼 숨김
+					var btngrp = app.lookup("btngrp");
+					app.lookup("grp1").removeChild(btngrp,true);
+					
+					var vcIpb = new cpr.controls.InputBox();
+					vcIpb.style.css({
+						"borderRadius" : "10px",
+						"background-color":"#FAFAFA"
+					});
+					vcIpb.readOnly = true;
+					vcIpb.value = dataMap.getValue("boardAnswerTitle");
+					app.lookup("grp2").addChild(vcIpb, {
+						width : "669px",
+						height : "40px",
+						autoSize : "none"
+					});
+					
+					// 텍스트 에어리어 추가
+					var textArea = new cpr.controls.TextArea();
+					textArea.style.css({
+						"borderRadius" : "10px",
+						"background-color":"#FAFAFA"
+					});
+					textArea.readOnly = true;
+					textArea.value = dataMap.getValue("boardAnswerContent");
+					app.lookup("grp2").addChild(textArea, {
+						width : "669px",
+						height : "200px",
+						autoSize : "none"
+					});		
+					
+					// 버튼 추가
+					var button = new cpr.controls.Button();
+					button.style.css({
+						"background":"#0ebc59 none",
+						"color":"#FFFFFF",
+						"margin-bottom":"20px"
+					});
+					button.addEventListener("click", function(e){
+						var host = app.getHost(); // 부모 임베디드 앱
+						cpr.core.App.load("embedded/admin/findQnAAdminForm", function(loadedApp){
+							if (loadedApp){
+					//			host.initValue = initValue;
+								host.app = loadedApp;
+							}
+						});
+					});
+					button.text = "뒤로가기";
+					app.lookup("reversebtn").addChild(button, {
+						width : "140px",
+						height : "30px",
+						right: "0px",
+					});	
+					app.lookup("grp2").redraw();
+					app.lookup("reversebtn").redraw();
+				}	
 			};
 			// End - User Script
 			
@@ -119,6 +192,27 @@
 				]
 			});
 			app.register(dataMap_1);
+			
+			var dataMap_2 = new cpr.data.DataMap("dmboardinfo");
+			dataMap_2.parseData({
+				"columns" : [
+					{"name": "boardId"},
+					{"name": "boardTitle"}
+				]
+			});
+			app.register(dataMap_2);
+			
+			var dataMap_3 = new cpr.data.DataMap("dmanswerboardinfo");
+			dataMap_3.parseData({
+				"columns" : [
+					{"name": "boardId"},
+					{"name": "boardAnswerTitle"},
+					{"name": "boardAnswerContent"},
+					{"name": "boardAnswerId"},
+					{"name": "boardAnswerRegDate"}
+				]
+			});
+			app.register(dataMap_3);
 			var submission_1 = new cpr.protocols.Submission("subinsertqnaanswer");
 			submission_1.action = "/insertQnAAnswer";
 			submission_1.addRequestData(dataMap_1);
@@ -126,6 +220,15 @@
 				submission_1.addEventListener("submit-success", onSubinsertqnaanswerSubmitSuccess);
 			}
 			app.register(submission_1);
+			
+			var submission_2 = new cpr.protocols.Submission("subchkanswer");
+			submission_2.action = "/selectChkQnAAnswer";
+			submission_2.addRequestData(dataMap_2);
+			submission_2.addResponseData(dataMap_3, false);
+			if(typeof onSubchkanswerSubmitSuccess == "function") {
+				submission_2.addEventListener("submit-success", onSubchkanswerSubmitSuccess);
+			}
+			app.register(submission_2);
 			app.supportMedia("all and (min-width: 1860px)", "new-screen");
 			app.supportMedia("all and (min-width: 1024px) and (max-width: 1859px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -139,20 +242,23 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.distribution = "center";
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_1.setLayout(xYLayout_2);
+			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_2.distribution = "center";
+			group_1.setLayout(verticalLayout_2);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"background-color" : "#FFFFFF"
 				});
-				var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
-				group_2.setLayout(verticalLayout_1);
+				var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
+				verticalLayout_3.distribution = "center";
+				group_2.setLayout(verticalLayout_3);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
 					output_1.value = "Q & A 답변";
@@ -172,9 +278,9 @@
 					group_3.style.css({
 						"background-color" : "#FFFFFF"
 					});
-					var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
-					verticalLayout_2.distribution = "center";
-					group_3.setLayout(verticalLayout_2);
+					var verticalLayout_4 = new cpr.controls.layouts.VerticalLayout();
+					verticalLayout_4.distribution = "center";
+					group_3.setLayout(verticalLayout_4);
 					(function(container){
 						var inputBox_1 = new cpr.controls.InputBox("ipb1");
 						inputBox_1.readOnly = true;
@@ -189,18 +295,19 @@
 						var textArea_1 = new cpr.controls.TextArea("txa1");
 						textArea_1.readOnly = true;
 						textArea_1.style.css({
-							"border-radius" : "10px"
+							"border-radius" : "10px",
+							"background-image" : "none"
 						});
 						textArea_1.bind("value").toDataMap(app.lookup("dmqnaselect"), "boardAnswerContent");
 						container.addChild(textArea_1, {
 							"width": "820px",
 							"height": "259px"
 						});
-						var group_4 = new cpr.controls.Container();
-						var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-						group_4.setLayout(xYLayout_3);
+						var group_4 = new cpr.controls.Container("btngrp");
+						var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+						group_4.setLayout(xYLayout_1);
 						(function(container){
-							var button_1 = new cpr.controls.Button();
+							var button_1 = new cpr.controls.Button("btn1");
 							button_1.value = "답변 달기";
 							button_1.style.css({
 								"background-color" : "#0ebc59",
@@ -222,12 +329,20 @@
 							"height": "30px"
 						});
 						var group_5 = new cpr.controls.Container("grp2");
-						var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
-						group_5.setLayout(verticalLayout_3);
+						var verticalLayout_5 = new cpr.controls.layouts.VerticalLayout();
+						group_5.setLayout(verticalLayout_5);
 						container.addChild(group_5, {
 							"autoSize": "height",
 							"width": "820px",
-							"height": "289px"
+							"height": "270px"
+						});
+						var group_6 = new cpr.controls.Container("reversebtn");
+						var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+						group_6.setLayout(xYLayout_2);
+						container.addChild(group_6, {
+							"autoSize": "none",
+							"width": "820px",
+							"height": "40px"
 						});
 					})(group_3);
 					container.addChild(group_3, {
@@ -237,15 +352,13 @@
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "10px",
-					"bottom": "10px",
+					"autoSize": "height",
 					"width": "860px",
-					"left": "calc(50% - 430px)"
+					"height": "719px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "0px",
-				"left": "0px",
+				"autoSize": "height",
 				"width": "1860px",
 				"height": "739px"
 			});
