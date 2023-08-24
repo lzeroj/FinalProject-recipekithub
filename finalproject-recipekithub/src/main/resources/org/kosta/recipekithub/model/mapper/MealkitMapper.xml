@@ -61,7 +61,7 @@ ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 
 
 <select id="findAllMealkitBoard" resultMap="memberInfo">
-SELECT rnum, mk.mealkit_no, mk.mealkit_name, mk.mealkit_board_hits, m.member_image,m.member_nick , avg()
+SELECT rnum, mk.mealkit_no, mk.mealkit_name, mk.mealkit_board_hits, m.member_image,m.member_nick
 FROM (
 	SELECT ROW_NUMBER() OVER(ORDER BY 
 	<if test="sort == '최신순'">   
