@@ -13,9 +13,29 @@
           <cl:datacolumn std:sid="d-column-9776733c" name="boardAnswerContent" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-9e6272fb" id="dmboardinfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-76a0b33d" name="boardId"/>
+          <cl:datacolumn std:sid="d-column-4f71274f" name="boardTitle"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-d7f12ada" id="dmanswerboardinfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0fa134e9" name="boardId"/>
+          <cl:datacolumn std:sid="d-column-5aaf88fe" name="boardAnswerTitle"/>
+          <cl:datacolumn std:sid="d-column-f0757834" name="boardAnswerContent"/>
+          <cl:datacolumn std:sid="d-column-8d330196" name="boardAnswerId"/>
+          <cl:datacolumn std:sid="d-column-67b5eff0" name="boardAnswerRegDate"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-261ca56a" id="subinsertqnaanswer" action="/insertQnAAnswer">
         <cl:listener std:sid="listener-fa5b475d" name="submit-success" handler="onSubinsertqnaanswerSubmitSuccess"/>
         <cl:requestdata dataid="dmqnaselect"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d775d3e8" id="subchkanswer" action="/selectChkQnAAnswer">
+        <cl:listener std:sid="listener-6b172081" name="submit-success" handler="onSubchkanswerSubmitSuccess"/>
+        <cl:requestdata dataid="dmboardinfo"/>
+        <cl:responsedata dataid="dmanswerboardinfo"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -23,9 +43,9 @@
   <body std:sid="body-b0573fb0">
     <cl:listener std:sid="listener-62bb3491" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-98d122db">
-      <cl:xylayoutdata std:sid="xyl-data-2719d8a9" top="0px" left="0px" width="1860px" height="739px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:verticaldata std:sid="v-data-c4d7d1aa" width="1860px" height="739px" autosize="height"/>
       <cl:group std:sid="group-4364fe1b" style="background-color:#FFFFFF;">
-        <cl:xylayoutdata std:sid="xyl-data-541f3e73" top="10px" bottom="10px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+        <cl:verticaldata std:sid="v-data-9a3df3cf" width="860px" height="719px" autosize="height"/>
         <cl:output std:sid="output-062cce4d" style="background-color:#FFFFFF; color:#0fd465; font-weight:bold; font-size:18px; font-family:푸른전남; text-align:center;" value="Q &amp; A 답변">
           <cl:verticaldata std:sid="v-data-3de4fa28" width="860px" height="50px"/>
         </cl:output>
@@ -35,29 +55,33 @@
             <cl:datamapbind property="value" datacontrolid="dmqnaselect" columnname="boardAnswerTitle"/>
             <cl:verticaldata std:sid="v-data-710a93ce" width="820px" height="40px"/>
           </cl:inputbox>
-          <cl:textarea std:sid="t-area-8716c9d2" id="txa1" style="border-radius:10px;" readonly="true">
+          <cl:textarea std:sid="t-area-8716c9d2" id="txa1" style="border-radius:10px; background-image:none;" readonly="true">
             <cl:datamapbind property="value" datacontrolid="dmqnaselect" columnname="boardAnswerContent"/>
             <cl:verticaldata std:sid="v-data-1f138d23" width="820px" height="259px"/>
           </cl:textarea>
-          <cl:group std:sid="group-54a7ce2d">
+          <cl:group std:sid="group-54a7ce2d" id="btngrp">
             <cl:verticaldata std:sid="v-data-91ed95c2" width="820px" height="30px"/>
-            <cl:button std:sid="button-87ed44c2" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="답변 달기">
+            <cl:button std:sid="button-87ed44c2" id="btn1" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="답변 달기">
               <cl:listener std:sid="listener-a53ba729" name="click" handler="onButtonClick"/>
               <cl:xylayoutdata std:sid="xyl-data-74639305" right="0px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="CENTER"/>
             </cl:button>
             <cl:xylayout std:sid="xylayout-11e6224c"/>
           </cl:group>
           <cl:group std:sid="group-7a41a18a" id="grp2">
-            <cl:verticaldata std:sid="v-data-21a0976c" width="820px" height="289px" autosize="height"/>
+            <cl:verticaldata std:sid="v-data-21a0976c" width="820px" height="270px" autosize="height"/>
             <cl:verticallayout std:sid="v-layout-22e72418"/>
+          </cl:group>
+          <cl:group std:sid="group-80f2c42f" id="reversebtn">
+            <cl:verticaldata std:sid="v-data-7a73b0eb" width="820px" height="40px" autosize="none"/>
+            <cl:xylayout std:sid="xylayout-2d4be61a"/>
           </cl:group>
           <cl:verticallayout std:sid="v-layout-1d370cdd" distribution="center"/>
         </cl:group>
-        <cl:verticallayout std:sid="v-layout-ad6ad412"/>
+        <cl:verticallayout std:sid="v-layout-ad6ad412" distribution="center"/>
       </cl:group>
-      <cl:xylayout std:sid="xylayout-3f2045af"/>
+      <cl:verticallayout std:sid="v-layout-b5e6a5c5" distribution="center"/>
     </cl:group>
-    <cl:xylayout std:sid="xylayout-3b527e5d"/>
+    <cl:verticallayout std:sid="v-layout-00fc46b8" distribution="center"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

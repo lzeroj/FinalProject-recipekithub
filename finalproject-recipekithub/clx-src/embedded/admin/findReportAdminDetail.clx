@@ -31,7 +31,7 @@
   </head>
   <body std:sid="body-46aed2e9">
     <cl:listener std:sid="listener-5177884c" name="load" handler="onBodyLoad"/>
-    <cl:group std:sid="group-cde6200b" style="background-color:#FFFFFF;">
+    <cl:group std:sid="group-cde6200b" style="background-color:#FFFFFF; border-radius:20px;">
       <cl:xylayoutdata std:sid="xyl-data-d8a2b994" top="30px" bottom="30px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
       <cl:button std:sid="button-3f3ec088" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; background-image:none;" value="자세히 보기">
         <cl:listener std:sid="listener-1fe5b925" name="click" handler="onButtonClick"/>
@@ -40,7 +40,7 @@
       <cl:output std:sid="output-38b1a3c6" style="border-bottom-color:#0ebc59; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="해당 레시피 신고 리스트">
         <cl:formdata std:sid="f-data-bdd6fffb" row="0" col="0" rowspan="1" colspan="6"/>
       </cl:output>
-      <cl:grid std:sid="grid-bb2b067f" id="grd1" readonly="true" datasetid="dsselectreportlist">
+      <cl:grid std:sid="grid-bb2b067f" id="grd1" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" readonly="true" datasetid="dsselectreportlist">
         <cl:formdata std:sid="f-data-3572011f" row="2" col="0" rowspan="1" colspan="6"/>
         <cl:gridcolumn std:sid="g-column-095e2703" width="30px"/>
         <cl:gridcolumn std:sid="g-column-974f91c0" width="77px"/>
@@ -61,10 +61,10 @@
           <cl:gridrow std:sid="g-row-83f28c07"/>
           <cl:gridcell std:sid="gd-cell-831a61ab" rowindex="0" colindex="0" columntype="rowindex"/>
           <cl:gridcell std:sid="gd-cell-9ce465ee" rowindex="0" colindex="1" columnname="recipeBoardId"/>
-          <cl:gridcell std:sid="gd-cell-3c1eef7c" rowindex="0" colindex="2" columnname="reportTitle"/>
+          <cl:gridcell std:sid="gd-cell-3c1eef7c" rowindex="0" colindex="2" style="font-weight:bold;" columnname="reportTitle"/>
           <cl:gridcell std:sid="gd-cell-73cdf910" rowindex="0" colindex="3" columnname="memberEmail"/>
           <cl:gridcell std:sid="gd-cell-c559217e" rowindex="0" colindex="4" columnname="reportDate">
-            <cl:dateinput std:sid="d-input-f156db15" id="dti1" mask="YYYY-MM-DD HH:mm:ss" format="YYYYMMDDHHmmss" enabledinputmask="false">
+            <cl:dateinput std:sid="d-input-f156db15" id="dti1" style="text-align:center;" mask="YYYY-MM-DD HH:mm:ss" format="YYYYMMDDHHmmss" enabledinputmask="false">
               <cl:celldata std:sid="c-data-0ffca273"/>
             </cl:dateinput>
           </cl:gridcell>

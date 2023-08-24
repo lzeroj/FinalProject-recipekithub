@@ -16,7 +16,7 @@
   <body std:sid="body-742fa205" style="background-color:#F4FAEC;">
     <cl:listener std:sid="listener-def95c39" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-3afdffe4">
-      <cl:xylayoutdata std:sid="xyl-data-92d90e44" top="0px" left="0px" width="1920px" height="1090px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:verticaldata std:sid="v-data-4d8aedb0" width="1920px" height="1090px"/>
       <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
         <cl:listener std:sid="listener-e6ce5049" name="event" handler="onHeader3Event"/>
         <cl:listener std:sid="listener-d9a38060" name="logout" handler="onHeader3Logout"/>
@@ -46,7 +46,7 @@
       </cl:udc>
       <cl:xylayout std:sid="xylayout-e4d9b86a"/>
     </cl:group>
-    <cl:xylayout std:sid="xylayout-addfe2df"/>
+    <cl:verticallayout std:sid="v-layout-e7d29b71"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

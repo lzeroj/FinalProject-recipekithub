@@ -1905,6 +1905,15 @@
 				function onBtnLoginoffClick(e){
 					var btnLoginoff = e.control;
 					window.location.href="/memberUI/loginForm";
+				}
+	
+				/*
+				 * 버튼(cartbtn)에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onCartbtnClick(e){
+					var cartbtn = e.control;
+					window.location.href = "/mealkitList";
 				};
 				// End - User Script
 				
@@ -1996,6 +2005,9 @@
 							"background-image" : "url('theme/images/icon/shopping-basket.png')",
 							"border-top-style" : "none"
 						});
+						if(typeof onCartbtnClick == "function") {
+							button_2.addEventListener("click", onCartbtnClick);
+						}
 						container.addChild(button_2, {
 							"colIndex": 1,
 							"rowIndex": 0

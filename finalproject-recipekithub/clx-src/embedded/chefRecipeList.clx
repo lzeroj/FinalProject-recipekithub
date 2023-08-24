@@ -30,21 +30,24 @@
     <cl:group std:sid="group-8bf83f9d" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#e4e4e4; border-right-width:1px; border-left-color:#e4e4e4; border-right-color:#e4e4e4; border-left-width:1px; border-top-style:solid; background-color:#FFFFFF; border-left-style:solid; border-bottom-width:1px; border-top-color:#e4e4e4; border-bottom-style:solid;">
       <cl:xylayoutdata std:sid="xyl-data-0ab5168f" top="30px" bottom="30px" width="880px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-57d0501b" id="grp">
-        <cl:formdata std:sid="f-data-9b42a8ff" row="2" col="0" rowspan="1" colspan="3"/>
+        <cl:formdata std:sid="f-data-9b42a8ff" row="3" col="0" rowspan="1" colspan="5"/>
         <cl:flowlayout std:sid="f-layout-80980ea2"/>
       </cl:group>
       <cl:img std:sid="image-e55b91e9" id="memberimg" style="border-radius:100px;">
-        <cl:formdata std:sid="f-data-1af11e7d" halign="CENTER" valign="CENTER" width="100" height="100" row="0" col="1"/>
+        <cl:formdata std:sid="f-data-57d0aa32" halign="CENTER" valign="CENTER" width="100" height="100" row="1" col="2"/>
       </cl:img>
       <cl:output std:sid="output-2e0ef401" id="memberinfo" style="font-weight:bold; font-size:20px;" value="Output">
-        <cl:formdata std:sid="f-data-93070843" row="0" col="2"/>
+        <cl:formdata std:sid="f-data-23dca3cb" row="1" col="3" rowspan="1" colspan="2"/>
       </cl:output>
       <cl:formlayout std:sid="f-layout-d50a5be6" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL"/>
         <cl:rows length="100" unit="PIXEL"/>
         <cl:rows length="40" unit="PIXEL"/>
         <cl:rows length="1" unit="FRACTION"/>
         <cl:columns length="20" unit="PIXEL"/>
         <cl:columns length="100" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
         <cl:columns length="1" unit="FRACTION"/>
       </cl:formlayout>
     </cl:group>

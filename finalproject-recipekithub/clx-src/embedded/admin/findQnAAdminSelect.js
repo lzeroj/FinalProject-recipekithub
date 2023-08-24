@@ -16,6 +16,12 @@ function onBodyLoad(e){
 	app.lookup("txa1").text = val.boardContent;
 	app.lookup("ipb1").redraw();
 	app.lookup("txa1").redraw();
+	
+	// 답변이 있는지 확인
+	var dataMap = app.lookup("dmboardinfo");
+	dataMap.setValue("boardId", val.boardId);
+	dataMap.setValue("boardTitle", val.boardTitle);
+	app.lookup("subchkanswer").send();
 }
 
 /*
@@ -87,4 +93,71 @@ function onSubinsertqnaanswerSubmitSuccess(e){
 	if(metadata == 1){
 		alert("등록에 성공하였습니다");
 	}
+}
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSubchkanswerSubmitSuccess(e){
+	var subchkanswer = e.control;
+	var metadata = subchkanswer.getMetadata("chkmessage");
+	var dataMap = app.lookup("dmanswerboardinfo");
+	if(metadata == 1){ // 답변이 존재
+//		app.lookup("btn1").visible = false; //수정하기 버튼 숨김
+		var btngrp = app.lookup("btngrp");
+		app.lookup("grp1").removeChild(btngrp,true);
+		
+		var vcIpb = new cpr.controls.InputBox();
+		vcIpb.style.css({
+			"borderRadius" : "10px",
+			"background-color":"#FAFAFA"
+		});
+		vcIpb.readOnly = true;
+		vcIpb.value = dataMap.getValue("boardAnswerTitle");
+		app.lookup("grp2").addChild(vcIpb, {
+			width : "669px",
+			height : "40px",
+			autoSize : "none"
+		});
+		
+		// 텍스트 에어리어 추가
+		var textArea = new cpr.controls.TextArea();
+		textArea.style.css({
+			"borderRadius" : "10px",
+			"background-color":"#FAFAFA"
+		});
+		textArea.readOnly = true;
+		textArea.value = dataMap.getValue("boardAnswerContent");
+		app.lookup("grp2").addChild(textArea, {
+			width : "669px",
+			height : "200px",
+			autoSize : "none"
+		});		
+		
+		// 버튼 추가
+		var button = new cpr.controls.Button();
+		button.style.css({
+			"background":"#0ebc59 none",
+			"color":"#FFFFFF",
+			"margin-bottom":"20px"
+		});
+		button.addEventListener("click", function(e){
+			var host = app.getHost(); // 부모 임베디드 앱
+			cpr.core.App.load("embedded/admin/findQnAAdminForm", function(loadedApp){
+				if (loadedApp){
+		//			host.initValue = initValue;
+					host.app = loadedApp;
+				}
+			});
+		});
+		button.text = "뒤로가기";
+		app.lookup("reversebtn").addChild(button, {
+			width : "140px",
+			height : "30px",
+			right: "0px",
+			bottom: "10px"
+		});	
+		app.lookup("grp2").redraw();
+	}	
 }

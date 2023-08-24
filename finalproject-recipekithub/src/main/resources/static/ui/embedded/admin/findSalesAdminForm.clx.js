@@ -647,7 +647,8 @@
 					var group_4 = new cpr.controls.Container();
 					group_4.style.setClasses(["cl-form-group"]);
 					group_4.style.css({
-						"background-color" : "#FFFFFF"
+						"background-color" : "#FFFFFF",
+						"border-radius" : "20px"
 					});
 					var formLayout_1 = new cpr.controls.layouts.FormLayout();
 					formLayout_1.scrollable = false;

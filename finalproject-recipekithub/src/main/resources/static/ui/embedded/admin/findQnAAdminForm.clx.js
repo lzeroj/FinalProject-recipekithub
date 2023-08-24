@@ -148,7 +148,8 @@
 			(function(container){
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
-					"background-color" : "#FFFFFF"
+					"background-color" : "#FFFFFF",
+					"border-radius" : "20px"
 				});
 				var formLayout_1 = new cpr.controls.layouts.FormLayout();
 				formLayout_1.scrollable = false;
@@ -158,8 +159,8 @@
 				formLayout_1.leftMargin = "0px";
 				formLayout_1.horizontalSpacing = "0px";
 				formLayout_1.verticalSpacing = "0px";
-				formLayout_1.setColumns(["1fr", "160px"]);
-				formLayout_1.setRows(["50px", "20px", "1fr", "20px", "40px"]);
+				formLayout_1.setColumns(["1fr", "160px", "10px"]);
+				formLayout_1.setRows(["50px", "20px", "1fr", "20px", "40px", "10px"]);
 				group_2.setLayout(formLayout_1);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
@@ -178,7 +179,7 @@
 					container.addChild(output_1, {
 						"colIndex": 0,
 						"rowIndex": 0,
-						"colSpan": 2,
+						"colSpan": 3,
 						"rowSpan": 1
 					});
 					var grid_1 = new cpr.controls.Grid("grd1");
@@ -326,7 +327,7 @@
 					container.addChild(grid_1, {
 						"colIndex": 0,
 						"rowIndex": 2,
-						"colSpan": 2,
+						"colSpan": 3,
 						"rowSpan": 1
 					});
 					var button_1 = new cpr.controls.Button();

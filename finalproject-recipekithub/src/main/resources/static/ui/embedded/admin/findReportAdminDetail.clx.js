@@ -145,7 +145,8 @@
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
-				"background-color" : "#FFFFFF"
+				"background-color" : "#FFFFFF",
+				"border-radius" : "20px"
 			});
 			var formLayout_1 = new cpr.controls.layouts.FormLayout();
 			formLayout_1.scrollable = false;
@@ -310,6 +311,9 @@
 								"constraint": {"rowIndex": 0, "colIndex": 2},
 								"configurator": function(cell){
 									cell.columnName = "reportTitle";
+									cell.style.css({
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -327,6 +331,9 @@
 										dateInput_1.mask = "YYYY-MM-DD HH:mm:ss";
 										dateInput_1.format = "YYYYMMDDHHmmss";
 										dateInput_1.enabledInputMask = false;
+										dateInput_1.style.css({
+											"text-align" : "center"
+										});
 										dateInput_1.bind("value").toDataColumn("reportDate");
 										return dateInput_1;
 									})();
@@ -341,6 +348,16 @@
 							}
 						]
 					}
+				});
+				grid_1.style.css({
+					"border-right-style" : "solid",
+					"border-bottom-color" : "#ffffff",
+					"border-left-style" : "solid",
+					"border-left-color" : "#ffffff",
+					"border-top-color" : "#ffffff",
+					"border-bottom-style" : "solid",
+					"border-right-color" : "#ffffff",
+					"border-top-style" : "solid"
 				});
 				container.addChild(grid_1, {
 					"colIndex": 0,

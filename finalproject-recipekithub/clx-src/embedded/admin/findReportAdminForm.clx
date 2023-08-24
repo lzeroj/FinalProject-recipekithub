@@ -34,7 +34,7 @@
   </head>
   <body std:sid="body-ac8a2f76">
     <cl:listener std:sid="listener-487c7b62" name="load" handler="onBodyLoad"/>
-    <cl:group std:sid="group-7f20fd3e" style="background-color:#FFFFFF;">
+    <cl:group std:sid="group-7f20fd3e" style="background-color:#FFFFFF; border-radius:20px;">
       <cl:xylayoutdata std:sid="xyl-data-02b8e569" top="30px" bottom="30px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
       <cl:grid std:sid="grid-fdd2249e" id="grd1" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" readonly="true" datasetid="dsreportlist" selectionunit="cell">
         <cl:listener std:sid="listener-fc92ee0c" name="cell-click" handler="onGrd1CellClick"/>

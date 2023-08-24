@@ -73,13 +73,13 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_1.setLayout(xYLayout_2);
+			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_1);
 			(function(container){
 				var userDefinedControl_1 = linker.userDefinedControl_1 = new udc.header3();
 				if(typeof onHeader3Event == "function") {
@@ -101,8 +101,8 @@
 					"background-image" : "url('theme/images/common/bgimg10.png')",
 					"background-position" : "center"
 				});
-				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_3);
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_2);
 				(function(container){
 					var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
 					container.addChild(embeddedApp_1, {
@@ -166,8 +166,6 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "0px",
-				"left": "0px",
 				"width": "1920px",
 				"height": "1090px"
 			});
