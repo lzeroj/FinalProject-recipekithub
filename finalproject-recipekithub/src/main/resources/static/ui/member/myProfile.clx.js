@@ -8,7 +8,6 @@
 	var app = new cpr.core.App("member/myProfile", { 
 		onPrepare: function(loader) {
 			loader.addCSS("theme/cleopatra-theme.css");
-			loader.addCSS("theme/controls/htmlobject.css");
 			loader.addCSS("theme/custom-theme.css");
 			loader.addCSS("theme/settings.part.css");
 		},
@@ -1025,19 +1024,19 @@
 										button_2.value = "탈퇴";
 										button_2.style.setClasses(["btn-dim", "btn-danger"]);
 										button_2.style.css({
-											"border-bottom-color" : "#ff0000",
+											"border-bottom-color" : "#d11a1a",
 											"border-top-width" : "2px",
 											"border-right-width" : "2px",
 											"font-weight" : "bolder",
-											"border-left-color" : "#ff0000",
+											"border-left-color" : "#d11a1a",
 											"font-size" : "18px",
-											"border-right-color" : "#ff0000",
+											"border-right-color" : "#d11a1a",
 											"border-left-width" : "2px",
 											"background-color" : "none",
 											"border-radius" : "10px",
 											"text-shadow" : "none",
 											"border-bottom-width" : "2px",
-											"border-top-color" : "#ff0000",
+											"border-top-color" : "#d11a1a",
 											"font-family" : "푸른전남 Medium",
 											"background-image" : "none"
 										});

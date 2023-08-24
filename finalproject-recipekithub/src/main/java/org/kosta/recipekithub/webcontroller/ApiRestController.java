@@ -117,6 +117,7 @@ public class ApiRestController {
 		return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
 	}
 
+	
 	// 구글에서 리다이렉션
 	// 구글에게 토큰을 요청해서 받고, 받은 토큰을 다시 보내 유저 정보를 얻는 기능을 한다.
 	@GetMapping(value = "/login/oauth_google_check")

@@ -287,15 +287,15 @@
 							container.addChild(group_6, {
 								"top": "10px",
 								"right": "10px",
-								"width": "400px",
-								"height": "350px"
+								"width": "380px",
+								"height": "330px"
 							});
 						})(group_5);
 						container.addChild(group_5, {
 							"top": "41px",
 							"right": "36px",
-							"width": "420px",
-							"height": "370px"
+							"width": "400px",
+							"height": "350px"
 						});
 						var group_9 = new cpr.controls.Container();
 						var formLayout_1 = new cpr.controls.layouts.FormLayout();
@@ -336,7 +336,7 @@
 							formLayout_2.bottomMargin = "10px";
 							formLayout_2.leftMargin = "10px";
 							formLayout_2.horizontalSpacing = "20px";
-							formLayout_2.verticalSpacing = "20px";
+							formLayout_2.verticalSpacing = "10px";
 							formLayout_2.setColumns(["1fr", "1fr"]);
 							formLayout_2.setRows(["50px", "50px"]);
 							group_11.setLayout(formLayout_2);
@@ -345,7 +345,7 @@
 								output_1.style.css({
 									"color" : "#EC631D",
 									"font-weight" : "bolder",
-									"font-size" : "18px",
+									"font-size" : "24px",
 									"text-align" : "center"
 								});
 								output_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberNick", 0);
@@ -358,7 +358,7 @@
 								var output_2 = new cpr.controls.Output("opbEmail");
 								output_2.style.css({
 									"font-weight" : "bolder",
-									"font-size" : "18px",
+									"font-size" : "20px",
 									"text-align" : "center"
 								});
 								output_2.bind("value").toDataSet(app.lookup("ds_profile"), "memberEmail", 0);
@@ -379,8 +379,8 @@
 						container.addChild(group_9, {
 							"top": "50px",
 							"right": "45px",
-							"width": "400px",
-							"height": "350px"
+							"width": "380px",
+							"height": "330px"
 						});
 					})(group_3);
 					container.addChild(group_3, {

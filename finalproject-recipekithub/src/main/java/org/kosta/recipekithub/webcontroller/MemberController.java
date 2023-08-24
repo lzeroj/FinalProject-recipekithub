@@ -40,7 +40,7 @@ public class MemberController {
 	@RequestMapping("/memberlist")
 	public View findMemberList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) 	throws Exception {
 		List<MemberVO> findMemberList = memberService.findMemberList();
-		dataRequest.setResponse("memberList", findMemberList);
+		dataRequest.setResponse("ds_member", findMemberList);
 		return new JSONDataView();
 	}
 

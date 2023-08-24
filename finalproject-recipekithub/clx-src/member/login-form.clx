@@ -59,12 +59,12 @@
             <cl:xylayoutdata std:sid="xyl-data-ed7f739f" top="239px" right="40px" bottom="228px" left="40px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
             <cl:group std:sid="group-7a04d058">
               <cl:xylayoutdata std:sid="xyl-data-74a06a96" bottom="32px" width="304px" height="129px" horizontalAnchor="CENTER" verticalAnchor="BOTTOM"/>
-              <cl:inputbox std:sid="i-box-e70826e3" id="emailInput" style="border-radius:10px; font-size:16px;" placeholder=" Email">
+              <cl:inputbox std:sid="i-box-e70826e3" id="emailInput" style="border-radius:10px; padding-left:10px; font-size:16px;" showclearbutton="true" placeholder=" Email" spellcheck="false">
                 <cl:datamapbind property="value" datacontrolid="dm_login" columnname="member_email"/>
                 <cl:datamapbind property="autocomplete" category="PROPERTY" datacontrolid="dm_login" columnname="member_email"/>
                 <cl:formdata std:sid="f-data-f9b0bdfb" row="0" col="1"/>
               </cl:inputbox>
-              <cl:inputbox std:sid="i-box-e4792af7" id="pswdInput" style="border-radius:10px; font-size:16px;" placeholder=" Password">
+              <cl:inputbox std:sid="i-box-e4792af7" id="pswdInput" style="border-radius:10px; padding-left:10px; font-size:16px;" secret="true" showclearbutton="true" placeholder=" Password" spellcheck="false">
                 <cl:listener std:sid="listener-89744944" name="keydown" handler="onPswdInputKeydown"/>
                 <cl:datamapbind property="value" datacontrolid="dm_login" columnname="member_password"/>
                 <cl:formdata std:sid="f-data-6a394eb1" row="1" col="1"/>

@@ -7,6 +7,10 @@
 (function() {
 	var app = new cpr.core.App("embedded/admin/findMemberDetail", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/custom-theme.css");
+			loader.addCSS("theme/custom/member.part.css");
+			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -16,10 +20,195 @@
 			 * Created at 2023. 8. 23. 오전 10:40:39.
 			 *
 			 * @author kjoon
-			 ************************************************/;
+			 ************************************************/
+
+			/*
+			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+			 */
+			function onBodyLoad(e){
+				app.lookup("sub_findMemberList").send();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSub_findMemberListSubmitSuccess(e){
+				var sub_findMemberList = e.control;
+				//var dataSet = app.lookup("ds_member");
+				var grid = app.lookup("grd_member");
+				grid.redraw();
+
+				//var host = app.getHost(); // 부모 임베디드 앱
+				//var boardId = app.lookup("responseqnaselect").getValue(0, "boardId");
+				//var boardTitle = app.lookup("responseqnaselect").getValue(0, "boardTitle");
+				//var boardContent = app.lookup("responseqnaselect").getValue(0, "boardContent");
+				
+				//var initValue = {"boardId": boardId , "boardTitle" : boardTitle, "boardContent":boardContent};
+			//	cpr.core.App.load("embedded/admin/findQnAAdminSelect", function(loadedApp){
+			//		if (loadedApp){
+			//			//host.initValue = initValue;
+			//			host.app = loadedApp;
+			//		}
+			//	});
+			}
+
+			/*
+			 * 그리드에서 selection-change 이벤트 발생 시 호출.
+			 * detail의 cell 클릭하여 설정된 selectionunit에 해당되는 단위가 선택될 때 발생하는 이벤트.
+			 */
+			function onGrd_memberSelectionChange(e){
+				var grd_member = e.control;
+				
+			}
+
+			/*
+			 * "수정" 버튼(btnEditRow)에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onBtnEditRowClick(e){
+				var btnEditRow = e.control;
+				var vcGrid = app.lookup("grd_member"); 
+				vcGrid.setEditRowIndex(0); 				// 편집 행 설정
+				vcGrid.focusCell(0, "memberEmail"); 	// 셀에 포커스 설정
+			}
+
+			/*
+			 * "삭제" 버튼(btnDeleteRow)에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onBtnDeleteRowClick(e){
+				var btnDeleteRow = e.control;
+				var grdMem = app.lookup("grd_member"); 	
+				// 사용자가 선택한 행을 찾는다 
+				var selectedRowIndex = grdMem.getSelectedRowIndex();
+				// 사용자가 체크한 행을 찾는다
+				var checkRowIndices = grdMem.getCheckRowIndices();
+				
+				if (selectedRowIndex != -1) {
+					grdMem.deleteRow(selectedRowIndex);
+				}
+				
+				if (checkRowIndices.length > 0) { 
+					grdMem.deleteRow(checkRowIndices);
+				}
+				
+				var dataMap = app.lookup("dm_delete");
+				dataMap.setValue("memberEmail", app.lookup("opbEmail").value);
+				var submission = app.lookup("sub_delete");
+				submission.send();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSub_deleteMemberSubmitSuccess(e){
+				var sub_delete = e.control;
+				var initValue = "선택하신 회원 삭제가 완료되었습니다.";
+				app.openDialog("dialog/registerChkPopup", {
+					width: 400, height: 300, resizable: false, headerMovable: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					var grid = app.lookup("grd_member");
+					grid.redraw();
+				});
+			}
+
+			/*
+			 * 서치 인풋에서 value-change 이벤트 발생 시 호출.
+			 * SearchInput의 value를 변경하여 변경된 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onSearchMemberValueChange(e){
+				var searchMember = e.control;
+				var submission = app.lookup("sub_findMemberList");
+				submission.send();
+				
+			};
 			// End - User Script
 			
 			// Header
+			var dataSet_1 = new cpr.data.DataSet("ds_member");
+			dataSet_1.parseData({
+				"columns" : [
+					{
+						"name": "memberEmail",
+						"dataType": "string"
+					},
+					{
+						"name": "memberName",
+						"dataType": "string"
+					},
+					{
+						"name": "memberNick",
+						"dataType": "string"
+					},
+					{
+						"name": "memberAddress",
+						"dataType": "string"
+					},
+					{
+						"name": "memberPhone",
+						"dataType": "string"
+					},
+					{
+						"name": "memberBirthday",
+						"dataType": "string"
+					},
+					{
+						"name": "memberType",
+						"dataType": "string"
+					},
+					{
+						"name": "memberStatus",
+						"dataType": "string"
+					},
+					{
+						"name": "memberRegDate",
+						"dataType": "string"
+					},
+					{
+						"name": "memberPostcode",
+						"dataType": "string"
+					},
+					{
+						"name": "memberAddressDetail",
+						"dataType": "string"
+					},
+					{
+						"name": "memberImage",
+						"dataType": "string"
+					}
+				]
+			});
+			app.register(dataSet_1);
+			var dataMap_1 = new cpr.data.DataMap("dm_delete");
+			dataMap_1.parseData({
+				"columns" : [{
+					"name": "memberEmail",
+					"dataType": "string"
+				}]
+			});
+			app.register(dataMap_1);
+			var submission_1 = new cpr.protocols.Submission("sub_findMemberList");
+			submission_1.action = "/member/memberlist";
+			submission_1.addResponseData(dataSet_1, false);
+			if(typeof onSub_findMemberListSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onSub_findMemberListSubmitSuccess);
+			}
+			app.register(submission_1);
+			
+			var submission_2 = new cpr.protocols.Submission("sub_delete");
+			submission_2.action = "/member/deleteMember";
+			submission_2.addRequestData(dataMap_1);
+			if(typeof onSub_deleteMemberSubmitSuccess == "function") {
+				submission_2.addEventListener("submit-success", onSub_deleteMemberSubmitSuccess);
+			}
+			app.register(submission_2);
 			app.supportMedia("all and (min-width: 1860px)", "new-screen");
 			app.supportMedia("all and (min-width: 1024px) and (max-width: 1859px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -37,6 +226,535 @@
 			container.setLayout(xYLayout_1);
 			
 			// UI Configuration
+			var group_1 = new cpr.controls.Container();
+			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_2);
+			(function(container){
+				var tabFolder_1 = new cpr.controls.TabFolder();
+				tabFolder_1.style.header.css({
+					"font-size" : "24px"
+				});
+				tabFolder_1.style.item.css({
+					"border-radius" : "20px 20px 0px 0px",
+					"background-color" : "rgba(40, 165, 94, 1.0)",
+					"padding-top" : "10px",
+					"font-weight" : "bolder",
+					"padding-left" : "50px",
+					"padding-bottom" : "10px",
+					"font-size" : "30px",
+					"padding-right" : "50px"
+				});
+				tabFolder_1.style.body.css({
+					"border-radius" : "0px 10px 20px 20px"
+				});
+				
+				var tabItem_1 = (function(tabFolder){
+					var tabItem_1 = new cpr.controls.TabItem();
+					tabItem_1.text = "전체 회원 조회";
+					var group_2 = new cpr.controls.Container();
+					var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+					group_2.setLayout(xYLayout_3);
+					(function(container){
+						var grid_1 = new cpr.controls.Grid("grd_member");
+						grid_1.init({
+							"dataSet": app.lookup("ds_member"),
+							"columnMovable": true,
+							"resizableColumns": "all",
+							"columns": [
+								{"width": "25px"},
+								{"width": "50px"},
+								{"width": "200px"},
+								{"width": "100px"},
+								{"width": "100px"},
+								{"width": "100px"},
+								{"width": "100px"},
+								{"width": "100px"},
+								{"width": "100px"},
+								{"width": "100px"},
+								{"width": "100px"},
+								{"width": "100px"},
+								{"width": "100px"},
+								{"width": "100px"}
+							],
+							"header": {
+								"rows": [{"height": "50px"}],
+								"cells": [
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 0},
+										"configurator": function(cell){
+											cell.columnType = "checkbox";
+											cell.filterable = false;
+											cell.sortable = false;
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 1},
+										"configurator": function(cell){
+											cell.filterable = false;
+											cell.sortable = false;
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 2},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberEmail";
+											cell.text = "이메일";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 3},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberNick";
+											cell.text = "닉네임";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 4},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberName";
+											cell.text = "이름";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 5},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberBirthday";
+											cell.text = "생년월일";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 6},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberPhone";
+											cell.text = "연락처";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 7},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberPostcode";
+											cell.text = "우편번호";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 8},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberAddress";
+											cell.text = "주소";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 9},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberAddressDetail";
+											cell.text = "상세주소";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 10},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberType";
+											cell.text = "회원분류";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 11},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberStatus";
+											cell.text = "회원상태";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 12},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberRegDate";
+											cell.text = "가입일";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 13},
+										"configurator": function(cell){
+											cell.filterable = true;
+											cell.sortable = true;
+											cell.targetColumnName = "memberImage";
+											cell.text = "프로필 사진";
+											cell.style.css({
+												"background-color" : "#86D2A7",
+												"color" : "black",
+												"font-weight" : "bolder",
+												"font-size" : "18px"
+											});
+										}
+									}
+								]
+							},
+							"detail": {
+								"rows": [{"height": "40px"}],
+								"cells": [
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 0},
+										"configurator": function(cell){
+											cell.columnType = "checkbox";
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 1},
+										"configurator": function(cell){
+											cell.columnType = "rowindex";
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 2},
+										"configurator": function(cell){
+											cell.columnName = "memberEmail";
+											cell.control = (function(){
+												var output_1 = new cpr.controls.Output("opbEmail");
+												output_1.readOnly = true;
+												output_1.style.css({
+													"background-color" : "#F0F0F0"
+												});
+												output_1.bind("value").toDataColumn("memberEmail");
+												return output_1;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 3},
+										"configurator": function(cell){
+											cell.columnName = "memberNick";
+											cell.control = (function(){
+												var inputBox_1 = new cpr.controls.InputBox("ipb2");
+												inputBox_1.bind("value").toDataColumn("memberNick");
+												return inputBox_1;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 4},
+										"configurator": function(cell){
+											cell.columnName = "memberName";
+											cell.control = (function(){
+												var inputBox_2 = new cpr.controls.InputBox("ipb3");
+												inputBox_2.bind("value").toDataColumn("memberName");
+												return inputBox_2;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 5},
+										"configurator": function(cell){
+											cell.columnName = "memberBirthday";
+											cell.control = (function(){
+												var dateInput_1 = new cpr.controls.DateInput("dti1");
+												dateInput_1.bind("value").toDataColumn("memberBirthday");
+												return dateInput_1;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 6},
+										"configurator": function(cell){
+											cell.columnName = "memberPhone";
+											cell.control = (function(){
+												var maskEditor_1 = new cpr.controls.MaskEditor("mse1");
+												maskEditor_1.mask = "000-0000-0000";
+												maskEditor_1.bind("value").toDataColumn("memberPhone");
+												return maskEditor_1;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 7},
+										"configurator": function(cell){
+											cell.columnName = "memberPostcode";
+											cell.control = (function(){
+												var inputBox_3 = new cpr.controls.InputBox("ipb4");
+												inputBox_3.bind("value").toDataColumn("memberPostcode");
+												return inputBox_3;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 8},
+										"configurator": function(cell){
+											cell.columnName = "memberAddress";
+											cell.control = (function(){
+												var inputBox_4 = new cpr.controls.InputBox("ipb5");
+												inputBox_4.bind("value").toDataColumn("memberAddress");
+												return inputBox_4;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 9},
+										"configurator": function(cell){
+											cell.columnName = "memberAddressDetail";
+											cell.control = (function(){
+												var inputBox_5 = new cpr.controls.InputBox("ipb6");
+												inputBox_5.bind("value").toDataColumn("memberAddressDetail");
+												return inputBox_5;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 10},
+										"configurator": function(cell){
+											cell.columnName = "memberType";
+											cell.control = (function(){
+												var inputBox_6 = new cpr.controls.InputBox("ipb7");
+												inputBox_6.bind("value").toDataColumn("memberType");
+												return inputBox_6;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 11},
+										"configurator": function(cell){
+											cell.columnName = "memberStatus";
+											cell.control = (function(){
+												var inputBox_7 = new cpr.controls.InputBox("ipb8");
+												inputBox_7.bind("value").toDataColumn("memberStatus");
+												return inputBox_7;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 12},
+										"configurator": function(cell){
+											cell.columnName = "memberRegDate";
+											cell.control = (function(){
+												var maskEditor_2 = new cpr.controls.MaskEditor("mse2");
+												maskEditor_2.readOnly = true;
+												maskEditor_2.bind("value").toDataColumn("memberRegDate");
+												return maskEditor_2;
+											})();
+										}
+									},
+									{
+										"constraint": {"rowIndex": 0, "colIndex": 13},
+										"configurator": function(cell){
+											cell.columnName = "memberImage";
+											cell.control = (function(){
+												var inputBox_8 = new cpr.controls.InputBox("ipb9");
+												inputBox_8.bind("value").toDataColumn("memberImage");
+												return inputBox_8;
+											})();
+										}
+									}
+								]
+							}
+						});
+						grid_1.style.css({
+							"border-radius" : "10px"
+						});
+						if(typeof onGrd_memberSelectionChange == "function") {
+							grid_1.addEventListener("selection-change", onGrd_memberSelectionChange);
+						}
+						container.addChild(grid_1, {
+							"top": "20px",
+							"right": "20px",
+							"left": "20px",
+							"height": "500px"
+						});
+						var group_3 = new cpr.controls.Container();
+						var formLayout_1 = new cpr.controls.layouts.FormLayout();
+						formLayout_1.scrollable = false;
+						formLayout_1.topMargin = "0px";
+						formLayout_1.rightMargin = "0px";
+						formLayout_1.bottomMargin = "0px";
+						formLayout_1.leftMargin = "0px";
+						formLayout_1.horizontalSpacing = "20px";
+						formLayout_1.verticalSpacing = "20px";
+						formLayout_1.setColumns(["1fr", "1fr", "100px", "100px"]);
+						formLayout_1.setRows(["1fr"]);
+						group_3.setLayout(formLayout_1);
+						(function(container){
+							var button_1 = new cpr.controls.Button("btnEditRow");
+							button_1.value = "XXX";
+							button_1.style.setClasses(["btn-dim", "btn-success"]);
+							button_1.style.css({
+								"border-bottom-color" : "#28a55e",
+								"color" : "#28A55E",
+								"border-left-color" : "#28a55e",
+								"font-size" : "18px",
+								"border-top-color" : "#28a55e",
+								"border-right-color" : "#28a55e",
+								"background-image" : "none"
+							});
+							if(typeof onBtnEditRowClick == "function") {
+								button_1.addEventListener("click", onBtnEditRowClick);
+							}
+							container.addChild(button_1, {
+								"colIndex": 2,
+								"rowIndex": 0
+							});
+							var button_2 = new cpr.controls.Button("btnDeleteRow");
+							button_2.value = "삭제";
+							button_2.style.setClasses(["btn-dim", "btn-danger"]);
+							button_2.style.css({
+								"border-bottom-color" : "#d11a1a",
+								"border-left-color" : "#d11a1a",
+								"font-size" : "18px",
+								"border-top-color" : "#d11a1a",
+								"border-right-color" : "#d11a1a",
+								"background-image" : "none"
+							});
+							if(typeof onBtnDeleteRowClick == "function") {
+								button_2.addEventListener("click", onBtnDeleteRowClick);
+							}
+							container.addChild(button_2, {
+								"colIndex": 3,
+								"rowIndex": 0
+							});
+							var searchInput_1 = new cpr.controls.SearchInput("searchMember");
+							searchInput_1.style.css({
+								"border-radius" : "10px"
+							});
+							searchInput_1.style.search.css({
+								"width" : "20px"
+							});
+							searchInput_1.style.clear.css({
+								"width" : "10px"
+							});
+							if(typeof onSearchMemberValueChange == "function") {
+								searchInput_1.addEventListener("value-change", onSearchMemberValueChange);
+							}
+							container.addChild(searchInput_1, {
+								"colIndex": 0,
+								"rowIndex": 0
+							});
+						})(group_3);
+						container.addChild(group_3, {
+							"right": "20px",
+							"bottom": "20px",
+							"left": "20px",
+							"height": "40px"
+						});
+					})(group_2);
+					tabItem_1.content = group_2;
+					return tabItem_1;
+				})(tabFolder_1);
+				tabFolder_1.addTabItem(tabItem_1);
+				tabFolder_1.setSelectedTabItem(tabItem_1);
+				if(typeof onTabFolderSelectionChange == "function") {
+					tabFolder_1.addEventListener("selection-change", onTabFolderSelectionChange);
+				}
+				container.addChild(tabFolder_1, {
+					"top": "20px",
+					"bottom": "20px",
+					"width": "1620px",
+					"left": "calc(50% - 810px)"
+				});
+			})(group_1);
+			container.addChild(group_1, {
+				"top": "20px",
+				"left": "20px",
+				"width": "1820px",
+				"height": "700px"
+			});
+			if(typeof onBodyLoad == "function"){
+				app.addEventListener("load", onBodyLoad);
+			}
 		}
 	});
 	app.title = "findMemberDetail";
