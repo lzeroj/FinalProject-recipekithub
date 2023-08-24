@@ -156,8 +156,8 @@ function onSubchkanswerSubmitSuccess(e){
 			width : "140px",
 			height : "30px",
 			right: "0px",
-			bottom: "10px"
 		});	
 		app.lookup("grp2").redraw();
+		app.lookup("reversebtn").redraw();
 	}	
 }
