@@ -166,7 +166,8 @@
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
-				"background-color" : "#FFFFFF"
+				"background-color" : "#FFFFFF",
+				"border-radius" : "20px"
 			});
 			var formLayout_1 = new cpr.controls.layouts.FormLayout();
 			formLayout_1.scrollable = false;

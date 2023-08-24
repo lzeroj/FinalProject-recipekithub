@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.kosta.recipekithub.model.vo.MealkitCommentVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipeCommentPagination;
 
 public interface MealkitCommentService {
 
@@ -17,9 +18,9 @@ public interface MealkitCommentService {
 	
 	int updateCommentByNo(MealkitCommentVO mealkit);
 	
-	List<MealkitCommentVO> findCommentListByMealkit(int num);
+	List<MealkitCommentVO> findCommentListByMealkit(long mealkitNo, RecipeCommentPagination pagination);
 
-	int mealkitCommentCnt(int mealkitNo);
+	int mealkitCommentCnt(long mealkitNo);
 
 	//long updateHits(int mealkitNo);
 

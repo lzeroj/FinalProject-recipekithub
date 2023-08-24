@@ -673,7 +673,8 @@
 			container.addChild(hTMLSnippet_1, {
 				"autoSize": "height",
 				"width": "1200px",
-				"height": "515px"
+				"height": "300px",
+				"minHeight": 300
 			});
 			
 			var group_3 = new cpr.controls.Container();
@@ -723,7 +724,7 @@
 					"height": "77px"
 				});
 				var textArea_1 = new cpr.controls.TextArea("commentInput");
-				textArea_1.placeholder = "50자 내로 작성해주세요";
+				textArea_1.placeholder = "50자 내로 작성해 주세요";
 				textArea_1.maxLength = 50;
 				textArea_1.bind("value").toDataMap(app.lookup("dmInsertValue"), "recipeCommentContent");
 				container.addChild(textArea_1, {

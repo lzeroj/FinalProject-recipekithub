@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.RecipeBoardService;
 import org.kosta.recipekithub.model.vo.MemberVO;
-import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.kosta.recipekithub.model.vo.RecipeBoardVO;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +44,7 @@ public class RecipeBoardController {
 			throws IOException {
 		String search = dataRequest.getParameter("search");
 		Map<String, Object> searchParam = new HashMap<String, Object>();
-		if(search !=null) {	
+		if(search !=null || search != "") {	
 			searchParam.put("searchValue", search); 
 		}
 		return new UIView("ui/recipe/recipe.clx",searchParam);
@@ -101,25 +101,26 @@ public class RecipeBoardController {
 		List<RecipeBoardVO> list = recipeBoardService.likeRecipeList();
 		dataRequest.setResponse("likeRecipeList", list);
 		return new JSONDataView();
-	}		 
+	}		   
 	@PostMapping("/insertRecipeForm") 
 	public View insertRecipeForm(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			log.debug("비인증");
-			return new UIView("/");
-		}  
+//		HttpSession session = request.getSession(false);
+//		if (session == null || session.getAttribute("member") == null) {
+//			log.debug("비인증");
+//			System.out.println("비인증"); 
+//			return new UIView("/");
+//		}  
 		return new UIView("/ui/recipe/insertrecipe.clx");
 	}
 	
 	@PostMapping("/insertRecipe")
 	public View insertRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			log.debug("비인증");
-		}  
+			HttpSession session = request.getSession(false);
+//		if (session == null || session.getAttribute("member") == null) {
+//			log.debug("비인증");
+//		}  
 		
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipe");
 		String title = initParam.getValue("RECIPE_BOARD_TITLE");
@@ -214,11 +215,11 @@ public class RecipeBoardController {
 	@PostMapping("/updateRecipe")
 	public View moveUpdateRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			log.debug("비인증");
-			return new UIView("/");
-		}
+//		HttpSession session = request.getSession(false);
+//		if (session == null || session.getAttribute("member") == null) {
+//			log.debug("비인증");
+//			return new UIView("/");
+//		}
 		long recipeBoardId = Long.parseLong(dataRequest.getParameter("recipeBoardId"));   
 		RecipeBoardVO recipeBoardVO = recipeBoardService.findDetailRecipe(recipeBoardId);
 		String imagePath = recipeBoardVO.getRecipeBoardImage();
@@ -232,10 +233,10 @@ public class RecipeBoardController {
 	@RequestMapping("/updateSaveRecipe")
 	public View updateRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			log.debug("비인증");
-		}
+//		HttpSession session = request.getSession(false);
+//		if (session == null || session.getAttribute("member") == null) {
+//			log.debug("비인증");
+//		}
 		
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipe");
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
@@ -284,10 +285,10 @@ public class RecipeBoardController {
 	@RequestMapping("/deleteRecipe")
 	public View deleteRecipe(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			log.debug("비인증");
-		}         
+//		HttpSession session = request.getSession(false);
+//		if (session == null || session.getAttribute("member") == null) {
+//			log.debug("비인증");
+//		}         
 		ParameterGroup initParam = dataRequest.getParameterGroup("recipeBoardId");
 		long recipeBoardId = Long.parseLong(initParam.getValue("RECIPE_BOARD_ID"));
 		String savePath = "C:\\upload\\recipe\\";

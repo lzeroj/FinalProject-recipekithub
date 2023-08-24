@@ -28,7 +28,10 @@ public class MealkitServiceImpl implements MealkitService {
 		//유효성 검사 코드 필요..!!
 		mealKitMapper.insertMealKit(mealKitBoard);
 		int num = mealKitBoard.getMealkitNo();
+		System.out.println("num은 잘 나오니? = " + num);
+		
 		MealKitBoard mealkit = mealKitMapper.findMealKitByNo(num);
+		System.out.println("mealkit 상태를 알아보자 = " + mealkit.getStatus());
 		return num;
 	}
 	
@@ -36,6 +39,7 @@ public class MealkitServiceImpl implements MealkitService {
 	public MealKitBoard findMealKitByNo(int mealkitNo) {
 		
 		MealKitBoard mealkit = mealKitMapper.findMealKitByNo(mealkitNo);
+		System.out.println(mealkit.getStatus());
 		return mealkit;
 	}
 	
@@ -63,13 +67,18 @@ public class MealkitServiceImpl implements MealkitService {
 	}
 	
 	@Override
-	public long findTotalPostCount(String mealkitCategory, String searchMealkit) {
-		return mealKitMapper.findTotalPostCount(mealkitCategory, searchMealkit);
+	public long findTotalPostCount(String mealkitType, String searchMealkit) {
+		return mealKitMapper.findTotalPostCount(mealkitType, searchMealkit);
 	}
 
 	@Override
-	public List<MealKitBoard> findAllMealkitBoard(String mealkitCategory, String sort, String searchMealkit,
+	public List<MealKitBoard> findAllMealkitBoard(String mealkitType, String sort, String searchMealkit,
 			RecipePagination pagination) {
-		return mealKitMapper.findAllMealkitBoard(mealkitCategory, sort, searchMealkit, pagination);
+		return mealKitMapper.findAllMealkitBoard(mealkitType, sort, searchMealkit, pagination);
+	}
+	
+	@Override
+	public List<MealKitBoard> findMealkitByName(String mealkitName) {
+		return mealKitMapper.findMealkitByName(mealkitName);
 	}
 }

@@ -24,6 +24,8 @@
 			 */
 			function onBodyLoad(e){
 				app.lookup("likeRecipeList").send();
+				app.lookup("starMealkitList").send();
+				app.lookup("likeChefList").send();
 			}
 
 			/*
@@ -46,8 +48,8 @@
 						recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
 						recipe.title = recipeList[i].recipeBoardTitle;
 						container.addChild(recipe, {
-							height: "300px",
-							width: "280px",
+							height: "200px",
+							width: "180px",
 							autoSize: "both"
 						});
 						recipe.addEventListener("imgClick", function(e) {
@@ -64,13 +66,127 @@
 				var slidify = cpr.core.Module.require("Slidify").slidify;
 				//슬라이드 기능을 사용할 컨트롤에 적용시킨후 start 시킵니다. (아래의 두 코드는 필수로 작성하셔야 합니다.)
 				var slide = slidify(app.lookup("grp"));
-				slide.showCount = 3;
+				slide.showCount = 4;
 				slide.showPaginition = true;
 				slide.autoPlayDelay = 1;
 				slide.initialPage = 0;
 				slide.useInfiniteScroll = true;
 				slide.autoPlay();
 				slide.start();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onStarMealkitListSubmitSuccess(e){
+				var starMealkitList = e.control;
+				var slidify = cpr.core.Module.require("Slidify").slidify;
+				//슬라이드 기능을 사용할 컨트롤에 적용시킨후 start 시킵니다. (아래의 두 코드는 필수로 작성하셔야 합니다.)
+				var slide = slidify(app.lookup("mealkitgrp"));
+				slide.showCount = 4;
+				slide.showPaginition = true;
+				slide.autoPlayDelay = 1;
+				slide.initialPage = 0;
+				slide.useInfiniteScroll = true;
+				slide.autoPlay();
+				slide.start();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onLikeChefListSubmitSuccess(e){
+				var likeChefList = e.control;
+				var slidify = cpr.core.Module.require("Slidify").slidify;
+				//슬라이드 기능을 사용할 컨트롤에 적용시킨후 start 시킵니다. (아래의 두 코드는 필수로 작성하셔야 합니다.)
+				var slide = slidify(app.lookup("mealkitgrp"));
+				slide.showCount = 7;
+				slide.showPaginition = true;
+				slide.autoPlayDelay = 1;
+				slide.initialPage = 0;
+				slide.useInfiniteScroll = true;
+			//	slide.autoPlay();
+				slide.start();
+			}
+
+
+			/*
+			 * 서브미션에서 receive 이벤트 발생 시 호출.
+			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+			 */
+			function onStarMealkitListReceive(e){
+				var starMealkitList = e.control;
+				var xhr = starMealkitList.xhr;
+				var jsonData = JSON.parse(xhr.responseText);
+				var starList = jsonData.findMealkitStarList;
+				var container = app.lookup("mealkitgrp");
+				
+				for (var i = 0; i < starList.length; i++) {
+					(function(index) {
+						//udc 동적 생성
+						var mealkit = new udc.mealkitStarudc();
+						//udc에서 출판한 이미지 경로 앱 속성 지정
+						mealkit.mealkitImg = "/upload/mealkit/" + starList[i].mealkitImage;
+						mealkit.mealkitName = starList[i].mealkitName;
+						mealkit.mealkitPrice = starList[i].mealkitPrice;
+						container.addChild(mealkit, {
+							height: "200px",
+							width: "180px",
+							autoSize: "both"
+						});
+						mealkit.addEventListener("imgClick", function(e) {
+							window.location.href = "/mealkitDetail/" + starList[index].mealkitNo;
+						});
+					})(i);
+				}
+				
+			}
+
+
+			/*
+			 * 서브미션에서 receive 이벤트 발생 시 호출.
+			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+			 */
+			function onLikeChefListReceive(e){
+				var likeChefList = e.control;
+				var xhr = likeChefList.xhr;
+				var jsonData = JSON.parse(xhr.responseText);
+				var chefList = jsonData.chefList;
+				
+				var container = app.lookup("chefgrp");
+				
+				for (var i = 0; i < chefList.length; i++) {
+					(function(index) {
+						//udc 동적 생성
+						var chef = new udc.chefListIndexudc();
+						//udc에서 출판한 이미지 경로 앱 속성 지정
+						chef.memberImage = "/upload/profile/" + chefList[i].mealkitImage;
+						chef.memberEmail = chefList[i].memberEmail;
+						chef.memberNick = chefList[i].memberNick;
+						container.addChild(chef, {
+							height: "210px",
+							width: "160px",
+							autoSize: "both"
+						});
+						chef.addEventListener("memberImageClick", function(e) {
+							var host = app.getHost(); // 부모 임베디드 앱
+							var initvalue = {
+								"memberEmail":chefList[index].memberEmail,
+								"memberNick":chefList[index].memberNick,
+								"memberImage":"/upload/profile/"+chefList[index].mealkitImage
+							};
+							cpr.core.App.load("embedded/chefRecipeList", function(loadedApp){
+								if (loadedApp){
+									host.initValue = initvalue;
+									host.app = loadedApp;
+								}
+							});
+						});
+					})(i);
+				}
+				
 			};
 			// End - User Script
 			
@@ -84,6 +200,26 @@
 				submission_1.addEventListener("receive", onLikeRecipeListReceive);
 			}
 			app.register(submission_1);
+			
+			var submission_2 = new cpr.protocols.Submission("starMealkitList");
+			submission_2.action = "/findMealkitStarNO";
+			if(typeof onStarMealkitListSubmitSuccess == "function") {
+				submission_2.addEventListener("submit-success", onStarMealkitListSubmitSuccess);
+			}
+			if(typeof onStarMealkitListReceive == "function") {
+				submission_2.addEventListener("receive", onStarMealkitListReceive);
+			}
+			app.register(submission_2);
+			
+			var submission_3 = new cpr.protocols.Submission("likeChefList");
+			submission_3.action = "/findChefListByRecipe";
+			if(typeof onLikeChefListSubmitSuccess == "function") {
+				submission_3.addEventListener("submit-success", onLikeChefListSubmitSuccess);
+			}
+			if(typeof onLikeChefListReceive == "function") {
+				submission_3.addEventListener("receive", onLikeChefListReceive);
+			}
+			app.register(submission_3);
 			app.supportMedia("all and (min-width: 1920px)", "FHD");
 			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -97,56 +233,215 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.distribution = "center";
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
-			var group_1 = new cpr.controls.Container("grp");
-			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
-			group_1.setLayout(flowLayout_1);
+			var group_1 = new cpr.controls.Container();
+			group_1.style.css({
+				"background-color" : "#FFFFFF",
+				"border-radius" : "20px"
+			});
+			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_2.distribution = "center";
+			group_1.setLayout(verticalLayout_2);
+			(function(container){
+				var group_2 = new cpr.controls.Container();
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				xYLayout_1.scrollable = false;
+				group_2.setLayout(xYLayout_1);
+				(function(container){
+					var output_1 = new cpr.controls.Output();
+					output_1.value = "화제의";
+					output_1.style.css({
+						"font-weight" : "bold",
+						"font-size" : "20px",
+						"background-image" : "none"
+					});
+					container.addChild(output_1, {
+						"top": "18px",
+						"left": "49px",
+						"width": "73px",
+						"height": "30px"
+					});
+					var output_2 = new cpr.controls.Output();
+					output_2.value = "레시피";
+					output_2.style.css({
+						"color" : "#0ca44e",
+						"font-weight" : "bold",
+						"font-size" : "20px"
+					});
+					container.addChild(output_2, {
+						"top": "18px",
+						"left": "121px",
+						"width": "64px",
+						"height": "30px"
+					});
+					var image_1 = new cpr.controls.Image();
+					image_1.src = "theme/images/icon/recipe-book.png";
+					container.addChild(image_1, {
+						"top": "18px",
+						"left": "8px",
+						"width": "30px",
+						"height": "30px"
+					});
+				})(group_2);
+				container.addChild(group_2, {
+					"autoSize": "none",
+					"width": "1120px",
+					"height": "60px"
+				});
+				var group_3 = new cpr.controls.Container("grp");
+				var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
+				group_3.setLayout(flowLayout_1);
+				container.addChild(group_3, {
+					"autoSize": "none",
+					"width": "1120px",
+					"height": "280px"
+				});
+			})(group_1);
 			container.addChild(group_1, {
-				"top": "120px",
-				"width": "1120px",
-				"height": "300px",
-				"left": "calc(50% - 560px)"
+				"autoSize": "height",
+				"width": "1200px",
+				"height": "352px"
 			});
 			
-			var group_2 = new cpr.controls.Container();
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_2.setLayout(xYLayout_2);
+			var group_4 = new cpr.controls.Container();
+			group_4.style.css({
+				"background-color" : "#FFFFFF",
+				"border-radius" : "20px"
+			});
+			var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_3.scrollable = true;
+			verticalLayout_3.distribution = "center";
+			group_4.setLayout(verticalLayout_3);
 			(function(container){
-				var output_1 = new cpr.controls.Output();
-				output_1.value = "추천";
-				output_1.style.css({
-					"font-weight" : "bold",
-					"font-size" : "20px",
-					"background-image" : "none"
+				var group_5 = new cpr.controls.Container();
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_5.setLayout(xYLayout_2);
+				(function(container){
+					var output_3 = new cpr.controls.Output();
+					output_3.value = "인기있는";
+					output_3.style.css({
+						"font-weight" : "bold",
+						"font-size" : "20px",
+						"background-image" : "none"
+					});
+					container.addChild(output_3, {
+						"top": "18px",
+						"left": "47px",
+						"width": "92px",
+						"height": "30px"
+					});
+					var output_4 = new cpr.controls.Output();
+					output_4.value = "밀키트";
+					output_4.style.css({
+						"color" : "#0ca44e",
+						"font-weight" : "bold",
+						"font-size" : "20px"
+					});
+					container.addChild(output_4, {
+						"top": "18px",
+						"left": "138px",
+						"width": "60px",
+						"height": "30px"
+					});
+					var image_2 = new cpr.controls.Image();
+					image_2.src = "theme/images/icon/mealkit-icecream.png";
+					container.addChild(image_2, {
+						"top": "18px",
+						"left": "8px",
+						"width": "30px",
+						"height": "30px"
+					});
+				})(group_5);
+				container.addChild(group_5, {
+					"autoSize": "none",
+					"width": "1120px",
+					"height": "60px"
 				});
-				container.addChild(output_1, {
-					"top": "9px",
-					"left": "0px",
-					"width": "46px",
-					"height": "38px"
+				var group_6 = new cpr.controls.Container("mealkitgrp");
+				var flowLayout_2 = new cpr.controls.layouts.FlowLayout();
+				group_6.setLayout(flowLayout_2);
+				container.addChild(group_6, {
+					"autoSize": "none",
+					"width": "1120px",
+					"height": "280px"
 				});
-				var output_2 = new cpr.controls.Output();
-				output_2.value = "레시피";
-				output_2.style.css({
-					"color" : "#0ca44e",
-					"font-weight" : "bold",
-					"font-size" : "20px"
+			})(group_4);
+			container.addChild(group_4, {
+				"autoSize": "height",
+				"width": "1200px",
+				"height": "352px"
+			});
+			
+			var group_7 = new cpr.controls.Container();
+			group_7.style.css({
+				"background-color" : "#FFFFFF",
+				"border-radius" : "20px"
+			});
+			var verticalLayout_4 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_4.distribution = "center";
+			group_7.setLayout(verticalLayout_4);
+			(function(container){
+				var group_8 = new cpr.controls.Container();
+				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+				group_8.setLayout(xYLayout_3);
+				(function(container){
+					var output_5 = new cpr.controls.Output();
+					output_5.value = "최고의";
+					output_5.style.css({
+						"font-weight" : "bold",
+						"font-size" : "20px",
+						"background-image" : "none"
+					});
+					container.addChild(output_5, {
+						"top": "18px",
+						"left": "47px",
+						"width": "72px",
+						"height": "28px"
+					});
+					var output_6 = new cpr.controls.Output();
+					output_6.value = "쉐프!";
+					output_6.style.css({
+						"color" : "#0ca44e",
+						"font-weight" : "bold",
+						"font-size" : "20px"
+					});
+					container.addChild(output_6, {
+						"top": "18px",
+						"left": "118px",
+						"width": "49px",
+						"height": "28px"
+					});
+					var image_3 = new cpr.controls.Image();
+					image_3.src = "theme/images/icon/chef-old.png";
+					container.addChild(image_3, {
+						"top": "18px",
+						"left": "8px",
+						"width": "30px",
+						"height": "30px"
+					});
+				})(group_8);
+				container.addChild(group_8, {
+					"autoSize": "none",
+					"width": "1120px",
+					"height": "60px"
 				});
-				container.addChild(output_2, {
-					"top": "9px",
-					"left": "45px",
-					"width": "100px",
-					"height": "38px"
+				var group_9 = new cpr.controls.Container("chefgrp");
+				var flowLayout_3 = new cpr.controls.layouts.FlowLayout();
+				group_9.setLayout(flowLayout_3);
+				container.addChild(group_9, {
+					"autoSize": "height",
+					"width": "1120px",
+					"height": "210px"
 				});
-			})(group_2);
-			container.addChild(group_2, {
-				"top": "53px",
-				"width": "1120px",
-				"height": "47px",
-				"left": "calc(50% - 560px)"
+			})(group_7);
+			container.addChild(group_7, {
+				"autoSize": "height",
+				"width": "1200px",
+				"height": "292px"
 			});
 			if(typeof onBodyInit == "function"){
 				app.addEventListener("init", onBodyInit);

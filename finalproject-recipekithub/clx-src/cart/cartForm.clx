@@ -69,7 +69,8 @@
         <cl:output std:sid="output-93dc1bf1" style="background-color:#FFFFFF; color:#0ebc59; font-weight:bold; font-size:25px; font-family:'Noto Sans KR' , 'Malgun Gothic' , sans-serif;" value="  장바구니">
           <cl:formdata std:sid="f-data-81ebaa46" row="0" col="1" rowspan="1" colspan="6"/>
         </cl:output>
-        <cl:checkbox std:sid="c-box-3788f6c7" id="cbx1" style="background-color:#e5e5e5; color:#0ebc59; font-weight:700;" value="" text="전체상품">
+        <cl:checkbox std:sid="c-box-3788f6c7" id="cbx1" style="background-color:#e5e5e5; color:#0ebc59; font-weight:700;" value="true" text="전체상품">
+          <cl:listener std:sid="listener-6cf3f926" name="value-change" handler="onCbx1ValueChange"/>
           <cl:formdata std:sid="f-data-79e08a57" row="1" col="0" rowspan="1" colspan="6"/>
         </cl:checkbox>
         <cl:output std:sid="output-74eada54" value="">
@@ -84,6 +85,8 @@
         <cl:grid std:sid="grid-6d67e65a" id="grd1" style="background-color:#FFFFFF; background-image:none;" datasetid="cartlist" autofit="all" autorowheight="all" nodatamessage="장바구니에 목록이없습니다 " wheelrowcount="1" resizablecolumns="all">
           <cl:listener std:sid="listener-3961564a" name="row-uncheck" handler="onGrd1RowUncheck"/>
           <cl:listener std:sid="listener-fb14824e" name="row-check" handler="onGrd1RowCheck"/>
+          <cl:listener std:sid="listener-b4cc28c2" name="header-check" handler="onGrd1HeaderCheck"/>
+          <cl:listener std:sid="listener-f769b9e5" name="header-uncheck" handler="onGrd1HeaderUncheck"/>
           <cl:formdata std:sid="f-data-fe747965" row="3" col="0" rowspan="2" colspan="7"/>
           <cl:gridcolumn std:sid="g-column-019c1081" width="22px"/>
           <cl:gridcolumn std:sid="g-column-69c1d460" width="143px"/>

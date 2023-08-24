@@ -4,6 +4,21 @@
  *
  * @author user
  ************************************************/
+function getTimedSessionData(key) {
+	var storedData = sessionStorage.getItem(key);
+	
+	if (storedData) {
+		var data = JSON.parse(storedData);
+		var currentTime = new Date().getTime();
+		
+		if (currentTime < data.expirationTime) {
+			return data.value;
+		} else {
+			sessionStorage.removeItem(key);
+		}
+	}
+	return null;
+}
 /*
  * 루트 컨테이너에서 init 이벤트 발생 시 호출.
  * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
@@ -129,6 +144,11 @@ function onDeleteImgClick(e) {
  */
 function onButtonClick(e) {
 	var button = e.control;
+	var sessionval = getTimedSessionData("memsession");
+	if (sessionval == null) {
+		window.location.href= "/";
+	}
+	
 	var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
 	var vsOpt = app.lookup("smnote");
 	var dataMap = app.lookup("recipe");
@@ -200,6 +220,10 @@ function onUpdateRecipeSubmitSuccess(e) {
  */
 function onButtonClick2(e) {
 	var button = e.control;
+	var sessionval = getTimedSessionData("memsession");
+	if (sessionval == null) {
+		window.location.href= "/";
+	}
 	var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
 	var dataMap = app.lookup("recipeBoardId");
 	dataMap.setValue("RECIPE_BOARD_ID", recipeBoardId);

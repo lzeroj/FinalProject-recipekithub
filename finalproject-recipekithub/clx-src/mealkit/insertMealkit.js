@@ -74,18 +74,20 @@ function onButtonClick2(e){
    	var combo1 = app.lookup("cmb1").text;
    	var combo2 = app.lookup("cmb2").text;
    	var combo3 = app.lookup("cmb3").text;
+   	var combo4 = app.lookup("cmb4").text;
+   	
    	var category = combo1+"/"+combo2+"/"+combo3;
    	
    	var dataMap = app.lookup("mealkitMap");
    	dataMap.setValue("mealkitInfo", message);
    	dataMap.setValue("mealkitCategory", category);
+   	dataMap.setValue("mealkitType", combo4);
  	//유효성
  	
  	var name = app.lookup("ipb1");
  	var ingredients = app.lookup("ipb2");
  	var price = app.lookup("ipb3");
  	var stock = app.lookup("ipb4");
- 	
  	
  	if(name.value == null || name.value.trim().length == 0){
  		alert("밀키트 이름을 입력해주세요.");
