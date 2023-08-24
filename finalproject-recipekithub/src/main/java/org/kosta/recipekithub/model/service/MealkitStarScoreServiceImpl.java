@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.kosta.recipekithub.model.mapper.MealkitStarScoreMapper;
 import org.kosta.recipekithub.model.vo.MealkitStarScore;
+import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,11 @@ public class MealkitStarScoreServiceImpl implements MealkitStarScoreService {
 	@Override
 	public List<MealkitStarScore> findCommentStarList(int num) {
 		return mealkitStarScoreMapper.findCommentStarList(num);
+	}
+
+	@Override
+	public List<MealkitboardVO> findMealkitNoList() {
+		return mealkitStarScoreMapper.findMealkitNoList();
 	}
 
 	

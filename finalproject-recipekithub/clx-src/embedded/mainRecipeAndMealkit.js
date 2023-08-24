@@ -11,6 +11,7 @@
  */
 function onBodyLoad(e){
 	app.lookup("likeRecipeList").send();
+	app.lookup("starMealkitList").send();
 }
 
 /*
@@ -33,8 +34,8 @@ function onLikeRecipeListReceive(e){
 			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
 			recipe.title = recipeList[i].recipeBoardTitle;
 			container.addChild(recipe, {
-				height: "300px",
-				width: "280px",
+				height: "200px",
+				width: "180px",
 				autoSize: "both"
 			});
 			recipe.addEventListener("imgClick", function(e) {
@@ -51,11 +52,63 @@ function onLikeRecipeListSubmitSuccess(e){
 	var slidify = cpr.core.Module.require("Slidify").slidify;
 	//슬라이드 기능을 사용할 컨트롤에 적용시킨후 start 시킵니다. (아래의 두 코드는 필수로 작성하셔야 합니다.)
 	var slide = slidify(app.lookup("grp"));
-	slide.showCount = 3;
+	slide.showCount = 4;
 	slide.showPaginition = true;
 	slide.autoPlayDelay = 1;
 	slide.initialPage = 0;
 	slide.useInfiniteScroll = true;
 	slide.autoPlay();
 	slide.start();
+}
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onStarMealkitListSubmitSuccess(e){
+	var starMealkitList = e.control;
+	var slidify = cpr.core.Module.require("Slidify").slidify;
+	//슬라이드 기능을 사용할 컨트롤에 적용시킨후 start 시킵니다. (아래의 두 코드는 필수로 작성하셔야 합니다.)
+	var slide = slidify(app.lookup("mealkitgrp"));
+	slide.showCount = 4;
+	slide.showPaginition = true;
+	slide.autoPlayDelay = 1;
+	slide.initialPage = 0;
+	slide.useInfiniteScroll = true;
+	slide.autoPlay();
+	slide.start();
+}
+
+/*
+ * 서브미션에서 receive 이벤트 발생 시 호출.
+ * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
+ */
+function onStarMealkitListReceive(e){
+	var starMealkitList = e.control;
+	var xhr = starMealkitList.xhr;
+	var jsonData = JSON.parse(xhr.responseText);
+	var starList = jsonData.findMealkitStarList;
+	
+	console.log(starList[1].mealkitNo+" "+starList[1].mealkitName);
+	var container = app.lookup("mealkitgrp");
+	
+	for (var i = 0; i < starList.length; i++) {
+		(function(index) {
+			//udc 동적 생성
+			var mealkit = new udc.mealkitStarudc();
+			//udc에서 출판한 이미지 경로 앱 속성 지정
+			mealkit.mealkitImg = "/upload/mealkit/" + starList[i].mealkitImage;
+			mealkit.mealkitName = starList[i].mealkitName;
+			mealkit.mealkitPrice = starList[i].mealkitPrice;
+			container.addChild(mealkit, {
+				height: "200px",
+				width: "180px",
+				autoSize: "both"
+			});
+			mealkit.addEventListener("imgClick", function(e) {
+				window.location.href = "/mealkitDetail?mealkitNo=" + starList[index].mealkitNo;
+			});
+		})(i);
+	}
+	
 }

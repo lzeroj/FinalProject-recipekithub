@@ -18,6 +18,7 @@ import org.kosta.recipekithub.model.service.MealkitService;
 import org.kosta.recipekithub.model.service.MealkitStarScoreService;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MealkitCommentVO;
+import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
 import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.springframework.stereotype.Controller;
@@ -354,8 +355,18 @@ public class MealkitController {
 	@GetMapping("/deleteMealkit/{mealkitNo}")
 	public View deleteMealkitGet(@PathVariable int mealkitNo, HttpServletRequest request) {
 		return new UIView("/ui/index.clx");
-		
 	}
+	
+	// 현준
+	@RequestMapping("/findMealkitStarNO")
+	public View findMealkitStarNO(DataRequest dataRequest) {
+		// 번호에 관한 star 리스트뽑기
+		List<MealkitboardVO> starScore = mealkitStarScoreService.findMealkitNoList();
+		dataRequest.setResponse("findMealkitStarList", starScore);
+		
+		return new JSONDataView();
+	}
+	
 
 
 }
