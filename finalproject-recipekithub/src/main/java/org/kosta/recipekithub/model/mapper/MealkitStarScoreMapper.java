@@ -18,4 +18,6 @@ public interface MealkitStarScoreMapper {
 	List<MealkitStarScore> findCommentStarList(int num);
 
 	List<MealkitboardVO> findMealkitNoList();
+
+	double findMealkitStarAvg(int num);
 }

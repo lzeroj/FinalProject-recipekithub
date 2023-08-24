@@ -22,5 +22,7 @@ public interface MealkitCommentService {
 	int mealkitCommentCnt(int mealkitNo);
 
 	//long updateHits(int mealkitNo);
+	
+
 
 }

@@ -22,5 +22,4 @@ public interface MealkitCommentMapper {
 
 	void increaseMealkitHits(int mealkitNo);
 
-
 }

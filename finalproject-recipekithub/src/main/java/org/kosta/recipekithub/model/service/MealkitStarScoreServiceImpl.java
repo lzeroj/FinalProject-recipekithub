@@ -1,8 +1,13 @@
 package org.kosta.recipekithub.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.print.attribute.HashAttributeSet;
 
 import org.kosta.recipekithub.model.mapper.MealkitStarScoreMapper;
+import org.kosta.recipekithub.model.vo.MealkitCommentVO;
 import org.kosta.recipekithub.model.vo.MealkitStarScore;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
 import org.springframework.stereotype.Service;
@@ -47,6 +52,11 @@ public class MealkitStarScoreServiceImpl implements MealkitStarScoreService {
 	public List<MealkitboardVO> findMealkitNoList() {
 		return mealkitStarScoreMapper.findMealkitNoList();
 	}
-
 	
+	@Override
+	public double findMealkitStarAvg(int num) {
+		double avg = mealkitStarScoreMapper.findMealkitStarAvg(num);
+		return avg;
+	}
+
 }

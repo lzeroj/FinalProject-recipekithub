@@ -120,9 +120,18 @@ public class MealkitController {
 		}
 		//List<MealKitBoard> findMealkitByName = mealKitService.findMealkitByName(searchMealkit);
 		List<MealKitBoard> list = mealKitService.findAllMealkitBoard(mealkitType, sort, searchMealkit, pagination);
-
+		System.out.println("list = " + list);
+		List<Double> starAvgList = new ArrayList<>();
+		//double starMap = mealkitStarScoreService.findMealkitStarAvg();
+		for(MealKitBoard mb : list) {
+			double starMap = mealkitStarScoreService.findMealkitStarAvg(mb.getMealkitNo());
+			starAvgList.add(starMap);
+			System.out.println(starMap);
+		}
+		//System.out.println(starMap);
 		dataRequest.setResponse("mealkitAllList", list);
 		dataRequest.setResponse("totalMealkitCnt", totalMealkitCnt);
+		dataRequest.setResponse("findStarAvgByNo", starAvgList);
 		//dataRequest.setResponse("findMealkitByName", findMealkitByName);
 		return new JSONDataView();
 	}
