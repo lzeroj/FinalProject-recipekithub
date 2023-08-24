@@ -3,8 +3,8 @@
 <mapper namespace="org.kosta.recipekithub.model.mapper.MealkitMapper">
 
 <insert id="insertMealKit" parameterType="org.kosta.recipekithub.model.vo.MealKitBoard">
-	INSERT INTO MEALKIT_BOARD(MEALKIT_NO, MEMBER_EMAIL, MEALKIT_NAME, MEALKIT_INFO, MEALKIT_INGREDIENTS, MEALKIT_PRICE, MEALKIT_REG_DATE, MEALKIT_INVENTORY, MEALKIT_CATEGORY, MEALKIT_IMAGE) 
-	VALUES(MEALKIT_BOARD_seq.nextval, #{memberVO.memberEmail}, #{mealkitName}, #{mealkitInfo}, #{mealkitIngredients}, #{mealkitPrice}, SYSDATE, #{mealkitInventory}, #{mealkitCategory}, #{mealkitImage})
+	INSERT INTO MEALKIT_BOARD(MEALKIT_NO, MEMBER_EMAIL, MEALKIT_NAME, MEALKIT_INFO, MEALKIT_INGREDIENTS, MEALKIT_PRICE, MEALKIT_REG_DATE, MEALKIT_INVENTORY, MEALKIT_CATEGORY, MEALKIT_IMAGE, STATUS, MEALKIT_TYPE) 
+	VALUES(MEALKIT_BOARD_seq.nextval, #{memberVO.memberEmail}, #{mealkitName}, #{mealkitInfo}, #{mealkitIngredients}, #{mealkitPrice}, SYSDATE, #{mealkitInventory}, #{mealkitCategory}, #{mealkitImage}, #{status}, #{mealkitType})
 <selectKey keyColumn="MEALKIT_NO" keyProperty="mealkitNo" resultType="int" order="AFTER">
 	SELECT MEALKIT_BOARD_SEQ.CURRVAL FROM DUAL
 </selectKey>
@@ -21,7 +21,7 @@
 
 <select id="findMealKitByNo" parameterType="int" resultMap="memberInfo">
 SELECT M.MEALKIT_NO, M.MEALKIT_INFO , M.MEMBER_EMAIL, M.MEALKIT_NAME, M.MEALKIT_INGREDIENTS, M.MEALKIT_PRICE, to_char(M.MEALKIT_REG_DATE, 'yyyy-mm-dd hh24:mi')as MEALKIT_REG_DATE,
-M.MEALKIT_INVENTORY, M.MEALKIT_CATEGORY, M.MEALKIT_IMAGE, M.MEALKIT_BOARD_HITS , U.MEMBER_EMAIL,U.MEMBER_NAME, U.MEMBER_NICK FROM MEALKIT_BOARD M INNER JOIN MEMBER U
+M.MEALKIT_INVENTORY, M.MEALKIT_CATEGORY, M.MEALKIT_IMAGE, M.MEALKIT_BOARD_HITS, M.STATUS , U.MEMBER_EMAIL,U.MEMBER_NAME, U.MEMBER_NICK FROM MEALKIT_BOARD M INNER JOIN MEMBER U
 ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 </select>
 
@@ -50,8 +50,8 @@ ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 		select count(*) from mealkit_board
 		<where>
 			status = 'Y'
-			<if test="mealkitCategory != '전체/전체/전체'">
-				and mealkit_category = #{mealkitCategory}
+			<if test="mealkitType != '전체'">
+				and mealkit_type = #{mealkitType}
 			</if>
 			<if test="searchMealkit != null || searchMealkit != ''">
 				and mealkit_name like '%' || #{searchMealkit} || '%'
@@ -61,13 +61,12 @@ ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 
 
 <select id="findAllMealkitBoard" resultMap="memberInfo">
-SELECT rnum, mk.mealkit_no, mk.mealkit_name, mk.mealkit_board_hits, m.member_image,m.member_nick 
+SELECT rnum, mk.mealkit_no, mk.mealkit_name, mk.mealkit_board_hits, m.member_image,m.member_nick , avg()
 FROM (
 	SELECT ROW_NUMBER() OVER(ORDER BY 
 	<if test="sort == '최신순'">   
 	 mealkit_reg_date DESC
 	</if>
-
 	<if test="sort == '별점순'">
 	COALESCE(r.av, 0) DESC, mealkit_reg_date DESC
 	</if>
@@ -93,19 +92,24 @@ FROM (
 	order by COALESCE(r.av, 0) desc
 	</if>
 	<where>
-		<if test="mealkitCategory != '전체/전체/전체'">
-			and mealkit_category like '%' || #{mealkitCategory} || '%'
+		<if test="mealkitType != '전체'">
+			mealkit_type like '%' || #{mealkitType} || '%'
 		</if>
-		<if test="searchMealkit != null || searchMealkit == ''">
+		<if test="searchMealkit != null and searchMealkit != ''">
 			and mealkit_name like '%' || #{searchMealkit} || '%'
 		</if>
 	</where>
 	) mk 
 	INNER JOIN member m ON mk.member_email = m.member_email
-	AND rnum BETWEEN 1 AND 10
+	AND rnum BETWEEN #{pagination.startRowNumber} AND #{pagination.endRowNumber}
 	ORDER BY rnum
 </select>
 
+<select id="findMealkitByName" parameterType="string" resultMap="memberInfo">
+select b.mealkit_image, b.mealkit_name, b.mealkit_board_hits, m.member_nick
+from mealkit_board b inner join member m on b.member_email = m.member_email 
+where b.mealkit_name like '%' || #{mealkitName} || '%' and b.status = 'Y'
+</select>
 
 
 </mapper>

@@ -87,18 +87,20 @@
 			   	var combo1 = app.lookup("cmb1").text;
 			   	var combo2 = app.lookup("cmb2").text;
 			   	var combo3 = app.lookup("cmb3").text;
+			   	var combo4 = app.lookup("cmb4").text;
+			   	
 			   	var category = combo1+"/"+combo2+"/"+combo3;
 			   	
 			   	var dataMap = app.lookup("mealkitMap");
 			   	dataMap.setValue("mealkitInfo", message);
 			   	dataMap.setValue("mealkitCategory", category);
+			   	dataMap.setValue("mealkitType", combo4);
 			 	//유효성
 			 	
 			 	var name = app.lookup("ipb1");
 			 	var ingredients = app.lookup("ipb2");
 			 	var price = app.lookup("ipb3");
 			 	var stock = app.lookup("ipb4");
-			 	
 			 	
 			 	if(name.value == null || name.value.trim().length == 0){
 			 		alert("밀키트 이름을 입력해주세요.");
@@ -220,7 +222,8 @@
 					{"name": "mealkitIngredients"},
 					{"name": "mealkitPrice"},
 					{"name": "mealkitInventory"},
-					{"name": "mealkitCategory"}
+					{"name": "mealkitCategory"},
+					{"name": "mealkitType"}
 				]
 			});
 			app.register(dataMap_1);
@@ -466,6 +469,21 @@
 					container.addChild(comboBox_3, {
 						"top": "8px",
 						"left": "394px",
+						"width": "100px",
+						"height": "20px"
+					});
+					var comboBox_4 = new cpr.controls.ComboBox("cmb4");
+					(function(comboBox_4){
+						comboBox_4.addItem(new cpr.controls.Item("전체", "전체"));
+						comboBox_4.addItem(new cpr.controls.Item("한식", "한식"));
+						comboBox_4.addItem(new cpr.controls.Item("양식", "양식"));
+						comboBox_4.addItem(new cpr.controls.Item("중식/일식", "중식/일식"));
+						comboBox_4.addItem(new cpr.controls.Item("동남아", "동남아"));
+						comboBox_4.addItem(new cpr.controls.Item("에어프라이어", "에어프라이어"));
+					})(comboBox_4);
+					container.addChild(comboBox_4, {
+						"top": "8px",
+						"left": "504px",
 						"width": "100px",
 						"height": "20px"
 					});

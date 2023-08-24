@@ -22,6 +22,7 @@ function onBodyLoad(e){
 	var mealkitHits = cpr.core.Platform.INSTANCE.getParameter("mealkitHits");
 	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 	var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
+	var mealkitCategory = cpr.core.Platform.INSTANCE.getParameter("mealkitCategory");
 	var avg = cpr.core.Platform.INSTANCE.getParameter("avg");
 	console.log("mealkitHits = " + mealkitHits);
 	var starAvg = app.lookup("starScore");
@@ -73,6 +74,7 @@ function onBodyLoad(e){
 	dataMap.setValue("mealkitMember", mealkitMember);
 	dataMap.setValue("mealkitHits", mealkitHits);
 	dataMap.setValue("sessionMember", sessionMember);
+	dataMap.setValue("mealkitCategory", mealkitCategory);
 	dataMap.setValue("cnt", cnt);
 	
 	
