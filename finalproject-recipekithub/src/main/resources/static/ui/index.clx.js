@@ -73,13 +73,13 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_1.setLayout(xYLayout_2);
+			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			group_1.setLayout(verticalLayout_2);
 			(function(container){
 				var userDefinedControl_1 = linker.userDefinedControl_1 = new udc.header3();
 				if(typeof onHeader3Event == "function") {
@@ -89,86 +89,44 @@
 					userDefinedControl_1.addEventListener("logout", onHeader3Logout);
 				}
 				container.addChild(userDefinedControl_1, {
-					"top": "0px",
-					"right": "0px",
-					"left": "0px",
+					"width": "1920px",
 					"height": "200px"
 				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
+					"background-color" : "transparent",
 					"background-size" : "cover",
-					"background-image" : "url('theme/images/common/bgimgfinal.png')",
+					"background-image" : "url('theme/images/common/bgimg10.png')",
 					"background-position" : "center"
 				});
-				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_3);
+				var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
+				verticalLayout_3.scrollable = false;
+				group_2.setLayout(verticalLayout_3);
 				(function(container){
 					var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
 					container.addChild(embeddedApp_1, {
-						"right": "20px",
-						"left": "20px",
-						"height": "720px",
-						"top": "calc(50% - 360px)"
-					});
-					var group_3 = new cpr.controls.Container();
-					var formLayout_1 = new cpr.controls.layouts.FormLayout();
-					formLayout_1.scrollable = false;
-					formLayout_1.topMargin = "0px";
-					formLayout_1.rightMargin = "0px";
-					formLayout_1.bottomMargin = "0px";
-					formLayout_1.leftMargin = "0px";
-					formLayout_1.horizontalSpacing = "0px";
-					formLayout_1.verticalSpacing = "0px";
-					formLayout_1.setColumns(["1fr"]);
-					formLayout_1.setRows(["1fr"]);
-					group_3.setLayout(formLayout_1);
-					(function(container){
-						var button_1 = new cpr.controls.Button();
-						button_1.value = "";
-						button_1.style.css({
-							"background-color" : "transparent",
-							"border-right-style" : "none",
-							"background-size" : "cover",
-							"border-left-style" : "none",
-							"border-bottom-style" : "none",
-							"background-position" : "center",
-							"background-image" : "url('theme/images/pivot/field/arrow-up-circle.svg')",
-							"border-top-style" : "none"
-						});
-						if(typeof onButtonClick == "function") {
-							button_1.addEventListener("click", onButtonClick);
-						}
-						container.addChild(button_1, {
-							"colIndex": 0,
-							"rowIndex": 0
-						});
-					})(group_3);
-					container.addChild(group_3, {
-						"right": "20px",
-						"bottom": "0px",
-						"width": "30px",
-						"height": "30px"
+						"autoSize": "height",
+						"width": "1880px",
+						"height": "720px"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "200px",
-					"bottom": "100px",
+					"autoSize": "height",
 					"width": "1920px",
-					"left": "calc(50% - 960px)"
+					"height": "790px",
+					"minHeight": 790
 				});
 				var userDefinedControl_2 = new udc.footer();
 				container.addChild(userDefinedControl_2, {
-					"right": "0px",
-					"bottom": "0px",
-					"left": "0px",
-					"height": "100px"
+					"width": "1920px",
+					"height": "90px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "0px",
-				"left": "0px",
+				"autoSize": "height",
 				"width": "1920px",
-				"height": "1090px"
+				"height": "1090px",
+				"minHeight": 1090
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
