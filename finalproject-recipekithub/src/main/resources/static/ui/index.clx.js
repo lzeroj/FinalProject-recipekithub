@@ -8,7 +8,6 @@
 	var app = new cpr.core.App("index", { 
 		onPrepare: function(loader) {
 			loader.addCSS("theme/cleopatra-theme.css");
-			loader.addCSS("theme/controls/htmlobject.css");
 			loader.addCSS("theme/custom-theme.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
