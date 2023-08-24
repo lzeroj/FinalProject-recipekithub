@@ -97,23 +97,14 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.distribution = "center";
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
-			var group_1 = new cpr.controls.Container("grp");
-			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
-			group_1.setLayout(flowLayout_1);
-			container.addChild(group_1, {
-				"top": "120px",
-				"width": "1120px",
-				"height": "300px",
-				"left": "calc(50% - 560px)"
-			});
-			
-			var group_2 = new cpr.controls.Container();
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			group_2.setLayout(xYLayout_2);
+			var group_1 = new cpr.controls.Container();
+			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_1);
 			(function(container){
 				var output_1 = new cpr.controls.Output();
 				output_1.value = "추천";
@@ -141,12 +132,110 @@
 					"width": "100px",
 					"height": "38px"
 				});
-			})(group_2);
-			container.addChild(group_2, {
-				"top": "53px",
+			})(group_1);
+			container.addChild(group_1, {
 				"width": "1120px",
-				"height": "47px",
-				"left": "calc(50% - 560px)"
+				"height": "47px"
+			});
+			
+			var group_2 = new cpr.controls.Container("grp");
+			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
+			group_2.setLayout(flowLayout_1);
+			container.addChild(group_2, {
+				"width": "1120px",
+				"height": "300px"
+			});
+			
+			var group_3 = new cpr.controls.Container();
+			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+			group_3.setLayout(xYLayout_2);
+			(function(container){
+				var output_3 = new cpr.controls.Output();
+				output_3.value = "추천";
+				output_3.style.css({
+					"font-weight" : "bold",
+					"font-size" : "20px",
+					"background-image" : "none"
+				});
+				container.addChild(output_3, {
+					"top": "9px",
+					"left": "0px",
+					"width": "72px",
+					"height": "38px"
+				});
+				var output_4 = new cpr.controls.Output();
+				output_4.value = "밀키트";
+				output_4.style.css({
+					"color" : "#0ca44e",
+					"font-weight" : "bold",
+					"font-size" : "20px"
+				});
+				container.addChild(output_4, {
+					"top": "9px",
+					"left": "71px",
+					"width": "100px",
+					"height": "38px"
+				});
+			})(group_3);
+			container.addChild(group_3, {
+				"autoSize": "none",
+				"width": "1120px",
+				"height": "47px"
+			});
+			
+			var group_4 = new cpr.controls.Container();
+			var flowLayout_2 = new cpr.controls.layouts.FlowLayout();
+			group_4.setLayout(flowLayout_2);
+			container.addChild(group_4, {
+				"autoSize": "none",
+				"width": "1120px",
+				"height": "300px"
+			});
+			
+			var group_5 = new cpr.controls.Container();
+			var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+			group_5.setLayout(xYLayout_3);
+			(function(container){
+				var output_5 = new cpr.controls.Output();
+				output_5.value = "추천";
+				output_5.style.css({
+					"font-weight" : "bold",
+					"font-size" : "20px",
+					"background-image" : "none"
+				});
+				container.addChild(output_5, {
+					"top": "9px",
+					"left": "0px",
+					"width": "72px",
+					"height": "38px"
+				});
+				var output_6 = new cpr.controls.Output();
+				output_6.value = "쉐프";
+				output_6.style.css({
+					"color" : "#0ca44e",
+					"font-weight" : "bold",
+					"font-size" : "20px"
+				});
+				container.addChild(output_6, {
+					"top": "9px",
+					"left": "71px",
+					"width": "100px",
+					"height": "38px"
+				});
+			})(group_5);
+			container.addChild(group_5, {
+				"autoSize": "none",
+				"width": "1120px",
+				"height": "47px"
+			});
+			
+			var group_6 = new cpr.controls.Container();
+			var flowLayout_3 = new cpr.controls.layouts.FlowLayout();
+			group_6.setLayout(flowLayout_3);
+			container.addChild(group_6, {
+				"autoSize": "none",
+				"width": "1120px",
+				"height": "300px"
 			});
 			if(typeof onBodyInit == "function"){
 				app.addEventListener("init", onBodyInit);

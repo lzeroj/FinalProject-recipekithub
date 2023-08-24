@@ -55,7 +55,7 @@
 		</where>
 		) r
 		INNER JOIN member m ON r.member_email = m.member_email
-		AND rnum BETWEEN #{pagination.startRowNumber} AND
+		WHERE rnum BETWEEN #{pagination.startRowNumber} AND
 		#{pagination.endRowNumber}
 		ORDER BY rnum
 	</select>
@@ -132,8 +132,8 @@
     			SELECT r.recipe_board_id, COUNT(lr.recipe_board_id) AS like_count, r.recipe_board_image, r.recipe_board_title
   				 FROM recipe_board r
    				 INNER JOIN like_rkh lr ON lr.recipe_board_id = r.recipe_board_id
-    			GROUP BY r.recipe_board_id, r.recipe_board_image, r.recipe_board_title
-    			ORDER BY like_count DESC
+    			GROUP BY r.recipe_board_id, r.recipe_board_image, r.recipe_board_title,r.recipe_reg_date
+    			ORDER BY like_count DESC, recipe_reg_date DESC
 					)
 				WHERE 6 >= ROWNUM
 	</select>

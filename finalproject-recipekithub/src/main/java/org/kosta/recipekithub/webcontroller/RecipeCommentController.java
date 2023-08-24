@@ -18,14 +18,11 @@ import org.springframework.web.servlet.View;
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.spring.JSONDataView;
-import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class RecipeCommentController {
        
 	private final RecipeCommentService recipeCommentService;
@@ -57,11 +54,11 @@ public class RecipeCommentController {
 	@RequestMapping("/deleteRecipeComment")
 	public View deleteRecipeComment(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			log.debug("비인증");
-			return new UIView("/ui/index.clx");
-		}
+//		HttpSession session = request.getSession(false);
+//		if (session == null || session.getAttribute("member") == null) {
+//			log.debug("비인증");
+//			return new UIView("/ui/index.clx");
+//		}
 		ParameterGroup initParam = dataRequest.getParameterGroup("dmRecipeCommentId");
 		long recipeCommentId = Long.parseLong(initParam.getValue("recipeCommentId"));
 		recipeCommentService.deleteRecipeCommentByCommentId(recipeCommentId);
@@ -71,11 +68,11 @@ public class RecipeCommentController {
 	@RequestMapping("/insertRecipeComment")
 	public View insertRecipeComment(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws IOException {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			//System.out.println("비인증");
-			return new UIView("/ui/index.clx");
-		}
+			HttpSession session = request.getSession(false);
+//		if (session == null || session.getAttribute("member") == null) {
+//			//System.out.println("비인증");
+//			return new UIView("/ui/index.clx");
+//		}
 		MemberVO member = (MemberVO)session.getAttribute("member");   
 		String memberEmail = member.getMemberEmail();
 		ParameterGroup initParam = dataRequest.getParameterGroup("dmInsertValue");

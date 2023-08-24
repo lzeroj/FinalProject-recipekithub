@@ -24,10 +24,15 @@
 
 
 <select id="findCommentStarList" resultMap="mealkitStarMap">
-select m.mealkit_comment_id, m.mealkit_no ,s.mealkit_star_score, m.member_email, m.mealkit_comment_content,
- mealkit_comment_date from mealkit_comment m 
- left outer join mealkit_star_score s on m.mealkit_comment_id = s.mealkit_comment_id where m.mealkit_no = #{value} order by m.mealkit_no desc
+ select rnum, m.mealkit_comment_id, m.mealkit_no, 
+ m.member_email, m.mealkit_comment_content, m.mealkit_comment_date, s.mealkit_star_score
+ FROM (
+ select row_number() over(order by mealkit_comment_date desc) AS rnum, mealkit_comment_id, mealkit_no , member_email, mealkit_comment_content, mealkit_comment_date 
+ from mealkit_comment
+ where mealkit_no = #{num}
+ ) m
+ left outer join mealkit_star_score s on m.mealkit_comment_id = s.mealkit_comment_id 
+ where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
+ order by rnum
 </select>
-
-
 </mapper>

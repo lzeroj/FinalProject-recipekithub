@@ -22,6 +22,7 @@ function onBodyLoad(e){
 	var mealkitHits = cpr.core.Platform.INSTANCE.getParameter("mealkitHits");
 	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 	var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
+	var mealkitCategory = cpr.core.Platform.INSTANCE.getParameter("mealkitCategory");
 	var avg = cpr.core.Platform.INSTANCE.getParameter("avg");
 	console.log("mealkitHits = " + mealkitHits);
 	var starAvg = app.lookup("starScore");
@@ -73,6 +74,7 @@ function onBodyLoad(e){
 	dataMap.setValue("mealkitMember", mealkitMember);
 	dataMap.setValue("mealkitHits", mealkitHits);
 	dataMap.setValue("sessionMember", sessionMember);
+	dataMap.setValue("mealkitCategory", mealkitCategory);
 	dataMap.setValue("cnt", cnt);
 	
 	
@@ -363,6 +365,8 @@ function onCommentListSubSubmitSuccess(e){
 	app.lookup("cnt").value = totalCommentCount;
 	var container = app.lookup("commentgrp");
 	
+	app.lookup("page").totalRowCount = totalCommentCount;
+	
 	// 댓글 등록,삭제 시 재조회 할 수 있게 기존 목록 삭제
 	container.removeAllChildren();
 	
@@ -404,4 +408,11 @@ function onDeleteCommentSubmitSuccess(e){
 	app.lookup("commentListSub").send();
 }
 
-
+/*
+ * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
+ * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
+ */
+function onPageIndexerSelectionChange(e){
+	var pageIndexer = e.control;
+	app.lookup("commentListSub").send();
+}

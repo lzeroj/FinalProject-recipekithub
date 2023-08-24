@@ -128,7 +128,7 @@
       <cl:xylayout std:sid="xylayout-38653f1c"/>
     </cl:group>
     <cl:htmlsnippet std:sid="htmlsnippet-bf27aa3e" id="recipeContent" style="cursor:auto; background-color:#FFFFFF;" value="&lt;p>HTML Snippet&lt;/p>">
-      <cl:verticaldata std:sid="v-data-e575ef2d" width="1200px" height="515px" autosize="height"/>
+      <cl:verticaldata std:sid="v-data-e575ef2d" width="1200px" height="300px" syncminheight="true" autosize="height"/>
     </cl:htmlsnippet>
     <cl:group std:sid="group-a32172ec" style="background-color:#FFFFFF;">
       <cl:verticaldata std:sid="v-data-b7452cd6" width="1200px" height="125px"/>
@@ -142,7 +142,7 @@
         <cl:listener std:sid="listener-1dcc942f" name="click" handler="onButtonClick2"/>
         <cl:xylayoutdata std:sid="xyl-data-3792c2b3" top="46px" left="1094px" width="100px" height="77px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
-      <cl:textarea std:sid="t-area-b0a35dda" id="commentInput" placeholder="50자 내로 작성해주세요" maxlength="50">
+      <cl:textarea std:sid="t-area-b0a35dda" id="commentInput" placeholder="50자 내로 작성해 주세요" maxlength="50">
         <cl:datamapbind property="value" datacontrolid="dmInsertValue" columnname="recipeCommentContent"/>
         <cl:xylayoutdata std:sid="xyl-data-860d4f6f" top="46px" left="4px" width="1080px" height="77px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:textarea>

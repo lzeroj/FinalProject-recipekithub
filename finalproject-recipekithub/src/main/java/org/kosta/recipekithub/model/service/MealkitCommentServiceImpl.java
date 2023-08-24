@@ -6,6 +6,8 @@ import org.kosta.recipekithub.model.mapper.MealkitCommentMapper;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MealkitCommentVO;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipeCommentPagination;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -57,12 +59,12 @@ public class MealkitCommentServiceImpl implements MealkitCommentService {
 	}
 	
 	@Override
-	public List<MealkitCommentVO> findCommentListByMealkit(int num) {
-		return mealkitCommentMapper.findCommentListByMealkit(num);
+	public List<MealkitCommentVO> findCommentListByMealkit(long num, RecipeCommentPagination pagination) {
+		return mealkitCommentMapper.findCommentListByMealkit(num, pagination);
 	}
 	
 	@Override
-	public int mealkitCommentCnt(int mealkitNo) {
+	public int mealkitCommentCnt(long mealkitNo) {
 		return mealkitCommentMapper.mealkitCommentCnt(mealkitNo);
 	}
 }

@@ -13,6 +13,7 @@ import org.kosta.recipekithub.model.service.MealkitStarScoreService;
 import org.kosta.recipekithub.model.vo.MealkitCommentVO;
 import org.kosta.recipekithub.model.vo.MealkitStarScore;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipeCommentPagination;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,13 +82,25 @@ public class MealkitCommentController {
 	@RequestMapping("/commentList")
 	public View mealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		ParameterGroup param= dataRequest.getParameterGroup("commentList");
-		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo")); //밀키트 게시판 번호
-		int mealkitCommentNum = mealkitCommentService.mealkitCommentCnt(mealkitNo);//댓글 개수
+		long mealkitNo = Long.parseLong(param.getValue("mealkitNo")); //밀키트 게시판 번호
+		long mealkitCommentNum = mealkitCommentService.mealkitCommentCnt(mealkitNo);//댓글 개수
 		
-		List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
-		List<MealkitStarScore> starList= mealkitStarScoreService.findCommentStarList(mealkitNo);
+		ParameterGroup pageParam = dataRequest.getParameterGroup("pageNo");
+		String pageNo = pageParam.getValue("pageNo");
+		RecipeCommentPagination pagination = null;
+		if(pageNo==null) {
+			pagination = new RecipeCommentPagination(mealkitCommentNum);   
+		}else {
+			pagination = new RecipeCommentPagination(mealkitCommentNum,Long.parseLong(pageNo));
+		}
+		
+		List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo,pagination);
+		List<MealkitStarScore> starList= mealkitStarScoreService.findCommentStarList(mealkitNo,pagination);
 		//MealkitStarScore mealkitStar = mealkitStarScoreService.findMealkitStar(mealkitComment.getMealkitCommentId());
 		//List<MealkitCommentVO> list = mealkitCommentService.findCommentListByMealkit(mealkitNo);
+		System.out.println("리스트"+list);
+		System.out.println("별"+starList);	
+		
 		dataRequest.setResponse("mealkitCommentList", list);
 		dataRequest.setResponse("mealkitCommentNum", mealkitCommentNum);
 		dataRequest.setResponse("mealkitStarList", starList);
