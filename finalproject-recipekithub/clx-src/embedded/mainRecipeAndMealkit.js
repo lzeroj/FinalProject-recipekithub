@@ -88,10 +88,10 @@ function onLikeChefListSubmitSuccess(e){
 	var likeChefList = e.control;
 	var slidify = cpr.core.Module.require("Slidify").slidify;
 	//슬라이드 기능을 사용할 컨트롤에 적용시킨후 start 시킵니다. (아래의 두 코드는 필수로 작성하셔야 합니다.)
-	var slide = slidify(app.lookup("mealkitgrp"));
-	slide.showCount = 7;
+	var slide = slidify(app.lookup("chefgrp"));
+	slide.showCount = 6;
 	slide.showPaginition = true;
-	slide.autoPlayDelay = 1;
+// slide.autoPlayDelay = 1;
 	slide.initialPage = 0;
 	slide.useInfiniteScroll = true;
 //	slide.autoPlay();
@@ -117,6 +117,7 @@ function onStarMealkitListReceive(e){
 			//udc에서 출판한 이미지 경로 앱 속성 지정
 			mealkit.mealkitImg = "/upload/mealkit/" + starList[i].mealkitImage;
 			mealkit.mealkitName = starList[i].mealkitName;
+			console.log(mealkit.mealkitName);
 			mealkit.mealkitPrice = starList[i].mealkitPrice;
 			container.addChild(mealkit, {
 				height: "200px",
@@ -154,8 +155,8 @@ function onLikeChefListReceive(e){
 			chef.memberEmail = chefList[i].memberEmail;
 			chef.memberNick = chefList[i].memberNick;
 			container.addChild(chef, {
-				height: "210px",
-				width: "160px",
+				height: "200px",
+				width: "180px",
 				autoSize: "both"
 			});
 			chef.addEventListener("memberImageClick", function(e) {
