@@ -1,6 +1,7 @@
 package org.kosta.recipekithub.model.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.kosta.recipekithub.model.mapper.MealkitStarScoreMapper;
 import org.kosta.recipekithub.model.vo.MealkitStarScore;
@@ -46,8 +47,11 @@ public class MealkitStarScoreServiceImpl implements MealkitStarScoreService {
 	
 	@Override
 	public double findMealkitStarAvg(int num) {
-		double avg = mealkitStarScoreMapper.findMealkitStarAvg(num);
-		return avg;
+		//double avg = mealkitStarScoreMapper.findMealkitStarAvg(num);
+		Optional<Double> opt = mealkitStarScoreMapper.findMealkitStarAvg(num);
+		double defaultValue = 0.0; // 대체값 설정
+		double result = opt.orElse(defaultValue);
+		return result;
 	}
 
 	@Override

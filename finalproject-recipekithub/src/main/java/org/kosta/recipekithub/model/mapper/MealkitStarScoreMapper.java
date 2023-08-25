@@ -1,6 +1,7 @@
 package org.kosta.recipekithub.model.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.recipekithub.model.vo.MealkitStarScore;
@@ -20,5 +21,6 @@ public interface MealkitStarScoreMapper {
 
 	List<MealkitboardVO> findMealkitNoList();
 
-	double findMealkitStarAvg(int num);
+	//double findMealkitStarAvg(int num);
+	Optional<Double> findMealkitStarAvg(int num);
 }

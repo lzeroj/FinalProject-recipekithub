@@ -269,10 +269,10 @@ function onSubcreatmycartSubmitSuccess2(e){
 function onButtonClick5(e){
 	var button = e.control;
 	var comment = app.lookup("comment").value;
-	var star = parseFloat(app.lookup("starpoint").value);
+	var star = app.lookup("starpoint").value;
 	
-	if(isNaN(star) || star < 0 || star > 5 || star === "" || star === null){
-		alert("반드시 별점을 입력해주세요. 숫자 0점 이상 5점 이하로 입력해주세요.");
+	if(star == "" || star == null){
+		alert("반드시 별점을 선택해주세요.");
 		app.lookup("comment").value = "";
 		app.lookup("starpoint").value = "";
 		app.lookup("comment").redraw();

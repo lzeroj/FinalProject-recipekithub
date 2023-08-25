@@ -36,7 +36,7 @@
  order by rnum
 </select>
 
-<!-- 현준 : 밀키트 번호찾기 -->
+<!-- 현준 :  Index 밀키트 데이터 찾기 -->
 <select id="findMealkitNoList" resultType="org.kosta.recipekithub.model.vo.MealkitboardVO">
 	select m.mealkit_no, COALESCE(r.av, 0) mealkitStarScore, m.mealkit_name,  m.MEALKIT_IMAGE ,m.MEALKIT_PRICE 
 	from
