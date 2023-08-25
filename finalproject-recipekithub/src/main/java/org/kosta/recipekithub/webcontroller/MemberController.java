@@ -3,6 +3,7 @@ package org.kosta.recipekithub.webcontroller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.View;
 
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
+import com.cleopatra.protocol.data.ParameterRow;
 import com.cleopatra.protocol.data.UploadFile;
 import com.cleopatra.spring.JSONDataView;
 import com.cleopatra.spring.UIView;
@@ -232,7 +234,7 @@ public class MemberController {
 
 	// ---[ 회원 탈퇴 ]---//
 	@RequestMapping("/deleteMember")
-	public View deleteMyCart(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
+	public View deleteMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
@@ -245,6 +247,29 @@ public class MemberController {
 		int result = memberService.deleteMember(memberEmail);
 		log.debug("member 회원탈퇴 성공여부(if '1' succes) : {}", result);
 
+		return new JSONDataView();
+	}
+	
+	// ---[ 관리자 : 회원 강퇴 ]---//
+	@RequestMapping("/deleteMembers")
+	public View deleteMembers(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
+			throws Exception {
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("member") == null) {
+			System.out.println("---[로그인 상태가 아니므로 회원 탈퇴가 불가합니다.]---");
+			return new UIView("ui/member/login-form.clx");
+		}
+		
+		ParameterGroup paramGroup = dataRequest.getParameterGroup("ds_member");
+	    Iterator<ParameterRow> deletedRows = paramGroup.getDeletedRows(); // Get all rows marked as deleted
+
+	    while (deletedRows.hasNext()) {
+	        ParameterRow row = deletedRows.next();
+	        String memberEmail = row.getValue("memberEmail"); // Get the email from the row
+	        int result = memberService.deleteMember(memberEmail); // Delete the member
+	        log.debug("member 회원탈퇴 성공여부(if '1' success) : {}", result);
+	    }
+		
 		return new JSONDataView();
 	}
 
