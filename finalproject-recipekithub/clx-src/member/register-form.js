@@ -19,6 +19,11 @@ function onBodyLoad(e) {
 	app.lookup("opbCheckNick").style.css("color", "pink");
 }
 
+var checkEmailFlag = false; 
+var checkPswd1Flag = false;
+var checkPswd2Flag = false;
+var checkNickFlag = false;
+
 /*
  * "가입" 버튼에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
@@ -48,17 +53,17 @@ function onButtonClick(e) {
 	
 	// 다이얼로그창에 표시할 메시지
 	var initValue = null;		
-	// 회원가입 양식에서 빈칸으로 남아 있는 input-box가 있는 체크
-	if (memberEmail === "") {
-		initValue = "사용하실 Email을 입력해주세요";
-	} else if (memberPassword === "") {
-		initValue = "사용하실 비밀번호를 입력해주세요";
-	} else if (memberPassword2 === "") {
+	// 회원가입 양식에서 빈칸으로 남아 있는 input-box가 있거나 잘못된 정보를 입력하고 가입 시도를 했는지 체크
+	if (memberEmail === "" || checkEmailFlag == false) {
+		initValue = "Email을 확인해주세요.";
+	} else if (memberPassword === "" || checkPswd1Flag == false) {
+		initValue = "비밀번호를 확인해주세요.";
+	} else if (memberPassword2 === "" || checkPswd2Flag == false) {
 		initValue = "입력하신 비밀번호를 확인해주세요";
 	} else if (memberName === "") {
 		initValue = "성명을 입력해주세요";
-	} else if (memberNick === "") {
-		initValue = "사용하실 닉네임을 입력해주세요";
+	} else if (memberNick === "" || checkNickFlag == false) {
+		initValue = "닉네임을 확인해주세요.";
 	} else if (memberBirthday === "") {
 		initValue = "생년월일을 입력해주세요";
 	} else if (memberPhone === "") {
@@ -119,7 +124,7 @@ function onSub_registerSubmitSuccess(e) {
  */
 function onButtonClick2(e) {
 	//다이얼로그에 출력할 메시지
-	var initValue = "회원가입을 취소하고 메인페이지로 돌아가시겠습니까?";
+	var initValue = "회원가입을 취소하고\n 메인페이지로 돌아가시겠습니까?";
 	app.openDialog("dialog/registerPopup", {
 		width: 400,
 		height: 300
@@ -172,7 +177,7 @@ function debounce(func, wait) {
  */
 //---[ email이 변경될 때마다 호출되어 email 유효성을 확인 ]---//
 function onSub_check_emailSubmitSuccess(e) {
-	var checkEmailFlag = false; 
+	//var checkEmailFlag = false; 
 	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 	var sub_check_email = e.control;
 	
@@ -240,7 +245,7 @@ function onSub_check_emailSubmitSuccess(e) {
 //---[ password1이 변경될 때마다 호출되어 비밀번호 유효성을 확인하고, password2와의 일치 여부를 갱신 ]---//
 function onIpbPassword1Keyup(e) {
 	var ipbPassword1 = e.control;
-	var checkPswd1Flag = false; 	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+	//var checkPswd1Flag = false; 	// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 	var password1 = app.lookup("ipbPassword1");
 	var imgPswd1 = app.lookup("imgPswd1");
 	var checkPswdResult1 = app.lookup("opbCheckPassword");
@@ -318,6 +323,7 @@ function onIpbPassword2Keyup(e) {
 		checkPswdResult2.value = "위의 비밀번호와 일치하지 않습니다.";
 		imgPswd2.src = "../ui/theme/images/member/cross.png";
 	} else if (pswd1Value === pswd2Value) {
+		checkPswd2Flag = true;
 		checkPswdResult2.style.css("color", "blue");
 		checkPswdResult2.value = "비밀번호가 일치합니다.";
 		imgPswd2.src = "../ui/theme/images/member/checked.png";
@@ -345,7 +351,7 @@ function onIpbNickKeyup(e) {
 //---[ 닉네임이 변경될 때마다 호출되어 닉네임 유효성을 확인 ]---//
 function onSub_check_nickSubmitSuccess(e) {
 	var sub_check_nick = e.control;
-	var checkNickFlag = false; 		// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
+	//var checkNickFlag = false; 		// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 	
 	var metadataOk = sub_check_nick.getMetadata("ok"); 		// Controller측에서 닉네임 중복 여부를 체크하여 ok(사용 가능)인 경우
 	var metadataFail = sub_check_nick.getMetadata("fail"); 	// Controller측에서 닉네임 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우

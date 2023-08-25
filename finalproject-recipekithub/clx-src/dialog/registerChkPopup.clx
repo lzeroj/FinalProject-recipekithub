@@ -7,7 +7,7 @@
     <screen std:sid="screen-9864edd6" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <link std:sid="link-606e8566" href="../theme/controls/dialog.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-fa310609"/>
-    <cl:appspec title="회원가입"/>
+    <cl:appspec title="Notice"/>
   </head>
   <body std:sid="body-50a21ba6" style="top:0px; left:0px; width:800px; height:600px;">
     <cl:listener std:sid="listener-4cc7edc6" name="load" handler="onBodyLoad"/>
