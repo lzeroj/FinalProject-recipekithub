@@ -39,18 +39,14 @@
   </head>
   <body std:sid="body-0689d0c1" style="border-right-style:none; border-bottom-color:#0ca44e; border-left-style:none; border-left-color:#0ca44e; border-top-color:#0ca44e; font-size:24px; border-bottom-style:none; font-family:'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif; border-right-color:#0ca44e; background-image:none; border-top-style:none;">
     <cl:listener std:sid="listener-da597450" name="load" handler="onBodyLoad"/>
-    <cl:group std:sid="group-61653a6f" style="background-color:#6A8B41;">
-      <cl:responsivexylayoutdata std:sid="rxyl-data-8708af51">
-        <cl:xylayoutdata std:sid="sxyl-data-1a90debe" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+    <cl:group std:sid="group-61653a6f" style="background-color:#86D2A7;">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-52af9b29">
+        <cl:xylayoutdata std:sid="sxyl-data-bde73034" top="2px" left="2px" width="1024px" height="768px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
       </cl:responsivexylayoutdata>
       <cl:group std:sid="group-29a94915" style="border-radius:5px; background-color:#F4FAEC; background-repeat:no-repeat; background-size:cover; background-image:url(../theme/images/member/20.png); background-position:center;">
-        <cl:responsivexylayoutdata std:sid="rxyl-data-5fd43320">
-          <cl:xylayoutdata std:sid="sxyl-data-8a8971e1" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
-        </cl:responsivexylayoutdata>
+        <cl:xylayoutdata std:sid="xyl-data-bcc6bd39" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-934310e0" style="border-radius:10px; background-color:#FFFFFF;">
-          <cl:responsivexylayoutdata std:sid="rxyl-data-d8d32916">
-            <cl:xylayoutdata std:sid="sxyl-data-90598300" width="384px" height="628px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="default"/>
-          </cl:responsivexylayoutdata>
+          <cl:xylayoutdata std:sid="xyl-data-2adf9e68" width="384px" height="628px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
           <cl:group std:sid="group-ce6b1f97" style="background-size:cover; background-position:center; background-image:url(../theme/images/icon/recipekithubLog.png);">
             <cl:xylayoutdata std:sid="xyl-data-43d0b3cb" top="20px" width="356px" height="209px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
             <cl:xylayout std:sid="xylayout-53ee5a1d"/>
@@ -122,11 +118,11 @@
           </cl:group>
           <cl:xylayout std:sid="xylayout-6adfc418"/>
         </cl:group>
-        <cl:responsivexylayout std:sid="r-xylayout-72d5b393"/>
+        <cl:xylayout std:sid="xylayout-11a01f8f"/>
       </cl:group>
-      <cl:responsivexylayout std:sid="r-xylayout-f4cac586"/>
+      <cl:xylayout std:sid="xylayout-5a1143a8"/>
     </cl:group>
-    <cl:responsivexylayout std:sid="r-xylayout-9774ee4d"/>
+    <cl:responsivexylayout std:sid="r-xylayout-6627c569"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

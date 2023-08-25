@@ -128,6 +128,7 @@ function onStarMealkitListReceive(e){
 			});
 		})(i);
 	}
+	app.lookup("mealkitgrp").redraw();
 	
 }
 

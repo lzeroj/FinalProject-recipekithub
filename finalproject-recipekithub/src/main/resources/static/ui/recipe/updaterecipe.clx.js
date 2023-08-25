@@ -162,6 +162,7 @@
 				var button = e.control;
 				var sessionval = getTimedSessionData("memsession");
 				if (sessionval == null) {
+					alert("등록 실패");
 					window.location.href= "/";
 				}
 				

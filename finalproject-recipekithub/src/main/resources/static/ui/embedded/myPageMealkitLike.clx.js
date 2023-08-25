@@ -54,17 +54,19 @@
 			 */
 			function onGrd1CellClick(e){
 				var grd1 = e.control;
-				var grid = app.lookup("grd1");
-				var value = "theme/images/mealkit/heart_fill.png";
-				var image = app.lookup("likeimg");
-				if(e.cellIndex != 5){
+				var grid = app.lookup("grd1")
+				var index = grd1.getSelectedIndices()[0].rowIndex;
+				var cellIndex = grd1.getSelectedIndices()[0].cellIndex;
+				console.log(cellIndex);
+				var mealkitNo = grd1.getCellValue(index, "mealkitNo");
+				if(cellIndex != 4){
 					return ;
 				}else{
 					if(confirm("찜을 취소하시겠습니까? 취소하시면 목록에서 해당 밀키트가 삭제 됩니다")){
+						app.lookup("dmdeletemealkit").setValue("mealkitNo", mealkitNo);
 						app.lookup("subdeletemelkiktlike").send();
 					}
 				}
-				
 			}
 
 			/*
@@ -73,6 +75,7 @@
 			 */
 			function onSubdeletemelkiktlikeSubmitSuccess(e){
 				var subdeletemelkiktlike = e.control;
+				
 				app.lookup("grd1").redraw();
 			}
 
@@ -82,7 +85,29 @@
 			 */
 			function onSubdeletemelkiktlikeSubmitDone(e){
 				var subdeletemelkiktlike = e.control;
+				app.lookup("submealkitlikelist").send();
 				app.lookup("grd1").redraw();
+			}
+
+			/*
+			 * "해당 밀키트 확인" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick(e){
+				var button = e.control;
+				var grd1 = app.lookup("grd1");
+				var index = grd1.getSelectedIndices()[0].rowIndex;
+				var recipeBoardId = grd1.getCellValue(index, 1);
+				if(recipeBoardId == null || recipeBoardId == '' || index == null){
+					app.openDialog("dialog/noSelectCell", {width: 400, height: 300, headerClose: true
+					}, function(dialog){
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = "원하는 행을 선택해주세요";
+						});
+					});
+				}else{
+					window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
+				}
 			};
 			// End - User Script
 			
@@ -102,6 +127,11 @@
 				]
 			});
 			app.register(dataSet_1);
+			var dataMap_1 = new cpr.data.DataMap("dmdeletemealkit");
+			dataMap_1.parseData({
+				"columns" : [{"name": "mealkitNo"}]
+			});
+			app.register(dataMap_1);
 			var submission_1 = new cpr.protocols.Submission("submealkitlikelist");
 			submission_1.action = "/findMealkitLikeList";
 			submission_1.addResponseData(dataSet_1, false);
@@ -113,7 +143,7 @@
 			var submission_2 = new cpr.protocols.Submission("subdeletemelkiktlike");
 			submission_2.action = "/clickLike";
 			submission_2.mediaType = "application/x-www-form-urlencoded;simple";
-			submission_2.addRequestData(dataSet_1);
+			submission_2.addRequestData(dataMap_1);
 			if(typeof onSubdeletemelkiktlikeSubmitSuccess == "function") {
 				submission_2.addEventListener("submit-success", onSubdeletemelkiktlikeSubmitSuccess);
 			}
@@ -307,8 +337,24 @@
 					container.addChild(grid_1, {
 						"top": "15px",
 						"right": "15px",
-						"bottom": "15px",
+						"bottom": "50px",
 						"left": "15px"
+					});
+					var button_1 = new cpr.controls.Button();
+					button_1.value = "해당 밀키트 확인";
+					button_1.style.css({
+						"background-color" : "#0ebc59",
+						"color" : "#FFFFFF",
+						"background-image" : "none"
+					});
+					if(typeof onButtonClick == "function") {
+						button_1.addEventListener("click", onButtonClick);
+					}
+					container.addChild(button_1, {
+						"right": "15px",
+						"bottom": "10px",
+						"width": "120px",
+						"height": "30px"
 					});
 				})(group_2);
 				container.addChild(group_2, {

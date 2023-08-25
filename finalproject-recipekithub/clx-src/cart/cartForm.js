@@ -138,7 +138,6 @@ function onPaymentSubmitSuccess(e){
 			});
 		});
 	}else if(metadata == '결제가 정상적으로 완료되었습니다'){
-		console.log(metadata);
 		src = "dialog/successPayment";
 		var initValue = metadata;
 		app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
@@ -147,17 +146,13 @@ function onPaymentSubmitSuccess(e){
 				dialogApp.initValue = initValue;
 			});
 		}).then(function(returnValue){
-			console.log(returnValue);
-			console.log("페이지 이동하러감");
-			cpr.core.App.load("index1", function(loadedApp) {
+			cpr.core.App.load("index", function(loadedApp) {
 				app.close();
 				var newInst = loadedApp.createNewInstance();
 				newInst.run();
 			});	
-			console.log("페이지 이동성공");	
 		});
 	}
-//	app.lookup("grd1").redraw();
 }
 
 /*
@@ -168,7 +163,6 @@ function onGrd1RowUncheck(e){
 	var grd1 = e.control;
 	var grid = app.lookup("grd1");
 	var selectedRowIndex = grid.getSelectedRowIndex();
-
 	var cellValue = grid.getCellValue(selectedRowIndex, "mealkitName");
 	console.log(cellValue);
 	app.lookup("isCheckInfo").setValue("mealkitName", cellValue);

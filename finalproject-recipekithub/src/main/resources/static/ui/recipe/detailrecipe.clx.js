@@ -51,7 +51,7 @@
 				app.lookup("recipeBoardTitle").value = recipeBoardVO.recipeBoardTitle;
 				app.lookup("memberNick").value = recipeBoardVO.memberVO.memberNick;
 				app.lookup("memberProfile").src = "/upload/profile/" + recipeBoardVO.memberVO.memberImage;
-
+				
 				var hTMLSnippet = app.lookup("recipeContent");
 				hTMLSnippet.value = recipeBoardVO.recipeBoardContent;
 				
@@ -168,8 +168,8 @@
 						comment.regDate = recipeComment[i].recipeCommentDate;
 						comment.content = recipeComment[i].recipeCommentContent;
 						comment.profile = "/upload/profile/" + recipeComment[i].memberVO.memberImage;
-
-					console.log(comment.profile);
+						
+						console.log(comment.profile);
 						if (sessionval == null || sessionval != recipeComment[i].memberVO.memberEmail) {
 							comment.deleteBtn = false;
 						}
@@ -207,13 +207,29 @@
 				var sessionval = getTimedSessionData("memsession");
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 				if (sessionval == null) {
-					alert("로그인이 필요합니다");
-					app.lookup("commentInput").focus();
-				} else{
+					var initValue = "로그인이 필요합니다.";
+					app.openDialog("dialog/registerChkPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					})
+			//		.then(function(returnValue) {
+			//			if (returnValue == true) {
+			//			}
+			//		});
+				} else {
 					app.lookup("dmInsertValue").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
-					var insertComment = app.lookup("insertComment");
-					insertComment.send();
+					var contentValue = app.lookup("dmInsertValue").getValue("recipeCommentContent");
+					if(contentValue == null || contentValue=="" ){
+						alert("내용을 입력하세요");
+						app.lookup("commentInput").focus();
+						return;
 					}
+					app.lookup("insertComment").send();
+				}
 			}
 
 			/*
@@ -274,10 +290,21 @@
 				var likeimg = e.control;
 				var sessionval = getTimedSessionData("memsession");
 				if (sessionval == null) {
-					alert("로그인이 필요합니다");
-					app.lookup("commentInput").focus();
-				} else{
-				app.lookup("subinsertrecipelike").send();
+					var initValue =  "로그인이 필요합니다.";
+					app.openDialog("dialog/registerChkPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					})
+			//		.then(function(returnValue) {
+			//			if (returnValue == true) {
+			//			}
+			//		});
+				} else {
+					app.lookup("subinsertrecipelike").send();
 				}
 			}
 
@@ -288,32 +315,49 @@
 			function onImageClick(e) {
 				var image = e.control;
 				console.log(app.lookup("dmRecipeBoardId").getValue("recipeBoardId"));
-				var initvalue = {
-					"recipeBoardId": app.lookup("dmRecipeBoardId").getValue("recipeBoardId")
-				};
-				app.openDialog("dialog/declarationRecipe", {
-					width: 400,
-					height: 600,
-					headerVisible: false
-				}, function(dialog) {
-					dialog.ready(function(dialogApp) {
-						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
-						dialog.initValue = initvalue;
+				var sessionval = getTimedSessionData("memsession");
+				if (sessionval == null) {
+					var initValue = "로그인이 필요합니다.";
+					app.openDialog("dialog/registerChkPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					})
+			//		.then(function(returnValue) {
+			//			if (returnValue == true) {
+			//			}
+			//		});
+				} else {
+					var initvalue = {
+						"recipeBoardId": app.lookup("dmRecipeBoardId").getValue("recipeBoardId")
+					};
+					app.openDialog("dialog/declarationRecipe", {
+						width: 400,
+						height: 600,
+						headerVisible: false
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialog.initValue = initvalue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == 0) {
+							return;
+						}
+						if (returnValue == null || returnValue == '') {
+							return;
+						}
+						var recipeBoardId = app.lookup("dmRecipeBoardId").getValue("recipeBoardId");
+						app.lookup("dmdeclaration").setValue("recipeBoardId", recipeBoardId);
+						app.lookup("dmdeclaration").setValue("inputtext", returnValue.inputtext);
+						app.lookup("dmdeclaration").setValue("textbox", returnValue.textbox);
+						app.lookup("dmdeclaration").setValue("declarationType", returnValue.declarationType);
+						app.lookup("subinsertDeclaration").send();
 					});
-				}).then(function(returnValue) {
-					if (returnValue == 0) {
-						return;
-					}
-					if (returnValue == null || returnValue == '') {
-						return;
-					}
-					var recipeBoardId = app.lookup("dmRecipeBoardId").getValue("recipeBoardId");
-					app.lookup("dmdeclaration").setValue("recipeBoardId", recipeBoardId);
-					app.lookup("dmdeclaration").setValue("inputtext", returnValue.inputtext);
-					app.lookup("dmdeclaration").setValue("textbox", returnValue.textbox);
-					app.lookup("dmdeclaration").setValue("declarationType", returnValue.declarationType);
-					app.lookup("subinsertDeclaration").send();
-				});
+				}
 			}
 
 			/*
@@ -337,7 +381,7 @@
 			function onPageSelectionChange(e) {
 				var page = e.control;
 				app.lookup("recipeCommentList").send();
-			};
+			}
 			// End - User Script
 			
 			// Header

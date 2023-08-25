@@ -39,19 +39,6 @@
 				//var dataSet = app.lookup("ds_member");
 				var grid = app.lookup("grd_member");
 				grid.redraw();
-
-				//var host = app.getHost(); // 부모 임베디드 앱
-				//var boardId = app.lookup("responseqnaselect").getValue(0, "boardId");
-				//var boardTitle = app.lookup("responseqnaselect").getValue(0, "boardTitle");
-				//var boardContent = app.lookup("responseqnaselect").getValue(0, "boardContent");
-				
-				//var initValue = {"boardId": boardId , "boardTitle" : boardTitle, "boardContent":boardContent};
-			//	cpr.core.App.load("embedded/admin/findQnAAdminSelect", function(loadedApp){
-			//		if (loadedApp){
-			//			//host.initValue = initValue;
-			//			host.app = loadedApp;
-			//		}
-			//	});
 			}
 
 			/*
@@ -61,17 +48,6 @@
 			function onGrd_memberSelectionChange(e){
 				var grd_member = e.control;
 				
-			}
-
-			/*
-			 * "수정" 버튼(btnEditRow)에서 click 이벤트 발생 시 호출.
-			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-			 */
-			function onBtnEditRowClick(e){
-				var btnEditRow = e.control;
-				var vcGrid = app.lookup("grd_member"); 
-				vcGrid.setEditRowIndex(0); 				// 편집 행 설정
-				vcGrid.focusCell(0, "memberEmail"); 	// 셀에 포커스 설정
 			}
 
 			/*
@@ -94,10 +70,31 @@
 					grdMem.deleteRow(checkRowIndices);
 				}
 				
-				var dataMap = app.lookup("dm_delete");
-				dataMap.setValue("memberEmail", app.lookup("opbEmail").value);
-				var submission = app.lookup("sub_delete");
-				submission.send();
+				if (selectedRowIndex == null || checkRowIndices == null) {
+					var initValue = "선택한 회원이 없습니다.\n다시 한번 확인해주세요.";
+					app.openDialog("dialog/registerChkPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+						});
+					});
+				} else {
+					var initValue = "선택하신 회원의 정보를 삭제하시겠습니까?";
+					app.openDialog("dialog/registerChkPopup", {
+						width: 400, height: 300, resizable: false, headerMovable: false
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						var dataMap = app.lookup("dm_delete");
+						dataMap.setValue("memberEmail", app.lookup("opbEmail").value);
+						
+						var submission = app.lookup("sub_delete");
+						submission.send();
+					});
+				}
 			}
 
 			/*
@@ -106,7 +103,7 @@
 			 */
 			function onSub_deleteMemberSubmitSuccess(e){
 				var sub_delete = e.control;
-				var initValue = "선택하신 회원 삭제가 완료되었습니다.";
+				var initValue = "선택하신 회원 정보의\n 삭제가 완료되었습니다.";
 				app.openDialog("dialog/registerChkPopup", {
 					width: 400, height: 300, resizable: false, headerMovable: false
 				}, function(dialog) {
@@ -115,6 +112,7 @@
 					});
 				}).then(function(returnValue) {
 					var grid = app.lookup("grd_member");
+					grid.clearSelection();
 					grid.redraw();
 				});
 			}
@@ -238,6 +236,7 @@
 					"border-radius" : "20px 20px 0px 0px",
 					"background-color" : "rgba(40, 165, 94, 1.0)",
 					"padding-top" : "10px",
+					"color" : "white",
 					"font-weight" : "bolder",
 					"padding-left" : "50px",
 					"padding-bottom" : "10px",
@@ -516,6 +515,7 @@
 												output_1.bind("value").toDataColumn("memberEmail");
 												return output_1;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -527,6 +527,7 @@
 												inputBox_1.bind("value").toDataColumn("memberNick");
 												return inputBox_1;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -538,6 +539,7 @@
 												inputBox_2.bind("value").toDataColumn("memberName");
 												return inputBox_2;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -549,6 +551,7 @@
 												dateInput_1.bind("value").toDataColumn("memberBirthday");
 												return dateInput_1;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -561,6 +564,7 @@
 												maskEditor_1.bind("value").toDataColumn("memberPhone");
 												return maskEditor_1;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -572,6 +576,7 @@
 												inputBox_3.bind("value").toDataColumn("memberPostcode");
 												return inputBox_3;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -583,6 +588,7 @@
 												inputBox_4.bind("value").toDataColumn("memberAddress");
 												return inputBox_4;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -594,6 +600,7 @@
 												inputBox_5.bind("value").toDataColumn("memberAddressDetail");
 												return inputBox_5;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -605,6 +612,7 @@
 												inputBox_6.bind("value").toDataColumn("memberType");
 												return inputBox_6;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -616,6 +624,7 @@
 												inputBox_7.bind("value").toDataColumn("memberStatus");
 												return inputBox_7;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -628,6 +637,7 @@
 												maskEditor_2.bind("value").toDataColumn("memberRegDate");
 												return maskEditor_2;
 											})();
+											cell.controlConstraint = {};
 										}
 									},
 									{
@@ -639,6 +649,7 @@
 												inputBox_8.bind("value").toDataColumn("memberImage");
 												return inputBox_8;
 											})();
+											cell.controlConstraint = {};
 										}
 									}
 								]
@@ -669,29 +680,10 @@
 						formLayout_1.setRows(["1fr"]);
 						group_3.setLayout(formLayout_1);
 						(function(container){
-							var button_1 = new cpr.controls.Button("btnEditRow");
-							button_1.value = "XXX";
-							button_1.style.setClasses(["btn-dim", "btn-success"]);
+							var button_1 = new cpr.controls.Button("btnDeleteRow");
+							button_1.value = "삭제";
+							button_1.style.setClasses(["btn-dim", "btn-danger"]);
 							button_1.style.css({
-								"border-bottom-color" : "#28a55e",
-								"color" : "#28A55E",
-								"border-left-color" : "#28a55e",
-								"font-size" : "18px",
-								"border-top-color" : "#28a55e",
-								"border-right-color" : "#28a55e",
-								"background-image" : "none"
-							});
-							if(typeof onBtnEditRowClick == "function") {
-								button_1.addEventListener("click", onBtnEditRowClick);
-							}
-							container.addChild(button_1, {
-								"colIndex": 2,
-								"rowIndex": 0
-							});
-							var button_2 = new cpr.controls.Button("btnDeleteRow");
-							button_2.value = "삭제";
-							button_2.style.setClasses(["btn-dim", "btn-danger"]);
-							button_2.style.css({
 								"border-bottom-color" : "#d11a1a",
 								"border-left-color" : "#d11a1a",
 								"font-size" : "18px",
@@ -700,9 +692,9 @@
 								"background-image" : "none"
 							});
 							if(typeof onBtnDeleteRowClick == "function") {
-								button_2.addEventListener("click", onBtnDeleteRowClick);
+								button_1.addEventListener("click", onBtnDeleteRowClick);
 							}
-							container.addChild(button_2, {
+							container.addChild(button_1, {
 								"colIndex": 3,
 								"rowIndex": 0
 							});

@@ -61,6 +61,7 @@
 			output_1.value = "결제를 실패 하였습니다";
 			output_1.style.css({
 				"background-color" : "#FFFFFF",
+				"font-weight" : "bold",
 				"font-size" : "18px",
 				"text-align" : "center"
 			});
@@ -73,6 +74,13 @@
 			
 			var button_1 = new cpr.controls.Button();
 			button_1.value = "확인";
+			button_1.style.css({
+				"background-color" : "#0ca44e",
+				"color" : "#FFFFFF",
+				"font-weight" : "bold",
+				"font-size" : "20px",
+				"background-image" : "none"
+			});
 			if(typeof onButtonClick == "function") {
 				button_1.addEventListener("click", onButtonClick);
 			}
@@ -80,7 +88,7 @@
 				"right": "20px",
 				"bottom": "21px",
 				"left": "20px",
-				"height": "40px"
+				"height": "50px"
 			});
 			
 			var output_2 = new cpr.controls.Output("opb1");

@@ -26,9 +26,7 @@ public class PaymentServiceImpl implements PaymentService {
 		List<CartVO> cartlist = cartMapper.mealkitQuantityComparisonByCart(cartNo);
 		for(int i=0;i<cartlist.size();i++) {
 			int cartQuantity = cartlist.get(i).getCartdetailVO().getCartDetailQuantity();
-			System.out.println("cartQuantity : "+cartQuantity);
 			int mealkitInventory = cartlist.get(i).getMealkitboardVO().getMealkitInventory();
-			System.out.println("mealkitInventory : "+mealkitInventory);
 			if(cartQuantity > mealkitInventory) {
 				throw new NotEnoughStockException("재고수량이 충분하지 않습니다");
 			}else {

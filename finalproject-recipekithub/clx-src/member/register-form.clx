@@ -82,9 +82,9 @@
     <cl:listener std:sid="listener-ba0c4459" name="init" handler="onBodyInit"/>
     <cl:listener std:sid="listener-a5efa734" name="unload" handler="onBodyUnload"/>
     <cl:listener std:sid="listener-ebf238b4" name="load" handler="onBodyLoad"/>
-    <cl:group std:sid="group-e9f8bd7b" style="background-color:#6A8B41; background-size:cover; background-position:center;">
+    <cl:group std:sid="group-e9f8bd7b" style="background-color:#86D2A7; background-size:cover; background-position:center;">
       <cl:flowlayoutdata std:sid="f-data-fa9964cc" width="1920px" height="1080px"/>
-      <cl:group std:sid="group-bcaaf89d" style="border-radius:5px; background-image:url(../theme/images/common/bgimg8_1920.png);">
+      <cl:group std:sid="group-bcaaf89d" style="border-radius:5px; background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg3_1920.png); background-position:center;">
         <cl:xylayoutdata std:sid="xyl-data-c241c26b" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:tabfolder std:sid="t-folder-140356dc">
           <cl:xylayoutdata std:sid="xyl-data-1ecde20d" width="520px" height="901px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
@@ -324,7 +324,7 @@
               <cl:xylayout std:sid="xylayout-aa3a0542"/>
             </cl:group>
           </cl:tabitem>
-          <cl:item-style style="background-color:#0CA44E; border-radius:20px 20px 0px 0px; padding-top:5px; font-weight:bolder; padding-left:50px; font-size:24px; padding-bottom:5px; font-family:푸른전남 Medium; background-image:none; padding-right:50px;"/>
+          <cl:item-style style="background-color:#0CA44E; border-radius:20px 20px 0px 0px; padding-top:5px; color:white; font-weight:bolder; padding-left:50px; font-size:24px; padding-bottom:5px; font-family:푸른전남 Medium; background-image:none; padding-right:50px;"/>
           <cl:body-style style="border-radius:0px 10px 20px 20px; background-color:#E5F2E3;"/>
         </cl:tabfolder>
         <cl:xylayout std:sid="xylayout-6f96f31d"/>

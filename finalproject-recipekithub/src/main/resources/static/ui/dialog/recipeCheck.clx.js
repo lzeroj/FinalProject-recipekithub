@@ -66,17 +66,26 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var formLayout_1 = new cpr.controls.layouts.FormLayout();
+			formLayout_1.scrollable = false;
+			formLayout_1.topMargin = "0px";
+			formLayout_1.rightMargin = "0px";
+			formLayout_1.bottomMargin = "0px";
+			formLayout_1.leftMargin = "0px";
+			formLayout_1.horizontalSpacing = "0px";
+			formLayout_1.verticalSpacing = "0px";
+			formLayout_1.setColumns(["1fr"]);
+			formLayout_1.setRows(["1fr", "50px"]);
+			container.setLayout(formLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
-			var formLayout_1 = new cpr.controls.layouts.FormLayout();
-			formLayout_1.horizontalSpacing = "0px";
-			formLayout_1.verticalSpacing = "0px";
-			formLayout_1.setColumns(["1fr", "1fr"]);
-			formLayout_1.setRows(["1fr"]);
-			group_1.setLayout(formLayout_1);
+			var formLayout_2 = new cpr.controls.layouts.FormLayout();
+			formLayout_2.horizontalSpacing = "0px";
+			formLayout_2.verticalSpacing = "0px";
+			formLayout_2.setColumns(["1fr", "1fr"]);
+			formLayout_2.setRows(["1fr"]);
+			group_1.setLayout(formLayout_2);
 			(function(container){
 				var button_1 = new cpr.controls.Button("btnSubmit");
 				button_1.value = "확인";
@@ -85,8 +94,10 @@
 					"background-color" : "#0ca44e",
 					"border-radius" : "0px",
 					"text-shadow" : "none",
-					"color" : "white",
+					"color" : "#FFFFFF",
 					"border-left-style" : "none",
+					"font-weight" : "bold",
+					"font-size" : "20px",
 					"border-bottom-style" : "none",
 					"background-image" : "none",
 					"border-top-style" : "none"
@@ -103,10 +114,12 @@
 				button_2.style.css({
 					"border-right-style" : "none",
 					"border-radius" : "0px",
-					"background-color" : "#006BFF",
+					"background-color" : "#e5f2e3",
 					"text-shadow" : "none",
-					"color" : "white",
+					"color" : "#696969",
 					"border-left-style" : "none",
+					"font-weight" : "bold",
+					"font-size" : "20px",
 					"border-bottom-style" : "none",
 					"background-image" : "none",
 					"border-top-style" : "none"
@@ -120,10 +133,8 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "200px",
-				"left": "0px",
-				"width": "400px",
-				"height": "50px"
+				"colIndex": 0,
+				"rowIndex": 1
 			});
 			
 			var output_1 = new cpr.controls.Output("optValue");
@@ -134,10 +145,8 @@
 				"text-align" : "center"
 			});
 			container.addChild(output_1, {
-				"top": "0px",
-				"left": "0px",
-				"width": "400px",
-				"height": "200px"
+				"colIndex": 0,
+				"rowIndex": 0
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

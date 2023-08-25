@@ -22,7 +22,6 @@
     <cl:appspec/>
   </head>
   <body std:sid="body-ce16746a">
-    <cl:listener std:sid="listener-8a1ba4ce" name="init" handler="onBodyInit"/>
     <cl:listener std:sid="listener-b73e3327" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-ce8e65a4" style="background-color:#FFFFFF; border-radius:20px;">
       <cl:verticaldata std:sid="v-data-c658a10d" width="1200px" height="352px" autosize="height"/>
