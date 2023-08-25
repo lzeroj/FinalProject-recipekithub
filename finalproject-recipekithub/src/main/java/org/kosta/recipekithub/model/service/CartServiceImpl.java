@@ -33,7 +33,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartVO findCartNoByMemberEmail(String memberEmail) {
+	public List<CartVO> findCartNoByMemberEmail(String memberEmail) {
 		return cartMapper.findCartNoByMemberEmail(memberEmail);
 	}
 

@@ -146,11 +146,7 @@ function onPaymentSubmitSuccess(e){
 				dialogApp.initValue = initValue;
 			});
 		}).then(function(returnValue){
-			cpr.core.App.load("index", function(loadedApp) {
-				app.close();
-				var newInst = loadedApp.createNewInstance();
-				newInst.run();
-			});	
+			location.href="index.clx";
 		});
 	}
 }
@@ -236,16 +232,28 @@ function onButtonClick2(e){
 function onButtonClick3(e){
 	var button = e.control;
 	var grid = app.lookup("grd1");
-//	var checkRowIndices = grid.getCheckRowIndices();
-//	var value = grid.getDataRow(checkRowIndices[0]).getValue("mealkitName");
-	for(var i=0;i<grid.getDataRowCount();i++){
-		if(grid.isCheckedRow(i)){
-			var cellValue = grid.getCellValue(i, "mealkitName");
-			var data = {"mealkitName" : cellValue};
-			app.lookup("selectList").addRowData(data);
+	app.getRootAppInstance().openDialog("dialog/needConfirm", {
+		width: 400, height: 300, headerClose: true
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			dialogApp.initValue = "선택 상품을 취소하시겠습니까?"
+		});
+	}).then(function(returnValue){
+		if(returnValue == "ok"){
+			for(var i=0;i<grid.getDataRowCount();i++){
+				if(grid.isCheckedRow(i)){
+					var cellValue = grid.getCellValue(i, "mealkitName");
+					var data = {"mealkitName" : cellValue};
+					app.lookup("selectList").addRowData(data);
+				}
+			}
+			app.lookup("deleteMyCart").send();
+		}else{
+			return;
 		}
-	}
-	app.lookup("deleteMyCart").send();
+	});
+	
+	
 }
 
 /*

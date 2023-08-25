@@ -15,8 +15,9 @@
 		FROM CART_DETAIL cd, MEALKIT_BOARD mb, CART c, "MEMBER" m 
 		WHERE cd.CART_NO = c.CART_NO
 		AND cd.MEALKIT_NO = mb.MEALKIT_NO 
+		AND c.MEMBER_EMAIL = m.MEMBER_EMAIL 
 		AND c.CART_ORDER_STATUS = 'N'
-		AND m.MEMBER_EMAIL = #{memberEmail}
+		AND c.MEMBER_EMAIL = #{memberEmail}
 		AND cd.IS_ORDERED_DATAIL = 'N'
 	</select>
 	
@@ -36,7 +37,8 @@
 	<select id="findCartNoByMemberEmail" resultType="org.kosta.recipekithub.model.vo.CartVO">
 		SELECT c.CART_NO, c.CART_ORDER_STATUS, c.CART_TOTAL
 		FROM CART C,"MEMBER" m 
-		WHERE m.MEMBER_EMAIL = #{memberEmail} 
+		WHERE c.MEMBER_EMAIL = m.MEMBER_EMAIL 
+		AND m.MEMBER_EMAIL = #{memberEmail}
 		AND C.CART_ORDER_STATUS = 'N'
 	</select>
 	

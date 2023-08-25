@@ -40,10 +40,20 @@ function onGrd1CellClick(e){
 	if(e.cellIndex != 7){
 		return ;
 	}else{
-		if(confirm("좋아요를 취소하시겠습니까?")){
-			app.lookup("dmdeleteRecipeLike").setValue("recipeBoardId", recipeBoardId);
-			app.lookup("subdeleteRecipeLike").send();
-		}
+		app.getRootAppInstance().openDialog("dialog/needConfirm", {
+			width: 400, height: 300, headerClose: true
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				dialogApp.initValue = "해당 상품을 찜목록에서 삭제하시겠습니까?"
+			});
+		}).then(function(returnValue){
+			if(returnValue == "ok"){
+				app.lookup("dmdeleteRecipeLike").setValue("recipeBoardId", recipeBoardId);
+				app.lookup("subdeleteRecipeLike").send();
+			}else{
+				return;
+			}
+		});
 	}
 }
 
@@ -53,6 +63,7 @@ function onGrd1CellClick(e){
  */
 function onSubdeleteRecipeLikeSubmitSuccess(e){
 	var subdeleteRecipeLike = e.control;
+	app.lookup("subfindRecipeLikeList").send();
 	app.lookup("grd1").redraw();
 }
 

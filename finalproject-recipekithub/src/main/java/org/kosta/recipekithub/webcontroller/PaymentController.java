@@ -43,19 +43,21 @@ public class PaymentController {
 		ParameterGroup parammealkit = dataRequest.getParameterGroup("selectList");
 		String[] mealkitary = parammealkit.getValues("mealkitName");
 		
-		// 로그인 확인
+		// 세션 적용
 		HttpSession session = request.getSession(false);
-		if(session == null || session.getAttribute("member") == null) {
-			return new UIView("ui/member/login-form.clx");
+		String memberEmail = null;
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
 		}
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		if(memberVO != null) {
 			// 멤버의 활성화된 카트를 가져온다
-			CartVO cvo = cartService.findCartNoByMemberEmail(memberVO.getMemberEmail());
+			List<CartVO> cvo = cartService.findCartNoByMemberEmail(memberEmail);
 			Map<String,Object> errormsg = new HashMap<>();
 			try {
 				// payment 테이블에 인서트
-				int result = paymentService.paymentInsert(totalpay, cvo.getCartNo());
+				int result = paymentService.paymentInsert(totalpay, cvo.get(0).getCartNo());
 				if(result == 1) {
 				
 					// 장바구니 상태 업데이트
@@ -64,7 +66,7 @@ public class PaymentController {
 					// 장바구니 상세보기 업데이트
 					for(int i=0; i<mealkitary.length;i++) {
 						MealkitboardVO mealkitVO = cartService.findMealkitBoardByMealkitName(mealkitary[i]);
-						paymentService.updateCartDetailOrderStatus(cvo.getCartNo(),mealkitVO.getMealkitNo());
+						paymentService.updateCartDetailOrderStatus(cvo.get(0).getCartNo(),mealkitVO.getMealkitNo());
 					}
 					
 					// 장바구니 정리 (주문하지 않은 목록 삭제)
@@ -87,14 +89,15 @@ public class PaymentController {
 	
 	@RequestMapping("/findMyPaymentList")
 	public View findMyPaymentList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-		// 로그인 확인
+		// 세션 적용
 		HttpSession session = request.getSession(false);
-		if(session == null || session.getAttribute("member") == null) {
-			return new UIView("ui/member/login-form.clx");
+		String memberEmail = null;
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
 		}
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		
-		List<PaymentVO> paymentlist = paymentService.findMyPaymentList(memberVO.getMemberEmail());
+		List<PaymentVO> paymentlist = paymentService.findMyPaymentList(memberEmail);
 		
 		// 밀키트 데이터
 		List<MealkitboardVO> sendMealkitInfo = new ArrayList<>();
@@ -151,12 +154,14 @@ public class PaymentController {
 	public View searchMyPaymentList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest,String inputvalue, String combovalue) {
 		System.out.println(inputvalue+" "+combovalue);
 		
-		// 로그인 확인
+		// 세션 적용
 		HttpSession session = request.getSession(false);
-		if(session == null || session.getAttribute("member") == null) {
-			return new UIView("ui/member/login-form.clx");
+		String memberEmail = null;
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
 		}
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String memberId = memberVO.getMemberEmail();
 		
 		// 검색하기

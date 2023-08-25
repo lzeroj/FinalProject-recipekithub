@@ -164,7 +164,7 @@
 						//udc 동적 생성
 						var chef = new udc.chefListIndexudc();
 						//udc에서 출판한 이미지 경로 앱 속성 지정
-						chef.memberImage = "/upload/profile/" + chefList[i].mealkitImage;
+						chef.memberImage = "/upload/profile/" + chefList[i].memberImage;
 						chef.memberEmail = chefList[i].memberEmail;
 						chef.memberNick = chefList[i].memberNick;
 						container.addChild(chef, {
@@ -177,7 +177,7 @@
 							var initvalue = {
 								"memberEmail":chefList[index].memberEmail,
 								"memberNick":chefList[index].memberNick,
-								"memberImage":"/upload/profile/"+chefList[index].mealkitImage
+								"memberImage":"/upload/profile/"+chefList[index].memberImage
 							};
 							cpr.core.App.load("embedded/chefRecipeList", function(loadedApp){
 								if (loadedApp){

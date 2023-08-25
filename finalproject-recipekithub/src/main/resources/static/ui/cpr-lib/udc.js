@@ -1268,6 +1268,7 @@
 				function onMypageClick(e){
 					var mypage = e.control;
 					var sessionval = getTimedSessionData("memsession");
+					console.log("sessionval : "+sessionval);
 					if(sessionval == null || sessionval == ''){
 						app.getRootAppInstance().openDialog("dialog/needLogin", {
 							width: 400, height: 300, headerClose: true
@@ -1281,13 +1282,14 @@
 								location.href="member/login-form.clx";
 							}
 						});
-					}
-					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
-						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
-							window.location.href = "/findMyPageForm";
+					}else{
+						if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+							if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+								location.href = "/findMyPageForm";
+							}
+						} else {
+							location.href = "/findMyPageForm";
 						}
-					} else {
-						window.location.href = "/findMyPageForm";
 					}
 				}
 	
@@ -2078,6 +2080,21 @@
 				 *
 				 * @author shj22k
 				 ************************************************/
+				function getTimedSessionData(key) {
+				    var storedData = sessionStorage.getItem(key);
+	
+				    if (storedData) {
+				        var data = JSON.parse(storedData);
+				        var currentTime = new Date().getTime();
+	
+				        if (currentTime < data.expirationTime) {
+				            return data.value;
+				        } else {
+				            sessionStorage.removeItem(key);
+				        }
+				    }
+				    return null;
+				}
 	
 				/**
 				 * UDC 컨트롤이 그리드의 뷰 모드에서 표시할 텍스트를 반환합니다.
@@ -2106,25 +2123,90 @@
 				}
 	
 				/*
-				 * 버튼(btnLoginoff)에서 click 이벤트 발생 시 호출.
-				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-				 */
-				function onBtnLoginoffClick(e){
-					var btnLoginoff = e.control;
-					window.location.href="/memberUI/loginForm";
-				}
-	
-				/*
 				 * 버튼(cartbtn)에서 click 이벤트 발생 시 호출.
 				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 				 */
 				function onCartbtnClick(e){
 					var cartbtn = e.control;
 					window.location.href = "/mealkitList";
+				}
+	
+				/*
+				 * 콤보 박스에서 selection-change 이벤트 발생 시 호출.
+				 * ComboBox Item을 선택하여 선택된 값이 저장된 후에 발생하는 이벤트.
+				 */
+				function onCmb1SelectionChange(e){
+					var cmb1 = e.control;
+					
+				    // 비로그인 상태의 경우, 콤보박스에 "로그인" 메뉴 표시
+				    if (cmb1.value == "login") { 
+				        window.location.href = "/memberUI/loginForm";
+						
+					// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
+				    } else if (cmb1.value == "logout") {
+				    	var initValue = "로그아웃 하시겠습니까?";
+						app.getRootAppInstance().openDialog("dialog/registerPopup", {
+							width: 400, height: 300, headerClose: true, resizable: false
+						}, function(dialog) {
+							dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+							});
+						}).then(function(returnValue) {
+							sessionStorage.clear();
+							var submission = app.lookup("sub_logout");
+							submission.send();
+							var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+							httpPostMethod.submit();
+						});
+						
+					// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+					} else if (cmb1.value == "profile") {
+						var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+						httpPostMethod.submit();
+				    }
+					
+				}
+	
+				/*
+				 * 콤보 박스에서 open 이벤트 발생 시 호출.
+				 * 리스트박스를 열때 발생하는 이벤트.
+				 */
+				function onCmb1Open(e){
+					var cmb1 = e.control;
+					var sessionval = getTimedSessionData("memsession");
+	
+					cmb1.deleteAllItems();
+	
+				    if (sessionval) { 
+				        cmb1.addItem(new cpr.controls.Item("로그아웃", "logout"));
+				        cmb1.addItem(new cpr.controls.Item("프로필", "profile"));
+				    } else {
+				        cmb1.addItem(new cpr.controls.Item("로그인", "login"));
+				    }
+					
+				}
+	
+				/*
+				 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+				 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+				 */
+				function onBodyLoad(e){
+					var opbLoginStatus = app.lookup("opbLoginStatus");
+					var sessionval = getTimedSessionData("memsession");
+					console.log("세션에 담긴값 : " + sessionval);
+					if (sessionval != null) {
+						opbLoginStatus.text = "[ " + sessionval + " ] \n님이 로그인 상태입니다.";
+					} else {
+						opbLoginStatus.text = "현재 비로그인 상태입니다."
+					}
+					
 				};
 				// End - User Script
 				
 				// Header
+				var submission_1 = new cpr.protocols.Submission("sub_logout");
+				submission_1.action = "/member/logout";
+				app.register(submission_1);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 				app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -2167,6 +2249,21 @@
 						"left": "300px",
 						"width": "330px"
 					});
+					var output_1 = new cpr.controls.Output();
+					output_1.value = "My Page";
+					output_1.style.css({
+						"color" : "#0a8c43",
+						"font-weight" : "bold",
+						"font-size" : "60px",
+						"font-style" : "normal",
+						"text-align" : "center"
+					});
+					container.addChild(output_1, {
+						"top": "20px",
+						"right": "750px",
+						"bottom": "20px",
+						"left": "750px"
+					});
 					var group_2 = new cpr.controls.Container();
 					var formLayout_1 = new cpr.controls.layouts.FormLayout();
 					formLayout_1.scrollable = false;
@@ -2175,8 +2272,8 @@
 					formLayout_1.bottomMargin = "30px";
 					formLayout_1.leftMargin = "30px";
 					formLayout_1.horizontalSpacing = "50px";
-					formLayout_1.verticalSpacing = "50px";
-					formLayout_1.setColumns(["50px", "50px", "50px", "50px"]);
+					formLayout_1.verticalSpacing = "20px";
+					formLayout_1.setColumns(["200px", "50px", "50px", "50px", "50px"]);
 					formLayout_1.setRows(["50px"]);
 					group_2.setLayout(formLayout_1);
 					(function(container){
@@ -2193,11 +2290,8 @@
 							"background-position" : "center",
 							"border-top-style" : "none"
 						});
-						if(typeof onMypageClick == "function") {
-							button_1.addEventListener("click", onMypageClick);
-						}
 						container.addChild(button_1, {
-							"colIndex": 0,
+							"colIndex": 1,
 							"rowIndex": 0
 						});
 						var button_2 = new cpr.controls.Button("cartbtn");
@@ -2212,36 +2306,13 @@
 							"background-image" : "url('theme/images/icon/shopping-basket.png')",
 							"border-top-style" : "none"
 						});
-						if(typeof onCartbtnClick == "function") {
-							button_2.addEventListener("click", onCartbtnClick);
-						}
 						container.addChild(button_2, {
-							"colIndex": 1,
+							"colIndex": 2,
 							"rowIndex": 0
 						});
-						var button_3 = new cpr.controls.Button("btnLoginoff");
+						var button_3 = new cpr.controls.Button("btnWrite");
 						button_3.value = "";
 						button_3.style.css({
-							"background-color" : "transparent",
-							"border-right-style" : "none",
-							"background-repeat" : "no-repeat",
-							"background-size" : "cover",
-							"border-left-style" : "none",
-							"border-bottom-style" : "none",
-							"background-image" : "url('theme/images/common/loginoff.png')",
-							"background-position" : "center",
-							"border-top-style" : "none"
-						});
-						if(typeof onBtnLoginoffClick == "function") {
-							button_3.addEventListener("click", onBtnLoginoffClick);
-						}
-						container.addChild(button_3, {
-							"colIndex": 3,
-							"rowIndex": 0
-						});
-						var button_4 = new cpr.controls.Button("btnWrite");
-						button_4.value = "";
-						button_4.style.css({
 							"border-right-style" : "none",
 							"background-size" : "cover",
 							"border-bottom-color" : "none",
@@ -2256,31 +2327,73 @@
 							"border-bottom-style" : "none",
 							"background-image" : "url('theme/images/common/write.png')"
 						});
-						container.addChild(button_4, {
-							"colIndex": 2,
+						container.addChild(button_3, {
+							"colIndex": 3,
 							"rowIndex": 0
+						});
+						var comboBox_1 = new cpr.controls.ComboBox("cmb1");
+						comboBox_1.preventInput = true;
+						comboBox_1.style.css({
+							"border-right-style" : "none",
+							"background-color" : "#F4FAEC",
+							"background-size" : "cover",
+							"border-left-style" : "none",
+							"border-bottom-style" : "none",
+							"background-image" : "url('theme/images/common/loginoff.png')",
+							"background-position" : "center",
+							"border-top-style" : "none"
+						});
+						comboBox_1.style.list.css({
+							"border-radius" : "10px",
+							"padding-top" : "10px",
+							"box-shadow" : "3px 3px 5px 5px gray",
+							"padding-left" : "10px",
+							"vertical-align" : "middle",
+							"padding-bottom" : "10px",
+							"padding-right" : "10px",
+							"text-align" : "left"
+						});
+						comboBox_1.style.item.css({
+							"border-radius" : "10px",
+							"padding-top" : "20px",
+							"font-weight" : "bolder",
+							"padding-left" : "20px",
+							"padding-bottom" : "20px",
+							"font-size" : "20px",
+							"font-family" : "푸른전남 Medium",
+							"text-align" : "left",
+							"padding-right" : "20px"
+						});
+						if(typeof onCmb1SelectionChange == "function") {
+							comboBox_1.addEventListener("selection-change", onCmb1SelectionChange);
+						}
+						if(typeof onCmb1Open == "function") {
+							comboBox_1.addEventListener("open", onCmb1Open);
+						}
+						container.addChild(comboBox_1, {
+							"colIndex": 4,
+							"rowIndex": 0
+						});
+						var output_2 = new cpr.controls.Output("opbLoginStatus");
+						output_2.value = "";
+						output_2.style.css({
+							"font-weight" : "bold",
+							"font-size" : "16px",
+							"line-height" : "2.0"
+						});
+						container.addChild(output_2, {
+							"colIndex": 0,
+							"rowIndex": 0,
+							"colSpan": 1,
+							"rowSpan": 1,
+							"ignoreLayoutSpacing": true
 						});
 					})(group_2);
 					container.addChild(group_2, {
-						"top": "40px",
-						"right": "100px",
-						"bottom": "40px",
-						"width": "420px"
-					});
-					var output_1 = new cpr.controls.Output();
-					output_1.value = "My Page";
-					output_1.style.css({
-						"color" : "#0a8c43",
-						"font-weight" : "bold",
-						"font-size" : "60px",
-						"font-style" : "normal",
-						"text-align" : "center"
-					});
-					container.addChild(output_1, {
-						"top": "20px",
-						"right": "750px",
-						"bottom": "20px",
-						"left": "750px"
+						"top": "43px",
+						"left": "1191px",
+						"width": "710px",
+						"height": "110px"
 					});
 				})(group_1);
 				container.addChild(group_1, {
@@ -2289,6 +2402,9 @@
 					"bottom": "0px",
 					"left": "0px"
 				});
+				if(typeof onBodyLoad == "function"){
+					app.addEventListener("load", onBodyLoad);
+				}
 			}
 		});
 	internalApp.title = "headerMyPage";

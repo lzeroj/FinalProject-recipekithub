@@ -33,12 +33,15 @@ public class LikeController {
 		
 		// 세션 적용
 		HttpSession session = request.getSession(false);
-		if(session == null || session.getAttribute("member") == null) {
-			return new UIView("ui/member/login-form.clx");
+		String memberEmail = null;
+		int result = 0;
+		if(session != null) {
+			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
+			result = likeService.showLike(memberEmail, mealkitNo);
+		}else {
+			result = 0;
 		}
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		int result = likeService.showLike(memberVO.getMemberEmail(), mealkitNo);
-		
 		Map<String,Object> message = new HashMap<>();
 		message.put("likeresult", result);
 		dataRequest.setMetadata(true, message);
@@ -50,10 +53,10 @@ public class LikeController {
 		
 		// 세션 적용
 		HttpSession session = request.getSession(false);
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String memberEmail = memberVO.getMemberEmail();
-		if(memberEmail == null || memberEmail == "") {
-			return new UIView();
+		String memberEmail = null;
+		if(session != null) {
+			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
 		}
 		System.out.println("mealkitNo : "+mealkitNo);
 		int result = likeService.showLike(memberEmail, mealkitNo);
@@ -73,13 +76,13 @@ public class LikeController {
 	
 	@RequestMapping("/findMealkitLikeList")
 	public View findMealkitLikeList(HttpServletRequest request,DataRequest dataRequest) {
-		// 로그인 확인
+		// 세션 적용
 		HttpSession session = request.getSession(false);
-		if(session == null || session.getAttribute("member") == null) {
-			return new UIView("ui/member/login-form.clx");
+		String memberEmail = null;
+		if(session != null) {
+			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
 		}
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String memberEmail = memberVO.getMemberEmail();
 		
 		// 밀키트 찜 리스트 출력
 		List<MealkitboardVO> mllist = likeService.findMealkitLikeList(memberEmail);
@@ -128,10 +131,11 @@ public class LikeController {
 		
 		// 세션 적용
 		HttpSession session = request.getSession(false);
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String memberEmail = memberVO.getMemberEmail();
-		if(memberEmail == null || memberEmail == "") {
-			return new UIView();
+		String memberEmail = null;
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
 		}
 		int result = likeService.showRecipeLike(recipeBoardId,memberEmail);
 		if(result == 0) {

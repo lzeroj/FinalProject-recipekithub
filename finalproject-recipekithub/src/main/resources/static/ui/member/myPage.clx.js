@@ -317,6 +317,9 @@
 							(function(container){
 								var image_1 = new cpr.controls.Image("profileImg");
 								image_1.fallbackSrc = "theme/images/icon/chefimg.png";
+								image_1.style.css({
+									"border-radius" : "100px"
+								});
 								image_1.bind("src").toDataSet(app.lookup("ds_profile"), "memberImage", 0);
 								container.addChild(image_1, {
 									"top": "0px",

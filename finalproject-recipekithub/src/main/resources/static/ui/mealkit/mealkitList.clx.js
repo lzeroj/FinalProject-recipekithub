@@ -152,7 +152,7 @@
 				//console.log("mealkitList = " + mealkitList);
 				var container = app.lookup("grp");
 				for (var i = 0; i < mealkitAllList.length; i++) {
-					(function(index) {
+					(function(index) { 
 						var mealkit = new udc.mealkitList();
 						mealkit.img = "/upload/mealkit/" + mealkitAllList[i].mealkitImage;
 						var mealkitNo = mealkitAllList[i].mealkitNo

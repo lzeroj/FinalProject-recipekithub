@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.DeclarationService;
 import org.kosta.recipekithub.model.service.RecipeBoardService;
 import org.kosta.recipekithub.model.vo.DeclarationVO;
+import org.kosta.recipekithub.model.vo.MemberVO;
 import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,11 +39,14 @@ public class DeclarationController {
 		if(recipeBoardId == 0) {
 			return new UIView();
 		}
-//		 로그인 확인
-//		HttpSession session = request.getSession(false);
-//		MemberVO member = (MemberVO) session.getAttribute("member");
-//		String memberId = member.getMemberEmail();
-		String memberEmail = "shj";
+		
+		// 세션 적용
+		HttpSession session = request.getSession(false);
+		String memberEmail = null;
+		if(session != null) {
+			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
+		}
 		
 		DeclarationVO dvo = new DeclarationVO();
 		dvo.setMemberEmail(memberEmail);
