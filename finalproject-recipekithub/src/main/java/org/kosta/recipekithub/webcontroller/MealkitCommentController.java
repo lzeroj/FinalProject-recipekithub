@@ -41,8 +41,8 @@ public class MealkitCommentController {
 		ParameterGroup param = dataRequest.getParameterGroup("commentMap");
 		String comment = param.getValue("comment");
 		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo"));
-		double star = Double.parseDouble(param.getValue("star"));
-		
+		double star = Integer.parseInt(param.getValue("star"));
+		System.out.println("star = " + star);
 		log.info("comment, mealkitNo, star = {}, {},{} ", comment, mealkitNo, star);
 		HttpSession session = request.getSession(false);
 		MemberVO member = (MemberVO)session.getAttribute("member");

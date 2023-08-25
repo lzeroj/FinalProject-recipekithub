@@ -67,9 +67,7 @@
 				recipeCommentsub.send();
 				
 				// 현준
-				app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 				app.lookup("subrecipelikecount").send();
-				
 			}
 
 			/*
@@ -249,6 +247,7 @@
 			function onSubrecipelikecountSubmitSuccess(e) {
 				var subrecipelikecount = e.control;
 				var countRecipeLike = subrecipelikecount.getMetadata("countRecipeLike");
+				console.log(countRecipeLike);
 				var showlikestatus = subrecipelikecount.getMetadata("showlikestatus");
 				var likeimg = app.lookup("likeimg");
 				if (showlikestatus == 0) {
@@ -257,7 +256,9 @@
 					likeimg.src = "theme/images/mealkit/heart_fill.png";
 				}
 				likeimg.redraw();
-				
+				if(countRecipeLike == null){
+					
+				}
 				app.lookup("opt1").text = countRecipeLike;
 				app.lookup("opt1").redraw();
 			}

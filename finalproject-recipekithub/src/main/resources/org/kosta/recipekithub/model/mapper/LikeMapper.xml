@@ -37,7 +37,11 @@
 	</delete>
 	
 	<select id="showRecipeLike" resultType="int">
-		SELECT count(*) FROM LIKE_RKH WHERE MEMBER_EMAIL = #{memberEmail} AND RECIPE_BOARD_ID = #{recipeBoardId}
+		SELECT count(*) FROM LIKE_RKH WHERE
+		<if test="memberEmail != null">
+			MEMBER_EMAIL = #{memberEmail} AND
+		</if>
+		RECIPE_BOARD_ID = #{recipeBoardId}
 	</select>
 	
 	<!-- 레시피 좋아요 리스트 -->

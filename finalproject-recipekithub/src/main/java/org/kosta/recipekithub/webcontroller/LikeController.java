@@ -107,17 +107,16 @@ public class LikeController {
 
 	// 레시피 좋아요
 	@RequestMapping("/countRecipeLikeList")
-	public View countRecipeLikeList(HttpServletRequest request,DataRequest dataRequest,String recipeBoardId) {
+	public View countRecipeLikeList(HttpServletRequest request,DataRequest dataRequest,int recipeBoardId) {
 		// 세션 적용
 		HttpSession session = request.getSession(false);
-		if(session == null || session.getAttribute("member") == null) {
-			return new UIView("ui/member/login-form.clx");
+		String memberEmail = null;
+		if(session != null) {
+			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
 		}
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String memberEmail = memberVO.getMemberEmail();
-		
-		int result = likeService.countRecipeLikeList(Integer.parseInt(recipeBoardId));
-		int showlike = likeService.showRecipeLike(Integer.parseInt(recipeBoardId),memberEmail);
+		int result = likeService.countRecipeLikeList(recipeBoardId);
+		int showlike = likeService.showRecipeLike(recipeBoardId,memberEmail);
 		Map<String,Object> message = new HashMap<String, Object>();
 		message.put("countRecipeLike", result);
 		message.put("showlikestatus", showlike);

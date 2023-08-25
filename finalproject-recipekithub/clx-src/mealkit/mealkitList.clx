@@ -46,10 +46,10 @@
     </cl:udc>
     <cl:group std:sid="group-f7dd2b85">
       <cl:verticaldata std:sid="v-data-ddb86633" width="1114px" height="345px"/>
-      <cl:navigationbar std:sid="n-bar-2cf3bfa1" id="mealkitType" style="padding-top:0px; font-size:13px; padding-right:0px;">
+      <cl:navigationbar std:sid="n-bar-2cf3bfa1" id="mealkitType" style="padding-top:0px; font-weight:17.0; padding-right:0px;">
         <cl:listener std:sid="listener-49c7e2a9" name="selection-change" handler="onSortSelectionChange"/>
         <cl:datamapbind property="value" datacontrolid="meCategory" columnname="mealkitType"/>
-        <cl:xylayoutdata std:sid="xyl-data-15947996" top="20px" right="10px" left="10px" height="106px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-15947996" top="34px" width="1094px" height="75px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:menuitem std:sid="m-item-32659c61" label="전체" value="전체"/>
         <cl:menuitem std:sid="m-item-ba4ea216" label="한식" value="한식"/>
         <cl:menuitem std:sid="m-item-3fae6fec" label="양식" value="양식"/>
