@@ -83,7 +83,7 @@
     <cl:listener std:sid="listener-a5efa734" name="unload" handler="onBodyUnload"/>
     <cl:listener std:sid="listener-ebf238b4" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-e9f8bd7b" style="background-color:#86D2A7; background-size:cover; background-position:center;">
-      <cl:flowlayoutdata std:sid="f-data-fa9964cc" width="1920px" height="1080px"/>
+      <cl:verticaldata std:sid="v-data-0ecb6098" width="1920px" height="1080px"/>
       <cl:group std:sid="group-bcaaf89d" style="border-radius:5px; background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg3_1920.png); background-position:center;">
         <cl:xylayoutdata std:sid="xyl-data-c241c26b" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:tabfolder std:sid="t-folder-140356dc">
@@ -331,7 +331,7 @@
       </cl:group>
       <cl:xylayout std:sid="xylayout-1abeba9d"/>
     </cl:group>
-    <cl:flowlayout std:sid="f-layout-0b30bf65"/>
+    <cl:verticallayout std:sid="v-layout-da080cfd"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

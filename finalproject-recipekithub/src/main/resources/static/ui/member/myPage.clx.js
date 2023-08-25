@@ -393,24 +393,19 @@
 						"width": "1230px",
 						"left": "calc(50% - 615px)"
 					});
-					var userDefinedControl_1 = new udc.headerMyPage();
-					userDefinedControl_1.style.css({
-						"border-bottom-color" : "#62a40c",
-						"border-bottom-width" : "3px",
-						"border-bottom-style" : "solid"
-					});
+					var userDefinedControl_1 = new udc.footer();
 					container.addChild(userDefinedControl_1, {
-						"top": "0px",
-						"right": "0px",
-						"left": "0px",
-						"height": "200px"
-					});
-					var userDefinedControl_2 = new udc.footer();
-					container.addChild(userDefinedControl_2, {
 						"top": "973px",
 						"bottom": "0px",
 						"width": "1920px",
 						"left": "calc(50% - 960px)"
+					});
+					var userDefinedControl_2 = new udc.header4();
+					container.addChild(userDefinedControl_2, {
+						"top": "0px",
+						"left": "0px",
+						"width": "1920px",
+						"height": "200px"
 					});
 				})(group_2);
 				container.addChild(group_2, {
