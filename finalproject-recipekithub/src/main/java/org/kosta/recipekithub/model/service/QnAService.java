@@ -9,7 +9,7 @@ public interface QnAService {
 
 	int insertQnA(String memberEmail, String boardTitle, String boardContent);
 
-	List<QnAVO> selectQnaList();
+	List<QnAVO> selectQnaList(String memberEmail);
 
 	QnAVO selectQnaDetail(int boardId);
 

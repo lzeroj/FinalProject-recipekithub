@@ -15,6 +15,11 @@
           <cl:datacolumn std:sid="d-column-c1a8d91c" name="likeYN"/>
         </cl:datacolumnlist>
       </cl:dataset>
+      <cl:datamap std:sid="d-map-baa20605" id="dmdeletemealkit">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-16f0cf99" name="mealkitNo"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-4ef7f6f0" id="submealkitlikelist" action="/findMealkitLikeList">
         <cl:listener std:sid="listener-e269872d" name="submit-success" handler="onSubmealkitlikelistSubmitSuccess"/>
         <cl:responsedata dataid="mealkitLikeList"/>
@@ -22,7 +27,7 @@
       <cl:submission std:sid="submission-af87e0fd" id="subdeletemelkiktlike" action="/clickLike" mediatype="application/x-www-form-urlencoded;simple">
         <cl:listener std:sid="listener-d773c0df" name="submit-success" handler="onSubdeletemelkiktlikeSubmitSuccess"/>
         <cl:listener std:sid="listener-c05962de" name="submit-done" handler="onSubdeletemelkiktlikeSubmitDone"/>
-        <cl:requestdata dataid="mealkitLikeList"/>
+        <cl:requestdata dataid="dmdeletemealkit"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -38,7 +43,7 @@
         <cl:xylayoutdata std:sid="xyl-data-efd923e8" top="60px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:grid std:sid="grid-df701717" id="grd1" readonly="true" datasetid="mealkitLikeList" selectionunit="cell">
           <cl:listener std:sid="listener-831d0e17" name="cell-click" handler="onGrd1CellClick"/>
-          <cl:xylayoutdata std:sid="xyl-data-9effb366" top="15px" right="15px" bottom="15px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:xylayoutdata std:sid="xyl-data-9effb366" top="15px" right="15px" bottom="50px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
           <cl:gridcolumn std:sid="g-column-809c5551" width="20px"/>
           <cl:gridcolumn std:sid="g-column-20491fdc" width="140px"/>
           <cl:gridcolumn std:sid="g-column-2062c974" width="115px"/>
@@ -66,6 +71,10 @@
             </cl:gridcell>
           </cl:griddetail>
         </cl:grid>
+        <cl:button std:sid="button-ba44be39" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="해당 밀키트 확인">
+          <cl:listener std:sid="listener-dea8e1c8" name="click" handler="onButtonClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-8bfafebf" right="15px" bottom="10px" width="120px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+        </cl:button>
         <cl:xylayout std:sid="xylayout-be7da28c"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-e97e04ed"/>
