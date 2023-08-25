@@ -632,6 +632,7 @@
 				
 				// UI Configuration
 				var group_1 = new cpr.controls.Container();
+				group_1.style.setClasses(["footer"]);
 				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
 				group_1.setLayout(xYLayout_1);
 				(function(container){
