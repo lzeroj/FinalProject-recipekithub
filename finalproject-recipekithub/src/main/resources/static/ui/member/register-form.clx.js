@@ -675,8 +675,8 @@
 			});
 			
 			// Layout
-			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
-			container.setLayout(flowLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();

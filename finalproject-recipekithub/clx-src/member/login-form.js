@@ -73,7 +73,14 @@ function setTimedSessionData(key, value, expirationMinutes) {
  */
 function onSub_loginSubmitError(e) {
 	var sub_login = e.control;
-	alert("회원 정보를 다시 확인해주시기 바랍니다.");
+	var initValue = "회원 정보를/n다시 확인해주시기 바랍니다.";
+	app.openDialog("dialog/registerChkPopup", {
+		width: 400, height: 300, headerClose: true
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			dialogApp.initValue = initValue;
+		});
+	});
 }
 
 /*

@@ -9,7 +9,6 @@
 		onPrepare: function(loader) {
 			loader.addCSS("theme/cleopatra-theme.css");
 			loader.addCSS("theme/custom-theme.css");
-			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -21,6 +20,21 @@
 			 * @author kjoon
 			 ************************************************/
 
+			function getTimedSessionData(key) {
+				var storedData = sessionStorage.getItem(key);
+				
+				if (storedData) {
+					var data = JSON.parse(storedData);
+					var currentTime = new Date().getTime();
+					
+					if (currentTime < data.expirationTime) {
+						return data.value;
+					} else {
+						sessionStorage.removeItem(key);
+					}
+				}
+				return null;
+			}
 
 			/*
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
@@ -28,8 +42,32 @@
 			 */
 			function onBodyLoad(e) {
 				//sessionStorage.getItem("memsession");
+				
 				var submission = app.lookup("sub_profile");
 				submission.send();
+				
+				/*
+				 * var sessionval = getTimedSessionData("memsession");
+				 * console.log(sessionval);
+				 * var memberVO = cpr.core.Platform.INSTANCE.getParameter("member");
+				 * console.log(memberVO);
+				 * if (sessionval == null || sessionval != memberVO.memberEmail) {
+				 * 	app.lookup("btnMemUpdate").visible = false;
+				 * 	app.lookup("btnMemDelete").visible = false;
+				 * }
+				 * 
+				 * app.lookup("ipbEmail").text = memberVO.memberEmail;
+				 * app.lookup("ipbPassword1").text = memberVO.memberPassword;
+				 * app.lookup("ipbName").text = memberVO.memberName;
+				 * app.lookup("ipbNick").text = memberVO.memberNick;
+				 * app.lookup("address").text = memberVO.memberAddress;
+				 * app.lookup("postCode").text = memberVO.memberPostcode;
+				 * app.lookup("detailAddress").text = memberVO.memberAddressDetail;
+				 * app.lookup("ipbPhone").mask = memberVO.memberPhone;
+				 * app.lookup("ipbBirthday").value = memberVO.memberBirthday;
+				 * 
+				 * app.lookup("profileImg").src = "/upload/profile/" + memberVO.memberImage;
+				 */
 			}
 
 			/*
@@ -330,6 +368,7 @@
 					dataMap.setValue("memberEmail", app.lookup("ipbEmail").value);
 					var submission = app.lookup("sub_delete");
 					submission.send();
+					sessionStorage.clear();
 				});
 			}
 
@@ -340,7 +379,7 @@
 			function onSub_deleteSubmitSuccess(e) {
 				var sub_delete = e.control;
 				
-				var initValue = "지금까지 RecipeKitHub을 이용해주셔서 감사합니다!";
+				var initValue = "지금까지 RecipeKitHub을 이용해주셔서\n감사합니다!";
 				app.openDialog("dialog/registerChkPopup", {
 					width: 400, height: 300, resizable: false, headerMovable: false
 				}, function(dialog) {
@@ -853,6 +892,7 @@
 							"background-color" : "#0CA44E",
 							"border-radius" : "20px 20px 0px 0px",
 							"padding-top" : "10px",
+							"color" : "white",
 							"font-weight" : "bolder",
 							"padding-left" : "50px",
 							"padding-bottom" : "10px",
@@ -1076,7 +1116,6 @@
 										"rowIndex": 4
 									});
 									var image_1 = new cpr.controls.Image("profileImg");
-									image_1.src = "theme/images/common/user-darker.png";
 									image_1.fallbackSrc = "theme/images/icon/chefimg.png";
 									image_1.style.css({
 										"border-right-style" : "none",
