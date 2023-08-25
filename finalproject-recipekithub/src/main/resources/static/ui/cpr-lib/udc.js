@@ -632,6 +632,7 @@
 				
 				// UI Configuration
 				var group_1 = new cpr.controls.Container();
+				group_1.style.setClasses(["footer"]);
 				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
 				group_1.setLayout(xYLayout_1);
 				(function(container){
@@ -1221,34 +1222,42 @@
 					var sessionstrg = getTimedSessionData("memsession");
 					console.log("sessionstrg : "+sessionstrg);
 					if(sessionstrg == null || sessionstrg == ''){
-						alert("로그인이 필요한 작업입니다");
-						location.href="member/login-form.clx";
-					}
-					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
-						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
-							window.location.href = "/findMyCartForm";
-						}
-					} else {
-						//	window.location.href="/findMyCartForm";
-						
-						/** @type cpr.controls.EmbeddedApp */
-						var embeapp = app.getAppProperty("embe");
-						cpr.core.App.load("cart/cartForm", function( /*cpr.core.App*/ loadedApp) {
-							/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-							if (embeapp.getEmbeddedAppInstance()) {
-								embeapp.getEmbeddedAppInstance().dispose();
-							}
-							/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
-							if (loadedApp) {
-								/*초기값을 전달합니다.*/
-								embeapp.ready(function( /*cpr.controls.EmbeddedApp*/ embApp) {
-									//					embApp.initValue = voInitValue;
-								})
-								/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
-								embeapp.app = loadedApp;
+						app.getRootAppInstance().openDialog("dialog/needLogin", {
+							width: 400, height: 300, headerClose: true
+						}, function(dialog) {
+							dialog.ready(function(dialogApp) {
+								
+							});
+						}).then(function(returnValue){
+							if(returnValue == "ok"){
+								location.href="member/login-form.clx";
 							}
 						});
-						embeapp.redraw();
+					}else{
+						if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+							if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+								window.location.href = "/findMyCartForm";
+							}
+						} else {
+							/** @type cpr.controls.EmbeddedApp */
+							var embeapp = app.getAppProperty("embe");
+							cpr.core.App.load("cart/cartForm", function( /*cpr.core.App*/ loadedApp) {
+								/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+								if (embeapp.getEmbeddedAppInstance()) {
+									embeapp.getEmbeddedAppInstance().dispose();
+								}
+								/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+								if (loadedApp) {
+									/*초기값을 전달합니다.*/
+									embeapp.ready(function( /*cpr.controls.EmbeddedApp*/ embApp) {
+										//					embApp.initValue = voInitValue;
+									})
+									/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+									embeapp.app = loadedApp;
+								}
+							});
+							embeapp.redraw();
+						}
 					}
 				}
 	
@@ -1260,10 +1269,19 @@
 					var mypage = e.control;
 					var sessionval = getTimedSessionData("memsession");
 					if(sessionval == null || sessionval == ''){
-						alert("로그인이 필요한 작업입니다");
-						return;
+						app.getRootAppInstance().openDialog("dialog/needLogin", {
+							width: 400, height: 300, headerClose: true
+						}, function(dialog) {
+							dialog.ready(function(dialogApp) {
+								
+							});
+						}).then(function(returnValue){
+							if(returnValue == "ok"){
+								console.log(returnValue);
+								location.href="member/login-form.clx";
+							}
+						});
 					}
-					
 					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
 						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
 							window.location.href = "/findMyPageForm";
@@ -1431,8 +1449,18 @@
 					} else {
 						var sessionval = getTimedSessionData("memsession");
 						if (sessionval == null) {
-							alert("로그인이 필요합니다. \n로그인 페이지로 이동합니다.");
-							window.location.href = "/memberUI/loginForm";
+							app.getRootAppInstance().openDialog("dialog/needLogin", {
+								width: 400, height: 300, headerClose: true
+							}, function(dialog) {
+								dialog.ready(function(dialogApp) {
+									
+								});
+							}).then(function(returnValue){
+								if(returnValue == "ok"){
+									console.log(returnValue);
+									location.href="member/login-form.clx";
+								}
+							});
 						} else {
 							var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
 							_httpPostMethod.submit();

@@ -15,7 +15,7 @@
     <cl:appspec/>
   </head>
   <body std:sid="body-ae3aca0a" style="top:0px; left:0px; width:1920px; height:100px;">
-    <cl:group std:sid="group-34fc9b15">
+    <cl:group std:sid="group-34fc9b15" class="footer">
       <cl:verticaldata std:sid="v-data-a6dc266a" width="1920px" height="100px"/>
       <cl:group std:sid="group-924c3d6f">
         <cl:xylayoutdata std:sid="xyl-data-b0a77454" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>

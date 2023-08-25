@@ -21,8 +21,8 @@ public class QnAServiceImpl implements QnAService {
 	}
 
 	@Override
-	public List<QnAVO> selectQnaList() {
-		return qnAMapper.selectQnaList();
+	public List<QnAVO> selectQnaList(String memberEmail) {
+		return qnAMapper.selectQnaList(memberEmail);
 	}
 
 	@Override

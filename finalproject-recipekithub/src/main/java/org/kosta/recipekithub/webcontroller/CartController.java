@@ -41,7 +41,6 @@ public class CartController {
 			return new UIView("ui/member/login-form.clx");
 		}
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-
 		
 		List<CartVO> myCartInfo = new ArrayList<>();
 		if(memberVO != null) {
@@ -79,10 +78,11 @@ public class CartController {
 	
 	@RequestMapping("/updateMyCart") //밀키트 이름이 똑같으면 exception 남
 	public View updateMyCart(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest, String cartDetailQuantity, String mealkitName) {
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberEmail("shj");
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("member") == null) {
+			return new UIView("ui/member/login-form.clx");
+		}
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		if(memberVO != null) {
 			// 장바구니 번호 조회
 			CartVO cvo = cartService.findCartNoByMemberEmail(memberVO.getMemberEmail());
@@ -127,10 +127,11 @@ public class CartController {
 		int mealkitNo = Integer.parseInt(param.getValue("mealkitNo")); //해당 페이지의 밀키트 번호
 		int cartDetailQuantity = Integer.parseInt(param.getValue("cartDetailQuantity")); //밀키트 수량
 		
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberEmail("shj");
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("member") == null) {
+			return new UIView("ui/member/login-form.clx");
+		}
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String memberEmail = memberVO.getMemberEmail();
 		String cartN1o = cartService.findMyCartStatusYN(memberEmail);
 		
@@ -177,16 +178,7 @@ public class CartController {
 	@RequestMapping("/findSalesRankAdmin")
 	public View findSalesRankAdmin(HttpServletRequest request,HttpServletResponse response,DataRequest dataRequest) {
 		List<SalesVO> salesRankList = cartService.findSalesRankAdmin();
-//		List<SalesVO> mealkitTotalPrice = new ArrayList<>();
-//		SalesVO shartVO = null;
-//		for(int i=0;i<salesRankList.size();i++) {
-//			shartVO = new SalesVO();
-//			shartVO.setMealkitTotalPrice(salesRankList.get(i).getMealkitTotalPrice()+"원");
-//			mealkitTotalPrice.add(shartVO);
-//			System.out.println(mealkitTotalPrice.get(i).toString());
-//		}
 		dataRequest.setResponse("dsmealkitSalesAdmin", salesRankList);
-//		dataRequest.setResponse("dsmealkitTotalPrice", mealkitTotalPrice);
 		return new JSONDataView();
 	}
 	

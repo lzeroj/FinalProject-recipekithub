@@ -55,3 +55,24 @@ function onSubdeleteRecipeLikeSubmitSuccess(e){
 	var subdeleteRecipeLike = e.control;
 	app.lookup("grd1").redraw();
 }
+
+/*
+ * "레시피로 가기" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick(e){
+	var button = e.control;
+	var grd1 = app.lookup("grd1");
+	var index = grd1.getSelectedIndices()[0].rowIndex;
+	var recipeBoardId = grd1.getCellValue(index, 1);
+	if(recipeBoardId == null || recipeBoardId == '' || index == null){
+		app.openDialog("dialog/noSelectCell", {width: 400, height: 300, headerClose: true
+		}, function(dialog){
+			dialog.ready(function(dialogApp) {
+				dialogApp.initValue = "원하는 행을 선택해주세요";
+			});
+		});
+	}else{
+		window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
+	}
+}

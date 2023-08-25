@@ -25,12 +25,8 @@
 			function onBodyLoad(e){
 				var host = app.getHost();
 				var val = host.initValue;
-				console.log(val.memberEmail);
-				console.log(val.memberNick);
-				console.log(val.memberImage);
 				app.lookup("memberimg").src = val.memberImage;
 				app.lookup("memberinfo").text = "  "+val.memberNick+"님의 레시피 목록 입니다";
-				
 				app.lookup("dmmemberEmail").setValue("memberEmail", val.memberEmail);
 				app.lookup("subfindChefRecipeListByMemberEmail").send();
 			}
@@ -150,6 +146,7 @@
 					"rowSpan": 1
 				});
 				var image_1 = new cpr.controls.Image("memberimg");
+				image_1.fallbackSrc = "theme/images/icon/chefimg.png";
 				image_1.style.css({
 					"border-radius" : "100px"
 				});

@@ -74,6 +74,7 @@
 			
 			// Layout
 			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.spacing = 0;
 			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
@@ -90,17 +91,22 @@
 				}
 				container.addChild(userDefinedControl_1, {
 					"width": "1920px",
-					"height": "200px"
+					"height": "210px"
 				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"background-color" : "transparent",
 					"background-size" : "cover",
-					"background-image" : "url('theme/images/common/bgimg10.png')",
+					"background-image" : "url('theme/images/common/bgimgfinal.png')",
 					"background-position" : "center"
 				});
 				var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
 				verticalLayout_3.scrollable = false;
+				verticalLayout_3.spacing = 20;
+				verticalLayout_3.leftMargin = 20;
+				verticalLayout_3.rightMargin = 20;
+				verticalLayout_3.topMargin = 20;
+				verticalLayout_3.bottomMargin = 20;
 				group_2.setLayout(verticalLayout_3);
 				(function(container){
 					var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
@@ -113,20 +119,20 @@
 				container.addChild(group_2, {
 					"autoSize": "height",
 					"width": "1920px",
-					"height": "790px",
-					"minHeight": 790
+					"height": "762px",
+					"minHeight": 762
 				});
 				var userDefinedControl_2 = new udc.footer();
 				container.addChild(userDefinedControl_2, {
 					"width": "1920px",
-					"height": "90px"
+					"height": "103px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
 				"autoSize": "height",
 				"width": "1920px",
-				"height": "1090px",
-				"minHeight": 1090
+				"height": "1080px",
+				"minHeight": 1080
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);

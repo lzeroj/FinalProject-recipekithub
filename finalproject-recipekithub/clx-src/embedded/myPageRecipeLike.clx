@@ -43,7 +43,7 @@
         <cl:xylayoutdata std:sid="xyl-data-b3a813f8" top="60px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:grid std:sid="grid-8b296a2e" id="grd1" readonly="true" datasetid="dsrecipelikelist" selectionunit="cell">
           <cl:listener std:sid="listener-7a12bdc3" name="cell-click" handler="onGrd1CellClick"/>
-          <cl:xylayoutdata std:sid="xyl-data-e2fe0166" top="15px" right="15px" bottom="15px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:xylayoutdata std:sid="xyl-data-e2fe0166" top="15px" right="15px" bottom="50px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
           <cl:gridcolumn std:sid="g-column-4abecd04" width="30px"/>
           <cl:gridcolumn std:sid="g-column-92379872" width="57px"/>
           <cl:gridcolumn std:sid="g-column-a4f5daae" width="60px"/>
@@ -81,6 +81,10 @@
             </cl:gridcell>
           </cl:griddetail>
         </cl:grid>
+        <cl:button std:sid="button-ba44be39" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="레시피로 가기">
+          <cl:listener std:sid="listener-26c1c685" name="click" handler="onButtonClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-1f687f4e" right="15px" bottom="10px" width="120px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+        </cl:button>
         <cl:xylayout std:sid="xylayout-9a2135bd"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-2b100e0d"/>
