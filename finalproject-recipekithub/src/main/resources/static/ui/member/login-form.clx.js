@@ -90,7 +90,14 @@
 			 */
 			function onSub_loginSubmitError(e) {
 				var sub_login = e.control;
-				alert("회원 정보를 다시 확인해주시기 바랍니다.");
+				var initValue = "회원 정보를/n다시 확인해주시기 바랍니다.";
+				app.openDialog("dialog/registerChkPopup", {
+					width: 400, height: 300, headerClose: true
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = initValue;
+					});
+				});
 			}
 
 			/*
@@ -233,7 +240,9 @@
 				submission_1.addEventListener("submit-error", onSub_loginSubmitError);
 			}
 			app.register(submission_1);
-			app.supportMedia("all and (min-width: 1024px)", "default");
+			app.supportMedia("all and (min-width: 1920px)", "FHD");
+			app.supportMedia("all and (min-width: 1440px) and (max-width: 1919px)", "new-screen");
+			app.supportMedia("all and (min-width: 1024px) and (max-width: 1439px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
 			
@@ -273,7 +282,7 @@
 					"background-color" : "#F4FAEC",
 					"background-repeat" : "no-repeat",
 					"background-size" : "cover",
-					"background-image" : "url('theme/images/member/20.png')",
+					"background-image" : "url('theme/images/common/bgimg3_1920.png')",
 					"background-position" : "center"
 				});
 				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
@@ -537,25 +546,39 @@
 			container.addChild(group_1, {
 				positions: [
 					{
-						"media": "all and (min-width: 1024px)",
-						"top": "2px",
-						"left": "2px",
-						"width": "1024px",
-						"height": "768px"
+						"media": "all and (min-width: 1920px)",
+						"top": "0px",
+						"right": "0px",
+						"bottom": "0px",
+						"left": "0px"
+					}, 
+					{
+						"media": "all and (min-width: 1440px) and (max-width: 1919px)",
+						"top": "0px",
+						"right": "0px",
+						"bottom": "0px",
+						"left": "0px"
+					}, 
+					{
+						"media": "all and (min-width: 1024px) and (max-width: 1439px)",
+						"top": "0px",
+						"right": "0px",
+						"bottom": "0px",
+						"left": "0px"
 					}, 
 					{
 						"media": "all and (min-width: 500px) and (max-width: 1023px)",
-						"top": "2px",
-						"left": "1px",
-						"width": "500px",
-						"height": "768px"
+						"top": "0px",
+						"right": "0px",
+						"bottom": "0px",
+						"left": "0px"
 					}, 
 					{
 						"media": "all and (max-width: 499px)",
-						"top": "2px",
-						"left": "1px",
-						"width": "350px",
-						"height": "768px"
+						"top": "0px",
+						"right": "0px",
+						"bottom": "0px",
+						"left": "0px"
 					}
 				]
 			});

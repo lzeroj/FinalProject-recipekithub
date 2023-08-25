@@ -1743,13 +1743,19 @@
 									"border-top-style" : "none"
 								});
 								comboBox_1.style.list.css({
-									"border-radius" : "10px",
 									"border-right-style" : "none",
-									"box-shadow" : "3px 3px 5px 5px gray",
+									"padding-top" : "10px",
 									"white-space" : "normal",
+									"padding-left" : "10px",
+									"vertical-align" : "middle",
+									"padding-bottom" : "10px",
+									"border-top-style" : "none",
+									"border-radius" : "10px",
+									"box-shadow" : "3px 3px 5px 5px gray",
 									"border-left-style" : "none",
 									"border-bottom-style" : "none",
-									"border-top-style" : "none"
+									"padding-right" : "10px",
+									"text-align" : "left"
 								});
 								comboBox_1.style.button.css({
 									"padding-right" : "10px"
@@ -1762,10 +1768,10 @@
 									"white-space" : "normal",
 									"border-right-width" : "0px",
 									"font-weight" : "bolder",
-									"padding-left" : "30px",
+									"padding-left" : "20px",
 									"border-left-color" : "#ffffff",
 									"padding-bottom" : "20px",
-									"font-size" : "20px",
+									"font-size" : "18px",
 									"border-right-color" : "#ffffff",
 									"border-left-width" : "0px",
 									"border-top-style" : "solid",
@@ -1875,6 +1881,7 @@
 								"rowIndex": 0
 							});
 							var comboBox_2 = new cpr.controls.ComboBox("cmb1");
+							comboBox_2.buttonImage = "udc/url(../theme/images/member/transparentImg.png)";
 							comboBox_2.preventInput = true;
 							comboBox_2.style.css({
 								"border-right-style" : "none",
@@ -1902,7 +1909,7 @@
 								"font-weight" : "bolder",
 								"padding-left" : "20px",
 								"padding-bottom" : "20px",
-								"font-size" : "20px",
+								"font-size" : "18px",
 								"font-family" : "푸른전남 Medium",
 								"text-align" : "left",
 								"padding-right" : "20px"

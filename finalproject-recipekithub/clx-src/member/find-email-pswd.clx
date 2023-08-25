@@ -45,18 +45,18 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-c044c821">
+  <body std:sid="body-c044c821" style="background-color:#F4FAEC;">
     <cl:group std:sid="group-1fde106f">
-      <cl:flowlayoutdata std:sid="f-data-39acee2e" width="1920px" height="1080px"/>
+      <cl:verticaldata std:sid="v-data-8f840bdd" width="1920px" height="1080px"/>
       <cl:udc std:sid="ud-control-c123483e" type="udc.header3">
-        <cl:xylayoutdata std:sid="xyl-data-970ae750" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:verticaldata std:sid="v-data-3612a81c" width="1920px" height="205px"/>
       </cl:udc>
       <cl:group std:sid="group-cb9a5a54" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
-        <cl:xylayoutdata std:sid="xyl-data-b4887c6c" top="200px" bottom="100px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+        <cl:verticaldata std:sid="v-data-526235b1" width="1920px" height="762px" syncminheight="false" autosize="height"/>
         <cl:group std:sid="group-e743ec30">
-          <cl:xylayoutdata std:sid="xyl-data-007b248e" top="20px" left="20px" width="1880px" height="740px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:verticaldata std:sid="v-data-7d2767eb" width="1880px" height="740px"/>
           <cl:tabfolder std:sid="t-folder-e86d9d0f">
-            <cl:xylayoutdata std:sid="xyl-data-0bc96855" width="880px" height="610px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+            <cl:verticaldata std:sid="v-data-17be908e" width="880px" height="610px"/>
             <cl:tabitem std:sid="t-item-ad46741c" name="tabFindEmail" selected="true" text="Email 찾기">
               <cl:group std:sid="group-142616c9">
                 <std:metadata>
@@ -196,16 +196,16 @@
             <cl:item-style style="background-color:#0CA44E; border-radius:20px 20px 0px 0px; padding-top:10px; padding-left:50px; font-size:24px; padding-bottom:10px; font-family:푸른전남 Medium; text-align:center; padding-right:50px;"/>
             <cl:body-style style="border-radius:0px 10px 20px 20px; font-family:푸른전남 Medium;"/>
           </cl:tabfolder>
-          <cl:xylayout std:sid="xylayout-61893839"/>
+          <cl:verticallayout std:sid="v-layout-e49dabf3" distribution="center" topmargin="50"/>
         </cl:group>
-        <cl:xylayout std:sid="xylayout-3e1bbfd9"/>
+        <cl:verticallayout std:sid="v-layout-5b80643a"/>
       </cl:group>
       <cl:udc std:sid="ud-control-101e92b1" type="udc.footer">
-        <cl:xylayoutdata std:sid="xyl-data-0bcc2f5b" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+        <cl:verticaldata std:sid="v-data-af4f1266" width="1920px" height="100px"/>
       </cl:udc>
-      <cl:xylayout std:sid="xylayout-79bdcb39"/>
+      <cl:verticallayout std:sid="v-layout-c6d358f6"/>
     </cl:group>
-    <cl:flowlayout std:sid="f-layout-58fae0ab"/>
+    <cl:verticallayout std:sid="v-layout-84ec05e5"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

@@ -42,9 +42,9 @@
               <cl:formdata std:sid="f-data-74e6790f" row="0" col="0"/>
               <cl:item std:sid="t-item-86ed32a7" label="레시피" value="레시피" icon=""/>
               <cl:item std:sid="t-item-e0af8fd8" label="밀키트" value="밀키트"/>
-              <cl:liststyle style="border-radius:10px; border-right-style:none; box-shadow:3px 3px 5px 5px gray; white-space:normal; border-left-style:none; border-bottom-style:none; border-top-style:none;"/>
+              <cl:liststyle style="border-right-style:none; padding-top:10px; white-space:normal; padding-left:10px; vertical-align:middle; padding-bottom:10px; border-top-style:none; border-radius:10px; box-shadow:3px 3px 5px 5px gray; border-left-style:none; border-bottom-style:none; padding-right:10px; text-align:left;"/>
               <cl:buttonstyle style="padding-right:10px;"/>
-              <cl:itemstyle style="border-right-style:solid; padding-top:20px; border-bottom-color:#ffffff; border-top-width:0px; white-space:normal; border-right-width:0px; font-weight:bolder; padding-left:30px; border-left-color:#ffffff; padding-bottom:20px; font-size:20px; border-right-color:#ffffff; border-left-width:0px; border-top-style:solid; border-radius:10px; border-left-style:solid; border-bottom-width:0px; border-top-color:#ffffff; border-bottom-style:solid; font-family:푸른전남 Medium; padding-right:20px; text-align:left;"/>
+              <cl:itemstyle style="border-right-style:solid; padding-top:20px; border-bottom-color:#ffffff; border-top-width:0px; white-space:normal; border-right-width:0px; font-weight:bolder; padding-left:20px; border-left-color:#ffffff; padding-bottom:20px; font-size:18px; border-right-color:#ffffff; border-left-width:0px; border-top-style:solid; border-radius:10px; border-left-style:solid; border-bottom-width:0px; border-top-color:#ffffff; border-bottom-style:solid; font-family:푸른전남 Medium; padding-right:20px; text-align:left;"/>
             </cl:combobox>
             <cl:formlayout std:sid="f-layout-4176e8a9" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
               <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
@@ -72,12 +72,12 @@
             <cl:listener std:sid="listener-aace7466" name="click" handler="onBtnWriteClick"/>
             <cl:formdata std:sid="f-data-49c286d3" row="0" col="3"/>
           </cl:button>
-          <cl:combobox std:sid="c-box-4a527f50" id="cmb1" style="border-right-style:none; background-color:#F4FAEC; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/common/loginoff.png); background-position:center; border-top-style:none;" preventinput="true">
+          <cl:combobox std:sid="c-box-4a527f50" id="cmb1" style="border-right-style:none; background-color:#F4FAEC; background-size:cover; border-left-style:none; border-bottom-style:none; background-image:url(../theme/images/common/loginoff.png); background-position:center; border-top-style:none;" buttonimage="url(../theme/images/member/transparentImg.png)" preventinput="true">
             <cl:listener std:sid="listener-004ce1a5" name="selection-change" handler="onCmb1SelectionChange"/>
             <cl:listener std:sid="listener-2c042a1b" name="open" handler="onCmb1Open"/>
             <cl:formdata std:sid="f-data-0a5f2441" row="0" col="4"/>
             <cl:liststyle style="border-radius:10px; padding-top:10px; box-shadow:3px 3px 5px 5px gray; padding-left:10px; vertical-align:middle; padding-bottom:10px; padding-right:10px; text-align:left;"/>
-            <cl:itemstyle style="border-radius:10px; padding-top:20px; font-weight:bolder; padding-left:20px; padding-bottom:20px; font-size:20px; font-family:푸른전남 Medium; text-align:left; padding-right:20px;"/>
+            <cl:itemstyle style="border-radius:10px; padding-top:20px; font-weight:bolder; padding-left:20px; padding-bottom:20px; font-size:18px; font-family:푸른전남 Medium; text-align:left; padding-right:20px;"/>
           </cl:combobox>
           <cl:output std:sid="output-33b374ed" id="opbLoginStatus" style="font-weight:bold; font-size:16px; line-height:2.0;" value="">
             <cl:formdata std:sid="f-data-af665947" row="0" col="0" rowspan="1" colspan="1" ignore-layout-spacing="true"/>

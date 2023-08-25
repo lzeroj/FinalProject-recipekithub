@@ -7,7 +7,6 @@
     <screen std:sid="screen-e0120e6c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <link std:sid="link-4252a4d7" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-85831bc4" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-6db5d72d" href="../theme/settings.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-026b268b">
       <cl:dataset std:sid="d-set-80185aa1" id="ds_profile">
         <cl:datacolumnlist>
@@ -177,7 +176,7 @@
                       <cl:columns length="1" unit="FRACTION"/>
                     </cl:formlayout>
                   </cl:group>
-                  <cl:img std:sid="image-7e3a7f36" id="profileImg" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" src="../theme/images/common/user-darker.png" fallbacksrc="../theme/images/icon/chefimg.png">
+                  <cl:img std:sid="image-7e3a7f36" id="profileImg" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" fallbacksrc="../theme/images/icon/chefimg.png">
                     <cl:datasetbind property="src" datacontrolid="ds_profile" columnname="memberImage" rowindex="0"/>
                     <cl:formdata std:sid="f-data-958d5805" row="0" col="0"/>
                   </cl:img>
@@ -352,7 +351,7 @@
                 </cl:formlayout>
               </cl:group>
             </cl:tabitem>
-            <cl:item-style style="background-color:#0CA44E; border-radius:20px 20px 0px 0px; padding-top:10px; font-weight:bolder; padding-left:50px; padding-bottom:10px; font-size:30px; font-family:푸른전남 Medium; padding-right:50px;"/>
+            <cl:item-style style="background-color:#0CA44E; border-radius:20px 20px 0px 0px; padding-top:10px; color:white; font-weight:bolder; padding-left:50px; padding-bottom:10px; font-size:30px; font-family:푸른전남 Medium; padding-right:50px;"/>
             <cl:body-style style="border-radius:0px 10px 20px 20px;"/>
           </cl:tabfolder>
           <cl:xylayout std:sid="xylayout-efe83e9a"/>

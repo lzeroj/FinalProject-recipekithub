@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-273e2d3f" version="1.0.4584">
   <head std:sid="head-0cb6413c">
-    <screen std:sid="screen-dce8b91f" id="default" name="default" width="1024px" height="768px"/>
-    <screen std:sid="screen-62d040f5" id="tablet" name="tablet" width="500px" height="667px"/>
-    <screen std:sid="screen-2d2b7cf9" id="mobile" name="mobile" width="350px" height="525px"/>
     <link std:sid="link-6fab46b5" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-a08a8c61" href="../theme/controls/htmlobject.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-8d839f5d" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-924d6938" href="../theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
+    <screen std:sid="screen-70a9d335" id="FHD" name="FHD" minwidth="1920px" width="1920px" height="1080px" active="true"/>
+    <screen std:sid="screen-a7bac9b4" id="new-screen" name="new-screen" minwidth="1440px" maxwidth="1919px" width="1440px" height="900px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-bc8b8038" id="default" name="default" minwidth="1024px" maxwidth="1439px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-7c94eb40" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-6a00a6b5" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <cl:model std:sid="model-eca06b7b">
       <cl:dataset std:sid="d-set-a687e425" id="ds_member">
         <cl:datacolumnlist>
@@ -40,10 +42,10 @@
   <body std:sid="body-0689d0c1" style="border-right-style:none; border-bottom-color:#0ca44e; border-left-style:none; border-left-color:#0ca44e; border-top-color:#0ca44e; font-size:24px; border-bottom-style:none; font-family:'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif; border-right-color:#0ca44e; background-image:none; border-top-style:none;">
     <cl:listener std:sid="listener-da597450" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-61653a6f" style="background-color:#86D2A7;">
-      <cl:responsivexylayoutdata std:sid="rxyl-data-52af9b29">
-        <cl:xylayoutdata std:sid="sxyl-data-bde73034" top="2px" left="2px" width="1024px" height="768px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+      <cl:responsivexylayoutdata std:sid="rxyl-data-7c63a40f">
+        <cl:xylayoutdata std:sid="sxyl-data-25701b5a" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="FHD"/>
       </cl:responsivexylayoutdata>
-      <cl:group std:sid="group-29a94915" style="border-radius:5px; background-color:#F4FAEC; background-repeat:no-repeat; background-size:cover; background-image:url(../theme/images/member/20.png); background-position:center;">
+      <cl:group std:sid="group-29a94915" style="border-radius:5px; background-color:#F4FAEC; background-repeat:no-repeat; background-size:cover; background-image:url(../theme/images/common/bgimg3_1920.png); background-position:center;">
         <cl:xylayoutdata std:sid="xyl-data-bcc6bd39" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-934310e0" style="border-radius:10px; background-color:#FFFFFF;">
           <cl:xylayoutdata std:sid="xyl-data-2adf9e68" width="384px" height="628px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
@@ -122,7 +124,7 @@
       </cl:group>
       <cl:xylayout std:sid="xylayout-5a1143a8"/>
     </cl:group>
-    <cl:responsivexylayout std:sid="r-xylayout-6627c569"/>
+    <cl:responsivexylayout std:sid="r-xylayout-a8d6a7bc"/>
   </body>
   <std:studiosetting>
     <std:hruler/>
