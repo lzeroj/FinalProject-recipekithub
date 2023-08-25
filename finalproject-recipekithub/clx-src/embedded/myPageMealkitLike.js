@@ -41,17 +41,19 @@ function onBodyLoad(e){
  */
 function onGrd1CellClick(e){
 	var grd1 = e.control;
-	var grid = app.lookup("grd1");
-	var value = "theme/images/mealkit/heart_fill.png";
-	var image = app.lookup("likeimg");
-	if(e.cellIndex != 5){
+	var grid = app.lookup("grd1")
+	var index = grd1.getSelectedIndices()[0].rowIndex;
+	var cellIndex = grd1.getSelectedIndices()[0].cellIndex;
+	console.log(cellIndex);
+	var mealkitNo = grd1.getCellValue(index, "mealkitNo");
+	if(cellIndex != 4){
 		return ;
 	}else{
 		if(confirm("찜을 취소하시겠습니까? 취소하시면 목록에서 해당 밀키트가 삭제 됩니다")){
+			app.lookup("dmdeletemealkit").setValue("mealkitNo", mealkitNo);
 			app.lookup("subdeletemelkiktlike").send();
 		}
 	}
-	
 }
 
 /*
@@ -60,6 +62,7 @@ function onGrd1CellClick(e){
  */
 function onSubdeletemelkiktlikeSubmitSuccess(e){
 	var subdeletemelkiktlike = e.control;
+	
 	app.lookup("grd1").redraw();
 }
 
@@ -69,5 +72,27 @@ function onSubdeletemelkiktlikeSubmitSuccess(e){
  */
 function onSubdeletemelkiktlikeSubmitDone(e){
 	var subdeletemelkiktlike = e.control;
+	app.lookup("submealkitlikelist").send();
 	app.lookup("grd1").redraw();
+}
+
+/*
+ * "해당 밀키트 확인" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick(e){
+	var button = e.control;
+	var grd1 = app.lookup("grd1");
+	var index = grd1.getSelectedIndices()[0].rowIndex;
+	var recipeBoardId = grd1.getCellValue(index, 1);
+	if(recipeBoardId == null || recipeBoardId == '' || index == null){
+		app.openDialog("dialog/noSelectCell", {width: 400, height: 300, headerClose: true
+		}, function(dialog){
+			dialog.ready(function(dialogApp) {
+				dialogApp.initValue = "원하는 행을 선택해주세요";
+			});
+		});
+	}else{
+		window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
+	}
 }

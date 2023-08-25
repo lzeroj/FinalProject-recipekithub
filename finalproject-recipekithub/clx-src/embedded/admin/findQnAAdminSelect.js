@@ -91,7 +91,17 @@ function onSubinsertqnaanswerSubmitSuccess(e){
 	console.log(metadata);
 	console.log(metadata.insertResult);
 	if(metadata == 1){
-		alert("등록에 성공하였습니다");
+		app.openDialog("dialog/successQnARegister", {
+			width: 400, height: 300, headerVisible: false
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				
+			});
+		}).then(function(returnValue){
+			if(returnValue == "ok"){
+				app.lookup("grp1").redraw();
+			}
+		});
 	}
 }
 

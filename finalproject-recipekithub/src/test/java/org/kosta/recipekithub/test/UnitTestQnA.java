@@ -27,7 +27,7 @@ public class UnitTestQnA {
 	
 	@Test
 	public void selectQnaList() {
-		List<QnAVO> qnAList = qnAService.selectQnaList();
+		List<QnAVO> qnAList = qnAService.selectQnaList("shj");
 		Assertions.assertEquals(1, qnAList.size());
 	}
 	

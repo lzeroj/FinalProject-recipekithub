@@ -33,7 +33,7 @@
         <cl:formdata std:sid="f-data-9b42a8ff" row="3" col="0" rowspan="1" colspan="5"/>
         <cl:flowlayout std:sid="f-layout-80980ea2"/>
       </cl:group>
-      <cl:img std:sid="image-e55b91e9" id="memberimg" style="border-radius:100px;">
+      <cl:img std:sid="image-e55b91e9" id="memberimg" style="border-radius:100px;" fallbacksrc="../theme/images/icon/chefimg.png">
         <cl:formdata std:sid="f-data-57d0aa32" halign="CENTER" valign="CENTER" width="100" height="100" row="1" col="2"/>
       </cl:img>
       <cl:output std:sid="output-2e0ef401" id="memberinfo" style="font-weight:bold; font-size:20px;" value="Output">

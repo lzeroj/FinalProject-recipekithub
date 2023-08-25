@@ -141,6 +141,7 @@
 						});
 					})(i);
 				}
+				app.lookup("mealkitgrp").redraw();
 				
 			}
 
@@ -443,9 +444,6 @@
 				"width": "1200px",
 				"height": "292px"
 			});
-			if(typeof onBodyInit == "function"){
-				app.addEventListener("init", onBodyInit);
-			}
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
 			}

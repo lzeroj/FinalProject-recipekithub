@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.exception.NotEnoughStockException;
 import org.kosta.recipekithub.model.service.CartService;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.View;
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.spring.JSONDataView;
+import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,19 +39,16 @@ public class PaymentController {
 	public View paymentInsert(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		ParameterGroup param = dataRequest.getParameterGroup("paymentTotal");
 		int totalpay = Integer.parseInt(param.getValue("totalpay"));
-		System.out.println(totalpay);
 		
 		ParameterGroup parammealkit = dataRequest.getParameterGroup("selectList");
 		String[] mealkitary = parammealkit.getValues("mealkitName");
 		
-		for(int i=0;i<mealkitary.length;i++) {
-			System.out.println(mealkitary[i]);
+		// 로그인 확인
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("member") == null) {
+			return new UIView("ui/member/login-form.clx");
 		}
-		
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberEmail("shj");
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		if(memberVO != null) {
 			// 멤버의 활성화된 카트를 가져온다
 			CartVO cvo = cartService.findCartNoByMemberEmail(memberVO.getMemberEmail());
@@ -79,7 +78,6 @@ public class PaymentController {
 			} catch (NotEnoughStockException e) {
 				e.printStackTrace();
 				String message = e.getMessage();
-				
 				errormsg.put("errormsg", message);
 			}
 			dataRequest.setMetadata(true, errormsg);
@@ -89,10 +87,12 @@ public class PaymentController {
 	
 	@RequestMapping("/findMyPaymentList")
 	public View findMyPaymentList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberEmail("shj");
+		// 로그인 확인
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("member") == null) {
+			return new UIView("ui/member/login-form.clx");
+		}
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		
 		List<PaymentVO> paymentlist = paymentService.findMyPaymentList(memberVO.getMemberEmail());
 		
@@ -150,11 +150,16 @@ public class PaymentController {
 	@RequestMapping("/searchMyPaymentList")
 	public View searchMyPaymentList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest,String inputvalue, String combovalue) {
 		System.out.println(inputvalue+" "+combovalue);
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberEmail("shj");
+		
+		// 로그인 확인
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("member") == null) {
+			return new UIView("ui/member/login-form.clx");
+		}
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String memberId = memberVO.getMemberEmail();
+		
+		// 검색하기
 		List<PaymentVO> searchList = paymentService.searchMyPaymentList(memberId, combovalue, inputvalue);
 
 		// 밀키트 데이터
@@ -170,10 +175,6 @@ public class PaymentController {
 			mlvo = new MealkitboardVO();
 			mlvo.setMealkitName(searchList.get(i).getMealkitVO().getMealkitName());
 			mlvo.setMealkitNo(searchList.get(i).getMealkitVO().getMealkitNo());
-			
-//			int cartNO = searchList.get(i).getCartVO().getCartNo();
-//			int paymentId = searchList.get(i).getPaymentId();
-//			List<CartdetailVO> mealkitNameAndCount = paymentService.findMealkitNameAndCount(memberVO.getMemberEmail(), cartNO, paymentId);
 			
 			String mealkitName = null;
 			int cartDetailQuantity = 0;
@@ -195,7 +196,6 @@ public class PaymentController {
 				mealkitInfoDetailmap.put("mealkitdetailinfo", mealkitdetailinfo);
 				mealkitInfoDetailmap.put("mealkitdetail", mealkitdetail);
 				mealkitinfo.add(mealkitInfoDetailmap);
-//				System.out.println("mealkitdetailinfo : "+mealkitdetailinfo);
 			}
 			sendMealkitInfo.add(mlvo);
 		}
