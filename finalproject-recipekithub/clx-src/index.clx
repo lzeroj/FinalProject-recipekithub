@@ -16,26 +16,26 @@
   <body std:sid="body-742fa205" style="background-color:#F4FAEC;">
     <cl:listener std:sid="listener-def95c39" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-3afdffe4">
-      <cl:verticaldata std:sid="v-data-9c4a7130" width="1920px" height="1090px" syncminheight="true" autosize="height"/>
+      <cl:verticaldata std:sid="v-data-9c4a7130" width="1920px" height="1080px" syncminheight="true" autosize="height"/>
       <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
         <cl:listener std:sid="listener-e6ce5049" name="event" handler="onHeader3Event"/>
         <cl:listener std:sid="listener-d9a38060" name="logout" handler="onHeader3Logout"/>
-        <cl:verticaldata std:sid="v-data-6489a537" width="1920px" height="200px"/>
+        <cl:verticaldata std:sid="v-data-6489a537" width="1920px" height="210px"/>
         <cl:property name="embe" value="ea1" type="control"/>
       </cl:udc>
-      <cl:group std:sid="group-19106c56" style="background-color:transparent; background-size:cover; background-image:url(theme/images/common/bgimg10.png); background-position:center;">
-        <cl:verticaldata std:sid="v-data-371fd84c" width="1920px" height="790px" syncminheight="true" autosize="height"/>
+      <cl:group std:sid="group-19106c56" style="background-color:transparent; background-size:cover; background-image:url(theme/images/common/bgimgfinal.png); background-position:center;">
+        <cl:verticaldata std:sid="v-data-371fd84c" width="1920px" height="762px" syncminheight="true" autosize="height"/>
         <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1">
           <cl:verticaldata std:sid="v-data-c0fa0993" width="1880px" height="720px" autosize="height"/>
         </cl:embeddedapp>
-        <cl:verticallayout std:sid="v-layout-c4fbb140" scrollable="false"/>
+        <cl:verticallayout std:sid="v-layout-c4fbb140" scrollable="false" spacing="20" leftmargin="20" rightmargin="20" topmargin="20" bottommargin="20"/>
       </cl:group>
       <cl:udc std:sid="ud-control-6c3a3fe8" type="udc.footer">
-        <cl:verticaldata std:sid="v-data-92c3ffcc" width="1920px" height="90px"/>
+        <cl:verticaldata std:sid="v-data-92c3ffcc" width="1920px" height="103px"/>
       </cl:udc>
       <cl:verticallayout std:sid="v-layout-95db5ec0"/>
     </cl:group>
-    <cl:verticallayout std:sid="v-layout-f4818101"/>
+    <cl:verticallayout std:sid="v-layout-f4818101" spacing="0"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

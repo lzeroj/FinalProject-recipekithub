@@ -835,7 +835,7 @@
 				group_2.style.css({
 					"background-color" : "#F4FAEC",
 					"background-size" : "cover",
-					"background-image" : "url('theme/images/common/bgimg10.png')",
+					"background-image" : "url('theme/images/common/bgimgfinal.png')",
 					"background-position" : "center"
 				});
 				var xYLayout_2 = new cpr.controls.layouts.XYLayout();

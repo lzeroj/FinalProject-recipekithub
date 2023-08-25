@@ -125,6 +125,6 @@
 			}
 		}
 	});
-	app.title = "회원가입";
+	app.title = "Notice";
 	cpr.core.Platform.INSTANCE.register(app);
 })();
