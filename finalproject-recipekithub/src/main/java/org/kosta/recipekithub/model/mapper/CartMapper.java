@@ -17,7 +17,7 @@ public interface CartMapper {
 
 	int updateCart(int cartNo, int mealkiitNo, int cartDetailQuantity);
 
-	CartVO findCartNoByMemberEmail(String memberEmail);
+	List<CartVO> findCartNoByMemberEmail(String memberEmail);
 
 	MealkitboardVO findMealkitBoardByMealkitName(String mealkitName);
 

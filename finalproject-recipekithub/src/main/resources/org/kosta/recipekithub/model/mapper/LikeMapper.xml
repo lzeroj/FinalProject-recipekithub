@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.recipekithub.model.mapper.LikeMapper">
 	<select id="showLike" resultType="int">
-		SELECT count(*) FROM mealkit_bookmark WHERE MEMBER_EMAIL = #{memberEmail} AND MEALKIT_NO = #{mealkitNo}
+		SELECT count(*) FROM mealkit_bookmark 
+		WHERE MEMBER_EMAIL = #{memberEmail} AND 
+		MEALKIT_NO = #{mealkitNo}
 	</select>
 	
 	<insert id="insertLike">

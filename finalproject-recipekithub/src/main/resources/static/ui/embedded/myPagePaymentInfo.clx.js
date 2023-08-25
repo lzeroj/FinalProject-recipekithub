@@ -359,7 +359,7 @@
 										cell.filterable = false;
 										cell.sortable = false;
 										cell.targetColumnName = "paymentTotal";
-										cell.text = "총 가격";
+										cell.text = "총 가격(원)";
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
@@ -393,6 +393,9 @@
 										cell.suppressible = true;
 										cell.control = (function(){
 											var dateInput_1 = new cpr.controls.DateInput("dti1");
+											dateInput_1.style.css({
+												"text-align" : "center"
+											});
 											dateInput_1.bind("value").toDataColumn("paymentDate");
 											return dateInput_1;
 										})();
@@ -493,12 +496,18 @@
 							"rowIndex": 0
 						});
 						var output_5 = new cpr.controls.Output();
+						output_5.style.css({
+							"text-align" : "center"
+						});
 						output_5.bind("value").toDataColumn("paymentId");
 						container.addChild(output_5, {
 							"colIndex": 1,
 							"rowIndex": 0
 						});
 						var output_6 = new cpr.controls.Output();
+						output_6.style.css({
+							"text-align" : "center"
+						});
 						output_6.bind("value").toDataColumn("mealkitName");
 						container.addChild(output_6, {
 							"colIndex": 1,
@@ -507,6 +516,9 @@
 							"rowSpan": 1
 						});
 						var output_7 = new cpr.controls.Output();
+						output_7.style.css({
+							"text-align" : "center"
+						});
 						output_7.bind("value").toDataColumn("paymentDate");
 						container.addChild(output_7, {
 							"colIndex": 1,
@@ -555,6 +567,9 @@
 							"rowSpan": 2
 						});
 						var output_12 = new cpr.controls.Output();
+						output_12.style.css({
+							"text-align" : "center"
+						});
 						output_12.bind("value").toDataColumn("mealkitdetailinfo");
 						container.addChild(output_12, {
 							"colIndex": 3,

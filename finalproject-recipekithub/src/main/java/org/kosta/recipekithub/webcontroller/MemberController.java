@@ -256,17 +256,20 @@ public class MemberController {
 			throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
-			System.out.println("---[로그인 상태가 아니므로 회원 탈퇴가 불가합니다.]---");
+			System.out.println("---[로그인 상태가 아니므로 회원 관리가 불가합니다.]---");
 			return new UIView("ui/member/login-form.clx");
 		}
 		
 		ParameterGroup paramGroup = dataRequest.getParameterGroup("ds_member");
-	    Iterator<ParameterRow> deletedRows = paramGroup.getDeletedRows(); // Get all rows marked as deleted
+		// 삭제하기 위해 선택한 복수의 행 (회원 정보) 저장
+	    Iterator<ParameterRow> deletedRows = paramGroup.getDeletedRows(); 
 
 	    while (deletedRows.hasNext()) {
 	        ParameterRow row = deletedRows.next();
-	        String memberEmail = row.getValue("memberEmail"); // Get the email from the row
-	        int result = memberService.deleteMember(memberEmail); // Delete the member
+	        // 선택한 행으로부터 Email 반환
+	        String memberEmail = row.getValue("memberEmail"); 
+	        // 회원정보 삭제 수행
+	        int result = memberService.deleteMember(memberEmail); 
 	        log.debug("member 회원탈퇴 성공여부(if '1' success) : {}", result);
 	    }
 		

@@ -176,7 +176,7 @@
 							var initvalue = {
 								"memberEmail":chefList[index].memberEmail,
 								"memberNick":chefList[index].memberNick,
-								"memberImage":"/upload/profile/"+chefList[index].mealkitImage
+								"memberImage":"/upload/profile/"+chefList[index].memberImage
 							};
 							cpr.core.App.load("embedded/chefRecipeList", function(loadedApp){
 								if (loadedApp){

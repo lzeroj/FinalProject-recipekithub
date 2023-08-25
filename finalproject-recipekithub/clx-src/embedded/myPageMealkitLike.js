@@ -49,10 +49,20 @@ function onGrd1CellClick(e){
 	if(cellIndex != 4){
 		return ;
 	}else{
-		if(confirm("찜을 취소하시겠습니까? 취소하시면 목록에서 해당 밀키트가 삭제 됩니다")){
-			app.lookup("dmdeletemealkit").setValue("mealkitNo", mealkitNo);
-			app.lookup("subdeletemelkiktlike").send();
-		}
+		app.getRootAppInstance().openDialog("dialog/needConfirm", {
+			width: 400, height: 300, headerClose: true
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				dialogApp.initValue = "찜을 취소하시겠습니까?\n취소하시면 목록에서 해당 밀키트가 삭제 됩니다"
+			});
+		}).then(function(returnValue){
+			if(returnValue == "ok"){
+				app.lookup("dmdeletemealkit").setValue("mealkitNo", mealkitNo);
+				app.lookup("subdeletemelkiktlike").send();
+			}else{
+				return;
+			}
+		});
 	}
 }
 
@@ -62,7 +72,6 @@ function onGrd1CellClick(e){
  */
 function onSubdeletemelkiktlikeSubmitSuccess(e){
 	var subdeletemelkiktlike = e.control;
-	
 	app.lookup("grd1").redraw();
 }
 
@@ -84,8 +93,8 @@ function onButtonClick(e){
 	var button = e.control;
 	var grd1 = app.lookup("grd1");
 	var index = grd1.getSelectedIndices()[0].rowIndex;
-	var recipeBoardId = grd1.getCellValue(index, 1);
-	if(recipeBoardId == null || recipeBoardId == '' || index == null){
+	var mealkitNo = app.lookup("mealkitLikeList").getValue(index, "mealkitNo");
+	if(mealkitNo == null || mealkitNo == '' || index == null){
 		app.openDialog("dialog/noSelectCell", {width: 400, height: 300, headerClose: true
 		}, function(dialog){
 			dialog.ready(function(dialogApp) {
@@ -93,6 +102,6 @@ function onButtonClick(e){
 			});
 		});
 	}else{
-		window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
+		window.location.href = "/mealkitDetail/" + mealkitNo;
 	}
 }

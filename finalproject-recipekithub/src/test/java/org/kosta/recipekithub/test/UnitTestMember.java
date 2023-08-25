@@ -68,10 +68,10 @@ public class UnitTestMember {
 	
 	@Test
 	public void registerMember() {
-		String memberEmail = "kjoonie@kakao.com";
+		String memberEmail = "kjoonie11@kakao.com";
 		String memberPassword = "asdf";
 		String memberName = "금동준";
-		String memberNick = "kdj77";
+		String memberNick = "kdj777";
 		String memberPostcode = "987234";
 		String memberAddress = "성남시 분당구";
 		String memberAddressDetail = "정자일로136";
@@ -95,7 +95,7 @@ public class UnitTestMember {
 	
 	@Test
 	public void deleteMember() {
-		String memberEmail = "kjoonie456@naver.com";
+		String memberEmail = "kjoonie77@naver.com";
 		int result = memberService.deleteMember(memberEmail);
 		Assertions.assertEquals(1, result);
 	}
