@@ -109,7 +109,7 @@
       <cl:udc std:sid="ud-control-9483e93d" type="udc.header3">
         <cl:xylayoutdata std:sid="xyl-data-d28fbe20" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:udc>
-      <cl:group std:sid="group-e743ec30" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg10.png); background-position:center;">
+      <cl:group std:sid="group-e743ec30" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
         <cl:xylayoutdata std:sid="xyl-data-32506c42" top="200px" bottom="100px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-b68ee0a0">
           <cl:xylayoutdata std:sid="xyl-data-24e8ad5e" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>

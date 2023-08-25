@@ -76,6 +76,7 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"border-radius" : "0px",
 				"width" : "100%",
 				"top" : "0px",
 				"height" : "100%",
@@ -92,6 +93,9 @@
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
+			group_1.style.css({
+				"border-radius" : "none"
+			});
 			var formLayout_2 = new cpr.controls.layouts.FormLayout();
 			formLayout_2.horizontalSpacing = "0px";
 			formLayout_2.verticalSpacing = "0px";
@@ -124,7 +128,7 @@
 				button_2.value = "취소";
 				button_2.style.css({
 					"border-right-style" : "none",
-					"background-color" : "#E5F2E3",
+					"background-color" : "#F0F0F0",
 					"text-shadow" : "none",
 					"color" : "#696969",
 					"border-left-style" : "none",
@@ -162,6 +166,6 @@
 			}
 		}
 	});
-	app.title = "회원가입";
+	app.title = "Notice";
 	cpr.core.Platform.INSTANCE.register(app);
 })();

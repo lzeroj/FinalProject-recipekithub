@@ -22,19 +22,6 @@ function onSub_findMemberListSubmitSuccess(e){
 	//var dataSet = app.lookup("ds_member");
 	var grid = app.lookup("grd_member");
 	grid.redraw();
-
-	//var host = app.getHost(); // 부모 임베디드 앱
-	//var boardId = app.lookup("responseqnaselect").getValue(0, "boardId");
-	//var boardTitle = app.lookup("responseqnaselect").getValue(0, "boardTitle");
-	//var boardContent = app.lookup("responseqnaselect").getValue(0, "boardContent");
-	
-	//var initValue = {"boardId": boardId , "boardTitle" : boardTitle, "boardContent":boardContent};
-//	cpr.core.App.load("embedded/admin/findQnAAdminSelect", function(loadedApp){
-//		if (loadedApp){
-//			//host.initValue = initValue;
-//			host.app = loadedApp;
-//		}
-//	});
 }
 
 /*
@@ -44,17 +31,6 @@ function onSub_findMemberListSubmitSuccess(e){
 function onGrd_memberSelectionChange(e){
 	var grd_member = e.control;
 	
-}
-
-/*
- * "수정" 버튼(btnEditRow)에서 click 이벤트 발생 시 호출.
- * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
- */
-function onBtnEditRowClick(e){
-	var btnEditRow = e.control;
-	var vcGrid = app.lookup("grd_member"); 
-	vcGrid.setEditRowIndex(0); 				// 편집 행 설정
-	vcGrid.focusCell(0, "memberEmail"); 	// 셀에 포커스 설정
 }
 
 /*
@@ -77,10 +53,31 @@ function onBtnDeleteRowClick(e){
 		grdMem.deleteRow(checkRowIndices);
 	}
 	
-	var dataMap = app.lookup("dm_delete");
-	dataMap.setValue("memberEmail", app.lookup("opbEmail").value);
-	var submission = app.lookup("sub_delete");
-	submission.send();
+	if (selectedRowIndex == null || checkRowIndices == null) {
+		var initValue = "선택한 회원이 없습니다.\n다시 한번 확인해주세요.";
+		app.openDialog("dialog/registerChkPopup", {
+			width: 400, height: 300, headerClose: true
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				dialogApp.initValue = initValue;
+			});
+		});
+	} else {
+		var initValue = "선택하신 회원의 정보를 삭제하시겠습니까?";
+		app.openDialog("dialog/registerChkPopup", {
+			width: 400, height: 300, resizable: false, headerMovable: false
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue) {
+			var dataMap = app.lookup("dm_delete");
+			dataMap.setValue("memberEmail", app.lookup("opbEmail").value);
+			
+			var submission = app.lookup("sub_delete");
+			submission.send();
+		});
+	}
 }
 
 /*
@@ -89,7 +86,7 @@ function onBtnDeleteRowClick(e){
  */
 function onSub_deleteMemberSubmitSuccess(e){
 	var sub_delete = e.control;
-	var initValue = "선택하신 회원 삭제가 완료되었습니다.";
+	var initValue = "선택하신 회원 정보의\n 삭제가 완료되었습니다.";
 	app.openDialog("dialog/registerChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
@@ -98,6 +95,7 @@ function onSub_deleteMemberSubmitSuccess(e){
 		});
 	}).then(function(returnValue) {
 		var grid = app.lookup("grd_member");
+		grid.clearSelection();
 		grid.redraw();
 	});
 }
