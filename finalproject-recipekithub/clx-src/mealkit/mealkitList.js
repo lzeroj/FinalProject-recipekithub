@@ -115,8 +115,10 @@ function onMealkitBoardListSubmitSuccess(e){
 	//alert("mealkitList = " + mealkitList);
 	//alert("mealkitAllList = " + mealkitAllList);
 	//console.log("ㅌㅌㅌ" + mealkitAllList.length);
-	console.log("findStarAvgByNo =" + findStarAvgByNo);
 	
+	for (var i = 0; i < mealkitAllList.length; i++) {
+	console.log("mealkitAllList =" + mealkitAllList[i].mealkitImage);
+	}
 	//app.lookup(id)	
 	var email = cpr.core.Platform.INSTANCE.getParameter("member");
 	console.log("email = " + email);

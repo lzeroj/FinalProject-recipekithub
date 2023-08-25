@@ -131,6 +131,11 @@ public class MealkitController {
 			starAvgList.add(starMap);
 			//System.out.println(starMap);
 		}
+		for(int i=0; i< list.size(); i++) {
+			System.out.println(list.get(i).getMealkitImage());
+		}
+		
+		
 		//System.out.println(starMap);
 		dataRequest.setResponse("mealkitAllList", list);
 		dataRequest.setResponse("totalMealkitCnt", totalMealkitCnt);
