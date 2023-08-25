@@ -86,7 +86,7 @@
             <cl:xylayoutdata std:sid="xyl-data-e3839137" top="50px" right="45px" width="380px" height="330px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
             <cl:group std:sid="group-668cd1ae">
               <cl:formdata std:sid="f-data-b38ca9e1" row="1" col="1"/>
-              <cl:img std:sid="image-eb10e8af" id="profileImg" fallbacksrc="../theme/images/icon/chefimg.png">
+              <cl:img std:sid="image-eb10e8af" id="profileImg" style="border-radius:100px;" fallbacksrc="../theme/images/icon/chefimg.png">
                 <cl:datasetbind property="src" datacontrolid="ds_profile" columnname="memberImage" rowindex="0"/>
                 <cl:xylayoutdata std:sid="xyl-data-9f957c73" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
               </cl:img>

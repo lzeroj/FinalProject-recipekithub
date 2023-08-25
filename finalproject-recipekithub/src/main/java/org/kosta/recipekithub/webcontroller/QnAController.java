@@ -41,12 +41,12 @@ public class QnAController {
 	@RequestMapping("/insertQnA")
 	public View insertQnA(HttpServletRequest request,DataRequest dataRequest) {
 		
-		// 로그인 확인
+		// 세션 적용
 		HttpSession session = request.getSession(false);
-		if(session == null || session.getAttribute("member") == null) {
-			return new UIView("ui/member/login-form.clx");
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
 		}
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String memberId = memberVO.getMemberEmail();
 		if(memberId == null || memberId == "") { // Guard Claues
 			return new UIView("ui/index.clx");
@@ -69,10 +69,14 @@ public class QnAController {
 	
 	@RequestMapping("/selectQnaList")
 	public View selectQnaList(HttpServletRequest request,DataRequest dataRequest) {
-		// 로그인 확인
+		// 세션 적용
 		HttpSession session = request.getSession(false);
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		String memberEmail = member.getMemberEmail();
+		String memberEmail = null;
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
+		}
 
 		List<QnAVO> qnalist = qnAService.selectQnaList(memberEmail);
 		dataRequest.setResponse("qnadslist", qnalist);
@@ -133,10 +137,13 @@ public class QnAController {
 
 	@RequestMapping("/insertQnAAnswer")
 	public View insertQnAAnswer(HttpServletRequest request,DataRequest dataRequest) {
-		// 로그인 확인
+		// 세션 적용
 		HttpSession session = request.getSession(false);
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		String answerMember = member.getMemberEmail();
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+		}
+		String answerMember = memberVO.getMemberEmail();
 		
 		ParameterGroup param = dataRequest.getParameterGroup("dmqnaselect");
 		int boardId = Integer.parseInt(param.getValue("boardId"));

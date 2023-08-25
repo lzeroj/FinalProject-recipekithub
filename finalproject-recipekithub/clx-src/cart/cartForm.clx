@@ -63,9 +63,9 @@
   <body std:sid="body-ea122247">
     <cl:listener std:sid="listener-bc966f2e" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-b8f6dc4d">
-      <cl:xylayoutdata std:sid="xyl-data-79d5a85f" top="20px" bottom="20px" width="1040px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+      <cl:verticaldata std:sid="v-data-c6e9f14e" width="1040px" height="700px" autosize="height"/>
       <cl:group std:sid="group-5ef8cda1" style="border-radius:30px; background-color:#FFFFFF;" class="cl-form-group">
-        <cl:xylayoutdata std:sid="xyl-data-0a61e2ac" top="0px" right="0px" bottom="150px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:verticaldata std:sid="v-data-cf9d77ac" width="1040px" height="550px" autosize="none"/>
         <cl:output std:sid="output-93dc1bf1" style="background-color:#FFFFFF; color:#0ebc59; font-weight:bold; font-size:25px; font-family:'Noto Sans KR' , 'Malgun Gothic' , sans-serif;" value="  장바구니">
           <cl:formdata std:sid="f-data-81ebaa46" row="0" col="1" rowspan="1" colspan="6"/>
         </cl:output>
@@ -82,50 +82,6 @@
           <cl:listener std:sid="listener-9ae8f2d6" name="mouseleave" handler="onShopconMouseleave"/>
           <cl:formdata std:sid="f-data-6e7eb832" row="5" col="0" rowspan="1" colspan="2"/>
         </cl:output>
-        <cl:grid std:sid="grid-6d67e65a" id="grd1" style="background-color:#FFFFFF; background-image:none;" datasetid="cartlist" autofit="all" autorowheight="all" nodatamessage="장바구니에 목록이없습니다 " wheelrowcount="1" resizablecolumns="all">
-          <cl:listener std:sid="listener-3961564a" name="row-uncheck" handler="onGrd1RowUncheck"/>
-          <cl:listener std:sid="listener-fb14824e" name="row-check" handler="onGrd1RowCheck"/>
-          <cl:listener std:sid="listener-b4cc28c2" name="header-check" handler="onGrd1HeaderCheck"/>
-          <cl:listener std:sid="listener-f769b9e5" name="header-uncheck" handler="onGrd1HeaderUncheck"/>
-          <cl:formdata std:sid="f-data-fe747965" row="3" col="0" rowspan="2" colspan="7"/>
-          <cl:gridcolumn std:sid="g-column-019c1081" width="22px"/>
-          <cl:gridcolumn std:sid="g-column-69c1d460" width="143px"/>
-          <cl:gridcolumn std:sid="g-column-70468fa0" width="345px"/>
-          <cl:gridcolumn std:sid="g-column-8d4813dd" width="143px"/>
-          <cl:gridcolumn std:sid="g-column-f8fe792c" width="143px"/>
-          <cl:gridcolumn std:sid="g-column-e9b7028b" width="143px"/>
-          <cl:gridheader std:sid="gh-band-33136b3c">
-            <cl:gridrow std:sid="g-row-9046acc8"/>
-            <cl:gridcell std:sid="gh-cell-287b455c" rowindex="0" colindex="0" style="background-color:#e5e5e5;" sortable="false" filterable="false" columntype="checkbox"/>
-            <cl:gridcell std:sid="gh-cell-887d4f67" rowindex="0" colindex="1" colspan="2" style="background-color:#e5e5e5; font-weight:400;" targetcolumnname="mealkitName" sortable="false" filterable="false" text="상품 정보"/>
-            <cl:gridcell std:sid="gh-cell-e9e00db1" rowindex="0" colindex="3" style="background-color:#e5e5e5; font-weight:400;" targetcolumnname="mealkitPrice" sortable="false" filterable="false" text="가격"/>
-            <cl:gridcell std:sid="gh-cell-1fc2f6a6" rowindex="0" colindex="4" rowspan="1" colspan="1" style="background-color:#e5e5e5; font-weight:400;" targetcolumnname="cartDetailQuantity" sortable="false" filterable="false" text="상품 수량"/>
-            <cl:gridcell std:sid="gh-cell-e9b83441" rowindex="0" colindex="5" rowspan="1" colspan="1" style="background-color:#e5e5e5; font-weight:400;" text="총 가격"/>
-          </cl:gridheader>
-          <cl:griddetail std:sid="gd-band-cf45ddda">
-            <cl:gridrow std:sid="g-row-113804dd" height="158px"/>
-            <cl:gridcell std:sid="gd-cell-fd628508" rowindex="0" colindex="0" columntype="checkbox" columnname="isChecked"/>
-            <cl:gridcell std:sid="gd-cell-dd3899cc" rowindex="0" colindex="1" columnname="mealkitImage">
-              <cl:img std:sid="image-a09ed00f" id="imggrd" fallbacksrc="../theme/images/icon/chefimg.png">
-                <cl:celldata std:sid="c-data-7b107fab"/>
-              </cl:img>
-            </cl:gridcell>
-            <cl:gridcell std:sid="gd-cell-11577796" rowindex="0" colindex="2" style="font-size:20px;" columnname="mealkitName"/>
-            <cl:gridcell std:sid="gd-cell-acc780a8" rowindex="0" colindex="3" columnname="mealkitPrice"/>
-            <cl:gridcell std:sid="gd-cell-c9cafc2b" rowindex="0" colindex="4" columnname="cartDetailQuantity">
-              <cl:numbereditor std:sid="n-editor-adb0f60c" id="nbe2" min="1" upbuttonimage="">
-                <cl:listener std:sid="listener-522227da" name="value-change" handler="onNbe2ValueChange"/>
-                <cl:celldata std:sid="c-data-e5cdfd84" halign="CENTER" valign="CENTER"/>
-              </cl:numbereditor>
-            </cl:gridcell>
-            <cl:gridcell std:sid="gd-cell-657bceb5" rowindex="0" colindex="5">
-              <cl:output std:sid="output-3bcb187c" id="sumex" style="text-align:center;">
-                <cl:expbind property="value" category="PROPERTY" expression="mealkitPrice * cartDetailQuantity"/>
-                <cl:celldata std:sid="c-data-429b5924"/>
-              </cl:output>
-            </cl:gridcell>
-          </cl:griddetail>
-        </cl:grid>
         <cl:img std:sid="image-cae3b2d5" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;" src="../theme/images/cart/trolley.png">
           <cl:formdata std:sid="f-data-a9009691" row="0" col="0" rowspan="1" colspan="1"/>
         </cl:img>
@@ -136,7 +92,55 @@
         <cl:output std:sid="output-5a94143e" style="background-color:#FFFFFF; border-left-style:solid; border-left-color:white;" value="">
           <cl:formdata std:sid="f-data-00f4578d" row="5" col="2" rowspan="1" colspan="5"/>
         </cl:output>
-        <cl:formlayout std:sid="f-layout-d28bc64c" scrollable="true" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
+        <cl:group std:sid="group-83195ae0">
+          <cl:formdata std:sid="f-data-290206db" row="3" col="0" rowspan="2" colspan="7"/>
+          <cl:grid std:sid="grid-6d67e65a" id="grd1" style="background-color:#FFFFFF; background-image:none;" datasetid="cartlist" autofit="all" autorowheight="all" nodatamessage="장바구니에 목록이없습니다 " wheelrowcount="1" resizablecolumns="all">
+            <cl:listener std:sid="listener-3961564a" name="row-uncheck" handler="onGrd1RowUncheck"/>
+            <cl:listener std:sid="listener-fb14824e" name="row-check" handler="onGrd1RowCheck"/>
+            <cl:listener std:sid="listener-b4cc28c2" name="header-check" handler="onGrd1HeaderCheck"/>
+            <cl:listener std:sid="listener-f769b9e5" name="header-uncheck" handler="onGrd1HeaderUncheck"/>
+            <cl:xylayoutdata std:sid="xyl-data-1bc45669" top="0px" left="0px" width="1038px" height="343px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+            <cl:gridcolumn std:sid="g-column-019c1081" width="22px"/>
+            <cl:gridcolumn std:sid="g-column-69c1d460" width="143px"/>
+            <cl:gridcolumn std:sid="g-column-70468fa0" width="345px"/>
+            <cl:gridcolumn std:sid="g-column-8d4813dd" width="143px"/>
+            <cl:gridcolumn std:sid="g-column-f8fe792c" width="143px"/>
+            <cl:gridcolumn std:sid="g-column-e9b7028b" width="143px"/>
+            <cl:gridheader std:sid="gh-band-33136b3c">
+              <cl:gridrow std:sid="g-row-9046acc8"/>
+              <cl:gridcell std:sid="gh-cell-287b455c" rowindex="0" colindex="0" style="background-color:#e5e5e5;" sortable="false" filterable="false" columntype="checkbox"/>
+              <cl:gridcell std:sid="gh-cell-887d4f67" rowindex="0" colindex="1" colspan="2" style="background-color:#e5e5e5; font-weight:400;" targetcolumnname="mealkitName" sortable="false" filterable="false" text="상품 정보"/>
+              <cl:gridcell std:sid="gh-cell-e9e00db1" rowindex="0" colindex="3" style="background-color:#e5e5e5; font-weight:400;" targetcolumnname="mealkitPrice" sortable="false" filterable="false" text="가격"/>
+              <cl:gridcell std:sid="gh-cell-1fc2f6a6" rowindex="0" colindex="4" rowspan="1" colspan="1" style="background-color:#e5e5e5; font-weight:400;" targetcolumnname="cartDetailQuantity" sortable="false" filterable="false" text="상품 수량"/>
+              <cl:gridcell std:sid="gh-cell-e9b83441" rowindex="0" colindex="5" rowspan="1" colspan="1" style="background-color:#e5e5e5; font-weight:400;" text="총 가격"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-cf45ddda">
+              <cl:gridrow std:sid="g-row-113804dd" height="158px"/>
+              <cl:gridcell std:sid="gd-cell-fd628508" rowindex="0" colindex="0" columntype="checkbox" columnname="isChecked"/>
+              <cl:gridcell std:sid="gd-cell-dd3899cc" rowindex="0" colindex="1" columnname="mealkitImage">
+                <cl:img std:sid="image-a09ed00f" id="imggrd" fallbacksrc="../theme/images/icon/chefimg.png">
+                  <cl:celldata std:sid="c-data-7b107fab"/>
+                </cl:img>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gd-cell-11577796" rowindex="0" colindex="2" style="font-size:20px;" columnname="mealkitName"/>
+              <cl:gridcell std:sid="gd-cell-acc780a8" rowindex="0" colindex="3" columnname="mealkitPrice"/>
+              <cl:gridcell std:sid="gd-cell-c9cafc2b" rowindex="0" colindex="4" columnname="cartDetailQuantity">
+                <cl:numbereditor std:sid="n-editor-adb0f60c" id="nbe2" min="1" upbuttonimage="">
+                  <cl:listener std:sid="listener-522227da" name="value-change" handler="onNbe2ValueChange"/>
+                  <cl:celldata std:sid="c-data-e5cdfd84" halign="CENTER" valign="CENTER"/>
+                </cl:numbereditor>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gd-cell-657bceb5" rowindex="0" colindex="5">
+                <cl:output std:sid="output-3bcb187c" id="sumex" style="text-align:center;">
+                  <cl:expbind property="value" category="PROPERTY" expression="mealkitPrice * cartDetailQuantity"/>
+                  <cl:celldata std:sid="c-data-429b5924"/>
+                </cl:output>
+              </cl:gridcell>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:xylayout std:sid="xylayout-26c0f8ab"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-d28bc64c" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
           <cl:rows length="80" unit="PIXEL"/>
           <cl:rows length="70" unit="PIXEL"/>
           <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
@@ -152,16 +156,8 @@
           <cl:columns length="150" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
-      <cl:button std:sid="button-923ccc1b" style="background-color:#0ebc59; color:#FFFFFF; white-space:normal; font-weight:bold; background-image:none;" value="전체 상품 주문">
-        <cl:listener std:sid="listener-7d528e36" name="click" handler="onButtonClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-cc9ccce4" right="0px" bottom="0px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
-      </cl:button>
-      <cl:button std:sid="button-41a920fd" style="background-color:#0ebc59; border-right-style:solid; color:#FFFFFF; border-bottom-color:#ffffff; border-left-style:solid; font-weight:bold; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; background-image:none; border-top-style:solid;" value="선택 상품 주문">
-        <cl:listener std:sid="listener-4821ad56" name="click" handler="onButtonClick2"/>
-        <cl:xylayoutdata std:sid="xyl-data-9da41d14" right="208px" bottom="0px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
-      </cl:button>
       <cl:group std:sid="group-3349f7ae">
-        <cl:xylayoutdata std:sid="xyl-data-1ebf251a" right="0px" bottom="88px" left="0px" height="52px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+        <cl:verticaldata std:sid="v-data-3d931a43" width="1040px" height="52px"/>
         <cl:output std:sid="output-c114cc9d" id="totalval" style="background-color:#FFFFFF; border-radius:0px; border-top-width:3px; border-bottom-color:#e5e5e5; border-bottom-width:3px; border-top-color:#e5e5e5; border-bottom-style:solid; background-image:none; border-top-style:solid; text-align:right;" datatype="number">
           <cl:formdata std:sid="f-data-2411d5be" row="0" col="1" rowspan="1" colspan="1"/>
         </cl:output>
@@ -178,9 +174,21 @@
           <cl:columns length="80" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
-      <cl:xylayout std:sid="xylayout-65a4c8da"/>
+      <cl:group std:sid="group-3608a4b6">
+        <cl:verticaldata std:sid="v-data-dc0f828d" width="1040px" height="79px"/>
+        <cl:button std:sid="button-41a920fd" style="background-color:#0ebc59; border-right-style:solid; color:#FFFFFF; border-bottom-color:#ffffff; border-left-style:solid; font-weight:bold; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; background-image:none; border-top-style:solid;" value="선택 상품 주문">
+          <cl:listener std:sid="listener-4821ad56" name="click" handler="onButtonClick2"/>
+          <cl:xylayoutdata std:sid="xyl-data-ddd888af" right="220px" bottom="10px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+        </cl:button>
+        <cl:button std:sid="button-923ccc1b" style="background-color:#0ebc59; color:#FFFFFF; white-space:normal; font-weight:bold; background-image:none;" value="전체 상품 주문">
+          <cl:listener std:sid="listener-7d528e36" name="click" handler="onButtonClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-1741dbdc" right="10px" bottom="10px" width="200px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-021c644e"/>
+      </cl:group>
+      <cl:verticallayout std:sid="v-layout-79e64ebb"/>
     </cl:group>
-    <cl:xylayout std:sid="xylayout-abf82726"/>
+    <cl:verticallayout std:sid="v-layout-a6ac7ac6" distribution="center"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

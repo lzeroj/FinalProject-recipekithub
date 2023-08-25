@@ -99,6 +99,7 @@ function onButtonClick(e){
 function onMypageClick(e){
 	var mypage = e.control;
 	var sessionval = getTimedSessionData("memsession");
+	console.log("sessionval : "+sessionval);
 	if(sessionval == null || sessionval == ''){
 		app.getRootAppInstance().openDialog("dialog/needLogin", {
 			width: 400, height: 300, headerClose: true
@@ -112,13 +113,14 @@ function onMypageClick(e){
 				location.href="member/login-form.clx";
 			}
 		});
-	}
-	if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
-		if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
-			window.location.href = "/findMyPageForm";
+	}else{
+		if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+			if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+				location.href = "/findMyPageForm";
+			}
+		} else {
+			location.href = "/findMyPageForm";
 		}
-	} else {
-		window.location.href = "/findMyPageForm";
 	}
 }
 

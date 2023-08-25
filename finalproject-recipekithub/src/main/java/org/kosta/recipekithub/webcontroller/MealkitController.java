@@ -212,7 +212,7 @@ public class MealkitController {
 	public View insertMealKitForm(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if(session == null) {
-			return new UIView("/ui/index.clx");	
+			return new UIView("/ui/index.clx");	 
 		}
 		
 		
@@ -226,7 +226,7 @@ public class MealkitController {
 //		MemberVO sessionMember = (MemberVO)session.getAttribute("member");
 //		if(sessionMember == null) {
 //			return new UIView("/ui/index.clx");	
-//		} 
+//		}  
 		
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
 		System.out.println("uploadFiles = " + uploadFiles);
@@ -266,7 +266,7 @@ public class MealkitController {
 		}else {
 			member = new MemberVO();
 			member.setMemberNick("guest");
-		}
+		}  
 		
 		mealkit.setMemberVO(member);
 		System.out.println("Service mealkit = " + mealkit);
