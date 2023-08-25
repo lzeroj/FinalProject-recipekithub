@@ -10,12 +10,12 @@
   <body std:sid="body-339cb126">
     <cl:listener std:sid="listener-d4b2c209" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-0c75a1f4">
-      <cl:xylayoutdata std:sid="xyl-data-ca9a995f" top="200px" left="0px" width="400px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      <cl:button std:sid="button-c18b893e" id="btnSubmit" style="border-right-style:none; background-color:#0ca44e; border-radius:0px; text-shadow:none; color:white; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;" value="확인">
+      <cl:formdata std:sid="f-data-49c93685" row="1" col="0"/>
+      <cl:button std:sid="button-c18b893e" id="btnSubmit" style="border-right-style:none; background-color:#0ca44e; border-radius:0px; text-shadow:none; color:#FFFFFF; border-left-style:none; font-weight:bold; font-size:20px; border-bottom-style:none; background-image:none; border-top-style:none;" value="확인">
         <cl:listener std:sid="listener-e075fe63" name="click" handler="onBtnSubmitClick"/>
         <cl:formdata std:sid="f-data-50f5c641" row="0" col="0"/>
       </cl:button>
-      <cl:button std:sid="button-7f8d59c0" id="btnCancel" style="border-right-style:none; border-radius:0px; background-color:#006BFF; text-shadow:none; color:white; border-left-style:none; border-bottom-style:none; background-image:none; border-top-style:none;" value="취소">
+      <cl:button std:sid="button-7f8d59c0" id="btnCancel" style="border-right-style:none; border-radius:0px; background-color:#e5f2e3; text-shadow:none; color:#696969; border-left-style:none; font-weight:bold; font-size:20px; border-bottom-style:none; background-image:none; border-top-style:none;" value="취소">
         <cl:listener std:sid="listener-9e12adca" name="click" handler="onBtnCancelClick"/>
         <cl:formdata std:sid="f-data-84128e39" row="0" col="1"/>
       </cl:button>
@@ -26,9 +26,13 @@
       </cl:formlayout>
     </cl:group>
     <cl:output std:sid="output-4e1be60a" id="optValue" style="font-weight:bold; font-size:20px; text-align:center;" value="">
-      <cl:xylayoutdata std:sid="xyl-data-f84c6d63" top="0px" left="0px" width="400px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:formdata std:sid="f-data-01350f41" row="0" col="0"/>
     </cl:output>
-    <cl:xylayout std:sid="xylayout-386521d1"/>
+    <cl:formlayout std:sid="f-layout-35677ea9" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:rows length="50" unit="PIXEL"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
   </body>
   <std:studiosetting>
     <std:hruler/>

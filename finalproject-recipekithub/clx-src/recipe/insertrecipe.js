@@ -106,8 +106,7 @@ function onButtonClick(e) {
 			"msg": "레시피 등록하시겠습니까?"
 		}
 		app.openDialog("dialog/recipeCheck", {
-			width: 405,
-			height: 300
+			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
 				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
@@ -132,8 +131,7 @@ function onButtonClick2(e) {
 		"msg": "변경사항이 저장되지 않습니다.\n 취소하시겠습니까?"
 	}
 	app.openDialog("dialog/recipeCheck", {
-		width: 405,
-		height: 300
+		width: 400, height: 300, headerClose: true
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
 			// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
