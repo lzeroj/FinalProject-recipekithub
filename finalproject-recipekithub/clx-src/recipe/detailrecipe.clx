@@ -7,6 +7,7 @@
     <link std:sid="link-4fb6f59e" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-f97c9de3" href="../theme/controls/htmlobject.part.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-4e7fe582" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-528c9b95" href="../theme/controls/page-indexer.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-6b99dcb1">
       <cl:dataset std:sid="d-set-257eaa8d" id="recipeBoard">
         <cl:datacolumnlist>
@@ -155,7 +156,7 @@
     <cl:pageindexer std:sid="p-indexer-275aa17e" id="page" pagerowcount="10">
       <cl:listener std:sid="listener-af5aa1ca" name="selection-change" handler="onPageSelectionChange"/>
       <cl:datamapbind property="currentPageIndex" datacontrolid="dmPage" columnname="pageNo"/>
-      <cl:verticaldata std:sid="v-data-4e5ef888" width="200px" height="40px"/>
+      <cl:verticaldata std:sid="v-data-4e5ef888" width="496px" height="40px"/>
     </cl:pageindexer>
     <cl:udc std:sid="ud-control-aa1a65e2" type="udc.footer">
       <cl:verticaldata std:sid="v-data-a1b90ac2" width="1920px" height="100px"/>
