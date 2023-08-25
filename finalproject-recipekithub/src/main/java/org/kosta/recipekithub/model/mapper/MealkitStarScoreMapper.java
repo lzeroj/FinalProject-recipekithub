@@ -21,6 +21,5 @@ public interface MealkitStarScoreMapper {
 
 	List<MealkitboardVO> findMealkitNoList();
 
-	//double findMealkitStarAvg(int num);
 	Optional<Double> findMealkitStarAvg(int num);
 }

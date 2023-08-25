@@ -2480,6 +2480,7 @@
 					app.lookup("regDate").text = app.getAppProperty("regDate");
 					app.lookup("content").text = app.getAppProperty("content");
 					app.lookup("star").text = app.getAppProperty("star");
+					app.lookup("deleteBtn").text = app.getAppProperty("deleteBtn");
 				}
 	
 				/*
@@ -2532,7 +2533,7 @@
 				container.addChild(output_1, {
 					"top": "20px",
 					"left": "8px",
-					"width": "100px",
+					"width": "122px",
 					"height": "18px"
 				});
 				
@@ -2540,19 +2541,20 @@
 				output_2.value = "Output";
 				container.addChild(output_2, {
 					"top": "21px",
-					"left": "160px",
+					"left": "182px",
 					"width": "93px",
 					"height": "18px"
 				});
 				
-				var button_1 = new cpr.controls.Button();
+				var button_1 = new cpr.controls.Button("deleteBtn");
+				button_1.visible = false;
 				button_1.value = "삭제";
 				if(typeof onButtonClick2 == "function") {
 					button_1.addEventListener("click", onButtonClick2);
 				}
 				container.addChild(button_1, {
 					"top": "20px",
-					"left": "252px",
+					"left": "274px",
 					"width": "61px",
 					"height": "20px"
 				});
@@ -2564,7 +2566,7 @@
 				});
 				container.addChild(output_3, {
 					"top": "22px",
-					"left": "125px",
+					"left": "147px",
 					"width": "36px",
 					"height": "15px"
 				});
@@ -2601,7 +2603,7 @@
 				});
 				container.addChild(image_1, {
 					"top": "22px",
-					"left": "107px",
+					"left": "129px",
 					"width": "19px",
 					"height": "15px"
 				});
@@ -2712,7 +2714,7 @@
 					app.lookup("title").text = app.getAppProperty("title");
 					app.lookup("nick").text = app.getAppProperty("nick");
 					app.lookup("star").text = app.getAppProperty("star");
-					app.lookup("hits").text = app.getAppProperty("hits");
+					app.lookup("price").text = app.getAppProperty("price");
 					app.lookup("count").text = app.getAppProperty("count");
 				}
 	
@@ -2732,7 +2734,7 @@
 				app.declareAppProperty("title", null);
 				app.declareAppProperty("nick", null);
 				app.declareAppProperty("star", null);
-				app.declareAppProperty("hits", null);
+				app.declareAppProperty("price", null);
 				app.declareAppProperty("count", null);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -2741,6 +2743,7 @@
 				// Configure root container
 				var container = app.getContainer();
 				container.style.css({
+					"font-family" : "푸른전남 Medium",
 					"width" : "100%",
 					"top" : "0px",
 					"height" : "100%",
@@ -2769,7 +2772,9 @@
 				var output_1 = new cpr.controls.Output("title");
 				output_1.value = "Output";
 				output_1.style.css({
-					"font-weight" : "bold"
+					"font-weight" : "bolder",
+					"font-size" : "16px",
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_1, {
 					"top": "149px",
@@ -2781,7 +2786,7 @@
 				var output_2 = new cpr.controls.Output("nick");
 				output_2.value = "Output";
 				output_2.style.css({
-					"color" : "#0CA44E"
+					"color" : "#A7A7A7"
 				});
 				container.addChild(output_2, {
 					"top": "178px",
@@ -2799,39 +2804,24 @@
 				});
 				container.addChild(output_3, {
 					"top": "204px",
-					"left": "45px",
-					"width": "26px",
+					"left": "196px",
+					"width": "34px",
 					"height": "24px"
 				});
 				
-				var output_4 = new cpr.controls.Output();
-				output_4.value = "조회수";
+				var output_4 = new cpr.controls.Output("price");
+				output_4.value = "Output";
+				output_4.style.css({
+					"color" : "black",
+					"font-weight" : "bolder",
+					"font-size" : "16px",
+					"font-family" : "푸른전남 Medium"
+				});
 				container.addChild(output_4, {
 					"top": "204px",
-					"left": "81px",
-					"width": "50px",
-					"height": "27px"
-				});
-				
-				var output_5 = new cpr.controls.Output("hits");
-				output_5.value = "Output";
-				output_5.style.css({
-					"color" : "#0CA44E"
-				});
-				container.addChild(output_5, {
-					"top": "204px",
-					"left": "130px",
-					"width": "50px",
-					"height": "27px"
-				});
-				
-				var image_2 = new cpr.controls.Image();
-				image_2.src = "theme/images/mealkit/free-icon-star-6063500.png";
-				container.addChild(image_2, {
-					"top": "206px",
 					"left": "0px",
-					"width": "27px",
-					"height": "23px"
+					"width": "88px",
+					"height": "27px"
 				});
 				
 				var group_1 = new cpr.controls.Container();
@@ -2847,13 +2837,28 @@
 					"height": "5px"
 				});
 				
-				var output_6 = new cpr.controls.Output("count");
-				output_6.value = "Output";
-				container.addChild(output_6, {
+				var output_5 = new cpr.controls.Output("count");
+				output_5.value = "Output";
+				output_5.style.css({
+					"text-align" : "center"
+				});
+				container.addChild(output_5, {
 					"top": "204px",
-					"left": "26px",
+					"left": "165px",
 					"width": "32px",
 					"height": "24px"
+				});
+				
+				var image_2 = new cpr.controls.Image();
+				image_2.src = "theme/images/mealkit/free-icon-thumbs-up-8560888.png";
+				image_2.style.css({
+					"text-align" : "right"
+				});
+				container.addChild(image_2, {
+					"top": "204px",
+					"left": "135px",
+					"width": "31px",
+					"height": "27px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);
@@ -2909,12 +2914,12 @@
 			return this.getEmbeddedAppInstance().setAppProperty("star", newValue, true);
 		}
 	});
-	Object.defineProperty(udc.mealkitList.prototype, "hits", {
+	Object.defineProperty(udc.mealkitList.prototype, "price", {
 		get: function(){
-			return this.getEmbeddedAppInstance().getAppProperty("hits");
+			return this.getEmbeddedAppInstance().getAppProperty("price");
 		},
 		set: function(newValue){
-			return this.getEmbeddedAppInstance().setAppProperty("hits", newValue, true);
+			return this.getEmbeddedAppInstance().setAppProperty("price", newValue, true);
 		}
 	});
 	Object.defineProperty(udc.mealkitList.prototype, "count", {

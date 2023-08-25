@@ -128,13 +128,9 @@
 				var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
 				var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
 				var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
-				//alert("mealkitList = " + mealkitList);
-				//alert("mealkitAllList = " + mealkitAllList);
-				//console.log("ㅌㅌㅌ" + mealkitAllList.length);
 				
-				for (var i = 0; i < mealkitAllList.length; i++) {
-				console.log("mealkitAllList =" + mealkitAllList[i].mealkitImage);
-				}
+
+				
 				//app.lookup(id)	
 				var email = cpr.core.Platform.INSTANCE.getParameter("member");
 				console.log("email = " + email);
@@ -156,7 +152,7 @@
 						var mealkit = new udc.mealkitList();
 						mealkit.img = "/upload/mealkit/" + mealkitAllList[i].mealkitImage;
 						var mealkitNo = mealkitAllList[i].mealkitNo
-						mealkit.hits = mealkitAllList[i].mealkitBoardHits;
+						mealkit.price = mealkitAllList[i].mealkitPrice;
 						mealkit.nick = mealkitAllList[i].memberVO.memberNick;
 						mealkit.title = mealkitAllList[i].mealkitName;
 						mealkit.star = findStarAvgByNo[i];
@@ -170,6 +166,7 @@
 							window.location.href = "/mealkitDetail/" + mealkitAllList[index].mealkitNo;
 						});
 					})(i);
+					
 				}
 			/* 초기
 				var cnt = app.lookup("mealkitCnt");
@@ -294,18 +291,23 @@
 			group_1.setLayout(xYLayout_1);
 			(function(container){
 				var navigationBar_1 = new cpr.controls.NavigationBar("mealkitType");
+				navigationBar_1.menuType = "fullmenu";
 				navigationBar_1.style.css({
 					"padding-top" : "0px",
-					"font-weight" : "17.0",
+					"font-weight" : "16.0",
 					"padding-right" : "0px"
 				});
 				navigationBar_1.style.bar.css({
 					"padding-top" : "0px",
-					"padding-right" : "0px",
+					"padding-left" : "30px",
+					"padding-right" : "30px",
 					"text-align" : "center"
 				});
 				navigationBar_1.style.item.css({
-					"text-align" : "center"
+					"white-space" : "normal",
+					"padding-left" : "25px",
+					"text-align" : "center",
+					"padding-right" : "25px"
 				});
 				navigationBar_1.bind("value").toDataMap(app.lookup("meCategory"), "mealkitType");
 				(function(navigationBar_1){
@@ -321,10 +323,10 @@
 					navigationBar_1.addEventListener("selection-change", onSortSelectionChange);
 				}
 				container.addChild(navigationBar_1, {
-					"top": "34px",
-					"width": "1094px",
-					"height": "75px",
-					"left": "calc(50% - 547px)"
+					"top": "67px",
+					"right": "10px",
+					"left": "10px",
+					"height": "75px"
 				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
@@ -387,7 +389,7 @@
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "176px",
+					"top": "177px",
 					"width": "984px",
 					"height": "70px",
 					"left": "calc(50% - 492px)"
@@ -400,7 +402,7 @@
 				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
 				group_3.setLayout(xYLayout_3);
 				container.addChild(group_3, {
-					"top": "136px",
+					"top": "152px",
 					"width": "974px",
 					"height": "15px",
 					"left": "calc(50% - 487px)"
@@ -413,7 +415,7 @@
 				var xYLayout_4 = new cpr.controls.layouts.XYLayout();
 				group_4.setLayout(xYLayout_4);
 				container.addChild(group_4, {
-					"top": "256px",
+					"top": "274px",
 					"width": "974px",
 					"height": "15px",
 					"left": "calc(50% - 487px)"
@@ -438,6 +440,20 @@
 					"width": "104px",
 					"height": "34px"
 				});
+				var output_4 = new cpr.controls.Output();
+				output_4.value = "밀키트";
+				output_4.style.css({
+					"font-weight" : "600",
+					"font-size" : "30px",
+					"font-family" : "푸른전남 Medium",
+					"text-align" : "center"
+				});
+				container.addChild(output_4, {
+					"top": "20px",
+					"left": "20px",
+					"width": "124px",
+					"height": "37px"
+				});
 			})(group_1);
 			container.addChild(group_1, {
 				"width": "1114px",
@@ -451,7 +467,7 @@
 			container.addChild(group_5, {
 				"autoSize": "height",
 				"width": "968px",
-				"height": "1045px"
+				"height": "932px"
 			});
 			
 			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
@@ -501,9 +517,9 @@
 				formLayout_2.setRows(["30px", "1fr"]);
 				group_7.setLayout(formLayout_2);
 				(function(container){
-					var output_4 = new cpr.controls.Output();
-					output_4.value = "Team HI-FIVE";
-					output_4.style.css({
+					var output_5 = new cpr.controls.Output();
+					output_5.value = "Team HI-FIVE";
+					output_5.style.css({
 						"border-right-style" : "none",
 						"color" : "#F4FAEC",
 						"border-bottom-color" : "#ffffff",
@@ -513,17 +529,17 @@
 						"border-bottom-style" : "solid",
 						"border-top-style" : "none"
 					});
-					container.addChild(output_4, {
+					container.addChild(output_5, {
 						"colIndex": 0,
 						"rowIndex": 0
 					});
-					var output_5 = new cpr.controls.Output();
-					output_5.value = "금동준\t 심현준\t 엄용식\t  임영준";
-					output_5.style.css({
+					var output_6 = new cpr.controls.Output();
+					output_6.value = "금동준\t 심현준\t 엄용식\t  임영준";
+					output_6.style.css({
 						"color" : "#F4FAEC",
 						"font-weight" : "bolder"
 					});
-					container.addChild(output_5, {
+					container.addChild(output_6, {
 						"colIndex": 0,
 						"rowIndex": 1,
 						"colSpan": 1,

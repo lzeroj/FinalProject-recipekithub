@@ -17,6 +17,22 @@
 			 *
 			 * @author KOSTA
 			 ************************************************/
+			//세션
+			function getTimedSessionData(key) {
+				var storedData = sessionStorage.getItem(key);
+				
+				if (storedData) {
+					var data = JSON.parse(storedData);
+					var currentTime = new Date().getTime();
+					
+					if (currentTime < data.expirationTime) {
+						return data.value;
+					} else {
+						sessionStorage.removeItem(key);
+					}
+				}
+				return null;
+			}
 
 			/*
 			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
@@ -104,9 +120,15 @@
 			   	console.log("updatedPrice, updatedInven = " + updatedPrice + ", "+ updatedInven);
 			   	console.log("price = "+ price.value +", " + typeof Number(price.value));
 			   	
+			   	var fileInput = app.lookup("file2");
+				var file = fileInput.file;
+				var img = app.lookup("updateImg");
+				alert("이미지 file = " + file);
+			   	
 			   	var combo1 = app.lookup("cmb1").text;
 			   	var combo2 = app.lookup("cmb2").text;
 			   	var combo3 = app.lookup("cmb3").text;
+			   	var type = app.lookup("type").text;
 			   	var category = combo1+"/"+combo2+"/"+combo3;
 			   	
 				dataMap.setValue("mealkitName", updatedName);
@@ -115,6 +137,7 @@
 				dataMap.setValue("mealkitPrice", updatedPrice);
 				dataMap.setValue("mealkitInventory", updatedInven);
 				dataMap.setValue("mealkitCategory", category);
+				dataMap.setValue("mealkitType", type);
 				var fileInput = app.lookup("file2");
 				var file = fileInput.file;
 				var image = app.lookup("updateImg");
@@ -149,7 +172,9 @@
 			 			alert("밀키트 수량을 입력해주세요.");
 			 			inven.focus();
 			 			return;
-			 		
+			 		}else if(type == null || type == ""){
+			 			alert("타입을 반드시 선택해주세요.");
+			 			return;
 			// 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
 			// 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
 			// 			inven.value = "";
@@ -171,7 +196,11 @@
 			 */
 			function onButtonClick(e){
 				var button = e.control;
-				window.location.href= "/"; //추후 상세 페이지로 바꿔야함.
+				var mealkitNo = cpr.core.Platform.INSTANCE.getParameter("mealkitNo");
+				if(confirm("변경된 사항은 변경되지 않습니다\n취소하시겠습니까?")){
+					window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
+				}
+				//window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
 			}
 
 			/*
@@ -268,6 +297,26 @@
 				fileInput.clear();
 				image.src = "";
 				}
+			}
+
+			/*
+			 * 이미지에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onImageClick(e){
+				var image = e.control;
+				var dataMap = app.lookup("updateMealkit");
+				var mealkitNo = dataMap.getValue("mealkitNo");
+				var mealkitMember = dataMap.getValue("mealkitMember");
+				var sessionId = getTimedSessionData("memsession");
+
+				
+				if(confirm("삭제하시겠습니까?")){
+					if(sessionId === mealkitMember){
+						var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+						HttpPostMethod.submit();
+					}
+				}
 			};
 			// End - User Script
 			
@@ -286,7 +335,8 @@
 					{"name": "mealkitInventory"},
 					{"name": "mealkitCategory"},
 					{"name": "mealkitMember"},
-					{"name": "mealkitImg"}
+					{"name": "mealkitImg"},
+					{"name": "mealkitType"}
 				]
 			});
 			app.register(dataMap_1);
@@ -545,6 +595,24 @@
 						"width": "100px",
 						"height": "20px"
 					});
+					var comboBox_4 = new cpr.controls.ComboBox("type");
+					comboBox_4.placeholder = "-선택-";
+					comboBox_4.style.css({
+						"text-align" : "center"
+					});
+					(function(comboBox_4){
+						comboBox_4.addItem(new cpr.controls.Item("한식", "한식"));
+						comboBox_4.addItem(new cpr.controls.Item("양식", "양식"));
+						comboBox_4.addItem(new cpr.controls.Item("중식/일식", "중식/일식"));
+						comboBox_4.addItem(new cpr.controls.Item("동남아", "동남아"));
+						comboBox_4.addItem(new cpr.controls.Item("에어프라이어", "에어프라이어"));
+					})(comboBox_4);
+					container.addChild(comboBox_4, {
+						"top": "8px",
+						"left": "504px",
+						"width": "100px",
+						"height": "20px"
+					});
 				})(group_5);
 				container.addChild(group_5, {
 					"top": "200px",
@@ -739,6 +807,25 @@
 					"width": "864px",
 					"height": "129px"
 				});
+				var button_4 = new cpr.controls.Button();
+				button_4.value = "삭제";
+				container.addChild(button_4, {
+					"top": "870px",
+					"left": "196px",
+					"width": "114px",
+					"height": "34px"
+				});
+				var image_2 = new cpr.controls.Image();
+				image_2.src = "theme/images/mealkit/trashbin.png";
+				if(typeof onImageClick == "function") {
+					image_2.addEventListener("click", onImageClick);
+				}
+				container.addChild(image_2, {
+					"top": "874px",
+					"left": "884px",
+					"width": "40px",
+					"height": "40px"
+				});
 			})(group_1);
 			container.addChild(group_1, {
 				"top": "209px",
@@ -771,9 +858,9 @@
 			formLayout_1.setRows(["1fr"]);
 			group_9.setLayout(formLayout_1);
 			(function(container){
-				var image_2 = new cpr.controls.Image();
-				image_2.src = "theme/images/common/footerLogo3.png";
-				container.addChild(image_2, {
+				var image_3 = new cpr.controls.Image();
+				image_3.src = "theme/images/common/footerLogo3.png";
+				container.addChild(image_3, {
 					"colIndex": 0,
 					"rowIndex": 0
 				});

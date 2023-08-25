@@ -15,14 +15,17 @@
 	<result column="member_name" property="memberVO.memberName" />
 	<result column="member_nick" property="memberVO.memberNick" />
 	<result column="member_image" property="memberVO.memberImage"/>
+	<result column="member_edit_date" property="memberVO.memberEditDate"/>
 </resultMap>
 <!--  -->
 
 
-<select id="findMealKitByNo" parameterType="int" resultMap="memberInfo">
-SELECT M.MEALKIT_NO, M.MEALKIT_INFO , M.MEMBER_EMAIL, M.MEALKIT_NAME, M.MEALKIT_INGREDIENTS, M.MEALKIT_PRICE, to_char(M.MEALKIT_REG_DATE, 'yyyy-mm-dd hh24:mi')as MEALKIT_REG_DATE,
+<select id="findMealKitByNo" resultMap="memberInfo">
+SELECT M.MEALKIT_NO, M.MEALKIT_INFO , M.MEMBER_EMAIL, M.MEALKIT_NAME, M.MEALKIT_INGREDIENTS, M.MEALKIT_PRICE,
+to_char(M.MEALKIT_REG_DATE, 'yyyy-mm-dd hh24:mi')as MEALKIT_REG_DATE, to_char(m.mealkit_edit_date, 'yyyy-mm-dd hh24:mi') as MEALKIT_EDIT_DATE,
 M.MEALKIT_INVENTORY, M.MEALKIT_CATEGORY, M.MEALKIT_IMAGE, M.MEALKIT_BOARD_HITS, M.STATUS , U.MEMBER_EMAIL,U.MEMBER_NAME, U.MEMBER_NICK FROM MEALKIT_BOARD M INNER JOIN MEMBER U
 ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
+
 </select>
 
 <select id="findMealKitList" resultType="org.kosta.recipekithub.model.vo.MealKitBoard" resultMap="memberInfo">
@@ -34,7 +37,8 @@ ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 
 <update id="updateMealkit" parameterType="org.kosta.recipekithub.model.vo.MealKitBoard">
 	UPDATE MEALKIT_BOARD SET MEALKIT_NAME = #{mealkitName}, MEALKIT_INFO = #{mealkitInfo}, MEALKIT_INGREDIENTS = #{mealkitIngredients},
-	MEALKIT_PRICE = #{mealkitPrice}, MEALKIT_INVENTORY = #{mealkitInventory}, MEALKIT_CATEGORY = #{mealkitCategory}, MEALKIT_EDIT_DATE = SYSDATE
+	MEALKIT_PRICE = #{mealkitPrice}, MEALKIT_INVENTORY = #{mealkitInventory}, MEALKIT_CATEGORY = #{mealkitCategory}, MEALKIT_EDIT_DATE = SYSDATE,
+	MEALKIT_TYPE = #{mealkitType}
 	WHERE MEALKIT_NO = #{mealkitNo}
 </update>
 
@@ -61,7 +65,7 @@ ON M.MEMBER_EMAIL = U.MEMBER_EMAIL WHERE M.MEALKIT_NO = #{VALUE}
 
 
 <select id="findAllMealkitBoard" resultMap="memberInfo">
-SELECT rnum, mk.mealkit_no, mk.mealkit_name, mk.mealkit_board_hits, m.member_image,m.member_nick
+SELECT rnum, mk.mealkit_no, mk.mealkit_name, mk.mealkit_board_hits, m.member_image,m.member_nick, mk.mealkit_image, mk.mealkit_price
 FROM (
 	SELECT ROW_NUMBER() OVER(ORDER BY 
 	<if test="sort == '최신순'">   
@@ -75,12 +79,13 @@ FROM (
 	</if>
 	 )AS rnum,
 	<if test = "sort == '최신순' || sort == '조회수순'">	
-	mkb.mealkit_no, mkb.mealkit_name, mkb.member_email, mkb.mealkit_board_hits
+	mkb.mealkit_no, mkb.mealkit_name, mkb.member_email, mkb.mealkit_board_hits, mkb.mealkit_image, mkb.mealkit_price
 	FROM mealkit_board mkb
+	where mkb.status = 'Y'
 	</if>
 	 <if test = "sort == '별점순'">
 	m.mealkit_no, COALESCE(r.av, 0), m.member_email,m.mealkit_board_hits,
-	m.mealkit_name
+	m.mealkit_name, m.mealkit_image, m.mealkit_price
 	from mealkit_board m
 	left join(
 	SELECT MEALKIT_NO, ROUND(SUM(MEALKIT_STAR_SCORE) / COUNT(MEALKIT_NO),1) as av

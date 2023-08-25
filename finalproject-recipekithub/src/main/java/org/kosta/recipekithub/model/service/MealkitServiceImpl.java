@@ -21,17 +21,14 @@ public class MealkitServiceImpl implements MealkitService {
 
 	private final MealkitMapper mealKitMapper;
 	private static Map<String, Long> checkHits = new HashMap<>();
-
+	
 
 	@Override
 	public int insertMealKit(MealKitBoard mealKitBoard) {
-		//유효성 검사 코드 필요..!!
 		mealKitMapper.insertMealKit(mealKitBoard);
 		int num = mealKitBoard.getMealkitNo();
-		System.out.println("num은 잘 나오니? = " + num);
 		
 		MealKitBoard mealkit = mealKitMapper.findMealKitByNo(num);
-		System.out.println("mealkit 상태를 알아보자 = " + mealkit.getStatus());
 		return num;
 	}
 	
@@ -39,7 +36,6 @@ public class MealkitServiceImpl implements MealkitService {
 	public MealKitBoard findMealKitByNo(int mealkitNo) {
 		
 		MealKitBoard mealkit = mealKitMapper.findMealKitByNo(mealkitNo);
-		System.out.println(mealkit.getStatus());
 		return mealkit;
 	}
 	
@@ -51,8 +47,9 @@ public class MealkitServiceImpl implements MealkitService {
 	
 	@Override
 	public MealKitBoard updateMealkit(MealKitBoard mealkit) {
-		mealKitMapper.updateMealkit(mealkit);		
-		return mealkit;
+		mealKitMapper.updateMealkit(mealkit);
+		MealKitBoard updatedMealkit = findMealKitByNo(mealkit.getMealkitNo());
+		return updatedMealkit;
 	}
 	
 	@Override

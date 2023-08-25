@@ -4,6 +4,22 @@
  *
  * @author KOSTA
  ************************************************/
+//세션
+function getTimedSessionData(key) {
+	var storedData = sessionStorage.getItem(key);
+	
+	if (storedData) {
+		var data = JSON.parse(storedData);
+		var currentTime = new Date().getTime();
+		
+		if (currentTime < data.expirationTime) {
+			return data.value;
+		} else {
+			sessionStorage.removeItem(key);
+		}
+	}
+	return null;
+}
 
 /*
  * 루트 컨테이너에서 init 이벤트 발생 시 호출.
@@ -91,9 +107,15 @@ function onButtonClick2(e){
    	console.log("updatedPrice, updatedInven = " + updatedPrice + ", "+ updatedInven);
    	console.log("price = "+ price.value +", " + typeof Number(price.value));
    	
+   	var fileInput = app.lookup("file2");
+	var file = fileInput.file;
+	var img = app.lookup("updateImg");
+	alert("이미지 file = " + file);
+   	
    	var combo1 = app.lookup("cmb1").text;
    	var combo2 = app.lookup("cmb2").text;
    	var combo3 = app.lookup("cmb3").text;
+   	var type = app.lookup("type").text;
    	var category = combo1+"/"+combo2+"/"+combo3;
    	
 	dataMap.setValue("mealkitName", updatedName);
@@ -102,6 +124,7 @@ function onButtonClick2(e){
 	dataMap.setValue("mealkitPrice", updatedPrice);
 	dataMap.setValue("mealkitInventory", updatedInven);
 	dataMap.setValue("mealkitCategory", category);
+	dataMap.setValue("mealkitType", type);
 	var fileInput = app.lookup("file2");
 	var file = fileInput.file;
 	var image = app.lookup("updateImg");
@@ -136,7 +159,9 @@ function onButtonClick2(e){
  			alert("밀키트 수량을 입력해주세요.");
  			inven.focus();
  			return;
- 		
+ 		}else if(type == null || type == ""){
+ 			alert("타입을 반드시 선택해주세요.");
+ 			return;
 // 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
 // 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
 // 			inven.value = "";
@@ -158,7 +183,11 @@ function onButtonClick2(e){
  */
 function onButtonClick(e){
 	var button = e.control;
-	window.location.href= "/"; //추후 상세 페이지로 바꿔야함.
+	var mealkitNo = cpr.core.Platform.INSTANCE.getParameter("mealkitNo");
+	if(confirm("변경된 사항은 변경되지 않습니다\n취소하시겠습니까?")){
+		window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
+	}
+	//window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
 }
 
 /*
@@ -254,5 +283,25 @@ function onDeleteImgBtnClick(e){
 	if(confirm("사진을 삭제하시겠습니까?")){
 	fileInput.clear();
 	image.src = "";
+	}
+}
+
+/*
+ * 이미지에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onImageClick(e){
+	var image = e.control;
+	var dataMap = app.lookup("updateMealkit");
+	var mealkitNo = dataMap.getValue("mealkitNo");
+	var mealkitMember = dataMap.getValue("mealkitMember");
+	var sessionId = getTimedSessionData("memsession");
+
+	
+	if(confirm("삭제하시겠습니까?")){
+		if(sessionId === mealkitMember){
+			var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+			HttpPostMethod.submit();
+		}
 	}
 }

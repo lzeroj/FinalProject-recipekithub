@@ -104,6 +104,10 @@
     </cl:udc>
     <cl:group std:sid="group-2d0b8c58" style="color:black;">
       <cl:verticaldata std:sid="v-data-20ebd78c" width="988px" height="956px"/>
+      <cl:button std:sid="button-655c2ef5" id="deleBtn" visible="false" value="삭제">
+        <cl:listener std:sid="listener-cbb82cc5" name="click" handler="onDeleBtnClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-56094351" top="11px" left="776px" width="14px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:button>
       <cl:group std:sid="group-1738c787">
         <cl:xylayoutdata std:sid="xyl-data-711c5795" top="41px" left="513px" width="327px" height="86px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:output std:sid="output-1c694a5c" id="name" style="font-weight:bolder; font-size:18px;">
@@ -114,7 +118,7 @@
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitMember"/>
           <cl:xylayoutdata std:sid="xyl-data-a9b92fe5" top="0px" left="9px" width="156px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:img std:sid="image-31c82b55" id="likeimg" style="cursor:pointer;">
+        <cl:img std:sid="image-31c82b55" id="likeimg" style="cursor:pointer;" src="../theme/images/mealkit/heart.png">
           <cl:listener std:sid="listener-69c514a3" name="click" handler="onLikeimgClick"/>
           <cl:xylayoutdata std:sid="xyl-data-591773a8" top="27px" left="266px" width="35px" height="35px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:img>
@@ -143,7 +147,7 @@
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitInventory"/>
           <cl:xylayoutdata std:sid="xyl-data-4e4c0cc1" top="20px" left="296px" width="135px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:img std:sid="image-44dd8bab" src="../theme/images/mealkit/free-icon-star-6063500.png">
+        <cl:img std:sid="image-44dd8bab" src="../theme/images/mealkit/free-icon-thumbs-up-8560888.png">
           <cl:xylayoutdata std:sid="xyl-data-ef66fd4c" top="14px" left="30px" width="31px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:img>
         <cl:output std:sid="output-ae19be6a" id="starScore" style="font-weight:bolder; font-size:20px;" value="">
@@ -206,24 +210,17 @@
         <cl:xylayoutdata std:sid="xyl-data-d434c19e" top="501px" left="23px" width="944px" height="3px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:xylayout std:sid="xylayout-35744802"/>
       </cl:group>
-      <cl:output std:sid="output-74bc907b" id="regDate" style="font-weight:normal; text-align:center;">
+      <cl:output std:sid="output-74bc907b" id="regDate" style="font-weight:normal; text-align:left;">
         <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitRegDate"/>
-        <cl:xylayoutdata std:sid="xyl-data-baef1c7f" top="11px" left="20px" width="130px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-baef1c7f" top="11px" left="20px" width="193px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:output std:sid="output-d54cfc08" id="hits" style="font-weight:normal; font-size:15px;">
         <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitHits"/>
         <cl:xylayoutdata std:sid="xyl-data-aba9bb86" top="29px" left="937px" width="43px" height="21px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:img std:sid="image-159cf4f0" src="../theme/images/mealkit/free-icon-eye-118191.png">
-        <cl:xylayoutdata std:sid="xyl-data-42e0b305" top="30px" left="901px" width="26px" height="19px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      </cl:img>
-      <cl:button std:sid="button-bbef5b23" id="updateBtn" visible="false" value="수정">
-        <cl:listener std:sid="listener-13c4f319" name="click" handler="onUpdateBtnClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-97c8ad90" top="12px" left="627px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      </cl:button>
-      <cl:button std:sid="button-655c2ef5" id="deleBtn" visible="false" value="삭제">
-        <cl:listener std:sid="listener-41c4bbc5" name="click" handler="onButtonClick3"/>
-        <cl:xylayoutdata std:sid="xyl-data-56094351" top="11px" left="740px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:button std:sid="button-bbef5b23" id="updateBtn" style="background-size:cover; background-image:url(../theme/images/mealkit/editBtn.png); background-position:center;" visible="false">
+        <cl:listener std:sid="listener-3f8646e1" name="click" handler="onUpdateBtnClick3"/>
+        <cl:xylayoutdata std:sid="xyl-data-97c8ad90" top="-1px" left="769px" width="41px" height="43px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:img std:sid="image-b051d3a2" id="mealkitImg">
         <cl:xylayoutdata std:sid="xyl-data-0aa79dec" top="41px" left="20px" width="436px" height="250px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -243,6 +240,12 @@
         <cl:xylayoutdata std:sid="xyl-data-ffae0622" top="924px" width="963px" height="3px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:xylayout std:sid="xylayout-817cd24d"/>
       </cl:group>
+      <cl:img std:sid="image-e6577b51" src="../theme/images/mealkit/views.png">
+        <cl:xylayoutdata std:sid="xyl-data-febd3eb1" top="29px" left="901px" width="26px" height="21px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:img>
+      <cl:output std:sid="output-761b13b6" id="mealkitEditDate" style="text-align:left;" visible="false" value="mealkitEditDate">
+        <cl:xylayoutdata std:sid="xyl-data-445558b4" top="11px" left="21px" width="191px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
       <cl:xylayout std:sid="xylayout-1e910270"/>
     </cl:group>
     <cl:group std:sid="group-5155607d" id="impInfo">
@@ -310,7 +313,7 @@
         <cl:listener std:sid="listener-2dca2f5a" name="value-change" handler="onIpb1ValueChange"/>
         <cl:formdata std:sid="f-data-559525e5" row="0" col="0"/>
       </cl:inputbox>
-      <cl:combobox std:sid="c-box-b3d1e4a9" id="starpoint" style="font-size:14px;" placeholder="별점 선택">
+      <cl:combobox std:sid="c-box-b3d1e4a9" id="starpoint" style="font-size:14px;" placeholder="별점 선택" preventinput="true">
         <cl:formdata std:sid="f-data-da3c264f" row="0" col="1" rowspan="1" colspan="1"/>
         <cl:item std:sid="t-item-cc08e9d2" label="1" value="1"/>
         <cl:item std:sid="t-item-85bf3ab0" label="2" value="2"/>

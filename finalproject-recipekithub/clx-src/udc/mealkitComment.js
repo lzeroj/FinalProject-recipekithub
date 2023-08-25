@@ -22,6 +22,7 @@ function onBodyLoad(e){
 	app.lookup("regDate").text = app.getAppProperty("regDate");
 	app.lookup("content").text = app.getAppProperty("content");
 	app.lookup("star").text = app.getAppProperty("star");
+	app.lookup("deleteBtn").text = app.getAppProperty("deleteBtn");
 }
 
 /*

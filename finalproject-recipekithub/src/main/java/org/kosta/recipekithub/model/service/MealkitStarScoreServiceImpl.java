@@ -47,7 +47,6 @@ public class MealkitStarScoreServiceImpl implements MealkitStarScoreService {
 	
 	@Override
 	public double findMealkitStarAvg(int num) {
-		//double avg = mealkitStarScoreMapper.findMealkitStarAvg(num);
 		Optional<Double> opt = mealkitStarScoreMapper.findMealkitStarAvg(num);
 		double defaultValue = 0.0; // 대체값 설정
 		double result = opt.orElse(defaultValue);
