@@ -17,6 +17,7 @@
           <cl:datacolumn std:sid="d-column-337e0c71" name="mealkitCategory"/>
           <cl:datacolumn std:sid="d-column-2042df66" name="mealkitMember"/>
           <cl:datacolumn std:sid="d-column-7eaea9fb" name="mealkitImg"/>
+          <cl:datacolumn std:sid="d-column-94433073" name="mealkitType"/>
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:datamap std:sid="d-map-73012936" id="sendUpdatedMealkit">
@@ -138,6 +139,14 @@
           <cl:item std:sid="t-item-4d33517d" label="회" value="회"/>
           <cl:item std:sid="t-item-b7fbec35" label="기타" value="기타"/>
         </cl:combobox>
+        <cl:combobox std:sid="c-box-84ca26ac" id="type" style="text-align:center;" placeholder="-선택-">
+          <cl:xylayoutdata std:sid="xyl-data-8e40a936" top="8px" left="504px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:item std:sid="t-item-ec616909" label="한식" value="한식"/>
+          <cl:item std:sid="t-item-e3ebd476" label="양식" value="양식"/>
+          <cl:item std:sid="t-item-7d29abe9" label="중식/일식" value="중식/일식"/>
+          <cl:item std:sid="t-item-ae02404a" label="동남아" value="동남아"/>
+          <cl:item std:sid="t-item-8608831a" label="에어프라이어" value="에어프라이어"/>
+        </cl:combobox>
         <cl:xylayout std:sid="xylayout-dbc58606"/>
       </cl:group>
       <cl:group std:sid="group-3dbf3d97">
@@ -196,6 +205,13 @@
         </cl:button>
         <cl:xylayout std:sid="xylayout-b63c3446"/>
       </cl:group>
+      <cl:button std:sid="button-75b88ba6" value="삭제">
+        <cl:xylayoutdata std:sid="xyl-data-46e6fab0" top="870px" left="196px" width="114px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:button>
+      <cl:img std:sid="image-8d5c38fb" src="../theme/images/mealkit/trashbin.png">
+        <cl:listener std:sid="listener-121b9c88" name="click" handler="onImageClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-246d2178" top="874px" left="884px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:img>
       <cl:xylayout std:sid="xylayout-9ecb7632"/>
     </cl:group>
     <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">

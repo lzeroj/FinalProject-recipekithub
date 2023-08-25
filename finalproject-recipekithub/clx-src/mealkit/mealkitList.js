@@ -112,13 +112,9 @@ function onMealkitBoardListSubmitSuccess(e){
 	var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
 	var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
 	var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
-	//alert("mealkitList = " + mealkitList);
-	//alert("mealkitAllList = " + mealkitAllList);
-	//console.log("ㅌㅌㅌ" + mealkitAllList.length);
 	
-	for (var i = 0; i < mealkitAllList.length; i++) {
-	console.log("mealkitAllList =" + mealkitAllList[i].mealkitImage);
-	}
+
+	
 	//app.lookup(id)	
 	var email = cpr.core.Platform.INSTANCE.getParameter("member");
 	console.log("email = " + email);
@@ -140,7 +136,7 @@ function onMealkitBoardListSubmitSuccess(e){
 			var mealkit = new udc.mealkitList();
 			mealkit.img = "/upload/mealkit/" + mealkitAllList[i].mealkitImage;
 			var mealkitNo = mealkitAllList[i].mealkitNo
-			mealkit.hits = mealkitAllList[i].mealkitBoardHits;
+			mealkit.price = mealkitAllList[i].mealkitPrice;
 			mealkit.nick = mealkitAllList[i].memberVO.memberNick;
 			mealkit.title = mealkitAllList[i].mealkitName;
 			mealkit.star = findStarAvgByNo[i];
@@ -154,6 +150,7 @@ function onMealkitBoardListSubmitSuccess(e){
 				window.location.href = "/mealkitDetail/" + mealkitAllList[index].mealkitNo;
 			});
 		})(i);
+		
 	}
 /* 초기
 	var cnt = app.lookup("mealkitCnt");

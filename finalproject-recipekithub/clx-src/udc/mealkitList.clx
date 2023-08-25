@@ -10,42 +10,39 @@
       <cl:property name="title" type="string"/>
       <cl:property name="nick" type="string"/>
       <cl:property name="star" type="string"/>
-      <cl:property name="hits" type="string"/>
+      <cl:property name="price" type="string"/>
       <cl:property name="count" type="string"/>
       <cl:event name="imgClick" type="cpr.events.CAppEvent"/>
     </cl:appspec>
   </head>
-  <body std:sid="body-2c534060" style="top:0px; left:0px; width:300px; height:300px;">
+  <body std:sid="body-2c534060" style="top:0px; left:0px; width:300px; font-family:푸른전남 Medium; height:300px;">
     <cl:listener std:sid="listener-d7578319" name="load" handler="onBodyLoad"/>
     <cl:img std:sid="image-433f24d8" id="img" style="cursor:pointer;">
       <cl:listener std:sid="listener-141862f4" name="click" handler="onImgClick"/>
       <cl:xylayoutdata std:sid="xyl-data-4cc33786" top="0px" left="0px" width="230px" height="150px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:img>
-    <cl:output std:sid="output-5df71c69" id="title" style="font-weight:bold;" value="Output">
+    <cl:output std:sid="output-5df71c69" id="title" style="font-weight:bolder; font-size:16px; font-family:푸른전남 Medium;" value="Output">
       <cl:xylayoutdata std:sid="xyl-data-e4fad0bc" top="149px" left="0px" width="230px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:output std:sid="output-5e4bbe61" id="nick" style="color:#0CA44E;" value="Output">
+    <cl:output std:sid="output-5e4bbe61" id="nick" style="color:#A7A7A7;" value="Output">
       <cl:xylayoutdata std:sid="xyl-data-7dfee4e7" top="178px" left="0px" width="116px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:output std:sid="output-86c3e89b" id="star" style="color:#0CA44E; font-weight:bold; font-size:14px;" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-7a83d067" top="204px" left="57px" width="34px" height="24px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-7a83d067" top="204px" left="196px" width="34px" height="24px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:output std:sid="output-4c9c7b47" value="조회수">
-      <cl:xylayoutdata std:sid="xyl-data-6d6c680b" top="204px" left="90px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    <cl:output std:sid="output-d6d7c904" id="price" style="color:black; font-weight:bolder; font-size:16px; font-family:푸른전남 Medium;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-9a70f666" top="204px" left="0px" width="88px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:output std:sid="output-d6d7c904" id="hits" style="color:#0CA44E;" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-9a70f666" top="204px" left="141px" width="50px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:output>
-    <cl:img std:sid="image-9f3a9c26" src="../theme/images/mealkit/free-icon-star-6063500.png">
-      <cl:xylayoutdata std:sid="xyl-data-47f09aa2" top="206px" left="0px" width="27px" height="23px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:img>
     <cl:group std:sid="group-8d63a404" style="background-color:#f9f9f9;">
       <cl:xylayoutdata std:sid="xyl-data-5f0dfbde" top="241px" left="0px" width="230px" height="5px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       <cl:xylayout std:sid="xylayout-de4618e0"/>
     </cl:group>
-    <cl:output std:sid="output-27dbb7e1" id="count" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-a781335c" top="204px" left="26px" width="32px" height="24px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    <cl:output std:sid="output-27dbb7e1" id="count" style="text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-a781335c" top="204px" left="165px" width="32px" height="24px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
+    <cl:img std:sid="image-c4c03989" style="text-align:right;" src="../theme/images/mealkit/free-icon-thumbs-up-8560888.png">
+      <cl:xylayoutdata std:sid="xyl-data-3f8dda37" top="204px" left="135px" width="31px" height="27px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
     <cl:xylayout std:sid="xylayout-7d80c481"/>
   </body>
   <std:studiosetting>

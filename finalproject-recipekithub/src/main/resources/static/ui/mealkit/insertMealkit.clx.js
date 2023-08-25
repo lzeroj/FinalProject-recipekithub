@@ -389,8 +389,10 @@
 						"height": "20px"
 					});
 					var comboBox_1 = new cpr.controls.ComboBox("cmb1");
+					comboBox_1.placeholder = "-종류-";
 					comboBox_1.style.css({
-						"background-color" : "#F9F9F9"
+						"background-color" : "#F9F9F9",
+						"text-align" : "center"
 					});
 					(function(comboBox_1){
 						comboBox_1.addItem(new cpr.controls.Item("밑반찬", "밑반찬"));
@@ -420,8 +422,10 @@
 						"height": "20px"
 					});
 					var comboBox_2 = new cpr.controls.ComboBox("cmb2");
+					comboBox_2.placeholder = "-재료-";
 					comboBox_2.style.css({
-						"background-color" : "#F9F9F9"
+						"background-color" : "#F9F9F9",
+						"text-align" : "center"
 					});
 					(function(comboBox_2){
 						comboBox_2.addItem(new cpr.controls.Item("소고기", "소고기"));
@@ -448,8 +452,10 @@
 						"height": "20px"
 					});
 					var comboBox_3 = new cpr.controls.ComboBox("cmb3");
+					comboBox_3.placeholder = "-방법-";
 					comboBox_3.style.css({
-						"background-color" : "#F9F9F9"
+						"background-color" : "#F9F9F9",
+						"text-align" : "center"
 					});
 					(function(comboBox_3){
 						comboBox_3.addItem(new cpr.controls.Item("볶음", "볶음"));
@@ -473,8 +479,11 @@
 						"height": "20px"
 					});
 					var comboBox_4 = new cpr.controls.ComboBox("cmb4");
+					comboBox_4.placeholder = "-선택-";
+					comboBox_4.style.css({
+						"text-align" : "center"
+					});
 					(function(comboBox_4){
-						comboBox_4.addItem(new cpr.controls.Item("전체", "전체"));
 						comboBox_4.addItem(new cpr.controls.Item("한식", "한식"));
 						comboBox_4.addItem(new cpr.controls.Item("양식", "양식"));
 						comboBox_4.addItem(new cpr.controls.Item("중식/일식", "중식/일식"));

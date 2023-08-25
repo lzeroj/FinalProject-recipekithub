@@ -30,11 +30,7 @@ public class MealkitCommentServiceImpl implements MealkitCommentService {
 		comment.setMealkitBoard(mealkit);
 		comment.setMemberVO(member);
 		
-		log.info("mealkit = {}", mealkit);
-		log.info("comment = {}", comment);
 		mealkitCommentMapper.insertMealkitComment(comment);
-		log.info("comment = {}", comment);
-		
 		return comment.getMealkitCommentId();
 	}
 	

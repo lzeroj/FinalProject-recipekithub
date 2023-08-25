@@ -4,7 +4,22 @@
  *
  * @author dyrlq
  ************************************************/
-
+//세션
+function getTimedSessionData(key) {
+	var storedData = sessionStorage.getItem(key);
+	
+	if (storedData) {
+		var data = JSON.parse(storedData);
+		var currentTime = new Date().getTime();
+		
+		if (currentTime < data.expirationTime) {
+			return data.value;
+		} else {
+			sessionStorage.removeItem(key);
+		}
+	}
+	return null;
+}
 /*
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
@@ -24,6 +39,7 @@ function onBodyLoad(e){
 	var mealkitImg = cpr.core.Platform.INSTANCE.getParameter("mealkitImg");
 	var mealkitCategory = cpr.core.Platform.INSTANCE.getParameter("mealkitCategory");
 	var avg = cpr.core.Platform.INSTANCE.getParameter("avg");
+	var EditDate = cpr.core.Platform.INSTANCE.getParameter("mealkitEditDate");
 	console.log("mealkitHits = " + mealkitHits);
 	var starAvg = app.lookup("starScore");
 	starAvg.value = avg;
@@ -34,9 +50,15 @@ function onBodyLoad(e){
 	
 	var hitsBox = app.lookup("hits");
 	hitsBox.value = mealkitHits;
-
-	console.log("mealkitMember, sessionMember = " + mealkitMember + ", " +sessionMember);
 	
+	if(EditDate != null){
+		var mealkitEditDate = app.lookup("mealkitEditDate");
+		var mealkitRegDate = app.lookup("regDate");
+		mealkitRegDate.visible = false;
+		mealkitEditDate.visible = true;
+		mealkitEditDate.value = "수정됨 : "+EditDate;
+	}
+
 	if(sessionMember != "guest"){
 		var commentBox = app.lookup("writeComment");
 		commentBox.visible = true;
@@ -52,15 +74,15 @@ function onBodyLoad(e){
 	
 	
 	
-	/* 세션이 들어오면 Open
-	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");//게시물 작성자이메일
-	var member = cpr.core.Platform.INSTANCE.getParameter("member"); //로그인한 계정
+	//세션이 들어오면 Open
+//	var mealkitMember = cpr.core.Platform.INSTANCE.getParameter("mealkitMember");//게시물 작성자이메일
+//	var member = cpr.core.Platform.INSTANCE.getParameter("member"); //로그인한 계정
+//	
+//	if(mealkitIngredients !== mealkitMember){
+//		var button = app.lookup("updateBtn");
+//		button.visible = false;
+//	}
 	
-	if(mealkitIngredients !== mealkitMember){
-		var button = app.lookup("updateBtn");
-		button.visible = false;
-	}
-	*/
 	
 	var cnt = app.lookup("mealcnt").value;
 	var dataMap = app.lookup("mealkit");
@@ -111,10 +133,6 @@ function onBodyLoad(e){
 	// 현준
 	app.lookup("submealkitlike").send();
 	
-	
-	
-	//var submission = app.lookup("mealkitSub");
-	//submission.send();
 		
 }
 
@@ -178,21 +196,21 @@ function onUpdateBtnClick(e){
  * "삭제" 버튼에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
-function onButtonClick3(e){
-	var button = e.control;
-	var mealkit = app.lookup("mealkit");
-	var mealkitNo = mealkit.getValue("mealkitNo");
-	
-	var sessionMember = mealkit.getValue("sessionMember");
-	var mealkitMember = mealkit.getValue("mealkitMember");
-	
-	if(confirm("삭제하시겠습니까?")){
-		if(sessionMember === mealkitMember){
-			var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-			HttpPostMethod.submit();
-		}
-	}
-}
+//function onButtonClick3(e){
+//	var button = e.control;
+//	var mealkit = app.lookup("mealkit");
+//	var mealkitNo = mealkit.getValue("mealkitNo");
+//	
+//	var sessionMember = mealkit.getValue("sessionMember");
+//	var mealkitMember = mealkit.getValue("mealkitMember");
+//	
+//	if(confirm("삭제하시겠습니까?")){
+//		if(sessionMember === mealkitMember){
+//			var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+//			HttpPostMethod.submit();
+//		}
+//	}
+//}
 
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -268,20 +286,23 @@ function onSubcreatmycartSubmitSuccess2(e){
  */
 function onButtonClick5(e){
 	var button = e.control;
-	var comment = app.lookup("comment").value;
+	var comment = app.lookup("comment");
 	var star = app.lookup("starpoint").value;
 	
 	if(star == "" || star == null){
 		alert("반드시 별점을 선택해주세요.");
-		app.lookup("comment").value = "";
-		app.lookup("starpoint").value = "";
-		app.lookup("comment").redraw();
+		app.lookup("starpoint").focus();;
 		app.lookup("starpoint").redraw();
+		return false;
+	}else if(comment.value == "" || comment.value == null){
+		alert("내용을 입력해주세요.");
+		comment.focus();
+		return false;
 	}else{
 		var commentList = app.lookup("commentList");
 		var mealkitNo = commentList.getValue("mealkitNo");
 		var commentMap = app.lookup("commentMap");
-		commentMap.setValue("comment", comment);
+		commentMap.setValue("comment", comment.value);
 		commentMap.setValue("mealkitNo", mealkitNo);//string
 		commentMap.setValue("star", star);//string
 		app.lookup("writeComment").redraw();
@@ -314,41 +335,6 @@ function onCommentSubSubmitSuccess(e){
 	app.lookup("commentListSub").send();
 }
 
-///*
-// * 서브미션에서 receive 이벤트 발생 시 호출.
-// * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
-// */
-//function onCommentListSubReceive(e){
-//	var commentListSub = e.control;
-//	var xhr = commentListSub.xhr;
-//	var jsonData = JSON.parse(xhr.responseText);
-//	//console.log("jsonData = " + jsonData);
-//	var mealkitCommentList = jsonData.commentListSub;
-//	//console.log("mealkitCommentList = " + mealkitCommentList);
-//	var container = app.lookup("commentgrp");
-//	for(var i =0; i<commentListSub.length; i++){
-//		(function(index){
-//			//udc 동적 생성
-//			var mealkitComment = new udc.mealkitComment();
-//			//udc에서 출판한 이미지 경로 앱 속성 지정
-//			mealkitComment.nick = commentListSub[i].memberVO.memberNick;
-//			mealkitComment.regDate = commentListSub[i].mealkitCommentDate;
-//			mealkitComment.content = commentListSub[i].commentContent;
-//			//mealkitComment.star = 별점 추가 예정
-//			
-//			container.addChild(mealkitComment, {
-//				height: "120px",
-//				width: "100px",
-//				autoSize: "both"
-//				
-//			});
-//			mealkitComment.addEventListener("deleteClick", function(e){
-//				app.lookup("commentId").setValue("mealkitCommentId", commentListSub[index].mealkitCommentId);
-//				app.lookup("deleteComment").send();
-//			});
-//		});
-//	}
-//}
 
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -356,17 +342,16 @@ function onCommentSubSubmitSuccess(e){
  */
 function onCommentListSubSubmitSuccess(e){
 	var commentListSub = e.control;
+	var sessionMember = cpr.core.Platform.INSTANCE.getParameter("sessionMember");
 	var xhr = commentListSub.xhr;
 	var jsonData = JSON.parse(xhr.responseText);
-	//var sessionval = getSessionStorage("memsession");
+	//var sessionval = getTimedSessionData("memsession");
 	var mealkitComment = jsonData.mealkitCommentList;
 	var totalCommentCount = jsonData.mealkitCommentNum;
 	var commentStar = jsonData.mealkitStarList;
 	app.lookup("cnt").value = totalCommentCount;
 	var container = app.lookup("commentgrp");
-	
 	app.lookup("page").totalRowCount = totalCommentCount;
-	
 	// 댓글 등록,삭제 시 재조회 할 수 있게 기존 목록 삭제
 	container.removeAllChildren();
 	
@@ -379,9 +364,9 @@ function onCommentListSubSubmitSuccess(e){
 			comment.regDate = mealkitComment[i].mealkitCommentDate;
 			comment.content = mealkitComment[i].mealkitCommentContent;
 			comment.star = commentStar[i].mealkitStarScore;
-			//if(sessionval ==null || sessionval != mealkitComment[i].memberVO.memberEmail){
-			//	comment.deleteBtn = false;
-			//}
+			if(sessionMember == null || sessionMember != mealkitComment[i].memberVO.memberEmail){
+				comment.deleteBtn = false;
+			}
 			container.addChild(comment, {
 				height: "100px",
 				width: "150px",
@@ -416,3 +401,20 @@ function onPageIndexerSelectionChange(e){
 	var pageIndexer = e.control;
 	app.lookup("commentListSub").send();
 }
+
+/*
+ * "수정" 버튼(updateBtn)에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onUpdateBtnClick3(e){
+	var updateBtn = e.control;
+	var mealkit = app.lookup("mealkit");
+	var value = mealkit.getValue("mealkitNo");
+	
+	if(confirm("수정하시겠습니까?")){
+		var httpPostMethod = new cpr.protocols.HttpPostMethod("/updateMealkitForm/"+value);
+		httpPostMethod.submit();	
+	}
+	
+}
+

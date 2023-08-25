@@ -46,10 +46,10 @@
     </cl:udc>
     <cl:group std:sid="group-f7dd2b85">
       <cl:verticaldata std:sid="v-data-ddb86633" width="1114px" height="345px"/>
-      <cl:navigationbar std:sid="n-bar-2cf3bfa1" id="mealkitType" style="padding-top:0px; font-weight:17.0; padding-right:0px;">
+      <cl:navigationbar std:sid="n-bar-2cf3bfa1" id="mealkitType" style="padding-top:0px; font-weight:16.0; padding-right:0px;" menutype="fullmenu">
         <cl:listener std:sid="listener-49c7e2a9" name="selection-change" handler="onSortSelectionChange"/>
         <cl:datamapbind property="value" datacontrolid="meCategory" columnname="mealkitType"/>
-        <cl:xylayoutdata std:sid="xyl-data-15947996" top="34px" width="1094px" height="75px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-15947996" top="67px" right="10px" left="10px" height="75px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         <cl:menuitem std:sid="m-item-32659c61" label="전체" value="전체"/>
         <cl:menuitem std:sid="m-item-ba4ea216" label="한식" value="한식"/>
         <cl:menuitem std:sid="m-item-3fae6fec" label="양식" value="양식"/>
@@ -57,11 +57,11 @@
         <cl:menuitem std:sid="m-item-5f777364" label="분식" value="분식"/>
         <cl:menuitem std:sid="m-item-a7b1c824" label="동남아" value="동남아"/>
         <cl:menuitem std:sid="m-item-87de225f" label="에어프라이어" value="에어프라이어"/>
-        <cl:barstyle style="padding-top:0px; padding-right:0px; text-align:center;"/>
-        <cl:itemstyle style="text-align:center;"/>
+        <cl:barstyle style="padding-top:0px; padding-left:30px; padding-right:30px; text-align:center;"/>
+        <cl:itemstyle style="white-space:normal; padding-left:25px; text-align:center; padding-right:25px;"/>
       </cl:navigationbar>
       <cl:group std:sid="group-2c062443" style="background-color:#FFFFFF;">
-        <cl:xylayoutdata std:sid="xyl-data-70ea6310" top="176px" width="984px" height="70px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-70ea6310" top="177px" width="984px" height="70px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:output std:sid="output-2eed6e9b" style="font-weight:bold;" value="총">
           <cl:xylayoutdata std:sid="xyl-data-c504d9b3" top="30px" left="45px" width="18px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
@@ -82,21 +82,24 @@
         <cl:xylayout std:sid="xylayout-ffe6ae24"/>
       </cl:group>
       <cl:group std:sid="group-396eaeec" style="background-color:#f9f9f9; background-image:none;">
-        <cl:xylayoutdata std:sid="xyl-data-9fabcd3c" top="136px" width="974px" height="15px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-9fabcd3c" top="152px" width="974px" height="15px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:xylayout std:sid="xylayout-6664e312"/>
       </cl:group>
       <cl:group std:sid="group-f63e3ec2" style="background-color:#f9f9f9; background-image:none;">
-        <cl:xylayoutdata std:sid="xyl-data-72364993" top="256px" width="974px" height="15px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-72364993" top="274px" width="974px" height="15px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:xylayout std:sid="xylayout-27b0cb22"/>
       </cl:group>
       <cl:button std:sid="button-068ac482" id="insertBtn" style="background-color:#0ca44e; color:white; font-weight:16; font-family:푸른전남 Medium; background-image:none;" class=".cl-button mealkitbtn" visible="false" value="밀키트 등록">
         <cl:listener std:sid="listener-2e4bf9b4" name="click" handler="onButtonClick2"/>
         <cl:xylayoutdata std:sid="xyl-data-ea1bc820" top="299px" right="73px" width="104px" height="34px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
       </cl:button>
+      <cl:output std:sid="output-f7226153" style="font-weight:600; font-size:30px; font-family:푸른전남 Medium; text-align:center;" value="밀키트">
+        <cl:xylayoutdata std:sid="xyl-data-27e7c470" top="20px" left="20px" width="124px" height="37px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:output>
       <cl:xylayout std:sid="xylayout-8fe99f2d" scrollable="false"/>
     </cl:group>
     <cl:group std:sid="group-6e55fbbc" id="grp">
-      <cl:verticaldata std:sid="v-data-e3faa2f3" width="968px" height="1045px" autosize="height"/>
+      <cl:verticaldata std:sid="v-data-e3faa2f3" width="968px" height="932px" autosize="height"/>
       <cl:flowlayout std:sid="f-layout-3671cf03" scrollable="false"/>
     </cl:group>
     <cl:pageindexer std:sid="p-indexer-0b7cb89b" id="page" pagerowcount="12">

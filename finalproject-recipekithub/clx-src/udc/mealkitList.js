@@ -22,7 +22,7 @@ function onBodyLoad(e){
 	app.lookup("title").text = app.getAppProperty("title");
 	app.lookup("nick").text = app.getAppProperty("nick");
 	app.lookup("star").text = app.getAppProperty("star");
-	app.lookup("hits").text = app.getAppProperty("hits");
+	app.lookup("price").text = app.getAppProperty("price");
 	app.lookup("count").text = app.getAppProperty("count");
 }
 

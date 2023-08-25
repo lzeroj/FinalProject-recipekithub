@@ -15,15 +15,11 @@ public interface MealkitStarScoreService {
 
 	 double findMealkitStarList(int mealkitCommentId);
 	 
-	 //int mealkitStarCnt();
-	 
-	 //List<MealkitStarScore> findCommentStarList(int num);
-	 
 	 List<MealkitboardVO> findMealkitNoList();	
 		
 	 double findMealkitStarAvg(int num);
 	 
-	List<MealkitStarScore> findCommentStarList(long num, RecipeCommentPagination pagination);
+	 List<MealkitStarScore> findCommentStarList(long num, RecipeCommentPagination pagination);
 
 
 }
