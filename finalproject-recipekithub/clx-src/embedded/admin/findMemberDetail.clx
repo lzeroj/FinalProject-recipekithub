@@ -35,9 +35,9 @@
         <cl:listener std:sid="listener-a5db19ce" name="submit-success" handler="onSub_findMemberListSubmitSuccess"/>
         <cl:responsedata dataid="ds_member"/>
       </cl:submission>
-      <cl:submission std:sid="submission-d074a5b5" id="sub_delete" action="/member/deleteMember">
+      <cl:submission std:sid="submission-d074a5b5" id="sub_delete" action="/member/deleteMembers">
         <cl:listener std:sid="listener-a601bac8" name="submit-success" handler="onSub_deleteMemberSubmitSuccess"/>
-        <cl:requestdata dataid="dm_delete"/>
+        <cl:requestdata dataid="ds_member"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>

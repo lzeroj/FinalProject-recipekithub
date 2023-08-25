@@ -36,7 +36,6 @@
 			 */
 			function onSub_findMemberListSubmitSuccess(e){
 				var sub_findMemberList = e.control;
-				//var dataSet = app.lookup("ds_member");
 				var grid = app.lookup("grd_member");
 				grid.redraw();
 			}
@@ -62,13 +61,34 @@
 				// 사용자가 체크한 행을 찾는다
 				var checkRowIndices = grdMem.getCheckRowIndices();
 				
+				//var memberEmail = null;
+				var memberEmails = [];
+				
 				if (selectedRowIndex != -1) {
+			        //memberEmail = grdMem.getCellValue(selectedRowIndex, "memberEmail");
+			        var memberEmail = grdMem.getCellValue(selectedRowIndex, "memberEmail");
+			        memberEmails.push(memberEmail);
+			        
 					grdMem.deleteRow(selectedRowIndex);
 				}
 				
 				if (checkRowIndices.length > 0) { 
-					grdMem.deleteRow(checkRowIndices);
+					//grdMem.deleteRow(checkRowIndices);
+					
+					checkRowIndices.sort(function(a, b) { return b - a; });
+
+			        // Loop through the sorted array and delete rows
+			        for (var i = 0; i < checkRowIndices.length; i++) {
+			            var rowIndex = checkRowIndices[i];
+			            var memberEmail = grdMem.getCellValue(rowIndex, "memberEmail");
+			            memberEmails.push(memberEmail);
+			            grdMem.deleteRow(rowIndex);
+			        }
 				}
+				
+				//var cellIndex = grdMem.getCellIndex("memberEmail");
+				//grdMem.getSelectedIndices()[0].rowIndex;
+				//grdMem.get
 				
 				if (selectedRowIndex == null || checkRowIndices == null) {
 					var initValue = "선택한 회원이 없습니다.\n다시 한번 확인해주세요.";
@@ -88,8 +108,17 @@
 							dialogApp.initValue = initValue;
 						});
 					}).then(function(returnValue) {
-						var dataMap = app.lookup("dm_delete");
+						 var dataSet = app.lookup("ds_member");
+						
+						/*
 						dataMap.setValue("memberEmail", app.lookup("opbEmail").value);
+						
+						if (memberEmail !== null) {
+			                dataMap.setValue("memberEmail", memberEmail);
+			            }
+			            */
+						
+			            dataSet.setValue("memberEmail", memberEmail);
 						
 						var submission = app.lookup("sub_delete");
 						submission.send();
@@ -201,8 +230,8 @@
 			app.register(submission_1);
 			
 			var submission_2 = new cpr.protocols.Submission("sub_delete");
-			submission_2.action = "/member/deleteMember";
-			submission_2.addRequestData(dataMap_1);
+			submission_2.action = "/member/deleteMembers";
+			submission_2.addRequestData(dataSet_1);
 			if(typeof onSub_deleteMemberSubmitSuccess == "function") {
 				submission_2.addEventListener("submit-success", onSub_deleteMemberSubmitSuccess);
 			}
