@@ -124,14 +124,17 @@
 				var totalMealkitCnt = jsonData.totalMealkitCnt;
 				var findMealkitByName= jsonData.findMealkitByName;
 				var findStarAvgByNo= jsonData.findStarAvgByNo;
+				var commentCnt= jsonData.commentCnt;
 				var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
 				var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
 				var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
 				//alert("mealkitList = " + mealkitList);
 				//alert("mealkitAllList = " + mealkitAllList);
 				//console.log("ㅌㅌㅌ" + mealkitAllList.length);
-				console.log("findStarAvgByNo =" + findStarAvgByNo);
 				
+				for (var i = 0; i < mealkitAllList.length; i++) {
+				console.log("mealkitAllList =" + mealkitAllList[i].mealkitImage);
+				}
 				//app.lookup(id)	
 				var email = cpr.core.Platform.INSTANCE.getParameter("member");
 				console.log("email = " + email);
@@ -157,7 +160,7 @@
 						mealkit.nick = mealkitAllList[i].memberVO.memberNick;
 						mealkit.title = mealkitAllList[i].mealkitName;
 						mealkit.star = findStarAvgByNo[i];
-						mealkit.count = "("+commentCount[i]+")";
+						mealkit.count = "("+commentCnt[i]+")";
 						container.addChild(mealkit, {
 							height: "250px",
 							width: "230px",
@@ -293,7 +296,7 @@
 				var navigationBar_1 = new cpr.controls.NavigationBar("mealkitType");
 				navigationBar_1.style.css({
 					"padding-top" : "0px",
-					"font-size" : "13px",
+					"font-weight" : "17.0",
 					"padding-right" : "0px"
 				});
 				navigationBar_1.style.bar.css({
@@ -318,10 +321,10 @@
 					navigationBar_1.addEventListener("selection-change", onSortSelectionChange);
 				}
 				container.addChild(navigationBar_1, {
-					"top": "20px",
-					"right": "10px",
-					"left": "10px",
-					"height": "106px"
+					"top": "34px",
+					"width": "1094px",
+					"height": "75px",
+					"left": "calc(50% - 547px)"
 				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({

@@ -2,6 +2,7 @@ package org.kosta.recipekithub.model.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.kosta.recipekithub.model.vo.MealkitCommentVO;
 import org.kosta.recipekithub.model.vo.MealkitStarScore;
@@ -21,6 +22,8 @@ public interface MealkitStarScoreService {
 	 List<MealkitboardVO> findMealkitNoList();	
 		
 	 double findMealkitStarAvg(int num);
-
+	 
 	List<MealkitStarScore> findCommentStarList(long num, RecipeCommentPagination pagination);
+
+
 }

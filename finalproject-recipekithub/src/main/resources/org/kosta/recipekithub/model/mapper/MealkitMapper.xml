@@ -79,7 +79,7 @@ FROM (
 	FROM mealkit_board mkb
 	</if>
 	 <if test = "sort == '별점순'">
-	m.mealkit_no, COALESCE(r.av, 0), m.member_email,m.mealkit_board_hits
+	m.mealkit_no, COALESCE(r.av, 0), m.member_email,m.mealkit_board_hits,
 	m.mealkit_name
 	from mealkit_board m
 	left join(
