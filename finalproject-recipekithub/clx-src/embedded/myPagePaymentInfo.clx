@@ -78,14 +78,14 @@
             <cl:gridcell std:sid="gh-cell-12efc04f" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" sortable="false" filterable="false"/>
             <cl:gridcell std:sid="gh-cell-0c2ecefa" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; background-image:none;" sortable="false" filterable="false" text="주문 목록"/>
             <cl:gridcell std:sid="gh-cell-08e06b21" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; background-image:none;" targetcolumnname="paymentDate" sortable="false" filterable="false" text="주문 날짜"/>
-            <cl:gridcell std:sid="gh-cell-20018625" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; background-image:none;" targetcolumnname="paymentTotal" sortable="false" filterable="false" text="총 가격"/>
+            <cl:gridcell std:sid="gh-cell-20018625" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; background-image:none;" targetcolumnname="paymentTotal" sortable="false" filterable="false" text="총 가격(원)"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-e563b250">
             <cl:gridrow std:sid="g-row-8cb67276"/>
             <cl:gridcell std:sid="gd-cell-1d6ade9e" rowindex="0" colindex="0" columntype="rowindex"/>
             <cl:gridcell std:sid="gd-cell-3a7c38a0" rowindex="0" colindex="1" columnname="mealkitName"/>
             <cl:gridcell std:sid="gd-cell-471320f2" rowindex="0" colindex="2" columnname="paymentDate" suppressible="true" suppressref="3">
-              <cl:dateinput std:sid="d-input-948461d3" id="dti1">
+              <cl:dateinput std:sid="d-input-948461d3" id="dti1" style="text-align:center;">
                 <cl:celldata std:sid="c-data-e0360fb2"/>
               </cl:dateinput>
             </cl:gridcell>
@@ -118,15 +118,15 @@
           <cl:output std:sid="output-c655b566" style="text-align:center;" value="총 가격">
             <cl:formdata std:sid="f-data-99ccefbb" row="0" col="2"/>
           </cl:output>
-          <cl:output std:sid="output-106cf696">
+          <cl:output std:sid="output-106cf696" style="text-align:center;">
             <cl:relativebind property="value" columnname="paymentId"/>
             <cl:formdata std:sid="f-data-bb39e6e4" row="0" col="1"/>
           </cl:output>
-          <cl:output std:sid="output-1be283f9">
+          <cl:output std:sid="output-1be283f9" style="text-align:center;">
             <cl:relativebind property="value" category="PROPERTY" columnname="mealkitName"/>
             <cl:formdata std:sid="f-data-d8e45ff8" row="1" col="1" rowspan="1" colspan="1"/>
           </cl:output>
-          <cl:output std:sid="output-ec609f0b">
+          <cl:output std:sid="output-ec609f0b" style="text-align:center;">
             <cl:relativebind property="value" category="PROPERTY" columnname="paymentDate"/>
             <cl:formdata std:sid="f-data-08551bf3" row="2" col="1" rowspan="1" colspan="1"/>
           </cl:output>
@@ -143,7 +143,7 @@
           <cl:output std:sid="output-f896d1fe" style="text-align:center;" value="상세 구매정보">
             <cl:formdata std:sid="f-data-41521e7c" row="1" col="2" rowspan="2" colspan="1"/>
           </cl:output>
-          <cl:output std:sid="output-53bc8d86">
+          <cl:output std:sid="output-53bc8d86" style="text-align:center;">
             <cl:relativebind property="value" category="PROPERTY" columnname="mealkitdetailinfo"/>
             <cl:formdata std:sid="f-data-49ebed32" row="1" col="3" rowspan="2" colspan="3"/>
           </cl:output>

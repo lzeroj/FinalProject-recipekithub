@@ -275,25 +275,24 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"background-color" : "#F4FAEC",
 				"width" : "100%",
 				"height" : "100%"
 			});
 			
 			// Layout
-			var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
-			container.setLayout(flowLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			group_1.setLayout(xYLayout_1);
+			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			group_1.setLayout(verticalLayout_2);
 			(function(container){
 				var userDefinedControl_1 = new udc.header3();
 				container.addChild(userDefinedControl_1, {
-					"top": "0px",
-					"right": "0px",
-					"left": "0px",
-					"height": "200px"
+					"width": "1920px",
+					"height": "205px"
 				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
@@ -302,12 +301,14 @@
 					"background-image" : "url('theme/images/common/bgimgfinal.png')",
 					"background-position" : "center"
 				});
-				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_2);
+				var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
+				group_2.setLayout(verticalLayout_3);
 				(function(container){
 					var group_3 = new cpr.controls.Container();
-					var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-					group_3.setLayout(xYLayout_3);
+					var verticalLayout_4 = new cpr.controls.layouts.VerticalLayout();
+					verticalLayout_4.distribution = "center";
+					verticalLayout_4.topMargin = 50;
+					group_3.setLayout(verticalLayout_4);
 					(function(container){
 						var tabFolder_1 = new cpr.controls.TabFolder();
 						tabFolder_1.style.header.css({
@@ -335,8 +336,8 @@
 							tabItem_1.text = "Email 찾기";
 							tabItem_1.name = "tabFindEmail";
 							var group_4 = new cpr.controls.Container();
-							var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-							group_4.setLayout(xYLayout_4);
+							var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+							group_4.setLayout(xYLayout_1);
 							(function(container){
 								var group_5 = new cpr.controls.Container();
 								var formLayout_1 = new cpr.controls.layouts.FormLayout();
@@ -600,8 +601,8 @@
 							tabItem_2.text = "Password 찾기";
 							tabItem_2.name = "tabFindPswd";
 							var group_6 = new cpr.controls.Container();
-							var xYLayout_5 = new cpr.controls.layouts.XYLayout();
-							group_6.setLayout(xYLayout_5);
+							var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+							group_6.setLayout(xYLayout_2);
 							(function(container){
 								var group_7 = new cpr.controls.Container();
 								var formLayout_2 = new cpr.controls.layouts.FormLayout();
@@ -825,29 +826,22 @@
 						tabFolder_1.setSelectedTabItem(tabItem_1);
 						container.addChild(tabFolder_1, {
 							"width": "880px",
-							"height": "610px",
-							"left": "calc(50% - 440px)",
-							"top": "calc(50% - 305px)"
+							"height": "610px"
 						});
 					})(group_3);
 					container.addChild(group_3, {
-						"top": "20px",
-						"left": "20px",
 						"width": "1880px",
 						"height": "740px"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "200px",
-					"bottom": "100px",
+					"autoSize": "height",
 					"width": "1920px",
-					"left": "calc(50% - 960px)"
+					"height": "762px"
 				});
 				var userDefinedControl_2 = new udc.footer();
 				container.addChild(userDefinedControl_2, {
-					"right": "0px",
-					"bottom": "0px",
-					"left": "0px",
+					"width": "1920px",
 					"height": "100px"
 				});
 			})(group_1);

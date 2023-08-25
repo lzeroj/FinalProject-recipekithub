@@ -10,6 +10,7 @@
 			loader.addCSS("theme/cleopatra-theme.css");
 			loader.addCSS("theme/controls/htmlobject.part.css");
 			loader.addCSS("theme/custom-theme.css");
+			loader.addCSS("theme/controls/page-indexer.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};

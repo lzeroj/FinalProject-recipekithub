@@ -183,7 +183,7 @@ public class MealkitController {
 	public View insertMealKitForm(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if(session == null) {
-			return new UIView("/ui/index.clx");	
+			return new UIView("/ui/index.clx");	 
 		}
 
 		return new UIView("/ui/mealkit/insertMealkit.clx");
@@ -235,7 +235,7 @@ public class MealkitController {
 		}else {
 			member = new MemberVO();
 			member.setMemberNick("guest");
-		}
+		}  
 		
 		mealkit.setMemberVO(member);
 		int mealkitNo = mealKitService.insertMealKit(mealkit);

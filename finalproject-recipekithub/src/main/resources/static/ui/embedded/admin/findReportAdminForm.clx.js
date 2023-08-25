@@ -64,9 +64,20 @@
 			function onSubdeleterecipeSubmitSuccess(e){
 				var subdeleterecipe = e.control;
 				if(subdeleterecipe.getMetadata("deleteRecipeByIdResult") == 1){
-					alert("삭제되었습니다");
-					app.lookup("subreportlist").send();
-					app.lookup("grd1").redraw();
+					app.getRootAppInstance().openDialog("dialog/noneedConfirm", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = "해당 레시피를 삭제하였습니다"
+						});
+					}).then(function(returnValue){
+						if(returnValue == "ok"){
+							app.lookup("subreportlist").send();
+							app.lookup("grd1").redraw();
+						}else{
+							return;
+						}
+					});
 				}
 			}
 
@@ -81,18 +92,24 @@
 				var cellIndex = RPgrid.getCellIndex("recipeBoardId");
 				var index = grd1.getSelectedIndices()[0].rowIndex;
 				var cellValue = grd1.getCellValue(index, 1);
-			//	var selectedIndices = RPgrid.getSelectedIndices()[cellIndex];
-			//	console.log(selectedIndices);
-			//	RPgrid.getCellValue(rowIndex,)
-			//	RPgrid.getCellValue(RPgrid.getSelectedCellIndices());
 				if(e.cellIndex != 6){
 					return ;
+				}else{
+					app.getRootAppInstance().openDialog("dialog/needConfirm", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = "해당 레시피를 삭제하시겠습니까 ?"
+						});
+					}).then(function(returnValue){
+						if(returnValue == "ok"){
+							app.lookup("dmdeleterecipe").setValue("recipeBoardId", cellValue);
+							app.lookup("subdeleterecipe").send();
+						}else{
+							return;
+						}
+					});
 				}
-				if(confirm("해당 레시피를 지우시겠습니까?")){
-					app.lookup("dmdeleterecipe").setValue("recipeBoardId", cellValue);
-					app.lookup("subdeleterecipe").send();
-				}
-
 			}
 
 			/*

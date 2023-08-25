@@ -1599,7 +1599,7 @@ body.cl-has-modal {
 .cl-pageindexer .cl-pageindexer-prev.cl-disabled,
 .cl-pageindexer .cl-pageindexer-next.cl-disabled,
 .cl-pageindexer .cl-pageindexer-index.cl-disabled {
-  background-color: #ccc;
+  background-color: white;
 }
 .cl-pageindexer .cl-pageindexer-index {
   /* 페이지 인덱서 선택된 페이지 */

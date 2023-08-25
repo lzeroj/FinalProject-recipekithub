@@ -10,6 +10,7 @@
 			loader.addCSS("theme/cleopatra-theme.css");
 			loader.addCSS("theme/controls/htmlobject.part.css");
 			loader.addCSS("theme/custom-theme.css");
+			loader.addCSS("theme/controls/page-indexer.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -67,9 +68,7 @@
 				recipeCommentsub.send();
 				
 				// 현준
-				app.lookup("dmRecipeBoardId").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 				app.lookup("subrecipelikecount").send();
-				
 			}
 
 			/*
@@ -249,6 +248,7 @@
 			function onSubrecipelikecountSubmitSuccess(e) {
 				var subrecipelikecount = e.control;
 				var countRecipeLike = subrecipelikecount.getMetadata("countRecipeLike");
+				console.log(countRecipeLike);
 				var showlikestatus = subrecipelikecount.getMetadata("showlikestatus");
 				var likeimg = app.lookup("likeimg");
 				if (showlikestatus == 0) {
@@ -257,7 +257,9 @@
 					likeimg.src = "theme/images/mealkit/heart_fill.png";
 				}
 				likeimg.redraw();
-				
+				if(countRecipeLike == null){
+					
+				}
 				app.lookup("opt1").text = countRecipeLike;
 				app.lookup("opt1").redraw();
 			}
@@ -803,7 +805,7 @@
 				pageIndexer_1.addEventListener("selection-change", onPageSelectionChange);
 			}
 			container.addChild(pageIndexer_1, {
-				"width": "200px",
+				"width": "496px",
 				"height": "40px"
 			});
 			

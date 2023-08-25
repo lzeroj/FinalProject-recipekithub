@@ -81,7 +81,7 @@
         <cl:xylayout std:sid="xylayout-c8b51aec"/>
       </cl:group>
       <cl:group std:sid="group-d057114e" id="chefgrp">
-        <cl:verticaldata std:sid="v-data-ee806e12" width="1120px" height="210px" autosize="height"/>
+        <cl:verticaldata std:sid="v-data-ee806e12" width="1120px" height="210px"/>
         <cl:flowlayout std:sid="f-layout-3037ae0a"/>
       </cl:group>
       <cl:verticallayout std:sid="v-layout-276a755a" distribution="center"/>

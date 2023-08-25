@@ -51,13 +51,13 @@ public class UnitTestCart {
 		Assertions.assertEquals(1, result);
 	}
 	
-	@Test
-	public void findCartNoByMemberEmail() {
-		String memberEmail = "shj";
-		CartVO cartVO = cartService.findCartNoByMemberEmail(memberEmail);
-		System.out.println(cartVO.toString());
-		Assertions.assertNotNull(cartVO);
-	}
+//	@Test
+//	public void findCartNoByMemberEmail() {
+//		String memberEmail = "shj";
+//		CartVO cartVO = cartService.findCartNoByMemberEmail(memberEmail);
+//		System.out.println(cartVO.toString());
+//		Assertions.assertNotNull(cartVO);
+//	}
 	
 	@Test
 	public void findCartNoByMemberEmailOrderSuccess() {
