@@ -117,7 +117,6 @@ function onStarMealkitListReceive(e){
 			//udc에서 출판한 이미지 경로 앱 속성 지정
 			mealkit.mealkitImg = "/upload/mealkit/" + starList[i].mealkitImage;
 			mealkit.mealkitName = starList[i].mealkitName;
-			console.log(mealkit.mealkitName);
 			mealkit.mealkitPrice = starList[i].mealkitPrice;
 			container.addChild(mealkit, {
 				height: "200px",
