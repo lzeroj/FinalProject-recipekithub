@@ -38,9 +38,9 @@ public class MemberController {
 	private final MemberService memberService;
 
 	// ---[ 전체 회원 정보 조회 ]---//
-	// ---> 아직 사용하지 않음
 	@RequestMapping("/memberlist")
 	public View findMemberList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) 	throws Exception {
+		// 전체 회원 정보 저장
 		List<MemberVO> findMemberList = memberService.findMemberList();
 		dataRequest.setResponse("ds_member", findMemberList);
 		return new JSONDataView();
@@ -51,24 +51,56 @@ public class MemberController {
 	public View login(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		// `DataRequest`: 서브미션 통신에 대한 데이터
 		// `ParameterGroup` : 서브미션 request 데이터를 받음
-		ParameterGroup param = dataRequest.getParameterGroup("dm_login");
-		String memberEmail = param.getValue("member_email");
-		String memberPassword = param.getValue("member_password");
-
-		MemberVO member = memberService.login(memberEmail, memberPassword);
-		log.debug("member 로그인 {}", member);
-
-		if (member == null) {
-			return new UIView("ui/index.clx");
+		ParameterGroup memberParam = dataRequest.getParameterGroup("dm_login");
+		String memberEmail = memberParam.getValue("member_email");
+		String memberPassword = memberParam.getValue("member_password");
+		
+		boolean loginSuccess = false;
+		
+		Map<String, Object> message = new HashMap<>();
+		
+		if(memberParam != null) {
+			if(memberEmail != null && memberPassword != null ) {
+				HttpSession session = request.getSession(false);
+				if(session != null) {
+					session.invalidate();
+				}
+				
+				MemberVO member = memberService.login(memberEmail, memberPassword);
+				log.debug("member 로그인 {}", member);
+				
+				if (member == null) {
+					message.put("loginFailMessage", "로그인 정보를\n다시 확인해주시기 바랍니다.");
+					dataRequest.setMetadata(loginSuccess, message);
+					return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+				}
+				
+				session = request.getSession(true);
+				session.setAttribute("member", member);
+				loginSuccess = true;
+				
+				message.put("path", "index");
+			} 
 		}
-
-		HttpSession session = request.getSession();
-		session.setAttribute("member", member);
-		dataRequest.setResponse("ds_member", member);
-		System.out.println(session.getAttribute("member"));
-
+		dataRequest.setMetadata(loginSuccess, message);
 		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
+	
+//		String memberEmail = param.getValue("member_email");
+//		String memberPassword = param.getValue("member_password");
+//
+//		MemberVO member = memberService.login(memberEmail, memberPassword);
+//		log.debug("member 로그인 {}", member);
+//
+//		if (member == null) {
+//			return new UIView("ui/member/login-form.clx");
+//		}
+//
+//		HttpSession session = request.getSession();
+//		session.setAttribute("member", member);
+//		dataRequest.setResponse("ds_member", member);
+//		System.out.println(session.getAttribute("member"));
+		
 
 	// ---[ 회원가입 ]---//
 	@RequestMapping("/register")
@@ -291,6 +323,7 @@ public class MemberController {
 		return new JSONDataView();
 	}
 
+	// ---[ 회원 이메일 찾기 ]---//
 	@RequestMapping("/findEmail")
 	public View findEmailByNamePhoneBirthday(HttpServletRequest request, HttpServletResponse response,
 			DataRequest dataRequest) throws Exception {
@@ -316,6 +349,7 @@ public class MemberController {
 		return new JSONDataView();
 	}
 
+	// ---[ 회원 비밀번호 찾기 ]---//
 	@RequestMapping("/findPassword")
 	public View findPswdByEmailNamePhone(HttpServletRequest request, HttpServletResponse response,
 			DataRequest dataRequest) throws Exception {
@@ -340,7 +374,7 @@ public class MemberController {
 		return new JSONDataView();
 	}
 
-	
+	// ---[ 프로필 조회 화면 : 프로필 사진 삭제 ]---//
 	@RequestMapping("/deleteProfileImage")
 	public View deleteProfileImg(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {

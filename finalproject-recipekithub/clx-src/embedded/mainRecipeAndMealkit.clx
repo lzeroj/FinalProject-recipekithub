@@ -5,6 +5,7 @@
     <screen std:sid="screen-1a5ea977" id="default" name="default" minwidth="1024px" maxwidth="1919px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
     <screen std:sid="screen-739ade33" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
     <screen std:sid="screen-b2cc828b" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <link std:sid="link-b7163ed6" href="../theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-4e8308b0">
       <cl:submission std:sid="submission-ebc068d7" id="likeRecipeList" action="/likeRecipeList">
         <cl:listener std:sid="listener-4dc5ff24" name="submit-success" handler="onLikeRecipeListSubmitSuccess"/>
@@ -30,7 +31,7 @@
         <cl:output std:sid="output-d0a525bb" style="font-weight:bold; font-size:20px; background-image:none;" value="화제의">
           <cl:xylayoutdata std:sid="xyl-data-bb84c3ab" top="18px" left="49px" width="73px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:output std:sid="output-a3d5edba" style="color:#0ca44e; font-weight:bold; font-size:20px;" value="레시피">
+        <cl:output std:sid="output-a3d5edba" style="color:#0ca44e; font-weight:bold; font-size:20px;" class="emphasis" value="레시피">
           <cl:xylayoutdata std:sid="xyl-data-81ca3521" top="18px" left="121px" width="64px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:img std:sid="image-748c2345" src="../theme/images/icon/recipe-book.png">
@@ -51,7 +52,7 @@
         <cl:output std:sid="output-08a96ec4" style="font-weight:bold; font-size:20px; background-image:none;" value="인기있는">
           <cl:xylayoutdata std:sid="xyl-data-18075207" top="18px" left="47px" width="92px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:output std:sid="output-ffc126a5" style="color:#0ca44e; font-weight:bold; font-size:20px;" value="밀키트">
+        <cl:output std:sid="output-ffc126a5" style="color:#0ca44e; font-weight:bold; font-size:20px;" class="emphasis" value="밀키트">
           <cl:xylayoutdata std:sid="xyl-data-6760088e" top="18px" left="138px" width="60px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:img std:sid="image-7dd2f2f8" src="../theme/images/icon/mealkit-icecream.png">
@@ -72,7 +73,7 @@
         <cl:output std:sid="output-cc67abed" style="font-weight:bold; font-size:20px; background-image:none;" value="최고의">
           <cl:xylayoutdata std:sid="xyl-data-77670328" top="18px" left="47px" width="72px" height="28px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:output std:sid="output-260da09f" style="color:#0ca44e; font-weight:bold; font-size:20px;" value="쉐프!">
+        <cl:output std:sid="output-260da09f" style="color:#0ca44e; font-weight:bold; font-size:20px;" class="emphasis" value="쉐프!">
           <cl:xylayoutdata std:sid="xyl-data-cd2069d7" top="18px" left="118px" width="49px" height="28px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:img std:sid="image-96d0e201" src="../theme/images/icon/chef-old.png">

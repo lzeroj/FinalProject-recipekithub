@@ -91,6 +91,6 @@
 			}
 		}
 	});
-	app.title = "noneedConfirm";
+	app.title = "RecipeKitHub";
 	cpr.core.Platform.INSTANCE.register(app);
 })();

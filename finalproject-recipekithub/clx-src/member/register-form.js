@@ -74,7 +74,7 @@ function onButtonClick(e) {
 	
 	// 1. 회원가입 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
 	if (initValue) {		
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -84,7 +84,7 @@ function onButtonClick(e) {
 	// 2. 회원가입 양식이 전부 유효하게 작성되어 있는 경우, 회원가입 서브미션 전송	
 	} else {		
 		initValue = "회원가입을 진행하시겠습니까?";
-		app.openDialog("dialog/registerPopup", {
+		app.openDialog("dialog/memberPopup", {
 			width: 400, height: 300, headerClose: true, resizable: false
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -106,7 +106,7 @@ function onButtonClick(e) {
 function onSub_registerSubmitSuccess(e) {
 	var sub_register = e.control;
 	var initValue = "RecipeKitHub에 오신 것을 환영합니다..!!";
-	app.openDialog("dialog/registerChkPopup", {
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
@@ -125,7 +125,7 @@ function onSub_registerSubmitSuccess(e) {
 function onButtonClick2(e) {
 	//다이얼로그에 출력할 메시지
 	var initValue = "회원가입을 취소하고\n 메인페이지로 돌아가시겠습니까?";
-	app.openDialog("dialog/registerPopup", {
+	app.openDialog("dialog/memberPopup", {
 		width: 400,
 		height: 300
 	}, function(dialog) {

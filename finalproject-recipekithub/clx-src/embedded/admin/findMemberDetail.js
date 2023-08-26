@@ -75,7 +75,7 @@ function onBtnDeleteRowClick(e){
 	
 	if (selectedRowIndex == null || checkRowIndices == null) {
 		var initValue = "선택한 회원이 없습니다.\n다시 한번 확인해주세요.";
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -84,7 +84,7 @@ function onBtnDeleteRowClick(e){
 		});
 	} else {
 		var initValue = "선택하신 회원의 정보를 삭제하시겠습니까?";
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, resizable: false, headerMovable: false
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -116,7 +116,7 @@ function onBtnDeleteRowClick(e){
 function onSub_deleteMemberSubmitSuccess(e){
 	var sub_delete = e.control;
 	var initValue = "선택하신 회원 정보의\n 삭제가 완료되었습니다.";
-	app.openDialog("dialog/registerChkPopup", {
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {

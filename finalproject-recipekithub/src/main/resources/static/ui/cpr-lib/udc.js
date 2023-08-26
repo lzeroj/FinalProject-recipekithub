@@ -61,6 +61,7 @@
 				// Configure root container
 				var container = app.getContainer();
 				container.style.css({
+					"font-family" : "푸른전남 Medium",
 					"width" : "100%",
 					"top" : "0px",
 					"height" : "100%",
@@ -1570,7 +1571,7 @@
 					// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
 				    } else if (cmb1.value == "logout") {
 				    	var initValue = "로그아웃 하시겠습니까?";
-						app.getRootAppInstance().openDialog("dialog/registerPopup", {
+						app.getRootAppInstance().openDialog("dialog/memberPopup", {
 							width: 400, height: 300, headerClose: true, resizable: false
 						}, function(dialog) {
 							dialog.ready(function(dialogApp) {
@@ -1713,6 +1714,7 @@
 									"border-right-style" : "solid",
 									"border-bottom-color" : "#ffffff",
 									"border-left-style" : "solid",
+									"padding-left" : "10px",
 									"border-left-color" : "#ffffff",
 									"border-top-color" : "#ffffff",
 									"border-bottom-style" : "solid",
@@ -2950,7 +2952,7 @@
 					// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
 				    } else if (cmb1.value == "logout") {
 				    	var initValue = "로그아웃 하시겠습니까?";
-						app.getRootAppInstance().openDialog("dialog/registerPopup", {
+						app.getRootAppInstance().openDialog("dialog/memberPopup", {
 							width: 400, height: 300, headerClose: true, resizable: false
 						}, function(dialog) {
 							dialog.ready(function(dialogApp) {
@@ -3401,6 +3403,7 @@
 					app.lookup("regDate").text = app.getAppProperty("regDate");
 					app.lookup("content").text = app.getAppProperty("content");
 					app.lookup("star").text = app.getAppProperty("star");
+					app.lookup("deleteBtn").text = app.getAppProperty("deleteBtn");
 				}
 	
 				/*
@@ -3453,7 +3456,7 @@
 				container.addChild(output_1, {
 					"top": "20px",
 					"left": "8px",
-					"width": "100px",
+					"width": "122px",
 					"height": "18px"
 				});
 				
@@ -3461,19 +3464,20 @@
 				output_2.value = "Output";
 				container.addChild(output_2, {
 					"top": "21px",
-					"left": "160px",
+					"left": "182px",
 					"width": "93px",
 					"height": "18px"
 				});
 				
-				var button_1 = new cpr.controls.Button();
+				var button_1 = new cpr.controls.Button("deleteBtn");
+				button_1.visible = false;
 				button_1.value = "삭제";
 				if(typeof onButtonClick2 == "function") {
 					button_1.addEventListener("click", onButtonClick2);
 				}
 				container.addChild(button_1, {
 					"top": "20px",
-					"left": "252px",
+					"left": "274px",
 					"width": "61px",
 					"height": "20px"
 				});
@@ -3485,7 +3489,7 @@
 				});
 				container.addChild(output_3, {
 					"top": "22px",
-					"left": "125px",
+					"left": "147px",
 					"width": "36px",
 					"height": "15px"
 				});
@@ -3522,7 +3526,7 @@
 				});
 				container.addChild(image_1, {
 					"top": "22px",
-					"left": "107px",
+					"left": "129px",
 					"width": "19px",
 					"height": "15px"
 				});
@@ -3633,7 +3637,7 @@
 					app.lookup("title").text = app.getAppProperty("title");
 					app.lookup("nick").text = app.getAppProperty("nick");
 					app.lookup("star").text = app.getAppProperty("star");
-					app.lookup("hits").text = app.getAppProperty("hits");
+					app.lookup("price").text = app.getAppProperty("price");
 					app.lookup("count").text = app.getAppProperty("count");
 				}
 	
@@ -3653,7 +3657,7 @@
 				app.declareAppProperty("title", null);
 				app.declareAppProperty("nick", null);
 				app.declareAppProperty("star", null);
-				app.declareAppProperty("hits", null);
+				app.declareAppProperty("price", null);
 				app.declareAppProperty("count", null);
 				app.supportMedia("all and (min-width: 1024px)", "default");
 				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -3662,6 +3666,7 @@
 				// Configure root container
 				var container = app.getContainer();
 				container.style.css({
+					"font-family" : "푸른전남 Medium",
 					"width" : "100%",
 					"top" : "0px",
 					"height" : "100%",
@@ -3690,7 +3695,9 @@
 				var output_1 = new cpr.controls.Output("title");
 				output_1.value = "Output";
 				output_1.style.css({
-					"font-weight" : "bold"
+					"font-weight" : "bolder",
+					"font-size" : "16px",
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_1, {
 					"top": "149px",
@@ -3702,7 +3709,7 @@
 				var output_2 = new cpr.controls.Output("nick");
 				output_2.value = "Output";
 				output_2.style.css({
-					"color" : "#0CA44E"
+					"color" : "#A7A7A7"
 				});
 				container.addChild(output_2, {
 					"top": "178px",
@@ -3720,39 +3727,24 @@
 				});
 				container.addChild(output_3, {
 					"top": "204px",
-					"left": "57px",
+					"left": "196px",
 					"width": "34px",
 					"height": "24px"
 				});
 				
-				var output_4 = new cpr.controls.Output();
-				output_4.value = "조회수";
+				var output_4 = new cpr.controls.Output("price");
+				output_4.value = "Output";
+				output_4.style.css({
+					"color" : "black",
+					"font-weight" : "bolder",
+					"font-size" : "16px",
+					"font-family" : "푸른전남 Medium"
+				});
 				container.addChild(output_4, {
 					"top": "204px",
-					"left": "90px",
-					"width": "50px",
-					"height": "27px"
-				});
-				
-				var output_5 = new cpr.controls.Output("hits");
-				output_5.value = "Output";
-				output_5.style.css({
-					"color" : "#0CA44E"
-				});
-				container.addChild(output_5, {
-					"top": "204px",
-					"left": "141px",
-					"width": "50px",
-					"height": "27px"
-				});
-				
-				var image_2 = new cpr.controls.Image();
-				image_2.src = "theme/images/mealkit/free-icon-star-6063500.png";
-				container.addChild(image_2, {
-					"top": "206px",
 					"left": "0px",
-					"width": "27px",
-					"height": "23px"
+					"width": "88px",
+					"height": "27px"
 				});
 				
 				var group_1 = new cpr.controls.Container();
@@ -3768,13 +3760,28 @@
 					"height": "5px"
 				});
 				
-				var output_6 = new cpr.controls.Output("count");
-				output_6.value = "Output";
-				container.addChild(output_6, {
+				var output_5 = new cpr.controls.Output("count");
+				output_5.value = "Output";
+				output_5.style.css({
+					"text-align" : "center"
+				});
+				container.addChild(output_5, {
 					"top": "204px",
-					"left": "26px",
+					"left": "165px",
 					"width": "32px",
 					"height": "24px"
+				});
+				
+				var image_2 = new cpr.controls.Image();
+				image_2.src = "theme/images/mealkit/free-icon-thumbs-up-8560888.png";
+				image_2.style.css({
+					"text-align" : "right"
+				});
+				container.addChild(image_2, {
+					"top": "204px",
+					"left": "135px",
+					"width": "31px",
+					"height": "27px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);
@@ -3830,12 +3837,12 @@
 			return this.getEmbeddedAppInstance().setAppProperty("star", newValue, true);
 		}
 	});
-	Object.defineProperty(udc.mealkitList.prototype, "hits", {
+	Object.defineProperty(udc.mealkitList.prototype, "price", {
 		get: function(){
-			return this.getEmbeddedAppInstance().getAppProperty("hits");
+			return this.getEmbeddedAppInstance().getAppProperty("price");
 		},
 		set: function(newValue){
-			return this.getEmbeddedAppInstance().setAppProperty("hits", newValue, true);
+			return this.getEmbeddedAppInstance().setAppProperty("price", newValue, true);
 		}
 	});
 	Object.defineProperty(udc.mealkitList.prototype, "count", {
@@ -4018,6 +4025,804 @@
 	cpr.core.Platform.INSTANCE.register(internalApp);
 })();
 /// end - udc.mealkitStarudc
+/// start - udc.myPageHeader
+/*
+ * UDC Qualified Name: udc.myPageHeader
+ * App URI: udc/myPageHeader
+ * Source Location: udc/myPageHeader.clx
+ *
+ * This file was generated by eXBuilder6 compiler(1.0.4584), Don't edit manually.
+ */
+(function(){
+	// App Declaration
+		var internalApp = new cpr.core.App("udc/myPageHeader", { 
+			onPrepare: function(loader) {
+				loader.addCSS("theme/cleopatra-theme.css");
+				loader.addCSS("theme/custom-theme.css");
+				loader.addCSS("theme/custom/member.part.css");
+			},
+			onCreate: function(/* cpr.core.AppInstance */ app, exports) {
+				var linker = {};
+				// Start - User Script
+				/************************************************
+				 * header.js
+				 * Created at 2023. 8. 8. 오후 3:17:56.
+				 *
+				 * @author shj22k
+				 ************************************************/
+	
+				/**
+				 * UDC 컨트롤이 그리드의 뷰 모드에서 표시할 텍스트를 반환합니다.
+				 */
+				exports.getText = function(){
+					// TODO: 그리드의 뷰 모드에서 표시할 텍스트를 반환하는 하는 코드를 작성해야 합니다.
+					return "";
+				};
+	
+				function getTimedSessionData(key) {
+				    var storedData = sessionStorage.getItem(key);
+	
+				    if (storedData) {
+				        var data = JSON.parse(storedData);
+				        var currentTime = new Date().getTime();
+	
+				        if (currentTime < data.expirationTime) {
+				            return data.value;
+				        } else {
+				            sessionStorage.removeItem(key);
+				        }
+				    }
+				    return null;
+				}
+	
+				/*
+				 * 이미지에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onHeaderLogoClick(e){
+					var headerLogo = e.control;
+					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+							window.location.href = "/";
+						}
+					} else {
+						window.location.href = "/";
+					}
+				}
+	
+				/*
+				 * 버튼에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onButtonClick(e){
+					var button = e.control;
+					var sessionstrg = getTimedSessionData("memsession");
+					console.log("sessionstrg : "+sessionstrg);
+					if(sessionstrg == null || sessionstrg == ''){
+						app.getRootAppInstance().openDialog("dialog/needLogin", {
+							width: 400, height: 300, headerClose: true
+						}, function(dialog) {
+							dialog.ready(function(dialogApp) {
+								
+							});
+						}).then(function(returnValue){
+							if(returnValue == "ok"){
+								location.href="member/login-form.clx";
+							}
+						});
+					}else{
+						if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+							if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+								window.location.href = "/findMyCartForm";
+							}
+						} else {
+							/** @type cpr.controls.EmbeddedApp */
+							var embeapp = app.getAppProperty("embe");
+							cpr.core.App.load("cart/cartForm", function( /*cpr.core.App*/ loadedApp) {
+								/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+								if (embeapp.getEmbeddedAppInstance()) {
+									embeapp.getEmbeddedAppInstance().dispose();
+								}
+								/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+								if (loadedApp) {
+									/*초기값을 전달합니다.*/
+									embeapp.ready(function( /*cpr.controls.EmbeddedApp*/ embApp) {
+										//					embApp.initValue = voInitValue;
+									})
+									/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+									embeapp.app = loadedApp;
+								}
+							});
+							embeapp.redraw();
+						}
+					}
+				}
+	
+				/*
+				 * 버튼(mypage)에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onMypageClick(e){
+					var mypage = e.control;
+					var sessionval = getTimedSessionData("memsession");
+					if(sessionval == null || sessionval == ''){
+						app.getRootAppInstance().openDialog("dialog/needLogin", {
+							width: 400, height: 300, headerClose: true
+						}, function(dialog) {
+							dialog.ready(function(dialogApp) {
+								
+							});
+						}).then(function(returnValue){
+							if(returnValue == "ok"){
+								console.log(returnValue);
+								location.href="member/login-form.clx";
+							}
+						});
+					}
+					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+							window.location.href = "/findMyPageForm";
+						}
+					} else {
+						window.location.href = "/findMyPageForm";
+					}
+				}
+	
+				/*
+				 * 내비게이션 바에서 item-click 이벤트 발생 시 호출.
+				 * 아이템 클릭시 발생하는 이벤트.
+				 */
+				function onNavigationBarItemClick(e) {
+					var navigationBar = e.control;
+					if(navigationBar.value == null || navigationBar.value == ''){
+						return;
+					}
+					if (navigationBar.value == 'mealkit') {
+						if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+							if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+								window.location.href = "/mealkitList";
+							}
+						} else {
+							window.location.href = "/mealkitList";
+						}
+					}
+					
+					if (navigationBar.value == 'questionAdmin') {
+						/** @type cpr.controls.EmbeddedApp */
+						var embeapp = app.getAppProperty("embe");
+						cpr.core.App.load("embedded/admin/findQnAAdminForm", function( /*cpr.core.App*/ loadedApp) {
+							/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
+							if (embeapp.getEmbeddedAppInstance()) {
+								embeapp.getEmbeddedAppInstance().dispose();
+							}
+							/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
+							if (loadedApp) {
+								/*초기값을 전달합니다.*/
+								embeapp.ready(function( /*cpr.controls.EmbeddedApp*/ embApp) {
+									//					embApp.initValue = voInitValue;
+								})
+								/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
+								embeapp.app = loadedApp;
+							}
+						});
+						embeapp.redraw();
+					}
+					
+					if (navigationBar.value == 'recommend') {
+						if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+							if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+								window.location.href = "/";
+							}
+						} else {
+							window.location.href = "/";
+						}
+					}
+					if (navigationBar.value == 'recipe') {
+						if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+							if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+								window.location.href = "/recipeBoardList";
+							}
+						} else {
+							window.location.href = "/recipeBoardList";
+						}
+					}
+				}
+	
+				/*
+				 * 버튼(btnWrite)에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onBtnWriteClick(e) {
+					var btnWrite = e.control;
+					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
+						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
+							var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
+							_httpPostMethod.submit();
+						}
+					} else {
+						var sessionval = getTimedSessionData("memsession");
+						if (sessionval == null) {
+							app.getRootAppInstance().openDialog("dialog/needLogin", {
+								width: 400, height: 300, headerClose: true
+							}, function(dialog) {
+								dialog.ready(function(dialogApp) {
+									
+								});
+							}).then(function(returnValue){
+								if(returnValue == "ok"){
+									console.log(returnValue);
+									location.href="member/login-form.clx";
+								}
+							});
+						} else {
+							var _httpPostMethod = new cpr.protocols.HttpPostMethod("/insertRecipeForm", "_self");
+							_httpPostMethod.submit();
+						}
+					}
+				}
+	
+				/*
+				 * 버튼(btnLoginoff)에서 click 이벤트 발생 시 호출.
+				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+				 */
+				function onBtnLoginoffClick(e) {
+					var btnLoginoff = e.control;
+					window.location.href = "/memberUI/loginForm";
+					var event = new cpr.events.CAppEvent("clickEvent");
+					app.dispatchEvent(event);
+				}
+	
+				/*
+				 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+				 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+				 */
+				function onBodyLoad(e) {
+					var sessionval = getTimedSessionData("memsession");
+					console.log("세션에 담긴값 : " + sessionval);
+					
+					app.lookup("category").value = app.getAppProperty("categoryValue");
+					app.lookup("searchInput").value = app.getAppProperty("searchValue");
+					var opbLoginStatus = app.lookup("opbLoginStatus");
+					if (sessionval != null) {
+						opbLoginStatus.text = "[ " + sessionval + " ] \n님이 로그인 상태입니다.";
+					} else {
+						opbLoginStatus.text = "현재 비로그인 상태입니다."
+					}
+				}
+	
+				/*
+				 * 서치 인풋에서 search 이벤트 발생 시 호출.
+				 * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
+				 */
+	
+				function onSearchInputSearch(e) {
+					var searchInput = e.control;
+					var comboBox = app.lookup("category");
+					if(comboBox.value =="" || comboBox.value ==null){
+						alert("카테고리 선택하세요");
+						return;
+					}
+					if(comboBox.value =="레시피"){
+						if(window.location.href=== "http://localhost:7777/insertRecipeForm" || window.location.href==="http://localhost:7777/updateRecipe"){
+							if(confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")){
+								window.location.href="/recipeBoardList?search="+ searchInput.value;
+							}
+						} else {
+							window.location.href = "/recipeBoardList?search=" + searchInput.value;
+						}
+					}
+					if(comboBox.value =="밀키트"){
+						window.location.href="/mealkitList?search="+searchInput.value;
+					}
+				}
+	
+				/*
+				 * 콤보 박스에서 open 이벤트 발생 시 호출.
+				 * 리스트박스를 열때 발생하는 이벤트.
+				 */
+				function onCmb1Open(e){
+					var cmb1 = e.control;
+					var sessionval = getTimedSessionData("memsession");
+	
+					cmb1.deleteAllItems();
+	
+				    if (sessionval) { 
+				        cmb1.addItem(new cpr.controls.Item("로그아웃", "logout"));
+				        cmb1.addItem(new cpr.controls.Item("프로필", "profile"));
+				    } else {
+				        cmb1.addItem(new cpr.controls.Item("로그인", "login"));
+				    }
+				}
+	
+				/*
+				 * 콤보 박스에서 selection-change 이벤트 발생 시 호출.
+				 * ComboBox Item을 선택하여 선택된 값이 저장된 후에 발생하는 이벤트.
+				 */
+				function onCmb1SelectionChange(e){
+					var cmb1 = e.control;
+				    
+				    // 비로그인 상태의 경우, 콤보박스에 "로그인" 메뉴 표시
+				    if (cmb1.value == "login") { 
+				        window.location.href = "/memberUI/loginForm";
+						
+					// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
+				    } else if (cmb1.value == "logout") {
+				    	var initValue = "로그아웃 하시겠습니까?";
+						app.getRootAppInstance().openDialog("dialog/memberPopup", {
+							width: 400, height: 300, headerClose: true, resizable: false
+						}, function(dialog) {
+							dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+							});
+						}).then(function(returnValue) {
+							sessionStorage.clear();
+							var submission = app.lookup("sub_logout");
+							submission.send();
+							var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+							httpPostMethod.submit();
+						});
+						
+					// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
+					} else if (cmb1.value == "profile") {
+						var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+						httpPostMethod.submit();
+				    }
+				};
+				// End - User Script
+				
+				// Header
+				app.declareAppProperty("embe", null);
+				app.declareAppProperty("categoryValue", null);
+				app.declareAppProperty("searchValue", null);
+				app.declareAppProperty("cmb1", null);
+				var submission_1 = new cpr.protocols.Submission("sub_logout");
+				submission_1.action = "/member/logout";
+				app.register(submission_1);
+				app.supportMedia("all and (min-width: 1920px)", "FHD");
+				app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
+				app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
+				app.supportMedia("all and (max-width: 499px)", "mobile");
+				
+				// Configure root container
+				var container = app.getContainer();
+				container.style.css({
+					"width" : "100%",
+					"top" : "0px",
+					"height" : "100%",
+					"left" : "0px"
+				});
+				
+				// Layout
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				container.setLayout(xYLayout_1);
+				
+				// UI Configuration
+				var group_1 = new cpr.controls.Container();
+				group_1.style.css({
+					"box-shadow" : "0 0 10px #333"
+				});
+				var formLayout_1 = new cpr.controls.layouts.FormLayout();
+				formLayout_1.scrollable = false;
+				formLayout_1.topMargin = "0px";
+				formLayout_1.rightMargin = "0px";
+				formLayout_1.bottomMargin = "0px";
+				formLayout_1.leftMargin = "0px";
+				formLayout_1.horizontalSpacing = "0px";
+				formLayout_1.verticalSpacing = "0px";
+				formLayout_1.setColumns(["1fr"]);
+				formLayout_1.setRows(["140px", "60px"]);
+				group_1.setLayout(formLayout_1);
+				(function(container){
+					var group_2 = new cpr.controls.Container("grp1");
+					group_2.overscrollBehavior = "none";
+					group_2.style.css({
+						"background-color" : "#F4FAEC"
+					});
+					var formLayout_2 = new cpr.controls.layouts.FormLayout();
+					formLayout_2.scrollable = false;
+					formLayout_2.topMargin = "20px";
+					formLayout_2.rightMargin = "30px";
+					formLayout_2.bottomMargin = "0px";
+					formLayout_2.leftMargin = "50px";
+					formLayout_2.horizontalSpacing = "40px";
+					formLayout_2.verticalSpacing = "0px";
+					formLayout_2.setColumns(["330px", "2fr", "250px", "420px"]);
+					formLayout_2.setRows(["110px"]);
+					group_2.setLayout(formLayout_2);
+					(function(container){
+						var image_1 = new cpr.controls.Image("headerLogo");
+						image_1.src = "theme/images/common/headerLogo3.png";
+						if(typeof onHeaderLogoClick == "function") {
+							image_1.addEventListener("click", onHeaderLogoClick);
+						}
+						container.addChild(image_1, {
+							"colIndex": 0,
+							"rowIndex": 0,
+							"colSpan": 1,
+							"rowSpan": 1
+						});
+						var group_3 = new cpr.controls.Container();
+						var formLayout_3 = new cpr.controls.layouts.FormLayout();
+						formLayout_3.scrollable = false;
+						formLayout_3.topMargin = "25px";
+						formLayout_3.rightMargin = "25px";
+						formLayout_3.bottomMargin = "25px";
+						formLayout_3.leftMargin = "25px";
+						formLayout_3.horizontalSpacing = "0px";
+						formLayout_3.verticalSpacing = "0px";
+						formLayout_3.setColumns(["1fr"]);
+						formLayout_3.setRows(["1fr"]);
+						group_3.setLayout(formLayout_3);
+						(function(container){
+							var group_4 = new cpr.controls.Container();
+							group_4.style.setClasses(["cl-form-group"]);
+							group_4.style.css({
+								"border-right-style" : "solid",
+								"border-bottom-color" : "#b4b4b4",
+								"border-top-width" : "2px",
+								"border-right-width" : "2px",
+								"border-left-color" : "#b4b4b4",
+								"border-right-color" : "#b4b4b4",
+								"border-left-width" : "2px",
+								"border-top-style" : "solid",
+								"border-radius" : "15px",
+								"border-left-style" : "solid",
+								"border-bottom-width" : "2px",
+								"border-top-color" : "#b4b4b4",
+								"border-bottom-style" : "solid"
+							});
+							var formLayout_4 = new cpr.controls.layouts.FormLayout();
+							formLayout_4.scrollable = false;
+							formLayout_4.topMargin = "0px";
+							formLayout_4.rightMargin = "0px";
+							formLayout_4.bottomMargin = "0px";
+							formLayout_4.leftMargin = "0px";
+							formLayout_4.horizontalSpacing = "0px";
+							formLayout_4.verticalSpacing = "0px";
+							formLayout_4.horizontalSeparatorWidth = 1;
+							formLayout_4.verticalSeparatorWidth = 1;
+							formLayout_4.setColumns(["1fr", "2fr", "2fr"]);
+							formLayout_4.setRows(["1fr"]);
+							group_4.setLayout(formLayout_4);
+							(function(container){
+								var searchInput_1 = new cpr.controls.SearchInput("searchInput");
+								searchInput_1.searchButtonImage = "theme/images/com/main/icon-search-line.svg";
+								searchInput_1.style.css({
+									"border-right-style" : "solid",
+									"border-bottom-color" : "#ffffff",
+									"border-left-style" : "solid",
+									"border-left-color" : "#ffffff",
+									"border-top-color" : "#ffffff",
+									"border-bottom-style" : "solid",
+									"border-right-color" : "#ffffff",
+									"border-top-style" : "solid"
+								});
+								searchInput_1.style.search.css({
+									"width" : "30px",
+									"padding-right" : "15px"
+								});
+								searchInput_1.style.clear.css({
+									"width" : "20px",
+									"padding-right" : "10px"
+								});
+								if(typeof onSearchInputSearch == "function") {
+									searchInput_1.addEventListener("search", onSearchInputSearch);
+								}
+								container.addChild(searchInput_1, {
+									"colIndex": 1,
+									"rowIndex": 0,
+									"colSpan": 2,
+									"rowSpan": 1
+								});
+								var comboBox_1 = new cpr.controls.ComboBox("category");
+								comboBox_1.preventInput = true;
+								comboBox_1.style.css({
+									"border-right-style" : "none",
+									"border-left-style" : "none",
+									"border-bottom-style" : "none",
+									"border-top-style" : "none"
+								});
+								comboBox_1.style.list.css({
+									"border-right-style" : "none",
+									"padding-top" : "10px",
+									"white-space" : "normal",
+									"padding-left" : "10px",
+									"vertical-align" : "middle",
+									"padding-bottom" : "10px",
+									"border-top-style" : "none",
+									"border-radius" : "10px",
+									"box-shadow" : "3px 3px 5px 5px gray",
+									"border-left-style" : "none",
+									"border-bottom-style" : "none",
+									"padding-right" : "10px",
+									"text-align" : "left"
+								});
+								comboBox_1.style.button.css({
+									"padding-right" : "10px"
+								});
+								comboBox_1.style.item.css({
+									"border-right-style" : "solid",
+									"padding-top" : "20px",
+									"border-bottom-color" : "#ffffff",
+									"border-top-width" : "0px",
+									"white-space" : "normal",
+									"border-right-width" : "0px",
+									"font-weight" : "bolder",
+									"padding-left" : "20px",
+									"border-left-color" : "#ffffff",
+									"padding-bottom" : "20px",
+									"font-size" : "18px",
+									"border-right-color" : "#ffffff",
+									"border-left-width" : "0px",
+									"border-top-style" : "solid",
+									"border-radius" : "10px",
+									"border-left-style" : "solid",
+									"border-bottom-width" : "0px",
+									"border-top-color" : "#ffffff",
+									"border-bottom-style" : "solid",
+									"font-family" : "푸른전남 Medium",
+									"padding-right" : "20px",
+									"text-align" : "left"
+								});
+								(function(comboBox_1){
+									comboBox_1.addItem(new cpr.controls.Item("레시피", "레시피"));
+									comboBox_1.addItem(new cpr.controls.Item("밀키트", "밀키트"));
+								})(comboBox_1);
+								container.addChild(comboBox_1, {
+									"colIndex": 0,
+									"rowIndex": 0
+								});
+							})(group_4);
+							container.addChild(group_4, {
+								"colIndex": 0,
+								"rowIndex": 0
+							});
+						})(group_3);
+						container.addChild(group_3, {
+							"colIndex": 1,
+							"rowIndex": 0,
+							"colSpan": 1,
+							"rowSpan": 1
+						});
+						var group_5 = new cpr.controls.Container();
+						var formLayout_5 = new cpr.controls.layouts.FormLayout();
+						formLayout_5.scrollable = false;
+						formLayout_5.topMargin = "30px";
+						formLayout_5.rightMargin = "30px";
+						formLayout_5.bottomMargin = "30px";
+						formLayout_5.leftMargin = "30px";
+						formLayout_5.horizontalSpacing = "70px";
+						formLayout_5.verticalSpacing = "20px";
+						formLayout_5.setColumns(["200px", "50px", "50px", "50px"]);
+						formLayout_5.setRows(["50px"]);
+						group_5.setLayout(formLayout_5);
+						(function(container){
+							var button_1 = new cpr.controls.Button("mypage");
+							button_1.value = "";
+							button_1.style.setClasses(["login"]);
+							button_1.style.css({
+								"border-right-style" : "none",
+								"background-color" : "#F4FAEC",
+								"background-size" : "cover",
+								"border-left-style" : "none",
+								"border-bottom-style" : "none",
+								"background-image" : "url('theme/images/common/mypage.png')",
+								"background-position" : "center",
+								"border-top-style" : "none"
+							});
+							if(typeof onMypageClick == "function") {
+								button_1.addEventListener("click", onMypageClick);
+							}
+							container.addChild(button_1, {
+								"colIndex": 1,
+								"rowIndex": 0
+							});
+							var button_2 = new cpr.controls.Button("btnWrite");
+							button_2.value = "";
+							button_2.style.css({
+								"border-right-style" : "none",
+								"background-size" : "cover",
+								"border-bottom-color" : "none",
+								"border-left-color" : "none",
+								"border-right-color" : "none",
+								"background-position" : "center",
+								"border-top-style" : "none",
+								"background-color" : "transparent",
+								"background-repeat" : "no-repeat",
+								"border-left-style" : "none",
+								"border-top-color" : "none",
+								"border-bottom-style" : "none",
+								"background-image" : "url('theme/images/common/write.png')"
+							});
+							if(typeof onBtnWriteClick == "function") {
+								button_2.addEventListener("click", onBtnWriteClick);
+							}
+							container.addChild(button_2, {
+								"colIndex": 2,
+								"rowIndex": 0
+							});
+							var comboBox_2 = new cpr.controls.ComboBox("cmb1");
+							comboBox_2.buttonImage = "udc/url(../theme/images/member/transparentImg.png)";
+							comboBox_2.preventInput = true;
+							comboBox_2.style.css({
+								"border-right-style" : "none",
+								"background-color" : "#F4FAEC",
+								"background-size" : "cover",
+								"border-left-style" : "none",
+								"border-bottom-style" : "none",
+								"background-image" : "url('theme/images/common/loginoff.png')",
+								"background-position" : "center",
+								"border-top-style" : "none"
+							});
+							comboBox_2.style.list.css({
+								"border-radius" : "10px",
+								"padding-top" : "10px",
+								"box-shadow" : "3px 3px 5px 5px gray",
+								"padding-left" : "10px",
+								"vertical-align" : "middle",
+								"padding-bottom" : "10px",
+								"padding-right" : "10px",
+								"text-align" : "left"
+							});
+							comboBox_2.style.item.css({
+								"border-radius" : "10px",
+								"padding-top" : "20px",
+								"font-weight" : "bolder",
+								"padding-left" : "20px",
+								"padding-bottom" : "20px",
+								"font-size" : "18px",
+								"font-family" : "푸른전남 Medium",
+								"text-align" : "left",
+								"padding-right" : "20px"
+							});
+							if(typeof onCmb1SelectionChange == "function") {
+								comboBox_2.addEventListener("selection-change", onCmb1SelectionChange);
+							}
+							if(typeof onCmb1Open == "function") {
+								comboBox_2.addEventListener("open", onCmb1Open);
+							}
+							container.addChild(comboBox_2, {
+								"colIndex": 3,
+								"rowIndex": 0
+							});
+							var output_1 = new cpr.controls.Output("opbLoginStatus");
+							output_1.value = "";
+							output_1.style.css({
+								"font-weight" : "bold",
+								"font-size" : "16px",
+								"line-height" : "2.0"
+							});
+							container.addChild(output_1, {
+								"colIndex": 0,
+								"rowIndex": 0,
+								"colSpan": 1,
+								"rowSpan": 1,
+								"ignoreLayoutSpacing": true
+							});
+						})(group_5);
+						container.addChild(group_5, {
+							"colIndex": 2,
+							"rowIndex": 0,
+							"colSpan": 2,
+							"rowSpan": 1
+						});
+					})(group_2);
+					container.addChild(group_2, {
+						"colIndex": 0,
+						"rowIndex": 0
+					});
+					var navigationBar_1 = new cpr.controls.NavigationBar("nav1");
+					navigationBar_1.menuType = "fullmenu";
+					navigationBar_1.expandTrigger = "click";
+					navigationBar_1.style.setClasses(["navbar1"]);
+					navigationBar_1.style.css({
+						"box-shadow" : "10px 10px 5px 5px gray",
+						"text-shadow" : "2px 2px 4px gray",
+						"color" : "#F4FAEC",
+						"font-weight" : "bolder",
+						"font-size" : "24px",
+						"font-family" : "푸른전남 Medium"
+					});
+					navigationBar_1.style.bar.setClasses(["navbar1"]);
+					navigationBar_1.style.bar.css({
+						"box-shadow" : "10px 10px 5px 5px gray",
+						"text-align" : "center"
+					});
+					navigationBar_1.style.item.css({
+						"text-align" : "center"
+					});
+					navigationBar_1.style.list.css({
+						"background-color" : "transparent",
+						"border-right-style" : "none",
+						"border-left-style" : "none",
+						"border-bottom-style" : "none",
+						"border-top-style" : "none"
+					});
+					navigationBar_1.style.listitem.css({
+						"padding-top" : "20px",
+						"font-weight" : "bolder",
+						"font-size" : "20px",
+						"padding-bottom" : "20px",
+						"font-family" : "푸른전남 Medium"
+					});
+					(function(navigationBar_1){
+						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "recommend", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "recipe", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "mealkit", null));
+					})(navigationBar_1);
+					if(typeof onNavigationBarItemClick == "function") {
+						navigationBar_1.addEventListener("item-click", onNavigationBarItemClick);
+					}
+					container.addChild(navigationBar_1, {
+						"colIndex": 0,
+						"rowIndex": 1
+					});
+				})(group_1);
+				container.addChild(group_1, {
+					"top": "0px",
+					"right": "0px",
+					"left": "0px",
+					"height": "200px"
+				});
+				if(typeof onBodyLoad == "function"){
+					app.addEventListener("load", onBodyLoad);
+				}
+			}
+		});
+	internalApp.title = "myPageHeader";
+	
+	// Type declaration for myPageHeader
+	cpr.utils.Util.ensurePackage("udc").myPageHeader = function(id){
+		cpr.controls.UDCBase.call(this, "udc.myPageHeader", internalApp, id);
+	};
+	
+	udc.myPageHeader.prototype = Object.create(cpr.controls.UDCBase.prototype);
+	Object.defineProperty(udc.myPageHeader.prototype, "type", {
+		get : function(){
+			return "udc.myPageHeader";
+		},
+		
+		configurable: true
+	});
+	
+	// App Properties
+	Object.defineProperty(udc.myPageHeader.prototype, "embe", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("embe");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("embe", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.myPageHeader.prototype, "categoryValue", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("categoryValue");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("categoryValue", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.myPageHeader.prototype, "searchValue", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("searchValue");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("searchValue", newValue, true);
+		}
+	});
+	Object.defineProperty(udc.myPageHeader.prototype, "cmb1", {
+		get: function(){
+			return this.getEmbeddedAppInstance().getAppProperty("cmb1");
+		},
+		set: function(newValue){
+			return this.getEmbeddedAppInstance().setAppProperty("cmb1", newValue, true);
+		}
+	});
+	
+	// Register type into the Platform and package
+	cpr.core.Platform.INSTANCE.register(internalApp);
+})();
+/// end - udc.myPageHeader
 /// start - udc.recipeCommentudc
 /*
  * UDC Qualified Name: udc.recipeCommentudc

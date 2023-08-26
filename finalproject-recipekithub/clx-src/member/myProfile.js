@@ -288,7 +288,7 @@ function onBtnMemUpdateClick(e){
 	
 	// 1. 프로필 조회/수정 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
 	if (initValue) {		
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -298,7 +298,7 @@ function onBtnMemUpdateClick(e){
 	// 2. 프로필 조회/수정 양식이 전부 유효하게 작성되어 있는 경우, 프로필 수정 서브미션 전송	
 	} else {		
 		initValue = "회원정보를 수정하시겠습니까?";
-		app.openDialog("dialog/registerPopup", {
+		app.openDialog("dialog/memberPopup", {
 			width: 400, height: 300, headerClose: true, resizable: false
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -321,7 +321,7 @@ function onBtnMemUpdateClick(e){
 function onSub_updateSubmitSuccess(e) {
 	var sub_update = e.control;
 	var initValue = "회원 정보 수정이 완료되었습니다!";
-	app.openDialog("dialog/registerChkPopup", {
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
@@ -342,7 +342,7 @@ function onBtnMemDeleteClick(e){
 	var btnMemDelete = e.control;
 	
 	var initValue = "정말로 탈퇴하시겠습니까?";
-	app.openDialog("dialog/registerPopup", {
+	app.openDialog("dialog/memberPopup", {
 		width: 400, height: 300, headerClose: true, resizable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
@@ -365,7 +365,7 @@ function onSub_deleteSubmitSuccess(e) {
 	var sub_delete = e.control;
 	
 	var initValue = "지금까지 RecipeKitHub을 이용해주셔서\n감사합니다!";
-	app.openDialog("dialog/registerChkPopup", {
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
@@ -428,7 +428,7 @@ function onBtnInsertProfileImgClick(e){
 function onSub_insert_imageSubmitSuccess(e){
 	var sub_insert_image = e.control;
 	var initValue = "프로필 사진을 '등록/변경' 하시겠습니까?";
-	app.openDialog("dialog/registerChkPopup", {
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
@@ -479,7 +479,7 @@ function onSub_delete_imageSubmitSuccess(e){
 	var fileInput = app.lookup("fi1");
 	var image = app.lookup("profileImg");
 	var initValue = "현재 프로필 사진을 '삭제' 하시겠습니까?";
-	app.openDialog("dialog/registerChkPopup", {
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {

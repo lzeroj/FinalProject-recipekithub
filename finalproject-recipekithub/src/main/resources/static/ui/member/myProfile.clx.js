@@ -303,7 +303,7 @@
 				
 				// 1. 프로필 조회/수정 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
 				if (initValue) {		
-					app.openDialog("dialog/registerChkPopup", {
+					app.openDialog("dialog/memberChkPopup", {
 						width: 400, height: 300, headerClose: true
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -313,7 +313,7 @@
 				// 2. 프로필 조회/수정 양식이 전부 유효하게 작성되어 있는 경우, 프로필 수정 서브미션 전송	
 				} else {		
 					initValue = "회원정보를 수정하시겠습니까?";
-					app.openDialog("dialog/registerPopup", {
+					app.openDialog("dialog/memberPopup", {
 						width: 400, height: 300, headerClose: true, resizable: false
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -336,7 +336,7 @@
 			function onSub_updateSubmitSuccess(e) {
 				var sub_update = e.control;
 				var initValue = "회원 정보 수정이 완료되었습니다!";
-				app.openDialog("dialog/registerChkPopup", {
+				app.openDialog("dialog/memberChkPopup", {
 					width: 400, height: 300, resizable: false, headerMovable: false
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
@@ -357,7 +357,7 @@
 				var btnMemDelete = e.control;
 				
 				var initValue = "정말로 탈퇴하시겠습니까?";
-				app.openDialog("dialog/registerPopup", {
+				app.openDialog("dialog/memberPopup", {
 					width: 400, height: 300, headerClose: true, resizable: false
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
@@ -380,7 +380,7 @@
 				var sub_delete = e.control;
 				
 				var initValue = "지금까지 RecipeKitHub을 이용해주셔서\n감사합니다!";
-				app.openDialog("dialog/registerChkPopup", {
+				app.openDialog("dialog/memberChkPopup", {
 					width: 400, height: 300, resizable: false, headerMovable: false
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
@@ -443,7 +443,7 @@
 			function onSub_insert_imageSubmitSuccess(e){
 				var sub_insert_image = e.control;
 				var initValue = "프로필 사진을 '등록/변경' 하시겠습니까?";
-				app.openDialog("dialog/registerChkPopup", {
+				app.openDialog("dialog/memberChkPopup", {
 					width: 400, height: 300, resizable: false, headerMovable: false
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
@@ -494,7 +494,7 @@
 				var fileInput = app.lookup("fi1");
 				var image = app.lookup("profileImg");
 				var initValue = "현재 프로필 사진을 '삭제' 하시겠습니까?";
-				app.openDialog("dialog/registerChkPopup", {
+				app.openDialog("dialog/memberChkPopup", {
 					width: 400, height: 300, resizable: false, headerMovable: false
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
@@ -967,6 +967,7 @@
 										inputBox_1.spellCheck = false;
 										inputBox_1.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										inputBox_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberName", 0);
@@ -996,6 +997,7 @@
 										inputBox_2.readOnly = true;
 										inputBox_2.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										inputBox_2.bind("value").toDataSet(app.lookup("ds_profile"), "memberEmail", 0);
@@ -1236,6 +1238,7 @@
 										inputBox_3.spellCheck = false;
 										inputBox_3.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px",
 											"background-image" : "none"
 										});
@@ -1312,6 +1315,7 @@
 										inputBox_4.spellCheck = false;
 										inputBox_4.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										if(typeof onIpbPassword2Keyup == "function") {
@@ -1386,6 +1390,7 @@
 										inputBox_5.spellCheck = false;
 										inputBox_5.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										inputBox_5.bind("value").toDataSet(app.lookup("ds_profile"), "memberNick", 0);
@@ -1482,6 +1487,7 @@
 									maskEditor_1.showClearButton = true;
 									maskEditor_1.style.css({
 										"border-radius" : "5px",
+										"padding-left" : "10px",
 										"font-size" : "15px"
 									});
 									maskEditor_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberPhone", 0);
@@ -1517,7 +1523,8 @@
 										var maskEditor_2 = new cpr.controls.MaskEditor("postCode");
 										maskEditor_2.mask = "00000";
 										maskEditor_2.style.css({
-											"border-radius" : "5px"
+											"border-radius" : "5px",
+											"padding-left" : "10px"
 										});
 										maskEditor_2.bind("value").toDataSet(app.lookup("ds_profile"), "memberPostcode", 0);
 										container.addChild(maskEditor_2, {
@@ -1528,7 +1535,8 @@
 										inputBox_6.lengthUnit = "utf8";
 										inputBox_6.maxLength = 30;
 										inputBox_6.style.css({
-											"border-radius" : "5px"
+											"border-radius" : "5px",
+											"padding-left" : "10px"
 										});
 										inputBox_6.bind("value").toDataSet(app.lookup("ds_profile"), "memberAddress", 0);
 										container.addChild(inputBox_6, {
@@ -1541,7 +1549,8 @@
 										inputBox_7.lengthUnit = "utf8";
 										inputBox_7.maxLength = 30;
 										inputBox_7.style.css({
-											"border-radius" : "5px"
+											"border-radius" : "5px",
+											"padding-left" : "10px"
 										});
 										inputBox_7.bind("value").toDataSet(app.lookup("ds_profile"), "memberAddressDetail", 0);
 										container.addChild(inputBox_7, {

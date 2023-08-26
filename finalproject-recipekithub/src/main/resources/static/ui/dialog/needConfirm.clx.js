@@ -99,8 +99,8 @@
 			var button_2 = new cpr.controls.Button();
 			button_2.value = "취소";
 			button_2.style.css({
-				"background-color" : "#EFEFEF",
-				"color" : "#000000",
+				"background-color" : "#F0F0F0",
+				"color" : "#696969",
 				"font-weight" : "bold",
 				"background-image" : "none"
 			});

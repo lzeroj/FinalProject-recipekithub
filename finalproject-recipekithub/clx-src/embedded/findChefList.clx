@@ -5,6 +5,7 @@
     <screen std:sid="screen-28862687" id="default" name="default" minwidth="1024px" maxwidth="1879px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
     <screen std:sid="screen-ff20484b" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
     <screen std:sid="screen-8b44801c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <link std:sid="link-82d6a626" href="../theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-bd72779c">
       <cl:dataset std:sid="d-set-d79e3bc3" id="chefList">
         <cl:datacolumnlist>
@@ -26,15 +27,24 @@
     <cl:group std:sid="group-fa635fe4" style="border-right-style:solid; border-bottom-color:#e4e4e4; border-top-width:1px; border-right-width:1px; border-left-color:#e4e4e4; border-right-color:#e4e4e4; border-left-width:1px; border-top-style:solid; background-color:#FFFFFF; border-left-style:solid; border-bottom-width:1px; border-top-color:#e4e4e4; border-bottom-style:solid;">
       <cl:xylayoutdata std:sid="xyl-data-1345d5af" top="30px" bottom="30px" left="500px" width="880px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-d72724a4" id="grp">
-        <cl:formdata std:sid="f-data-b83d0887" row="3" col="1" rowspan="1" colspan="3"/>
+        <cl:formdata std:sid="f-data-9bd2c6d9" row="3" col="1" rowspan="1" colspan="5"/>
         <cl:flowlayout std:sid="f-layout-0895aa16"/>
       </cl:group>
       <cl:img std:sid="image-a5f373d6" src="../theme/images/icon/ranking.png">
         <cl:formdata std:sid="f-data-cdfdf7fd" halign="CENTER" valign="CENTER" width="80" height="80" row="1" col="2"/>
       </cl:img>
-      <cl:output std:sid="output-9a9f18f0" style="background-color:#FFFFFF; color:#0a8c43; font-weight:bold; font-size:25px;" value="쉐프 랭킹">
-        <cl:formdata std:sid="f-data-e94f355b" row="1" col="3"/>
-      </cl:output>
+      <cl:group std:sid="group-6a15b6bf">
+        <cl:formdata std:sid="f-data-7fd773e5" row="1" col="3"/>
+        <cl:output std:sid="output-9a9f18f0" style="background-color:#FFFFFF; color:#0a8c43; font-weight:bold; font-size:25px;" class="emphasis" value="쉐프 랭킹">
+          <cl:formdata std:sid="f-data-09b98a4f" row="1" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-c698ee94" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="20" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="20" unit="PIXEL"/>
+          <cl:columns length="110" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
       <cl:formlayout std:sid="f-layout-a6ace469" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
         <cl:rows length="20" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         <cl:rows length="80" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
@@ -43,7 +53,8 @@
         <cl:columns length="20" unit="PIXEL"/>
         <cl:columns length="280" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         <cl:columns length="150" unit="PIXEL"/>
-        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="120" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="308" unit="PIXEL"/>
         <cl:columns length="20" unit="PIXEL"/>
       </cl:formlayout>
     </cl:group>

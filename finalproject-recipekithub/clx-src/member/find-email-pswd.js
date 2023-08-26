@@ -34,7 +34,7 @@ function onBtnFindEmailClick(e){
 	
 	// 1. Email 찾기 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
 	if (initValue) {		
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -44,7 +44,7 @@ function onBtnFindEmailClick(e){
 	// 2. Email 찾기 양식이 전부 유효하게 작성되어 있는 경우, Email 찾기 서브미션 전송	
 	} else {		
 		initValue = "Email을 조회 하시겠습니까?";
-		app.openDialog("dialog/registerPopup", {
+		app.openDialog("dialog/memberPopup", {
 			width: 400, height: 300, headerClose: true, resizable: false
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -121,7 +121,7 @@ function onBtnFindPswdClick(e){
 	
 	// 1. 비밀번호 찾기 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
 	if (initValue) {		
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -131,7 +131,7 @@ function onBtnFindPswdClick(e){
 	// 2. 비밀번호 찾기 양식이 전부 유효하게 작성되어 있는 경우, 비밀번호 찾기 서브미션 전송	
 	} else {		
 		initValue = "비밀번호를 조회 하시겠습니까?";
-		app.openDialog("dialog/registerPopup", {
+		app.openDialog("dialog/memberPopup", {
 			width: 400, height: 300, headerClose: true, resizable: false
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
