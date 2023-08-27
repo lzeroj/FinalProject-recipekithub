@@ -70,7 +70,7 @@
         <cl:listener std:sid="listener-86c6f206" name="submit-success" handler="onSub_profileSubmitSuccess"/>
         <cl:responsedata dataid="ds_profile"/>
       </cl:submission>
-      <cl:submission std:sid="submission-ab199ee6" id="sub_update" action="/member/updateMember" mediatype="multipart/form-data">
+      <cl:submission std:sid="submission-ab199ee6" id="sub_update" action="/member/updateMember">
         <cl:listener std:sid="listener-93c1fbf7" name="submit-success" handler="onSub_updateSubmitSuccess"/>
         <cl:requestdata dataid="dm_update"/>
         <cl:responsedata dataid="ds_profile"/>
@@ -79,16 +79,9 @@
         <cl:listener std:sid="listener-d597c9ec" name="submit-success" handler="onSub_deleteSubmitSuccess"/>
         <cl:requestdata dataid="dm_delete"/>
       </cl:submission>
-      <cl:submission std:sid="submission-2f947cef" id="sub_logout" action="/member/logout">
-        <cl:listener std:sid="listener-57e9e82d" name="submit-success" handler="onSub_logoutSubmitSuccess"/>
-      </cl:submission>
       <cl:submission std:sid="submission-d01f233f" id="sub_check_nick" action="/member/checkNick">
         <cl:listener std:sid="listener-adb91cad" name="submit-success" handler="onSub_check_nickSubmitSuccess"/>
         <cl:requestdata dataid="dm_check_nick"/>
-      </cl:submission>
-      <cl:submission std:sid="submission-c74b7ae9" id="sub_insert_image" action="/member/insertProfileImage" mediatype="multipart/form-data">
-        <cl:listener std:sid="listener-9fab877e" name="submit-success" handler="onSub_insert_imageSubmitSuccess"/>
-        <cl:requestdata dataid="dm_profile"/>
       </cl:submission>
       <cl:submission std:sid="submission-b5f62cb2" id="sub_delete_image" action="/member/deleteProfileImage" mediatype="multipart/form-data">
         <cl:listener std:sid="listener-dc373097" name="submit-success" handler="onSub_delete_imageSubmitSuccess"/>
@@ -130,7 +123,7 @@
                     <cl:output std:sid="output-a1e84c51" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - 이름">
                       <cl:formdata std:sid="f-data-62ae9a0d" row="0" col="0"/>
                     </cl:output>
-                    <cl:inputbox std:sid="i-box-89c752dd" id="ipbName" style="border-radius:5px; padding-left:10px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="18" spellcheck="false">
+                    <cl:inputbox std:sid="i-box-89c752dd" id="ipbName" style="border-radius:5px; padding-left:10px; font-size:15px;" readonly="true" lengthunit="utf8" maxlength="18" spellcheck="false">
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberName" rowindex="0"/>
                       <cl:formdata std:sid="f-data-9d832d07" row="0" col="1"/>
                     </cl:inputbox>
@@ -142,7 +135,7 @@
                   </cl:group>
                   <cl:group std:sid="group-4dec26a4">
                     <cl:formdata std:sid="f-data-056f5136" row="2" col="0"/>
-                    <cl:inputbox std:sid="i-box-d292bda5" id="ipbEmail" style="border-radius:5px; padding-left:10px; font-size:15px;" readonly="true">
+                    <cl:inputbox std:sid="i-box-d292bda5" id="ipbEmail" style="border-radius:5px; padding-left:10px; font-size:15px;" readonly="true" spellcheck="false">
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberEmail" rowindex="0"/>
                       <cl:formdata std:sid="f-data-02bcb800" row="0" col="1"/>
                     </cl:inputbox>
@@ -268,7 +261,7 @@
                       <cl:formdata std:sid="f-data-b39d9a61" row="0" col="0" rowspan="3" colspan="1"/>
                     </cl:output>
                     <cl:inputbox std:sid="i-box-717e3d70" id="ipbNick" style="border-radius:5px; padding-left:10px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="24" spellcheck="false">
-                      <cl:listener std:sid="listener-76e592a4" name="keyup" handler="onIpbNickKeyup"/>
+                      <cl:listener std:sid="listener-c6629eb5" name="blur" handler="onIpbNickBlur"/>
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberNick" rowindex="0"/>
                       <cl:formdata std:sid="f-data-5d266f1a" row="0" col="1"/>
                     </cl:inputbox>
@@ -317,11 +310,11 @@
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberPostcode" rowindex="0"/>
                       <cl:formdata std:sid="f-data-f390c2df" row="0" col="0"/>
                     </cl:maskeditor>
-                    <cl:inputbox std:sid="i-box-3eac9641" id="address" style="border-radius:5px; padding-left:10px;" lengthunit="utf8" maxlength="30">
+                    <cl:inputbox std:sid="i-box-3eac9641" id="address" style="border-radius:5px; padding-left:10px;" lengthunit="utf8" maxlength="30" spellcheck="false">
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberAddress" rowindex="0"/>
                       <cl:formdata std:sid="f-data-710e1de7" row="1" col="0" rowspan="1" colspan="2"/>
                     </cl:inputbox>
-                    <cl:inputbox std:sid="i-box-f8e684d0" id="detailAddress" style="border-radius:5px; padding-left:10px;" lengthunit="utf8" maxlength="30">
+                    <cl:inputbox std:sid="i-box-f8e684d0" id="detailAddress" style="border-radius:5px; padding-left:10px;" lengthunit="utf8" maxlength="30" spellcheck="false">
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberAddressDetail" rowindex="0"/>
                       <cl:formdata std:sid="f-data-c680e801" row="2" col="0" rowspan="1" colspan="2"/>
                     </cl:inputbox>

@@ -129,15 +129,33 @@ function onSub_deleteMemberSubmitSuccess(e){
 	});
 }
 
-/*
- * 서치 인풋에서 value-change 이벤트 발생 시 호출.
- * SearchInput의 value를 변경하여 변경된 값이 저장된 후에 발생하는 이벤트.
- */
-function onSearchMemberValueChange(e){
-	var searchMember = e.control;
-	var submission = app.lookup("sub_findMemberList");
-	submission.send();
-	
-}
 
-
+///*
+// * 서치 인풋에서 search 이벤트 발생 시 호출.
+// * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
+// */
+//function onSearchMemberSearch(e){
+//	var searchMember = e.control;
+//     var keyword = searchMember.value; // Get the value entered in the search input
+//    
+//    var grid = app.lookup("grd_member"); // Assuming "grd_member" is the ID of your grid
+//    
+//    // Use findAllRow to find rows that match the keyword in any of the specified columns
+//    var matchingRows = grid.findAllRow(function(row) {
+//        return (row.getValue("memberEmail") && row.getValue("memberEmail").indexOf(keyword) >= 0) ||
+//               (row.getValue("memberName") && row.getValue("memberName").indexOf(keyword) >= 0) ||
+//               (row.getValue("memberNick") && row.getValue("memberNick").indexOf(keyword) >= 0) ||
+//               (row.getValue("memberAddress") && row.getValue("memberAddress").indexOf(keyword) >= 0);
+//    });
+//
+//    if (matchingRows.length > 0) {
+//        // Do something with the matching rows, e.g., select them
+//        grid.select(matchingRows.map(function(row) { return row.getIndex(); }));
+//            grid.redraw();
+//        
+//        alert("Found " + matchingRows.length + " matching member(s).");
+//    } else {
+//        alert('No matching members found.');
+//    }
+//
+//}

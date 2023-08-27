@@ -33,14 +33,12 @@
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:submission std:sid="submission-0659aa30" id="sub_findEmail" action="/member/findEmail">
-        <cl:listener std:sid="listener-5c56b74e" name="submit-success" handler="onSub_findEmailSubmitSuccess2"/>
+        <cl:listener std:sid="listener-5c56b74e" name="submit-success" handler="onSub_findEmailSubmitSuccess"/>
         <cl:requestdata dataid="dm_find_email"/>
-        <cl:responsedata dataid="ds_member"/>
       </cl:submission>
       <cl:submission std:sid="submission-c04bdbd6" id="sub_findPswd" action="/member/findPassword">
         <cl:listener std:sid="listener-6590a5da" name="submit-success" handler="onSub_findPswdSubmitSuccess"/>
         <cl:requestdata dataid="dm_find_pswd"/>
-        <cl:responsedata dataid="ds_member"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -192,7 +190,7 @@
                 <cl:xylayout std:sid="xylayout-0515500f"/>
               </cl:group>
             </cl:tabitem>
-            <cl:header-style style="border-radius:0px; font-family:푸른전남 Medium;"/>
+            <cl:header-style style="border-radius:0px; color:white; font-family:푸른전남 Medium;"/>
             <cl:item-style style="background-color:#0CA44E; border-radius:20px 20px 0px 0px; padding-top:10px; padding-left:50px; font-size:24px; padding-bottom:10px; font-family:푸른전남 Medium; text-align:center; padding-right:50px;"/>
             <cl:body-style style="border-radius:0px 10px 20px 20px; font-family:푸른전남 Medium;"/>
           </cl:tabfolder>

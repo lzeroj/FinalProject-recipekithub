@@ -46,10 +46,7 @@
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
 			function onButtonClick(e) {
-				var dataMap1 = app.lookup("dm_register_member");
-				var dataMap2 = app.lookup("dm_check_email");
-				var dataMap3 = app.lookup("dm_check_pswd");
-				var dataMap4 = app.lookup("dm_check_nick");
+				var dataMap = app.lookup("dm_register_member");
 				
 				var memberEmail = app.lookup("ipbEmail").value;
 				var memberPassword = app.lookup("ipbPassword1").value;
@@ -59,14 +56,6 @@
 				var memberBirthday = app.lookup("ipbBirthday").value;
 				var memberPhone = app.lookup("ipbPhone").value;
 				var memberPostcode = app.lookup("postCode").value;
-				
-				dataMap2.setValue("member_email", memberEmail);
-				dataMap3.setValue("member_password", memberPassword);
-				dataMap1.setValue("member_name", memberName);
-				dataMap4.setValue("member_nick", memberNick);
-				dataMap1.setValue("member_birthday", memberBirthday);
-				dataMap1.setValue("member_phone", memberPhone);
-				dataMap1.setValue("member_postcode", memberPostcode);
 				
 				// 다이얼로그창에 표시할 메시지
 				var initValue = null;		
@@ -98,6 +87,7 @@
 							dialogApp.initValue = initValue;
 						});
 					});
+					
 				// 2. 회원가입 양식이 전부 유효하게 작성되어 있는 경우, 회원가입 서브미션 전송	
 				} else {		
 					initValue = "회원가입을 진행하시겠습니까?";
@@ -114,7 +104,6 @@
 				}
 			}
 
-
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
@@ -122,18 +111,43 @@
 			//---[ 회원가입이 성공적으로 이루어진 경우 ]---//	
 			function onSub_registerSubmitSuccess(e) {
 				var sub_register = e.control;
-				var initValue = "RecipeKitHub에 오신 것을 환영합니다..!!";
+				
+				var registerSuccess = sub_register.getMetadata("path");
+				
+				if (registerSuccess != null) {
+					var initValue = "RecipeKitHub에 오신 것을 환영합니다..!!";
+					app.openDialog("dialog/memberChkPopup", {
+						width: 400, height: 300, resizable: false, headerMovable: false
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						cpr.core.App.load(registerSuccess, function(newapp){
+							app.close();
+							newapp.createNewInstance().run();
+						});
+						return;
+					});
+				}
+			}
+
+			/*
+			 * 서브미션에서 submit-error 이벤트 발생 시 호출.
+			 * 통신 중 문제가 생기면 발생합니다.
+			 */
+			function onSub_registerSubmitError(e){
+				var sub_register = e.control;
+				var registerFail = sub_register.getMetadata("registerFailMessage");
 				app.openDialog("dialog/memberChkPopup", {
-					width: 400, height: 300, resizable: false, headerMovable: false
+					width: 400, height: 300, headerClose: true
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
-						dialogApp.initValue = initValue;
+						dialogApp.initValue = registerFail;
 					});
-				}).then(function(returnValue) {
-					var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-					httpPostMethod.submit();
 				});
 			}
+
 
 			/*
 			 * "취소" 버튼에서 click 이벤트 발생 시 호출.
@@ -155,37 +169,18 @@
 			}
 
 
-			// keyup X -> value change
 			/*
-			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
-			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+			 * 인풋 박스에서 blur 이벤트 발생 시 호출.
+			 * 컨트롤이 포커스를 잃은 후 발생하는 이벤트.
 			 */
-			function onIpbEmailKeyup(e) {
+			function onIpbEmailBlur(e){
 				var ipbEmail = e.control;
-				
 				var dataMap = app.lookup("dm_check_email");
 				dataMap.setValue("member_email", ipbEmail.value);
 				
 				var subCheckEmail = app.lookup("sub_check_email");
 				subCheckEmail.send();
-				
-				//app.lookup("ipbEmail").addEventListener('keyup', debounce(onIpbEmailKeyup, 300));  // 300ms 후에 서버 요청을 보냅니다.
 			}
-
-			/*
-			function debounce(func, wait) {
-			    var timeout;
-			    return function() {
-			        var context = this, args = arguments;
-			        var later = function() {
-			            timeout = null;
-			            func.apply(context, args);
-			        };
-			        clearTimeout(timeout);
-			        timeout = setTimeout(later, wait);
-			    };
-			}
-			*/
 
 
 			/*
@@ -194,7 +189,7 @@
 			 */
 			//---[ email이 변경될 때마다 호출되어 email 유효성을 확인 ]---//
 			function onSub_check_emailSubmitSuccess(e) {
-				//var checkEmailFlag = false; 
+				// var checkEmailFlag = false; 
 				// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 				var sub_check_email = e.control;
 				
@@ -347,19 +342,20 @@
 				}
 			}
 
+
 			/*
-			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
-			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+			 * 인풋 박스에서 blur 이벤트 발생 시 호출.
+			 * 컨트롤이 포커스를 잃은 후 발생하는 이벤트.
 			 */
-			function onIpbNickKeyup(e) {
+			function onIpbNickBlur(e){
 				var ipbNick = e.control;
-				
 				var dataMap = app.lookup("dm_check_nick");
 				dataMap.setValue("member_nick", ipbNick.value);
 				
 				var subCheckNick = app.lookup("sub_check_nick");
 				subCheckNick.send();
 			}
+
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -497,64 +493,10 @@
 			function onBodyUnload(e) {
 				var appConf = cpr.core.AppConfig.INSTANCE;
 				appConf.getEnvConfig().setValue("appcache", false);
-			}
+			};
 			// End - User Script
 			
 			// Header
-			var dataSet_1 = new cpr.data.DataSet("ds_member");
-			dataSet_1.parseData({
-				"columns" : [
-					{
-						"name": "member_email",
-						"dataType": "string"
-					},
-					{
-						"name": "member_password",
-						"dataType": "string"
-					},
-					{
-						"name": "member_name",
-						"dataType": "string"
-					},
-					{
-						"name": "member_nick",
-						"dataType": "string"
-					},
-					{
-						"name": "member_address",
-						"dataType": "string"
-					},
-					{
-						"name": "member_phone",
-						"dataType": "string"
-					},
-					{
-						"name": "member_birthday",
-						"dataType": "string"
-					},
-					{
-						"name": "member_type",
-						"dataType": "string"
-					},
-					{
-						"name": "member_status",
-						"dataType": "string"
-					},
-					{
-						"name": "member_reg_date",
-						"dataType": "string"
-					},
-					{
-						"name": "member_postcode",
-						"dataType": "string"
-					},
-					{
-						"name": "member_address_detail",
-						"dataType": "string"
-					}
-				]
-			});
-			app.register(dataSet_1);
 			var dataMap_1 = new cpr.data.DataMap("dm_register_member");
 			dataMap_1.parseData({
 				"columns" : [
@@ -626,13 +568,12 @@
 			app.register(dataMap_4);
 			var submission_1 = new cpr.protocols.Submission("sub_register");
 			submission_1.action = "/member/register";
-			submission_1.addRequestData(dataMap_2);
-			submission_1.addRequestData(dataMap_3);
-			submission_1.addRequestData(dataMap_4);
 			submission_1.addRequestData(dataMap_1);
-			submission_1.addResponseData(dataSet_1, false);
 			if(typeof onSub_registerSubmitSuccess == "function") {
 				submission_1.addEventListener("submit-success", onSub_registerSubmitSuccess);
+			}
+			if(typeof onSub_registerSubmitError == "function") {
+				submission_1.addEventListener("submit-error", onSub_registerSubmitError);
 			}
 			app.register(submission_1);
 			
@@ -746,7 +687,7 @@
 									formLayout_1.setRows(["50px"]);
 									group_6.setLayout(formLayout_1);
 									(function(container){
-										var button_1 = new cpr.controls.Button();
+										var button_1 = new cpr.controls.Button("btnRegister");
 										button_1.value = "가입";
 										button_1.style.css({
 											"border-right-style" : "solid",
@@ -775,7 +716,7 @@
 											"colIndex": 1,
 											"rowIndex": 0
 										});
-										var button_2 = new cpr.controls.Button();
+										var button_2 = new cpr.controls.Button("btnCancel");
 										button_2.value = "취소";
 										button_2.style.css({
 											"border-right-style" : "solid",
@@ -998,6 +939,12 @@
 										if(typeof onIpbEmailKeyup == "function") {
 											inputBox_3.addEventListener("keyup", onIpbEmailKeyup);
 										}
+										if(typeof onIpbEmailValueChange == "function") {
+											inputBox_3.addEventListener("value-change", onIpbEmailValueChange);
+										}
+										if(typeof onIpbEmailBlur == "function") {
+											inputBox_3.addEventListener("blur", onIpbEmailBlur);
+										}
 										container.addChild(inputBox_3, {
 											"colIndex": 1,
 											"rowIndex": 0,
@@ -1065,6 +1012,9 @@
 										inputBox_4.bind("value").toDataMap(app.lookup("dm_register_member"), "member_password");
 										if(typeof onIpbPassword1Keyup == "function") {
 											inputBox_4.addEventListener("keyup", onIpbPassword1Keyup);
+										}
+										if(typeof onIpbPassword1ValueChange == "function") {
+											inputBox_4.addEventListener("value-change", onIpbPassword1ValueChange);
 										}
 										container.addChild(inputBox_4, {
 											"colIndex": 1,
@@ -1264,6 +1214,9 @@
 										inputBox_6.bind("value").toDataMap(app.lookup("dm_register_member"), "member_nick");
 										if(typeof onIpbNickKeyup == "function") {
 											inputBox_6.addEventListener("keyup", onIpbNickKeyup);
+										}
+										if(typeof onIpbNickBlur == "function") {
+											inputBox_6.addEventListener("blur", onIpbNickBlur);
 										}
 										container.addChild(inputBox_6, {
 											"colIndex": 1,

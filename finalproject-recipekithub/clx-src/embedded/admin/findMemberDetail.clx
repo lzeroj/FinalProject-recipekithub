@@ -96,7 +96,7 @@
                 <cl:gridcell std:sid="gd-cell-d5eb809d" rowindex="0" colindex="0" columntype="checkbox"/>
                 <cl:gridcell std:sid="gd-cell-a7fb9500" rowindex="0" colindex="1" columntype="rowindex"/>
                 <cl:gridcell std:sid="gd-cell-f344f27b" rowindex="0" colindex="2" columnname="memberEmail">
-                  <cl:output std:sid="output-9c7ec49c" id="opbEmail" style="background-color:#F0F0F0;" readonly="true">
+                  <cl:output std:sid="output-9c7ec49c" id="opbEmail" style="background-color:#F0F0F0;">
                     <cl:celldata std:sid="c-data-99190223"/>
                   </cl:output>
                 </cl:gridcell>
@@ -163,12 +163,6 @@
                 <cl:listener std:sid="listener-6fee63f6" name="click" handler="onBtnDeleteRowClick"/>
                 <cl:formdata std:sid="f-data-96f45ed6" row="0" col="3"/>
               </cl:button>
-              <cl:searchinput std:sid="s-input-52c18a78" id="searchMember" style="border-radius:10px;">
-                <cl:listener std:sid="listener-9816a550" name="value-change" handler="onSearchMemberValueChange"/>
-                <cl:formdata std:sid="f-data-bd95e6d3" row="0" col="0"/>
-                <cl:searchstyle style="width:20px;"/>
-                <cl:clearstyle style="width:10px;"/>
-              </cl:searchinput>
               <cl:formlayout std:sid="f-layout-1d210b0b" scrollable="false" hspace="20px" vspace="20px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
                 <cl:rows length="1" unit="FRACTION"/>
                 <cl:columns length="1" unit="FRACTION"/>
