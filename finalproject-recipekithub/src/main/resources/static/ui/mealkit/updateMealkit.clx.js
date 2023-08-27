@@ -123,7 +123,7 @@
 			   	var fileInput = app.lookup("file2");
 				var file = fileInput.file;
 				var img = app.lookup("updateImg");
-				alert("이미지 file = " + file);
+				//alert("이미지 file = " + file);
 			   	
 			   	var combo1 = app.lookup("cmb1").text;
 			   	var combo2 = app.lookup("cmb2").text;
@@ -142,52 +142,65 @@
 				var file = fileInput.file;
 				var image = app.lookup("updateImg");
 				
-				if(confirm("수정하시겠습니까?")){
-					if(name.value == null || name.value.trim().length == 0){
-			 			alert("밀키트 이름을 입력해주세요.");
-			 			name.focus();
-			 			return;
-			 		}else if(combo1.length == 0 || combo2.length == 0 || combo3.length == 0){
-			 			alert("카테고리를 반드시 선택해주세요.");
-			 			return ;
+					if (name.value == null || name.value.trim().length == 0) {
+						alert("밀키트 이름을 입력해주세요.");
+						name.focus();
+						return;
+					} else if (combo1.length == 0 || combo2.length == 0 || combo3.length == 0) {
+						alert("카테고리를 반드시 선택해주세요.");
+						return;
+						
+					} else if (ingredients.value == null || ingredients.value.trim().length == 0) {
+						alert("밀키트 성분을 입력해주세요.");
+						ingredients.focus();
+						return;
+						
+					} else if (message == null || message.trim().length == 0) {
+						
+						alert("밀키트 정보를 입력해주세요.");
+						console.log("왜 안 먹지?");
+						//e.preventDefault();
+						return;
+					} else if (price.value == null || price.value == "") {
+						alert("밀키트 가격을 입력해주세요.");
+						price.focus();
+						return;
+						
+					} else if (inven.value == null || inven.value == "") {
+						alert("밀키트 수량을 입력해주세요.");
+						inven.focus();
+						return;
+					} else if (type == null || type == "") {
+						alert("타입을 반드시 선택해주세요.");
+						return;
+						// 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
+						// 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
+						// 			inven.value = "";
+						// 			inven.focus();
+						// 			return;
+					}else{
 			 		
-			 		}else if(ingredients.value == null || ingredients.value.trim().length == 0){
-			 			alert("밀키트 성분을 입력해주세요.");
-			 			ingredients.focus();
-			 			return;
+			 		var initValue = {
+						"msg": "밀키트를 수정하시겠습니까?"
+					}
+					app.openDialog("dialog/recipeCheck", {
+						width: 300, height: 200, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							submission.addFileParameter("image", file);
+							app.lookup("updateMealkitSub").send();
+						}
+					});
+			 	}			
+			 			//submission.addFileParameter("image", file);
+						//app.lookup("updateMealkitSub").send();
+			 		
 			 	
-			 		}else if(message == null || message.trim().length == 0){
-			 			
-			 			alert("밀키트 정보를 입력해주세요.");
-			 			console.log("왜 안 먹지?");
-			 			//e.preventDefault();
-			 			return;
-			 		}else if(price.value == null || price.value == ""){
-			 			alert("밀키트 가격을 입력해주세요.");
-			 			price.focus();
-			 			return;
-			 		
-			 		
-			 		}else if(inven.value == null || inven.value == ""){
-			 			alert("밀키트 수량을 입력해주세요.");
-			 			inven.focus();
-			 			return;
-			 		}else if(type == null || type == ""){
-			 			alert("타입을 반드시 선택해주세요.");
-			 			return;
-			// 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
-			// 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
-			// 			inven.value = "";
-			// 			inven.focus();
-			// 			return;
-			 		}else{
-			 			submission.addFileParameter("image", file);
-						app.lookup("updateMealkitSub").send();
-			 		}
-			 	}
-				
-				
-
 			}
 
 			/*
@@ -197,10 +210,28 @@
 			function onButtonClick(e){
 				var button = e.control;
 				var mealkitNo = cpr.core.Platform.INSTANCE.getParameter("mealkitNo");
-				if(confirm("변경된 사항은 변경되지 않습니다\n취소하시겠습니까?")){
-					window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
-				}
-				//window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
+				var initValue = {
+						"msg": "변경된 사항은 변경되지 않습니다.\n취소하시겠습니까?"
+					}
+					app.openDialog("dialog/recipeCheck", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							window.location.href= "/mealkitDetail/"+mealkitNo;
+						}
+					});
+				
+				
+				
+			//	if(confirm("변경된 사항은 변경되지 않습니다\n취소하시겠습니까?")){
+			//		window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
+			//	}
+			//	//window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
 			}
 
 			/*
@@ -310,13 +341,30 @@
 				var mealkitMember = dataMap.getValue("mealkitMember");
 				var sessionId = getTimedSessionData("memsession");
 
+				var initValue = "해당 게시물을 삭제하시겠습니까?";
+					
+					app.openDialog("dialog/registerPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+							HttpPostMethod.submit();
+						}
+					});
 				
-				if(confirm("삭제하시겠습니까?")){
-					if(sessionId === mealkitMember){
-						var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-						HttpPostMethod.submit();
-					}
-				}
+
+				
+			//	if(confirm("삭제하시겠습니까?")){
+			//		if(sessionId === mealkitMember){
+			//			var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+			//			HttpPostMethod.submit();
+			//		}
+			//	}
 			};
 			// End - User Script
 			
@@ -806,14 +854,6 @@
 					"left": "60px",
 					"width": "864px",
 					"height": "129px"
-				});
-				var button_4 = new cpr.controls.Button();
-				button_4.value = "삭제";
-				container.addChild(button_4, {
-					"top": "870px",
-					"left": "196px",
-					"width": "114px",
-					"height": "34px"
 				});
 				var image_2 = new cpr.controls.Image();
 				image_2.src = "theme/images/mealkit/trashbin.png";
