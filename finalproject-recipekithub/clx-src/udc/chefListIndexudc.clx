@@ -12,7 +12,7 @@
       <cl:event name="memberImageClick" type="cpr.events.CAppEvent"/>
     </cl:appspec>
   </head>
-  <body std:sid="body-8576130b" style="top:0px; left:0px; width:300px; height:300px;">
+  <body std:sid="body-8576130b" style="top:0px; left:0px; width:300px; font-family:푸른전남 Medium; height:300px;">
     <cl:listener std:sid="listener-b0413b5e" name="load" handler="onBodyLoad"/>
     <cl:img std:sid="image-c5690ada" id="chefimg" style="border-radius:100px; cursor:pointer;" fallbacksrc="../theme/images/icon/chefimg.png">
       <cl:listener std:sid="listener-89b8e9e2" name="click" handler="onChefimgClick"/>

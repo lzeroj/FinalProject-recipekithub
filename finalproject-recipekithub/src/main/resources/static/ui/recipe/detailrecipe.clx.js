@@ -156,7 +156,7 @@
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 				if (sessionval == null) {
 					var initValue = "로그인이 필요합니다.";
-					app.openDialog("dialog/registerChkPopup", {
+					app.openDialog("dialog/memberChkPopup", {
 						width: 400, height: 300, headerClose: true
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -238,7 +238,7 @@
 				var sessionval = getTimedSessionData("memsession");
 				if (sessionval == null) {
 					var initValue =  "로그인이 필요합니다.";
-					app.openDialog("dialog/registerChkPopup", {
+					app.openDialog("dialog/memberChkPopup", {
 						width: 400, height: 300, headerClose: true
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -261,7 +261,7 @@
 				var sessionval = getTimedSessionData("memsession");
 				if (sessionval == null) {
 					var initValue = "로그인이 필요합니다.";
-					app.openDialog("dialog/registerChkPopup", {
+					app.openDialog("dialog/memberChkPopup", {
 						width: 400, height: 300, headerClose: true
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {

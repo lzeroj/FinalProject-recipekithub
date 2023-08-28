@@ -90,6 +90,6 @@
 			}
 		}
 	});
-	app.title = "needLogin";
+	app.title = "RecipeKitHub";
 	cpr.core.Platform.INSTANCE.register(app);
 })();

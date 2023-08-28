@@ -114,7 +114,7 @@
 				button_2.style.css({
 					"border-right-style" : "none",
 					"border-radius" : "0px",
-					"background-color" : "#e5f2e3",
+					"background-color" : "#F0F0F0",
 					"text-shadow" : "none",
 					"color" : "#696969",
 					"border-left-style" : "none",
@@ -142,6 +142,7 @@
 			output_1.style.css({
 				"font-weight" : "bold",
 				"font-size" : "20px",
+				"line-height" : "2.0",
 				"text-align" : "center"
 			});
 			container.addChild(output_1, {
@@ -153,6 +154,6 @@
 			}
 		}
 	});
-	app.title = "recipeKitHub";
+	app.title = "RecipeKitHub";
 	cpr.core.Platform.INSTANCE.register(app);
 })();

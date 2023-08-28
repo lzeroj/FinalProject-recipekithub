@@ -7,6 +7,9 @@
 (function() {
 	var app = new cpr.core.App("mealkit/mealkitDetail", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/custom/member.part.css");
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/custom-theme.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};

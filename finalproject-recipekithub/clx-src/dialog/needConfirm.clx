@@ -16,7 +16,7 @@
       <cl:listener std:sid="listener-77cf2735" name="click" handler="onButtonClick"/>
       <cl:xylayoutdata std:sid="xyl-data-f93cdbc6" top="200px" right="200px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
     </cl:button>
-    <cl:button std:sid="button-8b3d5b7e" style="background-color:#EFEFEF; color:#000000; font-weight:bold; background-image:none;" value="취소">
+    <cl:button std:sid="button-8b3d5b7e" style="background-color:#F0F0F0; color:#696969; font-weight:bold; background-image:none;" value="취소">
       <cl:listener std:sid="listener-079e28cc" name="click" handler="onButtonClick2"/>
       <cl:xylayoutdata std:sid="xyl-data-3766f5c8" top="200px" right="0px" bottom="0px" left="200px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
     </cl:button>

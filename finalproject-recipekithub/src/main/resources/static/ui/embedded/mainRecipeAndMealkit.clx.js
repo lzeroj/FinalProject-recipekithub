@@ -7,6 +7,7 @@
 (function() {
 	var app = new cpr.core.App("embedded/mainRecipeAndMealkit", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/custom/member.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -268,6 +269,7 @@
 					});
 					var output_2 = new cpr.controls.Output();
 					output_2.value = "레시피";
+					output_2.style.setClasses(["emphasis"]);
 					output_2.style.css({
 						"color" : "#0ca44e",
 						"font-weight" : "bold",
@@ -337,6 +339,7 @@
 					});
 					var output_4 = new cpr.controls.Output();
 					output_4.value = "밀키트";
+					output_4.style.setClasses(["emphasis"]);
 					output_4.style.css({
 						"color" : "#0ca44e",
 						"font-weight" : "bold",
@@ -405,6 +408,7 @@
 					});
 					var output_6 = new cpr.controls.Output();
 					output_6.value = "쉐프!";
+					output_6.style.setClasses(["emphasis"]);
 					output_6.style.css({
 						"color" : "#0ca44e",
 						"font-weight" : "bold",

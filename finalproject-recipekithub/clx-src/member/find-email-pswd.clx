@@ -33,14 +33,12 @@
         </cl:datacolumnlist>
       </cl:datamap>
       <cl:submission std:sid="submission-0659aa30" id="sub_findEmail" action="/member/findEmail">
-        <cl:listener std:sid="listener-5c56b74e" name="submit-success" handler="onSub_findEmailSubmitSuccess2"/>
+        <cl:listener std:sid="listener-5c56b74e" name="submit-success" handler="onSub_findEmailSubmitSuccess"/>
         <cl:requestdata dataid="dm_find_email"/>
-        <cl:responsedata dataid="ds_member"/>
       </cl:submission>
       <cl:submission std:sid="submission-c04bdbd6" id="sub_findPswd" action="/member/findPassword">
         <cl:listener std:sid="listener-6590a5da" name="submit-success" handler="onSub_findPswdSubmitSuccess"/>
         <cl:requestdata dataid="dm_find_pswd"/>
-        <cl:responsedata dataid="ds_member"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -58,6 +56,9 @@
           <cl:tabfolder std:sid="t-folder-e86d9d0f">
             <cl:verticaldata std:sid="v-data-17be908e" width="880px" height="610px"/>
             <cl:tabitem std:sid="t-item-ad46741c" name="tabFindEmail" selected="true" text="Email 찾기">
+              <std:metadata>
+                <std:property key="is-active-item" value="true"/>
+              </std:metadata>
               <cl:group std:sid="group-142616c9">
                 <std:metadata>
                   <std:property key="locked" value="true"/>
@@ -77,15 +78,15 @@
                   <cl:output std:sid="output-a0daba31" style="border-radius:10px; border-right-style:none; background-color:#F0F0F0; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:none; border-top-style:none;" value="- 회원 생년월일">
                     <cl:formdata std:sid="f-data-fb6d4aa4" row="3" col="0"/>
                   </cl:output>
-                  <cl:inputbox std:sid="i-box-aa047745" id="ipbName1" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" showclearbutton="true">
+                  <cl:inputbox std:sid="i-box-aa047745" id="ipbName1" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; padding-left:10px; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" showclearbutton="true">
                     <cl:datamapbind property="value" datacontrolid="dm_find_email" columnname="member_name"/>
                     <cl:formdata std:sid="f-data-bab7b91d" row="1" col="1" rowspan="1" colspan="1"/>
                   </cl:inputbox>
-                  <cl:inputbox std:sid="i-box-e74c7b5c" id="ipbPhone1" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" showclearbutton="true" maxlength="11" inputfilter="[0-9]">
+                  <cl:inputbox std:sid="i-box-e74c7b5c" id="ipbPhone1" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; padding-left:10px; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" showclearbutton="true" maxlength="11" inputfilter="[0-9]">
                     <cl:datamapbind property="value" datacontrolid="dm_find_email" columnname="member_phone"/>
                     <cl:formdata std:sid="f-data-cf77df75" row="2" col="1" rowspan="1" colspan="1"/>
                   </cl:inputbox>
-                  <cl:inputbox std:sid="i-box-971c3214" id="ipbBirthday" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" showclearbutton="true" maxlength="8" inputfilter="[0-9]">
+                  <cl:inputbox std:sid="i-box-971c3214" id="ipbBirthday" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; padding-left:10px; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" showclearbutton="true" maxlength="8" inputfilter="[0-9]">
                     <cl:listener std:sid="listener-6e2326a6" name="keydown" handler="onIpbBirthdayKeydown"/>
                     <cl:datamapbind property="value" datacontrolid="dm_find_email" columnname="member_birthday"/>
                     <cl:formdata std:sid="f-data-739c6e10" row="3" col="1" rowspan="1" colspan="1"/>
@@ -128,9 +129,6 @@
               </cl:group>
             </cl:tabitem>
             <cl:tabitem std:sid="t-item-7d703641" name="tabFindPswd" text="Password 찾기">
-              <std:metadata>
-                <std:property key="is-active-item" value="true"/>
-              </std:metadata>
               <cl:group std:sid="group-9bc8a01d">
                 <std:metadata>
                   <std:property key="locked" value="true"/>
@@ -149,15 +147,15 @@
                   <cl:output std:sid="output-2a7c98ad" style="border-radius:10px; border-right-style:none; background-color:#F0F0F0; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:none; border-top-style:none;" value="- 핸드폰 번호">
                     <cl:formdata std:sid="f-data-fd3dac8e" row="3" col="0"/>
                   </cl:output>
-                  <cl:inputbox std:sid="i-box-a86bf26e" id="ipbEmail" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;">
+                  <cl:inputbox std:sid="i-box-a86bf26e" id="ipbEmail" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; padding-left:10px; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;">
                     <cl:datamapbind property="value" datacontrolid="dm_find_pswd" columnname="member_email"/>
                     <cl:formdata std:sid="f-data-9057471c" row="1" col="1" rowspan="1" colspan="1"/>
                   </cl:inputbox>
-                  <cl:inputbox std:sid="i-box-bff13fe5" id="ipbName2" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;">
+                  <cl:inputbox std:sid="i-box-bff13fe5" id="ipbName2" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; padding-left:10px; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;">
                     <cl:datamapbind property="value" datacontrolid="dm_find_pswd" columnname="member_name"/>
                     <cl:formdata std:sid="f-data-8f285ddb" row="2" col="1" rowspan="1" colspan="1"/>
                   </cl:inputbox>
-                  <cl:inputbox std:sid="i-box-b09de35c" id="ipbPhone2" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" maxlength="11" inputfilter="[0-9]">
+                  <cl:inputbox std:sid="i-box-b09de35c" id="ipbPhone2" style="border-radius:10px; border-right-style:solid; border-bottom-color:#a0a0a0; border-left-style:solid; padding-left:10px; border-left-color:#a0a0a0; border-top-color:#a0a0a0; font-size:20px; border-right-color:#a0a0a0; border-bottom-style:solid; border-top-style:solid;" maxlength="11" inputfilter="[0-9]">
                     <cl:listener std:sid="listener-d7dcef90" name="keydown" handler="onIpbPhone2Keydown"/>
                     <cl:datamapbind property="value" datacontrolid="dm_find_pswd" columnname="member_phone"/>
                     <cl:formdata std:sid="f-data-d7802db2" row="3" col="1" rowspan="1" colspan="1"/>
@@ -192,7 +190,7 @@
                 <cl:xylayout std:sid="xylayout-0515500f"/>
               </cl:group>
             </cl:tabitem>
-            <cl:header-style style="border-radius:0px; font-family:푸른전남 Medium;"/>
+            <cl:header-style style="border-radius:0px; color:white; font-family:푸른전남 Medium;"/>
             <cl:item-style style="background-color:#0CA44E; border-radius:20px 20px 0px 0px; padding-top:10px; padding-left:50px; font-size:24px; padding-bottom:10px; font-family:푸른전남 Medium; text-align:center; padding-right:50px;"/>
             <cl:body-style style="border-radius:0px 10px 20px 20px; font-family:푸른전남 Medium;"/>
           </cl:tabfolder>
