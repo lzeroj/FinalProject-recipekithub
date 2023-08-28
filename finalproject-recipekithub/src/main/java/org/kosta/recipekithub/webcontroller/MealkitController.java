@@ -84,13 +84,10 @@ public class MealkitController {
 	public View findMealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		//페이지 번호 값
 		ParameterGroup pageParam = dataRequest.getParameterGroup("mePage");
-		System.out.println("pageNo = " + pageParam.getValue("pageNo"));
 		String pageNo = pageParam.getValue("pageNo");
-		System.out.println("pageNo = " + pageNo);
 		//카테고리별
 		ParameterGroup categoryParam = dataRequest.getParameterGroup("meCategory");
 		String mealkitType = categoryParam.getValue("mealkitType");
-		System.out.println("mealkitType = " + mealkitType);
 		//분류별
 		ParameterGroup sortParam = dataRequest.getParameterGroup("meSort");
 		String sort = sortParam.getValue("sort");
@@ -107,9 +104,6 @@ public class MealkitController {
 		}
 		
 		List<MealKitBoard> list = mealKitService.findAllMealkitBoard(mealkitType, sort, searchMealkit, pagination);
-		for(MealKitBoard mealkit : list) {
-			System.out.println("mealkit = " + mealkit);
-		}
 		
 		List<Double> starAvgList = new ArrayList<>();
 		List<Long> commentCnt = new ArrayList<>();

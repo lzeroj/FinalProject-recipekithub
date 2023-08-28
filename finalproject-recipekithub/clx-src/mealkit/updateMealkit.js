@@ -34,8 +34,6 @@ function onBodyInit2(e){
             app.lookup("sampleThr").redraw();
         }); 
     });
-
-
 }
 
 
@@ -80,7 +78,6 @@ function onSampleThrLoad(e){
         });
         $("#summernote").summernote('code', mealkitInfo);
     }
-
 }
 
 
@@ -129,44 +126,35 @@ function onButtonClick2(e){
 	var file = fileInput.file;
 	var image = app.lookup("updateImg");
 	
-		if (name.value == null || name.value.trim().length == 0) {
-			alert("밀키트 이름을 입력해주세요.");
-			name.focus();
-			return;
-		} else if (combo1.length == 0 || combo2.length == 0 || combo3.length == 0) {
-			alert("카테고리를 반드시 선택해주세요.");
-			return;
-			
-		} else if (ingredients.value == null || ingredients.value.trim().length == 0) {
-			alert("밀키트 성분을 입력해주세요.");
-			ingredients.focus();
-			return;
-			
-		} else if (message == null || message.trim().length == 0) {
-			
-			alert("밀키트 정보를 입력해주세요.");
-			console.log("왜 안 먹지?");
-			//e.preventDefault();
-			return;
-		} else if (price.value == null || price.value == "") {
-			alert("밀키트 가격을 입력해주세요.");
-			price.focus();
-			return;
-			
-		} else if (inven.value == null || inven.value == "") {
-			alert("밀키트 수량을 입력해주세요.");
-			inven.focus();
-			return;
-		} else if (type == null || type == "") {
-			alert("타입을 반드시 선택해주세요.");
-			return;
-			// 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
-			// 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
-			// 			inven.value = "";
-			// 			inven.focus();
-			// 			return;
-		}else{
- 		
+	if (name.value == null || name.value.trim().length == 0) {
+		alert("밀키트 이름을 입력해주세요.");
+		name.focus();
+		return;
+	} else if (combo1.length == 0 || combo2.length == 0 || combo3.length == 0) {
+		alert("카테고리를 반드시 선택해주세요.");
+		return;
+	} else if (ingredients.value == null || ingredients.value.trim().length == 0) {
+		alert("밀키트 성분을 입력해주세요.");
+		ingredients.focus();
+		return;
+	} else if (message == null || message.trim().length == 0) {
+		alert("밀키트 정보를 입력해주세요.");
+		console.log("왜 안 먹지?");
+		//e.preventDefault();
+		return;
+	} else if (price.value == null || price.value == "") {
+		alert("밀키트 가격을 입력해주세요.");
+		price.focus();
+		return;
+		
+	} else if (inven.value == null || inven.value == "") {
+		alert("밀키트 수량을 입력해주세요.");
+		inven.focus();
+		return;
+	} else if (type == null || type == "") {
+		alert("타입을 반드시 선택해주세요.");
+		return;
+	}else{
  		var initValue = {
 			"msg": "밀키트를 수정하시겠습니까?"
 		}
@@ -184,10 +172,6 @@ function onButtonClick2(e){
 			}
 		});
  	}			
- 			//submission.addFileParameter("image", file);
-			//app.lookup("updateMealkitSub").send();
- 		
- 	
 }
 
 /*
@@ -198,27 +182,20 @@ function onButtonClick(e){
 	var button = e.control;
 	var mealkitNo = cpr.core.Platform.INSTANCE.getParameter("mealkitNo");
 	var initValue = {
-			"msg": "변경된 사항은 변경되지 않습니다.\n취소하시겠습니까?"
-		}
-		app.openDialog("dialog/recipeCheck", {
-			width: 400, height: 300, headerClose: true
-		}, function(dialog) {
-			dialog.ready(function(dialogApp) {
-				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
-				dialogApp.initValue = initValue;
-			});
-		}).then(function(returnValue) {
-			if (returnValue == true) {
-				window.location.href= "/mealkitDetail/"+mealkitNo;
-			}
+		"msg": "변경된 사항은 변경되지 않습니다.\n취소하시겠습니까?"
+	}
+	app.openDialog("dialog/recipeCheck", {
+		width: 400, height: 300, headerClose: true
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+			dialogApp.initValue = initValue;
 		});
-	
-	
-	
-//	if(confirm("변경된 사항은 변경되지 않습니다\n취소하시겠습니까?")){
-//		window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
-//	}
-//	//window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
+	}).then(function(returnValue) {
+		if (returnValue == true) {
+			window.location.href= "/mealkitDetail/"+mealkitNo;
+		}
+	});
 }
 
 /*
@@ -229,8 +206,6 @@ function onUpdateMealkitSubSubmitSuccess(e){
 	var updateMealkitSub = e.control;
 	var mealkitNo = updateMealkitSub.getMetadata("result");
 	alert("밀키트가 수정되었습니다.");
-	//var dataMap = app.lookup("mealkitNo");
-	//dataMap.setValue("mealkitNo", metadata);
 	var url = '/mealkitDetail/'+mealkitNo; //상세 페이지 url
 	window.location.href= url;
 }
@@ -296,10 +271,10 @@ function onFile2ValueChange(e){
 	//이미지 파일 아닌 걸 넣었을 때 
 	if (fileInput.files && fileInput.files[0]) {
 		var reader = new FileReader();
-			reader.onload = function(e) {
-				image.src = e.target.result;
-			};
-			reader.readAsDataURL(fileInput.files[0]);
+		reader.onload = function(e) {
+			image.src = e.target.result;
+		};
+		reader.readAsDataURL(fileInput.files[0]);
 	}
 }
 
@@ -312,8 +287,8 @@ function onDeleteImgBtnClick(e){
 	var fileInput = app.lookup("file2");
 	var image = app.lookup("updateImg");
 	if(confirm("사진을 삭제하시겠습니까?")){
-	fileInput.clear();
-	image.src = "";
+		fileInput.clear();
+		image.src = "";
 	}
 }
 
@@ -327,29 +302,19 @@ function onImageClick(e){
 	var mealkitNo = dataMap.getValue("mealkitNo");
 	var mealkitMember = dataMap.getValue("mealkitMember");
 	var sessionId = getTimedSessionData("memsession");
-
 	var initValue = "해당 게시물을 삭제하시겠습니까?";
 		
-		app.openDialog("dialog/registerPopup", {
-			width: 400, height: 300, headerClose: true
-		}, function(dialog) {
-			dialog.ready(function(dialogApp) {
-				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
-				dialogApp.initValue = initValue;
-			});
-		}).then(function(returnValue) {
-			if (returnValue == true) {
-				var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-				HttpPostMethod.submit();
-			}
+	app.openDialog("dialog/memberPopup", {
+		width: 400, height: 300, headerClose: true
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+			dialogApp.initValue = initValue;
 		});
-	
-
-	
-//	if(confirm("삭제하시겠습니까?")){
-//		if(sessionId === mealkitMember){
-//			var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-//			HttpPostMethod.submit();
-//		}
-//	}
+	}).then(function(returnValue) {
+		if (returnValue == true) {
+			var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+			HttpPostMethod.submit();
+		}
+	});
 }

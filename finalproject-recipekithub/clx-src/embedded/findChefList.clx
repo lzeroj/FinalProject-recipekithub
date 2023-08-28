@@ -25,9 +25,9 @@
   <body std:sid="body-6bf3f8ae">
     <cl:listener std:sid="listener-36d888bd" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-fa635fe4" style="border-right-style:solid; border-bottom-color:#e4e4e4; border-top-width:1px; border-right-width:1px; border-left-color:#e4e4e4; border-right-color:#e4e4e4; border-left-width:1px; border-top-style:solid; background-color:#FFFFFF; border-left-style:solid; border-bottom-width:1px; border-top-color:#e4e4e4; border-bottom-style:solid;">
-      <cl:xylayoutdata std:sid="xyl-data-1345d5af" top="30px" bottom="30px" left="500px" width="880px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+      <cl:verticaldata std:sid="v-data-bec56224" width="880px" height="680px" autosize="height"/>
       <cl:group std:sid="group-d72724a4" id="grp">
-        <cl:formdata std:sid="f-data-9bd2c6d9" row="3" col="1" rowspan="1" colspan="5"/>
+        <cl:formdata std:sid="f-data-ab441ad4" row="3" col="1" rowspan="1" colspan="4"/>
         <cl:flowlayout std:sid="f-layout-0895aa16"/>
       </cl:group>
       <cl:img std:sid="image-a5f373d6" src="../theme/images/icon/ranking.png">
@@ -50,15 +50,14 @@
         <cl:rows length="80" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         <cl:rows length="50" unit="PIXEL"/>
         <cl:rows length="1" unit="FRACTION"/>
-        <cl:columns length="20" unit="PIXEL"/>
+        <cl:columns length="60" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         <cl:columns length="280" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         <cl:columns length="150" unit="PIXEL"/>
         <cl:columns length="120" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-        <cl:columns length="308" unit="PIXEL"/>
-        <cl:columns length="20" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
       </cl:formlayout>
     </cl:group>
-    <cl:xylayout std:sid="xylayout-b75e1438"/>
+    <cl:verticallayout std:sid="v-layout-15c52b8f" distribution="center"/>
   </body>
   <std:studiosetting>
     <std:hruler/>

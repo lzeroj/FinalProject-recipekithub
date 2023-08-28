@@ -296,7 +296,7 @@
 			function onButtonClick4(e){
 				var button = e.control;
 				var dsmealkit = app.lookup("mealkit");
-					var sessionId = getTimedSessionData("memsession");
+				var sessionId = getTimedSessionData("memsession");
 				//alert("sessionId = " + sessionId);
 				
 				if(sessionId == null){
@@ -308,16 +308,22 @@
 							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
 							dialogApp.initValue = initValue;
 						});
-					})
-					.then(function(returnValue) {
-						if (returnValue == true) {
-							var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-							HttpPostMethod.submit();
-						}
 					});
 				}else{
-					dsmealkit.setValue("cartDetailQuantity", app.lookup("mealcnt").text);
-					app.lookup("subcreatmycart").send();
+					var initValue = "주문하시겠습니까?";
+					app.openDialog("dialog/needConfirm", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue){
+						if(returnValue == "ok"){
+							dsmealkit.setValue("cartDetailQuantity", app.lookup("mealcnt").text);
+							app.lookup("subcreatmycart").send();
+						}
+					});
 				}
 			}
 
@@ -328,42 +334,22 @@
 			function onSubcreatmycartSubmitSuccess2(e){
 				var subcreatmycart = e.control;
 				var resultDetail = subcreatmycart.getMetadata("resultDetail");
-			//	if(!confirm("장바구니에 상품을 추가하시겠습니까?")){
-			//		return;
-			//	}
-			//	if(resultDetail!=1){
-			//		alert("상품 등록을 실패하였습니다");
-			//		return;
-			//	}
-			//	alert("상품이 추가되었습니다");
 				
 				if(resultDetail!= 1){
 					alert("상품 등록을 실패하였습니다.");
 					return;
 				}else{
-				var initValue = "장바구니에 상품을 추가하시겠습니까?";
-					app.openDialog("dialog/registerPopup", {
+					var initValue = "등록되었습니다";
+					app.openDialog("dialog/noneedConfirm", {
 						width: 400, height: 300, headerClose: true
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
 							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
 							dialogApp.initValue = initValue;
 						});
-					}).then(function(returnValue) {
-						if (returnValue == true) {
-							var initValue = "상품이 추가되었습니다.";
-							app.openDialog("dialog/noneedConfirm", {
-							width: 400, height: 300, headerClose: true
-							}, function(dialog) {
-							dialog.ready(function(dialogApp) {
-							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
-							dialogApp.initValue = initValue;
-						});
-					})
-						}
 					});
-					}
 				}
+			}
 
 			/*
 			 * "등록" 버튼에서 click 이벤트 발생 시 호출.
@@ -465,7 +451,7 @@
 			//					
 			//				}
 							var initValue = "삭제하시겠습니까?";
-							app.openDialog("dialog/registerPopup", {
+							app.openDialog("dialog/memberPopup", {
 							width: 400, height: 300, headerClose: true
 							}, function(dialog) {
 							dialog.ready(function(dialogApp) {
@@ -538,7 +524,7 @@
 				var value = mealkit.getValue("mealkitNo");
 				
 				var initValue = "밀키트를 수정하시겠습니까?";
-					app.openDialog("dialog/registerPopup", {
+					app.openDialog("dialog/memberPopup", {
 						width: 400, height: 300, headerClose: true
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {

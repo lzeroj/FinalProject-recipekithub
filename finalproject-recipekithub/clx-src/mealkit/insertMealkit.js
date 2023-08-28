@@ -138,7 +138,7 @@ function onButtonClick2(e){
  	}
  	
  		var initValue = "밀키트를 등록하시겠습니까?";
-		app.openDialog("dialog/registerPopup", {
+		app.openDialog("dialog/memberPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -225,7 +225,7 @@ function onDeleteImgBtnClick(e){
 function onButtonClick3(e){
 	var button = e.control;
 	var initValue = "작성된 사항은 반영되지 않습니다.\n취소하시겠습니까?";
-		app.openDialog("dialog/registerPopup", {
+		app.openDialog("dialog/memberPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {

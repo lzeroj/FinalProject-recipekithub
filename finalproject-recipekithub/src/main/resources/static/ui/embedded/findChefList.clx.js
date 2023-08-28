@@ -117,8 +117,9 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.distribution = "center";
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
@@ -145,7 +146,7 @@
 			formLayout_1.leftMargin = "0px";
 			formLayout_1.horizontalSpacing = "0px";
 			formLayout_1.verticalSpacing = "0px";
-			formLayout_1.setColumns(["20px", "280px", "150px", "120px", "308px", "20px"]);
+			formLayout_1.setColumns(["60px", "280px", "150px", "120px", "1fr"]);
 			formLayout_1.setRows(["20px", "80px", "50px", "1fr"]);
 			group_1.setLayout(formLayout_1);
 			(function(container){
@@ -155,7 +156,7 @@
 				container.addChild(group_2, {
 					"colIndex": 1,
 					"rowIndex": 3,
-					"colSpan": 5,
+					"colSpan": 4,
 					"rowSpan": 1
 				});
 				var image_1 = new cpr.controls.Image();
@@ -201,10 +202,9 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "30px",
-				"bottom": "30px",
-				"left": "500px",
-				"width": "880px"
+				"autoSize": "height",
+				"width": "880px",
+				"height": "680px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
