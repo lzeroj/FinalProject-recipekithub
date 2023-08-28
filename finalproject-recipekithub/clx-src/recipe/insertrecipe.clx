@@ -25,7 +25,7 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-3b09c04a" style="background-color:#F4FAEC;">
+  <body std:sid="body-3b09c04a" style="background-color:#F4FAEC; font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-6deef4f4" name="init" handler="onBodyInit"/>
     <cl:listener std:sid="listener-1cd2c239" name="load" handler="onBodyLoad"/>
     <cl:uicontrolshell std:sid="uic-shell-d808a028" id="smnote">

@@ -169,14 +169,28 @@
 				(function(container){
 					var group_3 = new cpr.controls.Container();
 					group_3.style.css({
-						"text-align" : "center"
+						"background-size" : "cover",
+						"background-image" : "url('theme/images/common/bgimgfinal.png')",
+						"background-position" : "center"
 					});
 					var xYLayout_3 = new cpr.controls.layouts.XYLayout();
 					group_3.setLayout(xYLayout_3);
+					container.addChild(group_3, {
+						"top": "199px",
+						"left": "0px",
+						"width": "1920px",
+						"height": "775px"
+					});
+					var group_4 = new cpr.controls.Container();
+					group_4.style.css({
+						"text-align" : "center"
+					});
+					var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+					group_4.setLayout(xYLayout_4);
 					(function(container){
-						var group_4 = new cpr.controls.Container();
+						var group_5 = new cpr.controls.Container();
 						var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
-						group_4.setLayout(verticalLayout_2);
+						group_5.setLayout(verticalLayout_2);
 						(function(container){
 							var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
 							embeddedApp_1.style.css({
@@ -204,8 +218,8 @@
 								"width": "714px",
 								"height": "701px"
 							});
-						})(group_4);
-						container.addChild(group_4, {
+						})(group_5);
+						container.addChild(group_5, {
 							"top": "39px",
 							"right": "516px",
 							"bottom": "0px",
@@ -244,61 +258,61 @@
 							"left": "0px",
 							"height": "40px"
 						});
-						var group_5 = new cpr.controls.Container();
-						group_5.style.css({
+						var group_6 = new cpr.controls.Container();
+						group_6.style.css({
 							"border-radius" : "50px",
 							"background-color" : "#14974C"
 						});
-						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-						group_5.setLayout(xYLayout_4);
+						var xYLayout_5 = new cpr.controls.layouts.XYLayout();
+						group_6.setLayout(xYLayout_5);
 						(function(container){
-							var group_6 = new cpr.controls.Container();
-							group_6.style.css({
+							var group_7 = new cpr.controls.Container();
+							group_7.style.css({
 								"background-color" : "#FFFFFF",
 								"border-radius" : "40px"
 							});
-							var xYLayout_5 = new cpr.controls.layouts.XYLayout();
-							group_6.setLayout(xYLayout_5);
+							var xYLayout_6 = new cpr.controls.layouts.XYLayout();
+							group_7.setLayout(xYLayout_6);
 							(function(container){
-								var group_7 = new cpr.controls.Container();
-								group_7.style.css({
+								var group_8 = new cpr.controls.Container();
+								group_8.style.css({
 									"border-radius" : "40px 40px 0px 0px",
 									"background-size" : "cover",
 									"background-image" : "url('theme/images/member/2.png')",
 									"background-position" : "center"
 								});
-								var xYLayout_6 = new cpr.controls.layouts.XYLayout();
-								group_7.setLayout(xYLayout_6);
-								container.addChild(group_7, {
+								var xYLayout_7 = new cpr.controls.layouts.XYLayout();
+								group_8.setLayout(xYLayout_7);
+								container.addChild(group_8, {
 									"top": "0px",
 									"right": "0px",
 									"left": "0px",
 									"height": "150px"
 								});
-								var group_8 = new cpr.controls.Container();
-								var xYLayout_7 = new cpr.controls.layouts.XYLayout();
-								group_8.setLayout(xYLayout_7);
-								container.addChild(group_8, {
+								var group_9 = new cpr.controls.Container();
+								var xYLayout_8 = new cpr.controls.layouts.XYLayout();
+								group_9.setLayout(xYLayout_8);
+								container.addChild(group_9, {
 									"right": "0px",
 									"bottom": "0px",
 									"left": "0px",
 									"height": "200px"
 								});
-							})(group_6);
-							container.addChild(group_6, {
+							})(group_7);
+							container.addChild(group_7, {
 								"top": "10px",
 								"right": "10px",
 								"width": "380px",
 								"height": "330px"
 							});
-						})(group_5);
-						container.addChild(group_5, {
+						})(group_6);
+						container.addChild(group_6, {
 							"top": "41px",
 							"right": "36px",
 							"width": "400px",
 							"height": "350px"
 						});
-						var group_9 = new cpr.controls.Container();
+						var group_10 = new cpr.controls.Container();
 						var formLayout_1 = new cpr.controls.layouts.FormLayout();
 						formLayout_1.scrollable = false;
 						formLayout_1.topMargin = "0px";
@@ -309,11 +323,11 @@
 						formLayout_1.verticalSpacing = "0px";
 						formLayout_1.setColumns(["1fr", "150px", "1fr"]);
 						formLayout_1.setRows(["50px", "150px", "1fr"]);
-						group_9.setLayout(formLayout_1);
+						group_10.setLayout(formLayout_1);
 						(function(container){
-							var group_10 = new cpr.controls.Container();
-							var xYLayout_8 = new cpr.controls.layouts.XYLayout();
-							group_10.setLayout(xYLayout_8);
+							var group_11 = new cpr.controls.Container();
+							var xYLayout_9 = new cpr.controls.layouts.XYLayout();
+							group_11.setLayout(xYLayout_9);
 							(function(container){
 								var image_1 = new cpr.controls.Image("profileImg");
 								image_1.fallbackSrc = "theme/images/icon/chefimg.png";
@@ -327,12 +341,12 @@
 									"bottom": "0px",
 									"left": "0px"
 								});
-							})(group_10);
-							container.addChild(group_10, {
+							})(group_11);
+							container.addChild(group_11, {
 								"colIndex": 1,
 								"rowIndex": 1
 							});
-							var group_11 = new cpr.controls.Container();
+							var group_12 = new cpr.controls.Container();
 							var formLayout_2 = new cpr.controls.layouts.FormLayout();
 							formLayout_2.scrollable = false;
 							formLayout_2.topMargin = "10px";
@@ -343,7 +357,7 @@
 							formLayout_2.verticalSpacing = "10px";
 							formLayout_2.setColumns(["1fr", "1fr"]);
 							formLayout_2.setRows(["50px", "50px"]);
-							group_11.setLayout(formLayout_2);
+							group_12.setLayout(formLayout_2);
 							(function(container){
 								var output_1 = new cpr.controls.Output("opbNick");
 								output_1.style.css({
@@ -372,22 +386,22 @@
 									"colSpan": 2,
 									"rowSpan": 1
 								});
-							})(group_11);
-							container.addChild(group_11, {
+							})(group_12);
+							container.addChild(group_12, {
 								"colIndex": 0,
 								"rowIndex": 2,
 								"colSpan": 3,
 								"rowSpan": 1
 							});
-						})(group_9);
-						container.addChild(group_9, {
+						})(group_10);
+						container.addChild(group_10, {
 							"top": "50px",
 							"right": "45px",
 							"width": "380px",
 							"height": "330px"
 						});
-					})(group_3);
-					container.addChild(group_3, {
+					})(group_4);
+					container.addChild(group_4, {
 						"top": "210px",
 						"bottom": "100px",
 						"width": "1230px",
@@ -403,23 +417,9 @@
 					var userDefinedControl_2 = new udc.myPageHeader();
 					container.addChild(userDefinedControl_2, {
 						"top": "0px",
+						"right": "0px",
 						"left": "0px",
-						"width": "1920px",
-						"height": "200px"
-					});
-					var group_12 = new cpr.controls.Container();
-					group_12.style.css({
-						"background-size" : "cover",
-						"background-image" : "url('theme/images/common/bgimgfinal.png')",
-						"background-position" : "center"
-					});
-					var xYLayout_9 = new cpr.controls.layouts.XYLayout();
-					group_12.setLayout(xYLayout_9);
-					container.addChild(group_12, {
-						"top": "199px",
-						"left": "0px",
-						"width": "1920px",
-						"height": "775px"
+						"height": "205px"
 					});
 				})(group_2);
 				container.addChild(group_2, {

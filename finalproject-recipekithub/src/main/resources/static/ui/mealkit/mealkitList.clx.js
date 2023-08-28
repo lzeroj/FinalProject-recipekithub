@@ -275,6 +275,7 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"font-family" : "푸른전남 Medium",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -288,7 +289,7 @@
 			var userDefinedControl_1 = new udc.header3("headerUdc");
 			container.addChild(userDefinedControl_1, {
 				"width": "1920px",
-				"height": "200px"
+				"height": "205px"
 			});
 			
 			var group_1 = new cpr.controls.Container();

@@ -49,6 +49,10 @@
       <cl:verticaldata std:sid="v-data-4dabbcea" width="1920px" height="1080px"/>
       <cl:group std:sid="group-3e468ab3" style="background-color:#f4faec;">
         <cl:xylayoutdata std:sid="xyl-data-a87a062c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:group std:sid="group-e170f311" style="background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
+          <cl:xylayoutdata std:sid="xyl-data-2e9624c6" top="199px" left="0px" width="1920px" height="775px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayout std:sid="xylayout-509c5d9d"/>
+        </cl:group>
         <cl:group std:sid="group-13bc8f58" style="text-align:center;">
           <cl:xylayoutdata std:sid="xyl-data-ba4a6983" top="210px" bottom="100px" width="1230px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
           <cl:group std:sid="group-3de6e575">
@@ -124,12 +128,8 @@
           <cl:xylayoutdata std:sid="xyl-data-f0467958" top="973px" bottom="0px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         </cl:udc>
         <cl:udc std:sid="ud-control-2ffb8604" type="udc.myPageHeader">
-          <cl:xylayoutdata std:sid="xyl-data-1c196913" top="0px" left="0px" width="1920px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-1c196913" top="0px" right="0px" left="0px" height="205px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         </cl:udc>
-        <cl:group std:sid="group-e170f311" style="background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
-          <cl:xylayoutdata std:sid="xyl-data-2e9624c6" top="199px" left="0px" width="1920px" height="775px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-          <cl:xylayout std:sid="xylayout-509c5d9d"/>
-        </cl:group>
         <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-832eec77"/>
