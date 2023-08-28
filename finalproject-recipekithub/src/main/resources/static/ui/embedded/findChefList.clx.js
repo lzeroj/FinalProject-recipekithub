@@ -7,6 +7,7 @@
 (function() {
 	var app = new cpr.core.App("embedded/findChefList", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/custom/member.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -144,7 +145,7 @@
 			formLayout_1.leftMargin = "0px";
 			formLayout_1.horizontalSpacing = "0px";
 			formLayout_1.verticalSpacing = "0px";
-			formLayout_1.setColumns(["20px", "280px", "150px", "1fr", "20px"]);
+			formLayout_1.setColumns(["20px", "280px", "150px", "120px", "308px", "20px"]);
 			formLayout_1.setRows(["20px", "80px", "50px", "1fr"]);
 			group_1.setLayout(formLayout_1);
 			(function(container){
@@ -154,7 +155,7 @@
 				container.addChild(group_2, {
 					"colIndex": 1,
 					"rowIndex": 3,
-					"colSpan": 3,
+					"colSpan": 5,
 					"rowSpan": 1
 				});
 				var image_1 = new cpr.controls.Image();
@@ -167,15 +168,34 @@
 					"width": 80,
 					"height": 80
 				});
-				var output_1 = new cpr.controls.Output();
-				output_1.value = "쉐프 랭킹";
-				output_1.style.css({
-					"background-color" : "#FFFFFF",
-					"color" : "#0a8c43",
-					"font-weight" : "bold",
-					"font-size" : "25px"
-				});
-				container.addChild(output_1, {
+				var group_3 = new cpr.controls.Container();
+				var formLayout_2 = new cpr.controls.layouts.FormLayout();
+				formLayout_2.scrollable = false;
+				formLayout_2.topMargin = "0px";
+				formLayout_2.rightMargin = "0px";
+				formLayout_2.bottomMargin = "0px";
+				formLayout_2.leftMargin = "0px";
+				formLayout_2.horizontalSpacing = "0px";
+				formLayout_2.verticalSpacing = "0px";
+				formLayout_2.setColumns(["110px"]);
+				formLayout_2.setRows(["20px", "1fr", "20px"]);
+				group_3.setLayout(formLayout_2);
+				(function(container){
+					var output_1 = new cpr.controls.Output();
+					output_1.value = "쉐프 랭킹";
+					output_1.style.setClasses(["emphasis"]);
+					output_1.style.css({
+						"background-color" : "#FFFFFF",
+						"color" : "#0a8c43",
+						"font-weight" : "bold",
+						"font-size" : "25px"
+					});
+					container.addChild(output_1, {
+						"colIndex": 0,
+						"rowIndex": 1
+					});
+				})(group_3);
+				container.addChild(group_3, {
 					"colIndex": 3,
 					"rowIndex": 1
 				});

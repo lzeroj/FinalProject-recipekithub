@@ -19,7 +19,7 @@
 			 *
 			 * @author kjoon
 			 ************************************************/
-
+			/*
 			function getTimedSessionData(key) {
 				var storedData = sessionStorage.getItem(key);
 				
@@ -35,39 +35,15 @@
 				}
 				return null;
 			}
+			*/
 
 			/*
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e) {
-				//sessionStorage.getItem("memsession");
-				
 				var submission = app.lookup("sub_profile");
 				submission.send();
-				
-				/*
-				 * var sessionval = getTimedSessionData("memsession");
-				 * console.log(sessionval);
-				 * var memberVO = cpr.core.Platform.INSTANCE.getParameter("member");
-				 * console.log(memberVO);
-				 * if (sessionval == null || sessionval != memberVO.memberEmail) {
-				 * 	app.lookup("btnMemUpdate").visible = false;
-				 * 	app.lookup("btnMemDelete").visible = false;
-				 * }
-				 * 
-				 * app.lookup("ipbEmail").text = memberVO.memberEmail;
-				 * app.lookup("ipbPassword1").text = memberVO.memberPassword;
-				 * app.lookup("ipbName").text = memberVO.memberName;
-				 * app.lookup("ipbNick").text = memberVO.memberNick;
-				 * app.lookup("address").text = memberVO.memberAddress;
-				 * app.lookup("postCode").text = memberVO.memberPostcode;
-				 * app.lookup("detailAddress").text = memberVO.memberAddressDetail;
-				 * app.lookup("ipbPhone").mask = memberVO.memberPhone;
-				 * app.lookup("ipbBirthday").value = memberVO.memberBirthday;
-				 * 
-				 * app.lookup("profileImg").src = "/upload/profile/" + memberVO.memberImage;
-				 */
 			}
 
 			/*
@@ -86,16 +62,7 @@
 				app.lookup("detailAddress").text = dsProfile.getValue(0, "memberAddressDetail");
 				app.lookup("ipbPhone").mask = dsProfile.getValue(0, "memberPhone");
 				app.lookup("ipbBirthday").value = dsProfile.getValue(0, "memberBirthday");
-				
 				app.lookup("profileImg").src = "/upload/profile/" + dsProfile.getValue(0, "memberImage");
-				
-				//var memberVO = cpr.core.Platform.INSTANCE.getParameter("ds_profile");
-				//alert(memberVO.memberImage);
-				//app.lookup("profileImg").src = "/upload/profile/" + memberVO.memberImage;
-				
-				//dataMap 형식으로 수정하기  -> 그룹 전체를 redraw하기
-				//app.lookup("dm_profile");
-				//app.lookup("myProfileForm").redraw();
 			}
 
 
@@ -191,18 +158,18 @@
 			}
 
 			/*
-			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
-			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+			 * 인풋 박스에서 blur 이벤트 발생 시 호출.
+			 * 컨트롤이 포커스를 잃은 후 발생하는 이벤트.
 			 */
-			function onIpbNickKeyup(e) {
+			function onIpbNickBlur(e){
 				var ipbNick = e.control;
-				
 				var dataMap = app.lookup("dm_check_nick");
 				dataMap.setValue("member_nick", app.lookup("ipbNick").value);
 				
 				var subCheckNick = app.lookup("sub_check_nick");
 				subCheckNick.send();
 			}
+
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -329,6 +296,7 @@
 				}
 			}
 
+
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
@@ -336,7 +304,7 @@
 			function onSub_updateSubmitSuccess(e) {
 				var sub_update = e.control;
 				var initValue = "회원 정보 수정이 완료되었습니다!";
-				app.openDialog("dialog/registerChkPopup", {
+				app.openDialog("dialog/memberChkPopup", {
 					width: 400, height: 300, resizable: false, headerMovable: false
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
@@ -357,7 +325,7 @@
 				var btnMemDelete = e.control;
 				
 				var initValue = "정말로 탈퇴하시겠습니까?";
-				app.openDialog("dialog/registerPopup", {
+				app.openDialog("dialog/memberPopup", {
 					width: 400, height: 300, headerClose: true, resizable: false
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
@@ -378,9 +346,8 @@
 			 */
 			function onSub_deleteSubmitSuccess(e) {
 				var sub_delete = e.control;
-				
 				var initValue = "지금까지 RecipeKitHub을 이용해주셔서\n감사합니다!";
-				app.openDialog("dialog/registerChkPopup", {
+				app.openDialog("dialog/memberChkPopup", {
 					width: 400, height: 300, resizable: false, headerMovable: false
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
@@ -401,60 +368,6 @@
 				window.location.href = "index.clx";
 			}
 
-
-			/*
-			 * 버튼에서 click 이벤트 발생 시 호출.
-			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-			 */
-			function onButtonClick(e) {
-				var button = e.control;
-				var submission = app.lookup("sub_logout");
-				submission.send();
-			}
-
-			/*
-			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
-			 * 통신이 성공하면 발생합니다.
-			 */
-			function onSub_logoutSubmitSuccess(e) {
-				var sub_logout = e.control;
-				alert("로그아웃이 완료되었습니다!")
-				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-				httpPostMethod.submit();
-			}
-
-
-			/*
-			 * "프로필 사진 등록/변경" 버튼(btnInsertProfileImg)에서 click 이벤트 발생 시 호출.
-			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-			 
-			function onBtnInsertProfileImgClick(e){
-				var btnInsertProfileImg = e.control;
-				var submission = app.lookup("sub_insert_image");
-				submission.addFileParameter("image", file);
-				submission.send();
-			}
-			*/
-
-			/*
-			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
-			 * 통신이 성공하면 발생합니다.
-
-			function onSub_insert_imageSubmitSuccess(e){
-				var sub_insert_image = e.control;
-				var initValue = "프로필 사진을 '등록/변경' 하시겠습니까?";
-				app.openDialog("dialog/registerChkPopup", {
-					width: 400, height: 300, resizable: false, headerMovable: false
-				}, function(dialog) {
-					dialog.ready(function(dialogApp) {
-						dialogApp.initValue = initValue;
-					});
-				}).then(function(returnValue) {
-					var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
-					httpPostMethod.submit();
-				});
-			}
-			*/
 
 			/*
 			 * 파일 인풋에서 value-change 이벤트 발생 시 호출.
@@ -494,7 +407,7 @@
 				var fileInput = app.lookup("fi1");
 				var image = app.lookup("profileImg");
 				var initValue = "현재 프로필 사진을 '삭제' 하시겠습니까?";
-				app.openDialog("dialog/registerChkPopup", {
+				app.openDialog("dialog/memberChkPopup", {
 					width: 400, height: 300, resizable: false, headerMovable: false
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
@@ -810,38 +723,22 @@
 			}
 			app.register(submission_3);
 			
-			var submission_4 = new cpr.protocols.Submission("sub_logout");
-			submission_4.action = "/member/logout";
-			if(typeof onSub_logoutSubmitSuccess == "function") {
-				submission_4.addEventListener("submit-success", onSub_logoutSubmitSuccess);
+			var submission_4 = new cpr.protocols.Submission("sub_check_nick");
+			submission_4.action = "/member/checkNick";
+			submission_4.addRequestData(dataMap_4);
+			if(typeof onSub_check_nickSubmitSuccess == "function") {
+				submission_4.addEventListener("submit-success", onSub_check_nickSubmitSuccess);
 			}
 			app.register(submission_4);
 			
-			var submission_5 = new cpr.protocols.Submission("sub_check_nick");
-			submission_5.action = "/member/checkNick";
-			submission_5.addRequestData(dataMap_4);
-			if(typeof onSub_check_nickSubmitSuccess == "function") {
-				submission_5.addEventListener("submit-success", onSub_check_nickSubmitSuccess);
+			var submission_5 = new cpr.protocols.Submission("sub_delete_image");
+			submission_5.action = "/member/deleteProfileImage";
+			submission_5.mediaType = "multipart/form-data";
+			submission_5.addRequestData(dataMap_1);
+			if(typeof onSub_delete_imageSubmitSuccess == "function") {
+				submission_5.addEventListener("submit-success", onSub_delete_imageSubmitSuccess);
 			}
 			app.register(submission_5);
-			
-			var submission_6 = new cpr.protocols.Submission("sub_insert_image");
-			submission_6.action = "/member/insertProfileImage";
-			submission_6.mediaType = "multipart/form-data";
-			submission_6.addRequestData(dataMap_1);
-			if(typeof onSub_insert_imageSubmitSuccess == "function") {
-				submission_6.addEventListener("submit-success", onSub_insert_imageSubmitSuccess);
-			}
-			app.register(submission_6);
-			
-			var submission_7 = new cpr.protocols.Submission("sub_delete_image");
-			submission_7.action = "/member/deleteProfileImage";
-			submission_7.mediaType = "multipart/form-data";
-			submission_7.addRequestData(dataMap_1);
-			if(typeof onSub_delete_imageSubmitSuccess == "function") {
-				submission_7.addEventListener("submit-success", onSub_delete_imageSubmitSuccess);
-			}
-			app.register(submission_7);
 			app.supportMedia("all and (min-width: 1920px)", "FHD");
 			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
@@ -961,12 +858,13 @@
 											"rowIndex": 0
 										});
 										var inputBox_1 = new cpr.controls.InputBox("ipbName");
-										inputBox_1.showClearButton = true;
+										inputBox_1.readOnly = true;
 										inputBox_1.lengthUnit = "utf8";
 										inputBox_1.maxLength = 18;
 										inputBox_1.spellCheck = false;
 										inputBox_1.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										inputBox_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberName", 0);
@@ -994,8 +892,10 @@
 									(function(container){
 										var inputBox_2 = new cpr.controls.InputBox("ipbEmail");
 										inputBox_2.readOnly = true;
+										inputBox_2.spellCheck = false;
 										inputBox_2.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										inputBox_2.bind("value").toDataSet(app.lookup("ds_profile"), "memberEmail", 0);
@@ -1236,6 +1136,7 @@
 										inputBox_3.spellCheck = false;
 										inputBox_3.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px",
 											"background-image" : "none"
 										});
@@ -1312,6 +1213,7 @@
 										inputBox_4.spellCheck = false;
 										inputBox_4.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										if(typeof onIpbPassword2Keyup == "function") {
@@ -1386,11 +1288,12 @@
 										inputBox_5.spellCheck = false;
 										inputBox_5.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										inputBox_5.bind("value").toDataSet(app.lookup("ds_profile"), "memberNick", 0);
-										if(typeof onIpbNickKeyup == "function") {
-											inputBox_5.addEventListener("keyup", onIpbNickKeyup);
+										if(typeof onIpbNickBlur == "function") {
+											inputBox_5.addEventListener("blur", onIpbNickBlur);
 										}
 										container.addChild(inputBox_5, {
 											"colIndex": 1,
@@ -1482,6 +1385,7 @@
 									maskEditor_1.showClearButton = true;
 									maskEditor_1.style.css({
 										"border-radius" : "5px",
+										"padding-left" : "10px",
 										"font-size" : "15px"
 									});
 									maskEditor_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberPhone", 0);
@@ -1517,7 +1421,8 @@
 										var maskEditor_2 = new cpr.controls.MaskEditor("postCode");
 										maskEditor_2.mask = "00000";
 										maskEditor_2.style.css({
-											"border-radius" : "5px"
+											"border-radius" : "5px",
+											"padding-left" : "10px"
 										});
 										maskEditor_2.bind("value").toDataSet(app.lookup("ds_profile"), "memberPostcode", 0);
 										container.addChild(maskEditor_2, {
@@ -1527,8 +1432,10 @@
 										var inputBox_6 = new cpr.controls.InputBox("address");
 										inputBox_6.lengthUnit = "utf8";
 										inputBox_6.maxLength = 30;
+										inputBox_6.spellCheck = false;
 										inputBox_6.style.css({
-											"border-radius" : "5px"
+											"border-radius" : "5px",
+											"padding-left" : "10px"
 										});
 										inputBox_6.bind("value").toDataSet(app.lookup("ds_profile"), "memberAddress", 0);
 										container.addChild(inputBox_6, {
@@ -1540,8 +1447,10 @@
 										var inputBox_7 = new cpr.controls.InputBox("detailAddress");
 										inputBox_7.lengthUnit = "utf8";
 										inputBox_7.maxLength = 30;
+										inputBox_7.spellCheck = false;
 										inputBox_7.style.css({
-											"border-radius" : "5px"
+											"border-radius" : "5px",
+											"padding-left" : "10px"
 										});
 										inputBox_7.bind("value").toDataSet(app.lookup("ds_profile"), "memberAddressDetail", 0);
 										container.addChild(inputBox_7, {

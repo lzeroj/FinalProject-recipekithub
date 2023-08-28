@@ -66,7 +66,7 @@
             <cl:menuitem std:sid="m-item-daee6a4f" label="밀키트찜" value="3"/>
             <cl:menuitem std:sid="m-item-437c11be" label="문의하기" value="4"/>
           </cl:navigationbar>
-          <cl:group std:sid="group-1ed10915" style="border-radius:50px; background-color:#0A8C43;">
+          <cl:group std:sid="group-1ed10915" style="border-radius:50px; background-color:#14974C;">
             <cl:xylayoutdata std:sid="xyl-data-ba8a8324" top="41px" right="36px" width="400px" height="350px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
             <cl:group std:sid="group-8003b2a0" style="background-color:#FFFFFF; border-radius:40px;">
               <cl:xylayoutdata std:sid="xyl-data-5817fe4c" top="10px" right="10px" width="380px" height="330px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
@@ -94,15 +94,15 @@
             </cl:group>
             <cl:group std:sid="group-881ef166">
               <cl:formdata std:sid="f-data-ec93c7b0" row="2" col="0" rowspan="1" colspan="3"/>
-              <cl:output std:sid="output-d575ac9f" id="opbNick" style="color:#EC631D; font-weight:bolder; font-size:24px; text-align:center;">
+              <cl:output std:sid="output-d575ac9f" id="opbNick" style="color:#EC631D; font-weight:bolder; font-size:30px; text-align:center;">
                 <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberNick" rowindex="0"/>
                 <cl:formdata std:sid="f-data-aff8c1cb" row="0" col="0" rowspan="1" colspan="2"/>
               </cl:output>
-              <cl:output std:sid="output-7bfb1bb7" id="opbEmail" style="font-weight:bolder; font-size:20px; text-align:center;">
+              <cl:output std:sid="output-7bfb1bb7" id="opbEmail" style="font-weight:bolder; font-size:24px; text-align:center;">
                 <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberEmail" rowindex="0"/>
                 <cl:formdata std:sid="f-data-48b9c5da" row="1" col="0" rowspan="1" colspan="2"/>
               </cl:output>
-              <cl:formlayout std:sid="f-layout-7ac671cb" scrollable="false" hspace="20px" vspace="10px" top-margin="20px" right-margin="10px" bottom-margin="10px" left-margin="10px">
+              <cl:formlayout std:sid="f-layout-7ac671cb" scrollable="false" hspace="20px" vspace="10px" top-margin="10px" right-margin="10px" bottom-margin="10px" left-margin="10px">
                 <cl:rows length="50" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
                 <cl:rows length="50" unit="PIXEL"/>
                 <cl:columns length="1" unit="FRACTION"/>
@@ -123,9 +123,13 @@
         <cl:udc std:sid="ud-control-c2834810" type="udc.footer">
           <cl:xylayoutdata std:sid="xyl-data-f0467958" top="973px" bottom="0px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         </cl:udc>
-        <cl:udc std:sid="ud-control-2ffb8604" type="udc.header4">
+        <cl:udc std:sid="ud-control-2ffb8604" type="udc.myPageHeader">
           <cl:xylayoutdata std:sid="xyl-data-1c196913" top="0px" left="0px" width="1920px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:udc>
+        <cl:group std:sid="group-e170f311" style="background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
+          <cl:xylayoutdata std:sid="xyl-data-2e9624c6" top="199px" left="0px" width="1920px" height="775px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayout std:sid="xylayout-509c5d9d"/>
+        </cl:group>
         <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-832eec77"/>

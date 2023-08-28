@@ -7,6 +7,9 @@
 (function() {
 	var app = new cpr.core.App("mealkit/insertMealkit", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/custom/member.part.css");
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/custom-theme.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -102,6 +105,13 @@
 			 	var price = app.lookup("ipb3");
 			 	var stock = app.lookup("ipb4");
 			 	
+			 	//
+			 	var fileInput = app.lookup("file1");
+				var file = fileInput.file;
+				app.lookup("uploadImg").src = file;  	
+				var submission = app.lookup("mealkitSub");
+			 	//
+			 	
 			 	if(name.value == null || name.value.trim().length == 0){
 			 		alert("밀키트 이름을 입력해주세요.");
 			 		name.focus();
@@ -121,9 +131,7 @@
 			 		console.log("왜 안 먹지?");
 			 		//e.preventDefault();
 			 		return;
-			 	}
-			 	
-			 	if(price.value == null || price.value == ""){
+			 	}else if(price.value == null || price.value == ""){
 			 		alert("밀키트 가격을 입력해주세요.");
 			 		price.focus();
 			 		return;
@@ -133,9 +141,7 @@
 			 		price.value = "";
 			 		price.focus();
 			 		return;
-			 	}
-			 	
-			 	if(stock.value == null || stock.value == ""){
+			 	}else if(stock.value == null || stock.value == ""){
 			 		alert("밀키트 수량을 입력해주세요.");
 			 		stock.focus();
 			 		return;
@@ -147,14 +153,30 @@
 			 		return;
 			 	}
 			 	
-			 	var fileInput = app.lookup("file1");
-				var file = fileInput.file;
-				app.lookup("uploadImg").src = file;
-			 	  	
-
-				var submission = app.lookup("mealkitSub");
-				submission.addFileParameter("image", file);
-				submission.send();
+			 		var initValue = "밀키트를 등록하시겠습니까?";
+					app.openDialog("dialog/registerPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							submission.addFileParameter("image", file);
+							submission.send();
+						}
+					});
+			 	
+			 	
+			// 	var fileInput = app.lookup("file1");
+			//	var file = fileInput.file;
+			//	app.lookup("uploadImg").src = file;
+			// 	  	
+			//
+			//	var submission = app.lookup("mealkitSub");
+			//	submission.addFileParameter("image", file);
+			//	submission.send();
 			   	
 			}
 
@@ -210,6 +232,27 @@
 				var image = app.lookup("uploadImg");
 				fileInput.clear();
 				image.src = "";
+			}
+
+			/*
+			 * "취소" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick3(e){
+				var button = e.control;
+				var initValue = "작성된 사항은 반영되지 않습니다.\n취소하시겠습니까?";
+					app.openDialog("dialog/registerPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							window.location.href = "/mealkitList";
+						}
+					});
 			};
 			// End - User Script
 			
@@ -271,17 +314,37 @@
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
+			group_1.style.css({
+				"background-color" : "#F4FAEC",
+				"background-size" : "cover",
+				"background-image" : "url('theme/images/common/bgimg3_1920.png')",
+				"background-position" : "center"
+			});
 			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			xYLayout_2.scrollable = false;
 			group_1.setLayout(xYLayout_2);
+			container.addChild(group_1, {
+				"top": "200px",
+				"right": "0px",
+				"left": "0px",
+				"height": "976px"
+			});
+			
+			var group_2 = new cpr.controls.Container();
+			group_2.style.css({
+				"background-color" : "#FFFFFF",
+				"border-radius" : "20px"
+			});
+			var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+			xYLayout_3.scrollable = false;
+			group_2.setLayout(xYLayout_3);
 			(function(container){
-				var group_2 = new cpr.controls.Container();
-				group_2.style.css({
+				var group_3 = new cpr.controls.Container();
+				group_3.style.css({
 					"background-color" : "#f9f9f9",
 					"background-image" : "none"
 				});
-				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_3);
+				var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+				group_3.setLayout(xYLayout_4);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
 					output_1.value = "밀키트 등록";
@@ -297,16 +360,16 @@
 						"width": "122px",
 						"height": "31px"
 					});
-				})(group_2);
-				container.addChild(group_2, {
+				})(group_3);
+				container.addChild(group_3, {
 					"top": "39px",
 					"width": "864px",
 					"height": "81px",
 					"left": "calc(50% - 432px)"
 				});
-				var group_3 = new cpr.controls.Container();
-				var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-				group_3.setLayout(xYLayout_4);
+				var group_4 = new cpr.controls.Container();
+				var xYLayout_5 = new cpr.controls.layouts.XYLayout();
+				group_4.setLayout(xYLayout_5);
 				(function(container){
 					var output_2 = new cpr.controls.Output();
 					output_2.value = "밀키트 이름";
@@ -332,16 +395,16 @@
 						"width": "463px",
 						"height": "41px"
 					});
-				})(group_3);
-				container.addChild(group_3, {
+				})(group_4);
+				container.addChild(group_4, {
 					"top": "130px",
 					"left": "60px",
 					"width": "864px",
 					"height": "71px"
 				});
-				var group_4 = new cpr.controls.Container();
-				var xYLayout_5 = new cpr.controls.layouts.XYLayout();
-				group_4.setLayout(xYLayout_5);
+				var group_5 = new cpr.controls.Container();
+				var xYLayout_6 = new cpr.controls.layouts.XYLayout();
+				group_5.setLayout(xYLayout_6);
 				(function(container){
 					var output_3 = new cpr.controls.Output();
 					output_3.value = "밀키트 성분";
@@ -364,16 +427,16 @@
 						"width": "654px",
 						"height": "55px"
 					});
-				})(group_4);
-				container.addChild(group_4, {
+				})(group_5);
+				container.addChild(group_5, {
 					"top": "234px",
 					"left": "60px",
 					"width": "864px",
 					"height": "71px"
 				});
-				var group_5 = new cpr.controls.Container();
-				var xYLayout_6 = new cpr.controls.layouts.XYLayout();
-				group_5.setLayout(xYLayout_6);
+				var group_6 = new cpr.controls.Container();
+				var xYLayout_7 = new cpr.controls.layouts.XYLayout();
+				group_6.setLayout(xYLayout_7);
 				(function(container){
 					var output_4 = new cpr.controls.Output();
 					output_4.value = "카테고리";
@@ -487,6 +550,7 @@
 						comboBox_4.addItem(new cpr.controls.Item("한식", "한식"));
 						comboBox_4.addItem(new cpr.controls.Item("양식", "양식"));
 						comboBox_4.addItem(new cpr.controls.Item("중식/일식", "중식/일식"));
+						comboBox_4.addItem(new cpr.controls.Item("분식", "분식"));
 						comboBox_4.addItem(new cpr.controls.Item("동남아", "동남아"));
 						comboBox_4.addItem(new cpr.controls.Item("에어프라이어", "에어프라이어"));
 					})(comboBox_4);
@@ -496,16 +560,16 @@
 						"width": "100px",
 						"height": "20px"
 					});
-				})(group_5);
-				container.addChild(group_5, {
+				})(group_6);
+				container.addChild(group_6, {
 					"top": "200px",
 					"left": "60px",
 					"width": "864px",
 					"height": "35px"
 				});
-				var group_6 = new cpr.controls.Container();
-				var xYLayout_7 = new cpr.controls.layouts.XYLayout();
-				group_6.setLayout(xYLayout_7);
+				var group_7 = new cpr.controls.Container();
+				var xYLayout_8 = new cpr.controls.layouts.XYLayout();
+				group_7.setLayout(xYLayout_8);
 				(function(container){
 					var output_5 = new cpr.controls.Output();
 					output_5.value = "가격";
@@ -555,16 +619,16 @@
 						"width": "165px",
 						"height": "20px"
 					});
-				})(group_6);
-				container.addChild(group_6, {
+				})(group_7);
+				container.addChild(group_7, {
 					"top": "750px",
 					"left": "60px",
 					"width": "864px",
 					"height": "50px"
 				});
-				var group_7 = new cpr.controls.Container();
-				var xYLayout_8 = new cpr.controls.layouts.XYLayout();
-				group_7.setLayout(xYLayout_8);
+				var group_8 = new cpr.controls.Container();
+				var xYLayout_9 = new cpr.controls.layouts.XYLayout();
+				group_8.setLayout(xYLayout_9);
 				(function(container){
 					var output_7 = new cpr.controls.Output();
 					output_7.value = "밀키트 소개";
@@ -589,8 +653,8 @@
 						"width": "647px",
 						"height": "267px"
 					});
-				})(group_7);
-				container.addChild(group_7, {
+				})(group_8);
+				container.addChild(group_8, {
 					"top": "454px",
 					"left": "60px",
 					"width": "864px",
@@ -623,15 +687,18 @@
 					"font-size" : "17px",
 					"background-image" : "none"
 				});
+				if(typeof onButtonClick3 == "function") {
+					button_2.addEventListener("click", onButtonClick3);
+				}
 				container.addChild(button_2, {
 					"top": "831px",
 					"left": "503px",
 					"width": "111px",
 					"height": "34px"
 				});
-				var group_8 = new cpr.controls.Container();
-				var xYLayout_9 = new cpr.controls.layouts.XYLayout();
-				group_8.setLayout(xYLayout_9);
+				var group_9 = new cpr.controls.Container();
+				var xYLayout_10 = new cpr.controls.layouts.XYLayout();
+				group_9.setLayout(xYLayout_10);
 				(function(container){
 					var fileInput_1 = new cpr.controls.FileInput("file1");
 					fileInput_1.placeholder = "클릭후 파일 업로드해주세요.";
@@ -677,103 +744,35 @@
 						"width": "23px",
 						"height": "20px"
 					});
-				})(group_8);
-				container.addChild(group_8, {
+				})(group_9);
+				container.addChild(group_9, {
 					"top": "315px",
 					"left": "60px",
 					"width": "864px",
 					"height": "129px"
 				});
-			})(group_1);
-			container.addChild(group_1, {
-				"top": "206px",
-				"bottom": "-355px",
-				"width": "984px",
-				"left": "calc(50% - 492px)"
+			})(group_2);
+			container.addChild(group_2, {
+				"top": "230px",
+				"right": "468px",
+				"left": "468px",
+				"height": "899px"
 			});
 			
 			var userDefinedControl_1 = new udc.header3();
 			container.addChild(userDefinedControl_1, {
-				"top": "-4px",
+				"top": "0px",
 				"right": "0px",
 				"left": "0px",
-				"height": "200px"
+				"height": "205px"
 			});
 			
-			var group_9 = new cpr.controls.Container();
-			group_9.style.css({
-				"background-color" : "#6A8B41"
-			});
-			var formLayout_1 = new cpr.controls.layouts.FormLayout();
-			formLayout_1.scrollable = false;
-			formLayout_1.topMargin = "0px";
-			formLayout_1.rightMargin = "50px";
-			formLayout_1.bottomMargin = "0px";
-			formLayout_1.leftMargin = "50px";
-			formLayout_1.horizontalSpacing = "50px";
-			formLayout_1.verticalSpacing = "30px";
-			formLayout_1.setColumns(["400px", "1fr", "400px"]);
-			formLayout_1.setRows(["1fr"]);
-			group_9.setLayout(formLayout_1);
-			(function(container){
-				var image_2 = new cpr.controls.Image();
-				image_2.src = "theme/images/common/footerLogo3.png";
-				container.addChild(image_2, {
-					"colIndex": 0,
-					"rowIndex": 0
-				});
-				var group_10 = new cpr.controls.Container();
-				var formLayout_2 = new cpr.controls.layouts.FormLayout();
-				formLayout_2.scrollable = false;
-				formLayout_2.topMargin = "5px";
-				formLayout_2.rightMargin = "0px";
-				formLayout_2.bottomMargin = "0px";
-				formLayout_2.leftMargin = "0px";
-				formLayout_2.horizontalSpacing = "10px";
-				formLayout_2.verticalSpacing = "5px";
-				formLayout_2.setColumns(["330px"]);
-				formLayout_2.setRows(["30px", "1fr"]);
-				group_10.setLayout(formLayout_2);
-				(function(container){
-					var output_9 = new cpr.controls.Output();
-					output_9.value = "Team HI-FIVE";
-					output_9.style.css({
-						"border-right-style" : "none",
-						"color" : "#F4FAEC",
-						"border-bottom-color" : "#ffffff",
-						"font-weight" : "bolder",
-						"border-left-style" : "none",
-						"font-size" : "20px",
-						"border-bottom-style" : "solid",
-						"border-top-style" : "none"
-					});
-					container.addChild(output_9, {
-						"colIndex": 0,
-						"rowIndex": 0
-					});
-					var output_10 = new cpr.controls.Output();
-					output_10.value = "금동준\t 심현준\t 엄용식\t  임영준";
-					output_10.style.css({
-						"color" : "#F4FAEC",
-						"font-weight" : "bolder"
-					});
-					container.addChild(output_10, {
-						"colIndex": 0,
-						"rowIndex": 1,
-						"colSpan": 1,
-						"rowSpan": 1
-					});
-				})(group_10);
-				container.addChild(group_10, {
-					"colIndex": 2,
-					"rowIndex": 0
-				});
-			})(group_9);
-			container.addChild(group_9, {
-				"bottom": "-556px",
-				"width": "1920px",
-				"height": "70px",
-				"left": "calc(50% - 960px)"
+			var userDefinedControl_2 = new udc.footer();
+			container.addChild(userDefinedControl_2, {
+				"top": "1175px",
+				"right": "0px",
+				"left": "0px",
+				"height": "100px"
 			});
 			if(typeof onBodyInit2 == "function"){
 				app.addEventListener("init", onBodyInit2);

@@ -55,32 +55,12 @@ function onBodyLoad(e) {
 }
 
 /*
- * 서브미션에서 receive 이벤트 발생 시 호출.
- * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
- */
-//function onDetailRecipeReceive(e){
-//	var detailRecipe = e.control;
-//	var xhr = detailRecipe.xhr;
-//	var jsonData = JSON.parse(xhr.responseText);
-//	console.log(jsonData);
-//	detailRecipe = jsonData.recipe;
-//	//app.lookup("recipeBoardImage").src = "theme/uploadrecipeimage/"+detailRecipe.recipeBoardImage;
-//	//app.lookup("memberNick").value = detailRecipe.memberVO.memberNick;
-//	//app.lookup("recipeBoardTitle").value = detailRecipe.recipeBoardTitle; 
-//	//app.lookup("recipeBoardContent").value = detailRecipe.recipeBoardContent;
-//}
-
-/*
  * "레시피 수정하기" 버튼에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
 function onButtonClick(e) {
 	var button = e.control;
 	var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
-	//	app.lookup("dmRecipeBoardId").setValue("dmRecipeBoardId", recipeBoardVO.recipeBoardId);
-	//	var submission = app.lookup("updateRecipe");
-	//	submission.send();
-	//window.location.href = "/updateRecipe?recipeBoardId=" + recipeBoardVO.recipeBoardId;
 	
 	// 로그인 안한사람이 url 로 접속되는 것을 막기 위해 post 방식 사용
 	var _httpPostMethod = new cpr.protocols.HttpPostMethod("/updateRecipe", "_self");
@@ -88,39 +68,6 @@ function onButtonClick(e) {
 	_httpPostMethod.submit();
 }
 
-/*
- * 서브미션에서 receive 이벤트 발생 시 호출.
- * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
- */
-//function onRecipeCommentListReceive(e){
-//	var recipeCommentList = e.control;
-//	var xhr = recipeCommentList.xhr;
-//	var jsonData = JSON.parse(xhr.responseText);
-//	var recipeComment = jsonData.recipeCommentList;
-//	var totalCommentCount = jsonData.totalCommentCount;
-//	app.lookup("commentCount").value = totalCommentCount;
-//	var container = app.lookup("commentgrp");
-//		for (var i = 0; i < recipeComment.length; i++) {
-//		(function(index) {
-//			//udc 동적 생성
-//			var comment = new udc.recipeCommentudc();
-//			//udc에서 출판한 이미지 경로 앱 속성 지정
-//			comment.nick = recipeComment[i].memberVO.memberNick;
-//			comment.regDate = recipeComment[i].recipeCommentDate;
-//			comment.content = recipeComment[i].recipeCommentContent;
-//			container.addChild(comment, {
-//				height: "120px",
-//				width: "100px",
-//				autoSize: "both"
-//			});
-//			comment.addEventListener("deleteClick", function(e) {
-//			app.lookup("dmRecipeCommentId").setValue("recipeCommentId", recipeComment[index].recipeCommentId);
-//			var deleteCommentsub = app.lookup("deleteComment");
-//			deleteCommentsub.send();
-//			});
-//		})(i);
-//	}
-//}
 
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -136,8 +83,10 @@ function onRecipeCommentListSubmitSuccess(e) {
 	app.lookup("commentCount").value = totalCommentCount;
 	var container = app.lookup("commentgrp");
 	
-	app.lookup("page").totalRowCount = totalCommentCount;
-	
+	var pageIndexer = app.lookup("page");
+
+	pageIndexer.totalRowCount = totalCommentCount;
+
 	// 댓글 등록,삭제 시 재조회 할 수 있게 기존 목록 삭제
 	container.removeAllChildren();
 	
@@ -190,7 +139,7 @@ function onButtonClick2(e) {
 	var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 	if (sessionval == null) {
 		var initValue = "로그인이 필요합니다.";
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -198,10 +147,6 @@ function onButtonClick2(e) {
 				dialogApp.initValue = initValue;
 			});
 		})
-//		.then(function(returnValue) {
-//			if (returnValue == true) {
-//			}
-//		});
 	} else {
 		app.lookup("dmInsertValue").setValue("recipeBoardId", recipeBoardVO.recipeBoardId);
 		var contentValue = app.lookup("dmInsertValue").getValue("recipeCommentContent");
@@ -276,7 +221,7 @@ function onLikeimgClick(e) {
 	var sessionval = getTimedSessionData("memsession");
 	if (sessionval == null) {
 		var initValue =  "로그인이 필요합니다.";
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -284,10 +229,6 @@ function onLikeimgClick(e) {
 				dialogApp.initValue = initValue;
 			});
 		})
-//		.then(function(returnValue) {
-//			if (returnValue == true) {
-//			}
-//		});
 	} else {
 		app.lookup("subinsertrecipelike").send();
 	}
@@ -303,7 +244,7 @@ function onImageClick(e) {
 	var sessionval = getTimedSessionData("memsession");
 	if (sessionval == null) {
 		var initValue = "로그인이 필요합니다.";
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -311,10 +252,6 @@ function onImageClick(e) {
 				dialogApp.initValue = initValue;
 			});
 		})
-//		.then(function(returnValue) {
-//			if (returnValue == true) {
-//			}
-//		});
 	} else {
 		var initvalue = {
 			"recipeBoardId": app.lookup("dmRecipeBoardId").getValue("recipeBoardId")

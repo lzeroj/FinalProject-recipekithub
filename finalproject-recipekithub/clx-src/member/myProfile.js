@@ -4,7 +4,7 @@
  *
  * @author kjoon
  ************************************************/
-
+/*
 function getTimedSessionData(key) {
 	var storedData = sessionStorage.getItem(key);
 	
@@ -20,39 +20,15 @@ function getTimedSessionData(key) {
 	}
 	return null;
 }
+*/
 
 /*
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e) {
-	//sessionStorage.getItem("memsession");
-	
 	var submission = app.lookup("sub_profile");
 	submission.send();
-	
-	/*
-	 * var sessionval = getTimedSessionData("memsession");
-	 * console.log(sessionval);
-	 * var memberVO = cpr.core.Platform.INSTANCE.getParameter("member");
-	 * console.log(memberVO);
-	 * if (sessionval == null || sessionval != memberVO.memberEmail) {
-	 * 	app.lookup("btnMemUpdate").visible = false;
-	 * 	app.lookup("btnMemDelete").visible = false;
-	 * }
-	 * 
-	 * app.lookup("ipbEmail").text = memberVO.memberEmail;
-	 * app.lookup("ipbPassword1").text = memberVO.memberPassword;
-	 * app.lookup("ipbName").text = memberVO.memberName;
-	 * app.lookup("ipbNick").text = memberVO.memberNick;
-	 * app.lookup("address").text = memberVO.memberAddress;
-	 * app.lookup("postCode").text = memberVO.memberPostcode;
-	 * app.lookup("detailAddress").text = memberVO.memberAddressDetail;
-	 * app.lookup("ipbPhone").mask = memberVO.memberPhone;
-	 * app.lookup("ipbBirthday").value = memberVO.memberBirthday;
-	 * 
-	 * app.lookup("profileImg").src = "/upload/profile/" + memberVO.memberImage;
-	 */
 }
 
 /*
@@ -71,16 +47,7 @@ function onSub_profileSubmitSuccess(e) {
 	app.lookup("detailAddress").text = dsProfile.getValue(0, "memberAddressDetail");
 	app.lookup("ipbPhone").mask = dsProfile.getValue(0, "memberPhone");
 	app.lookup("ipbBirthday").value = dsProfile.getValue(0, "memberBirthday");
-	
 	app.lookup("profileImg").src = "/upload/profile/" + dsProfile.getValue(0, "memberImage");
-	
-	//var memberVO = cpr.core.Platform.INSTANCE.getParameter("ds_profile");
-	//alert(memberVO.memberImage);
-	//app.lookup("profileImg").src = "/upload/profile/" + memberVO.memberImage;
-	
-	//dataMap 형식으로 수정하기  -> 그룹 전체를 redraw하기
-	//app.lookup("dm_profile");
-	//app.lookup("myProfileForm").redraw();
 }
 
 
@@ -176,18 +143,18 @@ function onIpbPassword2Keyup(e) {
 }
 
 /*
- * 인풋 박스에서 keyup 이벤트 발생 시 호출.
- * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
+ * 인풋 박스에서 blur 이벤트 발생 시 호출.
+ * 컨트롤이 포커스를 잃은 후 발생하는 이벤트.
  */
-function onIpbNickKeyup(e) {
+function onIpbNickBlur(e){
 	var ipbNick = e.control;
-	
 	var dataMap = app.lookup("dm_check_nick");
 	dataMap.setValue("member_nick", app.lookup("ipbNick").value);
 	
 	var subCheckNick = app.lookup("sub_check_nick");
 	subCheckNick.send();
 }
+
 
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -314,6 +281,7 @@ function onBtnMemUpdateClick(e){
 	}
 }
 
+
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
  * 통신이 성공하면 발생합니다.
@@ -321,7 +289,7 @@ function onBtnMemUpdateClick(e){
 function onSub_updateSubmitSuccess(e) {
 	var sub_update = e.control;
 	var initValue = "회원 정보 수정이 완료되었습니다!";
-	app.openDialog("dialog/registerChkPopup", {
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
@@ -342,7 +310,7 @@ function onBtnMemDeleteClick(e){
 	var btnMemDelete = e.control;
 	
 	var initValue = "정말로 탈퇴하시겠습니까?";
-	app.openDialog("dialog/registerPopup", {
+	app.openDialog("dialog/memberPopup", {
 		width: 400, height: 300, headerClose: true, resizable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
@@ -363,9 +331,8 @@ function onBtnMemDeleteClick(e){
  */
 function onSub_deleteSubmitSuccess(e) {
 	var sub_delete = e.control;
-	
 	var initValue = "지금까지 RecipeKitHub을 이용해주셔서\n감사합니다!";
-	app.openDialog("dialog/registerChkPopup", {
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
@@ -386,60 +353,6 @@ function onBtnCancelClick(e) {
 	window.location.href = "index.clx";
 }
 
-
-/*
- * 버튼에서 click 이벤트 발생 시 호출.
- * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
- */
-function onButtonClick(e) {
-	var button = e.control;
-	var submission = app.lookup("sub_logout");
-	submission.send();
-}
-
-/*
- * 서브미션에서 submit-success 이벤트 발생 시 호출.
- * 통신이 성공하면 발생합니다.
- */
-function onSub_logoutSubmitSuccess(e) {
-	var sub_logout = e.control;
-	alert("로그아웃이 완료되었습니다!")
-	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-	httpPostMethod.submit();
-}
-
-
-/*
- * "프로필 사진 등록/변경" 버튼(btnInsertProfileImg)에서 click 이벤트 발생 시 호출.
- * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
- 
-function onBtnInsertProfileImgClick(e){
-	var btnInsertProfileImg = e.control;
-	var submission = app.lookup("sub_insert_image");
-	submission.addFileParameter("image", file);
-	submission.send();
-}
-*/
-
-/*
- * 서브미션에서 submit-success 이벤트 발생 시 호출.
- * 통신이 성공하면 발생합니다.
-
-function onSub_insert_imageSubmitSuccess(e){
-	var sub_insert_image = e.control;
-	var initValue = "프로필 사진을 '등록/변경' 하시겠습니까?";
-	app.openDialog("dialog/registerChkPopup", {
-		width: 400, height: 300, resizable: false, headerMovable: false
-	}, function(dialog) {
-		dialog.ready(function(dialogApp) {
-			dialogApp.initValue = initValue;
-		});
-	}).then(function(returnValue) {
-		var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
-		httpPostMethod.submit();
-	});
-}
-*/
 
 /*
  * 파일 인풋에서 value-change 이벤트 발생 시 호출.
@@ -479,7 +392,7 @@ function onSub_delete_imageSubmitSuccess(e){
 	var fileInput = app.lookup("fi1");
 	var image = app.lookup("profileImg");
 	var initValue = "현재 프로필 사진을 '삭제' 하시겠습니까?";
-	app.openDialog("dialog/registerChkPopup", {
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, resizable: false, headerMovable: false
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
@@ -586,3 +499,5 @@ function onBodyUnload(e){
 	var appConf = cpr.core.AppConfig.INSTANCE;
 	appConf.getEnvConfig().setValue("appcache", false);
 }
+
+

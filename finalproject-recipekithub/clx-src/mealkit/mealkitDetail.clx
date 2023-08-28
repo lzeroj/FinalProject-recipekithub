@@ -4,6 +4,9 @@
     <screen std:sid="screen-7fe63b91" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1080" customWidth="1920" active="true"/>
     <screen std:sid="screen-2ddf5f15" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
     <screen std:sid="screen-2ebcbedb" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <link std:sid="link-18d2d4e1" href="../theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-9243da7b" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-36905765" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-4d398f88">
       <cl:datamap std:sid="d-map-0eff0cab" id="mealkit">
         <cl:listener std:sid="listener-b08ea584" name="update" handler="onMealkitUpdate"/>
@@ -100,13 +103,13 @@
   <body std:sid="body-4920d61b">
     <cl:listener std:sid="listener-4de5ada1" name="load" handler="onBodyLoad"/>
     <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
-      <cl:verticaldata std:sid="v-data-c130f50f" width="1920px" height="200px"/>
+      <cl:verticaldata std:sid="v-data-e043b797" width="1920px" height="200px"/>
     </cl:udc>
     <cl:group std:sid="group-2d0b8c58" style="color:black;">
-      <cl:verticaldata std:sid="v-data-20ebd78c" width="988px" height="956px"/>
+      <cl:verticaldata std:sid="v-data-30666102" width="988px" height="515px"/>
       <cl:button std:sid="button-655c2ef5" id="deleBtn" visible="false" value="삭제">
         <cl:listener std:sid="listener-cbb82cc5" name="click" handler="onDeleBtnClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-56094351" top="11px" left="776px" width="14px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-56094351" top="20px" left="429px" width="14px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:group std:sid="group-1738c787">
         <cl:xylayoutdata std:sid="xyl-data-711c5795" top="41px" left="513px" width="327px" height="86px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -207,7 +210,7 @@
         <cl:xylayoutdata std:sid="xyl-data-3ee64de1" top="319px" left="20px" width="436px" height="118px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:group std:sid="group-e81d6662" style="background-color:#f9f9f9; background-image:none;">
-        <cl:xylayoutdata std:sid="xyl-data-d434c19e" top="501px" left="23px" width="944px" height="3px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-d434c19e" top="502px" left="3px" width="988px" height="2px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         <cl:xylayout std:sid="xylayout-35744802"/>
       </cl:group>
       <cl:output std:sid="output-74bc907b" id="regDate" style="font-weight:normal; text-align:left;">
@@ -218,24 +221,9 @@
         <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitHits"/>
         <cl:xylayoutdata std:sid="xyl-data-aba9bb86" top="29px" left="937px" width="43px" height="21px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:button std:sid="button-bbef5b23" id="updateBtn" style="background-size:cover; background-image:url(../theme/images/mealkit/editBtn.png); background-position:center;" visible="false">
-        <cl:listener std:sid="listener-3f8646e1" name="click" handler="onUpdateBtnClick3"/>
-        <cl:xylayoutdata std:sid="xyl-data-97c8ad90" top="-1px" left="769px" width="41px" height="43px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      </cl:button>
       <cl:img std:sid="image-b051d3a2" id="mealkitImg">
         <cl:xylayoutdata std:sid="xyl-data-0aa79dec" top="41px" left="20px" width="436px" height="250px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
-      <cl:group std:sid="group-291e835c">
-        <cl:xylayoutdata std:sid="xyl-data-3d254f04" top="528px" left="22px" width="946px" height="386px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-        <cl:htmlsnippet std:sid="htmlsnippet-fd52013a" id="info">
-          <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitInfo"/>
-          <cl:verticaldata std:sid="v-data-9317a77e" width="929px" height="374px"/>
-        </cl:htmlsnippet>
-        <cl:verticallayout std:sid="v-layout-da2d1580" distribution="center"/>
-      </cl:group>
-      <cl:output std:sid="output-4c9f0d7a" style="font-weight:bold; font-size:16px; text-align:center;" value="필수표기정보">
-        <cl:xylayoutdata std:sid="xyl-data-41fdf1ff" top="935px" left="20px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      </cl:output>
       <cl:group std:sid="group-3473ba44" style="background-color:#f9f9f9; background-image:none;">
         <cl:xylayoutdata std:sid="xyl-data-ffae0622" top="924px" width="963px" height="3px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:xylayout std:sid="xylayout-817cd24d"/>
@@ -246,12 +234,25 @@
       <cl:output std:sid="output-761b13b6" id="mealkitEditDate" style="text-align:left;" visible="false" value="mealkitEditDate">
         <cl:xylayoutdata std:sid="xyl-data-445558b4" top="11px" left="21px" width="191px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:xylayout std:sid="xylayout-1e910270"/>
+      <cl:img std:sid="image-a49fa0dc" id="updateBtn" visible="false" src="../theme/images/mealkit/free-icon-erase-5353058.png">
+        <cl:listener std:sid="listener-44f0db01" name="value-change" handler="onImageValueChange"/>
+        <cl:listener std:sid="listener-bc020077" name="click" handler="onUpdateBtnClick2"/>
+        <cl:xylayoutdata std:sid="xyl-data-e45376d9" top="1px" left="429px" width="39px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:img>
+      <cl:xylayout std:sid="xylayout-1e910270" scrollable="false"/>
+    </cl:group>
+    <cl:htmlsnippet std:sid="htmlsnippet-e8b8c1ad" id="info">
+      <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitInfo"/>
+      <cl:verticaldata std:sid="v-data-03119f1e" width="988px" height="286px" autosize="height"/>
+    </cl:htmlsnippet>
+    <cl:group std:sid="group-85202607" style="background-color:#f9f9f9; background-image:none;">
+      <cl:verticaldata std:sid="v-data-e2886d2d" width="988px" height="3px"/>
+      <cl:xylayout std:sid="xylayout-5f13b37d"/>
     </cl:group>
     <cl:group std:sid="group-5155607d" id="impInfo">
-      <cl:verticaldata std:sid="v-data-0aeeef4b" width="946px" height="181px"/>
+      <cl:verticaldata std:sid="v-data-23299db5" width="998px" height="179px"/>
       <cl:output std:sid="output-69e941d9" style="background-color:#f9f9f9; text-align:center;" value="제품명">
-        <cl:formdata std:sid="f-data-90245153" row="0" col="0"/>
+        <cl:formdata std:sid="f-data-952d349b" row="0" col="0"/>
       </cl:output>
       <cl:output std:sid="output-bfa4893b" style="background-color:#f9f9f9; text-align:center;" value="생산자 및 소재지">
         <cl:formdata std:sid="f-data-0ac5e2b2" row="1" col="0"/>
@@ -268,26 +269,26 @@
       <cl:output std:sid="output-38a590f7" style="background-color:#f9f9f9; text-align:center;" value="종류/재료/전체">
         <cl:formdata std:sid="f-data-e62570c3" row="0" col="2"/>
       </cl:output>
-      <cl:output std:sid="output-8b916f65" style="text-align:left;" value="컨텐츠 참조">
+      <cl:output std:sid="output-8b916f65" style="font-weight:bold; text-align:left;" value="컨텐츠 참조">
         <cl:formdata std:sid="f-data-a6541833" row="1" col="1"/>
       </cl:output>
-      <cl:output std:sid="output-53854fe0">
+      <cl:output std:sid="output-53854fe0" style="font-weight:bold;">
         <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitInventory"/>
         <cl:formdata std:sid="f-data-77c00cbc" row="2" col="1"/>
       </cl:output>
-      <cl:output std:sid="output-3e91dd1c">
+      <cl:output std:sid="output-3e91dd1c" style="font-weight:bold;">
         <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitCategory"/>
         <cl:formdata std:sid="f-data-5f05c861" row="0" col="3"/>
       </cl:output>
-      <cl:output std:sid="output-b6399b7b" value="제조일로 3개월">
+      <cl:output std:sid="output-b6399b7b" style="font-weight:bold;" value="제조일로 3개월">
         <cl:formdata std:sid="f-data-6f105ebe" row="1" col="3"/>
       </cl:output>
-      <cl:output std:sid="output-8743aae8" value="컨텐츠 참조">
+      <cl:output std:sid="output-8743aae8" style="font-weight:bold;" value="컨텐츠 참조">
         <cl:formdata std:sid="f-data-4dbf331a" row="2" col="3"/>
       </cl:output>
-      <cl:output std:sid="output-f0bfb16a">
+      <cl:output std:sid="output-f0bfb16a" style="font-weight:bold;">
         <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitName"/>
-        <cl:formdata std:sid="f-data-bbb6618b" row="0" col="1"/>
+        <cl:formdata std:sid="f-data-9a2cc1ed" row="0" col="1"/>
       </cl:output>
       <cl:formlayout std:sid="f-layout-5421243e" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
         <cl:rows length="60" unit="PIXEL"/>
@@ -299,17 +300,17 @@
         <cl:columns length="1" unit="FRACTION"/>
       </cl:formlayout>
     </cl:group>
-    <cl:group std:sid="group-85202607" style="background-color:#f9f9f9; background-image:none;">
-      <cl:verticaldata std:sid="v-data-179f171b" width="963px" height="3px"/>
-      <cl:xylayout std:sid="xylayout-5f13b37d"/>
+    <cl:group std:sid="group-c6e17c15" style="background-color:black; background-image:none;">
+      <cl:verticaldata std:sid="v-data-cafc6a69" width="998px" height="1px"/>
+      <cl:xylayout std:sid="xylayout-b7424947"/>
     </cl:group>
     <cl:group std:sid="group-cd052328" id="writeComment" style="text-align:center;" visible="false">
-      <cl:verticaldata std:sid="v-data-45c6d02c" width="946px" height="57px"/>
+      <cl:verticaldata std:sid="v-data-ae5694b1" width="998px" height="57px"/>
       <cl:button std:sid="button-bba067fa" style="background-color:#0ca44e; color:white; font-size:16px; background-image:none;" value="등록">
         <cl:listener std:sid="listener-ecd299cb" name="click" handler="onButtonClick5"/>
         <cl:formdata std:sid="f-data-74d6857c" row="0" col="2" rowspan="1" colspan="1"/>
       </cl:button>
-      <cl:inputbox std:sid="i-box-8bf69832" id="comment" style="text-align:left;">
+      <cl:inputbox std:sid="i-box-8bf69832" id="comment" style="text-align:left;" placeholder="욕설 및 타인을 비방하는 댓글을 삼가해주세요.">
         <cl:listener std:sid="listener-2dca2f5a" name="value-change" handler="onIpb1ValueChange"/>
         <cl:formdata std:sid="f-data-559525e5" row="0" col="0"/>
       </cl:inputbox>
@@ -328,12 +329,8 @@
         <cl:columns length="70" unit="PIXEL"/>
       </cl:formlayout>
     </cl:group>
-    <cl:group std:sid="group-c6e17c15" style="background-color:black; background-image:none;">
-      <cl:verticaldata std:sid="v-data-daf9ee40" width="963px" height="1px"/>
-      <cl:xylayout std:sid="xylayout-b7424947"/>
-    </cl:group>
     <cl:group std:sid="group-25b8d42b">
-      <cl:verticaldata std:sid="v-data-59b46be2" width="963px" height="24px"/>
+      <cl:verticaldata std:sid="v-data-fee8b81d" width="998px" height="24px"/>
       <cl:output std:sid="output-e8c32823" value="댓글">
         <cl:xylayoutdata std:sid="xyl-data-a40e8c71" top="2px" left="12px" width="31px" height="17px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
@@ -343,21 +340,23 @@
       <cl:xylayout std:sid="xylayout-47c32e3b"/>
     </cl:group>
     <cl:group std:sid="group-b075a8c4" id="commentgrp">
-      <cl:verticaldata std:sid="v-data-455f739d" width="963px" height="324px" autosize="height"/>
+      <cl:verticaldata std:sid="v-data-8fa7f0ed" width="998px" height="324px" autosize="height"/>
       <cl:verticallayout std:sid="v-layout-03904eea" scrollable="false"/>
     </cl:group>
     <cl:pageindexer std:sid="p-indexer-0a8df5c6" id="page" pagerowcount="10">
       <cl:listener std:sid="listener-1534b067" name="selection-change" handler="onPageIndexerSelectionChange"/>
       <cl:datamapbind property="currentPageIndex" datacontrolid="pageNo" columnname="pageNo"/>
-      <cl:verticaldata std:sid="v-data-726457dc" width="200px" height="40px"/>
+      <cl:verticaldata std:sid="v-data-733db6b0" width="200px" height="40px"/>
     </cl:pageindexer>
     <cl:udc std:sid="ud-control-fc6b8f46" type="udc.footer">
-      <cl:verticaldata std:sid="v-data-86c305e0" width="1920px" height="100px"/>
+      <cl:verticaldata std:sid="v-data-a77b6eed" width="1920px" height="100px"/>
     </cl:udc>
-    <cl:verticallayout std:sid="v-layout-f0190ed3" distribution="center"/>
+    <cl:verticallayout std:sid="v-layout-dd510d24" distribution="center"/>
   </body>
   <std:studiosetting>
     <std:hruler/>
-    <std:vruler/>
+    <std:vruler>
+      <std:guide position="633"/>
+    </std:vruler>
   </std:studiosetting>
 </html>

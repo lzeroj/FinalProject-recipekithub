@@ -44,15 +44,6 @@
 					}
 				});
 				app.lookup("ea1").redraw();;
-			}
-
-			/*
-			 * 버튼에서 click 이벤트 발생 시 호출.
-			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-			 */
-			function onButtonClick(e){
-				var button = e.control;
-				window.scrollTo(0, 0);
 			};
 			// End - User Script
 			
@@ -95,9 +86,8 @@
 				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
-					"background-color" : "transparent",
+					"background-color" : "#F4FAEC",
 					"background-size" : "cover",
-					"background-image" : "url('theme/images/common/bgimgfinal.png')",
 					"background-position" : "center"
 				});
 				var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
@@ -110,6 +100,11 @@
 				group_2.setLayout(verticalLayout_3);
 				(function(container){
 					var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+					embeddedApp_1.style.css({
+						"background-repeat" : "repeat",
+						"background-size" : "contain",
+						"background-image" : "url('theme/images/common/bgimg1880_720.png')"
+					});
 					container.addChild(embeddedApp_1, {
 						"autoSize": "height",
 						"width": "1880px",

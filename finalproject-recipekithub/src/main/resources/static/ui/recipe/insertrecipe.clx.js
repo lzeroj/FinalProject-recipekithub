@@ -178,7 +178,7 @@
 			 */
 			function onFi1ValueChange(e) {
 				var fi1 = e.control;
-				app.lookup("deleteImg").redraw();
+				app.lookup("deleteImg").visible=true;
 				var image = app.lookup("uploadImg");
 				var fileInput = app.lookup("fi1");
 				if (fileInput.files && fileInput.files[0]) {
@@ -200,7 +200,20 @@
 				var image = app.lookup("uploadImg");
 				if (confirm("사진을 삭제하시겠습니까?")) {
 					fileInput.clear();
-					image.src = "";
+					image.src = null;
+					app.lookup("deleteImg").visible=false;
+				}
+			}
+
+			/*
+			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+			 */
+			function onBodyLoad(e){
+				var image = app.lookup("uploadImg");
+				console.log("이미지 경로 : "+image.src);
+				if(image.src==null){
+					app.lookup("deleteImg").visible=false;
 				}
 			};
 			// End - User Script
@@ -265,7 +278,7 @@
 				uIControlShell_1.addEventListener("load", onShl1Load);
 			}
 			container.addChild(uIControlShell_1, {
-				"top": "554px",
+				"top": "510px",
 				"width": "1200px",
 				"height": "450px",
 				"left": "calc(50% - 600px)"
@@ -347,7 +360,7 @@
 			container.addChild(group_2, {
 				"top": "1340px",
 				"width": "400px",
-				"height": "48px",
+				"height": "50px",
 				"left": "calc(50% - 200px)"
 			});
 			
@@ -370,8 +383,8 @@
 				formLayout_2.leftMargin = "5px";
 				formLayout_2.horizontalSpacing = "10px";
 				formLayout_2.verticalSpacing = "10px";
-				formLayout_2.setColumns(["100px", "531px"]);
-				formLayout_2.setRows(["1fr", "1fr", "1fr"]);
+				formLayout_2.setColumns(["100px"]);
+				formLayout_2.setRows(["1fr", "50px", "50px"]);
 				group_4.setLayout(formLayout_2);
 				(function(container){
 					var output_2 = new cpr.controls.Output();
@@ -386,7 +399,7 @@
 						"rowIndex": 0
 					});
 					var output_3 = new cpr.controls.Output();
-					output_3.value = "대표 사진";
+					output_3.value = "카테고리";
 					output_3.style.css({
 						"color" : "#90be70",
 						"font-weight" : "bolder",
@@ -397,7 +410,7 @@
 						"rowIndex": 1
 					});
 					var output_4 = new cpr.controls.Output();
-					output_4.value = "카테고리";
+					output_4.value = "대표 사진";
 					output_4.style.css({
 						"color" : "#90be70",
 						"font-weight" : "bolder",
@@ -407,116 +420,101 @@
 						"colIndex": 0,
 						"rowIndex": 2
 					});
-					var inputBox_1 = new cpr.controls.InputBox("ipb1");
-					inputBox_1.style.css({
-						"font-size" : "18px"
-					});
-					inputBox_1.bind("value").toDataMap(app.lookup("recipe"), "RECIPE_BOARD_TITLE");
-					container.addChild(inputBox_1, {
-						"colIndex": 1,
-						"rowIndex": 0,
-						"colSpan": 1,
-						"rowSpan": 1
-					});
-					var group_5 = new cpr.controls.Container();
-					var formLayout_3 = new cpr.controls.layouts.FormLayout();
-					formLayout_3.scrollable = false;
-					formLayout_3.topMargin = "5px";
-					formLayout_3.rightMargin = "5px";
-					formLayout_3.bottomMargin = "5px";
-					formLayout_3.leftMargin = "5px";
-					formLayout_3.horizontalSpacing = "10px";
-					formLayout_3.verticalSpacing = "10px";
-					formLayout_3.setColumns(["80px", "80px", "80px"]);
-					formLayout_3.setRows(["1fr"]);
-					group_5.setLayout(formLayout_3);
-					(function(container){
-						var linkedComboBox_1 = new cpr.controls.LinkedComboBox("lcb1");
-						linkedComboBox_1.placeholders = ["종류별"];
-						linkedComboBox_1.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_TYPE");
-						(function(linkedComboBox_1){
-							linkedComboBox_1.addItem((function(){
-								var treeItem_1 = new cpr.controls.TreeItem("밑반찬", "밑반찬", null);
-								treeItem_1.checked = false;
-								return treeItem_1;
-							})());
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("메인반찬", "메인반찬", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("국/탕", "국/탕", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("디저트", "디저트", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("면", "면", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("샐러드", "샐러드", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("음료", "음료", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("기타", "기타", null));
-						})(linkedComboBox_1);
-						container.addChild(linkedComboBox_1, {
-							"colIndex": 0,
-							"rowIndex": 0,
-							"colSpan": 1,
-							"rowSpan": 1
-						});
-						var linkedComboBox_2 = new cpr.controls.LinkedComboBox("lcb2");
-						linkedComboBox_2.placeholders = ["방법별"];
-						linkedComboBox_2.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_INGREDIENTS");
-						(function(linkedComboBox_2){
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("육류", "육류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("채소류", "채소류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("해물류", "해물류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("달걀/유제품", "달걀/유제품", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("가공식품류", "가공식품류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("과일류", "과일류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("기타", "기타", null));
-						})(linkedComboBox_2);
-						container.addChild(linkedComboBox_2, {
-							"colIndex": 1,
-							"rowIndex": 0
-						});
-						var linkedComboBox_3 = new cpr.controls.LinkedComboBox("lcb3");
-						linkedComboBox_3.placeholders = ["재료별"];
-						linkedComboBox_3.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_METHOD");
-						(function(linkedComboBox_3){
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("볶음", "볶음", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("끓이기", "끓이기", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("조림", "조림", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("튀김", "튀김", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("삶기", "삶기", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("굽기", "굽기", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("기타", "기타", null));
-						})(linkedComboBox_3);
-						container.addChild(linkedComboBox_3, {
-							"colIndex": 2,
-							"rowIndex": 0
-						});
-					})(group_5);
-					container.addChild(group_5, {
-						"colIndex": 1,
-						"rowIndex": 2,
-						"colSpan": 1,
-						"rowSpan": 1
-					});
-					var fileInput_1 = new cpr.controls.FileInput("fi1");
-					fileInput_1.acceptFile = "image/*";
-					if(typeof onFi1ValueChange == "function") {
-						fileInput_1.addEventListener("value-change", onFi1ValueChange);
-					}
-					container.addChild(fileInput_1, {
-						"colIndex": 1,
-						"rowIndex": 1,
-						"colSpan": 1,
-						"rowSpan": 1
-					});
 				})(group_4);
 				container.addChild(group_4, {
-					"right": "543px",
+					"right": "1085px",
 					"left": "5px",
-					"height": "268px",
-					"top": "calc(50% - 134px)"
+					"height": "208px",
+					"top": "calc(50% - 104px)"
+				});
+				var inputBox_1 = new cpr.controls.InputBox("ipb1");
+				inputBox_1.style.css({
+					"font-size" : "18px"
+				});
+				inputBox_1.bind("value").toDataMap(app.lookup("recipe"), "RECIPE_BOARD_TITLE");
+				container.addChild(inputBox_1, {
+					"top": "16px",
+					"left": "125px",
+					"width": "531px",
+					"height": "75px"
+				});
+				var linkedComboBox_1 = new cpr.controls.LinkedComboBox("lcb1");
+				linkedComboBox_1.placeholders = ["종류별"];
+				linkedComboBox_1.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_TYPE");
+				(function(linkedComboBox_1){
+					linkedComboBox_1.addItem((function(){
+						var treeItem_1 = new cpr.controls.TreeItem("밑반찬", "밑반찬", null);
+						treeItem_1.checked = false;
+						return treeItem_1;
+					})());
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("메인반찬", "메인반찬", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("국/탕", "국/탕", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("디저트", "디저트", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("면", "면", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("샐러드", "샐러드", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("음료", "음료", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("기타", "기타", null));
+				})(linkedComboBox_1);
+				container.addChild(linkedComboBox_1, {
+					"top": "110px",
+					"left": "125px",
+					"width": "80px",
+					"height": "40px"
+				});
+				var linkedComboBox_2 = new cpr.controls.LinkedComboBox("lcb2");
+				linkedComboBox_2.placeholders = ["방법별"];
+				linkedComboBox_2.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_INGREDIENTS");
+				(function(linkedComboBox_2){
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("육류", "육류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("채소류", "채소류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("해물류", "해물류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("달걀/유제품", "달걀/유제품", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("가공식품류", "가공식품류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("과일류", "과일류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("기타", "기타", null));
+				})(linkedComboBox_2);
+				container.addChild(linkedComboBox_2, {
+					"top": "110px",
+					"left": "215px",
+					"width": "80px",
+					"height": "40px"
+				});
+				var linkedComboBox_3 = new cpr.controls.LinkedComboBox("lcb3");
+				linkedComboBox_3.placeholders = ["재료별"];
+				linkedComboBox_3.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_METHOD");
+				(function(linkedComboBox_3){
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("볶음", "볶음", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("끓이기", "끓이기", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("조림", "조림", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("튀김", "튀김", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("삶기", "삶기", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("굽기", "굽기", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("기타", "기타", null));
+				})(linkedComboBox_3);
+				container.addChild(linkedComboBox_3, {
+					"top": "110px",
+					"left": "305px",
+					"width": "80px",
+					"height": "40px"
+				});
+				var fileInput_1 = new cpr.controls.FileInput("fi1");
+				fileInput_1.placeholder = "요리 대표 사진을 등록해 주세요";
+				fileInput_1.acceptFile = "image/*";
+				if(typeof onFi1ValueChange == "function") {
+					fileInput_1.addEventListener("value-change", onFi1ValueChange);
+				}
+				container.addChild(fileInput_1, {
+					"top": "164px",
+					"left": "125px",
+					"width": "260px",
+					"height": "50px"
 				});
 				var image_1 = new cpr.controls.Image("uploadImg");
 				container.addChild(image_1, {
 					"top": "0px",
-					"right": "235px",
-					"left": "680px",
-					"height": "268px"
+					"right": "182px",
+					"left": "712px",
+					"height": "225px"
 				});
 				var button_3 = new cpr.controls.Button("deleteImg");
 				button_3.value = "";
@@ -530,15 +528,15 @@
 				}
 				container.addChild(button_3, {
 					"top": "0px",
-					"left": "940px",
+					"left": "993px",
 					"width": "25px",
 					"height": "25px"
 				});
 			})(group_3);
 			container.addChild(group_3, {
-				"top": "262px",
+				"top": "260px",
 				"width": "1200px",
-				"height": "268px",
+				"height": "228px",
 				"left": "calc(50% - 600px)"
 			});
 			
@@ -553,8 +551,8 @@
 			var userDefinedControl_2 = new udc.footer();
 			container.addChild(userDefinedControl_2, {
 				"top": "1400px",
+				"right": "0px",
 				"left": "0px",
-				"width": "1920px",
 				"height": "100px"
 			});
 			if(typeof onBodyInit == "function"){

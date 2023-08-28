@@ -247,7 +247,7 @@
 						var group_5 = new cpr.controls.Container();
 						group_5.style.css({
 							"border-radius" : "50px",
-							"background-color" : "#0A8C43"
+							"background-color" : "#14974C"
 						});
 						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
 						group_5.setLayout(xYLayout_4);
@@ -335,7 +335,7 @@
 							var group_11 = new cpr.controls.Container();
 							var formLayout_2 = new cpr.controls.layouts.FormLayout();
 							formLayout_2.scrollable = false;
-							formLayout_2.topMargin = "20px";
+							formLayout_2.topMargin = "10px";
 							formLayout_2.rightMargin = "10px";
 							formLayout_2.bottomMargin = "10px";
 							formLayout_2.leftMargin = "10px";
@@ -349,7 +349,7 @@
 								output_1.style.css({
 									"color" : "#EC631D",
 									"font-weight" : "bolder",
-									"font-size" : "24px",
+									"font-size" : "30px",
 									"text-align" : "center"
 								});
 								output_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberNick", 0);
@@ -362,7 +362,7 @@
 								var output_2 = new cpr.controls.Output("opbEmail");
 								output_2.style.css({
 									"font-weight" : "bolder",
-									"font-size" : "20px",
+									"font-size" : "24px",
 									"text-align" : "center"
 								});
 								output_2.bind("value").toDataSet(app.lookup("ds_profile"), "memberEmail", 0);
@@ -400,12 +400,26 @@
 						"width": "1920px",
 						"left": "calc(50% - 960px)"
 					});
-					var userDefinedControl_2 = new udc.header4();
+					var userDefinedControl_2 = new udc.myPageHeader();
 					container.addChild(userDefinedControl_2, {
 						"top": "0px",
 						"left": "0px",
 						"width": "1920px",
 						"height": "200px"
+					});
+					var group_12 = new cpr.controls.Container();
+					group_12.style.css({
+						"background-size" : "cover",
+						"background-image" : "url('theme/images/common/bgimgfinal.png')",
+						"background-position" : "center"
+					});
+					var xYLayout_9 = new cpr.controls.layouts.XYLayout();
+					group_12.setLayout(xYLayout_9);
+					container.addChild(group_12, {
+						"top": "199px",
+						"left": "0px",
+						"width": "1920px",
+						"height": "775px"
 					});
 				})(group_2);
 				container.addChild(group_2, {

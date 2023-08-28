@@ -11,9 +11,9 @@
  */
 function onLoginBtnClick(e) {
 	//var loginBtn = e.control;
-	var dataMap = app.lookup("dm_login");
-	dataMap.setValue("member_email", app.lookup("emailInput").value);
-	dataMap.setValue("member_password", app.lookup("pswdInput").value);
+	//var dataMap = app.lookup("dm_login");
+	//dataMap.setValue("member_email", app.lookup("emailInput").value);
+	//dataMap.setValue("member_password", app.lookup("pswdInput").value);
 	var subLogin = app.lookup("sub_login");
 	subLogin.send();
 }
@@ -36,6 +36,18 @@ function onFindBtnClick(e) {
 	window.location.href = "member/find-email-pswd.clx";
 }
 
+// 데이터 저장과 만료 시간 설정	// 현준
+function setTimedSessionData(key, value, expirationMinutes) {
+    var currentTime = new Date().getTime();
+    var expirationTime = currentTime + (expirationMinutes * 60 * 1000); // milliseconds
+
+    var data = {
+        value: value,
+        expirationTime: expirationTime
+    };
+    sessionStorage.setItem(key, JSON.stringify(data));
+}
+
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
  * 통신이 성공하면 발생합니다.
@@ -51,37 +63,49 @@ function onSub_loginSubmitSuccess(e) {
 		localStorage.setItem("memberEmail", memberEmail);
 	}
 	setTimedSessionData("memsession", memberEmail,30);
+	//
+
+	var loginSuccess = sub_login.getMetadata("path");
 	
-	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-	httpPostMethod.submit();
+	if (loginSuccess != null) {
+		cpr.core.App.load(loginSuccess, function(newapp){
+			app.close();
+			newapp.createNewInstance().run();
+		});
+		return;
+	} 
+//	else {
+//		//var initValue = "로그인 정보를\n다시 확인해주시기 바랍니다.";
+//		app.openDialog("dialog/memberChkPopup", {
+//			width: 400, height: 300, headerClose: true
+//		}, function(dialog) {
+//			dialog.ready(function(dialogApp) {
+//				dialogApp.initValue = loginFail;
+//			});
+//		});
+//	}
+	
+	//var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
+	//httpPostMethod.submit();
 }
 
-// 데이터 저장과 만료 시간 설정	// 현준
-function setTimedSessionData(key, value, expirationMinutes) {
-    var currentTime = new Date().getTime();
-    var expirationTime = currentTime + (expirationMinutes * 60 * 1000); // milliseconds
 
-    var data = {
-        value: value,
-        expirationTime: expirationTime
-    };
-    sessionStorage.setItem(key, JSON.stringify(data));
-}
 /*
  * 서브미션에서 submit-error 이벤트 발생 시 호출.
  * 통신 중 문제가 생기면 발생합니다.
  */
 function onSub_loginSubmitError(e) {
 	var sub_login = e.control;
-	var initValue = "회원 정보를/n다시 확인해주시기 바랍니다.";
-	app.openDialog("dialog/registerChkPopup", {
+	var loginFail = sub_login.getMetadata("loginFailMessage");
+	app.openDialog("dialog/memberChkPopup", {
 		width: 400, height: 300, headerClose: true
 	}, function(dialog) {
 		dialog.ready(function(dialogApp) {
-			dialogApp.initValue = initValue;
+			dialogApp.initValue = loginFail;
 		});
 	});
 }
+
 
 /*
  * 인풋 박스에서 keydown 이벤트 발생 시 호출.

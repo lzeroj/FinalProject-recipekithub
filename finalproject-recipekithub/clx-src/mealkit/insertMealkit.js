@@ -89,6 +89,13 @@ function onButtonClick2(e){
  	var price = app.lookup("ipb3");
  	var stock = app.lookup("ipb4");
  	
+ 	//
+ 	var fileInput = app.lookup("file1");
+	var file = fileInput.file;
+	app.lookup("uploadImg").src = file;  	
+	var submission = app.lookup("mealkitSub");
+ 	//
+ 	
  	if(name.value == null || name.value.trim().length == 0){
  		alert("밀키트 이름을 입력해주세요.");
  		name.focus();
@@ -108,9 +115,7 @@ function onButtonClick2(e){
  		console.log("왜 안 먹지?");
  		//e.preventDefault();
  		return;
- 	}
- 	
- 	if(price.value == null || price.value == ""){
+ 	}else if(price.value == null || price.value == ""){
  		alert("밀키트 가격을 입력해주세요.");
  		price.focus();
  		return;
@@ -120,9 +125,7 @@ function onButtonClick2(e){
  		price.value = "";
  		price.focus();
  		return;
- 	}
- 	
- 	if(stock.value == null || stock.value == ""){
+ 	}else if(stock.value == null || stock.value == ""){
  		alert("밀키트 수량을 입력해주세요.");
  		stock.focus();
  		return;
@@ -134,14 +137,30 @@ function onButtonClick2(e){
  		return;
  	}
  	
- 	var fileInput = app.lookup("file1");
-	var file = fileInput.file;
-	app.lookup("uploadImg").src = file;
- 	  	
-
-	var submission = app.lookup("mealkitSub");
-	submission.addFileParameter("image", file);
-	submission.send();
+ 		var initValue = "밀키트를 등록하시겠습니까?";
+		app.openDialog("dialog/registerPopup", {
+			width: 400, height: 300, headerClose: true
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+				dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue) {
+			if (returnValue == true) {
+				submission.addFileParameter("image", file);
+				submission.send();
+			}
+		});
+ 	
+ 	
+// 	var fileInput = app.lookup("file1");
+//	var file = fileInput.file;
+//	app.lookup("uploadImg").src = file;
+// 	  	
+//
+//	var submission = app.lookup("mealkitSub");
+//	submission.addFileParameter("image", file);
+//	submission.send();
    	
 }
 
@@ -197,4 +216,25 @@ function onDeleteImgBtnClick(e){
 	var image = app.lookup("uploadImg");
 	fileInput.clear();
 	image.src = "";
+}
+
+/*
+ * "취소" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick3(e){
+	var button = e.control;
+	var initValue = "작성된 사항은 반영되지 않습니다.\n취소하시겠습니까?";
+		app.openDialog("dialog/registerPopup", {
+			width: 400, height: 300, headerClose: true
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+				dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue) {
+			if (returnValue == true) {
+				window.location.href = "/mealkitList";
+			}
+		});
 }

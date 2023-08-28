@@ -7,6 +7,9 @@
 (function() {
 	var app = new cpr.core.App("mealkit/updateMealkit", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/custom-theme.css");
+			loader.addCSS("theme/custom/member.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -123,7 +126,7 @@
 			   	var fileInput = app.lookup("file2");
 				var file = fileInput.file;
 				var img = app.lookup("updateImg");
-				alert("이미지 file = " + file);
+				//alert("이미지 file = " + file);
 			   	
 			   	var combo1 = app.lookup("cmb1").text;
 			   	var combo2 = app.lookup("cmb2").text;
@@ -142,52 +145,65 @@
 				var file = fileInput.file;
 				var image = app.lookup("updateImg");
 				
-				if(confirm("수정하시겠습니까?")){
-					if(name.value == null || name.value.trim().length == 0){
-			 			alert("밀키트 이름을 입력해주세요.");
-			 			name.focus();
-			 			return;
-			 		}else if(combo1.length == 0 || combo2.length == 0 || combo3.length == 0){
-			 			alert("카테고리를 반드시 선택해주세요.");
-			 			return ;
+					if (name.value == null || name.value.trim().length == 0) {
+						alert("밀키트 이름을 입력해주세요.");
+						name.focus();
+						return;
+					} else if (combo1.length == 0 || combo2.length == 0 || combo3.length == 0) {
+						alert("카테고리를 반드시 선택해주세요.");
+						return;
+						
+					} else if (ingredients.value == null || ingredients.value.trim().length == 0) {
+						alert("밀키트 성분을 입력해주세요.");
+						ingredients.focus();
+						return;
+						
+					} else if (message == null || message.trim().length == 0) {
+						
+						alert("밀키트 정보를 입력해주세요.");
+						console.log("왜 안 먹지?");
+						//e.preventDefault();
+						return;
+					} else if (price.value == null || price.value == "") {
+						alert("밀키트 가격을 입력해주세요.");
+						price.focus();
+						return;
+						
+					} else if (inven.value == null || inven.value == "") {
+						alert("밀키트 수량을 입력해주세요.");
+						inven.focus();
+						return;
+					} else if (type == null || type == "") {
+						alert("타입을 반드시 선택해주세요.");
+						return;
+						// 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
+						// 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
+						// 			inven.value = "";
+						// 			inven.focus();
+						// 			return;
+					}else{
 			 		
-			 		}else if(ingredients.value == null || ingredients.value.trim().length == 0){
-			 			alert("밀키트 성분을 입력해주세요.");
-			 			ingredients.focus();
-			 			return;
+			 		var initValue = {
+						"msg": "밀키트를 수정하시겠습니까?"
+					}
+					app.openDialog("dialog/recipeCheck", {
+						width: 300, height: 200, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							submission.addFileParameter("image", file);
+							app.lookup("updateMealkitSub").send();
+						}
+					});
+			 	}			
+			 			//submission.addFileParameter("image", file);
+						//app.lookup("updateMealkitSub").send();
+			 		
 			 	
-			 		}else if(message == null || message.trim().length == 0){
-			 			
-			 			alert("밀키트 정보를 입력해주세요.");
-			 			console.log("왜 안 먹지?");
-			 			//e.preventDefault();
-			 			return;
-			 		}else if(price.value == null || price.value == ""){
-			 			alert("밀키트 가격을 입력해주세요.");
-			 			price.focus();
-			 			return;
-			 		
-			 		
-			 		}else if(inven.value == null || inven.value == ""){
-			 			alert("밀키트 수량을 입력해주세요.");
-			 			inven.focus();
-			 			return;
-			 		}else if(type == null || type == ""){
-			 			alert("타입을 반드시 선택해주세요.");
-			 			return;
-			// 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
-			// 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
-			// 			inven.value = "";
-			// 			inven.focus();
-			// 			return;
-			 		}else{
-			 			submission.addFileParameter("image", file);
-						app.lookup("updateMealkitSub").send();
-			 		}
-			 	}
-				
-				
-
 			}
 
 			/*
@@ -197,10 +213,28 @@
 			function onButtonClick(e){
 				var button = e.control;
 				var mealkitNo = cpr.core.Platform.INSTANCE.getParameter("mealkitNo");
-				if(confirm("변경된 사항은 변경되지 않습니다\n취소하시겠습니까?")){
-					window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
-				}
-				//window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
+				var initValue = {
+						"msg": "변경된 사항은 변경되지 않습니다.\n취소하시겠습니까?"
+					}
+					app.openDialog("dialog/recipeCheck", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							window.location.href= "/mealkitDetail/"+mealkitNo;
+						}
+					});
+				
+				
+				
+			//	if(confirm("변경된 사항은 변경되지 않습니다\n취소하시겠습니까?")){
+			//		window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
+			//	}
+			//	//window.location.href= "/mealkitDetail/"+mealkitNo; //추후 상세 페이지로 바꿔야함.
 			}
 
 			/*
@@ -310,13 +344,30 @@
 				var mealkitMember = dataMap.getValue("mealkitMember");
 				var sessionId = getTimedSessionData("memsession");
 
+				var initValue = "해당 게시물을 삭제하시겠습니까?";
+					
+					app.openDialog("dialog/registerPopup", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+							HttpPostMethod.submit();
+						}
+					});
 				
-				if(confirm("삭제하시겠습니까?")){
-					if(sessionId === mealkitMember){
-						var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-						HttpPostMethod.submit();
-					}
-				}
+
+				
+			//	if(confirm("삭제하시겠습니까?")){
+			//		if(sessionId === mealkitMember){
+			//			var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+			//			HttpPostMethod.submit();
+			//		}
+			//	}
 			};
 			// End - User Script
 			
@@ -807,14 +858,6 @@
 					"width": "864px",
 					"height": "129px"
 				});
-				var button_4 = new cpr.controls.Button();
-				button_4.value = "삭제";
-				container.addChild(button_4, {
-					"top": "870px",
-					"left": "196px",
-					"width": "114px",
-					"height": "34px"
-				});
 				var image_2 = new cpr.controls.Image();
 				image_2.src = "theme/images/mealkit/trashbin.png";
 				if(typeof onImageClick == "function") {
@@ -840,82 +883,6 @@
 				"right": "0px",
 				"left": "0px",
 				"height": "200px"
-			});
-			
-			var group_9 = new cpr.controls.Container();
-			group_9.style.css({
-				"background-color" : "#6A8B41"
-			});
-			var formLayout_1 = new cpr.controls.layouts.FormLayout();
-			formLayout_1.scrollable = false;
-			formLayout_1.topMargin = "0px";
-			formLayout_1.rightMargin = "50px";
-			formLayout_1.bottomMargin = "0px";
-			formLayout_1.leftMargin = "50px";
-			formLayout_1.horizontalSpacing = "50px";
-			formLayout_1.verticalSpacing = "30px";
-			formLayout_1.setColumns(["400px", "1fr", "400px"]);
-			formLayout_1.setRows(["1fr"]);
-			group_9.setLayout(formLayout_1);
-			(function(container){
-				var image_3 = new cpr.controls.Image();
-				image_3.src = "theme/images/common/footerLogo3.png";
-				container.addChild(image_3, {
-					"colIndex": 0,
-					"rowIndex": 0
-				});
-				var group_10 = new cpr.controls.Container();
-				var formLayout_2 = new cpr.controls.layouts.FormLayout();
-				formLayout_2.scrollable = false;
-				formLayout_2.topMargin = "5px";
-				formLayout_2.rightMargin = "0px";
-				formLayout_2.bottomMargin = "0px";
-				formLayout_2.leftMargin = "0px";
-				formLayout_2.horizontalSpacing = "10px";
-				formLayout_2.verticalSpacing = "5px";
-				formLayout_2.setColumns(["330px"]);
-				formLayout_2.setRows(["30px", "1fr"]);
-				group_10.setLayout(formLayout_2);
-				(function(container){
-					var output_9 = new cpr.controls.Output();
-					output_9.value = "Team HI-FIVE";
-					output_9.style.css({
-						"border-right-style" : "none",
-						"color" : "#F4FAEC",
-						"border-bottom-color" : "#ffffff",
-						"font-weight" : "bolder",
-						"border-left-style" : "none",
-						"font-size" : "20px",
-						"border-bottom-style" : "solid",
-						"border-top-style" : "none"
-					});
-					container.addChild(output_9, {
-						"colIndex": 0,
-						"rowIndex": 0
-					});
-					var output_10 = new cpr.controls.Output();
-					output_10.value = "금동준\t 심현준\t 엄용식\t  임영준";
-					output_10.style.css({
-						"color" : "#F4FAEC",
-						"font-weight" : "bolder"
-					});
-					container.addChild(output_10, {
-						"colIndex": 0,
-						"rowIndex": 1,
-						"colSpan": 1,
-						"rowSpan": 1
-					});
-				})(group_10);
-				container.addChild(group_10, {
-					"colIndex": 2,
-					"rowIndex": 0
-				});
-			})(group_9);
-			container.addChild(group_9, {
-				"bottom": "-535px",
-				"width": "1920px",
-				"height": "70px",
-				"left": "calc(50% - 960px)"
 			});
 			if(typeof onBodyInit2 == "function"){
 				app.addEventListener("init", onBodyInit2);
