@@ -106,6 +106,7 @@ function onBodyLoad(e) {
  */
 function onFi1ValueChange(e) {
 	var fi1 = e.control;
+	app.lookup("deleteImg").visible = true;
 	var image = app.lookup("uploadImg");
 	var fileInput = app.lookup("fi1");
 	//이미지 파일 아닌 걸 넣었을 때 
@@ -134,7 +135,8 @@ function onDeleteImgClick(e) {
 	var image = app.lookup("uploadImg");
 	if (confirm("사진을 삭제하시겠습니까?")) {
 		fileInput.clear();
-		image.src = "";
+		image.src = null;
+		app.lookup("deleteImg").visible = false;
 	}
 }
 
@@ -191,17 +193,6 @@ function onButtonClick(e) {
 		});
 	}
 }
-
-///*
-// * 서브미션에서 submit-success 이벤트 발생 시 호출.
-// * 통신이 성공하면 발생합니다.
-// */
-//function onUpdateRecipeSubmitSuccess(e){
-//	var updateRecipe = e.control;
-//	if (recipeBoardId != null) {
-//	window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
-//	}
-//}
 
 /*
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
