@@ -216,7 +216,7 @@ public class MemberController {
 			String memberEmail = param.getValue("memberEmail");
 			String memberPassword = param.getValue("memberPassword");
 			String memberName = param.getValue("memberName");
-			String memberNick = param.getValue("memberNick");
+			String memberNick = param.getValue("memberNick");			
 			String memberBirthday = param.getValue("memberBirthday");
 			String memberPhone = param.getValue("memberPhone");
 			String memberPostcode = param.getValue("memberPostcode");
@@ -224,6 +224,8 @@ public class MemberController {
 			String memberAddressDetail = param.getValue("memberAddressDetail");
 			String memberImage = param.getValue("memberImage");
 
+			
+			
 			
 			// 새로운 이미지가 업로드 되었는지 확인
 			Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
@@ -263,6 +265,8 @@ public class MemberController {
 			if (memberVO != null) {
 				int result = memberService.updateMember(memberVO);
 				log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
+				session.setAttribute("member", memberVO);
+				System.out.println(session.getAttribute("member"));
 			}
 			
 			dataRequest.setResponse("ds_profile", memberVO);

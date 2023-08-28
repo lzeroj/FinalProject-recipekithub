@@ -57,6 +57,7 @@
 				app.lookup("ipbPassword1").text = dsProfile.getValue(0, "memberPassword");
 				app.lookup("ipbName").text = dsProfile.getValue(0, "memberName");
 				app.lookup("ipbNick").text = dsProfile.getValue(0, "memberNick");
+				console.log(app.lookup("ipbNick").text);
 				app.lookup("address").text = dsProfile.getValue(0, "memberAddress");
 				app.lookup("postCode").text = dsProfile.getValue(0, "memberPostcode");
 				app.lookup("detailAddress").text = dsProfile.getValue(0, "memberAddressDetail");
