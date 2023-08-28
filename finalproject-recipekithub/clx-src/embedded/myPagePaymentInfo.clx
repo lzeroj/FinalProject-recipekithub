@@ -46,7 +46,7 @@
           <cl:combobox std:sid="c-box-e4b777c7" id="cmb1" showicon="true" preventinput="true">
             <cl:listener std:sid="listener-66145c12" name="selection-change" handler="onCmb1SelectionChange"/>
             <cl:formdata std:sid="f-data-7e4500f5" row="0" col="0"/>
-            <cl:item std:sid="t-item-348949db" label="----------" value=""/>
+            <cl:item std:sid="t-item-348949db" label="----------" value="a"/>
             <cl:item std:sid="t-item-8f999339" label="결제일자" value="paymentDate"/>
             <cl:item std:sid="t-item-c3dc66c3" label="밀키트 이름" value="mealkitName"/>
           </cl:combobox>
@@ -112,10 +112,10 @@
         <cl:group std:sid="group-7398bc11" class="cl-form-group">
           <cl:selectioncontext selectionProvider="#grid-24560983"/>
           <cl:formdata std:sid="f-data-42b64d6f" row="1" col="0" rowspan="3" colspan="4"/>
-          <cl:output std:sid="output-e1c67019" style="text-align:center;" value="결제 번호">
+          <cl:output std:sid="output-e1c67019" style="background-color:#0ebc59; color:#FFFFFF; font-weight:300; background-image:none; text-align:center;" value="결제 번호">
             <cl:formdata std:sid="f-data-fc6bae0d" row="0" col="0"/>
           </cl:output>
-          <cl:output std:sid="output-c655b566" style="text-align:center;" value="총 가격">
+          <cl:output std:sid="output-c655b566" style="background-color:#0ebc59; color:#FFFFFF; font-weight:300; background-image:none; text-align:center;" value="총 가격">
             <cl:formdata std:sid="f-data-99ccefbb" row="0" col="2"/>
           </cl:output>
           <cl:output std:sid="output-106cf696" style="text-align:center;">
@@ -130,17 +130,17 @@
             <cl:relativebind property="value" category="PROPERTY" columnname="paymentDate"/>
             <cl:formdata std:sid="f-data-08551bf3" row="2" col="1" rowspan="1" colspan="1"/>
           </cl:output>
-          <cl:output std:sid="output-4ddea93d" style="text-align:center;" value="주문자 명">
+          <cl:output std:sid="output-4ddea93d" style="background-color:#0ebc59; color:#FFFFFF; font-weight:300; background-image:none; text-align:center;" value="주문자 명">
             <cl:formdata std:sid="f-data-98520172" row="1" col="0"/>
           </cl:output>
-          <cl:output std:sid="output-d8152fb1" style="text-align:center;" value="결제 일자">
+          <cl:output std:sid="output-d8152fb1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:300; background-image:none; text-align:center;" value="결제 일자">
             <cl:formdata std:sid="f-data-ec55df32" row="2" col="0"/>
           </cl:output>
           <cl:output std:sid="output-f758297a" style="text-align:center;">
             <cl:relativebind property="value" category="PROPERTY" columnname="paymentTotal"/>
             <cl:formdata std:sid="f-data-c99e56f1" row="0" col="3" rowspan="1" colspan="3"/>
           </cl:output>
-          <cl:output std:sid="output-f896d1fe" style="text-align:center;" value="상세 구매정보">
+          <cl:output std:sid="output-f896d1fe" style="background-color:#0ebc59; color:#FFFFFF; font-weight:300; background-image:none; text-align:center;" value="상세 구매정보">
             <cl:formdata std:sid="f-data-41521e7c" row="1" col="2" rowspan="2" colspan="1"/>
           </cl:output>
           <cl:output std:sid="output-53bc8d86" style="text-align:center;">

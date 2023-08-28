@@ -367,7 +367,7 @@ function onMealkitLikeListLoad(e){
         .attr("transform", "translate(" + (width / 2) + ", " + (margin.top / 2) + ")")
         .attr("font-size", "20px")
         .attr("font-weight", "bold")
-        .text("레시피 좋아요 순위");
+        .text("밀키트 찜 순위");
 
     /* 안쪽, 바깥쪽 반지름 값 설정 */
     var arc = d3.arc().innerRadius(0).outerRadius(Math.min(width, height) / 2.5);

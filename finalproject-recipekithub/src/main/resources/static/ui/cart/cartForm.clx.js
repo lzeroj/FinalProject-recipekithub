@@ -93,10 +93,9 @@
 					app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);
 					app.lookup("payment").send();
 				}else{
-					console.log("장바구니없음");
 					var src = "dialog/failPayment";
 					var initValue = "장바구니에 물건이 없습니다";
-					app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
+					app.getRootAppInstance().openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
 						dialog.ready(function(dialogApp){
 							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
 							dialogApp.initValue = initValue;
@@ -144,7 +143,7 @@
 				if(metadata == '재고수량이 충분하지 않습니다'){
 					src = "dialog/failPayment";
 					var initValue = metadata;
-					app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
+					app.getRootAppInstance().openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
 						dialog.ready(function(dialogApp){
 							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
 							dialogApp.initValue = initValue;
@@ -153,7 +152,7 @@
 				}else if(metadata == '결제가 정상적으로 완료되었습니다'){
 					src = "dialog/successPayment";
 					var initValue = metadata;
-					app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
+					app.getRootAppInstance().openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
 						dialog.ready(function(dialogApp){
 							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
 							dialogApp.initValue = initValue;
@@ -202,6 +201,7 @@
 			function onButtonClick2(e){
 				var button = e.control;
 				var grid = app.lookup("grd1");
+
 				if(grid.getCheckRowIndices().length > 0){
 					for(var i=0;i<grid.getDataRowCount();i++){
 						if(grid.isCheckedRow(i)){
@@ -245,28 +245,41 @@
 			function onButtonClick3(e){
 				var button = e.control;
 				var grid = app.lookup("grd1");
-				app.getRootAppInstance().openDialog("dialog/needConfirm", {
-					width: 400, height: 300, headerClose: true
-				}, function(dialog) {
-					dialog.ready(function(dialogApp) {
-						dialogApp.initValue = "선택 상품을 취소하시겠습니까?"
-					});
-				}).then(function(returnValue){
-					if(returnValue == "ok"){
-						for(var i=0;i<grid.getDataRowCount();i++){
-							if(grid.isCheckedRow(i)){
-								var cellValue = grid.getCellValue(i, "mealkitName");
-								var data = {"mealkitName" : cellValue};
-								app.lookup("selectList").addRowData(data);
-							}
+				if(grid.getDataRowCount() == 0)	{
+					var src = "dialog/noneedConfirm";
+					var initValue = "장바구니에 물건이 없습니다";
+					app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
+						dialog.ready(function(dialogApp){
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue){
+						if(returnValue == "ok"){
+							return;
 						}
-						app.lookup("deleteMyCart").send();
-					}else{
-						return;
-					}
-				});
-				
-				
+					});
+				}else{
+					app.getRootAppInstance().openDialog("dialog/needConfirm", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = "선택 상품을 취소하시겠습니까?"
+						});
+					}).then(function(returnValue){
+						if(returnValue == "ok"){
+							for(var i=0;i<grid.getDataRowCount();i++){
+								if(grid.isCheckedRow(i)){
+									var cellValue = grid.getCellValue(i, "mealkitName");
+									var data = {"mealkitName" : cellValue};
+									app.lookup("selectList").addRowData(data);
+								}
+							}
+							app.lookup("deleteMyCart").send();
+						}else{
+							return;
+						}
+					});
+				}
 			}
 
 			/*
@@ -480,6 +493,7 @@
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
 			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_2.scrollable = false;
 			group_1.setLayout(verticalLayout_2);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
@@ -616,8 +630,9 @@
 						"rowSpan": 1
 					});
 					var group_3 = new cpr.controls.Container();
-					var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-					group_3.setLayout(xYLayout_1);
+					var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
+					verticalLayout_3.scrollable = false;
+					group_3.setLayout(verticalLayout_3);
 					(function(container){
 						var grid_1 = new cpr.controls.Grid("grd1");
 						grid_1.init({
@@ -791,8 +806,7 @@
 							grid_1.addEventListener("header-uncheck", onGrd1HeaderUncheck);
 						}
 						container.addChild(grid_1, {
-							"top": "0px",
-							"left": "0px",
+							"autoSize": "height",
 							"width": "1038px",
 							"height": "343px"
 						});
@@ -805,7 +819,7 @@
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"autoSize": "none",
+					"autoSize": "height",
 					"width": "1040px",
 					"height": "550px"
 				});
@@ -887,8 +901,8 @@
 					"height": "52px"
 				});
 				var group_5 = new cpr.controls.Container();
-				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-				group_5.setLayout(xYLayout_2);
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				group_5.setLayout(xYLayout_1);
 				(function(container){
 					var button_2 = new cpr.controls.Button();
 					button_2.value = "선택 상품 주문";

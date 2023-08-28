@@ -65,7 +65,7 @@
     <cl:group std:sid="group-b8f6dc4d">
       <cl:verticaldata std:sid="v-data-c6e9f14e" width="1040px" height="700px" autosize="height"/>
       <cl:group std:sid="group-5ef8cda1" style="border-radius:30px; background-color:#FFFFFF;" class="cl-form-group">
-        <cl:verticaldata std:sid="v-data-cf9d77ac" width="1040px" height="550px" autosize="none"/>
+        <cl:verticaldata std:sid="v-data-cf9d77ac" width="1040px" height="550px" autosize="height"/>
         <cl:output std:sid="output-93dc1bf1" style="background-color:#FFFFFF; color:#0ebc59; font-weight:bold; font-size:25px; font-family:'Noto Sans KR' , 'Malgun Gothic' , sans-serif;" value="  장바구니">
           <cl:formdata std:sid="f-data-81ebaa46" row="0" col="1" rowspan="1" colspan="6"/>
         </cl:output>
@@ -99,7 +99,7 @@
             <cl:listener std:sid="listener-fb14824e" name="row-check" handler="onGrd1RowCheck"/>
             <cl:listener std:sid="listener-b4cc28c2" name="header-check" handler="onGrd1HeaderCheck"/>
             <cl:listener std:sid="listener-f769b9e5" name="header-uncheck" handler="onGrd1HeaderUncheck"/>
-            <cl:xylayoutdata std:sid="xyl-data-1bc45669" top="0px" left="0px" width="1038px" height="343px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+            <cl:verticaldata std:sid="v-data-813e9108" width="1038px" height="343px" autosize="height"/>
             <cl:gridcolumn std:sid="g-column-019c1081" width="22px"/>
             <cl:gridcolumn std:sid="g-column-69c1d460" width="143px"/>
             <cl:gridcolumn std:sid="g-column-70468fa0" width="345px"/>
@@ -138,7 +138,7 @@
               </cl:gridcell>
             </cl:griddetail>
           </cl:grid>
-          <cl:xylayout std:sid="xylayout-26c0f8ab"/>
+          <cl:verticallayout std:sid="v-layout-0c620ca0" scrollable="false"/>
         </cl:group>
         <cl:formlayout std:sid="f-layout-d28bc64c" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
           <cl:rows length="80" unit="PIXEL"/>
@@ -186,7 +186,7 @@
         </cl:button>
         <cl:xylayout std:sid="xylayout-021c644e"/>
       </cl:group>
-      <cl:verticallayout std:sid="v-layout-79e64ebb"/>
+      <cl:verticallayout std:sid="v-layout-79e64ebb" scrollable="false"/>
     </cl:group>
     <cl:verticallayout std:sid="v-layout-a6ac7ac6" distribution="center"/>
   </body>

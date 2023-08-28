@@ -84,14 +84,23 @@
 					dataMap.setValue("boardId", val.boardId);
 					dataMap.setValue("boardAnswerTitle", vcIpb.text);
 					dataMap.setValue("boardAnswerContent", textArea.text);
-					app.lookup("subinsertqnaanswer").send();
+					app.getRootAppInstance().openDialog("dialog/needConfirm", {
+						width: 400, height: 300, headerVisible: false
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = "등록하시겠습니까?";
+						});
+					}).then(function(returnValue){
+						if(returnValue == "ok"){
+							app.lookup("subinsertqnaanswer").send();
+						}
+					});
 				});
 				app.lookup("grp2").addChild( vcBtn, {
 					width : "100px",
 					height : "30px",
 					autoSize : "width"
 				});
-				
 			}
 
 			/*
@@ -102,7 +111,6 @@
 				var subinsertqnaanswer = e.control;
 				var metadata = subinsertqnaanswer.getMetadata("insertResult");
 				console.log(metadata);
-				console.log(metadata.insertResult);
 				if(metadata == 1){
 					app.openDialog("dialog/successQnARegister", {
 						width: 400, height: 300, headerVisible: false
@@ -112,7 +120,12 @@
 						});
 					}).then(function(returnValue){
 						if(returnValue == "ok"){
-							app.lookup("grp1").redraw();
+							var host = app.getHost(); // 부모 임베디드 앱
+							cpr.core.App.load("embedded/admin/findQnAAdminForm", function(loadedApp){
+								if (loadedApp){
+									host.app = loadedApp;
+								}
+							});
 						}
 					});
 				}

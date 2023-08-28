@@ -10,6 +10,8 @@
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e){
+	// 콤보박스 디폴트 설정
+	app.lookup("cmb1").selectItemByValue("a"); 
 	app.lookup("myPaymentListOnload").send();
 }
 

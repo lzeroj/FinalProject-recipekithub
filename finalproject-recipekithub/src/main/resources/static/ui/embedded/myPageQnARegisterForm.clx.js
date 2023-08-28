@@ -27,7 +27,18 @@
 				var dataMap = app.lookup("qnaparam");
 				dataMap.setValue("boardTitle", app.lookup("ipb1").text);
 				dataMap.setValue("boardContent", app.lookup("txa1").text);
-				app.lookup("subqna").send();
+				var host = app.getHost(); // 부모 임베디드 앱
+				app.getRootAppInstance().openDialog("dialog/needConfirm", {
+					width: 400, height: 300, headerVisible: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = "등록하시겠습니까?";
+					});
+				}).then(function(returnValue){
+					if(returnValue == "ok"){
+						app.lookup("subqna").send();
+					}
+				});
 			}
 
 			/*
