@@ -247,16 +247,16 @@
 				dataMap.setValue("memberImage", memberImage);
 				
 				// Flag to track if the file input has changed
-				var fileChanged = false;
+				//var fileChanged = false;
 				
 				// Attach an event listener to the file input to set the flag when the file changes
-				var fileInput = app.lookup("fi1");
-				fileInput.addEventListener("change", function() {
-				    fileChanged = true;
-				});
-				
 				//var fileInput = app.lookup("fi1");
-				//var file = fileInput.file;
+				//fileInput.addEventListener("change", function() {
+				//    fileChanged = true;
+				//});
+				
+				var fileInput = app.lookup("fi1");
+				var file = fileInput.file;
 				
 				// 다이얼로그창에 표시할 메시지
 				var initValue = null;		
@@ -297,12 +297,13 @@
 						});
 					}).then(function(returnValue) {
 						var subUpdate = app.lookup("sub_update");
+			       		subUpdate.addFileParameter("memberImage", file);
 						
-						if (fileChanged) {
-			       	 		var file = fileInput.file;
-			        		subUpdate.addFileParameter("memberImage", file);
-			        		fileChanged = false;
-			    		}
+						//if (fileChanged) {
+			       	 	//	var file = fileInput.file;
+			        	//	subUpdate.addFileParameter("memberImage", file);
+			        	//	fileChanged = false;
+			    		//}
 						//subUpdate.addFileParameter("memberImage", file);
 						
 						subUpdate.send();

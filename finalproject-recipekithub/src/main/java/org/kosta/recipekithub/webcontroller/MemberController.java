@@ -220,7 +220,6 @@ public class MemberController {
 		// myProfile.clx에서 서브미션(sub_update)을 통해 요청 데이터(데이터맵 : dm_update)을 전달 받음
 		ParameterGroup param = dataRequest.getParameterGroup("dm_update");
 		String memberEmail = param.getValue("memberEmail");
-		System.out.println(memberEmail);
 		String memberPassword = param.getValue("memberPassword");
 		String memberName = param.getValue("memberName");
 		String memberNick = param.getValue("memberNick");
@@ -229,69 +228,72 @@ public class MemberController {
 		String memberPostcode = param.getValue("memberPostcode");
 		String memberAddress = param.getValue("memberAddress");
 		String memberAddressDetail = param.getValue("memberAddressDetail");
-		String memberImage = param.getValue("memberImage");
+		//String memberImage = param.getValue("memberImage");
 
-		// Check if a new image has been uploaded
-		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
-		if (uploadFiles != null && uploadFiles.containsKey("memberImage")) {
-		    UploadFile[] uploadFile = uploadFiles.get("memberImage");
-
-		    // Check if the uploadFile array is not null and has at least one file
-		    if (uploadFile != null && uploadFile.length > 0) {
-		        // Delete the old image file if it exists
-		        if (memberImage != null) {
-		            File existImageFile = new File("C:\\upload\\profile\\" + memberImage);
-		            if (existImageFile.exists()) {
-		                existImageFile.delete();
-		            }
-		        }
-
-		        // Upload the new image
-		        File orgName = uploadFile[0].getFile();
-		        String saveName = uploadFile[0].getFileName();
-		        String savePath = "C:\\upload\\profile\\";
-		        String uuid = UUID.randomUUID().toString();
-
-		        // Copy the new file to the desired location
-		        FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-
-		        // Update the member's image
-		        member.setMemberImage(uuid + "_" + saveName);
-		        memberImage = member.getMemberImage();
-		    }
-		}
-		
-		
-//		// 프로필 사진 등록
+//		// Check if a new image has been uploaded
 //		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
-//		UploadFile[] uploadFile = uploadFiles.get("memberImage");
-//		File orgName = uploadFile[0].getFile();
-//		String saveName = uploadFile[0].getFileName();
-//		// String savePath =
-//		// "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
-//		String savePath = "C:\\upload\\profile\\";
-//		String uuid = UUID.randomUUID().toString();
-//		FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
+//		if (uploadFiles != null && uploadFiles.containsKey("memberImage")) {
+//		    UploadFile[] uploadFile = uploadFiles.get("memberImage");
 //
-//		member.setMemberImage(uuid + "_" + saveName);
-//		memberImage = member.getMemberImage();
+//		    // Check if the uploadFile array is not null and has at least one file
+//		    if (uploadFile != null && uploadFile.length > 0) {
+//		        // Delete the old image file if it exists
+//		        if (memberImage != null) {
+//		            File existImageFile = new File("C:\\upload\\profile\\" + memberImage);
+//		            if (existImageFile.exists()) {
+//		                existImageFile.delete();
+//		            }
+//		        }
 //
-//		// 프로필 사진 변경 : 사진을 변경했으면 삭제 후 저장
-//		if (uploadFiles.size() != 0) {
-//			if (memberImage != null) {
-//				File existImageFile = new File(savePath + memberImage);
-//				if (existImageFile.exists()) {
-//					existImageFile.delete();
-//				}
-//			}
-//			uploadFile = uploadFiles.get("memberImage");
-//			orgName = uploadFile[0].getFile();
-//			saveName = uploadFile[0].getFileName();
-//			log.debug("프로필 사진 saveName {}", saveName);
-//			FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-//			member.setMemberImage(uuid + "_" + saveName);
+//		        // Upload the new image
+//		        File orgName = uploadFile[0].getFile();
+//		        String saveName = uploadFile[0].getFileName();
+//		        String savePath = "C:\\upload\\profile\\";
+//		        String uuid = UUID.randomUUID().toString();
+//
+//		        // Copy the new file to the desired location
+//		        FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
+//
+//		        // Update the member's image
+//		        member.setMemberImage(uuid + "_" + saveName);
+//		        memberImage = member.getMemberImage();
+//		    }
 //		}
+		
+	   // if (!memberImage.isEmpty()) {
 
+		
+		// 프로필 사진 등록
+		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
+		UploadFile[] uploadFile = uploadFiles.get("memberImage");
+		File orgName = uploadFile[0].getFile();
+		String saveName = uploadFile[0].getFileName();
+		// String savePath =
+		// "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
+		String savePath = "C:\\upload\\profile\\";
+		String uuid = UUID.randomUUID().toString();
+		FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
+
+		member.setMemberImage(uuid + "_" + saveName);
+		String memberImage = member.getMemberImage();
+
+		// 프로필 사진 변경 : 사진을 변경했으면 삭제 후 저장
+		if (uploadFiles.size() != 0) {
+			if (memberImage != null) {
+				File existImageFile = new File(savePath + memberImage);
+				if (existImageFile.exists()) {
+					existImageFile.delete();
+				}
+			}
+			uploadFile = uploadFiles.get("memberImage");
+			orgName = uploadFile[0].getFile();
+			saveName = uploadFile[0].getFileName();
+			log.debug("프로필 사진 saveName {}", saveName);
+			FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
+			member.setMemberImage(uuid + "_" + saveName);
+		}
+	    
+		
 		MemberVO memberVO = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode,
 				memberAddress, memberAddressDetail, memberPhone, memberBirthday, null, null, null, memberImage);
 		log.debug("member 정보 : {}", memberVO);
