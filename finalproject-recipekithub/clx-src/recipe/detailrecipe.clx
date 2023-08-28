@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-dc7ab4e3" version="1.0.4584">
   <head std:sid="head-c832a6d2">
-    <screen std:sid="screen-c6cd0f25" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1080" customWidth="1920" active="true"/>
-    <screen std:sid="screen-164e2275" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
-    <screen std:sid="screen-fcc77fa4" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <link std:sid="link-4fb6f59e" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-f97c9de3" href="../theme/controls/htmlobject.part.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-4e7fe582" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-528c9b95" href="../theme/controls/page-indexer.part.less" rel="stylesheet" type="text/css"/>
+    <screen std:sid="screen-efef7f36" id="FHD" name="FHD" minwidth="1920px" width="1920px" height="1080px" useCustomWidth="false" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-582dc9cc" id="default" name="default" minwidth="1024px" maxwidth="1919px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1080" customWidth="1920" active="false"/>
+    <screen std:sid="screen-0ba16afd" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-0c58303a" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <cl:model std:sid="model-6b99dcb1">
       <cl:dataset std:sid="d-set-257eaa8d" id="recipeBoard">
         <cl:datacolumnlist>
@@ -79,32 +80,32 @@
   <body std:sid="body-6931a0a1" style="background-color:#F4FAEC;">
     <cl:listener std:sid="listener-aad71981" name="load" handler="onBodyLoad"/>
     <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
-      <cl:verticaldata std:sid="v-data-f1832feb" width="1920px" height="200px"/>
+      <cl:verticaldata std:sid="v-data-f1832feb" width="1920px" height="200px" syncminwidth="true" autosize="none"/>
     </cl:udc>
     <cl:group std:sid="group-331f46c0" style="background-color:#FFFFFF;">
-      <cl:verticaldata std:sid="v-data-699de27c" width="1200px" height="353px"/>
+      <cl:verticaldata std:sid="v-data-699de27c" width="1200px" height="396px"/>
       <cl:img std:sid="image-a93fe2b5" id="recipeBoardImage">
-        <cl:xylayoutdata std:sid="xyl-data-f2fbe13b" top="42px" width="642px" height="201px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-f2fbe13b" top="42px" width="642px" height="251px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:img>
       <cl:output std:sid="output-4175a2ee" id="memberNick" style="color:#0CA44E; font-weight:lighter; font-size:18px; text-align:center;" value="닉네임">
-        <cl:xylayoutdata std:sid="xyl-data-f7c51adc" top="303px" width="128px" height="34px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-f7c51adc" top="343px" width="128px" height="34px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:output>
       <cl:output std:sid="output-10e92904" id="recipeBoardTitle" style="font-weight:bold; font-size:20px; text-align:center;" value="타이틀">
-        <cl:xylayoutdata std:sid="xyl-data-75d8834d" top="277px" left="95px" width="384px" height="58px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-75d8834d" top="317px" left="95px" width="384px" height="58px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:output std:sid="output-2592074b" id="opt1" style="font-size:20px;" value="좋아요 갯수">
-        <cl:xylayoutdata std:sid="xyl-data-607cfe7e" top="305px" left="1039px" width="82px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-607cfe7e" top="335px" left="1039px" width="82px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:img std:sid="image-98b0d895" id="likeimg" style="cursor:pointer; background-image:none;">
         <cl:listener std:sid="listener-4e3e4ff8" name="click" handler="onLikeimgClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-167d2acd" top="295px" left="990px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-167d2acd" top="325px" left="990px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:img std:sid="image-0b5e307d" style="cursor:pointer;" src="../theme/images/mealkit/alarm.png">
         <cl:listener std:sid="listener-fff7ab39" name="click" handler="onImageClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-0eac82ec" top="295px" left="939px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-0eac82ec" top="325px" left="939px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
       <cl:img std:sid="image-6d843c03" id="memberProfile" style="border-radius:100px;" fallbacksrc="../theme/images/icon/chefimg.png">
-        <cl:xylayoutdata std:sid="xyl-data-2f8fcd36" top="227px" width="146px" height="77px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-2f8fcd36" top="267px" width="146px" height="77px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:img>
       <cl:group std:sid="group-3511dc92" style="background-color:#FFFFFF;">
         <cl:xylayoutdata std:sid="xyl-data-16208fb1" top="0px" left="4px" width="399px" height="26px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -156,10 +157,10 @@
     <cl:pageindexer std:sid="p-indexer-275aa17e" id="page" pagerowcount="10">
       <cl:listener std:sid="listener-af5aa1ca" name="selection-change" handler="onPageSelectionChange"/>
       <cl:datamapbind property="currentPageIndex" datacontrolid="dmPage" columnname="pageNo"/>
-      <cl:verticaldata std:sid="v-data-4e5ef888" width="496px" height="40px"/>
+      <cl:verticaldata std:sid="v-data-4e5ef888" width="400px" height="40px"/>
     </cl:pageindexer>
     <cl:udc std:sid="ud-control-aa1a65e2" type="udc.footer">
-      <cl:verticaldata std:sid="v-data-a1b90ac2" width="1920px" height="100px"/>
+      <cl:verticaldata std:sid="v-data-a1b90ac2" width="1920px" height="100px" syncminwidth="true" autosize="none"/>
     </cl:udc>
     <cl:verticallayout std:sid="v-layout-6f7aef56" distribution="center"/>
   </body>
