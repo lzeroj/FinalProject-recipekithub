@@ -84,7 +84,9 @@ public class MealkitController {
 	public View findMealkitList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		//페이지 번호 값
 		ParameterGroup pageParam = dataRequest.getParameterGroup("mePage");
+		System.out.println("pageNo = " + pageParam.getValue("pageNo"));
 		String pageNo = pageParam.getValue("pageNo");
+		System.out.println("pageNo = " + pageNo);
 		//카테고리별
 		ParameterGroup categoryParam = dataRequest.getParameterGroup("meCategory");
 		String mealkitType = categoryParam.getValue("mealkitType");
@@ -196,7 +198,6 @@ public class MealkitController {
 		if(sessionMember == null) {
 			return new UIView("/ui/index.clx");	
 		} 
-		
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
 		System.out.println("uploadFiles = " + uploadFiles);
 		UploadFile[] uploadFile = uploadFiles.get("image");
@@ -204,7 +205,6 @@ public class MealkitController {
 		File orgName = uploadFile[0].getFile();
 		String saveName = uploadFile[0].getFileName();
 		String savePath = "C:\\upload\\mealkit\\";
-		
 		String uuid = UUID.randomUUID().toString();
 		FileCopyUtils.copy(orgName, new File(savePath+uuid+"_"+saveName));
 		
@@ -228,7 +228,6 @@ public class MealkitController {
 		mealkit.setStatus("Y");
 		mealkit.setMealkitType(mealkitType);
 		
-		//HttpSession session = request.getSession(false);
 		MemberVO member = null;
 		if(session != null && session.getAttribute("member") != null) {
 			member = (MemberVO)session.getAttribute("member");

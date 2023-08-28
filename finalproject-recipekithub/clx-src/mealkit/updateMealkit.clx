@@ -205,9 +205,6 @@
         </cl:button>
         <cl:xylayout std:sid="xylayout-b63c3446"/>
       </cl:group>
-      <cl:button std:sid="button-75b88ba6" value="삭제">
-        <cl:xylayoutdata std:sid="xyl-data-46e6fab0" top="870px" left="196px" width="114px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      </cl:button>
       <cl:img std:sid="image-8d5c38fb" src="../theme/images/mealkit/trashbin.png">
         <cl:listener std:sid="listener-121b9c88" name="click" handler="onImageClick"/>
         <cl:xylayoutdata std:sid="xyl-data-246d2178" top="874px" left="884px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
