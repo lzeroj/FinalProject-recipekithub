@@ -252,8 +252,9 @@ function onLikeimgClick(e){
 //				HttpPostMethod.submit();
 //			}
 //		});
+	}else{
+		app.lookup("subclicklike").send();
 	}
-	app.lookup("subclicklike").send();
 }
 
 /*
@@ -292,15 +293,16 @@ function onButtonClick4(e){
 				dialogApp.initValue = initValue;
 			});
 		})
-//		.then(function(returnValue) {
-//			if (returnValue == true) {
-//				var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
-//				HttpPostMethod.submit();
-//			}
-//		});
+		.then(function(returnValue) {
+			if (returnValue == true) {
+				var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+				HttpPostMethod.submit();
+			}
+		});
+	}else{
+		dsmealkit.setValue("cartDetailQuantity", app.lookup("mealcnt").text);
+		app.lookup("subcreatmycart").send();
 	}
-	dsmealkit.setValue("cartDetailQuantity", app.lookup("mealcnt").text);
-	app.lookup("subcreatmycart").send();
 }
 
 /*

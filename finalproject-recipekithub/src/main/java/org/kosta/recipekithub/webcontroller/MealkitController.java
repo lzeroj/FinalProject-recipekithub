@@ -90,6 +90,7 @@ public class MealkitController {
 		//카테고리별
 		ParameterGroup categoryParam = dataRequest.getParameterGroup("meCategory");
 		String mealkitType = categoryParam.getValue("mealkitType");
+		System.out.println("mealkitType = " + mealkitType);
 		//분류별
 		ParameterGroup sortParam = dataRequest.getParameterGroup("meSort");
 		String sort = sortParam.getValue("sort");
@@ -104,7 +105,12 @@ public class MealkitController {
 		}else {
 			pagination = new RecipePagination(totalMealkitCnt, Integer.parseInt(pageNo));
 		}
+		
 		List<MealKitBoard> list = mealKitService.findAllMealkitBoard(mealkitType, sort, searchMealkit, pagination);
+		for(MealKitBoard mealkit : list) {
+			System.out.println("mealkit = " + mealkit);
+		}
+		
 		List<Double> starAvgList = new ArrayList<>();
 		List<Long> commentCnt = new ArrayList<>();
 		for(MealKitBoard mb : list) {
