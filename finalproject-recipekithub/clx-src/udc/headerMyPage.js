@@ -69,7 +69,7 @@ function onCmb1SelectionChange(e){
 	// 로그인 상태의 경우, 콤보박스에 "로그아웃" 메뉴 표시
     } else if (cmb1.value == "logout") {
     	var initValue = "로그아웃 하시겠습니까?";
-		app.getRootAppInstance().openDialog("dialog/registerPopup", {
+		app.getRootAppInstance().openDialog("dialog/memberPopup", {
 			width: 400, height: 300, headerClose: true, resizable: false
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {

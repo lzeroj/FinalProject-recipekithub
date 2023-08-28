@@ -2934,9 +2934,9 @@ code,
   width: 30px;
 }
 .emphasis {
-  background-image: linear-gradient(transparent 70%, #E5F2E3 70%);
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  background-image: linear-gradient(transparent 70%, #86D2A7 70%);
+  /*border-top-left-radius: 5px;*/
+  /*border-top-right-radius: 5px;*/
 }
 /*
 .a {

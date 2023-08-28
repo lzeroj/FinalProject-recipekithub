@@ -32,7 +32,7 @@
           <cl:formdata std:sid="f-data-970d69c9" row="0" col="1" rowspan="1" colspan="1"/>
           <cl:group std:sid="group-7180dd82" style="border-right-style:solid; border-bottom-color:#b4b4b4; border-top-width:2px; border-right-width:2px; border-left-color:#b4b4b4; border-right-color:#b4b4b4; border-left-width:2px; border-top-style:solid; border-radius:15px; border-left-style:solid; border-bottom-width:2px; border-top-color:#b4b4b4; border-bottom-style:solid;" class="cl-form-group">
             <cl:formdata std:sid="f-data-4d984b76" row="0" col="0"/>
-            <cl:searchinput std:sid="s-input-ff13a668" id="searchInput" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" searchbuttonimage="../theme/images/com/main/icon-search-line.svg">
+            <cl:searchinput std:sid="s-input-ff13a668" id="searchInput" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; padding-left:10px; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" searchbuttonimage="../theme/images/com/main/icon-search-line.svg">
               <cl:listener std:sid="listener-89ad9453" name="search" handler="onSearchInputSearch"/>
               <cl:formdata std:sid="f-data-00802766" row="0" col="1" rowspan="1" colspan="2"/>
               <cl:searchstyle style="width:30px; padding-right:15px;"/>

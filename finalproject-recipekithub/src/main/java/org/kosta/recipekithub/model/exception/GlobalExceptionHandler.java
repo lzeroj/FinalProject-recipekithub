@@ -9,7 +9,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public void handleGlobalException(Exception ex, Model model) {
-    	System.out.println("왔니?");
+    	System.out.println(" ?");
         model.addAttribute("errorMessage", "An error occurred: " + ex.getMessage());
     }
 } 

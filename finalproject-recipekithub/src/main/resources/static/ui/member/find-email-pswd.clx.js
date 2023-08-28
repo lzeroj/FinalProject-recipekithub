@@ -53,7 +53,7 @@
 				
 				// 1. Email 찾기 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
 				if (initValue) {		
-					app.openDialog("dialog/registerChkPopup", {
+					app.openDialog("dialog/memberChkPopup", {
 						width: 400, height: 300, headerClose: true
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -63,7 +63,7 @@
 				// 2. Email 찾기 양식이 전부 유효하게 작성되어 있는 경우, Email 찾기 서브미션 전송	
 				} else {		
 					initValue = "Email을 조회 하시겠습니까?";
-					app.openDialog("dialog/registerPopup", {
+					app.openDialog("dialog/memberPopup", {
 						width: 400, height: 300, headerClose: true, resizable: false
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -91,10 +91,9 @@
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onSub_findEmailSubmitSuccess2(e){
+			function onSub_findEmailSubmitSuccess(e){
 				var sub_findEmail = e.control;
 				var opbFindEmailNotice = app.lookup("opbFindEmailNotice");
-				var dataSet = app.lookup("ds_member");
 				
 				var metadataOk = sub_findEmail.getMetadata("ok"); 	// Controller측에서 입력한 정보에 따른 이메일을 조회하여 ok(조회 성공)인 경우
 				var metadataFail = sub_findEmail.getMetadata("fail"); 	// Controller측에서 입력한 정보에 따른 이메일을 조회하여 fail(조회 불가)인 경우
@@ -140,7 +139,7 @@
 				
 				// 1. 비밀번호 찾기 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
 				if (initValue) {		
-					app.openDialog("dialog/registerChkPopup", {
+					app.openDialog("dialog/memberChkPopup", {
 						width: 400, height: 300, headerClose: true
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -150,7 +149,7 @@
 				// 2. 비밀번호 찾기 양식이 전부 유효하게 작성되어 있는 경우, 비밀번호 찾기 서브미션 전송	
 				} else {		
 					initValue = "비밀번호를 조회 하시겠습니까?";
-					app.openDialog("dialog/registerPopup", {
+					app.openDialog("dialog/memberPopup", {
 						width: 400, height: 300, headerClose: true, resizable: false
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -181,7 +180,6 @@
 			function onSub_findPswdSubmitSuccess(e){
 				var sub_findPswd = e.control;
 				var opbFindPswdNotice = app.lookup("opbFindPswdNotice");
-				var dataSet = app.lookup("ds_member");
 				
 				var metadataOk = sub_findPswd.getMetadata("ok"); 	// Controller측에서 입력한 정보에 따른 비밀번호를 조회하여 ok(조회 성공)인 경우
 				var metadataFail = sub_findPswd.getMetadata("fail"); 	// Controller측에서 입력한 정보에 따른 비밀번호를 조회하여 fail(조회 불가)인 경우
@@ -253,16 +251,14 @@
 			var submission_1 = new cpr.protocols.Submission("sub_findEmail");
 			submission_1.action = "/member/findEmail";
 			submission_1.addRequestData(dataMap_1);
-			submission_1.addResponseData(dataSet_1, false);
-			if(typeof onSub_findEmailSubmitSuccess2 == "function") {
-				submission_1.addEventListener("submit-success", onSub_findEmailSubmitSuccess2);
+			if(typeof onSub_findEmailSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onSub_findEmailSubmitSuccess);
 			}
 			app.register(submission_1);
 			
 			var submission_2 = new cpr.protocols.Submission("sub_findPswd");
 			submission_2.action = "/member/findPassword";
 			submission_2.addRequestData(dataMap_2);
-			submission_2.addResponseData(dataSet_1, false);
 			if(typeof onSub_findPswdSubmitSuccess == "function") {
 				submission_2.addEventListener("submit-success", onSub_findPswdSubmitSuccess);
 			}
@@ -313,6 +309,7 @@
 						var tabFolder_1 = new cpr.controls.TabFolder();
 						tabFolder_1.style.header.css({
 							"border-radius" : "0px",
+							"color" : "white",
 							"font-family" : "푸른전남 Medium"
 						});
 						tabFolder_1.style.item.css({
@@ -423,6 +420,7 @@
 										"border-right-style" : "solid",
 										"border-bottom-color" : "#a0a0a0",
 										"border-left-style" : "solid",
+										"padding-left" : "10px",
 										"border-left-color" : "#a0a0a0",
 										"border-top-color" : "#a0a0a0",
 										"font-size" : "20px",
@@ -446,6 +444,7 @@
 										"border-right-style" : "solid",
 										"border-bottom-color" : "#a0a0a0",
 										"border-left-style" : "solid",
+										"padding-left" : "10px",
 										"border-left-color" : "#a0a0a0",
 										"border-top-color" : "#a0a0a0",
 										"font-size" : "20px",
@@ -469,6 +468,7 @@
 										"border-right-style" : "solid",
 										"border-bottom-color" : "#a0a0a0",
 										"border-left-style" : "solid",
+										"padding-left" : "10px",
 										"border-left-color" : "#a0a0a0",
 										"border-top-color" : "#a0a0a0",
 										"font-size" : "20px",
@@ -684,6 +684,7 @@
 										"border-right-style" : "solid",
 										"border-bottom-color" : "#a0a0a0",
 										"border-left-style" : "solid",
+										"padding-left" : "10px",
 										"border-left-color" : "#a0a0a0",
 										"border-top-color" : "#a0a0a0",
 										"font-size" : "20px",
@@ -704,6 +705,7 @@
 										"border-right-style" : "solid",
 										"border-bottom-color" : "#a0a0a0",
 										"border-left-style" : "solid",
+										"padding-left" : "10px",
 										"border-left-color" : "#a0a0a0",
 										"border-top-color" : "#a0a0a0",
 										"font-size" : "20px",
@@ -726,6 +728,7 @@
 										"border-right-style" : "solid",
 										"border-bottom-color" : "#a0a0a0",
 										"border-left-style" : "solid",
+										"padding-left" : "10px",
 										"border-left-color" : "#a0a0a0",
 										"border-top-color" : "#a0a0a0",
 										"font-size" : "20px",

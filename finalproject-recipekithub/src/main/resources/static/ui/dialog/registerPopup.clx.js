@@ -155,6 +155,7 @@
 			output_1.value = "";
 			output_1.style.css({
 				"font-size" : "20px",
+				"line-height" : "2.0",
 				"text-align" : "center"
 			});
 			container.addChild(output_1, {
@@ -166,6 +167,6 @@
 			}
 		}
 	});
-	app.title = "Notice";
+	app.title = "RecipeKitHub";
 	cpr.core.Platform.INSTANCE.register(app);
 })();
