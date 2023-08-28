@@ -51,67 +51,6 @@
 			}
 
 			/*
-			 * 서브미션에서 receive 이벤트 발생 시 호출.
-			 * 서버로 부터 데이터를 모두 전송받았을 때 발생합니다.
-			 */
-			//function onRecipeBoardListReceive(e) {
-			//	var recipeBoardList = e.control;
-			//	var xhr = recipeBoardList.xhr;
-			//	var jsonData = JSON.parse(xhr.responseText);
-			//	var recipeList = jsonData.recipe_board;
-			//	var totalPostCount = jsonData.totalPostCount;
-			//	var likeCounts = jsonData.likeCounts;
-			//	console.log(likeCounts.length);
-			//	var container = app.lookup("grp");
-			//	app.lookup("recipeCount").value = totalPostCount;
-			//	for (var i = 0; i < recipeList.length; i++) {
-			//		(function(index) {
-			//			//udc 동적 생성
-			//			var recipe = new udc.recipeListudc();
-			//			//udc에서 출판한 이미지 경로 앱 속성 지정
-			//			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
-			//			recipe.hits = recipeList[i].recipeBoardHits;
-			//			recipe.nick = recipeList[i].memberVO.memberNick;
-			//			recipe.title = recipeList[i].recipeBoardTitle;
-			//			recipe.like = likeCounts[i];
-			//			container.addChild(recipe, {
-			//				height: "250px",
-			//				width: "230px",
-			//				autoSize: "both"
-			//			});
-			//			recipe.addEventListener("imgClick", function(e) {
-			//				window.location.href = "/detailRecipe?recipeBoardId=" + recipeList[index].recipeBoardId;
-			//			});
-			//		})(i);
-			//	}
-			//}	
-
-				
-				//	var recipeList = cpr.core.Platform.INSTANCE.getParameter("recipe_board");
-			//	var pagination = cpr.core.Platform.INSTANCE.getParameter("pagination");
-			//	console.log(pagination);
-			//	var container = app.lookup("grp");
-			//	app.lookup("recipeCount").value = recipeList.length;
-			//	for (var i = 0; i < recipeList.length; i++) {
-			//		(function(index) {
-			//			var recipe = new udc.recipeListudc();
-			//			recipe.img = "/upload/recipe/" + recipeList[i].recipeBoardImage;
-			//			console.log(recipeList.img);
-			//			recipe.hits = recipeList[i].recipeBoardHits;
-			//			recipe.nick = recipeList[i].memberVO.memberNick;
-			//			recipe.title = recipeList[i].recipeBoardTitle;
-			//			container.addChild(recipe, {
-			//				height: "250px",
-			//				width: "230px",
-			//				autoSize: "both"
-			//			});
-			//			recipe.addEventListener("imgClick", function(e) {
-			//				window.location.href = "/detailRecipe?recipeBoardId=" + recipeList[index].recipeBoardId;
-			//			});
-			//		})(i);
-			//	}
-
-			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
@@ -281,6 +220,7 @@
 			// UI Configuration
 			var userDefinedControl_1 = new udc.header3("headerUdc");
 			container.addChild(userDefinedControl_1, {
+				"autoSize": "none",
 				"width": "1920px",
 				"height": "200px"
 			});
@@ -515,7 +455,8 @@
 			container.addChild(group_4, {
 				"autoSize": "height",
 				"width": "1220px",
-				"height": "768px"
+				"height": "400px",
+				"minHeight": 400
 			});
 			
 			var pageIndexer_1 = new cpr.controls.PageIndexer("page");
@@ -527,12 +468,14 @@
 				pageIndexer_1.addEventListener("selection-change", onPageSelectionChange);
 			}
 			container.addChild(pageIndexer_1, {
+				"autoSize": "none",
 				"width": "320px",
 				"height": "40px"
 			});
 			
 			var userDefinedControl_2 = new udc.footer();
 			container.addChild(userDefinedControl_2, {
+				"autoSize": "none",
 				"width": "1920px",
 				"height": "100px"
 			});
