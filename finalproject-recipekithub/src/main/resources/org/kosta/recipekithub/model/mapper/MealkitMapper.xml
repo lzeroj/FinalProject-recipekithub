@@ -94,16 +94,19 @@ FROM (
 	group by MC.mealkit_no
 	) r on m.mealkit_no = r.mealkit_no
 	where m.status = 'Y'
-	order by COALESCE(r.av, 0) desc
 	</if>
-	<where>
+<!-- 	<where> -->
 		<if test="mealkitType != '전체'">
-			mealkit_type like '%' || #{mealkitType} || '%'
+			<!--  mealkit_type like '%' || #{mealkitType} || '%' -->
+			and mealkit_type = #{mealkitType}
 		</if>
 		<if test="searchMealkit != null and searchMealkit != ''">
 			and mealkit_name like '%' || #{searchMealkit} || '%'
 		</if>
-	</where>
+<!-- 	</where> -->
+	<if test = "sort == '별점순'">
+	order by COALESCE(r.av, 0) desc
+	</if>
 	) mk 
 	INNER JOIN member m ON mk.member_email = m.member_email
 	AND rnum BETWEEN #{pagination.startRowNumber} AND #{pagination.endRowNumber}

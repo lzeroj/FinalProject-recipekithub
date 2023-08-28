@@ -43,6 +43,11 @@
 			function onBodyLoad(e){
 				app.lookup("mealkitType").value = "전체";
 				app.lookup("sort").value = "최신순";
+				
+				//var dataMap = app.lookup("mePage");
+				//var page = dataMap.getValue("pageNo");
+				//alert("page = " + page);
+				
 				app.lookup("mealkitBoardList").send();
 				
 
@@ -75,20 +80,25 @@
 				var sort = e.control;
 				app.lookup("sort").value = "최신순";
 				app.lookup("page").currentPageIndex = 1;
+				
+			//	var data = app.lookup("meCategory");
+			//	var value = data.getValue("mealkitType");
+			//	alert("value = " + value);
+				
 				app.lookup("mealkitBoardList").send();
 			}
 
-			/*
-			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
-			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
-			 */
-			function onIngreSelectionChange(e){
-				var ingre = e.control;
-				app.lookup("sort").value = "최신순";
-				app.lookup("page").currentPageIndex = 1;
-				app.lookup("mealkitBoardList").send();
-				
-			}
+			///*
+			// * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			// * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			// */
+			//function onIngreSelectionChange(e){
+			//	var ingre = e.control;
+			//	app.lookup("sort").value = "최신순";
+			//	app.lookup("page").currentPageIndex = 1;
+			//	app.lookup("mealkitBoardList").send();
+			//	
+			//}
 
 			/*
 			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
@@ -129,8 +139,6 @@
 				var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
 				var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
 				
-
-				
 				//app.lookup(id)	
 				var email = cpr.core.Platform.INSTANCE.getParameter("member");
 				console.log("email = " + email);
@@ -140,12 +148,9 @@
 					button.redraw();
 				}
 				
-				//app.lookup("page").totalRowCount = ;
-				app.lookup("grp").removeAllChildren();
-				
 				app.lookup("mealkitCnt").value = totalMealkitCnt;
 				app.lookup("page").totalRowCount = totalMealkitCnt;
-				//console.log("mealkitList = " + mealkitList);
+				app.lookup("grp").removeAllChildren();
 				var container = app.lookup("grp");
 				for (var i = 0; i < mealkitAllList.length; i++) {
 					(function(index) {
@@ -168,6 +173,7 @@
 					})(i);
 					
 				}
+			}
 			/* 초기
 				var cnt = app.lookup("mealkitCnt");
 				cnt.value = mealkitList.length;
@@ -194,7 +200,7 @@
 					})(i);
 				}
 			*/	
-			}	
+				
 				
 			//function filterMealkit(e){
 			//	var filter = e.control;

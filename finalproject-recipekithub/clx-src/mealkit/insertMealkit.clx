@@ -138,6 +138,7 @@
           <cl:item std:sid="t-item-ec616909" label="한식" value="한식"/>
           <cl:item std:sid="t-item-e3ebd476" label="양식" value="양식"/>
           <cl:item std:sid="t-item-7d29abe9" label="중식/일식" value="중식/일식"/>
+          <cl:item std:sid="t-item-bdf73f36" label="분식" value="분식"/>
           <cl:item std:sid="t-item-ae02404a" label="동남아" value="동남아"/>
           <cl:item std:sid="t-item-8608831a" label="에어프라이어" value="에어프라이어"/>
         </cl:combobox>
@@ -177,6 +178,7 @@
         <cl:xylayoutdata std:sid="xyl-data-ce4c196e" top="831px" left="389px" width="104px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:button std:sid="button-8b76c874" style="background-color:#0ca44e; color:white; font-size:17px; background-image:none;" class=".cl-button mealkitbtn" value="취소">
+        <cl:listener std:sid="listener-9fc7de1d" name="click" handler="onButtonClick3"/>
         <cl:xylayoutdata std:sid="xyl-data-47c9b50e" top="831px" left="503px" width="111px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:group std:sid="group-756e860d">
