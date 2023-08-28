@@ -247,7 +247,7 @@
 						var group_5 = new cpr.controls.Container();
 						group_5.style.css({
 							"border-radius" : "50px",
-							"background-color" : "#0A8C43"
+							"background-color" : "#14974C"
 						});
 						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
 						group_5.setLayout(xYLayout_4);
@@ -406,6 +406,20 @@
 						"left": "0px",
 						"width": "1920px",
 						"height": "200px"
+					});
+					var group_12 = new cpr.controls.Container();
+					group_12.style.css({
+						"background-size" : "cover",
+						"background-image" : "url('theme/images/common/bgimgfinal.png')",
+						"background-position" : "center"
+					});
+					var xYLayout_9 = new cpr.controls.layouts.XYLayout();
+					group_12.setLayout(xYLayout_9);
+					container.addChild(group_12, {
+						"top": "199px",
+						"left": "0px",
+						"width": "1920px",
+						"height": "775px"
 					});
 				})(group_2);
 				container.addChild(group_2, {

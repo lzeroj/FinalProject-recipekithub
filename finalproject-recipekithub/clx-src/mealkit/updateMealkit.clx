@@ -220,32 +220,6 @@
     <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
       <cl:xylayoutdata std:sid="xyl-data-f0e0c718" top="-1px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
     </cl:udc>
-    <cl:group std:sid="group-53fdc39a" style="background-color:#6A8B41;">
-      <cl:xylayoutdata std:sid="xyl-data-8a2a9d28" bottom="-535px" width="1920px" height="70px" horizontalAnchor="CENTER" verticalAnchor="BOTTOM"/>
-      <cl:img std:sid="image-0dc9370c" src="../theme/images/common/footerLogo3.png">
-        <cl:formdata std:sid="f-data-eeb1aa08" row="0" col="0"/>
-      </cl:img>
-      <cl:group std:sid="group-dbf01117">
-        <cl:formdata std:sid="f-data-39030415" row="0" col="2"/>
-        <cl:output std:sid="output-b9ac6351" style="border-right-style:none; color:#F4FAEC; border-bottom-color:#ffffff; font-weight:bolder; border-left-style:none; font-size:20px; border-bottom-style:solid; border-top-style:none;" value="Team HI-FIVE">
-          <cl:formdata std:sid="f-data-8627a0eb" row="0" col="0"/>
-        </cl:output>
-        <cl:output std:sid="output-dbc9a072" style="color:#F4FAEC; font-weight:bolder;" value="금동준&#x9; 심현준&#x9; 엄용식&#x9;  임영준">
-          <cl:formdata std:sid="f-data-49939140" row="1" col="0" rowspan="1" colspan="1"/>
-        </cl:output>
-        <cl:formlayout std:sid="f-layout-b6500cc2" scrollable="false" hspace="10px" vspace="5px" top-margin="5px" right-margin="0px" bottom-margin="0px" left-margin="0px">
-          <cl:rows length="30" unit="PIXEL"/>
-          <cl:rows length="1" unit="FRACTION"/>
-          <cl:columns length="330" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-        </cl:formlayout>
-      </cl:group>
-      <cl:formlayout std:sid="f-layout-86f5bd20" scrollable="false" hspace="50px" vspace="30px" top-margin="0px" right-margin="50px" bottom-margin="0px" left-margin="50px">
-        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
-        <cl:columns length="400" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
-        <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
-        <cl:columns length="400" unit="PIXEL"/>
-      </cl:formlayout>
-    </cl:group>
     <cl:xylayout std:sid="xylayout-01adf7b6"/>
   </body>
   <std:studiosetting>

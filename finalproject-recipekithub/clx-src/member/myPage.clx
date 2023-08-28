@@ -66,7 +66,7 @@
             <cl:menuitem std:sid="m-item-daee6a4f" label="밀키트찜" value="3"/>
             <cl:menuitem std:sid="m-item-437c11be" label="문의하기" value="4"/>
           </cl:navigationbar>
-          <cl:group std:sid="group-1ed10915" style="border-radius:50px; background-color:#0A8C43;">
+          <cl:group std:sid="group-1ed10915" style="border-radius:50px; background-color:#14974C;">
             <cl:xylayoutdata std:sid="xyl-data-ba8a8324" top="41px" right="36px" width="400px" height="350px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
             <cl:group std:sid="group-8003b2a0" style="background-color:#FFFFFF; border-radius:40px;">
               <cl:xylayoutdata std:sid="xyl-data-5817fe4c" top="10px" right="10px" width="380px" height="330px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
@@ -126,6 +126,10 @@
         <cl:udc std:sid="ud-control-2ffb8604" type="udc.myPageHeader">
           <cl:xylayoutdata std:sid="xyl-data-1c196913" top="0px" left="0px" width="1920px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:udc>
+        <cl:group std:sid="group-e170f311" style="background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
+          <cl:xylayoutdata std:sid="xyl-data-2e9624c6" top="199px" left="0px" width="1920px" height="775px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayout std:sid="xylayout-509c5d9d"/>
+        </cl:group>
         <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-832eec77"/>

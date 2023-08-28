@@ -204,20 +204,19 @@ public class MemberController {
 		return new JSONDataView();
 	}
 
+	
 	// ---[ 회원정보 수정 ]---//
 	@RequestMapping("/updateMember")
 	public View updateMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest,
 			String cartDetailQuantity, String mealkitName) throws Exception {
-		// 로그인 상태 여부 확인
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
-			log.debug("---[로그인 상태가 아니므로 회원 정보 수정이 불가합니다.]---");
+			System.out.println("---[로그인 상태가 아니므로 회원 정보 수정이 불가합니다.]---");
 			return new UIView("ui/member/login-form.clx");
 		}
-
+		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-
-		// myProfile.clx에서 서브미션(sub_update)을 통해 요청 데이터(데이터맵 : dm_update)을 전달 받음
+		
 		ParameterGroup param = dataRequest.getParameterGroup("dm_update");
 		String memberEmail = param.getValue("memberEmail");
 		String memberPassword = param.getValue("memberPassword");
@@ -228,42 +227,7 @@ public class MemberController {
 		String memberPostcode = param.getValue("memberPostcode");
 		String memberAddress = param.getValue("memberAddress");
 		String memberAddressDetail = param.getValue("memberAddressDetail");
-		//String memberImage = param.getValue("memberImage");
-
-//		// Check if a new image has been uploaded
-//		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
-//		if (uploadFiles != null && uploadFiles.containsKey("memberImage")) {
-//		    UploadFile[] uploadFile = uploadFiles.get("memberImage");
-//
-//		    // Check if the uploadFile array is not null and has at least one file
-//		    if (uploadFile != null && uploadFile.length > 0) {
-//		        // Delete the old image file if it exists
-//		        if (memberImage != null) {
-//		            File existImageFile = new File("C:\\upload\\profile\\" + memberImage);
-//		            if (existImageFile.exists()) {
-//		                existImageFile.delete();
-//		            }
-//		        }
-//
-//		        // Upload the new image
-//		        File orgName = uploadFile[0].getFile();
-//		        String saveName = uploadFile[0].getFileName();
-//		        String savePath = "C:\\upload\\profile\\";
-//		        String uuid = UUID.randomUUID().toString();
-//
-//		        // Copy the new file to the desired location
-//		        FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-//
-//		        // Update the member's image
-//		        member.setMemberImage(uuid + "_" + saveName);
-//		        memberImage = member.getMemberImage();
-//		    }
-//		}
 		
-	   // if (!memberImage.isEmpty()) {
-
-		
-		// 프로필 사진 등록
 		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
 		UploadFile[] uploadFile = uploadFiles.get("memberImage");
 		File orgName = uploadFile[0].getFile();
@@ -273,37 +237,38 @@ public class MemberController {
 		String savePath = "C:\\upload\\profile\\";
 		String uuid = UUID.randomUUID().toString();
 		FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-
+		
 		member.setMemberImage(uuid + "_" + saveName);
 		String memberImage = member.getMemberImage();
-
-		// 프로필 사진 변경 : 사진을 변경했으면 삭제 후 저장
-		if (uploadFiles.size() != 0) {
-			if (memberImage != null) {
-				File existImageFile = new File(savePath + memberImage);
-				if (existImageFile.exists()) {
-					existImageFile.delete();
+		
+		// 사진을 변경했으면 삭제 후 저장
+				if (uploadFiles.size() != 0) {
+					if (memberImage != null) {
+						File existImageFile = new File(savePath + memberImage);
+						if (existImageFile.exists()) {
+							existImageFile.delete();
+						}
+					}
+					uploadFile = uploadFiles.get("memberImage");
+					orgName = uploadFile[0].getFile();
+					saveName = uploadFile[0].getFileName();
+					System.out.println(saveName);
+					FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
+					member.setMemberImage(uuid + "_" + saveName);
 				}
-			}
-			uploadFile = uploadFiles.get("memberImage");
-			orgName = uploadFile[0].getFile();
-			saveName = uploadFile[0].getFileName();
-			log.debug("프로필 사진 saveName {}", saveName);
-			FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-			member.setMemberImage(uuid + "_" + saveName);
-		}
-	    
+		
+		//int insertImgResult = memberService.insertProfileImg(memberEmail, memberImage);
+		//log.debug("member 프로필 사진 등록/수정 성공여부(if '1' succes) : {}", insertImgResult);
 		
 		MemberVO memberVO = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode,
 				memberAddress, memberAddressDetail, memberPhone, memberBirthday, null, null, null, memberImage);
 		log.debug("member 정보 : {}", memberVO);
 
-		// 회원 객체 정보가 정상적으로 생성되면 회원 정보 업데이트 메서드 호출
 		if (memberVO != null) {
 			int result = memberService.updateMember(memberVO);
 			log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
 		}
-
+		
 		dataRequest.setResponse("ds_profile", memberVO);
 		return new JSONDataView();
 	}

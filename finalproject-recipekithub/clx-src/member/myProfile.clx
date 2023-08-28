@@ -70,7 +70,7 @@
         <cl:listener std:sid="listener-86c6f206" name="submit-success" handler="onSub_profileSubmitSuccess"/>
         <cl:responsedata dataid="ds_profile"/>
       </cl:submission>
-      <cl:submission std:sid="submission-ab199ee6" id="sub_update" action="/member/updateMember">
+      <cl:submission std:sid="submission-ab199ee6" id="sub_update" action="/member/updateMember" mediatype="multipart/form-data">
         <cl:listener std:sid="listener-93c1fbf7" name="submit-success" handler="onSub_updateSubmitSuccess"/>
         <cl:requestdata dataid="dm_update"/>
         <cl:responsedata dataid="ds_profile"/>

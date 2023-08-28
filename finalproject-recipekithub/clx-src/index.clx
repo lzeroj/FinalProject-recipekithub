@@ -23,9 +23,9 @@
         <cl:verticaldata std:sid="v-data-6489a537" width="1920px" height="210px"/>
         <cl:property name="embe" value="ea1" type="control"/>
       </cl:udc>
-      <cl:group std:sid="group-19106c56" style="background-color:transparent; background-size:cover; background-image:url(theme/images/common/bgimgfinal.png); background-position:center;">
+      <cl:group std:sid="group-19106c56" style="background-color:#F4FAEC; background-size:cover; background-position:center;">
         <cl:verticaldata std:sid="v-data-371fd84c" width="1920px" height="762px" syncminheight="true" autosize="height"/>
-        <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1">
+        <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1" style="background-repeat:repeat; background-size:contain; background-image:url('theme/images/common/bgimg1880_720.png');">
           <cl:verticaldata std:sid="v-data-c0fa0993" width="1880px" height="720px" autosize="height"/>
         </cl:embeddedapp>
         <cl:verticallayout std:sid="v-layout-c4fbb140" scrollable="false" spacing="20" leftmargin="20" rightmargin="20" topmargin="20" bottommargin="20"/>

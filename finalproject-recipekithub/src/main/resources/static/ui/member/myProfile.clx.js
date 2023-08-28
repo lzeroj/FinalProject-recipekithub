@@ -19,7 +19,7 @@
 			 *
 			 * @author kjoon
 			 ************************************************/
-
+			/*
 			function getTimedSessionData(key) {
 				var storedData = sessionStorage.getItem(key);
 				
@@ -35,6 +35,7 @@
 				}
 				return null;
 			}
+			*/
 
 			/*
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
@@ -214,7 +215,6 @@
 			}
 
 
-
 			/*
 			 * "수정" 버튼(btnMemUpdate)에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
@@ -246,15 +246,6 @@
 				dataMap.setValue("memberAddressDetail", memberAddressDetail);
 				dataMap.setValue("memberImage", memberImage);
 				
-				// Flag to track if the file input has changed
-				//var fileChanged = false;
-				
-				// Attach an event listener to the file input to set the flag when the file changes
-				//var fileInput = app.lookup("fi1");
-				//fileInput.addEventListener("change", function() {
-				//    fileChanged = true;
-				//});
-				
 				var fileInput = app.lookup("fi1");
 				var file = fileInput.file;
 				
@@ -279,7 +270,7 @@
 				
 				// 1. 프로필 조회/수정 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
 				if (initValue) {		
-					app.openDialog("dialog/memberChkPopup", {
+					app.openDialog("dialog/registerChkPopup", {
 						width: 400, height: 300, headerClose: true
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -289,7 +280,7 @@
 				// 2. 프로필 조회/수정 양식이 전부 유효하게 작성되어 있는 경우, 프로필 수정 서브미션 전송	
 				} else {		
 					initValue = "회원정보를 수정하시겠습니까?";
-					app.openDialog("dialog/memberPopup", {
+					app.openDialog("dialog/registerPopup", {
 						width: 400, height: 300, headerClose: true, resizable: false
 					}, function(dialog) {
 						dialog.ready(function(dialogApp) {
@@ -297,19 +288,14 @@
 						});
 					}).then(function(returnValue) {
 						var subUpdate = app.lookup("sub_update");
-			       		subUpdate.addFileParameter("memberImage", file);
-						
-						//if (fileChanged) {
-			       	 	//	var file = fileInput.file;
-			        	//	subUpdate.addFileParameter("memberImage", file);
-			        	//	fileChanged = false;
-			    		//}
-						//subUpdate.addFileParameter("memberImage", file);
-						
+						//var submission = app.lookup("sub_insert_image");
+						subUpdate.addFileParameter("memberImage", file);
 						subUpdate.send();
+						//submission.send();
 					});
 				}
 			}
+
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
@@ -721,6 +707,7 @@
 			
 			var submission_2 = new cpr.protocols.Submission("sub_update");
 			submission_2.action = "/member/updateMember";
+			submission_2.mediaType = "multipart/form-data";
 			submission_2.addRequestData(dataMap_2);
 			submission_2.addResponseData(dataSet_1, false);
 			if(typeof onSub_updateSubmitSuccess == "function") {
