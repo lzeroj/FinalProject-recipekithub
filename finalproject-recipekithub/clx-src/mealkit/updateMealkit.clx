@@ -47,11 +47,21 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-ab2bbb72" style="color:white;">
+  <body std:sid="body-ab2bbb72" style="background-color:#F4FAEC; color:white; font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-76a265cc" name="init" handler="onBodyInit2"/>
     <cl:listener std:sid="listener-2aec8081" name="load" handler="onBodyLoad"/>
-    <cl:group std:sid="group-fc26d059">
-      <cl:xylayoutdata std:sid="xyl-data-bbcf1eee" top="209px" width="984px" height="970px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+    <cl:group std:sid="group-f16d53ce" style="background-size:cover; background-image:url(../theme/images/common/bgimg1880_720.png); background-position:center;">
+      <cl:xylayoutdata std:sid="xyl-data-7a3654a8" top="205px" right="0px" left="0px" height="980px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:xylayout std:sid="xylayout-7754a227"/>
+    </cl:group>
+    <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
+      <cl:xylayoutdata std:sid="xyl-data-f0e0c718" top="0px" right="0px" left="0px" height="205px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:udc>
+    <cl:udc std:sid="ud-control-4d915fc3" type="udc.footer">
+      <cl:xylayoutdata std:sid="xyl-data-95210c47" top="1178px" left="0px" width="1920px" height="100px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:udc>
+    <cl:group std:sid="group-fc26d059" style="background-color:#FFFFFF; border-radius:20px;">
+      <cl:xylayoutdata std:sid="xyl-data-bbcf1eee" top="209px" width="984px" height="959px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:group std:sid="group-79300f65" style="background-color:#F9F9F9;">
         <cl:xylayoutdata std:sid="xyl-data-31215747" top="39px" width="864px" height="81px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
         <cl:output std:sid="output-7b3ee401" style="color:#0CA44E; font-weight:bolder; font-size:20px; font-style:normal;" value="밀키트 수정">
@@ -214,9 +224,6 @@
       </cl:img>
       <cl:xylayout std:sid="xylayout-9ecb7632"/>
     </cl:group>
-    <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
-      <cl:xylayoutdata std:sid="xyl-data-f0e0c718" top="-1px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
-    </cl:udc>
     <cl:xylayout std:sid="xylayout-01adf7b6"/>
   </body>
   <std:studiosetting>

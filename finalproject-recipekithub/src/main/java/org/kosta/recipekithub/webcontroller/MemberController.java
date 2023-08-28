@@ -145,7 +145,6 @@ public class MemberController {
 	public View checkEmail(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
 			throws Exception {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_check_email");
-		// ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
 		String memberEmail = param.getValue("member_email");
 		int checkResult = memberService.checkDuplicateEmail(memberEmail);
 		Map<String, Object> message = new HashMap<>();
@@ -153,7 +152,6 @@ public class MemberController {
 		if (checkResult == 0) {
 			message.put("ok", "이메일 사용 가능");
 		} else if (checkResult > 0) {
-//		} else {
 			message.put("fail", "이메일 중복");
 		}
 		dataRequest.setMetadata(true, message);
@@ -174,7 +172,6 @@ public class MemberController {
 		if (checkResult == 0) {
 			message.put("ok", "닉네임 사용 가능");
 		} else if (checkResult > 0) {
-//		} else {
 			message.put("fail", "닉네임 중복");
 		}
 		dataRequest.setMetadata(true, message);
@@ -199,81 +196,79 @@ public class MemberController {
 		myProfile.add(member);
 		dataRequest.setResponse("ds_profile", myProfile);
 
-		// Map<String, Object> initParam = new HashMap<String, Object>();
-		// initParam.put("member", member);
 		return new JSONDataView();
 	}
 
-	
 	// ---[ 회원정보 수정 ]---//
-	@RequestMapping("/updateMember")
-	public View updateMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest,
-			String cartDetailQuantity, String mealkitName) throws Exception {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member") == null) {
-			System.out.println("---[로그인 상태가 아니므로 회원 정보 수정이 불가합니다.]---");
-			return new UIView("ui/member/login-form.clx");
-		}
-		
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		
-		ParameterGroup param = dataRequest.getParameterGroup("dm_update");
-		String memberEmail = param.getValue("memberEmail");
-		String memberPassword = param.getValue("memberPassword");
-		String memberName = param.getValue("memberName");
-		String memberNick = param.getValue("memberNick");
-		String memberBirthday = param.getValue("memberBirthday");
-		String memberPhone = param.getValue("memberPhone");
-		String memberPostcode = param.getValue("memberPostcode");
-		String memberAddress = param.getValue("memberAddress");
-		String memberAddressDetail = param.getValue("memberAddressDetail");
-		
-		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
-		UploadFile[] uploadFile = uploadFiles.get("memberImage");
-		File orgName = uploadFile[0].getFile();
-		String saveName = uploadFile[0].getFileName();
-		// String savePath =
-		// "C:\\kosta260\\mygit-study\\FinalProject-recipekithub\\finalproject-recipekithub\\clx-src\\theme\\uploadrecipeimage\\";
-		String savePath = "C:\\upload\\profile\\";
-		String uuid = UUID.randomUUID().toString();
-		FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-		
-		member.setMemberImage(uuid + "_" + saveName);
-		String memberImage = member.getMemberImage();
-		
-		// 사진을 변경했으면 삭제 후 저장
-				if (uploadFiles.size() != 0) {
-					if (memberImage != null) {
-						File existImageFile = new File(savePath + memberImage);
-						if (existImageFile.exists()) {
-							existImageFile.delete();
-						}
-					}
-					uploadFile = uploadFiles.get("memberImage");
-					orgName = uploadFile[0].getFile();
-					saveName = uploadFile[0].getFileName();
-					System.out.println(saveName);
-					FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-					member.setMemberImage(uuid + "_" + saveName);
-				}
-		
-		//int insertImgResult = memberService.insertProfileImg(memberEmail, memberImage);
-		//log.debug("member 프로필 사진 등록/수정 성공여부(if '1' succes) : {}", insertImgResult);
-		
-		MemberVO memberVO = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode,
-				memberAddress, memberAddressDetail, memberPhone, memberBirthday, null, null, null, memberImage);
-		log.debug("member 정보 : {}", memberVO);
+		@RequestMapping("/updateMember")
+		public View updateMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest,
+				String cartDetailQuantity, String mealkitName) throws Exception {
+			HttpSession session = request.getSession(false);
+			if (session == null || session.getAttribute("member") == null) {
+				System.out.println("---[로그인 상태가 아니므로 회원 정보 수정이 불가합니다.]---");
+				return new UIView("ui/member/login-form.clx");
+			}
+			
+			MemberVO member = (MemberVO) session.getAttribute("member");
+			
+			// myProfile.clx에서 서브미션(sub_update)을 통해 요청 데이터(데이터맵 : dm_update)을 전달 받음
+			ParameterGroup param = dataRequest.getParameterGroup("dm_update");
+			String memberEmail = param.getValue("memberEmail");
+			String memberPassword = param.getValue("memberPassword");
+			String memberName = param.getValue("memberName");
+			String memberNick = param.getValue("memberNick");
+			String memberBirthday = param.getValue("memberBirthday");
+			String memberPhone = param.getValue("memberPhone");
+			String memberPostcode = param.getValue("memberPostcode");
+			String memberAddress = param.getValue("memberAddress");
+			String memberAddressDetail = param.getValue("memberAddressDetail");
+			String memberImage = param.getValue("memberImage");
 
-		if (memberVO != null) {
-			int result = memberService.updateMember(memberVO);
-			log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
-		}
-		
-		dataRequest.setResponse("ds_profile", memberVO);
-		return new JSONDataView();
-	}
-
+			
+			// 새로운 이미지가 업로드 되었는지 확인
+			Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
+			if (uploadFiles != null && uploadFiles.containsKey("memberImage")) {
+			    UploadFile[] uploadFile = uploadFiles.get("memberImage");
 	
+			    // uploadFile 이 null이 아닌지 확인
+			    if (uploadFile != null && uploadFile.length > 0) {
+			        // 기존에 이미지가 있는 경우 삭제
+			        if (memberImage != null) {
+			            File existImageFile = new File("C:\\upload\\profile\\" + memberImage);
+			             System.out.println(existImageFile);
+			            if (existImageFile.exists()) {
+			                existImageFile.delete();
+			            }
+			        }
+	
+			        // 새로운 이미지 업로드
+			        File orgName = uploadFile[0].getFile();
+			        String saveName = uploadFile[0].getFileName();
+			        String savePath = "C:\\upload\\profile\\";
+			        String uuid = UUID.randomUUID().toString();
+
+			        // 새로운 파일을 디렉토리에 저장
+			        FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
+
+			        // 이미지 업데이트
+			        member.setMemberImage(uuid + "_" + saveName);
+			        memberImage = member.getMemberImage();
+			    }
+			}
+			
+			MemberVO memberVO = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode,
+					memberAddress, memberAddressDetail, memberPhone, memberBirthday, null, null, null, memberImage);
+			log.debug("member 정보 : {}", memberVO);
+
+			if (memberVO != null) {
+				int result = memberService.updateMember(memberVO);
+				log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
+			}
+			
+			dataRequest.setResponse("ds_profile", memberVO);
+			return new JSONDataView();
+		}
+
 	// ---[ 회원 탈퇴 ]---//
 	@RequestMapping("/deleteMember")
 	public View deleteMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
@@ -320,16 +315,11 @@ public class MemberController {
 
 	// ---[ 로그아웃 -> 메인 화면으로 이동 ]---//
 	@RequestMapping("/logout")
-	public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			session.invalidate();
 		}
-
-		// Map<String, Object> message = new HashMap<String, Object>();
-		// message.put("uri", "login/login");
-		// dataRequest.setMetadata(true, message);
 
 		return new JSONDataView();
 	}
@@ -338,8 +328,7 @@ public class MemberController {
 	@RequestMapping("/findEmail")
 	public View findEmailByNamePhoneBirthday(HttpServletRequest request, HttpServletResponse response,
 			DataRequest dataRequest) throws Exception {
-		// find-email-pswd.clx에서 서브미션(sub_findEmail)을 통해 요청 데이터(데이터맵 : dm_find_email)을
-		// 전달 받음
+		// find-email-pswd.clx에서 서브미션(sub_findEmail)을 통해 요청 데이터(데이터맵 : dm_find_email)을 전달 받음
 		ParameterGroup param = dataRequest.getParameterGroup("dm_find_email");
 		String memberName = param.getValue("member_name");
 		String memberPhone = param.getValue("member_phone");

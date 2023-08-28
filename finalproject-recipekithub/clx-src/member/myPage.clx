@@ -128,7 +128,7 @@
           <cl:xylayoutdata std:sid="xyl-data-f0467958" top="973px" bottom="0px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         </cl:udc>
         <cl:udc std:sid="ud-control-2ffb8604" type="udc.myPageHeader">
-          <cl:xylayoutdata std:sid="xyl-data-1c196913" top="0px" left="0px" width="1920px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-1c196913" top="0px" right="0px" left="0px" height="205px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         </cl:udc>
         <cl:xylayout std:sid="xylayout-a5fb0e9a"/>
       </cl:group>

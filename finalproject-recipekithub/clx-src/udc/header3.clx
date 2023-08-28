@@ -105,7 +105,7 @@
         <cl:menuitem std:sid="m-item-27ee7474" label="추천" value="recommend"/>
         <cl:menuitem std:sid="m-item-2b69ecc0" label="레시피" value="recipe"/>
         <cl:menuitem std:sid="m-item-9a247b1f" label="밀키트" value="mealkit"/>
-        <cl:menuitem std:sid="m-item-fe761a4d" label="셰프" value="chef"/>
+        <cl:menuitem std:sid="m-item-fe761a4d" label="쉐프" value="chef"/>
         <cl:barstyle style="box-shadow:10px 10px 5px 5px gray; text-align:center;" class="navbar1"/>
         <cl:itemstyle style="text-align:center;"/>
         <cl:liststyle style="background-color:transparent; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;"/>

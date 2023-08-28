@@ -481,6 +481,7 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"font-family" : "푸른전남 Medium",
 				"width" : "100%",
 				"height" : "100%"
 			});

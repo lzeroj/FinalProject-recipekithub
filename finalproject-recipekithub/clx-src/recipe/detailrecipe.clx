@@ -77,7 +77,7 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-6931a0a1" style="background-color:#F4FAEC;">
+  <body std:sid="body-6931a0a1" style="background-color:#F4FAEC; font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-aad71981" name="load" handler="onBodyLoad"/>
     <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
       <cl:verticaldata std:sid="v-data-f1832feb" width="1920px" height="200px" syncminwidth="true" autosize="none"/>

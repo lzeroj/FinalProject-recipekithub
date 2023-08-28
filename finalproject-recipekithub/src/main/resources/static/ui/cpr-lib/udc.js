@@ -1208,8 +1208,7 @@
 							sessionStorage.clear();
 							var submission = app.lookup("sub_logout");
 							submission.send();
-							var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-							httpPostMethod.submit();
+							window.location.href = "/memberUI/loginForm";
 						});
 						
 					// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
@@ -1619,7 +1618,7 @@
 						navigationBar_1.addItem(new cpr.controls.MenuItem("추천", "recommend", null));
 						navigationBar_1.addItem(new cpr.controls.MenuItem("레시피", "recipe", null));
 						navigationBar_1.addItem(new cpr.controls.MenuItem("밀키트", "mealkit", null));
-						navigationBar_1.addItem(new cpr.controls.MenuItem("셰프", "chef", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("쉐프", "chef", null));
 					})(navigationBar_1);
 					if(typeof onNavigationBarItemClick == "function") {
 						navigationBar_1.addEventListener("item-click", onNavigationBarItemClick);

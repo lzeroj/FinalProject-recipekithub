@@ -417,9 +417,10 @@
 					var userDefinedControl_2 = new udc.myPageHeader();
 					container.addChild(userDefinedControl_2, {
 						"top": "0px",
+						"right": "0px",
 						"left": "0px",
 						"width": "1920px",
-						"height": "200px"
+						"height": "205px"
 					});
 				})(group_2);
 				container.addChild(group_2, {
