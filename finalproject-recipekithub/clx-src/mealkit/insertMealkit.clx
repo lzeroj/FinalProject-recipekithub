@@ -170,6 +170,7 @@
         <cl:xylayoutdata std:sid="xyl-data-ce4c196e" top="831px" left="389px" width="104px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:button std:sid="button-8b76c874" style="background-color:#0ca44e; color:white; font-size:17px; background-image:none;" class=".cl-button mealkitbtn" value="취소">
+        <cl:listener std:sid="listener-6ed7b68c" name="click" handler="onButtonClick3"/>
         <cl:xylayoutdata std:sid="xyl-data-47c9b50e" top="831px" left="503px" width="111px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
       <cl:group std:sid="group-756e860d">

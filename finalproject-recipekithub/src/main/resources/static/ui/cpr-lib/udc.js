@@ -3028,7 +3028,7 @@
 					app.lookup("regDate").text = app.getAppProperty("regDate");
 					app.lookup("content").text = app.getAppProperty("content");
 					app.lookup("star").text = app.getAppProperty("star");
-					app.lookup("deleteBtn").visible = app.getAppProperty("deleteBtn");
+					app.lookup("deleteBtn").text = app.getAppProperty("deleteBtn");
 				}
 	
 				/*
@@ -3045,17 +3045,7 @@
 				 * "삭제" 버튼에서 click 이벤트 발생 시 호출.
 				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 				 */
-				//function onButtonClick2(e){
-				//	var button = e.control;
-				//	var event = new cpr.events.CAppEvent("deleteClick");
-				//	app.dispatchEvent(event);
-				//}
-	
-				/*
-				 * "삭제" 버튼에서 click 이벤트 발생 시 호출.
-				 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-				 */
-				function onButtonClick3(e){
+				function onButtonClick2(e){
 					var button = e.control;
 					var event = new cpr.events.CAppEvent("deleteClick");
 					app.dispatchEvent(event);
@@ -3100,15 +3090,27 @@
 				container.addChild(output_2, {
 					"top": "21px",
 					"left": "182px",
-					"width": "119px",
+					"width": "93px",
 					"height": "18px"
+				});
+				
+				var button_1 = new cpr.controls.Button("deleteBtn");
+				button_1.visible = false;
+				button_1.value = "삭제";
+				if(typeof onButtonClick2 == "function") {
+					button_1.addEventListener("click", onButtonClick2);
+				}
+				container.addChild(button_1, {
+					"top": "20px",
+					"left": "274px",
+					"width": "61px",
+					"height": "20px"
 				});
 				
 				var output_3 = new cpr.controls.Output("star");
 				output_3.value = "별점";
 				output_3.style.css({
-					"font-size" : "12px",
-					"text-align" : "left"
+					"font-size" : "12px"
 				});
 				container.addChild(output_3, {
 					"top": "22px",
@@ -3143,33 +3145,15 @@
 				});
 				
 				var image_1 = new cpr.controls.Image();
-				image_1.src = "theme/images/mealkit/free-icon-thumbs-up-8560888.png";
+				image_1.src = "theme/images/mealkit/free-icon-star-6063500.png";
 				image_1.style.css({
-					"font-size" : "12px",
-					"text-align" : "right"
+					"font-size" : "12px"
 				});
 				container.addChild(image_1, {
-					"top": "20px",
+					"top": "22px",
 					"left": "129px",
 					"width": "19px",
-					"height": "20px"
-				});
-				
-				var button_1 = new cpr.controls.Button("deleteBtn");
-				button_1.value = "삭제";
-				button_1.style.css({
-					"background-color" : "transparent",
-					"font-weight" : "normal",
-					"background-image" : "none"
-				});
-				if(typeof onButtonClick3 == "function") {
-					button_1.addEventListener("click", onButtonClick3);
-				}
-				container.addChild(button_1, {
-					"top": "20px",
-					"left": "800px",
-					"width": "114px",
-					"height": "20px"
+					"height": "15px"
 				});
 				if(typeof onBodyLoad == "function"){
 					app.addEventListener("load", onBodyLoad);
