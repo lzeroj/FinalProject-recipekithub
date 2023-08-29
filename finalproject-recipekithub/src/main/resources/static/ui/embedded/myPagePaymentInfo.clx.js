@@ -537,7 +537,7 @@
 							"rowSpan": 1
 						});
 						var output_8 = new cpr.controls.Output();
-						output_8.value = "주문자 명";
+						output_8.value = "밀키트 명";
 						output_8.style.css({
 							"background-color" : "#0ebc59",
 							"color" : "#FFFFFF",

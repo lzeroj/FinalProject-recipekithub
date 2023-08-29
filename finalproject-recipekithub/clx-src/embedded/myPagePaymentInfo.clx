@@ -130,7 +130,7 @@
             <cl:relativebind property="value" category="PROPERTY" columnname="paymentDate"/>
             <cl:formdata std:sid="f-data-08551bf3" row="2" col="1" rowspan="1" colspan="1"/>
           </cl:output>
-          <cl:output std:sid="output-4ddea93d" style="background-color:#0ebc59; color:#FFFFFF; font-weight:300; background-image:none; text-align:center;" value="주문자 명">
+          <cl:output std:sid="output-4ddea93d" style="background-color:#0ebc59; color:#FFFFFF; font-weight:300; background-image:none; text-align:center;" value="밀키트 명">
             <cl:formdata std:sid="f-data-98520172" row="1" col="0"/>
           </cl:output>
           <cl:output std:sid="output-d8152fb1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:300; background-image:none; text-align:center;" value="결제 일자">
