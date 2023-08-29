@@ -23,6 +23,8 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
+				// 콤보박스 디폴트 설정
+				app.lookup("cmb1").selectItemByValue("a"); 
 				app.lookup("myPaymentListOnload").send();
 			}
 
@@ -258,7 +260,7 @@
 						comboBox_1.showIcon = true;
 						comboBox_1.preventInput = true;
 						(function(comboBox_1){
-							comboBox_1.addItem(new cpr.controls.Item("----------", ""));
+							comboBox_1.addItem(new cpr.controls.Item("----------", "a"));
 							comboBox_1.addItem(new cpr.controls.Item("결제일자", "paymentDate"));
 							comboBox_1.addItem(new cpr.controls.Item("밀키트 이름", "mealkitName"));
 						})(comboBox_1);
@@ -318,8 +320,9 @@
 										cell.filterable = false;
 										cell.sortable = false;
 										cell.style.css({
-											"background-color" : "#90be70",
-											"color" : "#FFFFFF"
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"background-image" : "none"
 										});
 									}
 								},
@@ -330,9 +333,10 @@
 										cell.sortable = false;
 										cell.text = "주문 목록";
 										cell.style.css({
-											"background-color" : "#90be70",
+											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"background-image" : "none"
 										});
 									}
 								},
@@ -344,9 +348,10 @@
 										cell.targetColumnName = "paymentDate";
 										cell.text = "주문 날짜";
 										cell.style.css({
-											"background-color" : "#90be70",
+											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"background-image" : "none"
 										});
 									}
 								},
@@ -356,11 +361,12 @@
 										cell.filterable = false;
 										cell.sortable = false;
 										cell.targetColumnName = "paymentTotal";
-										cell.text = "총 가격";
+										cell.text = "총 가격(원)";
 										cell.style.css({
-											"background-color" : "#90be70",
+											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"background-image" : "none"
 										});
 									}
 								}
@@ -389,6 +395,9 @@
 										cell.suppressible = true;
 										cell.control = (function(){
 											var dateInput_1 = new cpr.controls.DateInput("dti1");
+											dateInput_1.style.css({
+												"text-align" : "center"
+											});
 											dateInput_1.bind("value").toDataColumn("paymentDate");
 											return dateInput_1;
 										})();
@@ -473,6 +482,10 @@
 						var output_3 = new cpr.controls.Output();
 						output_3.value = "결제 번호";
 						output_3.style.css({
+							"background-color" : "#0ebc59",
+							"color" : "#FFFFFF",
+							"font-weight" : "300",
+							"background-image" : "none",
 							"text-align" : "center"
 						});
 						container.addChild(output_3, {
@@ -482,6 +495,10 @@
 						var output_4 = new cpr.controls.Output();
 						output_4.value = "총 가격";
 						output_4.style.css({
+							"background-color" : "#0ebc59",
+							"color" : "#FFFFFF",
+							"font-weight" : "300",
+							"background-image" : "none",
 							"text-align" : "center"
 						});
 						container.addChild(output_4, {
@@ -489,12 +506,18 @@
 							"rowIndex": 0
 						});
 						var output_5 = new cpr.controls.Output();
+						output_5.style.css({
+							"text-align" : "center"
+						});
 						output_5.bind("value").toDataColumn("paymentId");
 						container.addChild(output_5, {
 							"colIndex": 1,
 							"rowIndex": 0
 						});
 						var output_6 = new cpr.controls.Output();
+						output_6.style.css({
+							"text-align" : "center"
+						});
 						output_6.bind("value").toDataColumn("mealkitName");
 						container.addChild(output_6, {
 							"colIndex": 1,
@@ -503,6 +526,9 @@
 							"rowSpan": 1
 						});
 						var output_7 = new cpr.controls.Output();
+						output_7.style.css({
+							"text-align" : "center"
+						});
 						output_7.bind("value").toDataColumn("paymentDate");
 						container.addChild(output_7, {
 							"colIndex": 1,
@@ -513,6 +539,10 @@
 						var output_8 = new cpr.controls.Output();
 						output_8.value = "주문자 명";
 						output_8.style.css({
+							"background-color" : "#0ebc59",
+							"color" : "#FFFFFF",
+							"font-weight" : "300",
+							"background-image" : "none",
 							"text-align" : "center"
 						});
 						container.addChild(output_8, {
@@ -522,6 +552,10 @@
 						var output_9 = new cpr.controls.Output();
 						output_9.value = "결제 일자";
 						output_9.style.css({
+							"background-color" : "#0ebc59",
+							"color" : "#FFFFFF",
+							"font-weight" : "300",
+							"background-image" : "none",
 							"text-align" : "center"
 						});
 						container.addChild(output_9, {
@@ -542,6 +576,10 @@
 						var output_11 = new cpr.controls.Output();
 						output_11.value = "상세 구매정보";
 						output_11.style.css({
+							"background-color" : "#0ebc59",
+							"color" : "#FFFFFF",
+							"font-weight" : "300",
+							"background-image" : "none",
 							"text-align" : "center"
 						});
 						container.addChild(output_11, {
@@ -551,6 +589,9 @@
 							"rowSpan": 2
 						});
 						var output_12 = new cpr.controls.Output();
+						output_12.style.css({
+							"text-align" : "center"
+						});
 						output_12.bind("value").toDataColumn("mealkitdetailinfo");
 						container.addChild(output_12, {
 							"colIndex": 3,

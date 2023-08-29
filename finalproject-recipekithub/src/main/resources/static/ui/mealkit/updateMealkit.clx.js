@@ -7,6 +7,9 @@
 (function() {
 	var app = new cpr.core.App("mealkit/updateMealkit", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/custom-theme.css");
+			loader.addCSS("theme/custom/member.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -17,6 +20,22 @@
 			 *
 			 * @author KOSTA
 			 ************************************************/
+			//세션
+			function getTimedSessionData(key) {
+				var storedData = sessionStorage.getItem(key);
+				
+				if (storedData) {
+					var data = JSON.parse(storedData);
+					var currentTime = new Date().getTime();
+					
+					if (currentTime < data.expirationTime) {
+						return data.value;
+					} else {
+						sessionStorage.removeItem(key);
+					}
+				}
+				return null;
+			}
 
 			/*
 			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
@@ -31,8 +50,6 @@
 			            app.lookup("sampleThr").redraw();
 			        }); 
 			    });
-
-
 			}
 
 
@@ -77,7 +94,6 @@
 			        });
 			        $("#summernote").summernote('code', mealkitInfo);
 			    }
-
 			}
 
 
@@ -91,76 +107,87 @@
 				var dataMap = app.lookup("updateMealkit");	
 			  	vsOpt.value = $('#summernote').summernote('code');
 			   	var message = vsOpt.value;
-			   	 var submission = app.lookup("updateMealkitSub");
+			   	var submission = app.lookup("updateMealkitSub");
 			   	
 			   	var name = app.lookup("ipb1");
 			   	var ingredients = app.lookup("ipb2");
 			   	var price = app.lookup("ipb3");
 			   	var inven = app.lookup("ipb4");
+			   	var updatedIngredients= ingredients.value;
+			   	var updatedName = name.value;
+			   	var updatedPrice = price.value;
+			   	var updatedInven = inven.value;
+			   	console.log("updatedPrice, updatedInven = " + updatedPrice + ", "+ updatedInven);
+			   	console.log("price = "+ price.value +", " + typeof Number(price.value));
+			   	
+			   	var fileInput = app.lookup("file2");
+				var file = fileInput.file;
+				var img = app.lookup("updateImg");
+				//alert("이미지 file = " + file);
 			   	
 			   	var combo1 = app.lookup("cmb1").text;
 			   	var combo2 = app.lookup("cmb2").text;
 			   	var combo3 = app.lookup("cmb3").text;
+			   	var type = app.lookup("type").text;
 			   	var category = combo1+"/"+combo2+"/"+combo3;
 			   	
-				dataMap.setValue("mealkitName", name);
+				dataMap.setValue("mealkitName", updatedName);
 				dataMap.setValue("mealkitInfo", message);
-				dataMap.setValue("mealkitIngredients", ingredients);
-				dataMap.setValue("mealkitPrice", price);
-				dataMap.setValue("mealkitInventory", inven);
+				dataMap.setValue("mealkitIngredients", updatedIngredients);
+				dataMap.setValue("mealkitPrice", updatedPrice);
+				dataMap.setValue("mealkitInventory", updatedInven);
 				dataMap.setValue("mealkitCategory", category);
+				dataMap.setValue("mealkitType", type);
 				var fileInput = app.lookup("file2");
 				var file = fileInput.file;
 				var image = app.lookup("updateImg");
 				
-				if(confirm("수정하시겠습니까?")){
-					if(name.value == null || name.value.trim().length == 0){
-			 			alert("밀키트 이름을 입력해주세요.");
-			 			name.focus();
-			 			return;
-			 		}else if(combo1.length == 0 || combo2.length == 0 || combo3.length == 0){
-			 			alert("카테고리를 반드시 선택해주세요.");
-			 			return ;
-			 		
-			 		}else if(ingredients.value == null || ingredients.value.trim().length == 0){
-			 			alert("밀키트 성분을 입력해주세요.");
-			 			ingredients.focus();
-			 			return;
-			 	
-			 		}else if(message == null || message.trim().length == 0){
-			 			
-			 			alert("밀키트 정보를 입력해주세요.");
-			 			console.log("왜 안 먹지?");
-			 			//e.preventDefault();
-			 			return;
-			 		}else if(price.value == null || price.value == ""){
-			 			alert("밀키트 가격을 입력해주세요.");
-			 			price.focus();
-			 			return;
-			 		
-			 		}else if(Number(price.value) <= 0 || isNaN(price.value)){
-			 			alert("밀키트 가격은 숫자만 입력이 가능합니다. 다시 확인해주세요.");
-			 			price.value = "";
-			 			price.focus();
-			 			return;
-			 		}else if(inven.value == null || inven.value == ""){
-			 			alert("밀키트 수량을 입력해주세요.");
-			 			inven.focus();
-			 			return;
-			 		
-			 		}else if(Number(inven.value) <= 0 || isNaN(inven.value)){
-			 			alert("밀키트 수량은 숫자만 입력이 가능합니다. 다시 확인해주세요");
-			 			inven.value = "";
-			 			inven.focus();
-			 			return;
-			 		}else{
-			 			submission.addFileParameter("image", file);
-						submission = app.lookup("updateMealkitSub").send();
-			 		}
-			 	}
-				
-				
-
+				if (name.value == null || name.value.trim().length == 0) {
+					alert("밀키트 이름을 입력해주세요.");
+					name.focus();
+					return;
+				} else if (combo1.length == 0 || combo2.length == 0 || combo3.length == 0) {
+					alert("카테고리를 반드시 선택해주세요.");
+					return;
+				} else if (ingredients.value == null || ingredients.value.trim().length == 0) {
+					alert("밀키트 성분을 입력해주세요.");
+					ingredients.focus();
+					return;
+				} else if (message == null || message.trim().length == 0) {
+					alert("밀키트 정보를 입력해주세요.");
+					console.log("왜 안 먹지?");
+					//e.preventDefault();
+					return;
+				} else if (price.value == null || price.value == "") {
+					alert("밀키트 가격을 입력해주세요.");
+					price.focus();
+					return;
+					
+				} else if (inven.value == null || inven.value == "") {
+					alert("밀키트 수량을 입력해주세요.");
+					inven.focus();
+					return;
+				} else if (type == null || type == "") {
+					alert("타입을 반드시 선택해주세요.");
+					return;
+				}else{
+			 		var initValue = {
+						"msg": "밀키트를 수정하시겠습니까?"
+					}
+					app.openDialog("dialog/recipeCheck", {
+						width: 300, height: 200, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							submission.addFileParameter("image", file);
+							app.lookup("updateMealkitSub").send();
+						}
+					});
+			 	}			
 			}
 
 			/*
@@ -169,7 +196,22 @@
 			 */
 			function onButtonClick(e){
 				var button = e.control;
-				window.location.href= "/"; //추후 상세 페이지로 바꿔야함.
+				var mealkitNo = cpr.core.Platform.INSTANCE.getParameter("mealkitNo");
+				var initValue = {
+					"msg": "변경된 사항은 변경되지 않습니다.\n취소하시겠습니까?"
+				}
+				app.openDialog("dialog/recipeCheck", {
+					width: 400, height: 300, headerClose: true
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					if (returnValue == true) {
+						window.location.href= "/mealkitDetail/"+mealkitNo;
+					}
+				});
 			}
 
 			/*
@@ -180,8 +222,6 @@
 				var updateMealkitSub = e.control;
 				var mealkitNo = updateMealkitSub.getMetadata("result");
 				alert("밀키트가 수정되었습니다.");
-				//var dataMap = app.lookup("mealkitNo");
-				//dataMap.setValue("mealkitNo", metadata);
 				var url = '/mealkitDetail/'+mealkitNo; //상세 페이지 url
 				window.location.href= url;
 			}
@@ -247,10 +287,10 @@
 				//이미지 파일 아닌 걸 넣었을 때 
 				if (fileInput.files && fileInput.files[0]) {
 					var reader = new FileReader();
-						reader.onload = function(e) {
-							image.src = e.target.result;
-						};
-						reader.readAsDataURL(fileInput.files[0]);
+					reader.onload = function(e) {
+						image.src = e.target.result;
+					};
+					reader.readAsDataURL(fileInput.files[0]);
 				}
 			}
 
@@ -263,9 +303,36 @@
 				var fileInput = app.lookup("file2");
 				var image = app.lookup("updateImg");
 				if(confirm("사진을 삭제하시겠습니까?")){
-				fileInput.clear();
-				image.src = "";
+					fileInput.clear();
+					image.src = "";
 				}
+			}
+
+			/*
+			 * 이미지에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onImageClick(e){
+				var image = e.control;
+				var dataMap = app.lookup("updateMealkit");
+				var mealkitNo = dataMap.getValue("mealkitNo");
+				var mealkitMember = dataMap.getValue("mealkitMember");
+				var sessionId = getTimedSessionData("memsession");
+				var initValue = "해당 게시물을 삭제하시겠습니까?";
+					
+				app.openDialog("dialog/memberPopup", {
+					width: 400, height: 300, headerClose: true
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					if (returnValue == true) {
+						var HttpPostMethod = new cpr.protocols.HttpPostMethod("/deleteMealkit/"+mealkitNo);
+						HttpPostMethod.submit();
+					}
+				});
 			};
 			// End - User Script
 			
@@ -284,7 +351,8 @@
 					{"name": "mealkitInventory"},
 					{"name": "mealkitCategory"},
 					{"name": "mealkitMember"},
-					{"name": "mealkitImg"}
+					{"name": "mealkitImg"},
+					{"name": "mealkitType"}
 				]
 			});
 			app.register(dataMap_1);
@@ -326,7 +394,9 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"background-color" : "#F4FAEC",
 				"color" : "white",
+				"font-family" : "푸른전남 Medium",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -337,15 +407,50 @@
 			
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
+			group_1.style.css({
+				"background-size" : "cover",
+				"background-image" : "url('theme/images/common/bgimg1880_720.png')",
+				"background-position" : "center"
+			});
 			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
 			group_1.setLayout(xYLayout_2);
+			container.addChild(group_1, {
+				"top": "205px",
+				"right": "0px",
+				"left": "0px",
+				"height": "980px"
+			});
+			
+			var userDefinedControl_1 = new udc.header3();
+			container.addChild(userDefinedControl_1, {
+				"top": "0px",
+				"right": "0px",
+				"left": "0px",
+				"height": "205px"
+			});
+			
+			var userDefinedControl_2 = new udc.footer();
+			container.addChild(userDefinedControl_2, {
+				"top": "1178px",
+				"left": "0px",
+				"width": "1920px",
+				"height": "100px"
+			});
+			
+			var group_2 = new cpr.controls.Container();
+			group_2.style.css({
+				"background-color" : "#FFFFFF",
+				"border-radius" : "20px"
+			});
+			var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+			group_2.setLayout(xYLayout_3);
 			(function(container){
-				var group_2 = new cpr.controls.Container();
-				group_2.style.css({
+				var group_3 = new cpr.controls.Container();
+				group_3.style.css({
 					"background-color" : "#F9F9F9"
 				});
-				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_3);
+				var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+				group_3.setLayout(xYLayout_4);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
 					output_1.value = "밀키트 수정";
@@ -361,16 +466,16 @@
 						"width": "122px",
 						"height": "31px"
 					});
-				})(group_2);
-				container.addChild(group_2, {
+				})(group_3);
+				container.addChild(group_3, {
 					"top": "39px",
 					"width": "864px",
 					"height": "81px",
 					"left": "calc(50% - 432px)"
 				});
-				var group_3 = new cpr.controls.Container();
-				var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-				group_3.setLayout(xYLayout_4);
+				var group_4 = new cpr.controls.Container();
+				var xYLayout_5 = new cpr.controls.layouts.XYLayout();
+				group_4.setLayout(xYLayout_5);
 				(function(container){
 					var output_2 = new cpr.controls.Output();
 					output_2.value = "밀키트 이름";
@@ -396,16 +501,16 @@
 						"width": "463px",
 						"height": "41px"
 					});
-				})(group_3);
-				container.addChild(group_3, {
+				})(group_4);
+				container.addChild(group_4, {
 					"top": "130px",
 					"left": "60px",
 					"width": "864px",
 					"height": "71px"
 				});
-				var group_4 = new cpr.controls.Container();
-				var xYLayout_5 = new cpr.controls.layouts.XYLayout();
-				group_4.setLayout(xYLayout_5);
+				var group_5 = new cpr.controls.Container();
+				var xYLayout_6 = new cpr.controls.layouts.XYLayout();
+				group_5.setLayout(xYLayout_6);
 				(function(container){
 					var output_3 = new cpr.controls.Output();
 					output_3.value = "밀키트 성분";
@@ -428,16 +533,16 @@
 						"width": "654px",
 						"height": "55px"
 					});
-				})(group_4);
-				container.addChild(group_4, {
+				})(group_5);
+				container.addChild(group_5, {
 					"top": "234px",
 					"left": "60px",
 					"width": "864px",
 					"height": "71px"
 				});
-				var group_5 = new cpr.controls.Container();
-				var xYLayout_6 = new cpr.controls.layouts.XYLayout();
-				group_5.setLayout(xYLayout_6);
+				var group_6 = new cpr.controls.Container();
+				var xYLayout_7 = new cpr.controls.layouts.XYLayout();
+				group_6.setLayout(xYLayout_7);
 				(function(container){
 					var output_4 = new cpr.controls.Output();
 					output_4.value = "카테고리";
@@ -543,16 +648,34 @@
 						"width": "100px",
 						"height": "20px"
 					});
-				})(group_5);
-				container.addChild(group_5, {
+					var comboBox_4 = new cpr.controls.ComboBox("type");
+					comboBox_4.placeholder = "-선택-";
+					comboBox_4.style.css({
+						"text-align" : "center"
+					});
+					(function(comboBox_4){
+						comboBox_4.addItem(new cpr.controls.Item("한식", "한식"));
+						comboBox_4.addItem(new cpr.controls.Item("양식", "양식"));
+						comboBox_4.addItem(new cpr.controls.Item("중식/일식", "중식/일식"));
+						comboBox_4.addItem(new cpr.controls.Item("동남아", "동남아"));
+						comboBox_4.addItem(new cpr.controls.Item("에어프라이어", "에어프라이어"));
+					})(comboBox_4);
+					container.addChild(comboBox_4, {
+						"top": "8px",
+						"left": "504px",
+						"width": "100px",
+						"height": "20px"
+					});
+				})(group_6);
+				container.addChild(group_6, {
 					"top": "200px",
 					"left": "60px",
 					"width": "864px",
 					"height": "35px"
 				});
-				var group_6 = new cpr.controls.Container();
-				var xYLayout_7 = new cpr.controls.layouts.XYLayout();
-				group_6.setLayout(xYLayout_7);
+				var group_7 = new cpr.controls.Container();
+				var xYLayout_8 = new cpr.controls.layouts.XYLayout();
+				group_7.setLayout(xYLayout_8);
 				(function(container){
 					var output_5 = new cpr.controls.Output();
 					output_5.value = "가격";
@@ -602,16 +725,16 @@
 						"width": "165px",
 						"height": "20px"
 					});
-				})(group_6);
-				container.addChild(group_6, {
+				})(group_7);
+				container.addChild(group_7, {
 					"top": "749px",
 					"left": "60px",
 					"width": "864px",
 					"height": "50px"
 				});
-				var group_7 = new cpr.controls.Container();
-				var xYLayout_8 = new cpr.controls.layouts.XYLayout();
-				group_7.setLayout(xYLayout_8);
+				var group_8 = new cpr.controls.Container();
+				var xYLayout_9 = new cpr.controls.layouts.XYLayout();
+				group_8.setLayout(xYLayout_9);
 				(function(container){
 					var output_7 = new cpr.controls.Output();
 					output_7.value = "밀키트 소개";
@@ -636,8 +759,8 @@
 						"width": "647px",
 						"height": "267px"
 					});
-				})(group_7);
-				container.addChild(group_7, {
+				})(group_8);
+				container.addChild(group_8, {
 					"top": "454px",
 					"left": "60px",
 					"width": "864px",
@@ -679,9 +802,9 @@
 					"width": "114px",
 					"height": "34px"
 				});
-				var group_8 = new cpr.controls.Container();
-				var xYLayout_9 = new cpr.controls.layouts.XYLayout();
-				group_8.setLayout(xYLayout_9);
+				var group_9 = new cpr.controls.Container();
+				var xYLayout_10 = new cpr.controls.layouts.XYLayout();
+				group_9.setLayout(xYLayout_10);
 				(function(container){
 					var fileInput_1 = new cpr.controls.FileInput("file2");
 					fileInput_1.placeholder = "클릭후 파일 업로드해주세요.";
@@ -730,18 +853,29 @@
 						"width": "23px",
 						"height": "20px"
 					});
-				})(group_8);
-				container.addChild(group_8, {
+				})(group_9);
+				container.addChild(group_9, {
 					"top": "315px",
 					"left": "60px",
 					"width": "864px",
 					"height": "129px"
 				});
-			})(group_1);
-			container.addChild(group_1, {
-				"top": "20px",
+				var image_2 = new cpr.controls.Image();
+				image_2.src = "theme/images/mealkit/trashbin.png";
+				if(typeof onImageClick == "function") {
+					image_2.addEventListener("click", onImageClick);
+				}
+				container.addChild(image_2, {
+					"top": "874px",
+					"left": "884px",
+					"width": "40px",
+					"height": "40px"
+				});
+			})(group_2);
+			container.addChild(group_2, {
+				"top": "209px",
 				"width": "984px",
-				"height": "970px",
+				"height": "959px",
 				"left": "calc(50% - 492px)"
 			});
 			if(typeof onBodyInit2 == "function"){

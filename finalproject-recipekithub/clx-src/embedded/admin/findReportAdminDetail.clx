@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-bccfbf7b" version="1.0.4584">
+  <head std:sid="head-fd7e833c">
+    <screen std:sid="screen-078f6207" id="new-screen" name="new-screen" minwidth="1860px" width="1860px" height="740px" active="true"/>
+    <screen std:sid="screen-4365a4a1" id="default" name="default" minwidth="1024px" maxwidth="1859px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-783e2851" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-7616909c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-6431e9c6">
+      <cl:dataset std:sid="d-set-412701ea" id="dsselectreportlist">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6467a033" name="memberEmail"/>
+          <cl:datacolumn std:sid="d-column-01656735" name="recipeBoardId" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-85910a93" name="reportDate"/>
+          <cl:datacolumn std:sid="d-column-35af45d0" name="reportTitle"/>
+          <cl:datacolumn std:sid="d-column-ed7784eb" name="reportContent"/>
+          <cl:datacolumn std:sid="d-column-80751f7e" name="declarationType"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-ab9da3ca" id="dmselectreportlist">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b6b54b02" name="recipeBoardId"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-137575d7" id="subselectreportlist" action="/selectReportListByRecipeBoardId" mediatype="application/x-www-form-urlencoded;simple">
+        <cl:listener std:sid="listener-5f6539a7" name="submit-success" handler="onSubselectreportlistSubmitSuccess"/>
+        <cl:requestdata dataid="dmselectreportlist"/>
+        <cl:responsedata dataid="dsselectreportlist"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-46aed2e9">
+    <cl:listener std:sid="listener-5177884c" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-cde6200b" style="background-color:#FFFFFF; border-radius:20px;">
+      <cl:xylayoutdata std:sid="xyl-data-d8a2b994" top="30px" bottom="30px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+      <cl:button std:sid="button-3f3ec088" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; background-image:none;" value="자세히 보기">
+        <cl:listener std:sid="listener-1fe5b925" name="click" handler="onButtonClick"/>
+        <cl:formdata std:sid="f-data-0c57a9b7" row="4" col="2"/>
+      </cl:button>
+      <cl:output std:sid="output-38b1a3c6" style="border-bottom-color:#0ebc59; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="해당 레시피 신고 리스트">
+        <cl:formdata std:sid="f-data-bdd6fffb" row="0" col="0" rowspan="1" colspan="6"/>
+      </cl:output>
+      <cl:grid std:sid="grid-bb2b067f" id="grd1" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" readonly="true" datasetid="dsselectreportlist">
+        <cl:formdata std:sid="f-data-3572011f" row="2" col="0" rowspan="1" colspan="6"/>
+        <cl:gridcolumn std:sid="g-column-095e2703" width="30px"/>
+        <cl:gridcolumn std:sid="g-column-974f91c0" width="77px"/>
+        <cl:gridcolumn std:sid="g-column-065e9d91" width="153px"/>
+        <cl:gridcolumn std:sid="g-column-82faa716" width="121px"/>
+        <cl:gridcolumn std:sid="g-column-1534aedb" width="130px"/>
+        <cl:gridcolumn std:sid="g-column-bea8c623" width="111px"/>
+        <cl:gridheader std:sid="gh-band-a56b0acf">
+          <cl:gridrow std:sid="g-row-b2854aab"/>
+          <cl:gridcell std:sid="gh-cell-614f0cb5" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-1223a89b" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
+          <cl:gridcell std:sid="gh-cell-eff16e22" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="reportTitle" sortable="false" filterable="false" text="신고 제목"/>
+          <cl:gridcell std:sid="gh-cell-f93665d4" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="작성자 이름"/>
+          <cl:gridcell std:sid="gh-cell-24c9077e" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="reportDate" sortable="false" filterable="false" text="신고 일자"/>
+          <cl:gridcell std:sid="gh-cell-85895411" rowindex="0" colindex="5" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="declarationType" sortable="false" filterable="false" text="신고 타입"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-28b51e4f">
+          <cl:gridrow std:sid="g-row-83f28c07"/>
+          <cl:gridcell std:sid="gd-cell-831a61ab" rowindex="0" colindex="0" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-9ce465ee" rowindex="0" colindex="1" columnname="recipeBoardId"/>
+          <cl:gridcell std:sid="gd-cell-3c1eef7c" rowindex="0" colindex="2" style="font-weight:bold;" columnname="reportTitle"/>
+          <cl:gridcell std:sid="gd-cell-73cdf910" rowindex="0" colindex="3" columnname="memberEmail"/>
+          <cl:gridcell std:sid="gd-cell-c559217e" rowindex="0" colindex="4" columnname="reportDate">
+            <cl:dateinput std:sid="d-input-f156db15" id="dti1" style="text-align:center;" mask="YYYY-MM-DD HH:mm:ss" format="YYYYMMDDHHmmss" enabledinputmask="false">
+              <cl:celldata std:sid="c-data-0ffca273"/>
+            </cl:dateinput>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-bcbf7f17" rowindex="0" colindex="5" columnname="declarationType"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:button std:sid="button-d9b02fb5" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; background-image:none;" value="뒤로가기">
+        <cl:listener std:sid="listener-ddb41f96" name="click" handler="onButtonClick2"/>
+        <cl:formdata std:sid="f-data-a555b14f" row="4" col="4"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-b7a18612" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="50" unit="PIXEL"/>
+        <cl:rows length="20" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="20" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL"/>
+        <cl:rows length="10" unit="PIXEL"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="160" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="20" unit="PIXEL"/>
+        <cl:columns length="160" unit="PIXEL"/>
+        <cl:columns length="10" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-3d4cd353"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

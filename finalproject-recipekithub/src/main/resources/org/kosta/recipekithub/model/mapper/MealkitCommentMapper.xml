@@ -12,11 +12,15 @@
 	<result column="member_nick" property="memberVO.memberNick"/>
 </resultMap>
 
+<resultMap type="org.kosta.recipekithub.model.vo.MealkitStarScore" id="mealkitStarMap">
+	<result column="mealkit_star_score" property="mealkitStarScore"/>
+</resultMap>
+
 <insert id="insertMealkitComment" parameterType="org.kosta.recipekithub.model.vo.MealkitCommentVO">	
 	insert into mealkit_comment(mealkit_comment_id, mealkit_no, member_email, mealkit_comment_content, mealkit_comment_date)
-	values(mealkit_comment_seq.nextval, #{mealkitBoard.mealkitNo}, #{member.memberEmail}, #{commentContent}, SYSDATE)
+	values(mealkit_comment_seq.nextval, #{mealkitBoard.mealkitNo}, #{memberVO.memberEmail}, #{mealkitCommentContent}, SYSDATE)
 
-<selectKey keyColumn="mealkit_comment_id" keyProperty="commentId" resultType="int" order="AFTER">
+<selectKey keyColumn="mealkit_comment_id" keyProperty="mealkitCommentId" resultType="int" order="AFTER">
 	SELECT MEALKIT_COMMENT_SEQ.CURRVAL FROM DUAL
 </selectKey>	
 	
@@ -41,13 +45,33 @@ select
 	update mealkit_comment set mealkit_comment_content = #{commentContent}, mealkit_comment_edit_date = sysdate where mealkit_comment_id =#{commentId}
 </update>
 
-<select id="findCommentListByMealkit" parameterType="int" resultMap="memberMap">
-select c.mealkit_comment_id, b.member_email, b.member_nick, c.mealkit_comment_content,
-	to_char(c.mealkit_comment_date, 'yyyy-mm-dd hh24:mi') as mealkit_comment_date,
- 	to_char(c.mealkit_comment_edit_date, 'yyyy-mm-dd hh24:mi') as mealkit_comment_edit_date
- 	from mealkit_comment c inner join member b on c.member_email = b.member_email where c.mealkit_no = #{value}
+<select id="findCommentListByMealkit" resultMap="memberMap">
+ 	select rnum, c.mealkit_comment_id, c.mealkit_comment_content, c.mealkit_comment_date ,b.member_email, b.member_nick
+ 	FROM (
+ 	select row_number() over(order by mealkit_comment_date desc) AS rnum, mealkit_comment_id, mealkit_comment_content, member_email,
+	to_char(mealkit_comment_date, 'yyyy-mm-dd hh24:mi') as mealkit_comment_date
+ 	from mealkit_comment 
+ 	where mealkit_no = #{num}
+ 	) c
+ 	inner join member b on c.member_email = b.member_email 
+ 	where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
+ 	order by rnum
 </select>
 
+<select id="mealkitCommentCnt" resultType="int">
+	select count(*) from mealkit_comment where mealkit_no = #{value}
+</select>
+
+<resultMap id="commentRatingMap" type="java.util.HashMap">
+    <id property="mealkitCommentId" column="mealkit_comment_Id"/>
+    <result property="mealkitStarScore" column="mealkit_star_score"/>
+</resultMap>
+
+<select id="findCommentStarList"> 
+select m.mealkit_comment_id, m.mealkit_no ,s.mealkit_star_score, m.member_email, m.mealkit_comment_content,
+ mealkit_comment_date from mealkit_comment m 
+ left outer join mealkit_star_score s on m.mealkit_comment_id = s.mealkit_comment_id
+</select>
 
 
 </mapper>

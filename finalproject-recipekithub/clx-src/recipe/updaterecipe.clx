@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-47d57971" version="1.0.4584">
   <head std:sid="head-e376623b">
-    <screen std:sid="screen-3824759e" id="default" name="default" width="1024px" height="768px"/>
-    <screen std:sid="screen-2bef141c" id="tablet" name="tablet" width="500px" height="667px"/>
-    <screen std:sid="screen-9a85f12c" id="mobile" name="mobile" width="350px" height="525px"/>
+    <link std:sid="link-cfe4e601" href="../theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-13b23aad" href="../theme/controls/htmlobject.part.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-7e511b77" href="../theme/custom-theme.less" rel="stylesheet" type="text/css"/>
+    <screen std:sid="screen-af2ea071" id="FHD" name="FHD" minwidth="1920px" width="1920px" height="1080px" useCustomWidth="true" useCustomHeight="true" customHeight="1080" customWidth="1920" active="true"/>
+    <screen std:sid="screen-54651917" id="default" name="default" minwidth="1024px" maxwidth="1919px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1080" customWidth="1920" active="false"/>
+    <screen std:sid="screen-86285f42" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-db3ec573" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <cl:model std:sid="model-b5d86709">
       <cl:datamap std:sid="d-map-db57df7a" id="recipe">
         <cl:datacolumnlist>
@@ -31,31 +35,31 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-6c7088e3" style="background-color:#F0F0F0;">
+  <body std:sid="body-6c7088e3" style="background-color:#F4FAEC; font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-bfc3c259" name="init" handler="onBodyInit"/>
     <cl:listener std:sid="listener-da5cb7a7" name="load" handler="onBodyLoad"/>
     <cl:uicontrolshell std:sid="uic-shell-d808a028" id="smnote">
       <cl:listener std:sid="listener-42a0ca91" name="load" handler="onSmnoteLoad"/>
-      <cl:xylayoutdata std:sid="xyl-data-85b759de" top="263px" width="724px" height="277px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-85b759de" top="510px" width="1200px" height="450px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
     </cl:uicontrolshell>
     <cl:group std:sid="group-1943b338" style="background-color:#E7E7E7; background-image:none;">
-      <cl:xylayoutdata std:sid="xyl-data-43e5e510" top="10px" width="724px" height="52px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-43e5e510" top="199px" width="1200px" height="52px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:output std:sid="output-faee3c9b" style="font-weight:bold; font-size:20px; font-family:@HY엽서L;" value="레시피 등록">
         <cl:xylayoutdata std:sid="xyl-data-0211ebb4" top="0px" left="0px" width="127px" height="52px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:xylayout std:sid="xylayout-6bab63cf"/>
     </cl:group>
     <cl:group std:sid="group-128185d3">
-      <cl:xylayoutdata std:sid="xyl-data-f0012c31" top="698px" width="400px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
-      <cl:button std:sid="button-3bc0000e" style="font-weight:bold; background-image:linear-gradient(#52b135,#58fd45);" value="저장">
+      <cl:xylayoutdata std:sid="xyl-data-f0012c31" top="1340px" width="400px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:button std:sid="button-3bc0000e" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; background-image:none;" value="저장">
         <cl:listener std:sid="listener-ca6d2038" name="click" handler="onButtonClick"/>
         <cl:formdata std:sid="f-data-69fd5ecb" row="0" col="0"/>
       </cl:button>
-      <cl:button std:sid="button-e1ee046c" style="font-weight:bold; background-image:linear-gradient(#ffffff, #5690cb);" value="취소">
+      <cl:button std:sid="button-e1ee046c" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; background-image:none;" value="취소">
         <cl:listener std:sid="listener-b5863857" name="click" handler="onButtonClick3"/>
         <cl:formdata std:sid="f-data-3896aaca" row="0" col="2"/>
       </cl:button>
-      <cl:button std:sid="button-dc90f905" style="font-weight:bold; background-image:linear-gradient(#52b135,#58fd45);" value="삭제">
+      <cl:button std:sid="button-dc90f905" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; background-image:none;" value="삭제">
         <cl:listener std:sid="listener-1c6851ca" name="click" handler="onButtonClick2"/>
         <cl:formdata std:sid="f-data-dbe9d911" row="0" col="1"/>
       </cl:button>
@@ -66,90 +70,86 @@
         <cl:columns length="1" unit="FRACTION"/>
       </cl:formlayout>
     </cl:group>
-    <cl:group std:sid="group-f73b5c0b">
-      <cl:xylayoutdata std:sid="xyl-data-0323647b" top="61px" width="724px" height="200px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+    <cl:group std:sid="group-f73b5c0b" style="background-color:#FFFFFF;">
+      <cl:xylayoutdata std:sid="xyl-data-0323647b" top="260px" width="1200px" height="228px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       <cl:group std:sid="group-7de198a2" style="background-color:#FFFFFF;">
-        <cl:xylayoutdata std:sid="xyl-data-8b22d7d3" right="215px" left="5px" height="190px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
-        <cl:output std:sid="output-9ea77193" style="font-weight:bolder; text-align:center;" value="레시피 제목">
+        <cl:xylayoutdata std:sid="xyl-data-8b22d7d3" right="1085px" left="5px" height="208px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+        <cl:output std:sid="output-9ea77193" style="color:#90be70; font-weight:bolder; text-align:center;" value="레시피 제목">
           <cl:formdata std:sid="f-data-d4afe374" row="0" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-7dec2197" style="font-weight:bolder; text-align:center;" value="대표 사진">
-          <cl:formdata std:sid="f-data-dc1ce872" row="1" col="0"/>
+        <cl:output std:sid="output-f07304ae" style="color:#90be70; font-weight:bolder; text-align:center;" value="카테고리">
+          <cl:formdata std:sid="f-data-cb3643fa" row="1" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-f07304ae" style="font-weight:bolder; text-align:center;" value="카테고리">
-          <cl:formdata std:sid="f-data-9c41bf70" row="2" col="0"/>
+        <cl:output std:sid="output-7dec2197" style="color:#90be70; font-weight:bolder; text-align:center;" value="대표 사진">
+          <cl:formdata std:sid="f-data-ae747677" row="2" col="0"/>
         </cl:output>
-        <cl:inputbox std:sid="i-box-6229cdab" id="ipb1" style="font-size:18px;">
-          <cl:datamapbind property="value" datacontrolid="recipe" columnname="RECIPE_BOARD_TITLE"/>
-          <cl:formdata std:sid="f-data-33cd657a" row="0" col="1"/>
-        </cl:inputbox>
-        <cl:group std:sid="group-eb2c2a0c">
-          <cl:formdata std:sid="f-data-800b551b" row="2" col="1" rowspan="1" colspan="1"/>
-          <cl:linkedcombobox std:sid="lc-box-c8568b5a" id="lcb1">
-            <cl:datamapbind property="value" datacontrolid="recipe" columnname="CATEGORY_TYPE"/>
-            <cl:formdata std:sid="f-data-057ddd76" row="0" col="0" rowspan="1" colspan="1"/>
-            <cl:treeitem std:sid="t-item-17af4eee" label="밑반찬" value="밑반찬" checked="false"/>
-            <cl:treeitem std:sid="t-item-258646d2" label="메인반찬" value="메인반찬"/>
-            <cl:treeitem std:sid="t-item-efb735b5" label="국/탕" value="국/탕"/>
-            <cl:treeitem std:sid="t-item-446dfa38" label="디저트" value="디저트"/>
-            <cl:treeitem std:sid="t-item-679221d0" label="면" value="면"/>
-            <cl:treeitem std:sid="t-item-6380e2ab" label="샐러드" value="샐러드"/>
-            <cl:treeitem std:sid="t-item-789352ab" label="음료" value="음료"/>
-            <cl:treeitem std:sid="t-item-4af1b66c" label="기타" value="기타"/>
-            <cl:placeholder>종류별</cl:placeholder>
-          </cl:linkedcombobox>
-          <cl:linkedcombobox std:sid="lc-box-d8f45248" id="lcb2">
-            <cl:datamapbind property="value" datacontrolid="recipe" columnname="CATEGORY_INGREDIENTS"/>
-            <cl:formdata std:sid="f-data-42e9fe72" row="0" col="1"/>
-            <cl:treeitem std:sid="t-item-3cf1bf79" label="육류" value="육류"/>
-            <cl:treeitem std:sid="t-item-b961ca99" label="채소류" value="채소류"/>
-            <cl:treeitem std:sid="t-item-4bf7e504" label="해물류" value="해물류"/>
-            <cl:treeitem std:sid="t-item-a84f9814" label="달걀/유제품" value="달걀/유제품"/>
-            <cl:treeitem std:sid="t-item-26758fc4" label="가공식품류" value="가공식품류"/>
-            <cl:treeitem std:sid="t-item-33787467" label="과일류" value="과일류"/>
-            <cl:treeitem std:sid="t-item-5cfc7cf6" label="기타" value="기타"/>
-            <cl:placeholder>방법별</cl:placeholder>
-          </cl:linkedcombobox>
-          <cl:linkedcombobox std:sid="lc-box-99b5d909" id="lcb3">
-            <cl:datamapbind property="value" datacontrolid="recipe" columnname="CATEGORY_METHOD"/>
-            <cl:formdata std:sid="f-data-9d5b88c4" row="0" col="2"/>
-            <cl:treeitem std:sid="t-item-676255ce" label="볶음" value="볶음"/>
-            <cl:treeitem std:sid="t-item-fc955ec1" label="끓이기" value="끓이기"/>
-            <cl:treeitem std:sid="t-item-d02171c0" label="조림" value="조림"/>
-            <cl:treeitem std:sid="t-item-df9402b3" label="튀김" value="튀김"/>
-            <cl:treeitem std:sid="t-item-7e93d7b3" label="삶기" value="삶기"/>
-            <cl:treeitem std:sid="t-item-6a67df11" label="굽기" value="굽기"/>
-            <cl:treeitem std:sid="t-item-463b65f2" label="기타" value="기타"/>
-            <cl:placeholder>재료별</cl:placeholder>
-          </cl:linkedcombobox>
-          <cl:formlayout std:sid="f-layout-66b80871" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
-            <cl:rows length="1" unit="FRACTION"/>
-            <cl:columns length="80" unit="PIXEL"/>
-            <cl:columns length="80" unit="PIXEL"/>
-            <cl:columns length="80" unit="PIXEL"/>
-          </cl:formlayout>
-        </cl:group>
-        <cl:fileinput std:sid="f-input-f3cf13f4" id="fi1" style="text-align:left;" clearbuttonimage="" placeholder="요리 대표 사진을 등록해 주세요" acceptfile="image/*">
-          <cl:listener std:sid="listener-d2ce385d" name="value-change" handler="onFi1ValueChange"/>
-          <cl:formdata std:sid="f-data-dddb6e38" row="1" col="1"/>
-        </cl:fileinput>
         <cl:formlayout std:sid="f-layout-18d263d4" scrollable="false" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
-          <cl:rows length="1" unit="FRACTION"/>
-          <cl:rows length="1" unit="FRACTION"/>
-          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="50" unit="PIXEL"/>
+          <cl:rows length="50" unit="PIXEL"/>
           <cl:columns length="100" unit="PIXEL"/>
-          <cl:columns length="388" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
       <cl:img std:sid="image-4a5fee11" id="uploadImg">
-        <cl:xylayoutdata std:sid="xyl-data-02dde795" top="5px" left="508px" width="216px" height="193px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-17eed650" top="0px" right="182px" left="712px" height="225px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:img>
-      <cl:button std:sid="button-cc4a9f4f" id="deleteImg" value="X">
+      <cl:button std:sid="button-cc4a9f4f" id="deleteImg" style="background-size:cover; background-image:url('../theme/images/recipe/xbutton.png'); background-position:center;" value="">
         <cl:listener std:sid="listener-a207f99a" name="click" handler="onDeleteImgClick"/>
-        <cl:xylayoutdata std:sid="xyl-data-00f6bc5e" top="5px" left="686px" width="38px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:xylayoutdata std:sid="xyl-data-84249f07" top="0px" left="993px" width="25px" height="25px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
+      <cl:inputbox std:sid="i-box-6229cdab" id="ipb1" style="font-size:18px;">
+        <cl:datamapbind property="value" datacontrolid="recipe" columnname="RECIPE_BOARD_TITLE"/>
+        <cl:xylayoutdata std:sid="xyl-data-cd2b869f" top="16px" left="125px" width="531px" height="75px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:inputbox>
+      <cl:fileinput std:sid="f-input-f3cf13f4" id="fi1" style="text-align:center;" clearbuttonimage="" placeholder="요리 대표 사진을 등록해 주세요" acceptfile="image/*">
+        <cl:listener std:sid="listener-d2ce385d" name="value-change" handler="onFi1ValueChange"/>
+        <cl:xylayoutdata std:sid="xyl-data-0b6300a8" top="164px" left="125px" width="260px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      </cl:fileinput>
+      <cl:linkedcombobox std:sid="lc-box-c8568b5a" id="lcb1">
+        <cl:datamapbind property="value" datacontrolid="recipe" columnname="CATEGORY_TYPE"/>
+        <cl:xylayoutdata std:sid="xyl-data-81fe0ae1" top="110px" left="125px" width="80px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:treeitem std:sid="t-item-17af4eee" label="밑반찬" value="밑반찬" checked="false"/>
+        <cl:treeitem std:sid="t-item-258646d2" label="메인반찬" value="메인반찬"/>
+        <cl:treeitem std:sid="t-item-efb735b5" label="국/탕" value="국/탕"/>
+        <cl:treeitem std:sid="t-item-446dfa38" label="디저트" value="디저트"/>
+        <cl:treeitem std:sid="t-item-679221d0" label="면" value="면"/>
+        <cl:treeitem std:sid="t-item-6380e2ab" label="샐러드" value="샐러드"/>
+        <cl:treeitem std:sid="t-item-789352ab" label="음료" value="음료"/>
+        <cl:treeitem std:sid="t-item-4af1b66c" label="기타" value="기타"/>
+        <cl:placeholder>종류별</cl:placeholder>
+      </cl:linkedcombobox>
+      <cl:linkedcombobox std:sid="lc-box-d8f45248" id="lcb2">
+        <cl:datamapbind property="value" datacontrolid="recipe" columnname="CATEGORY_INGREDIENTS"/>
+        <cl:xylayoutdata std:sid="xyl-data-d9d3d37c" top="110px" left="215px" width="80px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:treeitem std:sid="t-item-3cf1bf79" label="육류" value="육류"/>
+        <cl:treeitem std:sid="t-item-b961ca99" label="채소류" value="채소류"/>
+        <cl:treeitem std:sid="t-item-4bf7e504" label="해물류" value="해물류"/>
+        <cl:treeitem std:sid="t-item-a84f9814" label="달걀/유제품" value="달걀/유제품"/>
+        <cl:treeitem std:sid="t-item-26758fc4" label="가공식품류" value="가공식품류"/>
+        <cl:treeitem std:sid="t-item-33787467" label="과일류" value="과일류"/>
+        <cl:treeitem std:sid="t-item-5cfc7cf6" label="기타" value="기타"/>
+        <cl:placeholder>방법별</cl:placeholder>
+      </cl:linkedcombobox>
+      <cl:linkedcombobox std:sid="lc-box-99b5d909" id="lcb3">
+        <cl:datamapbind property="value" datacontrolid="recipe" columnname="CATEGORY_METHOD"/>
+        <cl:xylayoutdata std:sid="xyl-data-fdce9a22" top="110px" left="305px" width="80px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        <cl:treeitem std:sid="t-item-676255ce" label="볶음" value="볶음"/>
+        <cl:treeitem std:sid="t-item-fc955ec1" label="끓이기" value="끓이기"/>
+        <cl:treeitem std:sid="t-item-d02171c0" label="조림" value="조림"/>
+        <cl:treeitem std:sid="t-item-df9402b3" label="튀김" value="튀김"/>
+        <cl:treeitem std:sid="t-item-7e93d7b3" label="삶기" value="삶기"/>
+        <cl:treeitem std:sid="t-item-6a67df11" label="굽기" value="굽기"/>
+        <cl:treeitem std:sid="t-item-463b65f2" label="기타" value="기타"/>
+        <cl:placeholder>재료별</cl:placeholder>
+      </cl:linkedcombobox>
       <cl:xylayout std:sid="xylayout-9937190d"/>
     </cl:group>
+    <cl:udc std:sid="ud-control-382ccecc" type="udc.header3">
+      <cl:xylayoutdata std:sid="xyl-data-1588b225" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:udc>
+    <cl:udc std:sid="ud-control-bd651ef3" type="udc.footer">
+      <cl:xylayoutdata std:sid="xyl-data-7045c621" top="1400px" right="0px" left="0px" height="102px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:udc>
     <cl:xylayout std:sid="xylayout-7510a7a8"/>
   </body>
   <std:studiosetting>

@@ -28,9 +28,9 @@
 			 */
 			function onLoginBtnClick(e) {
 				//var loginBtn = e.control;
-				var dataMap = app.lookup("dm_login");
-				dataMap.setValue("member_email", app.lookup("emailInput").value);
-				dataMap.setValue("member_password", app.lookup("pswdInput").value);
+				//var dataMap = app.lookup("dm_login");
+				//dataMap.setValue("member_email", app.lookup("emailInput").value);
+				//dataMap.setValue("member_password", app.lookup("pswdInput").value);
 				var subLogin = app.lookup("sub_login");
 				subLogin.send();
 			}
@@ -53,24 +53,7 @@
 				window.location.href = "member/find-email-pswd.clx";
 			}
 
-			/*
-			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
-			 * 통신이 성공하면 발생합니다.
-			 */
-			function onSub_loginSubmitSuccess(e) {
-				// 현준
-				var sub_login = e.control;
-				var checkBox = app.lookup("cbx1");
-				var memberEmail = app.lookup("dm_login").getValue("member_email");
-				if(checkBox.checked){
-					localStorage.setItem("memberEmail", memberEmail);
-				}
-				setTimedSessionData("memsession", memberEmail,30);
-				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-				httpPostMethod.submit();
-			}
-
-			// 데이터 저장과 만료 시간 설정
+			// 데이터 저장과 만료 시간 설정	// 현준
 			function setTimedSessionData(key, value, expirationMinutes) {
 			    var currentTime = new Date().getTime();
 			    var expirationTime = currentTime + (expirationMinutes * 60 * 1000); // milliseconds
@@ -79,17 +62,54 @@
 			        value: value,
 			        expirationTime: expirationTime
 			    };
-
 			    sessionStorage.setItem(key, JSON.stringify(data));
 			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSub_loginSubmitSuccess(e) {
+				var sub_login = e.control;
+				//alert(sub_login.xhr.status);
+				var checkBox = app.lookup("cbx1");
+				var memberEmail = app.lookup("dm_login").getValue("member_email");
+				
+				// 현준
+				if(checkBox.checked){
+					localStorage.setItem("memberEmail", memberEmail);
+				}
+				setTimedSessionData("memsession", memberEmail,30);
+				//
+
+				var loginSuccess = sub_login.getMetadata("path");
+				
+				if (loginSuccess != null) {
+					cpr.core.App.load(loginSuccess, function(newapp){
+						app.close();
+						newapp.createNewInstance().run();
+					});
+					return;
+				} 
+			}
+
+
 			/*
 			 * 서브미션에서 submit-error 이벤트 발생 시 호출.
 			 * 통신 중 문제가 생기면 발생합니다.
 			 */
 			function onSub_loginSubmitError(e) {
 				var sub_login = e.control;
-				alert("회원 정보를 다시 확인해주시기 바랍니다.")
+				var loginFail = sub_login.getMetadata("loginFailMessage");
+				app.openDialog("dialog/memberChkPopup", {
+					width: 400, height: 300, headerClose: true
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = loginFail;
+					});
+				});
 			}
+
 
 			/*
 			 * 인풋 박스에서 keydown 이벤트 발생 시 호출.
@@ -107,6 +127,8 @@
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
+				app.lookup("emailInput").focus();
+				
 				// 현준
 				var item = localStorage.getItem("memberEmail");
 				if(item == null || item == ''){
@@ -116,55 +138,18 @@
 				app.lookup("emailInput").text = item;
 				app.lookup("pswdInput").focus();
 			}
+
+			/*
+			 * 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick(e){
+				var button = e.control;
+				window.location.href = "index.clx";
+			};
 			// End - User Script
 			
 			// Header
-			var dataSet_1 = new cpr.data.DataSet("ds_member");
-			dataSet_1.parseData({
-				"columns" : [
-					{
-						"name": "member_email",
-						"dataType": "string"
-					},
-					{
-						"name": "member_password",
-						"dataType": "string"
-					},
-					{
-						"name": "member_name",
-						"dataType": "string"
-					},
-					{
-						"name": "member_nick",
-						"dataType": "string"
-					},
-					{
-						"name": "member_address",
-						"dataType": "string"
-					},
-					{
-						"name": "member_phone",
-						"dataType": "string"
-					},
-					{
-						"name": "member_birthday",
-						"dataType": "string"
-					},
-					{
-						"name": "member_type",
-						"dataType": "string"
-					},
-					{
-						"name": "member_status",
-						"dataType": "string"
-					},
-					{
-						"name": "member_reg_date",
-						"dataType": "string"
-					}
-				]
-			});
-			app.register(dataSet_1);
 			var dataMap_1 = new cpr.data.DataMap("dm_login");
 			dataMap_1.parseData({
 				"columns" : [
@@ -189,7 +174,9 @@
 				submission_1.addEventListener("submit-error", onSub_loginSubmitError);
 			}
 			app.register(submission_1);
-			app.supportMedia("all and (min-width: 1024px)", "default");
+			app.supportMedia("all and (min-width: 1920px)", "FHD");
+			app.supportMedia("all and (min-width: 1440px) and (max-width: 1919px)", "new-screen");
+			app.supportMedia("all and (min-width: 1024px) and (max-width: 1439px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
 			
@@ -218,10 +205,10 @@
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
-				"background-color" : "#6A8B41"
+				"background-color" : "#86D2A7"
 			});
-			var responsiveXYLayout_2 = new cpr.controls.layouts.ResponsiveXYLayout();
-			group_1.setLayout(responsiveXYLayout_2);
+			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+			group_1.setLayout(xYLayout_1);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
@@ -229,28 +216,28 @@
 					"background-color" : "#F4FAEC",
 					"background-repeat" : "no-repeat",
 					"background-size" : "cover",
-					"background-image" : "url('theme/images/member/20.png')",
+					"background-image" : "url('theme/images/common/bgimg3_1920.png')",
 					"background-position" : "center"
 				});
-				var responsiveXYLayout_3 = new cpr.controls.layouts.ResponsiveXYLayout();
-				group_2.setLayout(responsiveXYLayout_3);
+				var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+				group_2.setLayout(xYLayout_2);
 				(function(container){
 					var group_3 = new cpr.controls.Container();
 					group_3.style.css({
 						"border-radius" : "10px",
 						"background-color" : "#FFFFFF"
 					});
-					var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-					group_3.setLayout(xYLayout_1);
+					var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+					group_3.setLayout(xYLayout_3);
 					(function(container){
 						var group_4 = new cpr.controls.Container();
 						group_4.style.css({
 							"background-size" : "cover",
 							"background-position" : "center",
-							"background-image" : "url('theme/images/common/logo.png')"
+							"background-image" : "url('theme/images/icon/recipekithubLog.png')"
 						});
-						var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-						group_4.setLayout(xYLayout_2);
+						var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+						group_4.setLayout(xYLayout_4);
 						container.addChild(group_4, {
 							"top": "20px",
 							"width": "356px",
@@ -258,8 +245,8 @@
 							"left": "calc(50% - 178px)"
 						});
 						var group_5 = new cpr.controls.Container();
-						var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-						group_5.setLayout(xYLayout_3);
+						var xYLayout_5 = new cpr.controls.layouts.XYLayout();
+						group_5.setLayout(xYLayout_5);
 						(function(container){
 							var group_6 = new cpr.controls.Container();
 							var formLayout_1 = new cpr.controls.layouts.FormLayout();
@@ -275,9 +262,12 @@
 							group_6.setLayout(formLayout_1);
 							(function(container){
 								var inputBox_1 = new cpr.controls.InputBox("emailInput");
+								inputBox_1.showClearButton = true;
 								inputBox_1.placeholder = " Email";
+								inputBox_1.spellCheck = false;
 								inputBox_1.style.css({
 									"border-radius" : "10px",
+									"padding-left" : "10px",
 									"font-size" : "16px"
 								});
 								inputBox_1.bind("value").toDataMap(app.lookup("dm_login"), "member_email");
@@ -287,9 +277,13 @@
 									"rowIndex": 0
 								});
 								var inputBox_2 = new cpr.controls.InputBox("pswdInput");
+								inputBox_2.secret = true;
+								inputBox_2.showClearButton = true;
 								inputBox_2.placeholder = " Password";
+								inputBox_2.spellCheck = false;
 								inputBox_2.style.css({
 									"border-radius" : "10px",
+									"padding-left" : "10px",
 									"font-size" : "16px"
 								});
 								inputBox_2.bind("value").toDataMap(app.lookup("dm_login"), "member_password");
@@ -429,63 +423,78 @@
 							"height": "188px",
 							"left": "calc(50% - 152px)"
 						});
+						var group_8 = new cpr.controls.Container();
+						var formLayout_3 = new cpr.controls.layouts.FormLayout();
+						formLayout_3.scrollable = false;
+						formLayout_3.topMargin = "0px";
+						formLayout_3.rightMargin = "0px";
+						formLayout_3.bottomMargin = "0px";
+						formLayout_3.leftMargin = "0px";
+						formLayout_3.horizontalSpacing = "0px";
+						formLayout_3.verticalSpacing = "0px";
+						formLayout_3.setColumns(["1fr"]);
+						formLayout_3.setRows(["1fr"]);
+						group_8.setLayout(formLayout_3);
+						(function(container){
+							var button_4 = new cpr.controls.Button();
+							button_4.value = "";
+							button_4.style.css({
+								"background-color" : "#FFFFFF",
+								"border-right-style" : "none",
+								"background-size" : "cover",
+								"border-left-style" : "none",
+								"border-bottom-style" : "none",
+								"background-image" : "url('theme/images/member/ic_home.png')",
+								"background-position" : "center",
+								"border-top-style" : "none"
+							});
+							if(typeof onButtonClick == "function") {
+								button_4.addEventListener("click", onButtonClick);
+							}
+							container.addChild(button_4, {
+								"colIndex": 0,
+								"rowIndex": 0
+							});
+						})(group_8);
+						container.addChild(group_8, {
+							"top": "20px",
+							"right": "14px",
+							"width": "20px",
+							"height": "20px"
+						});
 					})(group_3);
 					container.addChild(group_3, {
-						positions: [
-							{
-								"media": "all and (min-width: 1024px)",
-								"width": "384px",
-								"height": "628px",
-								"left": "calc(50% - 192px)",
-								"top": "calc(50% - 314px)"
-							}, 
-							{
-								"media": "all and (min-width: 500px) and (max-width: 1023px)",
-								"width": "188px",
-								"height": "628px",
-								"left": "calc(50% - 94px)",
-								"top": "calc(50% - 314px)"
-							}, 
-							{
-								"media": "all and (max-width: 499px)",
-								"width": "131px",
-								"height": "628px",
-								"left": "calc(50% - 65px)",
-								"top": "calc(50% - 314px)"
-							}
-						]
+						"width": "384px",
+						"height": "628px",
+						"left": "calc(50% - 192px)",
+						"top": "calc(50% - 314px)"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					positions: [
-						{
-							"media": "all and (min-width: 1024px)",
-							"top": "20px",
-							"right": "20px",
-							"bottom": "20px",
-							"left": "20px"
-						}, 
-						{
-							"media": "all and (min-width: 500px) and (max-width: 1023px)",
-							"top": "20px",
-							"right": "10px",
-							"bottom": "20px",
-							"left": "10px"
-						}, 
-						{
-							"media": "all and (max-width: 499px)",
-							"top": "20px",
-							"right": "7px",
-							"bottom": "20px",
-							"left": "7px"
-						}
-					]
+					"top": "20px",
+					"right": "20px",
+					"bottom": "20px",
+					"left": "20px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
 				positions: [
 					{
-						"media": "all and (min-width: 1024px)",
+						"media": "all and (min-width: 1920px)",
+						"top": "0px",
+						"right": "0px",
+						"bottom": "0px",
+						"left": "0px"
+					}, 
+					{
+						"media": "all and (min-width: 1440px) and (max-width: 1919px)",
+						"top": "0px",
+						"right": "0px",
+						"bottom": "0px",
+						"left": "0px"
+					}, 
+					{
+						"media": "all and (min-width: 1024px) and (max-width: 1439px)",
 						"top": "0px",
 						"right": "0px",
 						"bottom": "0px",

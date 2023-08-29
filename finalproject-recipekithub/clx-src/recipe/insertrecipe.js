@@ -4,6 +4,21 @@
  *
  * @author user
  ************************************************/
+function getTimedSessionData(key) {
+	var storedData = sessionStorage.getItem(key);
+	
+	if (storedData) {
+		var data = JSON.parse(storedData);
+		var currentTime = new Date().getTime();
+		
+		if (currentTime < data.expirationTime) {
+			return data.value;
+		} else {
+			sessionStorage.removeItem(key);
+		}
+	}
+	return null;
+}
 /*
  * 루트 컨테이너에서 init 이벤트 발생 시 호출.
  * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
@@ -17,6 +32,7 @@ function onBodyInit(e) {
 		});
 	});
 }
+
 /*
  * 쉘에서 load 이벤트 발생 시 호출.
  * 쉘이 그려진 후 내용을 작성하는 이벤트.
@@ -40,7 +56,7 @@ function onShl1Load(e) {
 		$('#summernote').summernote({
 			placeholder: '글 작성란',
 			tabsize: 2,
-			height: 300,
+			height: 700,
 			toolbar: [
 				['style', ['style']],
 				['font', ['bold', 'underline', 'clear']],
@@ -60,6 +76,12 @@ function onShl1Load(e) {
  */
 function onButtonClick(e) {
 	var button = e.control;
+	var sessionval = getTimedSessionData("memsession");
+	if (sessionval == null) {
+		alert("등록 실패");
+		window.location.href= "/";
+	}
+	
 	var vsOpt = app.lookup("smnote");
 	var dataMap = app.lookup("recipe");
 	vsOpt.value = $('#summernote').summernote('code');
@@ -73,18 +95,53 @@ function onButtonClick(e) {
 	var value2 = dataMap.getValue("CATEGORY_TYPE");
 	var value3 = dataMap.getValue("CATEGORY_INGREDIENTS");
 	var value4 = dataMap.getValue("CATEGORY_METHOD");
-	if (confirm("등록 하시겠습니까?")) {
-		if (value == ""){
-			alert("제목을 작성하세요");
-		} else if(value2 == "" || value3 == "" || value4 == ""){
-			alert("카테고리를 등록하세요");
-		} else if(image.src == "") {
-			alert("사진을 등록하세요");
-		} else {
-			submission.addFileParameter("image", file);
-			submission.send();
+	if (value == "") {
+		alert("제목을 작성하세요");
+	} else if (value2 == "" || value3 == "" || value4 == "") {
+		alert("카테고리를 등록하세요");
+	} else if (image.src == null) {
+		alert("사진을 등록하세요");
+	} else {
+		var initValue = {
+			"msg": "레시피 등록하시겠습니까?"
 		}
+		app.openDialog("dialog/recipeCheck", {
+			width: 400, height: 300, headerClose: true
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+				dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue) {
+			if (returnValue == true) {
+				submission.addFileParameter("image", file);
+				submission.send();
+			}
+		});
 	}
+}
+
+/*
+ * "취소" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick2(e) {
+	var button = e.control;
+	var initValue = {
+		"msg": "변경사항이 저장되지 않습니다.\n 취소하시겠습니까?"
+	}
+	app.openDialog("dialog/recipeCheck", {
+		width: 400, height: 300, headerClose: true
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+			dialogApp.initValue = initValue;
+		});
+	}).then(function(returnValue) {
+		if (returnValue == true) {
+			window.location.href = "/";
+		}
+	});
 }
 
 /*
@@ -92,7 +149,6 @@ function onButtonClick(e) {
  * 통신이 성공하면 발생합니다.
  */
 function onInsertRecipeSubmitSuccess(e) {
-	alert("레시피가 등록되었습니다.");
 	var insertRecipe = e.control;
 	var recipeBoardId = insertRecipe.getMetadata("recipeBoardId");
 	if (recipeBoardId != null) {
@@ -106,13 +162,14 @@ function onInsertRecipeSubmitSuccess(e) {
  */
 function onFi1ValueChange(e) {
 	var fi1 = e.control;
+	app.lookup("deleteImg").visible=true;
 	var image = app.lookup("uploadImg");
 	var fileInput = app.lookup("fi1");
 	if (fileInput.files && fileInput.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			image.src = e.target.result;
-		};	
+		};
 		reader.readAsDataURL(fileInput.files[0]);
 	}
 }
@@ -125,8 +182,21 @@ function onDeleteImgClick(e) {
 	var deleteImg = e.control;
 	var fileInput = app.lookup("fi1");
 	var image = app.lookup("uploadImg");
-	if(confirm("사진을 삭제하시겠습니까?")){
-	fileInput.clear();
-	image.src = "";
+	if (confirm("사진을 삭제하시겠습니까?")) {
+		fileInput.clear();
+		image.src = null;
+		app.lookup("deleteImg").visible=false;
+	}
+}
+
+/*
+ * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+ * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+ */
+function onBodyLoad(e){
+	var image = app.lookup("uploadImg");
+	console.log("이미지 경로 : "+image.src);
+	if(image.src==null){
+		app.lookup("deleteImg").visible=false;
 	}
 }

@@ -12,13 +12,21 @@
 function onButtonClick(e){
 	var button = e.control;
 	var host = app.getHost(); // 부모 임베디드 앱
-    if(confirm("등록화면으로 이동하시겠습니까?")){
-		cpr.core.App.load("embedded/myPageQnARegisterForm", function(loadedApp){
-			if (loadedApp){
-				host.app = loadedApp;
-			}
+	app.getRootAppInstance().openDialog("dialog/needConfirm", {
+		width: 400, height: 300, headerVisible: false
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			dialogApp.initValue = "등록화면으로 이동하시겠습니까?";
 		});
-    }
+	}).then(function(returnValue){
+		if(returnValue == "ok"){
+			cpr.core.App.load("embedded/myPageQnARegisterForm", function(loadedApp){
+				if (loadedApp){
+					host.app = loadedApp;
+				}
+			});
+		}
+	});
 }
 
 /*

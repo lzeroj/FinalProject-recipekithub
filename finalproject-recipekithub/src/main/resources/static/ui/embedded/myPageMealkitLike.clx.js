@@ -54,17 +54,29 @@
 			 */
 			function onGrd1CellClick(e){
 				var grd1 = e.control;
-				var grid = app.lookup("grd1");
-				var value = "theme/images/mealkit/heart_fill.png";
-				var image = app.lookup("likeimg");
-				if(e.cellIndex != 5){
+				var grid = app.lookup("grd1")
+				var index = grd1.getSelectedIndices()[0].rowIndex;
+				var cellIndex = grd1.getSelectedIndices()[0].cellIndex;
+				console.log(cellIndex);
+				var mealkitNo = grd1.getCellValue(index, "mealkitNo");
+				if(cellIndex != 4){
 					return ;
 				}else{
-					if(confirm("찜을 취소하시겠습니까? 취소하시면 목록에서 해당 밀키트가 삭제 됩니다")){
-						app.lookup("subdeletemelkiktlike").send();
-					}
+					app.getRootAppInstance().openDialog("dialog/needConfirm", {
+						width: 400, height: 300, headerClose: true
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = "찜을 취소하시겠습니까?\n취소하시면 목록에서 해당 밀키트가 삭제 됩니다"
+						});
+					}).then(function(returnValue){
+						if(returnValue == "ok"){
+							app.lookup("dmdeletemealkit").setValue("mealkitNo", mealkitNo);
+							app.lookup("subdeletemelkiktlike").send();
+						}else{
+							return;
+						}
+					});
 				}
-				
 			}
 
 			/*
@@ -82,7 +94,29 @@
 			 */
 			function onSubdeletemelkiktlikeSubmitDone(e){
 				var subdeletemelkiktlike = e.control;
+				app.lookup("submealkitlikelist").send();
 				app.lookup("grd1").redraw();
+			}
+
+			/*
+			 * "해당 밀키트 확인" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick(e){
+				var button = e.control;
+				var grd1 = app.lookup("grd1");
+				var index = grd1.getSelectedIndices()[0].rowIndex;
+				var mealkitNo = app.lookup("mealkitLikeList").getValue(index, "mealkitNo");
+				if(mealkitNo == null || mealkitNo == '' || index == null){
+					app.openDialog("dialog/noSelectCell", {width: 400, height: 300, headerClose: true
+					}, function(dialog){
+						dialog.ready(function(dialogApp) {
+							dialogApp.initValue = "원하는 행을 선택해주세요";
+						});
+					});
+				}else{
+					window.location.href = "/mealkitDetail/" + mealkitNo;
+				}
 			};
 			// End - User Script
 			
@@ -102,6 +136,11 @@
 				]
 			});
 			app.register(dataSet_1);
+			var dataMap_1 = new cpr.data.DataMap("dmdeletemealkit");
+			dataMap_1.parseData({
+				"columns" : [{"name": "mealkitNo"}]
+			});
+			app.register(dataMap_1);
 			var submission_1 = new cpr.protocols.Submission("submealkitlikelist");
 			submission_1.action = "/findMealkitLikeList";
 			submission_1.addResponseData(dataSet_1, false);
@@ -113,7 +152,7 @@
 			var submission_2 = new cpr.protocols.Submission("subdeletemelkiktlike");
 			submission_2.action = "/clickLike";
 			submission_2.mediaType = "application/x-www-form-urlencoded;simple";
-			submission_2.addRequestData(dataSet_1);
+			submission_2.addRequestData(dataMap_1);
 			if(typeof onSubdeletemelkiktlikeSubmitSuccess == "function") {
 				submission_2.addEventListener("submit-success", onSubdeletemelkiktlikeSubmitSuccess);
 			}
@@ -166,7 +205,7 @@
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"border-radius" : "20px",
-					"background-color" : "#F6F6F6"
+					"background-color" : "#F7F7F7"
 				});
 				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
 				group_2.setLayout(xYLayout_3);
@@ -178,8 +217,7 @@
 						"selectionUnit": "cell",
 						"columns": [
 							{"width": "20px"},
-							{"width": "125px"},
-							{"width": "115px"},
+							{"width": "140px"},
 							{"width": "115px"},
 							{"width": "100px"},
 							{"width": "42px"}
@@ -192,6 +230,11 @@
 									"configurator": function(cell){
 										cell.filterable = false;
 										cell.sortable = false;
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -201,6 +244,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "mealkitName";
 										cell.text = "밀키트명";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -208,8 +256,13 @@
 									"configurator": function(cell){
 										cell.filterable = false;
 										cell.sortable = false;
-										cell.targetColumnName = "mealkitIngredients";
-										cell.text = "성분";
+										cell.targetColumnName = "mealkitCategory";
+										cell.text = "카테고리";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -217,22 +270,23 @@
 									"configurator": function(cell){
 										cell.filterable = false;
 										cell.sortable = false;
-										cell.targetColumnName = "mealkitCategory";
-										cell.text = "카테고리";
+										cell.targetColumnName = "memberEmail";
+										cell.text = "밀키트 등록자";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 4},
 									"configurator": function(cell){
-										cell.filterable = false;
-										cell.sortable = false;
-										cell.targetColumnName = "memberEmail";
-										cell.text = "등록자명";
-									}
-								},
-								{
-									"constraint": {"rowIndex": 0, "colIndex": 5},
-									"configurator": function(cell){
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								}
 							]
@@ -255,23 +309,17 @@
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 2},
 									"configurator": function(cell){
-										cell.columnName = "mealkitIngredients";
+										cell.columnName = "mealkitCategory";
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 3},
 									"configurator": function(cell){
-										cell.columnName = "mealkitCategory";
-									}
-								},
-								{
-									"constraint": {"rowIndex": 0, "colIndex": 4},
-									"configurator": function(cell){
 										cell.columnName = "memberEmail";
 									}
 								},
 								{
-									"constraint": {"rowIndex": 0, "colIndex": 5},
+									"constraint": {"rowIndex": 0, "colIndex": 4},
 									"configurator": function(cell){
 										cell.control = (function(){
 											var image_1 = new cpr.controls.Image("likeimg");
@@ -298,8 +346,24 @@
 					container.addChild(grid_1, {
 						"top": "15px",
 						"right": "15px",
-						"bottom": "15px",
+						"bottom": "50px",
 						"left": "15px"
+					});
+					var button_1 = new cpr.controls.Button();
+					button_1.value = "해당 밀키트 확인";
+					button_1.style.css({
+						"background-color" : "#0ebc59",
+						"color" : "#FFFFFF",
+						"background-image" : "none"
+					});
+					if(typeof onButtonClick == "function") {
+						button_1.addEventListener("click", onButtonClick);
+					}
+					container.addChild(button_1, {
+						"right": "15px",
+						"bottom": "10px",
+						"width": "120px",
+						"height": "30px"
 					});
 				})(group_2);
 				container.addChild(group_2, {

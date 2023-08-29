@@ -3,7 +3,7 @@ package org.kosta.recipekithub.model.service;
 import java.util.List;
 
 import org.kosta.recipekithub.model.mapper.RecipeBoardMapper;
-import org.kosta.recipekithub.model.vo.Pagination;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +14,8 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	
 	private final RecipeBoardMapper recipeBoardMapper;
 	@Override
-	public List<RecipeBoardVO> findAllRecipeBoard(Pagination pagination) {
-		return recipeBoardMapper.findAllRecipeBoard(pagination);
+	public List<RecipeBoardVO> findAllRecipeBoard(String type, String ingredients, String method, String sort ,String searchValue, RecipePagination pagination) {
+		return recipeBoardMapper.findAllRecipeBoard(type, ingredients, method, sort, searchValue, pagination);
 	}
 	@Override
 	public int insertRecipeBoard(RecipeBoardVO recipeBoardVO) {
@@ -34,8 +34,8 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 		return recipeBoardMapper.deleteRecipe(recipeBoardId);
 	}
 	@Override
-	public long findTotalPostCount() {
-		return recipeBoardMapper.findTotalPostCount();
+	public long findTotalPostCount(String type, String ingredients, String method, String searchValue) {
+		return recipeBoardMapper.findTotalPostCount(type, ingredients, method, searchValue);
 	}
 	@Override
 	public long updateRecipeHits(long id) {
@@ -44,5 +44,9 @@ public class RecipeBoardServiceImpl implements RecipeBoardService {
 	@Override
 	public long likeCount(long recipeBoardId) {
 		return recipeBoardMapper.likeCount(recipeBoardId);
+	}
+	@Override
+	public List<RecipeBoardVO> likeRecipeList() {
+		return recipeBoardMapper.likeRecipeList();
 	}
 }

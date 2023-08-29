@@ -21,7 +21,7 @@
         <cl:formdata std:sid="f-data-bb20d1d3" row="0" col="1" rowspan="1" colspan="2"/>
       </cl:inputbox>
       <cl:textarea std:sid="t-area-c9ea9216" id="txa1" style="border-radius:10px; font-family:푸른전남;">
-        <cl:formdata std:sid="f-data-4f302614" row="7" col="1" rowspan="1" colspan="2"/>
+        <cl:formdata std:sid="f-data-7a3eff75" row="7" col="1" rowspan="1" colspan="2"/>
       </cl:textarea>
       <cl:output std:sid="output-10d91d5f" style="font-weight:bold; font-family:푸른전남;" value="제목">
         <cl:formdata std:sid="f-data-7b001043" row="0" col="0"/>

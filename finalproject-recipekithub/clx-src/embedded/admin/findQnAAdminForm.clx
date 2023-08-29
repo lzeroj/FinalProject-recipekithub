@@ -40,13 +40,13 @@
     <cl:listener std:sid="listener-087fd3cf" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-e98afb90">
       <cl:xylayoutdata std:sid="xyl-data-01dc0c93" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:group std:sid="group-67002643">
+      <cl:group std:sid="group-67002643" style="background-color:#FFFFFF; border-radius:20px;">
         <cl:xylayoutdata std:sid="xyl-data-8c30d336" top="30px" bottom="30px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
-        <cl:output std:sid="output-dfed24b2" value="Q &amp; A 리스트">
-          <cl:formdata std:sid="f-data-5129b7a0" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-dfed24b2" style="background-color:#FFFFFF; color:#0fd465; border-bottom-color:#0ebc59; font-weight:bold; border-bottom-width:1px; font-size:18px; font-family:푸른전남; border-bottom-style:solid; text-align:center;" value="Q &amp; A 리스트">
+          <cl:formdata std:sid="f-data-ce7e57a0" row="0" col="0" rowspan="1" colspan="3"/>
         </cl:output>
-        <cl:grid std:sid="grid-6b88455a" id="grd1" readonly="true" datasetid="qnalistadmin">
-          <cl:formdata std:sid="f-data-966c20bb" row="2" col="0" rowspan="1" colspan="2"/>
+        <cl:grid std:sid="grid-6b88455a" id="grd1" style="background-color:#FFFFFF; border-right-style:solid; border-top-width:0px; border-left-style:solid; border-right-width:0px; border-bottom-width:0px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" readonly="true" datasetid="qnalistadmin">
+          <cl:formdata std:sid="f-data-607283ad" row="2" col="0" rowspan="1" colspan="3"/>
           <cl:gridcolumn std:sid="g-column-f08b842a" width="30px"/>
           <cl:gridcolumn std:sid="g-column-1bdea98a" width="121px"/>
           <cl:gridcolumn std:sid="g-column-c568d50d" width="74px"/>
@@ -54,11 +54,11 @@
           <cl:gridcolumn std:sid="g-column-5c463b52"/>
           <cl:gridheader std:sid="gh-band-d217be52">
             <cl:gridrow std:sid="g-row-ae5837cf"/>
-            <cl:gridcell std:sid="gh-cell-76b9dc9f" rowindex="0" colindex="0" sortable="false" filterable="false"/>
-            <cl:gridcell std:sid="gh-cell-fdb7d6a2" rowindex="0" colindex="1" targetcolumnname="boardTitle" sortable="false" filterable="false" text="제목"/>
-            <cl:gridcell std:sid="gh-cell-3442aceb" rowindex="0" colindex="2" targetcolumnname="memberEmail" sortable="false" filterable="false" text="작성자"/>
-            <cl:gridcell std:sid="gh-cell-1645c611" rowindex="0" colindex="3" targetcolumnname="boardRegDate" sortable="false" filterable="false" text="작성일"/>
-            <cl:gridcell std:sid="gh-cell-865a1409" rowindex="0" colindex="4" targetcolumnname="boardResponseStatus" sortable="false" filterable="false" text="답변여부"/>
+            <cl:gridcell std:sid="gh-cell-76b9dc9f" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-fdb7d6a2" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="boardTitle" sortable="false" filterable="false" text="제목"/>
+            <cl:gridcell std:sid="gh-cell-3442aceb" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="작성자"/>
+            <cl:gridcell std:sid="gh-cell-1645c611" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="boardRegDate" sortable="false" filterable="false" text="작성일"/>
+            <cl:gridcell std:sid="gh-cell-865a1409" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="boardResponseStatus" sortable="false" filterable="false" text="답변여부"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-f70f2135">
             <cl:gridrow std:sid="g-row-be315f19" height="64px"/>
@@ -73,7 +73,7 @@
             </cl:gridcell>
           </cl:griddetail>
         </cl:grid>
-        <cl:button std:sid="button-d88ae865" value="선택 열기">
+        <cl:button std:sid="button-d88ae865" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; background-image:none;" value="선택 열기">
           <cl:listener std:sid="listener-33bfa1a7" name="click" handler="onButtonClick"/>
           <cl:formdata std:sid="f-data-165374cd" row="4" col="1"/>
         </cl:button>
@@ -83,8 +83,10 @@
           <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
           <cl:rows length="20" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
           <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="10" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
           <cl:columns length="1" unit="FRACTION"/>
-          <cl:columns length="80" unit="PIXEL"/>
+          <cl:columns length="160" unit="PIXEL"/>
+          <cl:columns length="10" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
       <cl:xylayout std:sid="xylayout-032c94f6"/>

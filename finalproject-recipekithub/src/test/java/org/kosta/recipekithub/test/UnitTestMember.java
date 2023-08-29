@@ -36,8 +36,9 @@ public class UnitTestMember {
 	
 	@Test
 	public void findMemberByEmail() {
-		String memberEmail = "kjooniewetwet@kakao.com";
+		String memberEmail = "kjoonie@naver.com";
 		MemberVO member = memberService.findMemberByEmail(memberEmail);
+		log.debug(member.toString());
 		Assertions.assertNotNull(member);
 	}
 	
@@ -59,7 +60,7 @@ public class UnitTestMember {
 	
 	@Test
 	public void updateMember() {
-		MemberVO member = new MemberVO("kjoonie@kakao.com", "asdf", "금동준", "kdj9315", "123456", "성남시 분당구", "정자일로135", "01081639834", "19930105");
+		MemberVO member = new MemberVO("kjoonie7@naver.com", "asdf", "금동준", "kdj9999", "123456", "성남시 분당구", "정자일로135", "01081639834", "19930105");
 		int result = memberService.updateMember(member);
 		log.debug("result : {}", result);	// 1이 출력된다
 		Assertions.assertEquals(1, result);
@@ -67,10 +68,10 @@ public class UnitTestMember {
 	
 	@Test
 	public void registerMember() {
-		String memberEmail = "kjoonie@kakao.com";
+		String memberEmail = "kjoonie11@kakao.com";
 		String memberPassword = "asdf";
 		String memberName = "금동준";
-		String memberNick = "kdj77";
+		String memberNick = "kdj777";
 		String memberPostcode = "987234";
 		String memberAddress = "성남시 분당구";
 		String memberAddressDetail = "정자일로136";
@@ -94,7 +95,7 @@ public class UnitTestMember {
 	
 	@Test
 	public void deleteMember() {
-		String memberEmail = "kjoonie456@naver.com";
+		String memberEmail = "kjoonie77@naver.com";
 		int result = memberService.deleteMember(memberEmail);
 		Assertions.assertEquals(1, result);
 	}
@@ -141,9 +142,12 @@ public class UnitTestMember {
 		Assertions.assertNotNull(memberPassword);
 	}
 	
+	/*
 	@Test 
 	public void insertProfileImg() {
 		String memberEmail = "";
-		int result = memberService.insertProfileImg(memberEmail);
+		String memberImage="";
+		int result = memberService.insertProfileImg(memberEmail, memberImage);
 	}
+	*/
 }

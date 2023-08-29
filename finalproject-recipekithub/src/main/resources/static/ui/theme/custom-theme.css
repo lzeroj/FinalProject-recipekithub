@@ -123,6 +123,9 @@
 /****************************
  * File Upload
  ****************************/
+/****************************
+ * Modal
+ ****************************/
 /* 
  * Define Common Class
  * Template Name : common-apps-template
@@ -413,7 +416,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+  font-family: "푸른 전남", "Malgun Gothic", sans-serif;
   font-weight: 700;
   line-height: 1.1;
   color: #5b6879;
@@ -450,7 +453,7 @@ h6,
 }
 /* Font Family & Style */
 .ff-base {
-  font-family: "Noto Sans KR", "Malgun Gothic", sans-serif !important;
+  font-family: "푸른 전남", "Malgun Gothic", sans-serif !important;
 }
 .ff-italic {
   font-style: italic !important;
@@ -1891,7 +1894,7 @@ code,
   border-radius: 4px;
 }
 .cl-container.card .cl-output.card-title {
-  font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+  font-family: "푸른 전남", "Malgun Gothic", sans-serif;
   font-weight: 700;
   line-height: 1.1;
   color: #5b6879;
@@ -1899,7 +1902,7 @@ code,
 }
 .cl-container.card .cl-output.card-subtitle {
   color: #8094ae;
-  font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+  font-family: "푸른 전남", "Malgun Gothic", sans-serif;
   font-weight: 400;
   line-height: 1.1;
   font-size: 1rem;
@@ -2912,10 +2915,6 @@ code,
   font-weight: 500;
   padding-left: 20px;
 }
-.btnLogin {
-  background-image: ;
-  background-color: ;
-}
 .memberIcon {
   filter: brightness(0.5) saturate(0%);
 }
@@ -2935,9 +2934,9 @@ code,
   width: 30px;
 }
 .emphasis {
-  background-image: linear-gradient(transparent 70%, #E5F2E3 70%);
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  background-image: linear-gradient(transparent 70%, #86D2A7 70%);
+  /*border-top-left-radius: 5px;*/
+  /*border-top-right-radius: 5px;*/
 }
 /*
 .a {
@@ -2971,9 +2970,6 @@ code,
   border-right: 69px solid transparent;
 }
 */
-.abc {
-  border-radius: 0px 60px 0px 0px;
-}
 .btn-login {
   display: flex;
   /* 텍스트와 심플한 화살표를 가로로 배열 */
@@ -2990,7 +2986,7 @@ code,
   font-size: 24px;
   font-weight: 700;
   text-decoration: none;
-  background-color: #90be70;
+  background-color: #159e50;
   border-radius: 50px;
   box-shadow: 0 3px #696969;
   top: -2px;
@@ -3007,7 +3003,7 @@ code,
   /* 상하 중앙 배치 */
   width: 30px;
   height: 30px;
-  background-color: #cae6b7;
+  background-color: #f0fdf6;
   border-radius: 20px;
 }
 .btn-login::after {
@@ -3079,6 +3075,16 @@ code,
   box-shadow: 0 1px #696969;
   top: 1px;
 }
+.navbar1 {
+  background-color: rgba(19, 157, 79, 0.9);
+  box-shadow: 5px 5px 5px 5px gray;
+}
+.footer {
+  box-shadow: 0 -5px 5px -5px gray;
+}
+.footer-top {
+  background-color: #159e50;
+}
 .footer-bottom {
-  background: linear-gradient(to top, transparent, #6A8B41);
+  background: linear-gradient(to top, transparent, #159e50);
 }

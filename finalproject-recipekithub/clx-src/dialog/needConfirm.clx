@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-7f2b4faa" version="1.0.4584">
+  <head std:sid="head-b5a23286">
+    <screen std:sid="screen-56dd4959" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="250" customWidth="400" active="true"/>
+    <screen std:sid="screen-30931352" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-f47e88c9" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-14be0b46"/>
+    <cl:appspec title="RecipeKitHub"/>
+  </head>
+  <body std:sid="body-245d34d6">
+    <cl:listener std:sid="listener-e6c14b2c" name="load" handler="onBodyLoad"/>
+    <cl:output std:sid="output-f1383ede" id="message" style="background-color:#FFFFFF; font-weight:bold; font-size:16px; text-align:center;" value="">
+      <cl:xylayoutdata std:sid="xyl-data-527a85a9" top="0px" right="0px" bottom="50px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+    </cl:output>
+    <cl:button std:sid="button-35082e2e" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; background-image:none;" value="확인">
+      <cl:listener std:sid="listener-77cf2735" name="click" handler="onButtonClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-f93cdbc6" top="200px" right="200px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+    </cl:button>
+    <cl:button std:sid="button-8b3d5b7e" style="background-color:#F0F0F0; color:#696969; font-weight:bold; background-image:none;" value="취소">
+      <cl:listener std:sid="listener-079e28cc" name="click" handler="onButtonClick2"/>
+      <cl:xylayoutdata std:sid="xyl-data-3766f5c8" top="200px" right="0px" bottom="0px" left="200px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+    </cl:button>
+    <cl:xylayout std:sid="xylayout-62c303da"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

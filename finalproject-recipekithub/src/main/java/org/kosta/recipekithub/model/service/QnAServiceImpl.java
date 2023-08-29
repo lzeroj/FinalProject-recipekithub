@@ -3,6 +3,7 @@ package org.kosta.recipekithub.model.service;
 import java.util.List;
 
 import org.kosta.recipekithub.model.mapper.QnAMapper;
+import org.kosta.recipekithub.model.vo.QnAAnswerVO;
 import org.kosta.recipekithub.model.vo.QnAVO;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,8 @@ public class QnAServiceImpl implements QnAService {
 	}
 
 	@Override
-	public List<QnAVO> selectQnaList() {
-		return qnAMapper.selectQnaList();
+	public List<QnAVO> selectQnaList(String memberEmail) {
+		return qnAMapper.selectQnaList(memberEmail);
 	}
 
 	@Override
@@ -42,6 +43,21 @@ public class QnAServiceImpl implements QnAService {
 	@Override
 	public QnAVO selectQnaDetailAdmin(int boardId) {
 		return qnAMapper.selectQnaDetailAdmin(boardId);
+	}
+
+	@Override
+	public int insertQnAAnswer(QnAAnswerVO answerVO) {
+		return qnAMapper.insertQnAAnswer(answerVO);
+	}
+
+	@Override
+	public int updateBoardResponseStatus(int boardId) {
+		return qnAMapper.updateBoardResponseStatus(boardId);
+	}
+
+	@Override
+	public QnAAnswerVO selectChkQnAAnswer(int boardId) {
+		return qnAMapper.selectChkQnAAnswer(boardId);
 	}
 
 }

@@ -25,13 +25,21 @@
 			function onButtonClick(e){
 				var button = e.control;
 				var host = app.getHost(); // 부모 임베디드 앱
-			    if(confirm("등록화면으로 이동하시겠습니까?")){
-					cpr.core.App.load("embedded/myPageQnARegisterForm", function(loadedApp){
-						if (loadedApp){
-							host.app = loadedApp;
-						}
+				app.getRootAppInstance().openDialog("dialog/needConfirm", {
+					width: 400, height: 300, headerVisible: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = "등록화면으로 이동하시겠습니까?";
 					});
-			    }
+				}).then(function(returnValue){
+					if(returnValue == "ok"){
+						cpr.core.App.load("embedded/myPageQnARegisterForm", function(loadedApp){
+							if (loadedApp){
+								host.app = loadedApp;
+							}
+						});
+					}
+				});
 			}
 
 			/*
@@ -198,6 +206,11 @@
 								"configurator": function(cell){
 									cell.filterable = false;
 									cell.sortable = false;
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -207,6 +220,11 @@
 									cell.sortable = false;
 									cell.targetColumnName = "boardTitle";
 									cell.text = "글 제목";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
@@ -216,12 +234,22 @@
 									cell.sortable = false;
 									cell.targetColumnName = "boardRegDate";
 									cell.text = "작성 일시";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 3},
 								"configurator": function(cell){
 									cell.text = "작성 여부";
+									cell.style.css({
+										"background-color" : "#0ebc59",
+										"color" : "#FFFFFF",
+										"font-weight" : "bold"
+									});
 								}
 							}
 						]

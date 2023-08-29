@@ -21,6 +21,8 @@ function onBodyLoad(e){
 	app.lookup("nick").text = app.getAppProperty("nick");
 	app.lookup("regDate").text = app.getAppProperty("regDate");
 	app.lookup("content").text = app.getAppProperty("content");
+	app.lookup("star").text = app.getAppProperty("star");
+	app.lookup("deleteBtn").visible = app.getAppProperty("deleteBtn");
 }
 
 /*
@@ -37,7 +39,17 @@ function onButtonClick(e){
  * "삭제" 버튼에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
-function onButtonClick2(e){
+//function onButtonClick2(e){
+//	var button = e.control;
+//	var event = new cpr.events.CAppEvent("deleteClick");
+//	app.dispatchEvent(event);
+//}
+
+/*
+ * "삭제" 버튼에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onButtonClick3(e){
 	var button = e.control;
 	var event = new cpr.events.CAppEvent("deleteClick");
 	app.dispatchEvent(event);

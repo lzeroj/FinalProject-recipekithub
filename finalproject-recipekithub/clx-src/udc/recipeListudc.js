@@ -23,6 +23,7 @@ function onBodyLoad(e){
 	app.lookup("nick").text = app.getAppProperty("nick");
 	app.lookup("like").text = app.getAppProperty("like");
 	app.lookup("hits").text = app.getAppProperty("hits");
+	app.lookup("profile").src = app.getAppProperty("profile");
 }
 
 /*

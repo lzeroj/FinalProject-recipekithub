@@ -7,6 +7,9 @@
 (function() {
 	var app = new cpr.core.App("recipe/updaterecipe", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/controls/htmlobject.part.css");
+			loader.addCSS("theme/custom-theme.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -17,7 +20,21 @@
 			 *
 			 * @author user
 			 ************************************************/
-			var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
+			function getTimedSessionData(key) {
+				var storedData = sessionStorage.getItem(key);
+				
+				if (storedData) {
+					var data = JSON.parse(storedData);
+					var currentTime = new Date().getTime();
+					
+					if (currentTime < data.expirationTime) {
+						return data.value;
+					} else {
+						sessionStorage.removeItem(key);
+					}
+				}
+				return null;
+			}
 			/*
 			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
 			 * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
@@ -56,7 +73,7 @@
 					$('#summernote').summernote({
 						placeholder: '글 작성란',
 						tabsize: 2,
-						height: 300,
+						height: 700,
 						toolbar: [
 							['style', ['style']],
 							['font', ['bold', 'underline', 'clear']],
@@ -80,23 +97,23 @@
 				var recipeBoardVO = cpr.core.Platform.INSTANCE.getParameter("recipeBoardVO");
 				var imagePath = cpr.core.Platform.INSTANCE.getParameter("imagePath");
 				// 파일명에 uuid 값 제거하기 위함.
-				var  uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\_/i;
+				var uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\_/i;
 				
 				app.lookup("ipb1").value = recipeBoardVO.recipeBoardTitle;
 				app.lookup("lcb1").value = recipeBoardVO.categoryType;
 				app.lookup("lcb2").value = recipeBoardVO.categoryIngredients;
 				app.lookup("lcb3").value = recipeBoardVO.categoryMethod;
-				app.lookup("uploadImg").src = "/upload/recipe/"+imagePath;
+				app.lookup("uploadImg").src = "/upload/recipe/" + imagePath;
 				var fileInput = app.lookup("fi1");
 				
 				// 파일인풋에 이름만 넣기 
-				var  orgFileName = imagePath.replace(uuid, "");
-				fileInput.value=orgFileName;
+				var orgFileName = imagePath.replace(uuid, "");
+				fileInput.value = orgFileName;
 				
 				// 실제로 파일 넣는 것 사용 X
 				//var imageFile = new File([""], imagePath);
 				//fileInput.files = [imageFile];
-
+				
 			}
 
 			/*
@@ -105,22 +122,23 @@
 			 */
 			function onFi1ValueChange(e) {
 				var fi1 = e.control;
+				app.lookup("deleteImg").visible = true;
 				var image = app.lookup("uploadImg");
 				var fileInput = app.lookup("fi1");
 				//이미지 파일 아닌 걸 넣었을 때 
 				//var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 				if (fileInput.files && fileInput.files[0]) {
 					var reader = new FileReader();
-			//		if (allowedExtensions.test(fileInput.files[0].name)) {
-						reader.onload = function(e) {
-							image.src = e.target.result;
-						};
-						reader.readAsDataURL(fileInput.files[0]);
-			//		} 
-			//		else {
-			//		alert("이미지 파일만 업로드 가능합니다.");
-			//		fileInput.clear();
-			//		}
+					//		if (allowedExtensions.test(fileInput.files[0].name)) {
+					reader.onload = function(e) {
+						image.src = e.target.result;
+					};
+					reader.readAsDataURL(fileInput.files[0]);
+					//		} 
+					//		else {
+					//		alert("이미지 파일만 업로드 가능합니다.");
+					//		fileInput.clear();
+					//		}
 				}
 			}
 			/*
@@ -131,9 +149,10 @@
 				var deleteImg = e.control;
 				var fileInput = app.lookup("fi1");
 				var image = app.lookup("uploadImg");
-				if(confirm("사진을 삭제하시겠습니까?")){
-				fileInput.clear();
-				image.src = "";
+				if (confirm("사진을 삭제하시겠습니까?")) {
+					fileInput.clear();
+					image.src = null;
+					app.lookup("deleteImg").visible = false;
 				}
 			}
 
@@ -143,7 +162,13 @@
 			 */
 			function onButtonClick(e) {
 				var button = e.control;
+				var sessionval = getTimedSessionData("memsession");
+				if (sessionval == null) {
+					alert("등록 실패");
+					window.location.href= "/";
+				}
 				
+				var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
 				var vsOpt = app.lookup("smnote");
 				var dataMap = app.lookup("recipe");
 				vsOpt.value = $('#summernote').summernote('code');
@@ -152,44 +177,44 @@
 				
 				var fileInput = app.lookup("fi1");
 				var file = fileInput.file;
-				
 				var image = app.lookup("uploadImg");
 				var value = dataMap.getValue("RECIPE_BOARD_TITLE");
 				var value2 = dataMap.getValue("CATEGORY_TYPE");
 				var value3 = dataMap.getValue("CATEGORY_INGREDIENTS");
 				var value4 = dataMap.getValue("CATEGORY_METHOD");
 				var value5 = dataMap.setValue("RECIPE_BOARD_ID", recipeBoardId);
-				if (confirm("등록 하시겠습니까?")) {
-					if (value == ""){
-						alert("제목을 작성하세요");
-					} else if(value2 == "" || value3 == "" || value4 == ""){
-						alert("카테고리를 등록하세요");
-					} else if(image.src == "") {
-						alert("사진을 등록하세요");
-					} else {
-						submission.addFileParameter("image", file);
-						submission.send();
+				if (value == "") {
+					alert("제목을 작성하세요");
+				} else if (value2 == "" || value3 == "" || value4 == "") {
+					alert("카테고리를 등록하세요");
+				} else if (image.src == null) {
+					alert("사진을 등록하세요");
+				} else {
+					var initValue = {
+						"msg": "레시피 수정하시겠습니까?"
 					}
+					app.openDialog("dialog/recipeCheck", {
+						width: 405,
+						height: 300
+					}, function(dialog) {
+						dialog.ready(function(dialogApp) {
+							// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+							dialogApp.initValue = initValue;
+						});
+					}).then(function(returnValue) {
+						if (returnValue == true) {
+							submission.addFileParameter("image", file);
+							submission.send();
+						}
+					});
 				}
 			}
-
-			///*
-			// * 서브미션에서 submit-success 이벤트 발생 시 호출.
-			// * 통신이 성공하면 발생합니다.
-			// */
-			//function onUpdateRecipeSubmitSuccess(e){
-			//	var updateRecipe = e.control;
-			//	if (recipeBoardId != null) {
-			//	window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
-			//	}
-			//}
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onUpdateRecipeSubmitSuccess(e){
-				alert("레시피가 수정되었습니다.");
+			function onUpdateRecipeSubmitSuccess(e) {
 				var updateRecipe = e.control;
 				var recipeBoardId = updateRecipe.getMetadata("recipeBoardId");
 				if (recipeBoardId != null) {
@@ -201,21 +226,39 @@
 			 * "삭제" 버튼에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onButtonClick2(e){
+			function onButtonClick2(e) {
 				var button = e.control;
-				if(confirm("정말 삭제하시겠습니까?")){
-					var dataMap = app.lookup("recipeBoardId");
-					dataMap.setValue("RECIPE_BOARD_ID", recipeBoardId);
-					var submission = app.lookup("deleteRecipe");
-					submission.send();
+				var sessionval = getTimedSessionData("memsession");
+				if (sessionval == null) {
+					window.location.href= "/";
 				}
+				var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
+				var dataMap = app.lookup("recipeBoardId");
+				dataMap.setValue("RECIPE_BOARD_ID", recipeBoardId);
+				var initValue = {
+					"msg": "레시피 삭제하시겠습니까?"
+				}
+				app.openDialog("dialog/recipeCheck", {
+					width: 405,
+					height: 300
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					if (returnValue == true) {
+						var submission = app.lookup("deleteRecipe");
+						submission.send();
+					}
+				});
 			}
 
 			/*
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
-			function onDeleteRecipeSubmitSuccess(e){
+			function onDeleteRecipeSubmitSuccess(e) {
 				var deleteRecipe = e.control;
 				window.location.href = "/recipeBoardList";
 			}
@@ -224,12 +267,26 @@
 			 * "취소" 버튼에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
-			function onButtonClick3(e){
+			function onButtonClick3(e) {
 				var button = e.control;
-				if(confirm("취소하시겠습니까?")){
-					window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
+				var recipeBoardId = cpr.core.Platform.INSTANCE.getParameter("recipeBoardId");
+				var initValue = {
+					"msg": "변경사항이 저장되지 않습니다.\n 취소하시겠습니까?"
 				}
-			};
+				app.openDialog("dialog/recipeCheck", {
+					width: 405,
+					height: 300
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					if (returnValue == true) {
+						window.location.href = "/detailRecipe?recipeBoardId=" + recipeBoardId;
+					}
+				});
+			}
 			// End - User Script
 			
 			// Header
@@ -285,14 +342,16 @@
 				submission_2.addEventListener("submit-success", onDeleteRecipeSubmitSuccess);
 			}
 			app.register(submission_2);
-			app.supportMedia("all and (min-width: 1024px)", "default");
+			app.supportMedia("all and (min-width: 1920px)", "FHD");
+			app.supportMedia("all and (min-width: 1024px) and (max-width: 1919px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
 			
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
-				"background-color" : "#F0F0F0",
+				"background-color" : "#F4FAEC",
+				"font-family" : "푸른전남 Medium",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -307,10 +366,10 @@
 				uIControlShell_1.addEventListener("load", onSmnoteLoad);
 			}
 			container.addChild(uIControlShell_1, {
-				"top": "263px",
-				"width": "724px",
-				"height": "277px",
-				"left": "calc(50% - 362px)"
+				"top": "510px",
+				"width": "1200px",
+				"height": "450px",
+				"left": "calc(50% - 600px)"
 			});
 			
 			var group_1 = new cpr.controls.Container();
@@ -336,10 +395,10 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "10px",
-				"width": "724px",
+				"top": "199px",
+				"width": "1200px",
 				"height": "52px",
-				"left": "calc(50% - 362px)"
+				"left": "calc(50% - 600px)"
 			});
 			
 			var group_2 = new cpr.controls.Container();
@@ -358,8 +417,10 @@
 				var button_1 = new cpr.controls.Button();
 				button_1.value = "저장";
 				button_1.style.css({
+					"background-color" : "#0ca44e",
+					"color" : "#FFFFFF",
 					"font-weight" : "bold",
-					"background-image" : "linear-gradient(#52b135,#58fd45)"
+					"background-image" : "none"
 				});
 				if(typeof onButtonClick == "function") {
 					button_1.addEventListener("click", onButtonClick);
@@ -371,8 +432,10 @@
 				var button_2 = new cpr.controls.Button();
 				button_2.value = "취소";
 				button_2.style.css({
+					"background-color" : "#0ca44e",
+					"color" : "#FFFFFF",
 					"font-weight" : "bold",
-					"background-image" : "linear-gradient(#ffffff, #5690cb)"
+					"background-image" : "none"
 				});
 				if(typeof onButtonClick3 == "function") {
 					button_2.addEventListener("click", onButtonClick3);
@@ -384,8 +447,10 @@
 				var button_3 = new cpr.controls.Button();
 				button_3.value = "삭제";
 				button_3.style.css({
+					"background-color" : "#0ca44e",
+					"color" : "#FFFFFF",
 					"font-weight" : "bold",
-					"background-image" : "linear-gradient(#52b135,#58fd45)"
+					"background-image" : "none"
 				});
 				if(typeof onButtonClick2 == "function") {
 					button_3.addEventListener("click", onButtonClick2);
@@ -396,13 +461,16 @@
 				});
 			})(group_2);
 			container.addChild(group_2, {
-				"top": "698px",
+				"top": "1340px",
 				"width": "400px",
 				"height": "50px",
 				"left": "calc(50% - 200px)"
 			});
 			
 			var group_3 = new cpr.controls.Container();
+			group_3.style.css({
+				"background-color" : "#FFFFFF"
+			});
 			var xYLayout_3 = new cpr.controls.layouts.XYLayout();
 			group_3.setLayout(xYLayout_3);
 			(function(container){
@@ -418,13 +486,14 @@
 				formLayout_2.leftMargin = "5px";
 				formLayout_2.horizontalSpacing = "10px";
 				formLayout_2.verticalSpacing = "10px";
-				formLayout_2.setColumns(["100px", "388px"]);
-				formLayout_2.setRows(["1fr", "1fr", "1fr"]);
+				formLayout_2.setColumns(["100px"]);
+				formLayout_2.setRows(["1fr", "50px", "50px"]);
 				group_4.setLayout(formLayout_2);
 				(function(container){
 					var output_2 = new cpr.controls.Output();
 					output_2.value = "레시피 제목";
 					output_2.style.css({
+						"color" : "#90be70",
 						"font-weight" : "bolder",
 						"text-align" : "center"
 					});
@@ -433,8 +502,9 @@
 						"rowIndex": 0
 					});
 					var output_3 = new cpr.controls.Output();
-					output_3.value = "대표 사진";
+					output_3.value = "카테고리";
 					output_3.style.css({
+						"color" : "#90be70",
 						"font-weight" : "bolder",
 						"text-align" : "center"
 					});
@@ -443,8 +513,9 @@
 						"rowIndex": 1
 					});
 					var output_4 = new cpr.controls.Output();
-					output_4.value = "카테고리";
+					output_4.value = "대표 사진";
 					output_4.style.css({
+						"color" : "#90be70",
 						"font-weight" : "bolder",
 						"text-align" : "center"
 					});
@@ -452,134 +523,143 @@
 						"colIndex": 0,
 						"rowIndex": 2
 					});
-					var inputBox_1 = new cpr.controls.InputBox("ipb1");
-					inputBox_1.style.css({
-						"font-size" : "18px"
-					});
-					inputBox_1.bind("value").toDataMap(app.lookup("recipe"), "RECIPE_BOARD_TITLE");
-					container.addChild(inputBox_1, {
-						"colIndex": 1,
-						"rowIndex": 0
-					});
-					var group_5 = new cpr.controls.Container();
-					var formLayout_3 = new cpr.controls.layouts.FormLayout();
-					formLayout_3.scrollable = false;
-					formLayout_3.topMargin = "5px";
-					formLayout_3.rightMargin = "5px";
-					formLayout_3.bottomMargin = "5px";
-					formLayout_3.leftMargin = "5px";
-					formLayout_3.horizontalSpacing = "10px";
-					formLayout_3.verticalSpacing = "10px";
-					formLayout_3.setColumns(["80px", "80px", "80px"]);
-					formLayout_3.setRows(["1fr"]);
-					group_5.setLayout(formLayout_3);
-					(function(container){
-						var linkedComboBox_1 = new cpr.controls.LinkedComboBox("lcb1");
-						linkedComboBox_1.placeholders = ["종류별"];
-						linkedComboBox_1.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_TYPE");
-						(function(linkedComboBox_1){
-							linkedComboBox_1.addItem((function(){
-								var treeItem_1 = new cpr.controls.TreeItem("밑반찬", "밑반찬", null);
-								treeItem_1.checked = false;
-								return treeItem_1;
-							})());
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("메인반찬", "메인반찬", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("국/탕", "국/탕", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("디저트", "디저트", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("면", "면", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("샐러드", "샐러드", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("음료", "음료", null));
-							linkedComboBox_1.addItem(new cpr.controls.TreeItem("기타", "기타", null));
-						})(linkedComboBox_1);
-						container.addChild(linkedComboBox_1, {
-							"colIndex": 0,
-							"rowIndex": 0,
-							"colSpan": 1,
-							"rowSpan": 1
-						});
-						var linkedComboBox_2 = new cpr.controls.LinkedComboBox("lcb2");
-						linkedComboBox_2.placeholders = ["방법별"];
-						linkedComboBox_2.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_INGREDIENTS");
-						(function(linkedComboBox_2){
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("육류", "육류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("채소류", "채소류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("해물류", "해물류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("달걀/유제품", "달걀/유제품", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("가공식품류", "가공식품류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("과일류", "과일류", null));
-							linkedComboBox_2.addItem(new cpr.controls.TreeItem("기타", "기타", null));
-						})(linkedComboBox_2);
-						container.addChild(linkedComboBox_2, {
-							"colIndex": 1,
-							"rowIndex": 0
-						});
-						var linkedComboBox_3 = new cpr.controls.LinkedComboBox("lcb3");
-						linkedComboBox_3.placeholders = ["재료별"];
-						linkedComboBox_3.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_METHOD");
-						(function(linkedComboBox_3){
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("볶음", "볶음", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("끓이기", "끓이기", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("조림", "조림", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("튀김", "튀김", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("삶기", "삶기", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("굽기", "굽기", null));
-							linkedComboBox_3.addItem(new cpr.controls.TreeItem("기타", "기타", null));
-						})(linkedComboBox_3);
-						container.addChild(linkedComboBox_3, {
-							"colIndex": 2,
-							"rowIndex": 0
-						});
-					})(group_5);
-					container.addChild(group_5, {
-						"colIndex": 1,
-						"rowIndex": 2,
-						"colSpan": 1,
-						"rowSpan": 1
-					});
-					var fileInput_1 = new cpr.controls.FileInput("fi1");
-					fileInput_1.placeholder = "요리 대표 사진을 등록해 주세요";
-					fileInput_1.acceptFile = "image/*";
-					fileInput_1.style.css({
-						"text-align" : "left"
-					});
-					if(typeof onFi1ValueChange == "function") {
-						fileInput_1.addEventListener("value-change", onFi1ValueChange);
-					}
-					container.addChild(fileInput_1, {
-						"colIndex": 1,
-						"rowIndex": 1
-					});
 				})(group_4);
 				container.addChild(group_4, {
-					"right": "215px",
+					"right": "1085px",
 					"left": "5px",
-					"height": "190px",
-					"top": "calc(50% - 95px)"
+					"height": "208px",
+					"top": "calc(50% - 104px)"
 				});
 				var image_1 = new cpr.controls.Image("uploadImg");
 				container.addChild(image_1, {
-					"top": "5px",
-					"left": "508px",
-					"width": "216px",
-					"height": "193px"
+					"top": "0px",
+					"right": "182px",
+					"left": "712px",
+					"height": "225px"
 				});
 				var button_4 = new cpr.controls.Button("deleteImg");
-				button_4.value = "X";
+				button_4.value = "";
+				button_4.style.css({
+					"background-size" : "cover",
+					"background-image" : "url('theme/images/recipe/xbutton.png')",
+					"background-position" : "center"
+				});
 				if(typeof onDeleteImgClick == "function") {
 					button_4.addEventListener("click", onDeleteImgClick);
 				}
 				container.addChild(button_4, {
-					"top": "5px",
-					"left": "686px",
-					"width": "38px",
-					"height": "20px"
+					"top": "0px",
+					"left": "993px",
+					"width": "25px",
+					"height": "25px"
+				});
+				var inputBox_1 = new cpr.controls.InputBox("ipb1");
+				inputBox_1.style.css({
+					"font-size" : "18px"
+				});
+				inputBox_1.bind("value").toDataMap(app.lookup("recipe"), "RECIPE_BOARD_TITLE");
+				container.addChild(inputBox_1, {
+					"top": "16px",
+					"left": "125px",
+					"width": "531px",
+					"height": "75px"
+				});
+				var fileInput_1 = new cpr.controls.FileInput("fi1");
+				fileInput_1.placeholder = "요리 대표 사진을 등록해 주세요";
+				fileInput_1.acceptFile = "image/*";
+				fileInput_1.style.css({
+					"text-align" : "center"
+				});
+				if(typeof onFi1ValueChange == "function") {
+					fileInput_1.addEventListener("value-change", onFi1ValueChange);
+				}
+				container.addChild(fileInput_1, {
+					"top": "164px",
+					"left": "125px",
+					"width": "260px",
+					"height": "50px"
+				});
+				var linkedComboBox_1 = new cpr.controls.LinkedComboBox("lcb1");
+				linkedComboBox_1.placeholders = ["종류별"];
+				linkedComboBox_1.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_TYPE");
+				(function(linkedComboBox_1){
+					linkedComboBox_1.addItem((function(){
+						var treeItem_1 = new cpr.controls.TreeItem("밑반찬", "밑반찬", null);
+						treeItem_1.checked = false;
+						return treeItem_1;
+					})());
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("메인반찬", "메인반찬", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("국/탕", "국/탕", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("디저트", "디저트", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("면", "면", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("샐러드", "샐러드", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("음료", "음료", null));
+					linkedComboBox_1.addItem(new cpr.controls.TreeItem("기타", "기타", null));
+				})(linkedComboBox_1);
+				container.addChild(linkedComboBox_1, {
+					"top": "110px",
+					"left": "125px",
+					"width": "80px",
+					"height": "40px"
+				});
+				var linkedComboBox_2 = new cpr.controls.LinkedComboBox("lcb2");
+				linkedComboBox_2.placeholders = ["방법별"];
+				linkedComboBox_2.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_INGREDIENTS");
+				(function(linkedComboBox_2){
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("육류", "육류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("채소류", "채소류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("해물류", "해물류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("달걀/유제품", "달걀/유제품", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("가공식품류", "가공식품류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("과일류", "과일류", null));
+					linkedComboBox_2.addItem(new cpr.controls.TreeItem("기타", "기타", null));
+				})(linkedComboBox_2);
+				container.addChild(linkedComboBox_2, {
+					"top": "110px",
+					"left": "215px",
+					"width": "80px",
+					"height": "40px"
+				});
+				var linkedComboBox_3 = new cpr.controls.LinkedComboBox("lcb3");
+				linkedComboBox_3.placeholders = ["재료별"];
+				linkedComboBox_3.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_METHOD");
+				(function(linkedComboBox_3){
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("볶음", "볶음", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("끓이기", "끓이기", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("조림", "조림", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("튀김", "튀김", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("삶기", "삶기", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("굽기", "굽기", null));
+					linkedComboBox_3.addItem(new cpr.controls.TreeItem("기타", "기타", null));
+				})(linkedComboBox_3);
+				container.addChild(linkedComboBox_3, {
+					"top": "110px",
+					"left": "305px",
+					"width": "80px",
+					"height": "40px"
 				});
 			})(group_3);
 			container.addChild(group_3, {
-				"top": "61px",
-				"width": "724px",
-				"height": "200px",
-				"left": "calc(50% - 362px)"
+				"top": "260px",
+				"width": "1200px",
+				"height": "228px",
+				"left": "calc(50% - 600px)"
+			});
+			
+			var userDefinedControl_1 = new udc.header3();
+			container.addChild(userDefinedControl_1, {
+				"top": "0px",
+				"right": "0px",
+				"left": "0px",
+				"height": "200px"
+			});
+			
+			var userDefinedControl_2 = new udc.footer();
+			container.addChild(userDefinedControl_2, {
+				"top": "1400px",
+				"right": "0px",
+				"left": "0px",
+				"height": "102px"
 			});
 			if(typeof onBodyInit == "function"){
 				app.addEventListener("init", onBodyInit);

@@ -1,12 +1,17 @@
 package org.kosta.recipekithub.webcontroller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.DeclarationService;
+import org.kosta.recipekithub.model.service.RecipeBoardService;
 import org.kosta.recipekithub.model.vo.DeclarationVO;
+import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
@@ -22,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DeclarationController {
 	private final DeclarationService declarationService;
+	private final RecipeBoardService recipeBoardService;
 	
 	@RequestMapping("/insertDeclaration")
 	public View insertDeclaration(HttpServletRequest request, DataRequest dataRequest) {
@@ -33,11 +39,14 @@ public class DeclarationController {
 		if(recipeBoardId == 0) {
 			return new UIView();
 		}
-//		 로그인 확인
-//		HttpSession session = request.getSession(false);
-//		MemberVO member = (MemberVO) session.getAttribute("member");
-//		String memberId = member.getMemberEmail();
-		String memberEmail = "shj";
+		
+		// 세션 적용
+		HttpSession session = request.getSession(false);
+		String memberEmail = null;
+		if(session != null) {
+			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
+		}
 		
 		DeclarationVO dvo = new DeclarationVO();
 		dvo.setMemberEmail(memberEmail);
@@ -53,4 +62,36 @@ public class DeclarationController {
 		
 		return new JSONDataView(true,message);
 	}
+	
+	@RequestMapping("/selectAllReportList")
+	public View selectAllReportList(HttpServletRequest request, DataRequest dataRequest) {
+		List<RecipeBoardVO> recipelist = declarationService.selectAllReportList();
+		dataRequest.setResponse("dsreportlist", recipelist);
+		return new JSONDataView();
+	}
+	
+	@RequestMapping("/selectReportListByRecipeBoardId")
+	public View selectReportListByRecipeBoardId(HttpServletRequest request, DataRequest dataRequest, int recipeBoardId) {
+		List<DeclarationVO> selectReportList = declarationService.selectReportListByRecipeBoardId(recipeBoardId);
+		if(selectReportList == null) {
+			return new UIView();
+		}
+		Map<String,Object> message = new HashMap<>();
+		message.put("selectReportListResult", 1);
+		
+		dataRequest.setResponse("dsselectreportlist", selectReportList);
+		return new JSONDataView(true, message);
+	}
+	
+	@RequestMapping("/deleteRecipeById")
+	public View deleteRecipeById(HttpServletRequest request, DataRequest dataRequest, int recipeBoardId) {
+		int result = recipeBoardService.deleteRecipe(recipeBoardId);
+		if(result == 1) {
+			Map<String,Object> message = new HashMap<>();
+			message.put("deleteRecipeByIdResult", 1);
+			dataRequest.setMetadata(true, message);
+		}
+		return new JSONDataView();
+	}
+	
 }

@@ -7,6 +7,9 @@
 (function() {
 	var app = new cpr.core.App("mealkit/mealkitList", { 
 		onPrepare: function(loader) {
+			loader.addCSS("theme/cleopatra-theme.css");
+			loader.addCSS("theme/controls/htmlobject.part.css");
+			loader.addCSS("theme/custom-theme.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -19,30 +22,173 @@
 			 ************************************************/
 
 			/*
+			 * 루트 컨테이너에서 init 이벤트 발생 시 호출.
+			 * 앱이 최초 구성될 때 발생하는 이벤트 입니다.
+			 */
+			function onBodyInit(e){
+				var param = cpr.core.Platform.INSTANCE.getParameter("searchMealkit");
+				console.log("param = " + param);
+				var dataMap = app.lookup("meSearch");
+				if(param != null && param != ""){
+					app.lookup("headerUdc").searchValue = param;
+					app.lookup("headerUdc").categoryValue = "밀키트";
+					dataMap.setValue("searchMealkit", param);
+				}
+			}
+
+			/*
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
 			function onBodyLoad(e){
+				app.lookup("mealkitType").value = "전체";
+				app.lookup("sort").value = "최신순";
+				
+				//var dataMap = app.lookup("mePage");
+				//var page = dataMap.getValue("pageNo");
+				//alert("page = " + page);
+				
+				app.lookup("mealkitBoardList").send();
+				
+
+
+			}
+
+			/*
+			 * "밀키트 등록" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick2(e){
+				var button = e.control;
+				window.location.href='/insertMealkitForm';
+			}
+
+			/*
+			 * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
+			 * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
+			 */
+			function onPageIndexerSelectionChange(e){
+				var pageIndexer = e.control;
+				app.lookup("mealkitBoardList").send();
+			}
+
+			/*
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onSortSelectionChange(e){
+				var sort = e.control;
+				app.lookup("sort").value = "최신순";
+				app.lookup("page").currentPageIndex = 1;
+				
+			//	var data = app.lookup("meCategory");
+			//	var value = data.getValue("mealkitType");
+			//	alert("value = " + value);
+				
+				app.lookup("mealkitBoardList").send();
+			}
+
+			///*
+			// * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			// * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			// */
+			//function onIngreSelectionChange(e){
+			//	var ingre = e.control;
+			//	app.lookup("sort").value = "최신순";
+			//	app.lookup("page").currentPageIndex = 1;
+			//	app.lookup("mealkitBoardList").send();
+			//	
+			//}
+
+			/*
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onWaySelectionChange(e){
+				var way = e.control;
+				app.lookup("sort").value = "최신순";
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("mealkitBoardList").send();
+				
+			}
+
+			/*
+			 * 내비게이션 바에서 selection-change 이벤트 발생 시 호출.
+			 * 선택된 Item 값이 저장된 후에 발생하는 이벤트.
+			 */
+			function onCategorySelectionChange(e){
+				var category = e.control;
+				app.lookup("page").currentPageIndex = 1;
+				app.lookup("mealkitBoardList").send();
+			}
+
+			/*
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onMealkitBoardListSubmitSuccess(e){
+				var mealkitBoardList = e.control;
+			    var xhr = mealkitBoardList.xhr;
+				var jsonData = JSON.parse(xhr.responseText);
+				var mealkitAllList = jsonData.mealkitAllList;
+				var totalMealkitCnt = jsonData.totalMealkitCnt;
+				var findMealkitByName= jsonData.findMealkitByName;
+				var findStarAvgByNo= jsonData.findStarAvgByNo;
+				var commentCnt= jsonData.commentCnt;
 				var mealkitList = cpr.core.Platform.INSTANCE.getParameter("mealkitList");
+				var mealkitStarList = cpr.core.Platform.INSTANCE.getParameter("mealkitStarList");
+				var commentCount = cpr.core.Platform.INSTANCE.getParameter("commentCount");
+				
+				//app.lookup(id)	
 				var email = cpr.core.Platform.INSTANCE.getParameter("member");
 				console.log("email = " + email);
-				if(email !== "guest"){
+				if(email != "guest"){
 					var button = app.lookup("insertBtn");
 					button.visible = true;
 					button.redraw();
 				}
+				
+				app.lookup("mealkitCnt").value = totalMealkitCnt;
+				app.lookup("page").totalRowCount = totalMealkitCnt;
+				app.lookup("grp").removeAllChildren();
+				var container = app.lookup("grp");
+				for (var i = 0; i < mealkitAllList.length; i++) {
+					(function(index) {
+						var mealkit = new udc.mealkitList();
+						mealkit.img = "/upload/mealkit/" + mealkitAllList[i].mealkitImage;
+						var mealkitNo = mealkitAllList[i].mealkitNo
+						mealkit.price = mealkitAllList[i].mealkitPrice;
+						mealkit.nick = mealkitAllList[i].memberVO.memberNick;
+						mealkit.title = mealkitAllList[i].mealkitName;
+						mealkit.star = findStarAvgByNo[i];
+						mealkit.count = "("+commentCnt[i]+")";
+						container.addChild(mealkit, {
+							height: "250px",
+							width: "230px",
+							autoSize: "both"
+						});
+						mealkit.addEventListener("imgClick", function(e) {
+							window.location.href = "/mealkitDetail/" + mealkitAllList[index].mealkitNo;
+						});
+					})(i);
+					
+				}
+			}
+			/* 초기
 				var cnt = app.lookup("mealkitCnt");
 				cnt.value = mealkitList.length;
 				console.log("mealkitList = " + mealkitList);
 				var container = app.lookup("grp");
 				for (var i = 0; i < mealkitList.length; i++) {
 					(function(index) {
-						var mealkit = new udc.recipeListudc();
-						mealkit.img = "/upload/meaklkitUpload/" + mealkitList[i].recipeBoardImage;
+						var mealkit = new udc.mealkitList();
+						mealkit.img = "/upload/mealkit/" + mealkitList[i].mealkitImage;
 						console.log(mealkitList.img);
-						mealkit.hits = mealkitList[i].mealkitHits;
+						mealkit.hits = mealkitList[i].mealkitBoardHits;
 						mealkit.nick = mealkitList[i].memberVO.memberNick;
 						mealkit.title = mealkitList[i].mealkitName;
+						mealkit.star = mealkitStarList[i];
+						mealkit.count = "("+commentCount[i]+")";
 						container.addChild(mealkit, {
 							height: "250px",
 							width: "230px",
@@ -53,19 +199,75 @@
 						});
 					})(i);
 				}
-			}
-
-			/*
-			 * "밀키트 등록" 버튼에서 click 이벤트 발생 시 호출.
-			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
-			 */
-			function onButtonClick2(e){
-				var button = e.control;
-				window.location.href='/insertMealkitForm';
-			};
+			*/	
+				
+				
+			//function filterMealkit(e){
+			//	var filter = e.control;
+			//	var cnt = app.lookup("mealkitCnt");
+			//	cnt.value = filter.length;
+			//	console.log("filter = " + filter);
+			//	var container = app.lookup("grp");
+			//	for (var i = 0; i < filter.length; i++) {
+			//		(function(index) {
+			//			var mealkit = new udc.mealkitList();
+			//			mealkit.img = "/upload/mealkit/" + mealkitList[i].mealkitImage;
+			//			console.log(filter.img);
+			//			mealkit.hits = filter[i].mealkitBoardHits;
+			//			mealkit.nick = filter[i].memberVO.memberNick;
+			//			mealkit.title = filter[i].mealkitName;
+			//			mealkit.star = filter[i];
+			//			mealkit.count = "("+commentCount[i]+")";
+			//			container.addChild(mealkit, {
+			//				height: "250px",
+			//				width: "230px",
+			//				autoSize: "both"
+			//			});
+			//			mealkit.addEventListener("imgClick", function(e) {
+			//				window.location.href = "/mealkitDetail/" + filter[index].mealkitNo;
+			//			});
+			//		})(i);
+			//	}
+			//};
 			// End - User Script
 			
 			// Header
+			var dataMap_1 = new cpr.data.DataMap("meSearch");
+			dataMap_1.parseData({
+				"columns" : [{"name": "searchMealkit"}]
+			});
+			app.register(dataMap_1);
+			
+			var dataMap_2 = new cpr.data.DataMap("mePage");
+			dataMap_2.parseData({
+				"columns" : [{
+					"name": "pageNo",
+					"defaultValue": "1"
+				}]
+			});
+			app.register(dataMap_2);
+			
+			var dataMap_3 = new cpr.data.DataMap("meCategory");
+			dataMap_3.parseData({
+				"columns" : [{"name": "mealkitType"}]
+			});
+			app.register(dataMap_3);
+			
+			var dataMap_4 = new cpr.data.DataMap("meSort");
+			dataMap_4.parseData({
+				"columns" : [{"name": "sort"}]
+			});
+			app.register(dataMap_4);
+			var submission_1 = new cpr.protocols.Submission("mealkitBoardList");
+			submission_1.action = "/findMealkitList";
+			submission_1.addRequestData(dataMap_1);
+			submission_1.addRequestData(dataMap_2);
+			submission_1.addRequestData(dataMap_3);
+			submission_1.addRequestData(dataMap_4);
+			if(typeof onMealkitBoardListSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onMealkitBoardListSubmitSuccess);
+			}
+			app.register(submission_1);
 			app.supportMedia("all and (min-width: 1024px)", "default");
 			app.supportMedia("all and (min-width: 500px) and (max-width: 1023px)", "tablet");
 			app.supportMedia("all and (max-width: 499px)", "mobile");
@@ -73,272 +275,245 @@
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"font-family" : "푸른전남 Medium",
 				"width" : "100%",
 				"height" : "100%"
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.distribution = "center";
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
+			var userDefinedControl_1 = new udc.header3("headerUdc");
+			container.addChild(userDefinedControl_1, {
+				"width": "1920px",
+				"height": "205px"
+			});
+			
 			var group_1 = new cpr.controls.Container();
-			var xYLayout_2 = new cpr.controls.layouts.XYLayout();
-			xYLayout_2.scrollable = false;
-			group_1.setLayout(xYLayout_2);
+			group_1.style.css({
+				"background-color" : "#F4FAEC",
+				"background-size" : "cover",
+				"background-image" : "url('theme/images/common/bgimg1880_720.png')",
+				"background-position" : "center"
+			});
+			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_2.distribution = "center";
+			group_1.setLayout(verticalLayout_2);
 			(function(container){
-				var navigationBar_1 = new cpr.controls.NavigationBar();
-				navigationBar_1.style.css({
-					"font-size" : "13px"
-				});
-				(function(navigationBar_1){
-					navigationBar_1.addItem(new cpr.controls.MenuItem("종류별", "종류별", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("전체", "전체", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("밑반찬", "밑반찬", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("메인반찬", "메인반찬", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("국/탕", "국/탕", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("찌개", "찌개", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("디저트", "디저트", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("면/만두", "면/만두", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("밥/죽/떡", "밥/죽/떡", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("퓨전", "퓨전", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("김치/장류", "김치/장류", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("양념/소스/잼", "양념/소스/잼", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("양식", "양식", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("샐러드", "샐러드", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("스프", "스프", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("빵", "빵", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("과자", "과자", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("차/음료/술", "차/음료/술", null));
-					navigationBar_1.addItem(new cpr.controls.MenuItem("기타", "기타", null));
-				})(navigationBar_1);
-				container.addChild(navigationBar_1, {
-					"top": "20px",
-					"width": "1124px",
-					"height": "36px",
-					"left": "calc(50% - 562px)"
-				});
-				var navigationBar_2 = new cpr.controls.NavigationBar();
-				(function(navigationBar_2){
-					navigationBar_2.addItem(new cpr.controls.MenuItem("재료별", "재료별", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("전체", "전체", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("소고기", "소고기", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("돼지고기", "돼지고기", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("닭고기", "닭고기", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("육류", "육류", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("채소류", "채소류", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("해물류", "해물류", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("달걀/유제품", "달걀/유제품", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("가공식품류", "가공식품류", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("쌀", "쌀", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("밀가루", "밀가루", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("건어물류", "건어물류", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("과일류", "과일류", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("콩/견과류", "콩/견과류", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("곡류", "곡류", null));
-					navigationBar_2.addItem(new cpr.controls.MenuItem("기타", "기타", null));
-				})(navigationBar_2);
-				container.addChild(navigationBar_2, {
-					"top": "55px",
-					"width": "1124px",
-					"height": "32px",
-					"left": "calc(50% - 562px)"
-				});
-				var navigationBar_3 = new cpr.controls.NavigationBar();
-				(function(navigationBar_3){
-					navigationBar_3.addItem(new cpr.controls.MenuItem("방법별", "방법별", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("전체", "전체", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("볶음", "볶음", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("끓이기", "끓이기", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("부침", "부침", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("조림", "조림", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("무침", "무침", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("비빔", "비빔", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("찜", "찜", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("절임", "절임", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("튀김", "튀김", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("삶기", "삶기", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("굽기", "굽기", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("데치기", "데치기", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("회", "회", null));
-					navigationBar_3.addItem(new cpr.controls.MenuItem("기타", "기타", null));
-				})(navigationBar_3);
-				container.addChild(navigationBar_3, {
-					"top": "86px",
-					"width": "791px",
-					"height": "40px",
-					"left": "calc(50% - 395px)"
-				});
 				var group_2 = new cpr.controls.Container();
-				group_2.style.css({
-					"background-color" : "#FFFFFF"
-				});
-				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_3);
+				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+				xYLayout_1.scrollable = false;
+				group_2.setLayout(xYLayout_1);
 				(function(container){
-					var output_1 = new cpr.controls.Output();
-					output_1.value = "총";
-					output_1.style.css({
-						"font-weight" : "bold"
+					var navigationBar_1 = new cpr.controls.NavigationBar("mealkitType");
+					navigationBar_1.menuType = "fullmenu";
+					navigationBar_1.style.css({
+						"padding-top" : "0px",
+						"font-weight" : "16.0",
+						"padding-right" : "0px"
 					});
-					container.addChild(output_1, {
-						"top": "30px",
-						"left": "45px",
-						"width": "18px",
-						"height": "20px"
-					});
-					var button_1 = new cpr.controls.Button();
-					button_1.value = "최신순";
-					button_1.style.css({
-						"background-color" : "#ffbb3f",
-						"background-image" : "none"
-					});
-					container.addChild(button_1, {
-						"top": "34px",
-						"left": "652px",
-						"width": "100px",
-						"height": "30px"
-					});
-					var button_2 = new cpr.controls.Button();
-					button_2.value = "별점순";
-					button_2.style.css({
-						"background-color" : "white"
-					});
-					container.addChild(button_2, {
-						"top": "35px",
-						"left": "762px",
-						"width": "100px",
-						"height": "30px"
-					});
-					var button_3 = new cpr.controls.Button();
-					button_3.value = "조회수순";
-					button_3.style.css({
-						"background-color" : "white"
-					});
-					container.addChild(button_3, {
-						"top": "35px",
-						"left": "872px",
-						"width": "100px",
-						"height": "30px"
-					});
-					var output_2 = new cpr.controls.Output();
-					output_2.value = "개의 밀키트가 있습니다.";
-					output_2.style.css({
-						"font-weight" : "bold"
-					});
-					container.addChild(output_2, {
-						"top": "30px",
-						"left": "110px",
-						"width": "247px",
-						"height": "20px"
-					});
-					var output_3 = new cpr.controls.Output("mealkitCnt");
-					output_3.value = "";
-					output_3.style.css({
-						"color" : "#0CA44E",
-						"font-weight" : "bold",
-						"font-size" : "18px",
+					navigationBar_1.style.bar.css({
+						"padding-top" : "0px",
+						"padding-left" : "30px",
+						"padding-right" : "30px",
 						"text-align" : "center"
 					});
-					container.addChild(output_3, {
+					navigationBar_1.style.item.css({
+						"white-space" : "normal",
+						"padding-left" : "25px",
+						"text-align" : "center",
+						"padding-right" : "25px"
+					});
+					navigationBar_1.bind("value").toDataMap(app.lookup("meCategory"), "mealkitType");
+					(function(navigationBar_1){
+						navigationBar_1.addItem(new cpr.controls.MenuItem("전체", "전체", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("한식", "한식", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("양식", "양식", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("중식/일식", "중식/일식", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("분식", "분식", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("동남아", "동남아", null));
+						navigationBar_1.addItem(new cpr.controls.MenuItem("에어프라이어", "에어프라이어", null));
+					})(navigationBar_1);
+					if(typeof onSortSelectionChange == "function") {
+						navigationBar_1.addEventListener("selection-change", onSortSelectionChange);
+					}
+					container.addChild(navigationBar_1, {
+						"top": "67px",
+						"right": "10px",
+						"left": "10px",
+						"height": "75px"
+					});
+					var group_3 = new cpr.controls.Container();
+					group_3.style.css({
+						"background-color" : "#FFFFFF"
+					});
+					var xYLayout_2 = new cpr.controls.layouts.XYLayout();
+					group_3.setLayout(xYLayout_2);
+					(function(container){
+						var output_1 = new cpr.controls.Output();
+						output_1.value = "총";
+						output_1.style.css({
+							"font-weight" : "bold"
+						});
+						container.addChild(output_1, {
+							"top": "30px",
+							"left": "45px",
+							"width": "18px",
+							"height": "20px"
+						});
+						var output_2 = new cpr.controls.Output();
+						output_2.value = "개의 밀키트가 있습니다.";
+						output_2.style.css({
+							"font-weight" : "bold"
+						});
+						container.addChild(output_2, {
+							"top": "30px",
+							"left": "110px",
+							"width": "247px",
+							"height": "20px"
+						});
+						var output_3 = new cpr.controls.Output("mealkitCnt");
+						output_3.value = "";
+						output_3.style.css({
+							"color" : "#0CA44E",
+							"font-weight" : "bold",
+							"font-size" : "18px",
+							"text-align" : "center"
+						});
+						container.addChild(output_3, {
+							"top": "20px",
+							"left": "62px",
+							"width": "49px",
+							"height": "39px"
+						});
+						var navigationBar_2 = new cpr.controls.NavigationBar("sort");
+						navigationBar_2.bind("value").toDataMap(app.lookup("meSort"), "sort");
+						(function(navigationBar_2){
+							navigationBar_2.addItem(new cpr.controls.MenuItem("최신순", "최신순", null));
+							navigationBar_2.addItem(new cpr.controls.MenuItem("별점순", "별점순", null));
+							navigationBar_2.addItem(new cpr.controls.MenuItem("조회수순", "조회수순", null));
+						})(navigationBar_2);
+						if(typeof onCategorySelectionChange == "function") {
+							navigationBar_2.addEventListener("selection-change", onCategorySelectionChange);
+						}
+						container.addChild(navigationBar_2, {
+							"top": "20px",
+							"left": "775px",
+							"width": "202px",
+							"height": "40px"
+						});
+					})(group_3);
+					container.addChild(group_3, {
+						"top": "177px",
+						"width": "984px",
+						"height": "70px",
+						"left": "calc(50% - 492px)"
+					});
+					var group_4 = new cpr.controls.Container();
+					group_4.style.css({
+						"background-color" : "#f9f9f9",
+						"background-image" : "none"
+					});
+					var xYLayout_3 = new cpr.controls.layouts.XYLayout();
+					group_4.setLayout(xYLayout_3);
+					container.addChild(group_4, {
+						"top": "152px",
+						"width": "974px",
+						"height": "15px",
+						"left": "calc(50% - 487px)"
+					});
+					var group_5 = new cpr.controls.Container();
+					group_5.style.css({
+						"background-color" : "#f9f9f9",
+						"background-image" : "none"
+					});
+					var xYLayout_4 = new cpr.controls.layouts.XYLayout();
+					group_5.setLayout(xYLayout_4);
+					container.addChild(group_5, {
+						"top": "274px",
+						"width": "974px",
+						"height": "15px",
+						"left": "calc(50% - 487px)"
+					});
+					var button_1 = new cpr.controls.Button("insertBtn");
+					button_1.visible = false;
+					button_1.value = "밀키트 등록";
+					button_1.style.setClasses([".cl-button", "mealkitbtn"]);
+					button_1.style.css({
+						"background-color" : "#0ca44e",
+						"color" : "white",
+						"font-weight" : "16",
+						"font-family" : "푸른전남 Medium",
+						"background-image" : "none"
+					});
+					if(typeof onButtonClick2 == "function") {
+						button_1.addEventListener("click", onButtonClick2);
+					}
+					container.addChild(button_1, {
+						"top": "299px",
+						"right": "73px",
+						"width": "104px",
+						"height": "34px"
+					});
+					var output_4 = new cpr.controls.Output();
+					output_4.value = "밀키트";
+					output_4.style.setClasses(["emphasis"]);
+					output_4.style.css({
+						"font-weight" : "600",
+						"font-size" : "30px",
+						"font-family" : "푸른전남 Medium",
+						"text-align" : "center"
+					});
+					container.addChild(output_4, {
 						"top": "20px",
-						"left": "62px",
-						"width": "49px",
-						"height": "39px"
+						"left": "20px",
+						"width": "124px",
+						"height": "37px"
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "176px",
-					"width": "984px",
-					"height": "70px",
-					"left": "calc(50% - 492px)"
+					"width": "1114px",
+					"height": "345px"
 				});
-				var group_3 = new cpr.controls.Container();
-				group_3.style.css({
-					"background-color" : "#f9f9f9",
-					"background-image" : "none"
-				});
-				var xYLayout_4 = new cpr.controls.layouts.XYLayout();
-				group_3.setLayout(xYLayout_4);
-				container.addChild(group_3, {
-					"top": "136px",
-					"width": "974px",
-					"height": "31px",
-					"left": "calc(50% - 487px)"
-				});
-				var group_4 = new cpr.controls.Container();
-				group_4.style.css({
-					"background-color" : "#f9f9f9",
-					"background-image" : "none"
-				});
-				var xYLayout_5 = new cpr.controls.layouts.XYLayout();
-				group_4.setLayout(xYLayout_5);
-				container.addChild(group_4, {
-					"top": "256px",
-					"width": "974px",
-					"height": "33px",
-					"left": "calc(50% - 487px)"
-				});
-				var button_4 = new cpr.controls.Button();
-				button_4.value = "Button";
-				container.addChild(button_4, {
-					"top": "1133px",
-					"left": "452px",
-					"width": "100px",
-					"height": "20px"
-				});
-				var group_5 = new cpr.controls.Container("grp");
+				var group_6 = new cpr.controls.Container("grp");
 				var flowLayout_1 = new cpr.controls.layouts.FlowLayout();
 				flowLayout_1.scrollable = false;
-				group_5.setLayout(flowLayout_1);
-				container.addChild(group_5, {
-					"top": "343px",
-					"width": "968px",
-					"height": "717px",
-					"left": "calc(50% - 484px)"
-				});
-				var group_6 = new cpr.controls.Container();
-				group_6.style.css({
-					"background-color" : "#f9f9f9",
-					"background-image" : "none"
-				});
-				var xYLayout_6 = new cpr.controls.layouts.XYLayout();
-				group_6.setLayout(xYLayout_6);
+				group_6.setLayout(flowLayout_1);
 				container.addChild(group_6, {
-					"top": "1072px",
-					"width": "974px",
-					"height": "22px",
-					"left": "calc(50% - 487px)"
+					"autoSize": "height",
+					"width": "968px",
+					"height": "932px"
 				});
-				var button_5 = new cpr.controls.Button("insertBtn");
-				button_5.visible = false;
-				button_5.value = "밀키트 등록";
-				button_5.style.setClasses([".cl-button", "mealkitbtn"]);
-				button_5.style.css({
-					"background-color" : "#0ca44e",
-					"color" : "white",
-					"font-weight" : "16",
-					"font-family" : "푸른전남 Medium",
-					"background-image" : "none"
-				});
-				if(typeof onButtonClick2 == "function") {
-					button_5.addEventListener("click", onButtonClick2);
+				var pageIndexer_1 = new cpr.controls.PageIndexer("page");
+				pageIndexer_1.pageRowCount = 12;
+				pageIndexer_1.bind("currentPageIndex").toDataMap(app.lookup("mePage"), "pageNo");
+				pageIndexer_1.init(1, 1, 1);
+				if(typeof onPageIndexerSelectionChange == "function") {
+					pageIndexer_1.addEventListener("selection-change", onPageIndexerSelectionChange);
 				}
-				container.addChild(button_5, {
-					"top": "299px",
-					"right": "20px",
-					"width": "104px",
-					"height": "34px"
+				container.addChild(pageIndexer_1, {
+					"width": "321px",
+					"height": "40px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "20px",
-				"bottom": "-557px",
-				"width": "1004px",
-				"left": "calc(50% - 502px)"
+				"width": "1920px",
+				"height": "720px"
+			});
+			
+			var userDefinedControl_2 = new udc.footer();
+			container.addChild(userDefinedControl_2, {
+				"width": "1920px",
+				"height": "100px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
+			}
+			if(typeof onBodyInit == "function"){
+				app.addEventListener("init", onBodyInit);
 			}
 		}
 	});

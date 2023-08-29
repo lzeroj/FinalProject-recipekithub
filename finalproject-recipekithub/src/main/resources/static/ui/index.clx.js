@@ -8,19 +8,8 @@
 	var app = new cpr.core.App("index", { 
 		onPrepare: function(loader) {
 			loader.addCSS("theme/cleopatra-theme.css");
-			loader.addCSS("theme/controls/checkbox.part.css");
-			loader.addCSS("theme/controls/combo-box.part.css");
-			loader.addCSS("theme/controls/common.part.css");
-			loader.addCSS("theme/controls/htmlobject.css");
-			loader.addCSS("theme/controls/menu.part.css");
-			loader.addCSS("theme/controls/nav-bar.part.css");
-			loader.addCSS("theme/controls/searchinput.part.css");
-			loader.addCSS("theme/custom-settings.part.css");
 			loader.addCSS("theme/custom-theme.css");
 			loader.addCSS("theme/custom/member.part.css");
-			loader.addCSS("theme/custom/navigation.part.css");
-			loader.addCSS("theme/custom/search-box.part.css");
-			loader.addCSS("theme/settings.part.css");
 		},
 		onCreate: function(/* cpr.core.AppInstance */ app, exports) {
 			var linker = {};
@@ -36,25 +25,25 @@
 			 * 루트 컨테이너에서 load 이벤트 발생 시 호출.
 			 * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
 			 */
-			function onBodyLoad(e){
-			//	console.log(getSessionStorage("memsession"));
+			function onBodyLoad(e) {
+				//	console.log(getSessionStorage("memsession"));
 				var vcEmb = app.lookup("ea1");
-				cpr.core.App.load("embedded/dynamic-img", function(/*cpr.core.App*/ loadedApp){
+				cpr.core.App.load("embedded/mainRecipeAndMealkit", function( /*cpr.core.App*/ loadedApp) {
 					/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
-					if(vcEmb.getEmbeddedAppInstance()){
+					if (vcEmb.getEmbeddedAppInstance()) {
 						vcEmb.getEmbeddedAppInstance().dispose();
 					}
 					/*로드된 앱이 있는 경우에는 임베디드앱 안에 불러온 앱을 넣습니다.*/
-					if(loadedApp){						
-						/*초기값을 전달합니다.*/			
-						vcEmb.ready(function(/*cpr.controls.EmbeddedApp*/embApp){
-			//				embApp.initValue = voInitValue;
+					if (loadedApp) {
+						/*초기값을 전달합니다.*/
+						vcEmb.ready(function( /*cpr.controls.EmbeddedApp*/ embApp) {
+							//				embApp.initValue = voInitValue;
 						})
 						/*임베디드 앱에 내장할 앱을 로드하여 설정합니다*/
 						vcEmb.app = loadedApp;
 					}
-				}); 
-				app.lookup("ea1").redraw();
+				});
+				app.lookup("ea1").redraw();;
 			};
 			// End - User Script
 			
@@ -75,79 +64,76 @@
 			});
 			
 			// Layout
-			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-			container.setLayout(xYLayout_1);
+			var verticalLayout_1 = new cpr.controls.layouts.VerticalLayout();
+			verticalLayout_1.spacing = 0;
+			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
-			var userDefinedControl_1 = new udc.header3();
-			container.addChild(userDefinedControl_1, {
-				"top": "0px",
-				"left": "0px",
-				"width": "1920px",
-				"height": "200px"
-			});
-			
 			var group_1 = new cpr.controls.Container();
-			group_1.style.css({
-				"background-color" : "#F4FAEC",
-				"background-size" : "cover",
-				"background-image" : "url('theme/images/common/bgimg10.png')",
-				"background-position" : "center"
-			});
-			var responsiveXYLayout_1 = new cpr.controls.layouts.ResponsiveXYLayout();
-			group_1.setLayout(responsiveXYLayout_1);
+			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
+			group_1.setLayout(verticalLayout_2);
 			(function(container){
-				var embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
-				container.addChild(embeddedApp_1, {
-					positions: [
-						{
-							"media": "all and (min-width: 1920px)",
-							"right": "20px",
-							"left": "20px",
-							"height": "720px",
-							"top": "calc(50% - 360px)"
-						}, 
-						{
-							"media": "all and (min-width: 1024px) and (max-width: 1919px)",
-							"right": "20px",
-							"left": "20px",
-							"height": "720px",
-							"top": "calc(50% - 360px)"
-						}, 
-						{
-							"media": "all and (min-width: 500px) and (max-width: 1023px)",
-							"right": "10px",
-							"left": "10px",
-							"height": "720px",
-							"top": "calc(50% - 360px)"
-						}, 
-						{
-							"media": "all and (max-width: 499px)",
-							"right": "7px",
-							"left": "7px",
-							"height": "720px",
-							"top": "calc(50% - 360px)"
-						}
-					]
+				var userDefinedControl_1 = linker.userDefinedControl_1 = new udc.header3();
+				if(typeof onHeader3Event == "function") {
+					userDefinedControl_1.addEventListener("event", onHeader3Event);
+				}
+				if(typeof onHeader3Logout == "function") {
+					userDefinedControl_1.addEventListener("logout", onHeader3Logout);
+				}
+				container.addChild(userDefinedControl_1, {
+					"width": "1920px",
+					"height": "210px"
+				});
+				var group_2 = new cpr.controls.Container();
+				group_2.style.css({
+					"background-color" : "#F4FAEC",
+					"background-size" : "cover",
+					"background-position" : "center"
+				});
+				var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
+				verticalLayout_3.scrollable = false;
+				verticalLayout_3.spacing = 20;
+				verticalLayout_3.leftMargin = 20;
+				verticalLayout_3.rightMargin = 20;
+				verticalLayout_3.topMargin = 20;
+				verticalLayout_3.bottomMargin = 20;
+				group_2.setLayout(verticalLayout_3);
+				(function(container){
+					var embeddedApp_1 = linker.embeddedApp_1 = new cpr.controls.EmbeddedApp("ea1");
+					embeddedApp_1.style.css({
+						"background-repeat" : "repeat",
+						"background-size" : "contain",
+						"background-image" : "url('theme/images/common/bgimg1880_720.png')"
+					});
+					container.addChild(embeddedApp_1, {
+						"autoSize": "height",
+						"width": "1880px",
+						"height": "720px"
+					});
+				})(group_2);
+				container.addChild(group_2, {
+					"autoSize": "height",
+					"width": "1920px",
+					"height": "762px",
+					"minHeight": 762
+				});
+				var userDefinedControl_2 = new udc.footer();
+				container.addChild(userDefinedControl_2, {
+					"width": "1920px",
+					"height": "103px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "205px",
-				"left": "0px",
+				"autoSize": "height",
 				"width": "1920px",
-				"height": "780px"
-			});
-			
-			var userDefinedControl_2 = new udc.footer();
-			container.addChild(userDefinedControl_2, {
-				"top": "990px",
-				"left": "0px",
-				"width": "1920px",
-				"height": "100px"
+				"height": "1080px",
+				"minHeight": 1080
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
 			}
+			// Linking
+			linker.userDefinedControl_1.embe = linker.embeddedApp_1;
 		}
 	});
 	app.title = "index";

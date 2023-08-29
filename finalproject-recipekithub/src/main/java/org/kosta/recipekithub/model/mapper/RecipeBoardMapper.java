@@ -3,12 +3,12 @@ package org.kosta.recipekithub.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.kosta.recipekithub.model.vo.Pagination;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 @Mapper
 public interface RecipeBoardMapper {
 
-	List<RecipeBoardVO> findAllRecipeBoard(Pagination pagination);
+	List<RecipeBoardVO> findAllRecipeBoard(String type, String ingredients, String method, String sort, String searchValue, RecipePagination pagination);
 
 	int insertRecipeBoard(RecipeBoardVO recipeBoardVO);
 
@@ -18,9 +18,11 @@ public interface RecipeBoardMapper {
 
 	int deleteRecipe(long recipeBoardId);
 
-	long findTotalPostCount();
+	long findTotalPostCount(String type, String ingredients, String method, String searchValue);
 
 	long updateRecipeHits(long id);
 
 	long likeCount(long recipeBoardId);
+
+	List<RecipeBoardVO> likeRecipeList();
 }

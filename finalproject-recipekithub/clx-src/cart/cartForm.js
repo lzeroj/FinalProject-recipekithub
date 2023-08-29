@@ -5,6 +5,7 @@
  * @author shj22k
  ************************************************/
 
+
 /*
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
@@ -25,7 +26,7 @@ function onSelectMyCartSubmitSuccess(e){
 	var dscartlist = app.lookup("cartlist");
 	
 	for(var i=0;i<metadata.length;i++){
-		dscartlist.setValue(i, "mealkitImage", 'theme/images/mealkit/'+metadata[i].mealkitImage);
+		dscartlist.setValue(i, "mealkitImage", '/upload/mealkit/'+metadata[i].mealkitImage);
 		dscartlist.setValue(i, "mealkitName", metadata[i].mealkitName);
 		dscartlist.setValue(i, "mealkitPrice", metadata[i].mealkitPrice);
 		dscartlist.setValue(i, "cartDetailQuantity", cartDetailMeta[i].cartDetailQuantity);
@@ -79,10 +80,9 @@ function onButtonClick(e){
 		app.lookup("paymentTotal").setValue("totalpay", app.lookup("totalval").value);
 		app.lookup("payment").send();
 	}else{
-		console.log("장바구니없음");
 		var src = "dialog/failPayment";
 		var initValue = "장바구니에 물건이 없습니다";
-		app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
+		app.getRootAppInstance().openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
 			dialog.ready(function(dialogApp){
 				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
 				dialogApp.initValue = initValue;
@@ -130,33 +130,24 @@ function onPaymentSubmitSuccess(e){
 	if(metadata == '재고수량이 충분하지 않습니다'){
 		src = "dialog/failPayment";
 		var initValue = metadata;
-		app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
+		app.getRootAppInstance().openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
 			dialog.ready(function(dialogApp){
 				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
 				dialogApp.initValue = initValue;
 			});
 		});
 	}else if(metadata == '결제가 정상적으로 완료되었습니다'){
-		console.log(metadata);
 		src = "dialog/successPayment";
 		var initValue = metadata;
-		app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
+		app.getRootAppInstance().openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
 			dialog.ready(function(dialogApp){
 				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
 				dialogApp.initValue = initValue;
 			});
 		}).then(function(returnValue){
-			console.log(returnValue);
-			console.log("페이지 이동하러감");
-			cpr.core.App.load("index1", function(loadedApp) {
-				app.close();
-				var newInst = loadedApp.createNewInstance();
-				newInst.run();
-			});	
-			console.log("페이지 이동성공");	
+			location.href="index.clx";
 		});
 	}
-//	app.lookup("grd1").redraw();
 }
 
 /*
@@ -167,7 +158,6 @@ function onGrd1RowUncheck(e){
 	var grd1 = e.control;
 	var grid = app.lookup("grd1");
 	var selectedRowIndex = grid.getSelectedRowIndex();
-
 	var cellValue = grid.getCellValue(selectedRowIndex, "mealkitName");
 	console.log(cellValue);
 	app.lookup("isCheckInfo").setValue("mealkitName", cellValue);
@@ -198,6 +188,7 @@ function onGrd1RowCheck(e){
 function onButtonClick2(e){
 	var button = e.control;
 	var grid = app.lookup("grd1");
+
 	if(grid.getCheckRowIndices().length > 0){
 		for(var i=0;i<grid.getDataRowCount();i++){
 			if(grid.isCheckedRow(i)){
@@ -241,16 +232,41 @@ function onButtonClick2(e){
 function onButtonClick3(e){
 	var button = e.control;
 	var grid = app.lookup("grd1");
-//	var checkRowIndices = grid.getCheckRowIndices();
-//	var value = grid.getDataRow(checkRowIndices[0]).getValue("mealkitName");
-	for(var i=0;i<grid.getDataRowCount();i++){
-		if(grid.isCheckedRow(i)){
-			var cellValue = grid.getCellValue(i, "mealkitName");
-			var data = {"mealkitName" : cellValue};
-			app.lookup("selectList").addRowData(data);
-		}
+	if(grid.getDataRowCount() == 0)	{
+		var src = "dialog/noneedConfirm";
+		var initValue = "장바구니에 물건이 없습니다";
+		app.openDialog(src, {width : 400,height : 300,headerClose: true, headerVisible: false, resizable: false}, function(dialog){
+			dialog.ready(function(dialogApp){
+				// 필요한 경우, 다이얼로그의 앱이 초기화 된 후, 앱 속성을 전달하십시오.
+				dialogApp.initValue = initValue;
+			});
+		}).then(function(returnValue){
+			if(returnValue == "ok"){
+				return;
+			}
+		});
+	}else{
+		app.getRootAppInstance().openDialog("dialog/needConfirm", {
+			width: 400, height: 300, headerClose: true
+		}, function(dialog) {
+			dialog.ready(function(dialogApp) {
+				dialogApp.initValue = "선택 상품을 취소하시겠습니까?"
+			});
+		}).then(function(returnValue){
+			if(returnValue == "ok"){
+				for(var i=0;i<grid.getDataRowCount();i++){
+					if(grid.isCheckedRow(i)){
+						var cellValue = grid.getCellValue(i, "mealkitName");
+						var data = {"mealkitName" : cellValue};
+						app.lookup("selectList").addRowData(data);
+					}
+				}
+				app.lookup("deleteMyCart").send();
+			}else{
+				return;
+			}
+		});
 	}
-	app.lookup("deleteMyCart").send();
 }
 
 /*
@@ -261,4 +277,83 @@ function onDeleteMyCartSubmitSuccess(e){
 	var deleteMyCart = e.control;
 	app.lookup("selectMyCart").send();
 	app.lookup("grd1").redraw();
+}
+
+/*
+ * "    < 쇼핑 계속하기" 아웃풋에서 click 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+ */
+function onOutputClick(e){
+	var output = e.control;
+	window.location.href = "/mealkitList";
+}
+
+/*
+ * "    < 쇼핑 계속하기" 아웃풋에서 mousemove 이벤트 발생 시 호출.
+ * 사용자가 컨트롤 위에 포인터를 이동할 때 발생하는 이벤트.
+ */
+function onOutputMousemove(e){
+	var output = e.control;
+	var shopcon = app.lookup("shopcon");
+	shopcon.style.css({
+		"border-style":"solid",
+		"border-width":"2px",
+		"border-color":"azure"
+//		"box-shadow":"inset 0 0 2px 2px #EFA2A2"
+	});
+}
+
+/*
+ * "    < 쇼핑 계속하기" 아웃풋(shopcon)에서 mouseleave 이벤트 발생 시 호출.
+ * 사용자가 컨트롤 및 컨트롤의 자식 영역 바깥으로 마우스 포인터를 이동할 때 발생하는 이벤트.
+ */
+function onShopconMouseleave(e){
+	var shopcon = e.control;
+	var shopcon = app.lookup("shopcon");
+	shopcon.style.css({
+		"border-style":"none",
+		"border-width":"0px",
+		"border-color":"white"
+	});
+//	shopcon.style.css({
+//		"border-right":"solid",
+//		"border-width":"0px",
+//		"border-color":"white"
+//	});
+	
+}
+
+/*
+ * 체크 박스에서 value-change 이벤트 발생 시 호출.
+ */
+function onCbx1ValueChange(e){
+	var cbx1 = e.control;
+	if(cbx1.checked){
+		app.lookup("grd1").checkAllRow();
+	}else{
+		app.lookup("grd1").clearAllCheck();
+	}
+	getSumPrice();
+}
+
+/*
+ * 그리드에서 header-check 이벤트 발생 시 호출.
+ * Grid의 Header Checkbox가 체크 되었을 때 발생하는 이벤트. (columnType=checkbox)
+ */
+function onGrd1HeaderCheck(e){
+	var grd1 = e.control;
+	app.lookup("cbx1").checked = true;
+	app.lookup("cbx1").redraw();
+	getSumPrice();
+}
+
+/*
+ * 그리드에서 header-uncheck 이벤트 발생 시 호출.
+ * Grid의 Header Checkbox가 체크 해제되었을 때 발생하는 이벤트. (columnType=checkbox)
+ */
+function onGrd1HeaderUncheck(e){
+	var grd1 = e.control;
+	app.lookup("cbx1").checked = false;
+	app.lookup("cbx1").redraw();
+	getSumPrice();
 }

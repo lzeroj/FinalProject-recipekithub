@@ -63,19 +63,18 @@
 			 */
 			function onSubfindqnadetailadminSubmitSuccess(e){
 				var subfindqnadetailadmin = e.control;
-					var host = app.getHost(); // 부모 임베디드 앱
+				var host = app.getHost(); // 부모 임베디드 앱
 				var boardId = app.lookup("responseqnaselect").getValue(0, "boardId");
 				var boardTitle = app.lookup("responseqnaselect").getValue(0, "boardTitle");
 				var boardContent = app.lookup("responseqnaselect").getValue(0, "boardContent");
 				
 				var initValue = {"boardId": boardId , "boardTitle" : boardTitle, "boardContent":boardContent};
-				cpr.core.App.load("embedded/myPageQnARegisterSelect", function(loadedApp){
+				cpr.core.App.load("embedded/admin/findQnAAdminSelect", function(loadedApp){
 					if (loadedApp){
 						host.initValue = initValue;
 						host.app = loadedApp;
 					}
 				});
-				
 			};
 			// End - User Script
 			
@@ -148,6 +147,10 @@
 			group_1.setLayout(xYLayout_2);
 			(function(container){
 				var group_2 = new cpr.controls.Container();
+				group_2.style.css({
+					"background-color" : "#FFFFFF",
+					"border-radius" : "20px"
+				});
 				var formLayout_1 = new cpr.controls.layouts.FormLayout();
 				formLayout_1.scrollable = false;
 				formLayout_1.topMargin = "0px";
@@ -156,16 +159,27 @@
 				formLayout_1.leftMargin = "0px";
 				formLayout_1.horizontalSpacing = "0px";
 				formLayout_1.verticalSpacing = "0px";
-				formLayout_1.setColumns(["1fr", "80px"]);
-				formLayout_1.setRows(["50px", "20px", "1fr", "20px", "40px"]);
+				formLayout_1.setColumns(["1fr", "160px", "10px"]);
+				formLayout_1.setRows(["50px", "20px", "1fr", "20px", "40px", "10px"]);
 				group_2.setLayout(formLayout_1);
 				(function(container){
 					var output_1 = new cpr.controls.Output();
 					output_1.value = "Q & A 리스트";
+					output_1.style.css({
+						"background-color" : "#FFFFFF",
+						"color" : "#0fd465",
+						"border-bottom-color" : "#0ebc59",
+						"font-weight" : "bold",
+						"border-bottom-width" : "1px",
+						"font-size" : "18px",
+						"font-family" : "푸른전남",
+						"border-bottom-style" : "solid",
+						"text-align" : "center"
+					});
 					container.addChild(output_1, {
 						"colIndex": 0,
 						"rowIndex": 0,
-						"colSpan": 2,
+						"colSpan": 3,
 						"rowSpan": 1
 					});
 					var grid_1 = new cpr.controls.Grid("grd1");
@@ -187,6 +201,11 @@
 									"configurator": function(cell){
 										cell.filterable = false;
 										cell.sortable = false;
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -196,6 +215,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "boardTitle";
 										cell.text = "제목";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -205,6 +229,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "memberEmail";
 										cell.text = "작성자";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -214,6 +243,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "boardRegDate";
 										cell.text = "작성일";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								},
 								{
@@ -223,6 +257,11 @@
 										cell.sortable = false;
 										cell.targetColumnName = "boardResponseStatus";
 										cell.text = "답변여부";
+										cell.style.css({
+											"background-color" : "#0ebc59",
+											"color" : "#FFFFFF",
+											"font-weight" : "bold"
+										});
 									}
 								}
 							]
@@ -274,14 +313,31 @@
 							]
 						}
 					});
+					grid_1.style.css({
+						"background-color" : "#FFFFFF",
+						"border-right-style" : "solid",
+						"border-top-width" : "0px",
+						"border-left-style" : "solid",
+						"border-right-width" : "0px",
+						"border-bottom-width" : "0px",
+						"border-bottom-style" : "solid",
+						"border-left-width" : "0px",
+						"border-top-style" : "solid"
+					});
 					container.addChild(grid_1, {
 						"colIndex": 0,
 						"rowIndex": 2,
-						"colSpan": 2,
+						"colSpan": 3,
 						"rowSpan": 1
 					});
 					var button_1 = new cpr.controls.Button();
 					button_1.value = "선택 열기";
+					button_1.style.css({
+						"background-color" : "#0ebc59",
+						"color" : "#FFFFFF",
+						"font-size" : "16px",
+						"background-image" : "none"
+					});
 					if(typeof onButtonClick == "function") {
 						button_1.addEventListener("click", onButtonClick);
 					}

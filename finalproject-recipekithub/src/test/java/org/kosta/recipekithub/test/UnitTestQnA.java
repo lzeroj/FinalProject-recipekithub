@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.kosta.recipekithub.model.service.QnAService;
+import org.kosta.recipekithub.model.vo.QnAAnswerVO;
 import org.kosta.recipekithub.model.vo.QnAVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +27,7 @@ public class UnitTestQnA {
 	
 	@Test
 	public void selectQnaList() {
-		List<QnAVO> qnAList = qnAService.selectQnaList();
+		List<QnAVO> qnAList = qnAService.selectQnaList("shj");
 		Assertions.assertEquals(1, qnAList.size());
 	}
 	
@@ -47,8 +48,27 @@ public class UnitTestQnA {
 	}
 	
 	@Test
-	public void selectAllQnAListAdmin() {
+	public void insertQnAAnswer() {
+		int boardId = 5;
+		String boardAnswerTitle = "네네 끝났습니다";
+		String boardAnswerContent = "끝났어용";
+		String answerMember = "shj";
 		
+		QnAAnswerVO answerVO = new QnAAnswerVO();
+		answerVO.setBoardId(boardId);
+		answerVO.setAnswerMember(answerMember);
+		answerVO.setBoardAnswerTitle(boardAnswerTitle);
+		answerVO.setBoardAnswerContent(boardAnswerContent);
+		int result = qnAService.insertQnAAnswer(answerVO);
+		System.out.println(result);
+	}
+	
+	@Test
+	public void selectChkQnAAnswer() {
+		int boardId = 8;
+		
+		QnAAnswerVO answerVO = qnAService.selectChkQnAAnswer(boardId);
+		System.out.println(answerVO.toString());
 	}
 
 }

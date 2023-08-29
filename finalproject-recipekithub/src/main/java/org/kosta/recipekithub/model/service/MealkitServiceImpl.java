@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.kosta.recipekithub.model.mapper.MealkitMapper;
 import org.kosta.recipekithub.model.vo.MealKitBoard;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.RecipePagination;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -20,13 +21,13 @@ public class MealkitServiceImpl implements MealkitService {
 
 	private final MealkitMapper mealKitMapper;
 	private static Map<String, Long> checkHits = new HashMap<>();
-
+	
 
 	@Override
 	public int insertMealKit(MealKitBoard mealKitBoard) {
-		//유효성 검사 코드 필요..!!
 		mealKitMapper.insertMealKit(mealKitBoard);
 		int num = mealKitBoard.getMealkitNo();
+		
 		MealKitBoard mealkit = mealKitMapper.findMealKitByNo(num);
 		return num;
 	}
@@ -46,8 +47,9 @@ public class MealkitServiceImpl implements MealkitService {
 	
 	@Override
 	public MealKitBoard updateMealkit(MealKitBoard mealkit) {
-		mealKitMapper.updateMealkit(mealkit);		
-		return mealkit;
+		mealKitMapper.updateMealkit(mealkit);
+		MealKitBoard updatedMealkit = findMealKitByNo(mealkit.getMealkitNo());
+		return updatedMealkit;
 	}
 	
 	@Override
@@ -55,6 +57,25 @@ public class MealkitServiceImpl implements MealkitService {
 		mealKitMapper.deleteMealkit(mealkitNo);
 		
 	}
+	
+	@Override
+	public void increaseHits(int mealkitNo) {
+		mealKitMapper.increaseMealkitHits(mealkitNo);
+	}
+	
+	@Override
+	public long findTotalPostCount(String mealkitType, String searchMealkit) {
+		return mealKitMapper.findTotalPostCount(mealkitType, searchMealkit);
+	}
 
-
+	@Override
+	public List<MealKitBoard> findAllMealkitBoard(String mealkitType, String sort, String searchMealkit,
+			RecipePagination pagination) {
+		return mealKitMapper.findAllMealkitBoard(mealkitType, sort, searchMealkit, pagination);
+	}
+	
+	@Override
+	public List<MealKitBoard> findMealkitByName(String mealkitName) {
+		return mealKitMapper.findMealkitByName(mealkitName);
+	}
 }

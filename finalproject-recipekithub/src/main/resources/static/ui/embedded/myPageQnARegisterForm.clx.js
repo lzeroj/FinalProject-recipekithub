@@ -27,7 +27,18 @@
 				var dataMap = app.lookup("qnaparam");
 				dataMap.setValue("boardTitle", app.lookup("ipb1").text);
 				dataMap.setValue("boardContent", app.lookup("txa1").text);
-				app.lookup("subqna").send();
+				var host = app.getHost(); // 부모 임베디드 앱
+				app.getRootAppInstance().openDialog("dialog/needConfirm", {
+					width: 400, height: 300, headerVisible: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = "등록하시겠습니까?";
+					});
+				}).then(function(returnValue){
+					if(returnValue == "ok"){
+						app.lookup("subqna").send();
+					}
+				});
 			}
 
 			/*
@@ -149,9 +160,9 @@
 						"border-radius" : "10px"
 					});
 					container.addChild(inputBox_1, {
-						"top": "20px",
-						"right": "20px",
-						"left": "20px",
+						"top": "5px",
+						"right": "0px",
+						"left": "0px",
 						"height": "40px"
 					});
 					var textArea_1 = new cpr.controls.TextArea("txa1");
@@ -160,10 +171,10 @@
 						"border-radius" : "10px"
 					});
 					container.addChild(textArea_1, {
-						"top": "80px",
-						"right": "20px",
-						"bottom": "60px",
-						"left": "20px"
+						"top": "50px",
+						"right": "0px",
+						"left": "0px",
+						"height": "248px"
 					});
 					var button_1 = new cpr.controls.Button();
 					button_1.value = "등록하기";

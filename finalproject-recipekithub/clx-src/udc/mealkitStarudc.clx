@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-49b5d39b" version="1.0.4584">
+  <head std:sid="head-f5048653">
+    <screen std:sid="screen-303804cf" id="default" name="default" width="1024px" height="768px"/>
+    <screen std:sid="screen-52131ee1" id="tablet" name="tablet" width="500px" height="667px"/>
+    <screen std:sid="screen-16e2179e" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-0c75c08f"/>
+    <cl:appspec>
+      <cl:property name="mealkitImg" type="string"/>
+      <cl:property name="mealkitName" type="string"/>
+      <cl:property name="mealkitPrice" type="number"/>
+      <cl:event name="imgClick" type="cpr.events.CAppEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-5ec00c7d" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:listener std:sid="listener-2c0d0030" name="load" handler="onBodyLoad"/>
+    <cl:img std:sid="image-b481a66f" id="mealkitImg" style="cursor:pointer;">
+      <cl:listener std:sid="listener-8f0b1aa0" name="click" handler="onMealkitImgClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-3d97e41f" top="0px" left="0px" width="250px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:output std:sid="output-638c61a1" id="mealkitName" style="font-weight:bold; font-size:20px; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-f4588bef" top="200px" left="0px" width="250px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-3d17ebf9" id="mealkitPrice" style="color:#41913F; font-weight:bold; text-align:center;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-2261a016" top="229px" left="0px" width="250px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:xylayout std:sid="xylayout-b97c01e0"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

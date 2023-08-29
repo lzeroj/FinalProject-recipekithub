@@ -31,6 +31,8 @@
 				app.lookup("txa1").redraw();
 				app.lookup("ipb1").focus();
 				
+				app.lookup("updateqna").setValue("boardTitle", app.lookup("ipb1").text);
+				app.lookup("updateqna").setValue("boardContent", app.lookup("txa1").text);
 				app.lookup("updateqna").setValue("boardId", val.boardId);
 			}
 
@@ -41,7 +43,7 @@
 			function onButtonClick(e){
 				var button = e.control;
 				if(confirm("수정하시겠습니까?")){
-					app.lookup("updateqna").setValue("boardTitle", app.lookup("ipb1").text);
+					app.lookup("updateqna").setValue("boardTitle", app.lookup("ipb1").value);
 					app.lookup("updateqna").setValue("boardContent", app.lookup("txa1").text);
 					app.lookup("subupdateqna").send();
 				}
@@ -62,6 +64,28 @@
 						}
 					});
 				}
+				
+			}
+
+			/*
+			 * "뒤로가기" 버튼에서 click 이벤트 발생 시 호출.
+			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
+			 */
+			function onButtonClick2(e){
+				var button = e.control;
+				var host = app.getHost(); // 부모 임베디드 앱
+				var dataMap = app.lookup("updateqna");
+				var boardId = dataMap.getValue("boardId");
+				var boardTitle = dataMap.getValue("boardTitle");
+				var boardContent = dataMap.getValue("boardContent");
+				
+				var initValue = {"boardId": boardId , "boardTitle" : boardTitle, "boardContent":boardContent};
+				cpr.core.App.load("embedded/myPageQnARegisterSelect", function(loadedApp){
+					if (loadedApp){
+						host.initValue = initValue;
+						host.app = loadedApp;
+					}
+				});
 				
 			};
 			// End - User Script
@@ -139,9 +163,9 @@
 						"border-radius" : "10px"
 					});
 					container.addChild(inputBox_1, {
-						"top": "20px",
-						"right": "20px",
-						"left": "20px",
+						"top": "5px",
+						"right": "0px",
+						"left": "0px",
 						"height": "40px"
 					});
 					var textArea_1 = new cpr.controls.TextArea("txa1");
@@ -151,10 +175,10 @@
 						"border-radius" : "10px"
 					});
 					container.addChild(textArea_1, {
-						"top": "80px",
-						"right": "20px",
-						"bottom": "60px",
-						"left": "20px"
+						"top": "50px",
+						"right": "0px",
+						"left": "0px",
+						"height": "248px"
 					});
 					var button_1 = new cpr.controls.Button();
 					button_1.value = "수정";
@@ -167,7 +191,7 @@
 						button_1.addEventListener("click", onButtonClick);
 					}
 					container.addChild(button_1, {
-						"right": "170px",
+						"right": "150px",
 						"bottom": "20px",
 						"width": "140px",
 						"height": "30px"
@@ -179,8 +203,11 @@
 						"color" : "#FFFFFF",
 						"background-image" : "none"
 					});
+					if(typeof onButtonClick2 == "function") {
+						button_2.addEventListener("click", onButtonClick2);
+					}
 					container.addChild(button_2, {
-						"right": "20px",
+						"right": "0px",
 						"bottom": "20px",
 						"width": "140px",
 						"height": "30px"

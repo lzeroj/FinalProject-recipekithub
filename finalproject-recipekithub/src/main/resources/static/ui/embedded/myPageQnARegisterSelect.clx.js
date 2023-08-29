@@ -29,6 +29,12 @@
 				app.lookup("txa1").text = val.boardContent;
 				app.lookup("ipb1").redraw();
 				app.lookup("txa1").redraw();
+				
+				// 답변이 있는지 확인
+				var dataMap = app.lookup("dmboardinfo");
+				dataMap.setValue("boardId", val.boardId);
+				dataMap.setValue("boardTitle", val.boardTitle);
+				app.lookup("subchkanswer").send();
 			}
 
 			/*
@@ -49,50 +55,74 @@
 						}
 					});
 			    }
-				
 			}
 
 			/*
-			 * "답변 달기" 버튼에서 click 이벤트 발생 시 호출.
+			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
+			 * 통신이 성공하면 발생합니다.
+			 */
+			function onSubchkanswerSubmitSuccess(e){
+				var subchkanswer = e.control;
+				var metadata = subchkanswer.getMetadata("chkmessage");
+				var dataMap = app.lookup("dmanswerboardinfo");
+				if(metadata == 1){ // 답변이 존재
+					app.lookup("updatebtn").visible = false; //수정하기 버튼 숨김
+					
+					var vcIpb = new cpr.controls.InputBox();
+					vcIpb.style.css({
+						"borderRadius" : "10px" 
+					});
+					vcIpb.readOnly = true;
+					vcIpb.value = dataMap.getValue("boardAnswerTitle");
+					app.lookup("answergrp").addChild(vcIpb, {
+						width : "669px",
+						height : "40px",
+						autoSize : "none"
+					});
+					
+					// 텍스트 에어리어 추가
+					var textArea = new cpr.controls.TextArea();
+					textArea.style.css({
+						"borderRadius" : "10px" 
+					});
+					textArea.readOnly = true;
+					textArea.value = dataMap.getValue("boardAnswerContent");
+					app.lookup("answergrp").addChild(textArea, {
+						width : "669px",
+						height : "200px",
+						autoSize : "none"
+					});		
+			//		moveControl();
+					app.lookup("answergrp").redraw();
+				}
+			}
+
+			function moveControl(){
+				/* 폼 레이아웃 컨트롤 위치 변경 */
+				app.lookup("rootgrp").updateConstraint(app.lookup("buttongrp"), {
+					top : "",
+					left : "",
+					bottom : "0px",
+					right : "0px",
+					height : "50px",
+					width : "669px"
+				});
+			}
+
+			/*
+			 * "뒤로가기" 버튼에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
 			function onButtonClick2(e){
 				var button = e.control;
-				var container1 = app.lookup("grp1");
-				var container = app.getContainer();
+				var host = app.getHost(); // 부모 임베디드 앱
 				
-			//	container.updateConstraint(container1, {
-			//		
-			//	});
-				container1.style.css({
-					"height": "1200px",
-					"bottom": "100px",
-					"background-color": "black"
+				cpr.core.App.load("embedded/myPageQuestion", function(loadedApp){
+					if (loadedApp){
+			//			host.initValue = initValue;
+						host.app = loadedApp;
+					}
 				});
-				container1.redraw();
-				
-				var group_3 = new cpr.controls.Container("grp3");
-				var xYLayout_3 = new cpr.controls.layouts.XYLayout();
-				group_3.setLayout(xYLayout_3);
-				var button_3 = new cpr.controls.Button();
-				container.addChild(button_3, {
-					"top":"800px"
-				});
-				container.addChild(group_3, {
-					"top":"600px",
-					"height": "308px"
-				});
-				
-				app.lookup("grp1").redraw();
-			}
-
-			/*
-			 * 루트 컨테이너에서 before-draw 이벤트 발생 시 호출.
-			 * 그룹 컨텐츠가 그려지기 직전에 호출되는 이벤트 입니다. 내부 컨텐츠를 동적으로 구성하기위한 용도로만 사용됩니다.
-			 */
-			function onBodyBeforeDraw(e){
-				var group = e.control;
-
 			};
 			// End - User Script
 			
@@ -106,13 +136,42 @@
 				]
 			});
 			app.register(dataSet_1);
-			var submission_1 = new cpr.protocols.Submission("subqnaselect");
+			var dataMap_1 = new cpr.data.DataMap("dmboardinfo");
+			dataMap_1.parseData({
+				"columns" : [
+					{"name": "boardId"},
+					{"name": "boardTitle"}
+				]
+			});
+			app.register(dataMap_1);
+			
+			var dataMap_2 = new cpr.data.DataMap("dmanswerboardinfo");
+			dataMap_2.parseData({
+				"columns" : [
+					{"name": "boardId"},
+					{"name": "boardAnswerTitle"},
+					{"name": "boardAnswerContent"},
+					{"name": "boardAnswerId"},
+					{"name": "boardAnswerRegDate"}
+				]
+			});
+			app.register(dataMap_2);
+			var submission_1 = new cpr.protocols.Submission("subchkanswer");
+			submission_1.action = "/selectChkQnAAnswer";
+			submission_1.addRequestData(dataMap_1);
+			submission_1.addResponseData(dataMap_2, false);
+			if(typeof onSubchkanswerSubmitSuccess == "function") {
+				submission_1.addEventListener("submit-success", onSubchkanswerSubmitSuccess);
+			}
 			app.register(submission_1);
-			app.supportMedia("all", "new-screen");
+			app.supportMedia("all and (min-width: 709px)", "new-screen");
+			app.supportMedia("all and (min-width: 709px) and (max-width: 708px)", "new-screen2");
+			app.supportMedia("all and (max-width: 708px)", "new-screen3");
 			
 			// Configure root container
 			var container = app.getContainer();
 			container.style.css({
+				"background-color" : "#FFFFFF",
 				"width" : "100%",
 				"height" : "100%"
 			});
@@ -146,9 +205,9 @@
 					"width": "709px",
 					"height": "50px"
 				});
-				var group_2 = new cpr.controls.Container();
-				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
-				group_2.setLayout(xYLayout_1);
+				var group_2 = new cpr.controls.Container("rootgrp");
+				var verticalLayout_3 = new cpr.controls.layouts.VerticalLayout();
+				group_2.setLayout(verticalLayout_3);
 				(function(container){
 					var inputBox_1 = new cpr.controls.InputBox("ipb1");
 					inputBox_1.readOnly = true;
@@ -157,9 +216,7 @@
 						"border-radius" : "10px"
 					});
 					container.addChild(inputBox_1, {
-						"top": "20px",
-						"right": "20px",
-						"left": "20px",
+						"width": "669px",
 						"height": "40px"
 					});
 					var textArea_1 = new cpr.controls.TextArea("txa1");
@@ -169,67 +226,74 @@
 						"border-radius" : "10px"
 					});
 					container.addChild(textArea_1, {
-						"top": "80px",
-						"right": "20px",
-						"bottom": "60px",
-						"left": "20px"
+						"width": "669px",
+						"height": "248px"
 					});
-					var button_1 = new cpr.controls.Button();
-					button_1.value = "수정하기";
-					button_1.style.css({
-						"background-color" : "#0ebc59",
-						"color" : "#FFFFFF",
-						"background-image" : "none"
+					var group_3 = new cpr.controls.Container("answergrp");
+					var verticalLayout_4 = new cpr.controls.layouts.VerticalLayout();
+					verticalLayout_4.scrollable = false;
+					group_3.setLayout(verticalLayout_4);
+					container.addChild(group_3, {
+						"autoSize": "height",
+						"width": "400px",
+						"height": "288px"
 					});
-					if(typeof onButtonClick == "function") {
-						button_1.addEventListener("click", onButtonClick);
-					}
-					container.addChild(button_1, {
-						"right": "170px",
-						"bottom": "20px",
-						"width": "140px",
-						"height": "30px"
-					});
-					var button_2 = new cpr.controls.Button();
-					button_2.value = "뒤로가기";
-					button_2.style.css({
-						"background-color" : "#0ebc59",
-						"color" : "#FFFFFF",
-						"background-image" : "none"
-					});
-					container.addChild(button_2, {
-						"right": "20px",
-						"bottom": "20px",
-						"width": "140px",
-						"height": "30px"
-					});
-					var button_3 = new cpr.controls.Button();
-					button_3.value = "답변 달기";
-					if(typeof onButtonClick2 == "function") {
-						button_3.addEventListener("click", onButtonClick2);
-					}
-					container.addChild(button_3, {
-						"top": "458px",
-						"left": "250px",
-						"width": "140px",
-						"height": "30px"
+					var group_4 = new cpr.controls.Container("buttongrp");
+					var xYLayout_1 = new cpr.controls.layouts.XYLayout();
+					group_4.setLayout(xYLayout_1);
+					(function(container){
+						var button_1 = new cpr.controls.Button("updatebtn");
+						button_1.value = "수정하기";
+						button_1.style.css({
+							"background-color" : "#0ebc59",
+							"color" : "#FFFFFF",
+							"background-image" : "none"
+						});
+						if(typeof onButtonClick == "function") {
+							button_1.addEventListener("click", onButtonClick);
+						}
+						container.addChild(button_1, {
+							"right": "150px",
+							"bottom": "10px",
+							"width": "140px",
+							"height": "30px"
+						});
+						var button_2 = new cpr.controls.Button();
+						button_2.value = "뒤로가기";
+						button_2.style.css({
+							"background-color" : "#0ebc59",
+							"color" : "#FFFFFF",
+							"background-image" : "none"
+						});
+						if(typeof onButtonClick2 == "function") {
+							button_2.addEventListener("click", onButtonClick2);
+						}
+						container.addChild(button_2, {
+							"right": "0px",
+							"bottom": "10px",
+							"width": "140px",
+							"height": "30px"
+						});
+					})(group_4);
+					container.addChild(group_4, {
+						"autoSize": "none",
+						"width": "709px",
+						"height": "50px"
 					});
 				})(group_2);
 				container.addChild(group_2, {
+					"autoSize": "height",
 					"width": "709px",
-					"height": "558px"
+					"height": "648px"
 				});
 			})(group_1);
 			container.addChild(group_1, {
 				"autoSize": "height",
 				"width": "709px",
-				"height": "608px"
+				"height": "710px"
 			});
 			if(typeof onBodyLoad == "function"){
 				app.addEventListener("load", onBodyLoad);
-			}
-			if(typeof onBodyBeforeDraw == "function"){
-				app.getContainer().addEventListener("before-draw", onBodyBeforeDraw);
 			}
 		}
 	});

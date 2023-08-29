@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.kosta.recipekithub.model.mapper.CartMapper;
 import org.kosta.recipekithub.model.vo.CartVO;
+import org.kosta.recipekithub.model.vo.ChartVO;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
+import org.kosta.recipekithub.model.vo.SalesVO;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -31,7 +33,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartVO findCartNoByMemberEmail(String memberEmail) {
+	public List<CartVO> findCartNoByMemberEmail(String memberEmail) {
 		return cartMapper.findCartNoByMemberEmail(memberEmail);
 	}
 
@@ -83,6 +85,21 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public int updateCartDetailQuantity(int cartDetailQuantity, int mealkitNo, int cartNo) {
 		return cartMapper.updateCartDetailQuantity(cartDetailQuantity,mealkitNo,cartNo);
+	}
+
+	@Override
+	public List<SalesVO> findSalesRankAdmin() {
+		return cartMapper.findSalesRankAdmin();
+	}
+
+	@Override
+	public List<ChartVO> findTotalLikeRecipe() {
+		return cartMapper.findTotalLikeRecipe();
+	}
+
+	@Override
+	public List<ChartVO> findTotalLikeMealkit() {
+		return cartMapper.findTotalLikeMealkit();
 	}
 
 }

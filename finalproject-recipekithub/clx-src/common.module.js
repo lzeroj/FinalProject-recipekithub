@@ -11,7 +11,7 @@ globals.testAlert = function(){
 	
 }
 
-//// 데이터 가져오기
+//데이터 가져오기
 //globals.getSessionStorage = // 데이터 가져오기
 //function getTimedSessionData(key) {
 //    var storedData = sessionStorage.getItem(key);
@@ -35,5 +35,4 @@ globals.testAlert = function(){
 //	alert("익스포츠");
 //}
 //exports.testAlert2 = test2;
-
 

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.exception.NotEnoughStockException;
 import org.kosta.recipekithub.model.service.CartService;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.View;
 import com.cleopatra.protocol.data.DataRequest;
 import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.spring.JSONDataView;
+import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,26 +39,25 @@ public class PaymentController {
 	public View paymentInsert(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
 		ParameterGroup param = dataRequest.getParameterGroup("paymentTotal");
 		int totalpay = Integer.parseInt(param.getValue("totalpay"));
-		System.out.println(totalpay);
 		
 		ParameterGroup parammealkit = dataRequest.getParameterGroup("selectList");
 		String[] mealkitary = parammealkit.getValues("mealkitName");
 		
-		for(int i=0;i<mealkitary.length;i++) {
-			System.out.println(mealkitary[i]);
+		// 세션 적용
+		HttpSession session = request.getSession(false);
+		String memberEmail = null;
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
 		}
-		
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberEmail("shj");
 		if(memberVO != null) {
 			// 멤버의 활성화된 카트를 가져온다
-			CartVO cvo = cartService.findCartNoByMemberEmail(memberVO.getMemberEmail());
+			List<CartVO> cvo = cartService.findCartNoByMemberEmail(memberEmail);
 			Map<String,Object> errormsg = new HashMap<>();
 			try {
 				// payment 테이블에 인서트
-				int result = paymentService.paymentInsert(totalpay, cvo.getCartNo());
+				int result = paymentService.paymentInsert(totalpay, cvo.get(0).getCartNo());
 				if(result == 1) {
 				
 					// 장바구니 상태 업데이트
@@ -65,7 +66,7 @@ public class PaymentController {
 					// 장바구니 상세보기 업데이트
 					for(int i=0; i<mealkitary.length;i++) {
 						MealkitboardVO mealkitVO = cartService.findMealkitBoardByMealkitName(mealkitary[i]);
-						paymentService.updateCartDetailOrderStatus(cvo.getCartNo(),mealkitVO.getMealkitNo());
+						paymentService.updateCartDetailOrderStatus(cvo.get(0).getCartNo(),mealkitVO.getMealkitNo());
 					}
 					
 					// 장바구니 정리 (주문하지 않은 목록 삭제)
@@ -79,7 +80,6 @@ public class PaymentController {
 			} catch (NotEnoughStockException e) {
 				e.printStackTrace();
 				String message = e.getMessage();
-				
 				errormsg.put("errormsg", message);
 			}
 			dataRequest.setMetadata(true, errormsg);
@@ -89,12 +89,15 @@ public class PaymentController {
 	
 	@RequestMapping("/findMyPaymentList")
 	public View findMyPaymentList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) {
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberEmail("shj");
-		
-		List<PaymentVO> paymentlist = paymentService.findMyPaymentList(memberVO.getMemberEmail());
+		// 세션 적용
+		HttpSession session = request.getSession(false);
+		String memberEmail = null;
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
+		}
+		List<PaymentVO> paymentlist = paymentService.findMyPaymentList(memberEmail);
 		
 		// 밀키트 데이터
 		List<MealkitboardVO> sendMealkitInfo = new ArrayList<>();
@@ -150,11 +153,18 @@ public class PaymentController {
 	@RequestMapping("/searchMyPaymentList")
 	public View searchMyPaymentList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest,String inputvalue, String combovalue) {
 		System.out.println(inputvalue+" "+combovalue);
-//		HttpSession session = request.getSession(false);
-//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberEmail("shj");
+		
+		// 세션 적용
+		HttpSession session = request.getSession(false);
+		String memberEmail = null;
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
+		}
 		String memberId = memberVO.getMemberEmail();
+		
+		// 검색하기
 		List<PaymentVO> searchList = paymentService.searchMyPaymentList(memberId, combovalue, inputvalue);
 
 		// 밀키트 데이터
@@ -170,10 +180,6 @@ public class PaymentController {
 			mlvo = new MealkitboardVO();
 			mlvo.setMealkitName(searchList.get(i).getMealkitVO().getMealkitName());
 			mlvo.setMealkitNo(searchList.get(i).getMealkitVO().getMealkitNo());
-			
-//			int cartNO = searchList.get(i).getCartVO().getCartNo();
-//			int paymentId = searchList.get(i).getPaymentId();
-//			List<CartdetailVO> mealkitNameAndCount = paymentService.findMealkitNameAndCount(memberVO.getMemberEmail(), cartNO, paymentId);
 			
 			String mealkitName = null;
 			int cartDetailQuantity = 0;
@@ -195,7 +201,6 @@ public class PaymentController {
 				mealkitInfoDetailmap.put("mealkitdetailinfo", mealkitdetailinfo);
 				mealkitInfoDetailmap.put("mealkitdetail", mealkitdetail);
 				mealkitinfo.add(mealkitInfoDetailmap);
-//				System.out.println("mealkitdetailinfo : "+mealkitdetailinfo);
 			}
 			sendMealkitInfo.add(mlvo);
 		}

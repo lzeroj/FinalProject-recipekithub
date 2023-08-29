@@ -15,6 +15,11 @@
           <cl:datacolumn std:sid="d-column-c1a8d91c" name="likeYN"/>
         </cl:datacolumnlist>
       </cl:dataset>
+      <cl:datamap std:sid="d-map-baa20605" id="dmdeletemealkit">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-16f0cf99" name="mealkitNo"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-4ef7f6f0" id="submealkitlikelist" action="/findMealkitLikeList">
         <cl:listener std:sid="listener-e269872d" name="submit-success" handler="onSubmealkitlikelistSubmitSuccess"/>
         <cl:responsedata dataid="mealkitLikeList"/>
@@ -22,7 +27,7 @@
       <cl:submission std:sid="submission-af87e0fd" id="subdeletemelkiktlike" action="/clickLike" mediatype="application/x-www-form-urlencoded;simple">
         <cl:listener std:sid="listener-d773c0df" name="submit-success" handler="onSubdeletemelkiktlikeSubmitSuccess"/>
         <cl:listener std:sid="listener-c05962de" name="submit-done" handler="onSubdeletemelkiktlikeSubmitDone"/>
-        <cl:requestdata dataid="mealkitLikeList"/>
+        <cl:requestdata dataid="dmdeletemealkit"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -34,34 +39,31 @@
       <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="밀키트찜 목록">
         <cl:xylayoutdata std:sid="xyl-data-da28a6e7" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:group std:sid="group-92690e5f" style="border-radius:20px; background-color:#F6F6F6;">
+      <cl:group std:sid="group-92690e5f" style="border-radius:20px; background-color:#F7F7F7;">
         <cl:xylayoutdata std:sid="xyl-data-efd923e8" top="60px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
         <cl:grid std:sid="grid-df701717" id="grd1" readonly="true" datasetid="mealkitLikeList" selectionunit="cell">
           <cl:listener std:sid="listener-831d0e17" name="cell-click" handler="onGrd1CellClick"/>
-          <cl:xylayoutdata std:sid="xyl-data-9effb366" top="15px" right="15px" bottom="15px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:xylayoutdata std:sid="xyl-data-9effb366" top="15px" right="15px" bottom="50px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
           <cl:gridcolumn std:sid="g-column-809c5551" width="20px"/>
-          <cl:gridcolumn std:sid="g-column-20491fdc" width="125px"/>
-          <cl:gridcolumn std:sid="g-column-1e1abbec" width="115px"/>
+          <cl:gridcolumn std:sid="g-column-20491fdc" width="140px"/>
           <cl:gridcolumn std:sid="g-column-2062c974" width="115px"/>
           <cl:gridcolumn std:sid="g-column-24b49998"/>
           <cl:gridcolumn std:sid="g-column-e5c2aa16" width="42px"/>
           <cl:gridheader std:sid="gh-band-548dfad2">
             <cl:gridrow std:sid="g-row-7591f77c"/>
-            <cl:gridcell std:sid="gh-cell-544fc2d5" rowindex="0" colindex="0" sortable="false" filterable="false"/>
-            <cl:gridcell std:sid="gh-cell-d08d52cc" rowindex="0" colindex="1" targetcolumnname="mealkitName" sortable="false" filterable="false" text="밀키트명"/>
-            <cl:gridcell std:sid="gh-cell-1b1b603e" rowindex="0" colindex="2" targetcolumnname="mealkitIngredients" sortable="false" filterable="false" text="성분"/>
-            <cl:gridcell std:sid="gh-cell-fce6aec0" rowindex="0" colindex="3" targetcolumnname="mealkitCategory" sortable="false" filterable="false" text="카테고리"/>
-            <cl:gridcell std:sid="gh-cell-37fa085d" rowindex="0" colindex="4" targetcolumnname="memberEmail" sortable="false" filterable="false" text="등록자명"/>
-            <cl:gridcell std:sid="gh-cell-d7b220bb" rowindex="0" colindex="5"/>
+            <cl:gridcell std:sid="gh-cell-544fc2d5" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-d08d52cc" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="mealkitName" sortable="false" filterable="false" text="밀키트명"/>
+            <cl:gridcell std:sid="gh-cell-fce6aec0" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="mealkitCategory" sortable="false" filterable="false" text="카테고리"/>
+            <cl:gridcell std:sid="gh-cell-37fa085d" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="밀키트 등록자"/>
+            <cl:gridcell std:sid="gh-cell-d7b220bb" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-ca15c3d7">
             <cl:gridrow std:sid="g-row-c85a221d" height="42px"/>
             <cl:gridcell std:sid="gd-cell-6a63e263" rowindex="0" colindex="0" columntype="rowindex"/>
             <cl:gridcell std:sid="gd-cell-28f906dc" rowindex="0" colindex="1" columnname="mealkitName"/>
-            <cl:gridcell std:sid="gd-cell-ce4f61ab" rowindex="0" colindex="2" columnname="mealkitIngredients"/>
-            <cl:gridcell std:sid="gd-cell-e0477cb3" rowindex="0" colindex="3" columnname="mealkitCategory"/>
-            <cl:gridcell std:sid="gd-cell-adf78a2c" rowindex="0" colindex="4" columnname="memberEmail"/>
-            <cl:gridcell std:sid="gd-cell-abb048f4" rowindex="0" colindex="5">
+            <cl:gridcell std:sid="gd-cell-e0477cb3" rowindex="0" colindex="2" columnname="mealkitCategory"/>
+            <cl:gridcell std:sid="gd-cell-adf78a2c" rowindex="0" colindex="3" columnname="memberEmail"/>
+            <cl:gridcell std:sid="gd-cell-abb048f4" rowindex="0" colindex="4">
               <cl:img std:sid="image-d6dce196" id="likeimg" style="cursor:pointer;">
                 <cl:relativebind property="src" columnname="likeYN"/>
                 <cl:celldata std:sid="c-data-e3b547e8" halign="CENTER" valign="CENTER" width="40" height="40"/>
@@ -69,6 +71,10 @@
             </cl:gridcell>
           </cl:griddetail>
         </cl:grid>
+        <cl:button std:sid="button-ba44be39" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="해당 밀키트 확인">
+          <cl:listener std:sid="listener-dea8e1c8" name="click" handler="onButtonClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-8bfafebf" right="15px" bottom="10px" width="120px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+        </cl:button>
         <cl:xylayout std:sid="xylayout-be7da28c"/>
       </cl:group>
       <cl:xylayout std:sid="xylayout-e97e04ed"/>

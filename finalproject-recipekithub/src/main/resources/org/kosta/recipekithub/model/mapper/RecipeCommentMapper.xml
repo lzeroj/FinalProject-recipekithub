@@ -6,13 +6,17 @@
 		<resultMap type="org.kosta.recipekithub.model.vo.RecipeCommentVO" id="member">
 		<result column="member_nick" property="memberVO.memberNick"></result>
 		<result column="member_email" property="memberVO.memberEmail"></result>
+		<result column="member_image" property="memberVO.memberImage"></result>
 		</resultMap>
 	<select id="findCommentListByRecipeId" parameterType="long" resultMap="member">
-		select r.recipe_comment_id, r.recipe_comment_content, r.member_email, m.member_nick, r.recipe_comment_date, r.recipe_comment_edit_date
-		from recipe_comment r
-		inner join member m ON r.member_email = m.member_email
-		where r.recipe_board_id = #{value}
-		order by r.recipe_comment_date desc
+		SELECT rnum, r.recipe_comment_id, r.recipe_comment_content, r.member_email, m.member_nick, r.recipe_comment_date, m.member_image
+		FROM (
+		SELECT ROW_NUMBER() OVER(ORDER BY recipe_comment_date desc) AS rnum,
+		recipe_comment_id, recipe_comment_content, recipe_comment_date, member_email
+		FROM recipe_comment where recipe_board_id = #{recipeBoardId} ) r
+		INNER JOIN member m ON r.member_email = m.member_email
+		WHERE rnum BETWEEN #{pagination.startRowNumber} AND #{pagination.endRowNumber}
+		ORDER BY rnum
 	</select>
 	<delete id="deleteRecipeCommentByCommentId" parameterType="org.kosta.recipekithub.model.vo.RecipeCommentVO">
 		delete from recipe_comment where recipe_comment_id = #{value}

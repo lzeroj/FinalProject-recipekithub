@@ -9,6 +9,8 @@
       <cl:property name="nick" type="string"/>
       <cl:property name="regDate" type="string"/>
       <cl:property name="content" type="string"/>
+      <cl:property name="star" type="number"/>
+      <cl:property name="deleteBtn" type="control"/>
       <cl:event name="deleteClick" type="cpr.events.CAppEvent"/>
       <cl:event name="updateClick" type="cpr.events.CAppEvent"/>
     </cl:appspec>
@@ -16,22 +18,28 @@
   <body std:sid="body-bb47ecd9" style="top:0px; left:0px; width:300px; height:300px;">
     <cl:listener std:sid="listener-986cc2ff" name="load" handler="onBodyLoad"/>
     <cl:output std:sid="output-f2acda63" id="nick" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-46b95e0d" top="7px" left="8px" width="100px" height="31px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-46b95e0d" top="20px" left="8px" width="122px" height="18px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:output std:sid="output-17265300" id="regDate" value="Output">
-      <cl:xylayoutdata std:sid="xyl-data-1e89c84c" top="20px" left="107px" width="93px" height="18px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayoutdata std:sid="xyl-data-1e89c84c" top="21px" left="182px" width="119px" height="18px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:button std:sid="button-e603621a" value="수정">
-      <cl:listener std:sid="listener-80fe5724" name="click" handler="onButtonClick"/>
-      <cl:xylayoutdata std:sid="xyl-data-95d2770c" top="20px" left="434px" width="65px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    <cl:output std:sid="output-0a5982ca" id="star" style="font-size:12px; text-align:left;" value="별점">
+      <cl:xylayoutdata std:sid="xyl-data-06f3a866" top="22px" left="147px" width="36px" height="15px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:output std:sid="output-c5fb66f9" id="content" style="cursor:auto;" value="Output">
+      <cl:xylayoutdata std:sid="xyl-data-368f5382" top="39px" left="8px" width="926px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:group std:sid="group-0bcdaeea" style="background-color:#f9f9f9;">
+      <cl:xylayoutdata std:sid="xyl-data-7be460cc" top="88px" left="8px" width="926px" height="1px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:xylayout std:sid="xylayout-bb04f25f"/>
+    </cl:group>
+    <cl:img std:sid="image-16e903ef" style="font-size:12px; text-align:right;" src="../theme/images/mealkit/free-icon-thumbs-up-8560888.png">
+      <cl:xylayoutdata std:sid="xyl-data-6a0d385c" top="20px" left="129px" width="19px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:button std:sid="button-4cd0f8a2" id="deleteBtn" style="background-color:transparent; font-weight:normal; background-image:none;" value="삭제">
+      <cl:listener std:sid="listener-1d4dd4eb" name="click" handler="onButtonClick3"/>
+      <cl:xylayoutdata std:sid="xyl-data-1b5a8253" top="20px" left="800px" width="114px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:button>
-    <cl:button std:sid="button-a8613e85" value="삭제">
-      <cl:listener std:sid="listener-2195ee93" name="click" handler="onButtonClick2"/>
-      <cl:xylayoutdata std:sid="xyl-data-77bf655b" top="19px" left="509px" width="61px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:button>
-    <cl:inputbox std:sid="i-box-f276f75e" id="content" readonly="true">
-      <cl:xylayoutdata std:sid="xyl-data-39423cc9" top="38px" left="8px" width="562px" height="93px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:inputbox>
     <cl:xylayout std:sid="xylayout-cee034ab"/>
   </body>
   <std:studiosetting>

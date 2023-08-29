@@ -1,0 +1,51 @@
+.cl-button {
+	&.slide-button {
+		background-image: none;
+		background-color: transparent;
+		border-radius: 0px;
+		border: none;
+		color: white;
+		text-shadow: none;
+		background-position: center center;
+		background-repeat: no-repeat;
+		
+		&.slide-prev-button {
+//			background-image: url(../images/prev.png), linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0,0, 0, 0));
+		}
+		
+		&.slide-next-button {
+//			background-image: url(../images/next.png), linear-gradient(to right, rgba(0,0, 0, 0), rgba(0, 0, 0, 0.4));
+		}
+		
+		&:hover , &.cl-hover {
+			background-color: rgba(0, 0, 0, 0.2);
+			border-radius: 0px;
+			border: none;
+			color: white;
+			text-shadow: none;
+		}
+
+		&:active , &.cl-ativated {
+			background-color: rgba(0, 0, 0, 0.3);
+			border-radius: 0px;
+			border: none;
+			color: white;
+			text-shadow: none;
+		}
+	}
+}
+
+
+.cl-button.slide-page-button {
+	background-image: none;
+	border: none;
+	background-color: rgba(0, 0, 0, 0.3);
+	min-width : 5px;
+	min-height: 5px;
+	max-height: 5px;
+	border-radius: 5px;
+	
+	&.active {
+		background-color: rgba(0, 0, 0, 0.8);
+	}
+}

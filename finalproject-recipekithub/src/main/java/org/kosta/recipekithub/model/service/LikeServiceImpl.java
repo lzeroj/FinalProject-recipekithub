@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.kosta.recipekithub.model.mapper.LikeMapper;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.kosta.recipekithub.model.vo.RecipeBoardVO;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -53,6 +53,11 @@ public class LikeServiceImpl implements LikeService {
 	@Override
 	public int showRecipeLike(int recipeBoardId, String memberEmail) {
 		return likeMapper.showRecipeLike(recipeBoardId,memberEmail);
+	}
+
+	@Override
+	public List<RecipeBoardVO> findRecipeLikeList(String memberEmail) {
+		return likeMapper.findRecipeLikeList(memberEmail);
 	}
 
 

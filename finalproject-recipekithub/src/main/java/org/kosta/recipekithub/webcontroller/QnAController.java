@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.QnAService;
 import org.kosta.recipekithub.model.vo.MemberVO;
+import org.kosta.recipekithub.model.vo.QnAAnswerVO;
 import org.kosta.recipekithub.model.vo.QnAVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,7 @@ public class QnAController {
 	@RequestMapping("/findQnAAdminForm")
 	public View findQnAAdminForm() {
 		return new UIView("ui/embedded/admin/findQnAAdminForm.clx");
-	}
+	} 
 	
 	@RequestMapping("/insertQnaForm")
 	public View insertQnaForm() {
@@ -39,11 +41,13 @@ public class QnAController {
 	@RequestMapping("/insertQnA")
 	public View insertQnA(HttpServletRequest request,DataRequest dataRequest) {
 		
-		// 로그인 확인
-//		HttpSession session = request.getSession(false);
-//		MemberVO member = (MemberVO) session.getAttribute("member");
-//		String memberId = member.getMemberEmail();
-		String memberId = "shj";
+		// 세션 적용
+		HttpSession session = request.getSession(false);
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+		}
+		String memberId = memberVO.getMemberEmail();
 		if(memberId == null || memberId == "") { // Guard Claues
 			return new UIView("ui/index.clx");
 		}
@@ -52,7 +56,6 @@ public class QnAController {
 		ParameterGroup param = dataRequest.getParameterGroup("qnaparam");
 		String boardTitle = param.getValue("boardTitle");
 		String boardContent = param.getValue("boardContent");
-		System.out.println(boardTitle+" "+boardContent);
 		
 		// QnA 등록
 		int result = qnAService.insertQnA(memberId, boardTitle, boardContent);
@@ -66,7 +69,16 @@ public class QnAController {
 	
 	@RequestMapping("/selectQnaList")
 	public View selectQnaList(HttpServletRequest request,DataRequest dataRequest) {
-		List<QnAVO> qnalist = qnAService.selectQnaList();
+		// 세션 적용
+		HttpSession session = request.getSession(false);
+		String memberEmail = null;
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+			memberEmail = memberVO.getMemberEmail();
+		}
+
+		List<QnAVO> qnalist = qnAService.selectQnaList(memberEmail);
 		dataRequest.setResponse("qnadslist", qnalist);
 		return new JSONDataView();
 	}
@@ -123,7 +135,52 @@ public class QnAController {
 		return new JSONDataView();
 	}
 
-
+	@RequestMapping("/insertQnAAnswer")
+	public View insertQnAAnswer(HttpServletRequest request,DataRequest dataRequest) {
+		// 세션 적용
+		HttpSession session = request.getSession(false);
+		MemberVO memberVO = null;
+		if(session != null) {
+			memberVO = (MemberVO) session.getAttribute("member");
+		}
+		String answerMember = memberVO.getMemberEmail();
+		
+		ParameterGroup param = dataRequest.getParameterGroup("dmqnaselect");
+		int boardId = Integer.parseInt(param.getValue("boardId"));
+		String boardAnswerTitle = param.getValue("boardAnswerTitle");
+		String boardAnswerContent = param.getValue("boardAnswerContent");
+		
+		QnAAnswerVO answerVO = new QnAAnswerVO();
+		answerVO.setBoardId(boardId);
+		answerVO.setAnswerMember(answerMember);
+		answerVO.setBoardAnswerTitle(boardAnswerTitle);
+		answerVO.setBoardAnswerContent(boardAnswerContent);
+		int result = qnAService.insertQnAAnswer(answerVO);
+		if(result == 1) {
+			// 현 상태 변경
+			qnAService.updateBoardResponseStatus(boardId);
+		}
+		
+		Map<String,Object> message = new HashMap<>();
+		message.put("insertResult", result);
+		
+		return new JSONDataView(true,message);
+	}
 	
+	@RequestMapping("/selectChkQnAAnswer")
+	public View selectChkQnAAnswer(HttpServletRequest request,DataRequest dataRequest) {
+		ParameterGroup param = dataRequest.getParameterGroup("dmboardinfo");
+		int boardId = Integer.parseInt(param.getValue("boardId"));
+		
+		QnAAnswerVO answerVO = qnAService.selectChkQnAAnswer(boardId);
+		if(answerVO != null) {
+			Map<String,Object> message = new HashMap<>();
+			message.put("chkmessage", 1);
+			dataRequest.setMetadata(true, message);
+		}
+		
+		dataRequest.setResponse("dmanswerboardinfo", answerVO);
+		return new JSONDataView();
+	}
 	
 }

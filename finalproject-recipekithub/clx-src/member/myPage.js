@@ -10,9 +10,8 @@
  * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
  */
 function onBodyLoad(e){
-	console.log(sessionStorage.getItem("memsession"));
 	var vcEmb = app.lookup("ea1");
-	cpr.core.App.load("embedded/myPagePaymentInfo", function(/*cpr.core.App*/ loadedApp){
+	cpr.core.App.load("embedded/myPageRecipeLike", function(/*cpr.core.App*/ loadedApp){
 		/*임베디드앱에 안에 앱이 있는 경우에는 앱을 삭제해줍니다.(다시 앱을 열고싶을때 스크립트 작성)*/
 		if(vcEmb.getEmbeddedAppInstance()){
 			vcEmb.getEmbeddedAppInstance().dispose();
@@ -29,6 +28,10 @@ function onBodyLoad(e){
 	}); 
 	app.lookup("ea1").redraw();
 	
+	var submission = app.lookup("sub_profile");
+	submission.send();
+	
+	app.lookup("nav1").selectItemByValue(1);
 }
 
 /*
@@ -39,11 +42,13 @@ function onNav1ItemClick(e){
 	var nav1 = e.control;
 	var src = null;
 	if(nav1.value == '4'){ // QnA 게시판
-		src = "embedded/myPageQuestion"
+		src = "embedded/myPageQuestion";
 	}else if(nav1.value == '2'){
-		src = "embedded/myPagePaymentInfo"
+		src = "embedded/myPagePaymentInfo";
 	}else if(nav1.value == '3'){
-		src = "embedded/myPageMealkitLike"
+		src = "embedded/myPageMealkitLike";
+	}else if(nav1.value == '1'){
+		src = "embedded/myPageRecipeLike";
 	}
 	var vcEmb = app.lookup("ea1");
 	cpr.core.App.load(src, function(/*cpr.core.App*/ loadedApp){
@@ -62,5 +67,16 @@ function onNav1ItemClick(e){
 		}
 	}); 
 	app.lookup("ea1").redraw();	
-	
+}
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */
+function onSub_profileSubmitSuccess(e){
+	var sub_profile = e.control;
+	var dsProfile = app.lookup("ds_profile");
+	app.lookup("opbEmail").text = dsProfile.getValue(0, "memberEmail");
+	app.lookup("opbNick").text = dsProfile.getValue(0, "memberNick");
+	app.lookup("profileImg").src = "/upload/profile/" + dsProfile.getValue(0, "memberImage");
 }

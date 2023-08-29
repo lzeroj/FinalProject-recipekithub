@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.recipekithub.model.mapper.LikeMapper">
 	<select id="showLike" resultType="int">
-		SELECT count(*) FROM mealkit_bookmark WHERE MEMBER_EMAIL = #{memberEmail} AND MEALKIT_NO = #{mealkitNo}
+		SELECT count(*) FROM mealkit_bookmark 
+		WHERE MEMBER_EMAIL = #{memberEmail} AND 
+		MEALKIT_NO = #{mealkitNo}
 	</select>
 	
 	<insert id="insertLike">
@@ -37,9 +39,20 @@
 	</delete>
 	
 	<select id="showRecipeLike" resultType="int">
-		SELECT count(*) FROM LIKE_RKH WHERE MEMBER_EMAIL = #{memberEmail} AND RECIPE_BOARD_ID = #{recipeBoardId}
+		SELECT count(*) FROM LIKE_RKH WHERE
+		<if test="memberEmail != null">
+			MEMBER_EMAIL = #{memberEmail} AND
+		</if>
+		RECIPE_BOARD_ID = #{recipeBoardId}
 	</select>
 	
-	
+	<!-- 레시피 좋아요 리스트 -->
+	<select id="findRecipeLikeList" resultType="org.kosta.recipekithub.model.vo.RecipeBoardVO">
+		SELECT rb.RECIPE_BOARD_ID,rb.MEMBER_EMAIL,RECIPE_BOARD_TITLE,CATEGORY_TYPE,CATEGORY_INGREDIENTS,CATEGORY_METHOD,RECIPE_BOARD_IMAGE
+		FROM LIKE_RKH lr , RECIPE_BOARD rb , "MEMBER" m
+		WHERE lr.RECIPE_BOARD_ID = rb.RECIPE_BOARD_ID 
+		AND m.MEMBER_EMAIL = lr.MEMBER_EMAIL 
+		AND m.MEMBER_EMAIL = #{memberEmail}
+	</select>
 	
 </mapper>

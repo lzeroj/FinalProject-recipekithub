@@ -6,8 +6,8 @@
     <screen std:sid="screen-afc335e0" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
     <screen std:sid="screen-e8b8ac97" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
     <link std:sid="link-9e0ca717" href="theme/cleopatra-theme.less" rel="stylesheet" type="text/css"/>
-    <link std:sid="link-806edc16" href="theme/controls/htmlobject.less" rel="stylesheet" type="text/css"/>
     <link std:sid="link-e762ac8c" href="theme/custom-theme.less" rel="stylesheet" type="text/css"/>
+    <link std:sid="link-415e1bf8" href="theme/custom/member.part.less" rel="stylesheet" type="text/css"/>
     <cl:model std:sid="model-d6fbeaed">
       <cl:submission std:sid="submission-9e4ebe14" id="find"/>
     </cl:model>
@@ -15,26 +15,32 @@
   </head>
   <body std:sid="body-742fa205" style="background-color:#F4FAEC;">
     <cl:listener std:sid="listener-def95c39" name="load" handler="onBodyLoad"/>
-    <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
-      <cl:xylayoutdata std:sid="xyl-data-642ed781" top="0px" left="0px" width="1920px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      <cl:property name="embe" value="ea1" type="control"/>
-    </cl:udc>
-    <cl:group std:sid="group-19106c56" style="background-color:#F4FAEC; background-size:cover; background-image:url(theme/images/common/bgimg10.png); background-position:center;">
-      <cl:xylayoutdata std:sid="xyl-data-c865488b" top="205px" left="0px" width="1920px" height="780px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1">
-        <cl:responsivexylayoutdata std:sid="rxyl-data-dd351d24">
-          <cl:xylayoutdata std:sid="sxyl-data-61d0bbd5" right="20px" left="20px" height="720px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="FHD"/>
-        </cl:responsivexylayoutdata>
-      </cl:embeddedapp>
-      <cl:responsivexylayout std:sid="r-xylayout-b1999951"/>
+    <cl:group std:sid="group-3afdffe4">
+      <cl:verticaldata std:sid="v-data-9c4a7130" width="1920px" height="1080px" syncminheight="true" autosize="height"/>
+      <cl:udc std:sid="ud-control-0443a02f" type="udc.header3">
+        <cl:listener std:sid="listener-e6ce5049" name="event" handler="onHeader3Event"/>
+        <cl:listener std:sid="listener-d9a38060" name="logout" handler="onHeader3Logout"/>
+        <cl:verticaldata std:sid="v-data-6489a537" width="1920px" height="210px"/>
+        <cl:property name="embe" value="ea1" type="control"/>
+      </cl:udc>
+      <cl:group std:sid="group-19106c56" style="background-color:#F4FAEC; background-size:cover; background-position:center;">
+        <cl:verticaldata std:sid="v-data-371fd84c" width="1920px" height="762px" syncminheight="true" autosize="height"/>
+        <cl:embeddedapp std:sid="e-app-f883d39a" id="ea1" style="background-repeat:repeat; background-size:contain; background-image:url('theme/images/common/bgimg1880_720.png');">
+          <cl:verticaldata std:sid="v-data-c0fa0993" width="1880px" height="720px" autosize="height"/>
+        </cl:embeddedapp>
+        <cl:verticallayout std:sid="v-layout-c4fbb140" scrollable="false" spacing="20" leftmargin="20" rightmargin="20" topmargin="20" bottommargin="20"/>
+      </cl:group>
+      <cl:udc std:sid="ud-control-6c3a3fe8" type="udc.footer">
+        <cl:verticaldata std:sid="v-data-92c3ffcc" width="1920px" height="103px"/>
+      </cl:udc>
+      <cl:verticallayout std:sid="v-layout-95db5ec0"/>
     </cl:group>
-    <cl:udc std:sid="ud-control-6c3a3fe8" type="udc.footer">
-      <cl:xylayoutdata std:sid="xyl-data-f52c3329" top="990px" left="0px" width="1920px" height="100px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-    </cl:udc>
-    <cl:xylayout std:sid="xylayout-bc755070"/>
+    <cl:verticallayout std:sid="v-layout-f4818101" spacing="0"/>
   </body>
   <std:studiosetting>
     <std:hruler/>
-    <std:vruler/>
+    <std:vruler>
+      <std:guide position="290"/>
+    </std:vruler>
   </std:studiosetting>
 </html>

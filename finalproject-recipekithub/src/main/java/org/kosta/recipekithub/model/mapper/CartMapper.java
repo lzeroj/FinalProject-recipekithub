@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.recipekithub.model.vo.CartVO;
+import org.kosta.recipekithub.model.vo.ChartVO;
 import org.kosta.recipekithub.model.vo.MealkitboardVO;
+import org.kosta.recipekithub.model.vo.SalesVO;
 
 @Mapper
 public interface CartMapper {
@@ -15,7 +17,7 @@ public interface CartMapper {
 
 	int updateCart(int cartNo, int mealkiitNo, int cartDetailQuantity);
 
-	CartVO findCartNoByMemberEmail(String memberEmail);
+	List<CartVO> findCartNoByMemberEmail(String memberEmail);
 
 	MealkitboardVO findMealkitBoardByMealkitName(String mealkitName);
 
@@ -36,5 +38,11 @@ public interface CartMapper {
 	int findDuplicateMealkitCount(String memberEmail, int mealkitNo);
 
 	int updateCartDetailQuantity(int cartDetailQuantity, int mealkitNo, int cartNo);
+
+	List<SalesVO> findSalesRankAdmin();
+
+	List<ChartVO> findTotalLikeRecipe();
+
+	List<ChartVO> findTotalLikeMealkit();
 
 }
