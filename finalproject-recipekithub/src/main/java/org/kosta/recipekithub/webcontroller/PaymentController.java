@@ -175,7 +175,7 @@ public class PaymentController {
 		            // Process the rest of the items if any
 		            String mealkitName = mealkitNameAndCount.get(j).getMealkitboardVO().getMealkitName();
 		            int cartDetailQuantity = mealkitNameAndCount.get(j).getCartDetailQuantity();
-		            System.out.println(mealkitName + " " + cartDetailQuantity);
+//		            System.out.println(mealkitName + " " + cartDetailQuantity);
 
 		            mealkitdetailinfo.append("\n" + mealkitName + " x " + cartDetailQuantity);
 		            mealkitInfoDetailmap.put("mealkitdetail", mealkitdetail);
