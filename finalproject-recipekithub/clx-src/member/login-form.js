@@ -74,19 +74,6 @@ function onSub_loginSubmitSuccess(e) {
 		});
 		return;
 	} 
-//	else {
-//		//var initValue = "로그인 정보를\n다시 확인해주시기 바랍니다.";
-//		app.openDialog("dialog/memberChkPopup", {
-//			width: 400, height: 300, headerClose: true
-//		}, function(dialog) {
-//			dialog.ready(function(dialogApp) {
-//				dialogApp.initValue = loginFail;
-//			});
-//		});
-//	}
-	
-	//var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-	//httpPostMethod.submit();
 }
 
 
@@ -143,34 +130,3 @@ function onButtonClick(e){
 	var button = e.control;
 	window.location.href = "index.clx";
 }
-
-/*
-
-//처음 실행하는 함수
-function init() {
-	gapi.load('auth2', function() {
-		gapi.auth2.init();
-		options = new gapi.auth2.SigninOptionsBuilder();
-		options.setPrompt('select_account');
-        // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
-		options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
-        // 인스턴스의 함수 호출 - element에 로그인 기능 추가
-        // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
-		gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
-	})
-}
-
-
-function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
-
-function onSignInFailure(t){		
-	console.log(t);
-}
-
-*/

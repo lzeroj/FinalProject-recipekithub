@@ -36,7 +36,7 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-ab2bbb72">
+  <body std:sid="body-ab2bbb72" style="font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-76a265cc" name="init" handler="onBodyInit2"/>
     <cl:group std:sid="group-7afed2aa" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg3_1920.png); background-position:center;">
       <cl:xylayoutdata std:sid="xyl-data-958dffa0" top="200px" right="0px" left="0px" height="976px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>

@@ -193,11 +193,11 @@
 				// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 				var sub_check_email = e.control;
 				
-				var metadataOk = sub_check_email.getMetadata("ok"); 			// Controller측에서 Email 중복 여부를 체크하여 ok(사용 가능)인 경우
+				var metadataOk = sub_check_email.getMetadata("ok"); 		// Controller측에서 Email 중복 여부를 체크하여 ok(사용 가능)인 경우
 				var metadataFail = sub_check_email.getMetadata("fail"); 		// Controller측에서 Email 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우
 				
 				var ipbEmail = app.lookup("ipbEmail"); 										// Email 입력 input-box
-				var opbCheckEmailResult = app.lookup("opbCheckEmail"); 			// Email 유효성 검사가 결과가 출력되는 output-box
+				var opbCheckEmailResult = app.lookup("opbCheckEmail"); 		// Email 유효성 검사가 결과가 출력되는 output-box
 				var imgEmail = app.lookup("imgEmail"); 										// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
 				
 				// input-box에서 보여지는 HTML Element의 value를 가져와서 String 타입으로 저장.
@@ -266,27 +266,38 @@
 				// 회원가입시 사용가능한 비밀번호 정규식을 체크하는 변수 : 8-25자 사이, 숫자, 대소문자, 특수 문자 모두 포함
 				var regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W])[a-zA-Z\d\W]{8,25}$/;
 				
-				if (pswd1Value === "") { 															//---> 1. 비밀번호 입력칸이 빈칸인 경우
+				// 1. 비밀번호 입력칸이 빈칸인 경우
+				if (pswd1Value === "") { 															
 					checkPswdResult1.style.css("color", "pink");
 					checkPswdResult1.value = "비밀번호를 입력해주세요.";
 					imgPswd1.src = "";
-				} else if (pswd1Value.length < 8 || pswd1Value.length > 25) { 		//---> 2. 비밀번호로 입력한 값이 30자를 초과한 경우
+					
+				// 2. 비밀번호로 입력한 값이 30자를 초과한 경우
+				} else if (pswd1Value.length < 8 || pswd1Value.length > 25) { 		
 					checkPswdResult1.style.css("color", "red");
 					checkPswdResult1.value = "비밀번호는 8자 이상 25자 이하이어야 합니다.";
 					imgPswd1.src = "../ui/theme/images/member/cross.png";
-				} else if (regExp.test(pswd1Value) == false) { 							//---> 3. 입력한 값이 비밀번호 형식에 적합하지 않아 사용할 수 없는 경우
+					
+				// 3. 입력한 값이 비밀번호 형식에 적합하지 않아 사용할 수 없는 경우
+				} else if (regExp.test(pswd1Value) == false) { 							
 					checkPswdResult1.style.css("color", "red");
 					checkPswdResult1.value = "비밀번호 형식을 확인해주시기 바랍니다.";
 					imgPswd1.src = "../ui/theme/images/member/cross.png";
-				} else if (pswd1Value.search(" ") != -1) { 									//---> 4. 입력한 비밀번호에 공백이 포함되어 사용할 수 없는 경우
+					
+				// 4. 입력한 비밀번호에 공백이 포함되어 사용할 수 없는 경우
+				} else if (pswd1Value.search(" ") != -1) { 									
 					checkPswdResult1.style.css("color", "red");
 					checkPswdResult1.value = "비밀번호는 공백을 포함할 수 없습니다.";
 					imgPswd1.src = "../ui/theme/images/member/cross.png";
-				} else if (/(.)\1\1/.test(pswd1Value)) { 									//---> 5. 입력한 비밀번호에 같은 문자가 연속하여 3번 이상 사용된 경우
+				
+				// 5. 입력한 비밀번호에 같은 문자가 연속하여 3번 이상 사용된 경우
+				} else if (/(.)\1\1/.test(pswd1Value)) { 									
 					checkPswdResult1.style.css("color", "red");
 					checkPswdResult1.value = "같은 문자를 연속하여 3번 사용할 수 없습니다.";
 					imgPswd1.src = "../ui/theme/images/member/cross.png";
-				} else { 																					//---> 6. 입력한 비밀번호가 사용 가능한 경우
+				
+				// 6. 입력한 비밀번호가 사용 가능한 경우
+				} else { 																					
 					checkPswd1Flag = true;
 					checkPswdResult1.style.css("color", "blue");
 					checkPswdResult1.value = "사용가능한 비밀번호입니다.";
@@ -299,7 +310,8 @@
 				var pswd2Value = String(pswd2);
 				var checkPswdResult2 = app.lookup("opbCheckPassword2");
 				
-				if (pswd2Value !== "") { // password2가 비어 있지 않을 경우에만 확인
+				// password2가 비어 있지 않을 경우에만 확인
+				if (pswd2Value !== "") { 
 					if (pswd1Value !== pswd2Value) {
 						checkPswdResult2.style.css("color", "red");
 						checkPswdResult2.value = "위의 비밀번호와 일치하지 않습니다.";
@@ -377,23 +389,33 @@
 				var nickValue = String(nick); 											// input-box에서 보여지는 HTML Element의 value를 가져와서 String 타입으로 저장.	
 				
 				if (sub_check_nick.xhr.readyState == 4 && sub_check_nick.xhr.status == 200) {
-					if (nickValue === "") { 													//---> 1. 닉네임 입력칸이 빈칸인 경우
+					
+					// 1. 닉네임 입력칸이 빈칸인 경우
+					if (nickValue === "") { 													
 						opbCheckNickResult.style.css("color", "pink");
 						opbCheckNickResult.value = "닉네임을 입력해주세요.";
 						imgNick.src = "";
-					} else if (nickValue.length < 2 || nickValue.length > 8) { 		//---> 2. 닉네임으로 입력한 값이 1자 or 9자를 이상인 경우
+						
+					// 2. 닉네임으로 입력한 값이 1자 or 9자를 이상인 경우
+					} else if (nickValue.length < 2 || nickValue.length > 8) { 		
 						opbCheckNickResult.style.css("color", "red");
 						opbCheckNickResult.value = "닉네임은 2자이상 ~ 8자 이하이어야 합니다.";
 						imgNick.src = "../ui/theme/images/member/cross.png";
-					} else if (metadataFail) { 												//---> 3. 입력한 닉네임이 중복되어 사용할 수 없는 경우
+						
+					// 3. 입력한 닉네임이 중복되어 사용할 수 없는 경우
+					} else if (metadataFail) { 												
 						opbCheckNickResult.style.css("color", "red");
 						opbCheckNickResult.value = "닉네임이 중복됩니다.";
 						imgNick.src = "../ui/theme/images/member/cross.png";
-					} else if (nickValue.search(" ") != -1) { 								//---> 4. 입력한 닉네임에 공백이 포함되어 사용할 수 없는 경우
+					
+					// 4. 입력한 닉네임에 공백이 포함되어 사용할 수 없는 경우
+					} else if (nickValue.search(" ") != -1) { 								
 						opbCheckNickResult.style.css("color", "red");
 						opbCheckNickResult.value = "닉네임은 공백을 포함할 수 없습니다.";
 						imgNick.src = "../ui/theme/images/member/cross.png";
-					} else { 																			//---> 5. 입력한 닉네임이 사용 가능한 경우
+						
+					// 5. 입력한 닉네임이 사용 가능한 경우
+					} else { 																			
 						checkNickFlag = true;
 						opbCheckNickResult.style.css("color", "blue");
 						opbCheckNickResult.value = "사용가능한 닉네임입니다.";

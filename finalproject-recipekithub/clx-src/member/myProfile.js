@@ -4,7 +4,7 @@
  *
  * @author kjoon
  ************************************************/
-/*
+
 function getTimedSessionData(key) {
 	var storedData = sessionStorage.getItem(key);
 	
@@ -20,7 +20,7 @@ function getTimedSessionData(key) {
 	}
 	return null;
 }
-*/
+
 
 /*
  * 루트 컨테이너에서 load 이벤트 발생 시 호출.
@@ -42,6 +42,7 @@ function onSub_profileSubmitSuccess(e) {
 	app.lookup("ipbPassword1").text = dsProfile.getValue(0, "memberPassword");
 	app.lookup("ipbName").text = dsProfile.getValue(0, "memberName");
 	app.lookup("ipbNick").text = dsProfile.getValue(0, "memberNick");
+	console.log(app.lookup("ipbNick").text);
 	app.lookup("address").text = dsProfile.getValue(0, "memberAddress");
 	app.lookup("postCode").text = dsProfile.getValue(0, "memberPostcode");
 	app.lookup("detailAddress").text = dsProfile.getValue(0, "memberAddressDetail");
@@ -67,27 +68,38 @@ function onIpbPassword1Keyup(e) {
 	// 회원가입시 사용가능한 비밀번호 정규식을 체크하는 변수 : 8-25자 사이, 숫자, 대소문자, 특수 문자 모두 포함
 	var regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W])[a-zA-Z\d\W]{8,25}$/;
 	
-	if (pswd1Value === "") { 															//---> 1. 비밀번호 입력칸이 빈칸인 경우
+	// 1. 비밀번호 입력칸이 빈칸인 경우
+	if (pswd1Value === "") { 															
 		checkPswdResult1.style.css("color", "pink");
 		checkPswdResult1.value = "비밀번호를 입력해주세요.";
 		imgPswd1.src = "";
-	} else if (pswd1Value.length < 8 || pswd1Value.length > 25) { 		//---> 2. 비밀번호로 입력한 값이 30자를 초과한 경우
+		
+	// 2. 비밀번호로 입력한 값이 30자를 초과한 경우
+	} else if (pswd1Value.length < 8 || pswd1Value.length > 25) { 		
 		checkPswdResult1.style.css("color", "red");
 		checkPswdResult1.value = "비밀번호는 8자 이상 25자 이하이어야 합니다.";
 		imgPswd1.src = "../ui/theme/images/member/cross.png";
-	} else if (regExp.test(pswd1Value) == false) { 							//---> 3. 입력한 값이 비밀번호 형식에 적합하지 않아 사용할 수 없는 경우
+	
+	//3. 입력한 값이 비밀번호 형식에 적합하지 않아 사용할 수 없는 경우
+	} else if (regExp.test(pswd1Value) == false) { 							
 		checkPswdResult1.style.css("color", "red");
 		checkPswdResult1.value = "비밀번호 형식을 확인해주시기 바랍니다.";
 		imgPswd1.src = "../ui/theme/images/member/cross.png";
-	} else if (pswd1Value.search(" ") != -1) { 									//---> 4. 입력한 비밀번호에 공백이 포함되어 사용할 수 없는 경우
+	
+	//4. 입력한 비밀번호에 공백이 포함되어 사용할 수 없는 경우
+	} else if (pswd1Value.search(" ") != -1) { 									
 		checkPswdResult1.style.css("color", "red");
 		checkPswdResult1.value = "비밀번호는 공백을 포함할 수 없습니다.";
 		imgPswd1.src = "../ui/theme/images/member/cross.png";
-	} else if (/(.)\1\1/.test(pswd1Value)) { 									//---> 5. 입력한 비밀번호에 같은 문자가 연속하여 3번 이상 사용된 경우
+	
+	// 5. 입력한 비밀번호에 같은 문자가 연속하여 3번 이상 사용된 경우
+	} else if (/(.)\1\1/.test(pswd1Value)) { 									
 		checkPswdResult1.style.css("color", "red");
 		checkPswdResult1.value = "같은 문자를 연속하여 3번 사용할 수 없습니다.";
 		imgPswd1.src = "../ui/theme/images/member/cross.png";
-	} else { 																					//---> 6. 입력한 비밀번호가 사용 가능한 경우
+	
+	// 6. 입력한 비밀번호가 사용 가능한 경우
+	} else { 																					
 		checkPswd1Flag = true;
 		checkPswdResult1.style.css("color", "blue");
 		checkPswdResult1.value = "사용가능한 비밀번호입니다.";
@@ -168,30 +180,39 @@ function onSub_check_nickSubmitSuccess(e) {
 	var metadataOk = sub_check_nick.getMetadata("ok"); 			// Controller측에서 닉네임 중복 여부를 체크하여 ok(사용 가능)인 경우
 	var metadataFail = sub_check_nick.getMetadata("fail"); 		// Controller측에서 닉네임 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우
 	
-	var ipbNick = app.lookup("ipbNick"); 									// 닉네임 입력 input-box
-	var opbCheckNickResult = app.lookup("opbCheckNick"); 		// 닉네임 유효성 검사 결과가 출력되는 output-box
-	var imgNick = app.lookup("imgNickChk"); 								// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
+	var ipbNick = app.lookup("ipbNick"); 										// 닉네임 입력 input-box
+	var opbCheckNickResult = app.lookup("opbCheckNick"); 			// 닉네임 유효성 검사 결과가 출력되는 output-box
+	var imgNick = app.lookup("imgNickChk"); 									// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
 	
 	var nick = ipbNick.displayText;
 	var nickValue = String(nick); 		// input-box에서 보여지는 HTML Element의 value를 가져와서 String 타입으로 저장.	
 	
-	if (nickValue === "") { 														//---> 1. 닉네임 입력칸이 빈칸인 경우
+	// 1. 닉네임 입력칸이 빈칸인 경우
+	if (nickValue === "") { 															
 		opbCheckNickResult.style.css("color", "pink");
 		opbCheckNickResult.value = "닉네임을 입력해주세요.";
 		imgNick.src = "";
-	} else if (nickValue.length < 2 || nickValue.length > 8) { 			//---> 2. 닉네임으로 입력한 값이 1자 or 9자를 이상인 경우
+		
+	// 2. 닉네임으로 입력한 값이 1자 or 9자를 이상인 경우	
+	} else if (nickValue.length < 2 || nickValue.length > 8) { 			
 		opbCheckNickResult.style.css("color", "red");
 		opbCheckNickResult.value = "닉네임은 2자이상 ~ 8자 이하이어야 합니다.";
 		imgNick.src = "../ui/theme/images/member/cross.png";
-	} else if (metadataFail) { 													//---> 3. 입력한 닉네임이 중복되어 사용할 수 없는 경우
+		
+	// 3. 입력한 닉네임이 중복되어 사용할 수 없는 경우	
+	} else if (metadataFail) { 														
 		opbCheckNickResult.style.css("color", "red");
 		opbCheckNickResult.value = "닉네임이 중복됩니다.";
 		imgNick.src = "../ui/theme/images/member/cross.png";
-	} else if (nickValue.search(" ") != -1) { 									//---> 4. 입력한 닉네임에 공백이 포함되어 사용할 수 없는 경우
+		
+	// 4. 입력한 닉네임에 공백이 포함되어 사용할 수 없는 경우
+	} else if (nickValue.search(" ") != -1) { 									
 		opbCheckNickResult.style.css("color", "red");
 		opbCheckNickResult.value = "닉네임은 공백을 포함할 수 없습니다.";
 		imgNick.src = "../ui/theme/images/member/cross.png";
-	} else { 																				//---> 5. 입력한 닉네임이 사용 가능한 경우
+		
+	// 5. 입력한 닉네임이 사용 가능한 경우
+	} else { 																					
 		checkNickFlag = true;
 		opbCheckNickResult.style.css("color", "blue");
 		opbCheckNickResult.value = "사용가능한 닉네임입니다.";
@@ -231,9 +252,6 @@ function onBtnMemUpdateClick(e){
 	dataMap.setValue("memberAddressDetail", memberAddressDetail);
 	dataMap.setValue("memberImage", memberImage);
 	
-	var fileInput = app.lookup("fi1");
-	var file = fileInput.file;
-	
 	// 다이얼로그창에 표시할 메시지
 	var initValue = null;		
 	// 회원가입 양식에서 빈칸으로 남아 있는 input-box가 있는 체크
@@ -255,17 +273,18 @@ function onBtnMemUpdateClick(e){
 	
 	// 1. 프로필 조회/수정 양식에서 빈칸으로 남아 있는 input-box가 있는 경우
 	if (initValue) {		
-		app.openDialog("dialog/registerChkPopup", {
+		app.openDialog("dialog/memberChkPopup", {
 			width: 400, height: 300, headerClose: true
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
 				dialogApp.initValue = initValue;
 			});
 		});
+		
 	// 2. 프로필 조회/수정 양식이 전부 유효하게 작성되어 있는 경우, 프로필 수정 서브미션 전송	
 	} else {		
 		initValue = "회원정보를 수정하시겠습니까?";
-		app.openDialog("dialog/registerPopup", {
+		app.openDialog("dialog/memberPopup", {
 			width: 400, height: 300, headerClose: true, resizable: false
 		}, function(dialog) {
 			dialog.ready(function(dialogApp) {
@@ -273,10 +292,12 @@ function onBtnMemUpdateClick(e){
 			});
 		}).then(function(returnValue) {
 			var subUpdate = app.lookup("sub_update");
-			//var submission = app.lookup("sub_insert_image");
-			subUpdate.addFileParameter("memberImage", file);
+			
+			var fileInput = app.lookup("fi1");
+			var file = fileInput.file;
+			
+       		subUpdate.addFileParameter("memberImage", file);
 			subUpdate.send();
-			//submission.send();
 		});
 	}
 }
@@ -360,7 +381,6 @@ function onBtnCancelClick(e) {
  */
 function onFi1ValueChange(e) {
 	var fi1 = e.control;
-	//app.lookup("deleteImg").redraw();
 	var image = app.lookup("profileImg");
 	var fileInput = app.lookup("fi1");
 	if (fileInput.files && fileInput.files[0]) {

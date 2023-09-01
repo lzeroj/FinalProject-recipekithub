@@ -60,7 +60,7 @@
     </cl:model>
     <cl:appspec/>
   </head>
-  <body std:sid="body-ea122247">
+  <body std:sid="body-ea122247" style="font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-bc966f2e" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-b8f6dc4d">
       <cl:verticaldata std:sid="v-data-c6e9f14e" width="1040px" height="700px" autosize="height"/>
