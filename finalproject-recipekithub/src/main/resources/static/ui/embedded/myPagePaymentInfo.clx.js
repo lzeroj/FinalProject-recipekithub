@@ -408,6 +408,7 @@
 									"constraint": {"rowIndex": 0, "colIndex": 3},
 									"configurator": function(cell){
 										cell.columnName = "paymentTotal";
+										cell.suppressRef = -1;
 										cell.suppressible = true;
 									}
 								}

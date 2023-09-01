@@ -44,6 +44,9 @@
 			function onButtonClick(e){
 				var button = e.control;
 				
+				var btn1 = app.lookup("btn1");
+				btn1.visible = false;
+				
 				/* 버티컬 레이아웃 마지막 인덱스에 컨트롤 추가 */
 				var vcIpb = new cpr.controls.InputBox();
 				vcIpb.style.css({
@@ -97,6 +100,24 @@
 					});
 				});
 				app.lookup("grp2").addChild( vcBtn, {
+					width : "100px",
+					height : "30px",
+					autoSize : "width"
+				});
+				
+				var canclebtn = new cpr.controls.Button();
+				canclebtn.style.css({
+					"backgroundImage" : "none",
+					"backgroundColor" : "#0ebc59",
+					"color" : "#FFFFFF"
+				});
+				canclebtn.id = "btn4";
+				canclebtn.value = "취소";
+				canclebtn.addEventListener("click", function(e){
+					app.lookup("grp2").removeAllChildren();
+					btn1.visible = true;
+				});
+				app.lookup("grp2").addChild( canclebtn, {
 					width : "100px",
 					height : "30px",
 					autoSize : "width"
