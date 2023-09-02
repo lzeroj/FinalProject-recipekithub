@@ -419,7 +419,6 @@
 						"top": "0px",
 						"right": "0px",
 						"left": "0px",
-						"width": "1920px",
 						"height": "205px"
 					});
 				})(group_2);

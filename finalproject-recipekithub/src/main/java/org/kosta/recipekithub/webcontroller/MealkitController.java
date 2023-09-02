@@ -191,7 +191,7 @@ public class MealkitController {
 		return new UIView("/ui/mealkit/insertMealkit.clx");
 	}
 	
-	@RequestMapping("/insertMealkit")
+	@PostMapping("/insertMealkit")
 	public View insertMealKit(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws IOException {
 		HttpSession session = request.getSession(false);
 		MemberVO sessionMember = (MemberVO)session.getAttribute("member");

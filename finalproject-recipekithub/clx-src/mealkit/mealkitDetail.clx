@@ -102,11 +102,11 @@
   </head>
   <body std:sid="body-4920d61b" style="background-color:#F4FAEC; font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-4de5ada1" name="load" handler="onBodyLoad"/>
-    <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
-      <cl:verticaldata std:sid="v-data-e043b797" width="1920px" height="205px"/>
-    </cl:udc>
     <cl:group std:sid="group-1cda49b1" style="background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
       <cl:verticaldata std:sid="v-data-695100a0" width="1920px" height="720px"/>
+      <cl:udc std:sid="ud-control-ff679508" type="udc.myPageHeader">
+        <cl:verticaldata std:sid="v-data-78d9bc79" width="1920px" height="200px"/>
+      </cl:udc>
       <cl:group std:sid="group-2d0b8c58" style="color:black;">
         <cl:verticaldata std:sid="v-data-30666102" width="988px" height="515px"/>
         <cl:button std:sid="button-655c2ef5" id="deleBtn" visible="false" value="삭제">
