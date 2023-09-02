@@ -6,16 +6,14 @@
 /* 포커스 보더 색상 */
 /* Disable 상태의 보더 색상. */
 /* 내부에 아이템을 갖는 컨트롤의 경우, 각 아이템에 마우스 호버시의 텍스트 색상 */
-/*@hover-foreground: #646464;*/
 /* 내부에 아이템을 갖는 컨트롤의 경우, 각 아이템에 마우스 호버시의 배경 색상 */
 /* 내부에 아이템을 갖는 컨트롤의 경우, 각 아이템에 선택된 경우 텍스트 색상 */
 /* 내부에 아이템을 갖는 컨트롤의 경우, 각 아이템이 선택된 경우 배경 색상 */
-/*@selection-background: #0CA44E;*/
 /* 내부에 아이템을 갖는 컨트롤이 Disabled된 경우, 각 아이템에 선택된 경우 텍스트 색상 */
 /* 내부에 아이템을 갖는 컨트롤의 Disabled된 경우, 각 아이템이 선택된 경우 배경 색상 */
 /* 모든 UIControl 공통 스타일 */
 .cl-control {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
 }
 /* 오류 발생시 표시되는 메시지 스타일 */
@@ -46,7 +44,7 @@ body.cl-has-modal {
 }
 /* 넘버 에디터  */
 .cl-numbereditor {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   border: 1px solid #bbb;
   color: #333;
   /* 넘버 에디터 텍스트 */
@@ -71,15 +69,15 @@ body.cl-has-modal {
 }
 /* 넘버 에디터 focus 상태 */
 .cl-numbereditor.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
   /* 넘버 에디터 focus 상태 스핀 버튼 영역 */
 }
 .cl-numbereditor.cl-focus .cl-numbereditor-buttons {
-  border-left-color: #86D2A7;
+  border-left-color: #1369C5;
 }
 /* 데이트 인풋 */
 .cl-dateinput {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   text-align: left;
@@ -101,7 +99,7 @@ body.cl-has-modal {
   border-color: #ddd;
 }
 .cl-dateinput.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 /* 캘린더 */
 .cl-calendar {
@@ -134,6 +132,10 @@ body.cl-has-modal {
   /* 다음 달 버튼 */
   /* 헤더 텍스트 */
 }
+.cl-calendar .cl-calendar-header .cl-calendar-header-text:hover,
+.cl-calendar .cl-calendar-header .cl-calendar-header-text.cl-hover {
+  color: #208AED;
+}
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-day,
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-month,
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-year,
@@ -146,8 +148,8 @@ body.cl-has-modal {
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-month.cl-selected,
 .cl-calendar:not(.cl-disabled) .cl-calendar-content-year.cl-selected,
 .cl-calendar:not(.cl-disabled) .cl-other-month.cl-selected {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  color: #FFFFFF;
 }
 .cl-calendar .cl-calendar-content {
   /* week of year의 스타일 */
@@ -193,7 +195,7 @@ body.cl-has-modal {
   /* 기념일 텍스트 스타일 */
 }
 .cl-calendar.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-calendar.cl-focus .cl-calendar-content {
   /* 키보드 날짜 이동 스타일 */
@@ -213,7 +215,7 @@ body.cl-has-modal {
 /* 캘린더 disabled 상태 */
 /* 리스트 박스 */
 .cl-listbox {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   background-color: #fff;
   border: 1px solid #bbb;
   color: #333;
@@ -231,21 +233,21 @@ body.cl-has-modal {
   /* 아이템의 뱃지 스타일 */
 }
 .cl-listbox .cl-listbox-list .cl-listbox-item.cl-selected {
-  color: black;
-  background-color: #86D2A7;
+  color: #FFFFFF;
+  background-color: #208AED;
 }
 .cl-listbox:not(.cl-disabled) .cl-listbox-item:not(.cl-disabled):not(.cl-selected) {
   /* 포커스된 아이템 */
   /* 호버된 아이템 */
 }
 .cl-listbox:not(.cl-disabled) .cl-listbox-item:not(.cl-disabled):not(.cl-selected):focus {
-  color: black;
-  background-color: #86D2A7;
+  color: #333435;
+  background-color: #DAEFFC;
 }
 .cl-listbox:not(.cl-disabled) .cl-listbox-item:not(.cl-disabled):not(.cl-selected).cl-hover,
 .cl-listbox:not(.cl-disabled) .cl-listbox-item:not(.cl-disabled):not(.cl-selected):hover {
-  color: black;
-  background-color: #86D2A7;
+  color: #333435;
+  background-color: #DAEFFC;
 }
 /* disabled 상태 */
 .cl-listbox.cl-disabled {
@@ -258,11 +260,11 @@ body.cl-has-modal {
 }
 /* 포커스 상태 */
 .cl-listbox.cl-focus {
-  border: 1px solid #86D2A7;
+  border: 1px solid #1369C5;
 }
 /* 링크드 리스트 박스 루트 */
 .cl-linkedlistbox {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   /* 리스트 박스 */
   /* 링크드리스트박스 disabled 상태 */
@@ -300,10 +302,10 @@ body.cl-has-modal {
   /* 리스트 박스 리스트 - 포커스 상태 */
 }
 .cl-linkedlistbox.cl-focus .cl-linkedlistbox-header {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-linkedlistbox.cl-focus .cl-linkedlistbox-list {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-linkedlistbox.cl-disabled {
   color: #666;
@@ -319,17 +321,17 @@ body.cl-has-modal {
 }
 .cl-linkedlistbox:not(.cl-disabled) .cl-linkedlistbox-item:not(.cl-disabled):hover,
 .cl-linkedlistbox:not(.cl-disabled) .cl-linkedlistbox-item:not(.cl-disabled):focus {
-  color: black;
-  background-color: #86D2A7;
+  color: #333435;
+  background-color: #DAEFFC;
 }
 .cl-linkedlistbox:not(.cl-disabled) .cl-linkedlistbox-item:not(.cl-disabled).cl-selected {
-  color: black;
-  background-color: #86D2A7;
+  color: #FFFFFF;
+  background-color: #208AED;
   /* 선택된 아이템 드릴 다운 아이콘 */
 }
 /* 메뉴 루트 */
 .cl-menu {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   /* 메뉴 리스트 */
 }
 .cl-menu .cl-menu-list {
@@ -359,8 +361,8 @@ body.cl-has-modal {
   /* 메뉴 아이템 - disabled */
 }
 .cl-menu .cl-menu-list .cl-menu-item.cl-hover {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #DAEFFC;
+  color: #333435;
 }
 .cl-menu .cl-menu-list .cl-menu-item.cl-disabled {
   color: #666;
@@ -372,18 +374,18 @@ body.cl-has-modal {
 }
 .cl-menu .cl-menu-list .cl-menu-item:not(.cl-disabled):not(.cl-selected):hover,
 .cl-menu .cl-menu-list .cl-menu-item:not(.cl-disabled).cl-hover {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #DAEFFC;
+  color: #333435;
 }
 .cl-menu .cl-menu-list .cl-menu-item.cl-selected {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  color: #FFFFFF;
 }
 .cl-menu.cl-focus {
   /* 메뉴 리스트 - 포커스 */
 }
 .cl-menu.cl-focus .cl-menu-list {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-menu.cl-disabled .cl-menu-item {
   color: #666;
@@ -394,7 +396,7 @@ body.cl-has-modal {
 }
 /* 파일 업로드 루트 */
 .cl-fileupload {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   background-color: #fff;
@@ -448,7 +450,7 @@ body.cl-has-modal {
 }
 /* 버튼 */
 .cl-button {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   background-image: linear-gradient(#FCFEFF, #E0E1E2);
   border-radius: 4px;
@@ -465,7 +467,7 @@ body.cl-has-modal {
 }
 .cl-button:focus,
 .cl-button.cl-focus {
-  border: solid 1px #86D2A7;
+  border: solid 1px #1369C5;
 }
 .cl-button:not(.cl-disabled).cl-activated,
 .cl-button:not(.cl-disabled):active {
@@ -479,7 +481,7 @@ body.cl-has-modal {
 .cl-accordion {
   border: 1px solid #bbb;
   color: #333;
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   /* 아코디언의 각 헤더 */
   /* 아코디언 컨텐츠를 감싸는 영역 */
   /* 아코디언 섹션 */
@@ -498,16 +500,16 @@ body.cl-has-modal {
   color: #777;
 }
 .cl-accordion .cl-accordion-header.cl-activated {
-  background-color: #86D2A7;
-  border-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  border-color: #208AED;
+  color: #FFFFFF;
   /* 클릭된 헤더의 펼침 버튼 아이콘 */
 }
 .cl-accordion .cl-accordion-section:not(.cl-accordion-placeholder) {
   /* 아코디언 컨텐츠 */
 }
 .cl-accordion .cl-accordion-section:not(.cl-accordion-placeholder) .cl-accordion-content {
-  border: solid 1px #86D2A7;
+  border: solid 1px #208AED;
 }
 .cl-accordion .cl-accordion-section+.cl-accordion-header {
   /* 아코디언 섹션간의 간격 */
@@ -533,7 +535,7 @@ body.cl-has-modal {
 }
 /* 인풋 박스 루트 */
 .cl-inputbox {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   background-color: #fff;
@@ -543,7 +545,7 @@ body.cl-has-modal {
   /* 인풋 박스 - disabled 상태 */
 }
 .cl-inputbox.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-inputbox:not(.cl-disabled) {
   /* 클리어 버튼 hover상태 */
@@ -551,7 +553,7 @@ body.cl-has-modal {
 }
 /* 서치 인풋 */
 .cl-searchinput {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   text-align: left;
@@ -578,7 +580,7 @@ body.cl-has-modal {
   border-color: #ddd;
 }
 .cl-searchinput.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 /* 슬라이더 */
 .cl-slider {
@@ -596,13 +598,13 @@ body.cl-has-modal {
   /* 슬라이더 세로바 핸들 */
 }
 .cl-slider .cl-slider-bar .cl-slider-range {
-  background-color: #d0eedd;
+  background-color: #7ebcf5;
 }
 .cl-slider.cl-focus {
   /* 슬라이더 바 - focus */
 }
 .cl-slider.cl-focus .cl-slider-bar {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-slider.cl-disabled {
   /* 슬라이더 바 핸들 - 비활성화 */
@@ -616,7 +618,7 @@ body.cl-has-modal {
 }
 /* 아웃풋 */
 .cl-output {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
 }
 .cl-output.cl-disabled {
@@ -624,7 +626,7 @@ body.cl-has-modal {
 }
 /* 텍스트 에리어 */
 .cl-textarea {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   border: 1px solid #bbb;
   color: #333;
   /* 텍스트 에리어 텍스트 */
@@ -637,7 +639,7 @@ body.cl-has-modal {
   color: #666;
 }
 .cl-textarea.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 /* 라디오 버튼 */
 .cl-radiobutton {
@@ -753,7 +755,7 @@ body.cl-has-modal {
 }
 /* 마스크 에디터 루트 */
 .cl-maskeditor {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   border: 1px solid #bbb;
   background-color: #fff;
   color: #333;
@@ -763,7 +765,7 @@ body.cl-has-modal {
   /* 마스크 에디터 - 클리어 버튼 */
 }
 .cl-maskeditor.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-maskeditor.cl-disabled {
   border-color: #ddd;
@@ -772,7 +774,7 @@ body.cl-has-modal {
 }
 /* 콤보 박스 스타일 */
 .cl-combobox {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   border: 1px solid #bbb;
   background-color: #fff;
@@ -786,7 +788,7 @@ body.cl-has-modal {
   /* preventInput=true인 경우 */
 }
 .cl-combobox.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-combobox.cl-disabled {
   border-color: #ddd;
@@ -795,8 +797,8 @@ body.cl-has-modal {
 }
 /* 콤보 박스의 리스트 스타일 */
 .cl-combobox-list {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
-  border: 1px solid #86D2A7;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
+  border: 1px solid #1369C5;
   color: #333;
   /* 리스트의 쉐도우 */
   /* 콤보박스 위에 표시될때 상태 */
@@ -814,8 +816,8 @@ body.cl-has-modal {
   /* 콤보박스 트리 아이템 스타일 */
 }
 .cl-combobox-list .cl-combobox-item.cl-selected {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  color: #FFFFFF;
 }
 .cl-combobox-list .cl-combobox-item.cl-disabled {
   color: #666;
@@ -830,8 +832,8 @@ body.cl-has-modal {
 }
 .cl-combobox-list .cl-combobox-item:not(.cl-disabled):not(.cl-selected):hover,
 .cl-combobox-list .cl-combobox-item:not(.cl-disabled):not(.cl-selected).cl-hover {
-  color: black;
-  background-color: #86D2A7;
+  color: #333435;
+  background-color: #DAEFFC;
 }
 .cl-combobox-list .cl-combobox-item.cl-treeitem {
   /* 트리 아이콘 스타일 */
@@ -851,16 +853,16 @@ body.cl-has-modal {
   /* 부분 체크 상태 */
 }
 .cl-combobox-list.cl-multi-select .cl-combobox-item:not(.cl-disabled).cl-selected:hover {
-  color: black;
-  background-color: #86D2A7;
+  color: #333435;
+  background-color: #DAEFFC;
 }
 .cl-combobox-list.cl-multi-select .cl-combobox-item:not(.cl-disabled).cl-hover.cl-selected {
-  color: #86D2A7;
-  background-color: black;
+  color: #DAEFFC;
+  background-color: #333435;
 }
 /* 링크드 콤보 박스 루트 */
 .cl-linkedcombobox {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   /* 콤보 박스 */
   /* 콤보 박스 - 포커스 상태 */
@@ -877,7 +879,7 @@ body.cl-has-modal {
   /* preventInput속성일때 스타일 */
 }
 .cl-linkedcombobox .cl-linkedcombobox-combo.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-linkedcombobox.cl-disabled {
   color: #666;
@@ -889,9 +891,9 @@ body.cl-has-modal {
 }
 /* 콤보 박스 리스트 박스 */
 .cl-linkedcombobox-list {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
-  border: 1px solid #86D2A7;
+  border: 1px solid #1369C5;
   background-color: white;
   /* 리스트박스의 쉐도우 */
   /* 콤보박스 위에 표시될때 상태 */
@@ -912,8 +914,8 @@ body.cl-has-modal {
   /* 콤보 박스 아이템 - disabled 상태 */
 }
 .cl-linkedcombobox-list .cl-linkedcombobox-item.cl-selected {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  color: #FFFFFF;
   /* 콤보 박스 아이템 드릴 다운 아이콘 - 선택됨 */
 }
 .cl-linkedcombobox-list .cl-linkedcombobox-item.cl-disabled {
@@ -929,213 +931,33 @@ body.cl-has-modal {
 }
 .cl-linkedcombobox-list .cl-linkedcombobox-item:not(.cl-disabled):not(.cl-selected):hover,
 .cl-linkedcombobox-list .cl-linkedcombobox-item:not(.cl-disabled):not(.cl-selected).cl-hover {
-  color: black;
-  background-color: #86D2A7;
+  color: #333435;
+  background-color: #DAEFFC;
 }
-/* 
- * Define Custom variables
- * Template Name : common-template-v2
- * Author : Da-eun Ryu
- * File : less
- */
-/****************************
- * Color System
- ****************************/
-/* ADDITIONAL COLOR */
-/* ADDITIONAL PALE COLOR */
-/* THEME COLOR */
-/* THEME PALE COLOR */
-/* THEME LIGHTEN  COLOR */
-/****************************
- * Body
- ****************************/
-/****************************
- * Main
- ****************************/
-/* 사이드 메뉴와 미니 메뉴 */
-/* 메가 메뉴 */
-/****************************
- * Font
- ****************************/
-/****************************
- * Components
- ****************************/
-/* Text */
-/* Background */
-/* Border */
-/* Read Only */
-/* Focus */
-/* Hover */
-/* Active */
-/* Disabled */
-/* Selected - List 계열이 상속받는 변수 */
-/* Selected Item Disabled - List 계열이 상속받는 변수 */
-/* Transition */
-/****************************
- * Input Group
- ****************************/
-/* Text */
-/* Background */
-/* Border */
-/* Hover */
-/* Focus */
-/* Disabled */
-/* Readonly */
-/****************************
- * List Group (Selection)
- ****************************/
-/* List */
-/* List Text */
-/* List Background */
-/* List Border */
-/* List Hover */
-/* List Focus */
-/* List Disabled */
-/* Item */
-/* Item Text */
-/* Item Background */
-/* Item Hover */
-/* Item Focus */
-/* Item Selected */
-/* Item Disabled */
-/****************************
- * Button
- ****************************/
-/* Use When AutoSize=true */
-/* Text */
-/* Background */
-/* Border */
-/* Hover */
-/* Focus */
-/* Active */
-/* Disabled */
-/****************************
- * Form
- ****************************/
-/****************************
- * Table
- ****************************/
-/*Header */
-/*Footer */
-/* Detail */
-/* Row - even, odd */
-/* Row - Insert */
-/* Row - Update */
-/* Row - Delete */
-/* Row - Hover */
-/* Row - Select */
-/* Row - Edit */
-/****************************
- * Modal
- ****************************/
-/****************************
- * Tab
- ****************************/
-/* Tab Text */
-/* Tab Background */
-/* Tab Border */
-/* Tab Disabled */
-/* Tab Item  */
-/* Item Text */
-/* Item Background */
-/* Item Border */
-/* Item Hover */
-/* Item Selected */
-/* Item Disabled */
-/****************************
- * Alert
- ****************************/
-/****************************
- * Calendar
- ****************************/
-/* Calendar Root */
-/* Header */
-/* Content header */
-/* Other month */
-/* Dates */
-/* Footer */
-/****************************
- * File Upload
- ****************************/
-/****************************
- * Modal
- ****************************/
 /* 다이얼로그 루트 */
 .cl-dialog {
-  /* border: solid 1px @focus-border-color; */
-  border: none;
-  /*border-radius: @modal-border-radius;*/
-  border-radius: 20px;
-  box-shadow: 0 3px 12px 1px rgba(44, 55, 130, 0.15);
+  border: solid 1px #1369C5;
   /* 다이얼로그 헤더 */
 }
 .cl-dialog .cl-dialog-header {
-  background-color: #E5F2E9;
-  /*background-color: #456C23;*/
-  color: black;
-  font-weight: 900;
+  background-color: #1D7FDC;
+  color: white;
   border-bottom: 1px solid #e5e5e5;
   /* 다이얼로그 헤더 텍스트 */
   /* 다이얼로그 닫기 버튼 */
   /* 다이얼로그 닫기 버튼 - 호버 */
   /* 다이얼로그 닫기 버튼 - 액티브 */
   /* 다이얼로그 최소화 버튼 */
-  /* 다이얼로그 최소화 버튼 - 호버 */
   /* 다이얼로그 최소화 버튼 - 액티브 */
   /* 다이얼로그 최대화 버튼 */
-  /* 다이얼로그 최대화 버튼 - 호버 */
   /* 다이얼로그 최대화 버튼 - 액티브 */
   /* 다이얼로그 복구 버튼 */
-  /* 다이얼로그 복구 버튼 - 호버 */
   /* 다이얼로그 복구 버튼 - 액티브 */
-}
-.cl-dialog .cl-dialog-header .cl-dialog-close {
-  background-image: url("images/controls/dialog/icon-close.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-close:hover {
-  background-image: url("images/controls/dialog/icon-close-hover.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-close:active {
-  background-image: url("images/controls/dialog/icon-close-active.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-min {
-  background-image: url("images/controls/dialog/icon-minimize.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-min:hover {
-  background-image: url("images/controls/dialog/icon-minimize-hover.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-min:active {
-  background-image: url("images/controls/dialog/icon-minimize-active.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-max {
-  background-image: url("images/controls/dialog/icon-maximize.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-max:hover {
-  background-image: url("images/controls/dialog/icon-maximize-hover.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-max:active {
-  background-image: url("images/controls/dialog/icon-maximize-active.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-restore {
-  background-image: url("images/controls/dialog/icon-restore.png");
-  background-image: url("images/controls/dialog/icon-restore-hover.png");
-}
-.cl-dialog .cl-dialog-header .cl-dialog-restore:active {
-  background-image: url("images/controls/dialog/icon-restore-active.png");
-}
-.cl-overlay {
-  background-color: rgba(54, 74, 99, 0.35);
-}
-.cl-overlay.light {
-  background-color: rgba(16, 25, 36, 0.05);
-}
-.cl-overlay.dark {
-  background-color: rgba(52, 58, 64, 0.55);
 }
 /* 트리 */
 .cl-tree {
   border: 1px solid #bbb;
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   background-color: #fff;
   /* 트리 아이템 */
@@ -1174,19 +996,19 @@ body.cl-has-modal {
   background-color: #ccc;
 }
 .cl-tree .cl-tree-item.cl-selected {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  color: #FFFFFF;
 }
 .cl-tree .cl-tree-item.cl-selected.cl-folder {
   /* 트리 아이템 폴더 펼쳐짐 아이콘 - 선택됨 */
   /* 트리 아이템 폴더 점힘 아이콘 - 선택됨 */
 }
 .cl-tree.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-tree.cl-multi-select .cl-tree-item.cl-checked.cl-selected.cl-hover {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  color: #FFFFFF;
 }
 .cl-tree:not(.cl-disabled) .cl-tree-item:not(.cl-disabled) {
   /* 트리 아이템 - hover */
@@ -1196,8 +1018,8 @@ body.cl-has-modal {
 }
 .cl-tree:not(.cl-disabled) .cl-tree-item:not(.cl-disabled):not(.cl-selected).cl-hover,
 .cl-tree:not(.cl-disabled) .cl-tree-item:not(.cl-disabled):not(.cl-selected):hover {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #DAEFFC;
+  color: #333435;
 }
 /* 트리 - 비활성화 */
 .cl-tree.cl-disabled {
@@ -1210,7 +1032,7 @@ body.cl-has-modal {
 }
 /* 그리드 */
 .cl-grid {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   border: solid 1px #bbb;
   min-height: 100px;
@@ -1404,7 +1226,7 @@ body.cl-has-modal {
 /* 트리 셀 - disabled */
 /* 내비게이션 바 */
 .cl-navigationbar {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   border: solid 1px #bbb;
   color: #333;
   /* 스크롤 왼쪽 버튼 */
@@ -1445,13 +1267,13 @@ body.cl-has-modal {
   /* 내비게이션 바 아이템 - 선택됨 */
 }
 .cl-navigationbar .cl-navigationbar-bar .cl-navigationbar-item.cl-hover {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #DAEFFC;
+  color: #333435;
 }
 .cl-navigationbar .cl-navigationbar-bar .cl-navigationbar-item:not(.cl-disabled):not(.cl-selected):hover,
 .cl-navigationbar .cl-navigationbar-bar .cl-navigationbar-item:not(.cl-disabled).cl-hover {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #DAEFFC;
+  color: #333435;
 }
 .cl-navigationbar .cl-navigationbar-bar .cl-navigationbar-item.cl-disabled {
   color: #666;
@@ -1462,16 +1284,16 @@ body.cl-has-modal {
   background-color: #ccc;
 }
 .cl-navigationbar .cl-navigationbar-bar .cl-navigationbar-item.cl-selected {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  color: #FFFFFF;
 }
 .cl-navigationbar.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 /* 내비게이션 바 드랍다운 메뉴 */
 .cl-navigationbar-list {
   border: solid 1px #bbb;
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   /* megamenu 타입의 카테고리 */
   /* submenu의 up스크롤 버튼*/
   /* submenu의 down스크롤 버튼*/
@@ -1507,12 +1329,12 @@ body.cl-has-modal {
 }
 .cl-navigationbar-list .cl-navigationbar-listitem:not(.cl-disabled):not(.cl-selected):hover,
 .cl-navigationbar-list .cl-navigationbar-listitem:not(.cl-disabled).cl-hover {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #DAEFFC;
+  color: #333435;
 }
 .cl-navigationbar-list .cl-navigationbar-listitem.cl-hover {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #DAEFFC;
+  color: #333435;
 }
 .cl-navigationbar-list .cl-navigationbar-listitem.cl-disabled {
   color: #666;
@@ -1523,8 +1345,8 @@ body.cl-has-modal {
   background-color: #ccc;
 }
 .cl-navigationbar-list .cl-navigationbar-listitem.cl-selected {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  color: #FFFFFF;
 }
 /* fullmenu 타입 서브메뉴 */
 .cl-navigationbar-fullmenu {
@@ -1534,7 +1356,7 @@ body.cl-has-modal {
 /* 탭 폴더 */
 .cl-tabfolder {
   color: #333;
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   /* 헤더 */
   /* 탭폴더 바디 */
 }
@@ -1561,13 +1383,13 @@ body.cl-has-modal {
   /* 비활성 탭 아이템 */
 }
 .cl-tabfolder .cl-tabfolder-header .cl-tabfolder-item.cl-selected {
-  background-color: #86D2A7;
-  color: black;
-  border-color: #86D2A7;
+  background-color: #208AED;
+  color: #FFFFFF;
+  border-color: #1369C5;
   /* 선택된 탭 아이템 닫기 버튼 */
 }
 .cl-tabfolder .cl-tabfolder-header .cl-tabfolder-item:not(.cl-selected):hover {
-  background-color: #86D2A7;
+  background-color: #DAEFFC;
 }
 .cl-tabfolder .cl-tabfolder-body {
   background-color: white;
@@ -1576,7 +1398,7 @@ body.cl-has-modal {
 }
 /* 페이지 인덱서 */
 .cl-pageindexer {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   /* 페이지 인덱서 버튼 공통 */
   /* navigationType="text"으로 표현되는 페이지 정보 텍스트 */
@@ -1599,15 +1421,15 @@ body.cl-has-modal {
 .cl-pageindexer .cl-pageindexer-prev.cl-disabled,
 .cl-pageindexer .cl-pageindexer-next.cl-disabled,
 .cl-pageindexer .cl-pageindexer-index.cl-disabled {
-  background-color: white;
+  background-color: #ccc;
 }
 .cl-pageindexer .cl-pageindexer-index {
   /* 페이지 인덱서 선택된 페이지 */
 }
 .cl-pageindexer .cl-pageindexer-index.cl-selected {
-  background-color: #86D2A7;
-  color: black;
-  border-color: #86D2A7;
+  background-color: #208AED;
+  color: #FFFFFF;
+  border-color: #1369C5;
 }
 .cl-pageindexer.cl-disabled {
   color: #666;
@@ -1634,7 +1456,7 @@ body.cl-has-modal {
 .cl-pageindexer:not(.cl-disabled) .cl-pageindexer-prev:not(.cl-selected):hover,
 .cl-pageindexer:not(.cl-disabled) .cl-pageindexer-next:not(.cl-selected):hover,
 .cl-pageindexer:not(.cl-disabled) .cl-pageindexer-index:not(.cl-selected):hover {
-  background-color: #86D2A7;
+  background-color: #DAEFFC;
 }
 .cl-pageindexer:not(.cl-disabled) .cl-pageindexer-first.cl-disabled,
 .cl-pageindexer:not(.cl-disabled) .cl-pageindexer-last.cl-disabled,
@@ -1657,7 +1479,7 @@ body.cl-has-modal {
 }
 /* 알림 아이템 */
 .cl-notifier-item {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   /* 알림 아이템 텍스트 */
   /* 알림 아이템 아이콘 */
   /* 알림 아이템 닫기 버튼 */
@@ -1694,7 +1516,7 @@ body.cl-has-modal {
 }
 /* 파일 인풋 루트 */
 .cl-fileinput {
-  font: 14px "푸른 전남", "Malgun Gothic", sans-serif;
+  font: 14px "맑은 고딕", "Malgun Gothic", sans-serif;
   color: #333;
   border: solid 1px #bbb;
   /* autoSize 설정시 표시되는 기본크기 */
@@ -1704,7 +1526,7 @@ body.cl-has-modal {
   /* 파일 인풋 - 클리어 버튼 */
 }
 .cl-fileinput.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-fileinput.cl-disabled {
   border-color: #ddd;
@@ -1727,7 +1549,7 @@ body.cl-has-modal {
   /* 비활성화 상태 */
 }
 .cl-audio.cl-focus {
-  border: solid 1px #86D2A7;
+  border: solid 1px #1369C5;
 }
 /* 비디오 */
 .cl-video {
@@ -1736,7 +1558,7 @@ body.cl-has-modal {
   /* 비활성화 */
 }
 .cl-video.cl-focus {
-  border: solid 1px #86D2A7;
+  border: solid 1px #1369C5;
 }
 /* 사이드 내비게이션 */
 .cl-sidenavigation {
@@ -1747,7 +1569,7 @@ body.cl-has-modal {
   /* 비활성화 */
 }
 .cl-sidenavigation.cl-focus {
-  border-color: #86D2A7;
+  border-color: #1369C5;
 }
 .cl-sidenavigation .cl-sidenavigation-item {
   /* 아이템 아이콘 */
@@ -1761,12 +1583,12 @@ body.cl-has-modal {
 .cl-sidenavigation .cl-sidenavigation-item:hover,
 .cl-sidenavigation .cl-sidenavigation-item.cl-hover,
 .cl-sidenavigation .cl-sidenavigation-item:focus {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #DAEFFC;
+  color: #333435;
 }
 .cl-sidenavigation .cl-sidenavigation-item.cl-selected {
-  background-color: #86D2A7;
-  color: black;
+  background-color: #208AED;
+  color: #FFFFFF;
 }
 .cl-sidenavigation .cl-sidenavigation-item.cl-disabled {
   color: #666;
@@ -1788,42 +1610,4 @@ body.cl-has-modal {
 .cl-linkedcombobox-combo:focus,
 .cl-grid-cell:focus {
   /* 웹 접근성 개선 목적으로 포커스 링을 표시하려면 아래 주석을 해제 하십시오. */
-}
-.cl-button.slide-button {
-  background-image: none;
-  background-color: transparent;
-  border-radius: 0px;
-  border: none;
-  color: white;
-  text-shadow: none;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.cl-button.slide-button:hover,
-.cl-button.slide-button.cl-hover {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 0px;
-  border: none;
-  color: white;
-  text-shadow: none;
-}
-.cl-button.slide-button:active,
-.cl-button.slide-button.cl-ativated {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 0px;
-  border: none;
-  color: white;
-  text-shadow: none;
-}
-.cl-button.slide-page-button {
-  background-image: none;
-  border: none;
-  background-color: rgba(0, 0, 0, 0.3);
-  min-width: 5px;
-  min-height: 5px;
-  max-height: 5px;
-  border-radius: 5px;
-}
-.cl-button.slide-page-button.active {
-  background-color: rgba(0, 0, 0, 0.8);
 }
