@@ -1,6 +1,7 @@
 package org.kosta.recipekithub.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.recipekithub.model.vo.MemberVO;
 
@@ -28,8 +29,8 @@ public interface MemberService {
 
 	String findPswdByEmailNamePhone(String memberEmail, String memberName, String memberPhone);
 
-	//int insertProfileImg(String memberEmail, String memberImage);
-	
 	int deleteProfileImg(String memberEmail);
+
+	List<MemberVO> searchMembers(Map<String, String> searchParams);
 
 }

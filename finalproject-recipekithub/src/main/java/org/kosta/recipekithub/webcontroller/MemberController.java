@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.recipekithub.model.service.MemberService;
@@ -25,7 +24,6 @@ import com.cleopatra.protocol.data.ParameterGroup;
 import com.cleopatra.protocol.data.ParameterRow;
 import com.cleopatra.protocol.data.UploadFile;
 import com.cleopatra.spring.JSONDataView;
-import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +37,15 @@ public class MemberController {
 
 	// ---[ 전체 회원 정보 조회 ]---//
 	@RequestMapping("/memberlist")
-	public View findMemberList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View findMemberList(HttpServletRequest request, DataRequest dataRequest) throws Exception {
+		// 로그인 상태 여부 확인
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("member") == null) {
+			log.debug("---[로그인 상태가 아니므로 회원 조회가 불가합니다.]---");
+			Map<String, Object> message = new HashMap<>();
+			message.put("error", "세션이 만료되어\n 현재 비로그인 상태입니다");
+			return new JSONDataView(false, message);
+		}
 		// 전체 회원 정보 저장
 		List<MemberVO> findMemberList = memberService.findMemberList();
 		dataRequest.setResponse("ds_member", findMemberList);
@@ -48,7 +54,7 @@ public class MemberController {
 
 	// ---[ 로그인 ]---//
 	@RequestMapping("/login")
-	public View login(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) 	throws Exception {
+	public View login(HttpServletRequest request, DataRequest dataRequest)	throws Exception {
 		// `DataRequest`: 서브미션 통신에 대한 데이터
 		// `ParameterGroup` : 서브미션 request 데이터를 받음
 		// login-form.clx에서 서브미션(sub_login)을 통해 요청 데이터(데이터맵 : dm_login)을 전달 받음
@@ -78,8 +84,7 @@ public class MemberController {
 				// 사용자가 입력한 이메일과 비밀번호에 대응하는 회원정보가 존재하지 않는 경우
 				if (member == null) {
 					message.put("loginFailMessage", "로그인 정보를\n다시 확인해주시기 바랍니다.");
-					dataRequest.setMetadata(loginSuccess, message);
-					return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+					return new JSONDataView(loginSuccess, message); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 				}
 
 				// 사용자가 입력한 이메일과 비밀번호에 대응하는 회원정보가 DB에 존재하는 경우, 세션 정보 저장
@@ -90,13 +95,12 @@ public class MemberController {
 				message.put("path", "index");
 			}
 		}
-		dataRequest.setMetadata(loginSuccess, message);
-		return new JSONDataView(); 	// 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+		return new JSONDataView(loginSuccess, message); 	// 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 
 	// ---[ 회원가입 ]---//
 	@RequestMapping("/register")
-	public View registerMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View registerMember(HttpServletRequest request, DataRequest dataRequest) throws Exception {
 		// register-form.clx에서 서브미션(sub_register)을 통해 요청 데이터(데이터맵 : dm_register_member)을 전달 받음
 		ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
 		String memberEmail = param.getValue("member_email");
@@ -108,8 +112,7 @@ public class MemberController {
 		// 중복되는 회원정보가 있는지 확인
 		if (memberService.findMemberByEmail(memberEmail) != null) {
 			message.put("registerFailMessage", "입력하신 정보를\n다시 확인해주시기 바랍니다.");
-			dataRequest.setMetadata(registerSuccessFlag, message);
-			return new JSONDataView();
+			return new JSONDataView(registerSuccessFlag, message);
 		}
 
 		String memberPassword = param.getValue("member_password");
@@ -130,15 +133,14 @@ public class MemberController {
 
 		registerSuccessFlag = true;
 		message.put("path", "member/login-form");
-		dataRequest.setMetadata(registerSuccessFlag, message);
 
-		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+		return new JSONDataView(registerSuccessFlag, message); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 
 	// ---[ 회원가입시 이메일 중복 체크 ]---//
 	@RequestMapping("/checkEmail")
 	@ResponseBody
-	public View checkEmail(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View checkEmail(HttpServletRequest request, DataRequest dataRequest) throws Exception {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_check_email");
 		String memberEmail = param.getValue("member_email");
 		int checkResult = memberService.checkDuplicateEmail(memberEmail);
@@ -149,15 +151,13 @@ public class MemberController {
 		} else if (checkResult > 0) {
 			message.put("fail", "이메일 중복");
 		}
-		dataRequest.setMetadata(true, message);
-
-		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+		return new JSONDataView(true, message); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 
 	// ---[ 회원가입시 닉네임 중복 체크 ]---//
 	@RequestMapping("/checkNick")
 	@ResponseBody
-	public View checkNick(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View checkNick(HttpServletRequest request, DataRequest dataRequest) throws Exception {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_check_nick");
 		String memberNick = param.getValue("member_nick");
 		int checkResult = memberService.checkDuplicateNick(memberNick);
@@ -168,18 +168,19 @@ public class MemberController {
 		} else if (checkResult > 0) {
 			message.put("fail", "닉네임 중복");
 		}
-		dataRequest.setMetadata(true, message);
-		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+		return new JSONDataView(true, message); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 
 	// ---[ 회원 프로필 조회 ]---//
 	@RequestMapping("/profileInfo")
-	public View viewMyProfile(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View viewMyProfile(HttpServletRequest request, DataRequest dataRequest) throws Exception {
 		// 로그인 여부 확인
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("---[로그인 상태가 아니므로 회원 정보 조회가 불가합니다.]---");
-			return new UIView("ui/member/login-form.clx");
+			Map<String, Object> message = new HashMap<>();
+			message.put("error", "세션이 만료되어\n 현재 비로그인 상태입니다");
+			return new JSONDataView(false, message);
 		}
 
 		MemberVO member = (MemberVO) session.getAttribute("member"); // 현재 session에 담겨있는 회원 정보 가져오기
@@ -194,12 +195,14 @@ public class MemberController {
 
 	// ---[ 회원정보 수정 ]---//
 	@RequestMapping("/updateMember")
-	public View updateMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View updateMember(HttpServletRequest request, DataRequest dataRequest) throws Exception {
 		// 로그인 상태 여부 확인
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("---[로그인 상태가 아니므로 회원 정보 수정이 불가합니다.]---");
-			return new UIView("ui/member/login-form.clx");
+			Map<String, Object> message = new HashMap<>();
+			message.put("error", "세션이 만료되어\n 현재 비로그인 상태입니다");
+			return new JSONDataView(false, message);
 		}
 
 		MemberVO member = (MemberVO) session.getAttribute("member");
@@ -265,13 +268,16 @@ public class MemberController {
 
 	// ---[ 회원 탈퇴 ]---//
 	@RequestMapping("/deleteMember")
-	public View deleteMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View deleteMember(HttpServletRequest request, DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("---[로그인 상태가 아니므로 회원 탈퇴가 불가합니다.]---");
-			return new UIView("ui/member/login-form.clx");
+			Map<String, Object> message = new HashMap<>();
+			message.put("error", "세션이 만료되어\n 현재 비로그인 상태입니다");
+			return new JSONDataView(false, message);
 		}
 
+		// email에 해당하는 회원정보 삭제
 		ParameterGroup param = dataRequest.getParameterGroup("dm_delete");
 		String memberEmail = param.getValue("memberEmail");
 		int result = memberService.deleteMember(memberEmail);
@@ -280,19 +286,20 @@ public class MemberController {
 		return new JSONDataView();
 	}
 
-	// ---[ 관리자 : 회원 강퇴 ]---//
+	// ---[ 관리자 전체 회원 조회 페이지 : 회원 강퇴 ]---//
 	@RequestMapping("/deleteMembers")
-	public View deleteMembers(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View deleteMembers(HttpServletRequest request,  DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("---[로그인 상태가 아니므로 회원 관리가 불가합니다.]---");
-			return new UIView("ui/member/login-form.clx");
+			Map<String, Object> message = new HashMap<>();
+			message.put("error", "세션이 만료되어\n 현재 비로그인 상태입니다");
+			return new JSONDataView(false, message);
 		}
 
 		ParameterGroup paramGroup = dataRequest.getParameterGroup("ds_member");
 		// 삭제하기 위해 선택한 복수의 행 (회원 정보) 저장
 		Iterator<ParameterRow> deletedRows = paramGroup.getDeletedRows();
-
 		while (deletedRows.hasNext()) {
 			ParameterRow row = deletedRows.next();
 			// 선택한 행으로부터 Email 반환
@@ -301,24 +308,23 @@ public class MemberController {
 			int result = memberService.deleteMember(memberEmail);
 			log.debug("member 회원탈퇴 성공여부(if '1' success) : {}", result);
 		}
-
 		return new JSONDataView();
 	}
 
 	// ---[ 로그아웃 ]---//
 	@RequestMapping("/logout")
-	public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View logout(HttpServletRequest request,  DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
+		// 세션이 존재하는 경우, 세션 무효화
 		if (session != null) {
 			session.invalidate();
 		}
-
 		return new JSONDataView();
 	}
 
 	// ---[ 회원 이메일 찾기 ]---//
 	@RequestMapping("/findEmail")
-	public View findEmailByNamePhoneBirthday(HttpServletRequest request, HttpServletResponse response, 	DataRequest dataRequest) throws Exception {
+	public View findEmailByNamePhoneBirthday(HttpServletRequest request,  DataRequest dataRequest) throws Exception {
 		// find-email-pswd.clx에서 서브미션(sub_findEmail)을 통해 요청 데이터(데이터맵 : dm_find_email)을 전달 받음
 		ParameterGroup param = dataRequest.getParameterGroup("dm_find_email");
 		String memberName = param.getValue("member_name");
@@ -339,13 +345,12 @@ public class MemberController {
 
 		List<Map<String, Object>> memberEmail = new ArrayList<>();
 		memberEmail.add(email);
-		dataRequest.setMetadata(true, email);
-		return new JSONDataView();
+		return new JSONDataView(true, email);
 	}
 
 	// ---[ 회원 비밀번호 찾기 ]---//
 	@RequestMapping("/findPassword")
-	public View findPswdByEmailNamePhone(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View findPswdByEmailNamePhone(HttpServletRequest request, DataRequest dataRequest) throws Exception {
 		// find-email-pswd.clx에서 서브미션(sub_findPswd)을 통해 요청 데이터(데이터맵 : dm_find_pswd)을 전달 받음
 		ParameterGroup param = dataRequest.getParameterGroup("dm_find_pswd");
 		String memberEmail = param.getValue("member_email");
@@ -359,24 +364,25 @@ public class MemberController {
 		// 비밀번호 찾기 메서드를 호출하여 비밀번호 정보를 성공적으로 찾은 경우
 		if (findPswdResult != null) {
 			password.put("ok", findPswdResult);
-			// 비밀번호 찾기 메서드를 호출하여 비밀번호 정보를 찾지 못한 경우
+		// 비밀번호 찾기 메서드를 호출하여 비밀번호 정보를 찾지 못한 경우
 		} else {
 			password.put("fail", "비밀번호 찾기 실패");
 		}
 
 		List<Map<String, Object>> memberPassword = new ArrayList<>();
 		memberPassword.add(password);
-		dataRequest.setMetadata(true, password);
-		return new JSONDataView();
+		return new JSONDataView(true, password);
 	}
 
 	// ---[ 프로필 조회 화면 : 프로필 사진 삭제 ]---//
 	@RequestMapping("/deleteProfileImage")
-	public View deleteProfileImg(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+	public View deleteProfileImg(HttpServletRequest request, DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("---[로그인 상태가 아니므로 프로필 사진 삭제가 불가합니다.]---");
-			return new UIView("ui/member/login-form.clx");
+			Map<String, Object> message = new HashMap<>();
+			message.put("error", "세션이 만료되어\n 현재 비로그인 상태입니다");
+			return new JSONDataView(false, message);
 		}
 
 		MemberVO member = (MemberVO) session.getAttribute("member");
@@ -394,6 +400,28 @@ public class MemberController {
 		int result = memberService.deleteProfileImg(memberEmail);
 		log.debug("member 프로필 사진 삭제 성공여부(if '1' succes) : {}", result);
 
+		return new JSONDataView();
+	}
+	
+	// ---[ 관리자 전체 회원 조회 페이지 : 회원 검색 ]---//
+	@RequestMapping("/searchMember")
+	public View searchMembers(HttpServletRequest request, DataRequest dataRequest) {
+		// 로그인 상태 여부 확인
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("member") == null) {
+			log.debug("---[로그인 상태가 아니므로 회원 관리가 불가합니다.]---");
+			Map<String, Object> message = new HashMap<>();
+			message.put("error", "세션이 만료되어\n 현재 비로그인 상태입니다");
+			return new JSONDataView(false, message);
+		}
+		
+		// keyword를 받아와 DB에서 회원 정보 조회
+		ParameterGroup param = dataRequest.getParameterGroup("dm_search");
+		String searchKeyword = param.getValue("searchKeyword");
+		Map<String, String> searchParams = new HashMap<String, String>();
+		searchParams.put("searchKeyword", "%" + searchKeyword + "%");
+		List<MemberVO> memberList = memberService.searchMembers(searchParams);
+		dataRequest.setResponse("ds_member", memberList);
 		return new JSONDataView();
 	}
 }

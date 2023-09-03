@@ -108,38 +108,83 @@ public class PaymentController {
 		StringBuilder mealkitdetail = null;
 		StringBuilder mealkitdetailinfo = null;
 		
-		for(int i=0;i<paymentlist.size();i++) {
-			mlvo = new MealkitboardVO();
-			mlvo.setMealkitName(paymentlist.get(i).getMealkitVO().getMealkitName());
-			mlvo.setMealkitNo(paymentlist.get(i).getMealkitVO().getMealkitNo());
-			
-			int cartNO = paymentlist.get(i).getCartVO().getCartNo();
-			int paymentId = paymentlist.get(i).getPaymentId();
-			List<CartdetailVO> mealkitNameAndCount = paymentService.findMealkitNameAndCount(memberVO.getMemberEmail(), cartNO, paymentId);
-			
-			String mealkitName = null;
-			int cartDetailQuantity = 0;
-			for(int j=0; j<mealkitNameAndCount.size(); j++) {
-				mealkitdetail = new StringBuilder();
-				mealkitdetailinfo = new StringBuilder();
-				mealkitInfoDetailmap = new HashMap<>();
-				
-				mealkitName = mealkitNameAndCount.get(j).getMealkitboardVO().getMealkitName();
-				cartDetailQuantity = mealkitNameAndCount.get(j).getCartDetailQuantity();
+//		for(int i=0;i<paymentlist.size();i++) {
+//			mlvo = new MealkitboardVO();
+//			mlvo.setMealkitName(paymentlist.get(i).getMealkitVO().getMealkitName());
+//			mlvo.setMealkitNo(paymentlist.get(i).getMealkitVO().getMealkitNo());
+//			
+//			int cartNO = paymentlist.get(i).getCartVO().getCartNo();
+//			int paymentId = paymentlist.get(i).getPaymentId();
+//			List<CartdetailVO> mealkitNameAndCount = paymentService.findMealkitNameAndCount(memberVO.getMemberEmail(), cartNO, paymentId);
+//			
+//			String mealkitName = null;
+//			int cartDetailQuantity = 0;
+//			for(int j=0; j<mealkitNameAndCount.size(); j++) {
+//				mealkitdetail = new StringBuilder();
+//				mealkitdetailinfo = new StringBuilder();
+//				mealkitInfoDetailmap = new HashMap<>();
+//				
+//				mealkitName = mealkitNameAndCount.get(j).getMealkitboardVO().getMealkitName();
+//				cartDetailQuantity = mealkitNameAndCount.get(j).getCartDetailQuantity();
 //				System.out.println(mealkitName+" "+cartDetailQuantity);
-				
-				if(mealkitNameAndCount.size()>1) {
-					mealkitdetailinfo.append(mealkitName+" x "+cartDetailQuantity).append("\n");
-				}else {
-					mealkitdetailinfo.append(mealkitName+" x "+cartDetailQuantity);
-				}
-				mealkitdetail.append(mealkitName+" 외 "+(mealkitNameAndCount.size()-1)+"개");
-				mealkitInfoDetailmap.put("mealkitdetailinfo", mealkitdetailinfo);
-				mealkitInfoDetailmap.put("mealkitdetail", mealkitdetail);
-				mealkitinfo.add(mealkitInfoDetailmap);
-//				System.out.println("mealkitdetailinfo : "+mealkitdetailinfo);
-			}
-			sendMealkitInfo.add(mlvo);
+//				
+//				if(mealkitNameAndCount.size()>1) {
+//					mealkitdetailinfo.append(mealkitName+" x "+cartDetailQuantity).append("\n");
+//				}else {
+//					mealkitdetailinfo.append(mealkitName+" x "+cartDetailQuantity);
+//				}
+//				mealkitdetail.append(mealkitName+" 외 "+(mealkitNameAndCount.size()-1)+"개");
+//				mealkitInfoDetailmap.put("mealkitdetailinfo", mealkitdetailinfo);
+//				mealkitInfoDetailmap.put("mealkitdetail", mealkitdetail);
+//				
+//			    if (j == 0) {
+//			        mealkitinfo.add(mealkitInfoDetailmap);
+//			    }
+////				mealkitinfo.add(mealkitInfoDetailmap);
+////				System.out.println("mealkitdetailinfo : "+mealkitdetailinfo);
+//			}
+//			sendMealkitInfo.add(mlvo);
+//		}
+		
+		for (int i = 0; i < paymentlist.size(); i++) {
+		    mlvo = new MealkitboardVO();
+		    mlvo.setMealkitName(paymentlist.get(i).getMealkitVO().getMealkitName());
+		    mlvo.setMealkitNo(paymentlist.get(i).getMealkitVO().getMealkitNo());
+
+		    int cartNO = paymentlist.get(i).getCartVO().getCartNo();
+		    int paymentId = paymentlist.get(i).getPaymentId();
+		    List<CartdetailVO> mealkitNameAndCount = paymentService.findMealkitNameAndCount(memberVO.getMemberEmail(), cartNO, paymentId);
+
+		    if (!mealkitNameAndCount.isEmpty()) {
+		        mealkitdetail = new StringBuilder();
+		        mealkitdetailinfo = new StringBuilder();
+		        mealkitInfoDetailmap = new HashMap<>();
+
+		        // Process the first item separately
+		        CartdetailVO firstCartItem = mealkitNameAndCount.get(0);
+		        String firstMealkitName = firstCartItem.getMealkitboardVO().getMealkitName();
+		        int firstCartDetailQuantity = firstCartItem.getCartDetailQuantity();
+		        System.out.println(firstMealkitName + " " + firstCartDetailQuantity);
+
+		        mealkitdetailinfo.append(firstMealkitName + " x " + firstCartDetailQuantity);
+		        mealkitdetail.append(firstMealkitName + " 외 " + (mealkitNameAndCount.size() - 1) + "개");
+		        mealkitInfoDetailmap.put("mealkitdetailinfo", mealkitdetailinfo);
+		        mealkitInfoDetailmap.put("mealkitdetail", mealkitdetail);
+
+		        for (int j = 1; j < mealkitNameAndCount.size(); j++) {
+		            // Process the rest of the items if any
+		            String mealkitName = mealkitNameAndCount.get(j).getMealkitboardVO().getMealkitName();
+		            int cartDetailQuantity = mealkitNameAndCount.get(j).getCartDetailQuantity();
+//		            System.out.println(mealkitName + " " + cartDetailQuantity);
+
+		            mealkitdetailinfo.append("\n" + mealkitName + " x " + cartDetailQuantity);
+		            mealkitInfoDetailmap.put("mealkitdetail", mealkitdetail);
+		        }
+
+		        mealkitinfo.add(mealkitInfoDetailmap);
+		    }
+
+		    sendMealkitInfo.add(mlvo);
 		}
 		
 		Map<String,Object> map = new HashMap<>();

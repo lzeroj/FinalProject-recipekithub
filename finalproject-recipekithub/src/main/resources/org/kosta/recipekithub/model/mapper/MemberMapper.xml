@@ -53,14 +53,51 @@
 		SELECT member_password FROM MEMBER WHERE member_email=#{memberEmail} AND member_name=#{memberName} AND member_phone=#{memberPhone} 
 	</select>
 	
-	<!--  
-	<update id="insertProfileImg " parameterType="string">
-		UPDATE MEMBER SET member_image=#{memberImage} WHERE member_email=#{memberEmail}
-	</update>
-	-->
-	
 	<update id="deleteProfileImg" parameterType="string">
 		UPDATE MEMBER SET member_image = NULL WHERE member_email=#{memberEmail}
 	</update>
+	
+	<select id="searchMembers" parameterType="Map" resultType="org.kosta.recipekithub.model.vo.MemberVO">
+	<include refid="selectMember"></include>
+	    WHERE 1 = 1
+	    <if test="searchKeyword != null">
+		  AND (
+		    member_email LIKE #{searchKeyword}
+		    OR member_name LIKE #{searchKeyword}
+		    OR member_nick LIKE #{searchKeyword}
+		    OR member_phone LIKE #{searchKeyword}
+		    OR member_birthday LIKE #{searchKeyword}
+		    OR member_postcode LIKE #{searchKeyword}
+		    OR member_address LIKE #{searchKeyword}
+		    OR member_address_detail LIKE #{searchKeyword}
+		  )
+		</if>
+	    
+	    
+	    <!-- <if test="memberEmail != null">
+	      AND member_email LIKE #{memberEmail}
+	    </if>
+	    <if test="memberName != null">
+	      AND member_name LIKE #{memberName}
+	    </if>
+	    <if test="memberNick != null">
+	      AND member_nick LIKE #{memberNick}
+	    </if>
+	    <if test="memberPhone != null">
+	      AND member_phone LIKE #{memberPhone}
+	    </if>
+	    <if test="memberBirthday != null">
+	      AND member_birthday LIKE #{memberBirthday}
+	    </if>
+	   	<if test="memberPostcode != null">
+	      AND member_postcode LIKE #{memberAddress}
+	    </if>
+	   	<if test="memberAddress != null">
+	      AND member_address LIKE #{memberAddress}
+	    </if>
+	   	<if test="memberAddressDetail != null">
+	      AND member_address_detail LIKE #{memberAddressDetail}
+	    </if> -->
+	</select>
 	
 </mapper>

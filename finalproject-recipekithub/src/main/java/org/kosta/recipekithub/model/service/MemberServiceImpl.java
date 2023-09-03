@@ -1,6 +1,7 @@
 package org.kosta.recipekithub.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.recipekithub.model.mapper.MemberMapper;
 import org.kosta.recipekithub.model.vo.MemberVO;
@@ -68,16 +69,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.findPswdByEmailNamePhone(memberEmail, memberName, memberPhone);
 	}
 
-	/*
-	@Override
-	public int insertProfileImg(String memberEmail, String memberImage) {
-		return memberMapper.insertProfileImg(memberEmail, memberImage);
-	}
-	*/
-
 	@Override
 	public int deleteProfileImg(String memberEmail) {
 		return memberMapper.deleteProfileImg(memberEmail);
+	}
+	
+	@Override
+	public List<MemberVO> searchMembers(Map<String, String> searchParams) {
+		return memberMapper.searchMembers(searchParams);
 	}
 
 }

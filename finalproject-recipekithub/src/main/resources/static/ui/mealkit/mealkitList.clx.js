@@ -286,23 +286,22 @@
 			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
-			var userDefinedControl_1 = new udc.header3("headerUdc");
-			container.addChild(userDefinedControl_1, {
-				"width": "1920px",
-				"height": "205px"
-			});
-			
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
-				"background-color" : "#F4FAEC",
+				"background-color" : "#f4faec",
 				"background-size" : "cover",
-				"background-image" : "url('theme/images/common/bgimg1880_720.png')",
+				"background-image" : "url('theme/images/common/bgimg3_1920.png')",
 				"background-position" : "center"
 			});
 			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();
 			verticalLayout_2.distribution = "center";
 			group_1.setLayout(verticalLayout_2);
 			(function(container){
+				var userDefinedControl_1 = new udc.myPageHeader();
+				container.addChild(userDefinedControl_1, {
+					"width": "1920px",
+					"height": "200px"
+				});
 				var group_2 = new cpr.controls.Container();
 				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
 				xYLayout_1.scrollable = false;
@@ -492,7 +491,7 @@
 				container.addChild(group_6, {
 					"autoSize": "height",
 					"width": "968px",
-					"height": "932px"
+					"height": "358px"
 				});
 				var pageIndexer_1 = new cpr.controls.PageIndexer("page");
 				pageIndexer_1.pageRowCount = 12;
@@ -508,7 +507,7 @@
 			})(group_1);
 			container.addChild(group_1, {
 				"width": "1920px",
-				"height": "720px"
+				"height": "984px"
 			});
 			
 			var userDefinedControl_2 = new udc.footer();

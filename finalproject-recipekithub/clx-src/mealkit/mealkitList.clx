@@ -41,11 +41,11 @@
   <body std:sid="body-2490c64c" style="font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-d027acff" name="load" handler="onBodyLoad"/>
     <cl:listener std:sid="listener-cb3bb700" name="init" handler="onBodyInit"/>
-    <cl:udc std:sid="ud-control-2ab9e418" id="headerUdc" type="udc.header3">
-      <cl:verticaldata std:sid="v-data-d2703c87" width="1920px" height="205px"/>
-    </cl:udc>
-    <cl:group std:sid="group-3f997db2" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg1880_720.png); background-position:center;">
-      <cl:verticaldata std:sid="v-data-a527450e" width="1920px" height="720px"/>
+    <cl:group std:sid="group-3f997db2" style="background-color:#f4faec; background-size:cover; background-image:url('../theme/images/common/bgimg3_1920.png'); background-position:center;">
+      <cl:verticaldata std:sid="v-data-a527450e" width="1920px" height="984px"/>
+      <cl:udc std:sid="ud-control-042752ca" type="udc.myPageHeader">
+        <cl:verticaldata std:sid="v-data-d264594f" width="1920px" height="200px"/>
+      </cl:udc>
       <cl:group std:sid="group-f7dd2b85">
         <cl:verticaldata std:sid="v-data-ddb86633" width="1114px" height="345px"/>
         <cl:navigationbar std:sid="n-bar-2cf3bfa1" id="mealkitType" style="padding-top:0px; font-weight:16.0; font-family:푸른전남 Medium; padding-right:0px;" menutype="fullmenu">
@@ -101,7 +101,7 @@
         <cl:xylayout std:sid="xylayout-8fe99f2d" scrollable="false"/>
       </cl:group>
       <cl:group std:sid="group-6e55fbbc" id="grp">
-        <cl:verticaldata std:sid="v-data-e3faa2f3" width="968px" height="932px" autosize="height"/>
+        <cl:verticaldata std:sid="v-data-e3faa2f3" width="968px" height="358px" autosize="height"/>
         <cl:flowlayout std:sid="f-layout-3671cf03" scrollable="false"/>
       </cl:group>
       <cl:pageindexer std:sid="p-indexer-0b7cb89b" id="page" pagerowcount="12">
@@ -111,8 +111,8 @@
       </cl:pageindexer>
       <cl:verticallayout std:sid="v-layout-e5b6fdc4" distribution="center"/>
     </cl:group>
-    <cl:udc std:sid="ud-control-5e273933" type="udc.footer">
-      <cl:verticaldata std:sid="v-data-026d20cc" width="1920px" height="100px"/>
+    <cl:udc std:sid="ud-control-4b808336" type="udc.footer">
+      <cl:verticaldata std:sid="v-data-2b85a5a6" width="1920px" height="100px"/>
     </cl:udc>
     <cl:verticallayout std:sid="v-layout-2d71caef" distribution="center"/>
   </body>

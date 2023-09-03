@@ -68,15 +68,18 @@
       </cl:datamap>
       <cl:submission std:sid="submission-fc8d20e1" id="sub_profile" action="/member/profileInfo">
         <cl:listener std:sid="listener-86c6f206" name="submit-success" handler="onSub_profileSubmitSuccess"/>
+        <cl:listener std:sid="listener-c24cc65d" name="submit-error" handler="onSub_profileSubmitError"/>
         <cl:responsedata dataid="ds_profile"/>
       </cl:submission>
       <cl:submission std:sid="submission-ab199ee6" id="sub_update" action="/member/updateMember" mediatype="multipart/form-data">
         <cl:listener std:sid="listener-93c1fbf7" name="submit-success" handler="onSub_updateSubmitSuccess"/>
+        <cl:listener std:sid="listener-88b2488e" name="submit-error" handler="onSub_updateSubmitError"/>
         <cl:requestdata dataid="dm_update"/>
         <cl:responsedata dataid="ds_profile"/>
       </cl:submission>
       <cl:submission std:sid="submission-100846ed" id="sub_delete" action="/member/deleteMember">
         <cl:listener std:sid="listener-d597c9ec" name="submit-success" handler="onSub_deleteSubmitSuccess"/>
+        <cl:listener std:sid="listener-a8a553b2" name="submit-error" handler="onSub_deleteSubmitError"/>
         <cl:requestdata dataid="dm_delete"/>
       </cl:submission>
       <cl:submission std:sid="submission-d01f233f" id="sub_check_nick" action="/member/checkNick">
@@ -85,6 +88,7 @@
       </cl:submission>
       <cl:submission std:sid="submission-b5f62cb2" id="sub_delete_image" action="/member/deleteProfileImage" mediatype="multipart/form-data">
         <cl:listener std:sid="listener-dc373097" name="submit-success" handler="onSub_delete_imageSubmitSuccess"/>
+        <cl:listener std:sid="listener-dafd7f96" name="submit-error" handler="onSub_delete_imageSubmitError"/>
         <cl:requestdata dataid="dm_profile"/>
       </cl:submission>
     </cl:model>

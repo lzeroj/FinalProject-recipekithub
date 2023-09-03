@@ -31,13 +31,26 @@
           <cl:datacolumn std:sid="d-column-2affb96b" name="memberEmail" datatype="string"/>
         </cl:datacolumnlist>
       </cl:datamap>
+      <cl:datamap std:sid="d-map-7a0a14c1" id="dm_search">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5ebe7e74" name="searchKeyword"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
       <cl:submission std:sid="submission-17d7ecc4" id="sub_findMemberList" action="/member/memberlist">
         <cl:listener std:sid="listener-a5db19ce" name="submit-success" handler="onSub_findMemberListSubmitSuccess"/>
+        <cl:listener std:sid="listener-57bdf540" name="submit-error" handler="onSub_findMemberListSubmitError"/>
         <cl:responsedata dataid="ds_member"/>
       </cl:submission>
       <cl:submission std:sid="submission-d074a5b5" id="sub_delete" action="/member/deleteMembers">
         <cl:listener std:sid="listener-a601bac8" name="submit-success" handler="onSub_deleteMemberSubmitSuccess"/>
+        <cl:listener std:sid="listener-0dd7bb43" name="submit-error" handler="onSub_deleteSubmitError"/>
         <cl:requestdata dataid="ds_member"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a772499f" id="sub_search" action="/member/searchMember">
+        <cl:listener std:sid="listener-e11201f9" name="submit-success" handler="onSub_searchSubmitSuccess"/>
+        <cl:listener std:sid="listener-8a6ef187" name="submit-error" handler="onSub_searchSubmitError"/>
+        <cl:requestdata dataid="dm_search"/>
+        <cl:responsedata dataid="ds_member"/>
       </cl:submission>
     </cl:model>
     <cl:appspec/>
@@ -58,7 +71,6 @@
               <std:property key="locked" value="true"/>
             </std:metadata>
             <cl:grid std:sid="grid-2a889cff" id="grd_member" style="border-radius:10px; font-family:푸른전남;" datasetid="ds_member" resizablecolumns="all" columnMovable="true">
-              <cl:listener std:sid="listener-6f39eee9" name="selection-change" handler="onGrd_memberSelectionChange"/>
               <cl:xylayoutdata std:sid="xyl-data-780750fa" top="20px" right="20px" left="20px" height="500px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
               <cl:gridcolumn std:sid="g-column-0e0936b4" width="25px"/>
               <cl:gridcolumn std:sid="g-column-7adeb67b" width="50px"/>
@@ -163,8 +175,15 @@
                 <cl:listener std:sid="listener-6fee63f6" name="click" handler="onBtnDeleteRowClick"/>
                 <cl:formdata std:sid="f-data-96f45ed6" row="0" col="3"/>
               </cl:button>
-              <cl:output std:sid="output-dc34ca0e" value="❈ 제목행 각 열의 &quot; v &quot; 를 클릭하면 검색창을 열 수 있습니다. ">
-                <cl:formdata std:sid="f-data-8e459f23" row="0" col="0"/>
+              <cl:searchinput std:sid="s-input-d64c9d8b" id="searchInput" style="border-radius:10px; padding-left:10px; font-size:18px; font-family:푸른전남;">
+                <cl:listener std:sid="listener-6895b2ee" name="search" handler="onSearchInputSearch"/>
+                <cl:datamapbind property="value" datacontrolid="dm_search" columnname="searchKeyword"/>
+                <cl:formdata std:sid="f-data-34b9498f" row="0" col="0"/>
+                <cl:searchstyle style="width:20px; padding-right:10px;"/>
+                <cl:clearstyle style="padding-right:10px;"/>
+              </cl:searchinput>
+              <cl:output std:sid="output-dc34ca0e" style="text-align:center;" value="❈ 제목행 각 열의 &quot; v &quot; 를 클릭하면 세부 검색창을 열 수 있습니다. ">
+                <cl:formdata std:sid="f-data-c80a8de3" row="0" col="1"/>
               </cl:output>
               <cl:formlayout std:sid="f-layout-1d210b0b" scrollable="false" hspace="20px" vspace="20px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
                 <cl:rows length="1" unit="FRACTION"/>

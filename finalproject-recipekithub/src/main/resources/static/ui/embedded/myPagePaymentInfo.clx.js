@@ -408,6 +408,7 @@
 									"constraint": {"rowIndex": 0, "colIndex": 3},
 									"configurator": function(cell){
 										cell.columnName = "paymentTotal";
+										cell.suppressRef = -1;
 										cell.suppressible = true;
 									}
 								}
@@ -537,7 +538,7 @@
 							"rowSpan": 1
 						});
 						var output_8 = new cpr.controls.Output();
-						output_8.value = "주문자 명";
+						output_8.value = "밀키트 명";
 						output_8.style.css({
 							"background-color" : "#0ebc59",
 							"color" : "#FFFFFF",

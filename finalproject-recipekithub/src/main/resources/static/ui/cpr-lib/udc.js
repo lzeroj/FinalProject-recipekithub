@@ -2998,10 +2998,11 @@
 							});
 						}).then(function(returnValue){
 							if(returnValue == "ok"){
-								console.log(returnValue);
-								location.href="member/login-form.clx";
+								console.log("returnValue = " + returnValue);
+								//location.href="member/login-form.clx";
 							}
 						});
+						return ;
 					}
 					if (window.location.href === "http://localhost:7777/insertRecipeForm" || window.location.href === "http://localhost:7777/updateRecipe") {
 						if (confirm("변경된 사항이 저장되지 않습니다. 이동하시겠습니까?")) {
@@ -3095,7 +3096,7 @@
 							}).then(function(returnValue){
 								if(returnValue == "ok"){
 									console.log(returnValue);
-									location.href="member/login-form.clx";
+									//location.href="member/login-form.clx";
 								}
 							});
 						} else {

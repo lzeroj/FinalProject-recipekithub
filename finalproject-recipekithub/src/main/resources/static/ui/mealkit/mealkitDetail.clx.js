@@ -729,12 +729,6 @@
 			container.setLayout(verticalLayout_1);
 			
 			// UI Configuration
-			var userDefinedControl_1 = new udc.header3();
-			container.addChild(userDefinedControl_1, {
-				"width": "1920px",
-				"height": "205px"
-			});
-			
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
 				"background-size" : "cover",
@@ -745,6 +739,11 @@
 			verticalLayout_2.distribution = "center";
 			group_1.setLayout(verticalLayout_2);
 			(function(container){
+				var userDefinedControl_1 = new udc.myPageHeader();
+				container.addChild(userDefinedControl_1, {
+					"width": "1920px",
+					"height": "200px"
+				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"color" : "black"
@@ -756,9 +755,6 @@
 					var button_1 = new cpr.controls.Button("deleBtn");
 					button_1.visible = false;
 					button_1.value = "삭제";
-					button_1.style.css({
-						"font-family" : "푸른전남 Medium"
-					});
 					if(typeof onDeleBtnClick == "function") {
 						button_1.addEventListener("click", onDeleBtnClick);
 					}
@@ -775,8 +771,7 @@
 						var output_1 = new cpr.controls.Output("name");
 						output_1.style.css({
 							"font-weight" : "bolder",
-							"font-size" : "18px",
-							"font-family" : "푸른전남 Medium"
+							"font-size" : "18px"
 						});
 						output_1.bind("value").toDataMap(app.lookup("mealkit"), "mealkitName");
 						container.addChild(output_1, {
@@ -788,8 +783,7 @@
 						var output_2 = new cpr.controls.Output("seller");
 						output_2.style.css({
 							"color" : "#a9a9a9",
-							"font-size" : "16px",
-							"font-family" : "푸른전남 Medium"
+							"font-size" : "16px"
 						});
 						output_2.bind("value").toDataMap(app.lookup("mealkit"), "mealkitMember");
 						container.addChild(output_2, {
@@ -815,7 +809,6 @@
 						var output_3 = new cpr.controls.Output();
 						output_3.value = "찜";
 						output_3.style.css({
-							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_3, {
@@ -839,7 +832,6 @@
 						output_4.style.css({
 							"font-weight" : "bold",
 							"font-size" : "18px",
-							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						output_4.bind("value").toDataMap(app.lookup("mealkit"), "mealkitPrice");
@@ -851,9 +843,6 @@
 						});
 						var output_5 = new cpr.controls.Output();
 						output_5.value = "원";
-						output_5.style.css({
-							"font-family" : "푸른전남 Medium"
-						});
 						container.addChild(output_5, {
 							"top": "10px",
 							"left": "67px",
@@ -876,7 +865,6 @@
 						output_6.style.css({
 							"font-weight" : "normal",
 							"font-size" : "15px",
-							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_6, {
@@ -888,8 +876,7 @@
 						var output_7 = new cpr.controls.Output("inventory");
 						output_7.style.css({
 							"font-weight" : "normal",
-							"font-size" : "16px",
-							"font-family" : "푸른전남 Medium"
+							"font-size" : "16px"
 						});
 						output_7.bind("value").toDataMap(app.lookup("mealkit"), "mealkitInventory");
 						container.addChild(output_7, {
@@ -938,7 +925,6 @@
 						output_9.style.css({
 							"font-weight" : "bold",
 							"font-size" : "15px",
-							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_9, {
@@ -952,7 +938,6 @@
 						output_10.style.css({
 							"color" : "#0CA44E",
 							"font-size" : "13px",
-							"font-family" : "푸른전남 Medium",
 							"font-style" : "normal",
 							"text-align" : "center"
 						});
@@ -965,8 +950,7 @@
 						var output_11 = new cpr.controls.Output();
 						output_11.value = " 다음날 우리집 식탁까지 배송되어요.";
 						output_11.style.css({
-							"font-size" : "13px",
-							"font-family" : "푸른전남 Medium"
+							"font-size" : "13px"
 						});
 						container.addChild(output_11, {
 							"top": "38px",
@@ -996,7 +980,6 @@
 						"color" : "white",
 						"font-weight" : "bolder",
 						"font-size" : "17px",
-						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick4 == "function") {
@@ -1059,8 +1042,7 @@
 						var output_13 = new cpr.controls.Output("name2");
 						output_13.style.css({
 							"font-weight" : "bold",
-							"font-size" : "15px",
-							"font-family" : "푸른전남 Medium"
+							"font-size" : "15px"
 						});
 						output_13.bind("value").toDataMap(app.lookup("mealkit"), "mealkitName");
 						container.addChild(output_13, {
@@ -1091,7 +1073,6 @@
 					var group_8 = new cpr.controls.Container();
 					group_8.style.css({
 						"background-color" : "#f9f9f9",
-						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					var xYLayout_7 = new cpr.controls.layouts.XYLayout();
@@ -1103,9 +1084,6 @@
 						"height": "3px"
 					});
 					var output_15 = new cpr.controls.Output("ingredients");
-					output_15.style.css({
-						"font-family" : "푸른전남 Medium"
-					});
 					output_15.bind("value").toDataMap(app.lookup("mealkit"), "mealkitIngredients");
 					container.addChild(output_15, {
 						"top": "319px",
@@ -1129,7 +1107,6 @@
 					var output_16 = new cpr.controls.Output("regDate");
 					output_16.style.css({
 						"font-weight" : "normal",
-						"font-family" : "푸른전남 Medium",
 						"text-align" : "left"
 					});
 					output_16.bind("value").toDataMap(app.lookup("mealkit"), "mealkitRegDate");
@@ -1142,8 +1119,7 @@
 					var output_17 = new cpr.controls.Output("hits");
 					output_17.style.css({
 						"font-weight" : "normal",
-						"font-size" : "15px",
-						"font-family" : "푸른전남 Medium"
+						"font-size" : "15px"
 					});
 					output_17.bind("value").toDataMap(app.lookup("mealkit"), "mealkitHits");
 					container.addChild(output_17, {
@@ -1153,9 +1129,6 @@
 						"height": "21px"
 					});
 					var image_4 = new cpr.controls.Image("mealkitImg");
-					image_4.style.css({
-						"font-family" : "푸른전남 Medium"
-					});
 					container.addChild(image_4, {
 						"top": "41px",
 						"left": "20px",
@@ -1187,7 +1160,6 @@
 					output_18.visible = false;
 					output_18.value = "mealkitEditDate";
 					output_18.style.css({
-						"font-family" : "푸른전남 Medium",
 						"text-align" : "left"
 					});
 					container.addChild(output_18, {
@@ -1217,9 +1189,6 @@
 					"height": "515px"
 				});
 				var hTMLSnippet_1 = new cpr.controls.HTMLSnippet("info");
-				hTMLSnippet_1.style.css({
-					"font-family" : "푸른전남 Medium"
-				});
 				hTMLSnippet_1.bind("value").toDataMap(app.lookup("mealkit"), "mealkitInfo");
 				container.addChild(hTMLSnippet_1, {
 					"autoSize": "height",
@@ -1486,9 +1455,9 @@
 				verticalLayout_3.scrollable = false;
 				group_16.setLayout(verticalLayout_3);
 				container.addChild(group_16, {
-					"autoSize": "height",
+					"autoSize": "none",
 					"width": "998px",
-					"height": "324px"
+					"height": "230px"
 				});
 				var pageIndexer_1 = new cpr.controls.PageIndexer("page");
 				pageIndexer_1.pageRowCount = 10;
@@ -1504,7 +1473,7 @@
 			})(group_1);
 			container.addChild(group_1, {
 				"width": "1920px",
-				"height": "720px"
+				"height": "1620px"
 			});
 			
 			var userDefinedControl_2 = new udc.footer();

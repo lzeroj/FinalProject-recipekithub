@@ -1,6 +1,8 @@
 package org.kosta.recipekithub.test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -142,12 +144,13 @@ public class UnitTestMember {
 		Assertions.assertNotNull(memberPassword);
 	}
 	
-	/*
-	@Test 
-	public void insertProfileImg() {
-		String memberEmail = "";
-		String memberImage="";
-		int result = memberService.insertProfileImg(memberEmail, memberImage);
+	@Test
+	public void searchMembers() {
+		Map<String, String> searchParams = new HashMap<String, String>();
+		String searchKeyword = "kjoonie@naver.com";
+		searchParams.put("searchKeyword", searchKeyword);
+		List<MemberVO> memberList = memberService.searchMembers(searchParams);
+		log.debug(memberList.toString());
+		Assertions.assertNotNull(memberList);
 	}
-	*/
 }

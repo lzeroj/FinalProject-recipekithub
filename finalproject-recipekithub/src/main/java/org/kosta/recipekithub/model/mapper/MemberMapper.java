@@ -1,6 +1,7 @@
 package org.kosta.recipekithub.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.recipekithub.model.vo.MemberVO;
@@ -30,8 +31,8 @@ public interface MemberMapper {
 
 	String findPswdByEmailNamePhone(String memberEmail, String memberName, String memberPhone);
 
-	//int insertProfileImg(String memberEmail, String memberImage); 
-
 	int deleteProfileImg(String memberEmail);
+
+	List<MemberVO> searchMembers(Map<String, String> searchParams);
 
 }

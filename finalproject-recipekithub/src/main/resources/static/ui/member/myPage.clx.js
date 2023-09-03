@@ -332,7 +332,8 @@
 								var image_1 = new cpr.controls.Image("profileImg");
 								image_1.fallbackSrc = "theme/images/icon/chefimg.png";
 								image_1.style.css({
-									"border-radius" : "100px"
+									"border-radius" : "100px",
+									"background-color" : "white"
 								});
 								image_1.bind("src").toDataSet(app.lookup("ds_profile"), "memberImage", 0);
 								container.addChild(image_1, {
@@ -419,7 +420,6 @@
 						"top": "0px",
 						"right": "0px",
 						"left": "0px",
-						"width": "1920px",
 						"height": "205px"
 					});
 				})(group_2);

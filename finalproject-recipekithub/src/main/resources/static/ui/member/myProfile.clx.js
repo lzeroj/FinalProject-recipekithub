@@ -77,6 +77,29 @@
 
 
 			/*
+			 * 서브미션에서 submit-error 이벤트 발생 시 호출.
+			 * 통신 중 문제가 생기면 발생합니다.
+			 */
+			function onSub_profileSubmitError(e){
+				var sub_profile = e.control;
+				var sessionExpired = sub_profile.getMetadata("error");
+				sessionStorage.clear();
+				app.openDialog("dialog/memberChkPopup", {
+					width: 400, height: 300, resizable: false, headerMovable: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = sessionExpired;
+					});
+				}).then(function(returnValue) {
+					cpr.core.App.load("index", function(newapp){
+						app.close();
+						newapp.createNewInstance().run();
+					});
+				});
+			}
+
+
+			/*
 			 * 인풋 박스에서 keyup 이벤트 발생 시 호출.
 			 * 사용자가 키에서 손을 뗄 때 발생하는 이벤트. 키코드 관련 상수는 {@link cpr.events.KeyCode}에서 참조할 수 있습니다.
 			 */
@@ -202,7 +225,7 @@
 				var checkNickFlag = false; 		// 사용자가 사용 가능 상태에서 다시 사용불가 상태 아이디로 입력할 수 있으므로 keyup 이벤트 발생시마다 false로 상태 초기화
 				
 				var metadataOk = sub_check_nick.getMetadata("ok"); 			// Controller측에서 닉네임 중복 여부를 체크하여 ok(사용 가능)인 경우
-				var metadataFail = sub_check_nick.getMetadata("fail"); 		// Controller측에서 닉네임 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우
+				var metadataFail = sub_check_nick.getMetadata("fail"); 			// Controller측에서 닉네임 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우
 				
 				var ipbNick = app.lookup("ipbNick"); 											// 닉네임 입력 input-box
 				var opbCheckNickResult = app.lookup("opbCheckNick"); 			// 닉네임 유효성 검사 결과가 출력되는 output-box
@@ -350,6 +373,29 @@
 
 
 			/*
+			 * 서브미션에서 submit-error 이벤트 발생 시 호출.
+			 * 통신 중 문제가 생기면 발생합니다.
+			 */
+			function onSub_updateSubmitError(e){
+				var sub_update = e.control;
+				var sessionExpired = sub_update.getMetadata("error");
+				sessionStorage.clear();
+				app.openDialog("dialog/memberChkPopup", {
+					width: 400, height: 300, resizable: false, headerMovable: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = sessionExpired;
+					});
+				}).then(function(returnValue) {
+					cpr.core.App.load("index", function(newapp){
+						app.close();
+						newapp.createNewInstance().run();
+					});
+				});
+			}
+
+
+			/*
 			 * "탈퇴" 버튼(btnMemDelete)에서 click 이벤트 발생 시 호출.
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
@@ -384,6 +430,28 @@
 				}, function(dialog) {
 					dialog.ready(function(dialogApp) {
 						dialogApp.initValue = initValue;
+					});
+				}).then(function(returnValue) {
+					cpr.core.App.load("index", function(newapp){
+						app.close();
+						newapp.createNewInstance().run();
+					});
+				});
+			}
+
+			/*
+			 * 서브미션에서 submit-error 이벤트 발생 시 호출.
+			 * 통신 중 문제가 생기면 발생합니다.
+			 */
+			function onSub_deleteSubmitError(e){
+				var sub_delete = e.control;
+				var sessionExpired = sub_delete.getMetadata("error");
+				sessionStorage.clear();
+				app.openDialog("dialog/memberChkPopup", {
+					width: 400, height: 300, resizable: false, headerMovable: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = sessionExpired;
 					});
 				}).then(function(returnValue) {
 					cpr.core.App.load("index", function(newapp){
@@ -451,14 +519,33 @@
 					});
 				}).then(function(returnValue) {
 					fileInput.clear();
-					image.src = "";
+					image.src = "../theme/images/icon/chefimg.png";
 					image.redraw();
-					//var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
-					//httpPostMethod.submit();
 				});
 			}
 
 
+			/*
+			 * 서브미션에서 submit-error 이벤트 발생 시 호출.
+			 * 통신 중 문제가 생기면 발생합니다.
+			 */
+			function onSub_delete_imageSubmitError(e){
+				var sub_delete_image = e.control;
+				var sessionExpired = sub_delete_image.getMetadata("error");
+				sessionStorage.clear();
+				app.openDialog("dialog/memberChkPopup", {
+					width: 400, height: 300, resizable: false, headerMovable: false
+				}, function(dialog) {
+					dialog.ready(function(dialogApp) {
+						dialogApp.initValue = sessionExpired;
+					});
+				}).then(function(returnValue) {
+					cpr.core.App.load("index", function(newapp){
+						app.close();
+						newapp.createNewInstance().run();
+					});
+				});
+			}
 
 
 			//=============================================[ 카카오 주소검색 API ]=============================================//
@@ -737,6 +824,9 @@
 			if(typeof onSub_profileSubmitSuccess == "function") {
 				submission_1.addEventListener("submit-success", onSub_profileSubmitSuccess);
 			}
+			if(typeof onSub_profileSubmitError == "function") {
+				submission_1.addEventListener("submit-error", onSub_profileSubmitError);
+			}
 			app.register(submission_1);
 			
 			var submission_2 = new cpr.protocols.Submission("sub_update");
@@ -747,6 +837,9 @@
 			if(typeof onSub_updateSubmitSuccess == "function") {
 				submission_2.addEventListener("submit-success", onSub_updateSubmitSuccess);
 			}
+			if(typeof onSub_updateSubmitError == "function") {
+				submission_2.addEventListener("submit-error", onSub_updateSubmitError);
+			}
 			app.register(submission_2);
 			
 			var submission_3 = new cpr.protocols.Submission("sub_delete");
@@ -754,6 +847,9 @@
 			submission_3.addRequestData(dataMap_3);
 			if(typeof onSub_deleteSubmitSuccess == "function") {
 				submission_3.addEventListener("submit-success", onSub_deleteSubmitSuccess);
+			}
+			if(typeof onSub_deleteSubmitError == "function") {
+				submission_3.addEventListener("submit-error", onSub_deleteSubmitError);
 			}
 			app.register(submission_3);
 			
@@ -771,6 +867,9 @@
 			submission_5.addRequestData(dataMap_1);
 			if(typeof onSub_delete_imageSubmitSuccess == "function") {
 				submission_5.addEventListener("submit-success", onSub_delete_imageSubmitSuccess);
+			}
+			if(typeof onSub_delete_imageSubmitError == "function") {
+				submission_5.addEventListener("submit-error", onSub_delete_imageSubmitError);
 			}
 			app.register(submission_5);
 			app.supportMedia("all and (min-width: 1920px)", "FHD");

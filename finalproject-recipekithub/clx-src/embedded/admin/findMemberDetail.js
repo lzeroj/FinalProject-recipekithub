@@ -24,13 +24,24 @@ function onSub_findMemberListSubmitSuccess(e){
 }
 
 /*
- * 그리드에서 selection-change 이벤트 발생 시 호출.
- * detail의 cell 클릭하여 설정된 selectionunit에 해당되는 단위가 선택될 때 발생하는 이벤트.
+ * 서브미션에서 submit-error 이벤트 발생 시 호출.
+ * 통신 중 문제가 생기면 발생합니다.
  */
-function onGrd_memberSelectionChange(e){
-	var grd_member = e.control;
-	
+function onSub_findMemberListSubmitError(e){
+	var sub_findMemberList = e.control;
+	var sessionExpired = sub_findMemberList.getMetadata("error");
+	sessionStorage.clear();
+	app.openDialog("dialog/memberChkPopup", {
+		width: 400, height: 300, resizable: false, headerMovable: false
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			dialogApp.initValue = sessionExpired;
+		});
+	}).then(function(returnValue) {
+		location.href="member/login-form.clx";
+	});
 }
+
 
 /*
  * "삭제" 버튼(btnDeleteRow)에서 click 이벤트 발생 시 호출.
@@ -113,32 +124,61 @@ function onSub_deleteMemberSubmitSuccess(e){
 }
 
 
-///*
-// * 서치 인풋에서 search 이벤트 발생 시 호출.
-// * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
-// */
-//function onSearchMemberSearch(e){
-//	var searchMember = e.control;
-//     var keyword = searchMember.value; // Get the value entered in the search input
-//    
-//    var grid = app.lookup("grd_member"); // Assuming "grd_member" is the ID of your grid
-//    
-//    // Use findAllRow to find rows that match the keyword in any of the specified columns
-//    var matchingRows = grid.findAllRow(function(row) {
-//        return (row.getValue("memberEmail") && row.getValue("memberEmail").indexOf(keyword) >= 0) ||
-//               (row.getValue("memberName") && row.getValue("memberName").indexOf(keyword) >= 0) ||
-//               (row.getValue("memberNick") && row.getValue("memberNick").indexOf(keyword) >= 0) ||
-//               (row.getValue("memberAddress") && row.getValue("memberAddress").indexOf(keyword) >= 0);
-//    });
-//
-//    if (matchingRows.length > 0) {
-//        // Do something with the matching rows, e.g., select them
-//        grid.select(matchingRows.map(function(row) { return row.getIndex(); }));
-//            grid.redraw();
-//        
-//        alert("Found " + matchingRows.length + " matching member(s).");
-//    } else {
-//        alert('No matching members found.');
-//    }
-//
-//}
+/*
+ * 서브미션에서 submit-error 이벤트 발생 시 호출.
+ * 통신 중 문제가 생기면 발생합니다.
+ */
+function onSub_deleteSubmitError(e){
+	var sub_delete = e.control;
+	var sessionExpired = sub_delete.getMetadata("error");
+	sessionStorage.clear();
+	app.openDialog("dialog/memberChkPopup", {
+		width: 400, height: 300, resizable: false, headerMovable: false
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			dialogApp.initValue = sessionExpired;
+		});
+	}).then(function(returnValue) {
+		location.href="member/login-form.clx";
+	});
+}
+
+
+/*
+ * 서치 인풋에서 search 이벤트 발생 시 호출.
+ * Searchinput의 enter키 또는 검색버튼을 클릭하여 인풋의 값이 Search될때 발생하는 이벤트
+ */
+function onSearchInputSearch(e){
+	var searchInput = e.control;
+	app.lookup("sub_search").send();
+}	
+
+/*
+ * 서브미션에서 submit-success 이벤트 발생 시 호출.
+ * 통신이 성공하면 발생합니다.
+ */	
+function onSub_searchSubmitSuccess(e){
+	var sub_search = e.control;
+	var grid = app.lookup("grd_member");
+	grid.redraw();
+}
+
+
+/*
+ * 서브미션에서 submit-error 이벤트 발생 시 호출.
+ * 통신 중 문제가 생기면 발생합니다.
+ */
+function onSub_searchSubmitError(e){
+	var sub_search = e.control;
+	var sessionExpired = sub_search.getMetadata("error");
+	sessionStorage.clear();
+	app.openDialog("dialog/memberChkPopup", {
+		width: 400, height: 300, resizable: false, headerMovable: false
+	}, function(dialog) {
+		dialog.ready(function(dialogApp) {
+			dialogApp.initValue = sessionExpired;
+		});
+	}).then(function(returnValue) {
+		location.href="member/login-form.clx";
+	});
+}

@@ -125,7 +125,7 @@ public class CartController {
 			System.out.println(ary[i]);
 			System.out.println(ary.length);
 			MealkitboardVO mlvo = cartService.findMealkitBoardByMealkitName(ary[i]);
-			System.out.println(mlvo.getMealkitNo() + " "+cvo.get(0).getCartNo());
+//			System.out.println(mlvo.getMealkitNo() + " "+cvo.get(0).getCartNo());
 			cartService.deleteMyCart(mlvo.getMealkitNo(), cvo.get(0).getCartNo());
 		} 
 		return new JSONDataView();
