@@ -288,9 +288,9 @@
 			// UI Configuration
 			var group_1 = new cpr.controls.Container();
 			group_1.style.css({
-				"background-color" : "#F4FAEC",
+				"background-color" : "#f4faec",
 				"background-size" : "cover",
-				"background-image" : "url('theme/images/common/bgimg1880_720.png')",
+				"background-image" : "url('theme/images/common/bgimg3_1920.png')",
 				"background-position" : "center"
 			});
 			var verticalLayout_2 = new cpr.controls.layouts.VerticalLayout();

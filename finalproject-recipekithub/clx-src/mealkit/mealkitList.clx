@@ -41,7 +41,7 @@
   <body std:sid="body-2490c64c" style="font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-d027acff" name="load" handler="onBodyLoad"/>
     <cl:listener std:sid="listener-cb3bb700" name="init" handler="onBodyInit"/>
-    <cl:group std:sid="group-3f997db2" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimg1880_720.png); background-position:center;">
+    <cl:group std:sid="group-3f997db2" style="background-color:#f4faec; background-size:cover; background-image:url('../theme/images/common/bgimg3_1920.png'); background-position:center;">
       <cl:verticaldata std:sid="v-data-a527450e" width="1920px" height="984px"/>
       <cl:udc std:sid="ud-control-042752ca" type="udc.myPageHeader">
         <cl:verticaldata std:sid="v-data-d264594f" width="1920px" height="200px"/>
