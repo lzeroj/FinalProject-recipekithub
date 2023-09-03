@@ -495,6 +495,7 @@
 					output_2.style.css({
 						"color" : "#90be70",
 						"font-weight" : "bolder",
+						"font-family" : "푸른전남",
 						"text-align" : "center"
 					});
 					container.addChild(output_2, {
@@ -506,6 +507,7 @@
 					output_3.style.css({
 						"color" : "#90be70",
 						"font-weight" : "bolder",
+						"font-family" : "푸른전남",
 						"text-align" : "center"
 					});
 					container.addChild(output_3, {
@@ -517,6 +519,7 @@
 					output_4.style.css({
 						"color" : "#90be70",
 						"font-weight" : "bolder",
+						"font-family" : "푸른전남",
 						"text-align" : "center"
 					});
 					container.addChild(output_4, {
@@ -555,7 +558,8 @@
 				});
 				var inputBox_1 = new cpr.controls.InputBox("ipb1");
 				inputBox_1.style.css({
-					"font-size" : "18px"
+					"font-size" : "18px",
+					"font-family" : "푸른전남"
 				});
 				inputBox_1.bind("value").toDataMap(app.lookup("recipe"), "RECIPE_BOARD_TITLE");
 				container.addChild(inputBox_1, {
@@ -568,6 +572,7 @@
 				fileInput_1.placeholder = "요리 대표 사진을 등록해 주세요";
 				fileInput_1.acceptFile = "image/*";
 				fileInput_1.style.css({
+					"font-family" : "푸른전남",
 					"text-align" : "center"
 				});
 				if(typeof onFi1ValueChange == "function") {
@@ -581,6 +586,9 @@
 				});
 				var linkedComboBox_1 = new cpr.controls.LinkedComboBox("lcb1");
 				linkedComboBox_1.placeholders = ["종류별"];
+				linkedComboBox_1.style.css({
+					"font-family" : "푸른전남"
+				});
 				linkedComboBox_1.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_TYPE");
 				(function(linkedComboBox_1){
 					linkedComboBox_1.addItem((function(){
@@ -604,6 +612,9 @@
 				});
 				var linkedComboBox_2 = new cpr.controls.LinkedComboBox("lcb2");
 				linkedComboBox_2.placeholders = ["방법별"];
+				linkedComboBox_2.style.css({
+					"font-family" : "푸른전남"
+				});
 				linkedComboBox_2.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_INGREDIENTS");
 				(function(linkedComboBox_2){
 					linkedComboBox_2.addItem(new cpr.controls.TreeItem("육류", "육류", null));
@@ -622,6 +633,9 @@
 				});
 				var linkedComboBox_3 = new cpr.controls.LinkedComboBox("lcb3");
 				linkedComboBox_3.placeholders = ["재료별"];
+				linkedComboBox_3.style.css({
+					"font-family" : "푸른전남"
+				});
 				linkedComboBox_3.bind("value").toDataMap(app.lookup("recipe"), "CATEGORY_METHOD");
 				(function(linkedComboBox_3){
 					linkedComboBox_3.addItem(new cpr.controls.TreeItem("볶음", "볶음", null));

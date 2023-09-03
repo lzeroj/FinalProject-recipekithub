@@ -482,6 +482,7 @@
 					output_2.style.css({
 						"color" : "#0CA44E",
 						"font-size" : "15px",
+						"font-family" : "푸른전남 Medium",
 						"text-align" : "center"
 					});
 					container.addChild(output_2, {
@@ -492,7 +493,8 @@
 					});
 					var inputBox_1 = new cpr.controls.InputBox("ipb1");
 					inputBox_1.style.css({
-						"background-color" : "#F9F9F9"
+						"background-color" : "#F9F9F9",
+						"font-family" : "푸른전남"
 					});
 					inputBox_1.bind("value").toDataMap(app.lookup("updateMealkit"), "mealkitName");
 					container.addChild(inputBox_1, {
@@ -517,6 +519,7 @@
 					output_3.style.css({
 						"color" : "#0CA44E",
 						"font-size" : "15px",
+						"font-family" : "푸른전남 Medium",
 						"text-align" : "center"
 					});
 					container.addChild(output_3, {
@@ -526,6 +529,9 @@
 						"height": "20px"
 					});
 					var textArea_1 = new cpr.controls.TextArea("ipb2");
+					textArea_1.style.css({
+						"font-family" : "푸른전남"
+					});
 					textArea_1.bind("value").toDataMap(app.lookup("updateMealkit"), "mealkitIngredients");
 					container.addChild(textArea_1, {
 						"top": "9px",
@@ -549,6 +555,7 @@
 					output_4.style.css({
 						"color" : "#0CA44E",
 						"font-size" : "15px",
+						"font-family" : "푸른전남 Medium",
 						"text-align" : "center"
 					});
 					container.addChild(output_4, {
@@ -561,6 +568,7 @@
 					comboBox_1.placeholder = "-종류-";
 					comboBox_1.style.css({
 						"background-color" : "#F9F9F9",
+						"font-family" : "푸른전남",
 						"text-align" : "center"
 					});
 					(function(comboBox_1){
@@ -594,6 +602,7 @@
 					comboBox_2.placeholder = "-재료-";
 					comboBox_2.style.css({
 						"background-color" : "#F9F9F9",
+						"font-family" : "푸른전남",
 						"text-align" : "center"
 					});
 					(function(comboBox_2){
@@ -624,6 +633,7 @@
 					comboBox_3.placeholder = "-방법-";
 					comboBox_3.style.css({
 						"background-color" : "#F9F9F9",
+						"font-family" : "푸른전남",
 						"text-align" : "center"
 					});
 					(function(comboBox_3){
@@ -651,6 +661,7 @@
 					var comboBox_4 = new cpr.controls.ComboBox("type");
 					comboBox_4.placeholder = "-선택-";
 					comboBox_4.style.css({
+						"font-family" : "푸른전남",
 						"text-align" : "center"
 					});
 					(function(comboBox_4){
@@ -682,6 +693,7 @@
 					output_5.style.css({
 						"color" : "#0CA44E",
 						"font-size" : "15px",
+						"font-family" : "푸른전남 Medium",
 						"text-align" : "center"
 					});
 					container.addChild(output_5, {
@@ -695,6 +707,7 @@
 					output_6.style.css({
 						"color" : "#0CA44E",
 						"font-size" : "15px",
+						"font-family" : "푸른전남 Medium",
 						"text-align" : "center"
 					});
 					container.addChild(output_6, {
@@ -705,7 +718,8 @@
 					});
 					var inputBox_2 = new cpr.controls.InputBox("ipb3");
 					inputBox_2.style.css({
-						"background-color" : "#F9F9F9"
+						"background-color" : "#F9F9F9",
+						"font-family" : "푸른전남"
 					});
 					inputBox_2.bind("value").toDataMap(app.lookup("updateMealkit"), "mealkitPrice");
 					container.addChild(inputBox_2, {
@@ -716,7 +730,8 @@
 					});
 					var inputBox_3 = new cpr.controls.InputBox("ipb4");
 					inputBox_3.style.css({
-						"background-color" : "#F9F9F9"
+						"background-color" : "#F9F9F9",
+						"font-family" : "푸른전남"
 					});
 					inputBox_3.bind("value").toDataMap(app.lookup("updateMealkit"), "mealkitInventory");
 					container.addChild(inputBox_3, {
@@ -741,6 +756,7 @@
 					output_7.style.css({
 						"color" : "#0CA44E",
 						"font-size" : "15px",
+						"font-family" : "푸른전남 Medium",
 						"text-align" : "center"
 					});
 					container.addChild(output_7, {
@@ -750,6 +766,9 @@
 						"height": "20px"
 					});
 					var uIControlShell_1 = new cpr.controls.UIControlShell("sampleThr");
+					uIControlShell_1.style.css({
+						"font-family" : "푸른전남"
+					});
 					if(typeof onSampleThrLoad == "function") {
 						uIControlShell_1.addEventListener("load", onSampleThrLoad);
 					}
@@ -831,6 +850,7 @@
 					output_8.value = "파일";
 					output_8.style.css({
 						"color" : "#0CA44E",
+						"font-family" : "푸른전남 Medium",
 						"text-align" : "center"
 					});
 					container.addChild(output_8, {

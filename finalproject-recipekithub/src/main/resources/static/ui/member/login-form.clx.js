@@ -92,8 +92,7 @@
 				// 서브미션(sub_login)과 MemberController의 통신이 성공적인 경우의 메타데이터를 전달 받음
 				var loginSuccess = sub_login.getMetadata("path");
 				
-				var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx", "self");
-				httpPostMethod.submit();
+				location.href="index.clx";
 			}
 
 

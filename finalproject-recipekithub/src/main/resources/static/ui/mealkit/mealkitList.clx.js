@@ -313,6 +313,7 @@
 					navigationBar_1.style.css({
 						"padding-top" : "0px",
 						"font-weight" : "16.0",
+						"font-family" : "푸른전남 Medium",
 						"padding-right" : "0px"
 					});
 					navigationBar_1.style.bar.css({
@@ -356,7 +357,8 @@
 						var output_1 = new cpr.controls.Output();
 						output_1.value = "총";
 						output_1.style.css({
-							"font-weight" : "bold"
+							"font-weight" : "bold",
+							"font-family" : "푸른전남 Medium"
 						});
 						container.addChild(output_1, {
 							"top": "30px",
@@ -367,7 +369,8 @@
 						var output_2 = new cpr.controls.Output();
 						output_2.value = "개의 밀키트가 있습니다.";
 						output_2.style.css({
-							"font-weight" : "bold"
+							"font-weight" : "bold",
+							"font-family" : "푸른전남 Medium"
 						});
 						container.addChild(output_2, {
 							"top": "30px",
@@ -381,6 +384,7 @@
 							"color" : "#0CA44E",
 							"font-weight" : "bold",
 							"font-size" : "18px",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_3, {
@@ -390,6 +394,9 @@
 							"height": "39px"
 						});
 						var navigationBar_2 = new cpr.controls.NavigationBar("sort");
+						navigationBar_2.style.css({
+							"font-family" : "푸른전남 Medium"
+						});
 						navigationBar_2.bind("value").toDataMap(app.lookup("meSort"), "sort");
 						(function(navigationBar_2){
 							navigationBar_2.addItem(new cpr.controls.MenuItem("최신순", "최신순", null));

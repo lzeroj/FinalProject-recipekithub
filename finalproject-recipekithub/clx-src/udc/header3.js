@@ -408,8 +408,7 @@ function onCmb1SelectionChange(e){
 			sessionStorage.clear();
 			var submission = app.lookup("sub_logout");
 			submission.send();
-			var httpPostMethod = new cpr.protocols.HttpPostMethod("member/login-form.clx", "self");
-			httpPostMethod.submit();
+			location.href="member/login-form.clx";
 		});
 		
 	// 로그인 상태의 경우, 콤보박스에 "프로필" 메뉴 표시
