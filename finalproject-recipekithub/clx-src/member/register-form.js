@@ -147,7 +147,10 @@ function onButtonClick2(e) {
 			dialogApp.initValue = initValue;
 		});
 	}).then(function(returnValue) {
-		window.location.href = "index.clx";
+		cpr.core.App.load("index", function(newapp){
+			app.close();
+			newapp.createNewInstance().run();
+		});
 	});
 }
 
@@ -428,9 +431,6 @@ function onBodyInit(e) {
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
 function onBtnPostcodeClick(e) {
-	//var btnPostcode = e.control;
-	//app.lookup("btnPostcode").click();
-	
 	postCode();
 }
 

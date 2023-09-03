@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import com.cleopatra.protocol.data.DataRequest;
-import com.cleopatra.spring.JSONDataView;
 import com.cleopatra.spring.UIView;
 
 import lombok.RequiredArgsConstructor;

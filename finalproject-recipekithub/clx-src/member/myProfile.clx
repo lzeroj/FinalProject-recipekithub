@@ -98,11 +98,8 @@
     <cl:listener std:sid="listener-bc04d8b6" name="unload" handler="onBodyUnload"/>
     <cl:group std:sid="group-1fde106f">
       <cl:flowlayoutdata std:sid="f-data-eabc98cd" width="1920px" height="1080px"/>
-      <cl:udc std:sid="ud-control-9483e93d" type="udc.header3">
-        <cl:xylayoutdata std:sid="xyl-data-d28fbe20" top="0px" right="0px" left="0px" height="205px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
-      </cl:udc>
       <cl:group std:sid="group-e743ec30" style="background-color:#F4FAEC; background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
-        <cl:xylayoutdata std:sid="xyl-data-32506c42" top="200px" bottom="100px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+        <cl:xylayoutdata std:sid="xyl-data-32506c42" top="205px" bottom="103px" width="1920px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
         <cl:group std:sid="group-b68ee0a0">
           <cl:xylayoutdata std:sid="xyl-data-24e8ad5e" width="820px" height="740px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
           <cl:tabfolder std:sid="t-folder-1b30262a" style="font-size:28px;">
@@ -120,7 +117,7 @@
                   <cl:formdata std:sid="f-data-0d61493d" row="0" col="0" rowspan="1" colspan="1"/>
                   <cl:group std:sid="group-6420e001">
                     <cl:formdata std:sid="f-data-d3ceb846" row="3" col="0"/>
-                    <cl:output std:sid="output-a1e84c51" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - 이름">
+                    <cl:output std:sid="output-a1e84c51" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px; font-family:푸른전남 Medium;" value=" - 이름">
                       <cl:formdata std:sid="f-data-62ae9a0d" row="0" col="0"/>
                     </cl:output>
                     <cl:inputbox std:sid="i-box-89c752dd" id="ipbName" style="border-radius:5px; padding-left:10px; font-size:15px;" readonly="true" lengthunit="utf8" maxlength="18" spellcheck="false">
@@ -139,7 +136,7 @@
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberEmail" rowindex="0"/>
                       <cl:formdata std:sid="f-data-02bcb800" row="0" col="1"/>
                     </cl:inputbox>
-                    <cl:output std:sid="output-5f4d164b" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - Email">
+                    <cl:output std:sid="output-5f4d164b" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px; font-family:푸른전남 Medium;" value=" - Email">
                       <cl:formdata std:sid="f-data-b37c0501" row="0" col="0"/>
                     </cl:output>
                     <cl:formlayout std:sid="f-layout-91df97df" scrollable="false" hspace="20px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
@@ -175,11 +172,11 @@
                   </cl:img>
                   <cl:group std:sid="group-94f239e7">
                     <cl:formdata std:sid="f-data-690c73a3" row="1" col="0"/>
-                    <cl:button std:sid="button-8c35ea48" id="btnDeleteProfileImg" style="background-color:none; border-radius:10px; text-shadow:none; background-image:none;" class="btn-outline-secondary" value="프로필 사진 삭제">
+                    <cl:button std:sid="button-8c35ea48" id="btnDeleteProfileImg" style="background-color:none; border-radius:10px; text-shadow:none; font-family:푸른전남; background-image:none;" class="btn-outline-secondary" value="프로필 사진 삭제">
                       <cl:listener std:sid="listener-a9b3566d" name="click" handler="onBtnDeleteProfileImgClick"/>
                       <cl:formdata std:sid="f-data-fde3d12e" row="0" col="1"/>
                     </cl:button>
-                    <cl:fileinput std:sid="f-input-79fecf45" id="fi1" style="border-radius:10px; border-bottom-color:#a0a0a0; border-left-color:#a0a0a0; border-top-color:#a0a0a0; border-right-color:#a0a0a0;" placeholder="프로필 사진 등록/변경">
+                    <cl:fileinput std:sid="f-input-79fecf45" id="fi1" style="border-radius:10px; border-bottom-color:#a0a0a0; border-left-color:#a0a0a0; border-top-color:#a0a0a0; border-right-color:#a0a0a0; font-family:푸른전남;" placeholder="프로필 사진 등록/변경">
                       <cl:listener std:sid="listener-d618f770" name="value-change" handler="onFi1ValueChange"/>
                       <cl:formdata std:sid="f-data-16b7bbda" row="0" col="0"/>
                     </cl:fileinput>
@@ -202,7 +199,7 @@
                   <cl:formdata std:sid="f-data-bafda040" row="0" col="1"/>
                   <cl:group std:sid="group-307e4c0c">
                     <cl:formdata std:sid="f-data-65250980" row="0" col="0" rowspan="1" colspan="2"/>
-                    <cl:output std:sid="output-80de58cb" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - 비밀번호">
+                    <cl:output std:sid="output-80de58cb" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px; font-family:푸른전남 Medium;" value=" - 비밀번호">
                       <cl:formdata std:sid="f-data-afe68c0d" row="0" col="0" rowspan="3" colspan="1"/>
                     </cl:output>
                     <cl:inputbox std:sid="i-box-f47550e0" id="ipbPassword1" style="border-radius:5px; padding-left:10px; font-size:15px; background-image:none;" secret="true" showclearbutton="false" maxlength="25" spellcheck="false">
@@ -213,10 +210,10 @@
                     <cl:img std:sid="image-f29aab43" id="imgPswdChk1">
                       <cl:formdata std:sid="f-data-0a05dda6" row="0" col="2"/>
                     </cl:img>
-                    <cl:output std:sid="output-bb64ce6b" id="opbCheckPassword" value="">
+                    <cl:output std:sid="output-bb64ce6b" id="opbCheckPassword" style="font-family:푸른전남;" value="">
                       <cl:formdata std:sid="f-data-ead06923" row="1" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
-                    <cl:output std:sid="output-7ce0a65c" style="font-size:12px;" value="❈ 8자 이상~25자 이하 &#xD;&#xA;(숫자, 대소문자, 특수 문자 모두 포함)">
+                    <cl:output std:sid="output-7ce0a65c" style="font-size:12px; font-family:푸른전남;" value="❈ 8자 이상 ~ 25자 이하 &#xD;&#xA;(숫자, 대소문자, 특수 문자 모두 포함)">
                       <cl:formdata std:sid="f-data-3494a357" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:formlayout std:sid="f-layout-2da4d9fa" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -230,7 +227,7 @@
                   </cl:group>
                   <cl:group std:sid="group-ed7c0a44">
                     <cl:formdata std:sid="f-data-c2644bce" row="1" col="0" rowspan="1" colspan="2"/>
-                    <cl:output std:sid="output-43f7ba32" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - 비밀번호 확인">
+                    <cl:output std:sid="output-43f7ba32" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px; font-family:푸른전남 Medium;" value=" - 비밀번호 확인">
                       <cl:formdata std:sid="f-data-4c01da8c" row="0" col="0" rowspan="3" colspan="1"/>
                     </cl:output>
                     <cl:inputbox std:sid="i-box-b6daa8de" id="ipbPassword2" style="border-radius:5px; padding-left:10px; font-size:15px;" secret="true" showclearbutton="false" maxlength="25" spellcheck="false">
@@ -240,10 +237,10 @@
                     <cl:img std:sid="image-7b0ffb16" id="imgPswdChk2">
                       <cl:formdata std:sid="f-data-d37b1a71" row="0" col="2"/>
                     </cl:img>
-                    <cl:output std:sid="output-b92eba14" id="opbCheckPassword2" value="">
+                    <cl:output std:sid="output-b92eba14" id="opbCheckPassword2" style="font-family:푸른전남;" value="">
                       <cl:formdata std:sid="f-data-c62b1034" row="1" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
-                    <cl:output std:sid="output-38bce9e6" style="font-size:12px;" value="❈ 8자 이상~25자 이하 &#xD;&#xA;(숫자, 대소문자, 특수 문자 모두 포함)">
+                    <cl:output std:sid="output-38bce9e6" style="font-size:12px; font-family:푸른전남;" value="❈ 8자 이상 ~ 25자 이하 &#xD;&#xA;(숫자, 대소문자, 특수 문자 모두 포함)">
                       <cl:formdata std:sid="f-data-d05f7be8" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:formlayout std:sid="f-layout-cb5a3e95" scrollable="false" hspace="20px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -257,18 +254,18 @@
                   </cl:group>
                   <cl:group std:sid="group-63c4e5ed">
                     <cl:formdata std:sid="f-data-11f8b7e4" row="2" col="0" rowspan="1" colspan="2"/>
-                    <cl:output std:sid="output-cdf0c67d" style="background-color:#F0F0F0; font-weight:bolder; font-size:15px; border-top-style:none;" value=" - 닉네임">
+                    <cl:output std:sid="output-cdf0c67d" style="background-color:#F0F0F0; font-weight:bolder; font-size:15px; font-family:푸른전남 Medium; border-top-style:none;" value=" - 닉네임">
                       <cl:formdata std:sid="f-data-b39d9a61" row="0" col="0" rowspan="3" colspan="1"/>
                     </cl:output>
-                    <cl:inputbox std:sid="i-box-717e3d70" id="ipbNick" style="border-radius:5px; padding-left:10px; font-size:15px;" showclearbutton="true" lengthunit="utf8" maxlength="24" spellcheck="false">
+                    <cl:inputbox std:sid="i-box-717e3d70" id="ipbNick" style="border-radius:5px; padding-left:10px; font-size:15px; font-family:푸른전남;" showclearbutton="true" lengthunit="utf8" maxlength="24" spellcheck="false">
                       <cl:listener std:sid="listener-c6629eb5" name="blur" handler="onIpbNickBlur"/>
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberNick" rowindex="0"/>
                       <cl:formdata std:sid="f-data-5d266f1a" row="0" col="1"/>
                     </cl:inputbox>
-                    <cl:output std:sid="output-147cb024" id="opbCheckNick" value="">
+                    <cl:output std:sid="output-147cb024" id="opbCheckNick" style="font-family:푸른전남;" value="">
                       <cl:formdata std:sid="f-data-bb2f5d0f" row="1" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
-                    <cl:output std:sid="output-de90e3f9" style="font-size:14px;" value="❈ 중복 불가, 1자 이상~8자 이하.">
+                    <cl:output std:sid="output-de90e3f9" style="font-size:14px; font-family:푸른전남;" value="❈ 중복 불가, 1자 이상~8자 이하.">
                       <cl:formdata std:sid="f-data-9c8c8d34" row="2" col="1" rowspan="1" colspan="2"/>
                     </cl:output>
                     <cl:img std:sid="image-30a70019" id="imgNickChk">
@@ -283,38 +280,34 @@
                       <cl:columns length="1" unit="FRACTION"/>
                     </cl:formlayout>
                   </cl:group>
-                  <cl:output std:sid="output-f24a9174" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - 생년월일">
+                  <cl:output std:sid="output-f24a9174" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px; font-family:푸른전남 Medium;" value=" - 생년월일">
                     <cl:formdata std:sid="f-data-7a159c59" row="3" col="0"/>
                   </cl:output>
-                  <cl:output std:sid="output-c1784cad" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px;" value=" - 핸드폰 번호">
+                  <cl:output std:sid="output-c1784cad" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px; font-family:푸른전남 Medium;" value=" - 핸드폰 번호">
                     <cl:formdata std:sid="f-data-ee7910a8" row="4" col="0"/>
                   </cl:output>
-                  <cl:output std:sid="output-b3675a7d" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px; font-family:'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif;" value=" - 주소">
+                  <cl:output std:sid="output-b3675a7d" style="background-color:#F0F0F0; border-radius:5px; font-weight:bolder; font-size:15px; font-family:푸른전남 Medium;" value=" - 주소">
                     <cl:formdata std:sid="f-data-a71512e5" row="5" col="0"/>
                   </cl:output>
-                  <cl:dateinput std:sid="d-input-fa585cec" id="ipbBirthday" style="border-radius:5px; font-size:15px;" class="cl-dateinput-register single-datepicker" spinbutton="true" showclearbutton="true">
+                  <cl:dateinput std:sid="d-input-fa585cec" id="ipbBirthday" style="border-radius:5px; font-size:15px; font-family:푸른전남;" class="cl-dateinput-register single-datepicker" spinbutton="true" showclearbutton="true">
                     <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberBirthday" rowindex="0"/>
                     <cl:formdata std:sid="f-data-2b23b1fc" row="3" col="1"/>
                   </cl:dateinput>
-                  <cl:maskeditor std:sid="m-editor-0fbcd13a" id="ipbPhone" style="border-radius:5px; padding-left:10px; font-size:15px;" mask="000-0000-0000" showclearbutton="true" clearbuttonimage="">
-                    <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberPhone" rowindex="0"/>
-                    <cl:formdata std:sid="f-data-2a40a282" row="4" col="1"/>
-                  </cl:maskeditor>
                   <cl:group std:sid="group-1d26ac01">
                     <cl:formdata std:sid="f-data-7a3b0f2e" row="5" col="1"/>
-                    <cl:button std:sid="button-cde3b481" id="btnPostcode" style="font-size:15px;" value="주소 검색">
+                    <cl:button std:sid="button-cde3b481" id="btnPostcode" style="font-size:15px; font-family:푸른전남;" value="주소 검색">
                       <cl:listener std:sid="listener-f30bfa9f" name="click" handler="onBtnPostcodeClick"/>
                       <cl:formdata std:sid="f-data-59f871f8" row="0" col="1"/>
                     </cl:button>
-                    <cl:maskeditor std:sid="m-editor-b351da49" id="postCode" style="border-radius:5px; padding-left:10px;" mask="00000">
+                    <cl:maskeditor std:sid="m-editor-b351da49" id="postCode" style="border-radius:5px; padding-left:10px; font-family:푸른전남;" mask="XXXXX">
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberPostcode" rowindex="0"/>
                       <cl:formdata std:sid="f-data-f390c2df" row="0" col="0"/>
                     </cl:maskeditor>
-                    <cl:inputbox std:sid="i-box-3eac9641" id="address" style="border-radius:5px; padding-left:10px;" lengthunit="utf8" maxlength="30" spellcheck="false">
+                    <cl:inputbox std:sid="i-box-3eac9641" id="address" style="border-radius:5px; padding-left:10px; font-family:푸른전남;" lengthunit="utf8" maxlength="30" spellcheck="false">
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberAddress" rowindex="0"/>
                       <cl:formdata std:sid="f-data-710e1de7" row="1" col="0" rowspan="1" colspan="2"/>
                     </cl:inputbox>
-                    <cl:inputbox std:sid="i-box-f8e684d0" id="detailAddress" style="border-radius:5px; padding-left:10px;" lengthunit="utf8" maxlength="30" spellcheck="false">
+                    <cl:inputbox std:sid="i-box-f8e684d0" id="detailAddress" style="border-radius:5px; padding-left:10px; font-family:푸른전남;" lengthunit="utf8" maxlength="30" spellcheck="false">
                       <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberAddressDetail" rowindex="0"/>
                       <cl:formdata std:sid="f-data-c680e801" row="2" col="0" rowspan="1" colspan="2"/>
                     </cl:inputbox>
@@ -326,6 +319,10 @@
                       <cl:columns length="100" unit="PIXEL"/>
                     </cl:formlayout>
                   </cl:group>
+                  <cl:inputbox std:sid="i-box-5d1aa678" id="ipbPhone" style="border-radius:5px; padding-left:10px; font-size:15px; font-family:푸른전남;" secret="false" showclearbutton="true" maxlength="11" spellcheck="false">
+                    <cl:datasetbind property="value" datacontrolid="ds_profile" columnname="memberPhone" rowindex="0"/>
+                    <cl:formdata std:sid="f-data-2971f416" row="4" col="1"/>
+                  </cl:inputbox>
                   <cl:formlayout std:sid="f-layout-1411443f" scrollable="false" hspace="20px" vspace="20px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
                     <cl:rows length="110" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
                     <cl:rows length="110" unit="PIXEL"/>
@@ -353,6 +350,9 @@
       </cl:group>
       <cl:udc std:sid="ud-control-51995e03" type="udc.footer">
         <cl:xylayoutdata std:sid="xyl-data-5d464271" right="0px" bottom="0px" left="0px" height="100px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+      </cl:udc>
+      <cl:udc std:sid="ud-control-a50ffa88" type="udc.myPageHeader">
+        <cl:xylayoutdata std:sid="xyl-data-e21da996" top="0px" right="0px" left="0px" height="205px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:udc>
       <cl:xylayout std:sid="xylayout-89e2b51f"/>
     </cl:group>

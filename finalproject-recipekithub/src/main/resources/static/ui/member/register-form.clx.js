@@ -164,7 +164,10 @@
 						dialogApp.initValue = initValue;
 					});
 				}).then(function(returnValue) {
-					window.location.href = "index.clx";
+					cpr.core.App.load("index", function(newapp){
+						app.close();
+						newapp.createNewInstance().run();
+					});
 				});
 			}
 
@@ -445,9 +448,6 @@
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
 			function onBtnPostcodeClick(e) {
-				//var btnPostcode = e.control;
-				//app.lookup("btnPostcode").click();
-				
 				postCode();
 			}
 
@@ -695,107 +695,28 @@
 								var group_5 = new cpr.controls.Container();
 								var xYLayout_5 = new cpr.controls.layouts.XYLayout();
 								group_5.setLayout(xYLayout_5);
-								(function(container){
-									var group_6 = new cpr.controls.Container();
-									var formLayout_1 = new cpr.controls.layouts.FormLayout();
-									formLayout_1.scrollable = false;
-									formLayout_1.topMargin = "0px";
-									formLayout_1.rightMargin = "0px";
-									formLayout_1.bottomMargin = "0px";
-									formLayout_1.leftMargin = "0px";
-									formLayout_1.horizontalSpacing = "20px";
-									formLayout_1.verticalSpacing = "0px";
-									formLayout_1.setColumns(["1fr", "1fr", "10px", "1fr", "1fr"]);
-									formLayout_1.setRows(["50px"]);
-									group_6.setLayout(formLayout_1);
-									(function(container){
-										var button_1 = new cpr.controls.Button("btnRegister");
-										button_1.value = "가입";
-										button_1.style.css({
-											"border-right-style" : "solid",
-											"border-bottom-color" : "#097f3d",
-											"border-top-width" : "2px",
-											"color" : "#097f3d",
-											"border-right-width" : "2px",
-											"font-weight" : "bolder",
-											"border-left-color" : "#097f3d",
-											"font-size" : "16px",
-											"border-right-color" : "#097f3d",
-											"border-left-width" : "2px",
-											"border-top-style" : "solid",
-											"background-color" : "#FFFFFF",
-											"text-shadow" : "none",
-											"border-left-style" : "solid",
-											"border-bottom-width" : "2px",
-											"border-top-color" : "#097f3d",
-											"border-bottom-style" : "solid",
-											"background-image" : "none"
-										});
-										if(typeof onButtonClick == "function") {
-											button_1.addEventListener("click", onButtonClick);
-										}
-										container.addChild(button_1, {
-											"colIndex": 1,
-											"rowIndex": 0
-										});
-										var button_2 = new cpr.controls.Button("btnCancel");
-										button_2.value = "취소";
-										button_2.style.css({
-											"border-right-style" : "solid",
-											"border-top-width" : "2px",
-											"border-bottom-color" : "#a0a0a0",
-											"color" : "#646464",
-											"border-right-width" : "2px",
-											"font-weight" : "bolder",
-											"border-left-color" : "#a0a0a0",
-											"font-size" : "16px",
-											"border-right-color" : "#a0a0a0",
-											"border-left-width" : "2px",
-											"border-top-style" : "solid",
-											"background-color" : "#FFFFFF",
-											"border-left-style" : "solid",
-											"border-bottom-width" : "2px",
-											"border-top-color" : "#a0a0a0",
-											"border-bottom-style" : "solid",
-											"background-image" : "none"
-										});
-										if(typeof onButtonClick2 == "function") {
-											button_2.addEventListener("click", onButtonClick2);
-										}
-										container.addChild(button_2, {
-											"colIndex": 3,
-											"rowIndex": 0
-										});
-									})(group_6);
-									container.addChild(group_6, {
-										"top": "775px",
-										"right": "20px",
-										"bottom": "0px",
-										"left": "20px"
-									});
-								})(group_5);
 								container.addChild(group_5, {
 									"top": "0px",
 									"right": "0px",
 									"bottom": "0px",
 									"left": "0px"
 								});
-								var group_7 = new cpr.controls.Container();
-								group_7.style.css({
+								var group_6 = new cpr.controls.Container();
+								group_6.style.css({
 									"background-color" : "#FFFFFF",
 									"border-radius" : "10px"
 								});
-								var formLayout_2 = new cpr.controls.layouts.FormLayout();
-								formLayout_2.scrollable = false;
-								formLayout_2.topMargin = "20px";
-								formLayout_2.rightMargin = "10px";
-								formLayout_2.bottomMargin = "20px";
-								formLayout_2.leftMargin = "20px";
-								formLayout_2.horizontalSpacing = "20px";
-								formLayout_2.verticalSpacing = "10px";
-								formLayout_2.setColumns(["120px", "200px", "80px"]);
-								formLayout_2.setRows(["110px", "110px", "110px", "110px", "30px", "30px", "30px", "115px"]);
-								group_7.setLayout(formLayout_2);
+								var formLayout_1 = new cpr.controls.layouts.FormLayout();
+								formLayout_1.scrollable = false;
+								formLayout_1.topMargin = "20px";
+								formLayout_1.rightMargin = "10px";
+								formLayout_1.bottomMargin = "20px";
+								formLayout_1.leftMargin = "20px";
+								formLayout_1.horizontalSpacing = "20px";
+								formLayout_1.verticalSpacing = "10px";
+								formLayout_1.setColumns(["120px", "200px", "80px"]);
+								formLayout_1.setRows(["110px", "110px", "110px", "110px", "30px", "30px", "30px", "115px", "1fr"]);
+								group_6.setLayout(formLayout_1);
 								(function(container){
 									var output_1 = new cpr.controls.Output();
 									output_1.value = " - 생년월일";
@@ -839,6 +760,7 @@
 									maskEditor_1.showClearButton = true;
 									maskEditor_1.style.css({
 										"border-radius" : "5px",
+										"padding-left" : "10px",
 										"font-size" : "15px"
 									});
 									maskEditor_1.bind("value").toDataMap(app.lookup("dm_register_member"), "member_phone");
@@ -846,25 +768,25 @@
 										"colIndex": 1,
 										"rowIndex": 6
 									});
-									var group_8 = new cpr.controls.Container();
-									var formLayout_3 = new cpr.controls.layouts.FormLayout();
-									formLayout_3.scrollable = false;
-									formLayout_3.topMargin = "0px";
-									formLayout_3.rightMargin = "0px";
-									formLayout_3.bottomMargin = "0px";
-									formLayout_3.leftMargin = "0px";
-									formLayout_3.horizontalSpacing = "10px";
-									formLayout_3.verticalSpacing = "10px";
-									formLayout_3.setColumns(["180px", "100px"]);
-									formLayout_3.setRows(["30px", "30px", "30px"]);
-									group_8.setLayout(formLayout_3);
+									var group_7 = new cpr.controls.Container();
+									var formLayout_2 = new cpr.controls.layouts.FormLayout();
+									formLayout_2.scrollable = false;
+									formLayout_2.topMargin = "0px";
+									formLayout_2.rightMargin = "0px";
+									formLayout_2.bottomMargin = "0px";
+									formLayout_2.leftMargin = "0px";
+									formLayout_2.horizontalSpacing = "10px";
+									formLayout_2.verticalSpacing = "10px";
+									formLayout_2.setColumns(["180px", "100px"]);
+									formLayout_2.setRows(["30px", "30px", "30px"]);
+									group_7.setLayout(formLayout_2);
 									(function(container){
-										var button_3 = new cpr.controls.Button("btnPostcode");
-										button_3.value = "우편번호";
+										var button_1 = new cpr.controls.Button("btnPostcode");
+										button_1.value = "우편번호";
 										if(typeof onBtnPostcodeClick == "function") {
-											button_3.addEventListener("click", onBtnPostcodeClick);
+											button_1.addEventListener("click", onBtnPostcodeClick);
 										}
-										container.addChild(button_3, {
+										container.addChild(button_1, {
 											"colIndex": 1,
 											"rowIndex": 0
 										});
@@ -872,7 +794,8 @@
 										inputBox_1.lengthUnit = "utf8";
 										inputBox_1.maxLength = 30;
 										inputBox_1.style.css({
-											"border-radius" : "5px"
+											"border-radius" : "5px",
+											"padding-left" : "10px"
 										});
 										inputBox_1.bind("value").toDataMap(app.lookup("dm_register_member"), "member_address");
 										container.addChild(inputBox_1, {
@@ -885,7 +808,8 @@
 										inputBox_2.lengthUnit = "utf8";
 										inputBox_2.maxLength = 30;
 										inputBox_2.style.css({
-											"border-radius" : "5px"
+											"border-radius" : "5px",
+											"padding-left" : "10px"
 										});
 										inputBox_2.bind("value").toDataMap(app.lookup("dm_register_member"), "member_address_detail");
 										container.addChild(inputBox_2, {
@@ -897,32 +821,33 @@
 										var maskEditor_2 = new cpr.controls.MaskEditor("postCode");
 										maskEditor_2.mask = "00000";
 										maskEditor_2.style.css({
-											"border-radius" : "5px"
+											"border-radius" : "5px",
+											"padding-left" : "10px"
 										});
 										maskEditor_2.bind("value").toDataMap(app.lookup("dm_register_member"), "member_postcode");
 										container.addChild(maskEditor_2, {
 											"colIndex": 0,
 											"rowIndex": 0
 										});
-									})(group_8);
-									container.addChild(group_8, {
+									})(group_7);
+									container.addChild(group_7, {
 										"colIndex": 1,
 										"rowIndex": 7,
 										"colSpan": 2,
 										"rowSpan": 1
 									});
-									var group_9 = new cpr.controls.Container();
-									var formLayout_4 = new cpr.controls.layouts.FormLayout();
-									formLayout_4.scrollable = false;
-									formLayout_4.topMargin = "0px";
-									formLayout_4.rightMargin = "0px";
-									formLayout_4.bottomMargin = "0px";
-									formLayout_4.leftMargin = "0px";
-									formLayout_4.horizontalSpacing = "20px";
-									formLayout_4.verticalSpacing = "5px";
-									formLayout_4.setColumns(["120px", "1fr", "30px"]);
-									formLayout_4.setRows(["30px", "30px", "30px"]);
-									group_9.setLayout(formLayout_4);
+									var group_8 = new cpr.controls.Container();
+									var formLayout_3 = new cpr.controls.layouts.FormLayout();
+									formLayout_3.scrollable = false;
+									formLayout_3.topMargin = "0px";
+									formLayout_3.rightMargin = "0px";
+									formLayout_3.bottomMargin = "0px";
+									formLayout_3.leftMargin = "0px";
+									formLayout_3.horizontalSpacing = "20px";
+									formLayout_3.verticalSpacing = "5px";
+									formLayout_3.setColumns(["120px", "1fr", "30px"]);
+									formLayout_3.setRows(["30px", "30px", "30px"]);
+									group_8.setLayout(formLayout_3);
 									(function(container){
 										var output_3 = new cpr.controls.Output();
 										output_3.value = " - Email";
@@ -955,6 +880,7 @@
 										inputBox_3.spellCheck = false;
 										inputBox_3.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										inputBox_3.bind("value").toDataMap(app.lookup("dm_register_member"), "member_email");
@@ -974,7 +900,7 @@
 											"rowSpan": 1
 										});
 										var output_5 = new cpr.controls.Output();
-										output_5.value = "❈ 30자 이하의 중복이 불가한 이메일 형식";
+										output_5.value = "❈ 이메일 형식, 30자 이하, 중복 불가";
 										output_5.style.css({
 											"font-size" : "14px"
 										});
@@ -989,25 +915,25 @@
 											"colIndex": 2,
 											"rowIndex": 0
 										});
-									})(group_9);
-									container.addChild(group_9, {
+									})(group_8);
+									container.addChild(group_8, {
 										"colIndex": 0,
 										"rowIndex": 0,
 										"colSpan": 3,
 										"rowSpan": 1
 									});
-									var group_10 = new cpr.controls.Container();
-									var formLayout_5 = new cpr.controls.layouts.FormLayout();
-									formLayout_5.scrollable = false;
-									formLayout_5.topMargin = "0px";
-									formLayout_5.rightMargin = "0px";
-									formLayout_5.bottomMargin = "0px";
-									formLayout_5.leftMargin = "0px";
-									formLayout_5.horizontalSpacing = "20px";
-									formLayout_5.verticalSpacing = "5px";
-									formLayout_5.setColumns(["120px", "200px", "1fr"]);
-									formLayout_5.setRows(["30px", "30px", "30px"]);
-									group_10.setLayout(formLayout_5);
+									var group_9 = new cpr.controls.Container();
+									var formLayout_4 = new cpr.controls.layouts.FormLayout();
+									formLayout_4.scrollable = false;
+									formLayout_4.topMargin = "0px";
+									formLayout_4.rightMargin = "0px";
+									formLayout_4.bottomMargin = "0px";
+									formLayout_4.leftMargin = "0px";
+									formLayout_4.horizontalSpacing = "20px";
+									formLayout_4.verticalSpacing = "5px";
+									formLayout_4.setColumns(["120px", "200px", "1fr"]);
+									formLayout_4.setRows(["30px", "30px", "30px"]);
+									group_9.setLayout(formLayout_4);
 									(function(container){
 										var output_6 = new cpr.controls.Output();
 										output_6.value = " - 비밀번호";
@@ -1029,6 +955,7 @@
 										inputBox_4.spellCheck = false;
 										inputBox_4.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										inputBox_4.bind("value").toDataMap(app.lookup("dm_register_member"), "member_password");
@@ -1044,26 +971,26 @@
 											"colSpan": 1,
 											"rowSpan": 1
 										});
-										var group_11 = new cpr.controls.Container();
-										var formLayout_6 = new cpr.controls.layouts.FormLayout();
-										formLayout_6.scrollable = false;
-										formLayout_6.topMargin = "0px";
-										formLayout_6.rightMargin = "0px";
-										formLayout_6.bottomMargin = "0px";
-										formLayout_6.leftMargin = "25px";
-										formLayout_6.horizontalSpacing = "0px";
-										formLayout_6.verticalSpacing = "0px";
-										formLayout_6.setColumns(["30px"]);
-										formLayout_6.setRows(["30px"]);
-										group_11.setLayout(formLayout_6);
+										var group_10 = new cpr.controls.Container();
+										var formLayout_5 = new cpr.controls.layouts.FormLayout();
+										formLayout_5.scrollable = false;
+										formLayout_5.topMargin = "0px";
+										formLayout_5.rightMargin = "0px";
+										formLayout_5.bottomMargin = "0px";
+										formLayout_5.leftMargin = "25px";
+										formLayout_5.horizontalSpacing = "0px";
+										formLayout_5.verticalSpacing = "0px";
+										formLayout_5.setColumns(["30px"]);
+										formLayout_5.setRows(["30px"]);
+										group_10.setLayout(formLayout_5);
 										(function(container){
 											var image_2 = new cpr.controls.Image("imgPswd1");
 											container.addChild(image_2, {
 												"colIndex": 0,
 												"rowIndex": 0
 											});
-										})(group_11);
-										container.addChild(group_11, {
+										})(group_10);
+										container.addChild(group_10, {
 											"colIndex": 2,
 											"rowIndex": 0
 										});
@@ -1079,7 +1006,7 @@
 											"rowSpan": 1
 										});
 										var output_8 = new cpr.controls.Output();
-										output_8.value = "❈ 8자 이상~25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
+										output_8.value = "❈ 8자 이상 ~ 25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
 										output_8.style.css({
 											"font-size" : "12px"
 										});
@@ -1089,25 +1016,25 @@
 											"colSpan": 2,
 											"rowSpan": 1
 										});
-									})(group_10);
-									container.addChild(group_10, {
+									})(group_9);
+									container.addChild(group_9, {
 										"colIndex": 0,
 										"rowIndex": 1,
 										"colSpan": 3,
 										"rowSpan": 1
 									});
-									var group_12 = new cpr.controls.Container();
-									var formLayout_7 = new cpr.controls.layouts.FormLayout();
-									formLayout_7.scrollable = false;
-									formLayout_7.topMargin = "0px";
-									formLayout_7.rightMargin = "0px";
-									formLayout_7.bottomMargin = "0px";
-									formLayout_7.leftMargin = "0px";
-									formLayout_7.horizontalSpacing = "20px";
-									formLayout_7.verticalSpacing = "5px";
-									formLayout_7.setColumns(["120px", "200px", "1fr"]);
-									formLayout_7.setRows(["30px", "30px", "30px"]);
-									group_12.setLayout(formLayout_7);
+									var group_11 = new cpr.controls.Container();
+									var formLayout_6 = new cpr.controls.layouts.FormLayout();
+									formLayout_6.scrollable = false;
+									formLayout_6.topMargin = "0px";
+									formLayout_6.rightMargin = "0px";
+									formLayout_6.bottomMargin = "0px";
+									formLayout_6.leftMargin = "0px";
+									formLayout_6.horizontalSpacing = "20px";
+									formLayout_6.verticalSpacing = "5px";
+									formLayout_6.setColumns(["120px", "200px", "1fr"]);
+									formLayout_6.setRows(["30px", "30px", "30px"]);
+									group_11.setLayout(formLayout_6);
 									(function(container){
 										var output_9 = new cpr.controls.Output();
 										output_9.value = " - 비밀번호 확인";
@@ -1129,6 +1056,7 @@
 										inputBox_5.spellCheck = false;
 										inputBox_5.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										if(typeof onIpbPassword2Keyup == "function") {
@@ -1140,26 +1068,26 @@
 											"colSpan": 1,
 											"rowSpan": 1
 										});
-										var group_13 = new cpr.controls.Container();
-										var formLayout_8 = new cpr.controls.layouts.FormLayout();
-										formLayout_8.scrollable = false;
-										formLayout_8.topMargin = "0px";
-										formLayout_8.rightMargin = "0px";
-										formLayout_8.bottomMargin = "0px";
-										formLayout_8.leftMargin = "25px";
-										formLayout_8.horizontalSpacing = "0px";
-										formLayout_8.verticalSpacing = "0px";
-										formLayout_8.setColumns(["30px"]);
-										formLayout_8.setRows(["30px"]);
-										group_13.setLayout(formLayout_8);
+										var group_12 = new cpr.controls.Container();
+										var formLayout_7 = new cpr.controls.layouts.FormLayout();
+										formLayout_7.scrollable = false;
+										formLayout_7.topMargin = "0px";
+										formLayout_7.rightMargin = "0px";
+										formLayout_7.bottomMargin = "0px";
+										formLayout_7.leftMargin = "25px";
+										formLayout_7.horizontalSpacing = "0px";
+										formLayout_7.verticalSpacing = "0px";
+										formLayout_7.setColumns(["30px"]);
+										formLayout_7.setRows(["30px"]);
+										group_12.setLayout(formLayout_7);
 										(function(container){
 											var image_3 = new cpr.controls.Image("imgPswd2");
 											container.addChild(image_3, {
 												"colIndex": 0,
 												"rowIndex": 0
 											});
-										})(group_13);
-										container.addChild(group_13, {
+										})(group_12);
+										container.addChild(group_12, {
 											"colIndex": 2,
 											"rowIndex": 0
 										});
@@ -1172,7 +1100,7 @@
 											"rowSpan": 1
 										});
 										var output_11 = new cpr.controls.Output();
-										output_11.value = "❈ 8자 이상~25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
+										output_11.value = "❈ 8자 이상 ~ 25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
 										output_11.style.css({
 											"font-size" : "12px"
 										});
@@ -1182,25 +1110,25 @@
 											"colSpan": 2,
 											"rowSpan": 1
 										});
-									})(group_12);
-									container.addChild(group_12, {
+									})(group_11);
+									container.addChild(group_11, {
 										"colIndex": 0,
 										"rowIndex": 2,
 										"colSpan": 3,
 										"rowSpan": 1
 									});
-									var group_14 = new cpr.controls.Container();
-									var formLayout_9 = new cpr.controls.layouts.FormLayout();
-									formLayout_9.scrollable = false;
-									formLayout_9.topMargin = "0px";
-									formLayout_9.rightMargin = "0px";
-									formLayout_9.bottomMargin = "0px";
-									formLayout_9.leftMargin = "0px";
-									formLayout_9.horizontalSpacing = "20px";
-									formLayout_9.verticalSpacing = "5px";
-									formLayout_9.setColumns(["120px", "200px", "1fr"]);
-									formLayout_9.setRows(["30px", "30px", "30px"]);
-									group_14.setLayout(formLayout_9);
+									var group_13 = new cpr.controls.Container();
+									var formLayout_8 = new cpr.controls.layouts.FormLayout();
+									formLayout_8.scrollable = false;
+									formLayout_8.topMargin = "0px";
+									formLayout_8.rightMargin = "0px";
+									formLayout_8.bottomMargin = "0px";
+									formLayout_8.leftMargin = "0px";
+									formLayout_8.horizontalSpacing = "20px";
+									formLayout_8.verticalSpacing = "5px";
+									formLayout_8.setColumns(["120px", "200px", "1fr"]);
+									formLayout_8.setRows(["30px", "30px", "30px"]);
+									group_13.setLayout(formLayout_8);
 									(function(container){
 										var output_12 = new cpr.controls.Output();
 										output_12.value = " - 닉네임";
@@ -1231,6 +1159,7 @@
 										inputBox_6.spellCheck = false;
 										inputBox_6.style.css({
 											"border-radius" : "5px",
+											"padding-left" : "10px",
 											"font-size" : "15px"
 										});
 										inputBox_6.bind("value").toDataMap(app.lookup("dm_register_member"), "member_nick");
@@ -1244,31 +1173,31 @@
 											"colIndex": 1,
 											"rowIndex": 0
 										});
-										var group_15 = new cpr.controls.Container();
-										var formLayout_10 = new cpr.controls.layouts.FormLayout();
-										formLayout_10.scrollable = false;
-										formLayout_10.topMargin = "0px";
-										formLayout_10.rightMargin = "0px";
-										formLayout_10.bottomMargin = "0px";
-										formLayout_10.leftMargin = "25px";
-										formLayout_10.horizontalSpacing = "0px";
-										formLayout_10.verticalSpacing = "0px";
-										formLayout_10.setColumns(["30px"]);
-										formLayout_10.setRows(["30px"]);
-										group_15.setLayout(formLayout_10);
+										var group_14 = new cpr.controls.Container();
+										var formLayout_9 = new cpr.controls.layouts.FormLayout();
+										formLayout_9.scrollable = false;
+										formLayout_9.topMargin = "0px";
+										formLayout_9.rightMargin = "0px";
+										formLayout_9.bottomMargin = "0px";
+										formLayout_9.leftMargin = "25px";
+										formLayout_9.horizontalSpacing = "0px";
+										formLayout_9.verticalSpacing = "0px";
+										formLayout_9.setColumns(["30px"]);
+										formLayout_9.setRows(["30px"]);
+										group_14.setLayout(formLayout_9);
 										(function(container){
 											var image_4 = new cpr.controls.Image("imgNick");
 											container.addChild(image_4, {
 												"colIndex": 0,
 												"rowIndex": 0
 											});
-										})(group_15);
-										container.addChild(group_15, {
+										})(group_14);
+										container.addChild(group_14, {
 											"colIndex": 2,
 											"rowIndex": 0
 										});
 										var output_14 = new cpr.controls.Output();
-										output_14.value = "❈ 중복 불가, 1자 이상~8자 이하.";
+										output_14.value = "❈ 중복 불가, 1자 이상 ~ 8자 이하.";
 										output_14.style.css({
 											"font-size" : "14px"
 										});
@@ -1278,8 +1207,8 @@
 											"colSpan": 2,
 											"rowSpan": 1
 										});
-									})(group_14);
-									container.addChild(group_14, {
+									})(group_13);
+									container.addChild(group_13, {
 										"colIndex": 0,
 										"rowIndex": 3,
 										"colSpan": 3,
@@ -1319,6 +1248,7 @@
 									inputBox_7.imeMode = "active";
 									inputBox_7.style.css({
 										"border-radius" : "5px",
+										"padding-left" : "10px",
 										"font-size" : "15px"
 									});
 									inputBox_7.bind("value").toDataMap(app.lookup("dm_register_member"), "member_name");
@@ -1326,11 +1256,80 @@
 										"colIndex": 1,
 										"rowIndex": 4
 									});
-								})(group_7);
-								container.addChild(group_7, {
+									var group_15 = new cpr.controls.Container();
+									var formLayout_10 = new cpr.controls.layouts.FormLayout();
+									formLayout_10.scrollable = false;
+									formLayout_10.topMargin = "20px";
+									formLayout_10.rightMargin = "0px";
+									formLayout_10.bottomMargin = "0px";
+									formLayout_10.leftMargin = "120px";
+									formLayout_10.horizontalSpacing = "50px";
+									formLayout_10.setColumns(["100px", "100px"]);
+									formLayout_10.setRows(["50px"]);
+									group_15.setLayout(formLayout_10);
+									(function(container){
+										var button_2 = new cpr.controls.Button("btnRegister");
+										button_2.value = "가입";
+										button_2.style.setClasses(["btn-dim", "btn-outline-success"]);
+										button_2.style.css({
+											"border-right-style" : "solid",
+											"border-top-width" : "2px",
+											"border-right-width" : "2px",
+											"font-weight" : "bolder",
+											"font-size" : "16px",
+											"border-left-width" : "2px",
+											"border-top-style" : "solid",
+											"text-shadow" : "none",
+											"border-left-style" : "solid",
+											"border-bottom-width" : "2px",
+											"border-bottom-style" : "solid",
+											"font-family" : "푸른전남 Medium",
+											"background-image" : "none"
+										});
+										if(typeof onButtonClick == "function") {
+											button_2.addEventListener("click", onButtonClick);
+										}
+										container.addChild(button_2, {
+											"colIndex": 0,
+											"rowIndex": 0
+										});
+										var button_3 = new cpr.controls.Button("btnCancel");
+										button_3.value = "취소";
+										button_3.style.setClasses(["btn-dim", "btn-outline-gray"]);
+										button_3.style.css({
+											"border-right-style" : "solid",
+											"border-top-width" : "2px",
+											"border-right-width" : "2px",
+											"font-weight" : "bolder",
+											"border-left-style" : "solid",
+											"border-bottom-width" : "2px",
+											"font-size" : "16px",
+											"border-bottom-style" : "solid",
+											"font-family" : "푸른전남 Medium",
+											"background-image" : "none",
+											"border-left-width" : "2px",
+											"border-top-style" : "solid"
+										});
+										if(typeof onButtonClick2 == "function") {
+											button_3.addEventListener("click", onButtonClick2);
+										}
+										container.addChild(button_3, {
+											"colIndex": 1,
+											"rowIndex": 0
+										});
+									})(group_15);
+									container.addChild(group_15, {
+										"colIndex": 0,
+										"rowIndex": 8,
+										"colSpan": 3,
+										"rowSpan": 1,
+										"ignoreLayoutSpacing": true
+									});
+								})(group_6);
+								container.addChild(group_6, {
 									"top": "10px",
 									"right": "0px",
-									"bottom": "69px",
+									"bottom": "0px",
 									"left": "0px"
 								});
 							})(group_4);

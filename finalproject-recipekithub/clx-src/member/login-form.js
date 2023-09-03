@@ -10,37 +10,44 @@
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
 function onLoginBtnClick(e) {
-	//var loginBtn = e.control;
-	//var dataMap = app.lookup("dm_login");
-	//dataMap.setValue("member_email", app.lookup("emailInput").value);
-	//dataMap.setValue("member_password", app.lookup("pswdInput").value);
+	var loginBtn = e.control;
 	var subLogin = app.lookup("sub_login");
 	subLogin.send();
 }
+
 
 /*
  * "회원가입" 버튼(registerBtn)에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
+// "회원가입" 버튼 클릭시 회원가입 화면으로 이동 
 function onRegisterBtnClick(e) {
 	var registerBtn = e.control;
-	window.location.href = "member/register-form.clx";
+	cpr.core.App.load("member/register-form", function(newapp){
+		app.close();
+		newapp.createNewInstance().run();
+	});
 }
+
 
 /*
  * "이메일 / 비밀번호 찾기" 버튼(findBtn)에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
+// "이메일 / 비밀번호 찾기"  버튼 클릭시 "이메일 / 비밀번호 찾기" 화면으로 이동 
 function onFindBtnClick(e) {
 	var findBtn = e.control;
-	window.location.href = "member/find-email-pswd.clx";
+	cpr.core.App.load("member/find-email-pswd", function(newapp){
+		app.close();
+		newapp.createNewInstance().run();
+	});
 }
 
-// 데이터 저장과 만료 시간 설정	// 현준
+
+// 로그인 데이터 저장과 만료 시간 설정	
 function setTimedSessionData(key, value, expirationMinutes) {
     var currentTime = new Date().getTime();
     var expirationTime = currentTime + (expirationMinutes * 60 * 1000); // milliseconds
-
     var data = {
         value: value,
         expirationTime: expirationTime
@@ -52,28 +59,24 @@ function setTimedSessionData(key, value, expirationMinutes) {
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
  * 통신이 성공하면 발생합니다.
  */
+// 로그인이 성공적으로 이루어진 경우
 function onSub_loginSubmitSuccess(e) {
 	var sub_login = e.control;
-	//alert(sub_login.xhr.status);
 	var checkBox = app.lookup("cbx1");
 	var memberEmail = app.lookup("dm_login").getValue("member_email");
 	
-	// 현준
+	// "Email 저장" 체크박스가 체크된 경우, 브라우저의 로컬 스토리지에 "memberEmail" 키로 현재 로그인한 회원의 이메일 정보를 저장.
 	if(checkBox.checked){
 		localStorage.setItem("memberEmail", memberEmail);
 	}
-	setTimedSessionData("memsession", memberEmail,30);
-	//
+	// 세션 데이터를 30분 동안 유지
+	setTimedSessionData("memsession", memberEmail, 30);
 
+	// 서브미션(sub_login)과 MemberController의 통신이 성공적인 경우의 메타데이터를 전달 받음
 	var loginSuccess = sub_login.getMetadata("path");
 	
-	if (loginSuccess != null) {
-		cpr.core.App.load(loginSuccess, function(newapp){
-			app.close();
-			newapp.createNewInstance().run();
-		});
-		return;
-	} 
+	var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx", "self");
+	httpPostMethod.submit();
 }
 
 
@@ -81,6 +84,7 @@ function onSub_loginSubmitSuccess(e) {
  * 서브미션에서 submit-error 이벤트 발생 시 호출.
  * 통신 중 문제가 생기면 발생합니다.
  */
+// 로그인 정보가 부적합하여 로그인에 실패한 경우, 다이얼로그 호출
 function onSub_loginSubmitError(e) {
 	var sub_login = e.control;
 	var loginFail = sub_login.getMetadata("loginFailMessage");
@@ -100,6 +104,7 @@ function onSub_loginSubmitError(e) {
  */
 function onPswdInputKeydown(e) {
 	var pswdInput = e.control;
+	// 비밀번호를 입력한 후 "enter"키를 눌렀을 때 로그인 버튼이 실행되도록
 	if (e.keyCode == cpr.events.KeyCode.ENTER) {
 		app.lookup("btnLogin").click();
 	}
@@ -112,21 +117,27 @@ function onPswdInputKeydown(e) {
 function onBodyLoad(e){
 	app.lookup("emailInput").focus();
 	
-	// 현준
+	// local storage에 이전에 접속한 회원의 email 정보가 남아 있는 경우, 변수 item에 저장
 	var item = localStorage.getItem("memberEmail");
 	if(item == null || item == ''){
 		return;
 	}
+	
+	// "Email 저장" 체크박스가 체크되어 있고 item에 저장된 email 정보가 있는 경우, "emailInput"에 정보 출력
 	app.lookup("cbx1").checked = true;
 	app.lookup("emailInput").text = item;
 	app.lookup("pswdInput").focus();
 }
 
 /*
- * 버튼에서 click 이벤트 발생 시 호출.
+ * 버튼(btnHome)에서 click 이벤트 발생 시 호출.
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
+// 인덱스 페이지로 복귀하는 버튼
 function onButtonClick(e){
 	var button = e.control;
-	window.location.href = "index.clx";
+	cpr.core.App.load("index", function(newapp){
+		app.close();
+		newapp.createNewInstance().run();
+	});
 }

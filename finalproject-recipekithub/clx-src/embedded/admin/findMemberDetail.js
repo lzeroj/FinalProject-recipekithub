@@ -44,11 +44,9 @@ function onBtnDeleteRowClick(e){
 	// 사용자가 체크한 행을 찾는다
 	var checkRowIndices = grdMem.getCheckRowIndices();
 	
-	//var memberEmail = null;
 	var memberEmails = [];
 	
 	if (selectedRowIndex != -1) {
-        //memberEmail = grdMem.getCellValue(selectedRowIndex, "memberEmail");
         var memberEmail = grdMem.getCellValue(selectedRowIndex, "memberEmail");
         memberEmails.push(memberEmail);
         
@@ -56,11 +54,9 @@ function onBtnDeleteRowClick(e){
 	}
 	
 	if (checkRowIndices.length > 0) { 
-		//grdMem.deleteRow(checkRowIndices);
-		
 		checkRowIndices.sort(function(a, b) { return b - a; });
 
-        // Loop through the sorted array and delete rows
+        // 정렬된 배열을 기반으로 행 삭제
         for (var i = 0; i < checkRowIndices.length; i++) {
             var rowIndex = checkRowIndices[i];
             var memberEmail = grdMem.getCellValue(rowIndex, "memberEmail");
@@ -68,10 +64,6 @@ function onBtnDeleteRowClick(e){
             grdMem.deleteRow(rowIndex);
         }
 	}
-	
-	//var cellIndex = grdMem.getCellIndex("memberEmail");
-	//grdMem.getSelectedIndices()[0].rowIndex;
-	//grdMem.get
 	
 	if (selectedRowIndex == null || checkRowIndices == null) {
 		var initValue = "선택한 회원이 없습니다.\n다시 한번 확인해주세요.";
@@ -91,18 +83,8 @@ function onBtnDeleteRowClick(e){
 				dialogApp.initValue = initValue;
 			});
 		}).then(function(returnValue) {
-			 var dataSet = app.lookup("ds_member");
-			
-			/*
-			dataMap.setValue("memberEmail", app.lookup("opbEmail").value);
-			
-			if (memberEmail !== null) {
-                dataMap.setValue("memberEmail", memberEmail);
-            }
-            */
-			
+			var dataSet = app.lookup("ds_member");
             dataSet.setValue("memberEmail", memberEmail);
-			
 			var submission = app.lookup("sub_delete");
 			submission.send();
 		});
@@ -123,6 +105,7 @@ function onSub_deleteMemberSubmitSuccess(e){
 			dialogApp.initValue = initValue;
 		});
 	}).then(function(returnValue) {
+		app.lookup("sub_findMemberList").send();
 		var grid = app.lookup("grd_member");
 		grid.clearSelection();
 		grid.redraw();

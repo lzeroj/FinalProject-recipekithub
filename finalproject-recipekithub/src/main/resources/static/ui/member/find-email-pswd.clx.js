@@ -60,6 +60,7 @@
 							dialogApp.initValue = initValue;
 						});
 					});
+					
 				// 2. Email 찾기 양식이 전부 유효하게 작성되어 있는 경우, Email 찾기 서브미션 전송	
 				} else {		
 					initValue = "Email을 조회 하시겠습니까?";
@@ -98,10 +99,13 @@
 				var metadataOk = sub_findEmail.getMetadata("ok"); 	// Controller측에서 입력한 정보에 따른 이메일을 조회하여 ok(조회 성공)인 경우
 				var metadataFail = sub_findEmail.getMetadata("fail"); 	// Controller측에서 입력한 정보에 따른 이메일을 조회하여 fail(조회 불가)인 경우
 
-				if (metadataFail) {		//---> 1. 입력한 정보에 따른 이메일을 조회할 수 없는 경우
+				// 1. 입력한 정보에 따른 이메일을 조회할 수 없는 경우
+				if (metadataFail) {		
 					opbFindEmailNotice.style.css("color", "red");
 					opbFindEmailNotice.text = "등록된 정보가 없습니다. 입력하신 정보를 다시 확인해주세요.";
-				} else {						//---> 2. 입력한 정보에 따른 이메일을 조회하는데 성공한 경우
+				
+				// 2. 입력한 정보에 따른 이메일을 조회하는데 성공한 경우
+				} else {						
 					opbFindEmailNotice.style.css("color", "black");
 					opbFindEmailNotice.text = "입력하신 회원정보에 해당하는 Email 정보는 다음과 같습니다."
 					app.lookup("opbFindEmailResult").text = metadataOk;
@@ -146,6 +150,7 @@
 							dialogApp.initValue = initValue;
 						});
 					});
+					
 				// 2. 비밀번호 찾기 양식이 전부 유효하게 작성되어 있는 경우, 비밀번호 찾기 서브미션 전송	
 				} else {		
 					initValue = "비밀번호를 조회 하시겠습니까?";
@@ -181,13 +186,16 @@
 				var sub_findPswd = e.control;
 				var opbFindPswdNotice = app.lookup("opbFindPswdNotice");
 				
-				var metadataOk = sub_findPswd.getMetadata("ok"); 	// Controller측에서 입력한 정보에 따른 비밀번호를 조회하여 ok(조회 성공)인 경우
+				var metadataOk = sub_findPswd.getMetadata("ok"); 		// Controller측에서 입력한 정보에 따른 비밀번호를 조회하여 ok(조회 성공)인 경우
 				var metadataFail = sub_findPswd.getMetadata("fail"); 	// Controller측에서 입력한 정보에 따른 비밀번호를 조회하여 fail(조회 불가)인 경우
 
-				if (metadataFail) {		//---> 1. 입력한 정보에 따른 비밀번호를 조회할 수 없는 경우
+				// 1. 입력한 정보에 따른 비밀번호를 조회할 수 없는 경우
+				if (metadataFail) {		
 					opbFindPswdNotice.style.css("color", "red");
 					opbFindPswdNotice.text = "등록된 정보가 없습니다. 입력하신 정보를 다시 확인해주세요.";
-				} else {						//---> 2. 입력한 정보에 따른 비밀번호를 조회하는데 성공한 경우
+				
+				// 2. 입력한 정보에 따른 비밀번호를 조회하는데 성공한 경우
+				} else {						
 					opbFindPswdNotice.style.css("color", "black");
 					opbFindPswdNotice.text = "입력하신 회원정보에 해당하는 비밀번호 정보는 다음과 같습니다.\n보안을 위해 비밀번호를 수정해주시길 바랍니다."
 					app.lookup("opbFindPswdResult").text = metadataOk;
@@ -306,7 +314,7 @@
 					verticalLayout_4.topMargin = 50;
 					group_3.setLayout(verticalLayout_4);
 					(function(container){
-						var tabFolder_1 = new cpr.controls.TabFolder();
+						var tabFolder_1 = new cpr.controls.TabFolder("tab");
 						tabFolder_1.style.header.css({
 							"border-radius" : "0px",
 							"color" : "white",
@@ -352,7 +360,8 @@
 									var output_1 = new cpr.controls.Output();
 									output_1.value = "회원가입시 사용하신 Email을 찾기 위해 다음의 정보를 입력해주세요.";
 									output_1.style.css({
-										"font-size" : "20px"
+										"font-size" : "20px",
+										"font-family" : "푸른전남"
 									});
 									container.addChild(output_1, {
 										"colIndex": 0,
@@ -370,6 +379,7 @@
 										"border-left-style" : "none",
 										"font-size" : "20px",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남 Medium",
 										"border-top-style" : "none"
 									});
 									container.addChild(output_2, {
@@ -388,6 +398,7 @@
 										"border-left-style" : "none",
 										"font-size" : "20px",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남 Medium",
 										"border-top-style" : "none"
 									});
 									if(typeof onOutputValueChange == "function") {
@@ -407,6 +418,7 @@
 										"border-left-style" : "none",
 										"font-size" : "20px",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남 Medium",
 										"border-top-style" : "none"
 									});
 									container.addChild(output_4, {
@@ -426,6 +438,7 @@
 										"font-size" : "20px",
 										"border-right-color" : "#a0a0a0",
 										"border-bottom-style" : "solid",
+										"font-family" : "푸른전남",
 										"border-top-style" : "solid"
 									});
 									inputBox_1.bind("value").toDataMap(app.lookup("dm_find_email"), "member_name");
@@ -450,6 +463,7 @@
 										"font-size" : "20px",
 										"border-right-color" : "#a0a0a0",
 										"border-bottom-style" : "solid",
+										"font-family" : "푸른전남",
 										"border-top-style" : "solid"
 									});
 									inputBox_2.bind("value").toDataMap(app.lookup("dm_find_email"), "member_phone");
@@ -474,6 +488,7 @@
 										"font-size" : "20px",
 										"border-right-color" : "#a0a0a0",
 										"border-bottom-style" : "solid",
+										"font-family" : "푸른전남",
 										"border-top-style" : "solid"
 									});
 									inputBox_3.bind("value").toDataMap(app.lookup("dm_find_email"), "member_birthday");
@@ -489,7 +504,8 @@
 									var output_5 = new cpr.controls.Output("opbFindEmailNotice");
 									output_5.value = "";
 									output_5.style.css({
-										"font-size" : "20px"
+										"font-size" : "20px",
+										"font-family" : "푸른전남"
 									});
 									container.addChild(output_5, {
 										"colIndex": 0,
@@ -529,6 +545,7 @@
 										"border-radius" : "20px",
 										"border-bottom-width" : "2px",
 										"border-top-color" : "#0ca44e",
+										"font-family" : "푸른전남 Medium",
 										"background-image" : "none"
 									});
 									if(typeof onBtnFindEmailClick == "function") {
@@ -548,6 +565,7 @@
 										"border-right-style" : "none",
 										"border-left-style" : "none",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남",
 										"background-image" : "none",
 										"border-top-style" : "none"
 									});
@@ -562,6 +580,7 @@
 										"border-left-style" : "none",
 										"font-size" : "16px",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남",
 										"background-image" : "none",
 										"border-top-style" : "none"
 									});
@@ -576,6 +595,7 @@
 										"border-left-style" : "none",
 										"font-size" : "16px",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남",
 										"background-image" : "none",
 										"border-top-style" : "none"
 									});
@@ -620,7 +640,8 @@
 									var output_7 = new cpr.controls.Output();
 									output_7.value = "비밀번호를 찾기 위해 다음의 정보를 입력해주세요.";
 									output_7.style.css({
-										"font-size" : "20px"
+										"font-size" : "20px",
+										"font-family" : "푸른전남"
 									});
 									container.addChild(output_7, {
 										"colIndex": 0,
@@ -638,6 +659,7 @@
 										"border-left-style" : "none",
 										"font-size" : "20px",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남 Medium",
 										"border-top-style" : "none"
 									});
 									container.addChild(output_8, {
@@ -656,6 +678,7 @@
 										"border-left-style" : "none",
 										"font-size" : "20px",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남 Medium",
 										"border-top-style" : "none"
 									});
 									container.addChild(output_9, {
@@ -672,6 +695,7 @@
 										"border-left-style" : "none",
 										"font-size" : "20px",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남 Medium",
 										"border-top-style" : "none"
 									});
 									container.addChild(output_10, {
@@ -690,6 +714,7 @@
 										"font-size" : "20px",
 										"border-right-color" : "#a0a0a0",
 										"border-bottom-style" : "solid",
+										"font-family" : "푸른전남",
 										"border-top-style" : "solid"
 									});
 									inputBox_4.bind("value").toDataMap(app.lookup("dm_find_pswd"), "member_email");
@@ -711,6 +736,7 @@
 										"font-size" : "20px",
 										"border-right-color" : "#a0a0a0",
 										"border-bottom-style" : "solid",
+										"font-family" : "푸른전남",
 										"border-top-style" : "solid"
 									});
 									inputBox_5.bind("value").toDataMap(app.lookup("dm_find_pswd"), "member_name");
@@ -734,6 +760,7 @@
 										"font-size" : "20px",
 										"border-right-color" : "#a0a0a0",
 										"border-bottom-style" : "solid",
+										"font-family" : "푸른전남",
 										"border-top-style" : "solid"
 									});
 									inputBox_6.bind("value").toDataMap(app.lookup("dm_find_pswd"), "member_phone");
@@ -749,7 +776,8 @@
 									var output_11 = new cpr.controls.Output("opbFindPswdNotice");
 									output_11.value = "";
 									output_11.style.css({
-										"font-size" : "20px"
+										"font-size" : "20px",
+										"font-family" : "푸른전남"
 									});
 									container.addChild(output_11, {
 										"colIndex": 0,
@@ -789,6 +817,7 @@
 										"border-radius" : "20px",
 										"border-bottom-width" : "2px",
 										"border-top-color" : "#0ca44e",
+										"font-family" : "푸른전남 Medium",
 										"background-image" : "none"
 									});
 									if(typeof onBtnFindPswdClick == "function") {
@@ -807,6 +836,7 @@
 										"border-left-style" : "none",
 										"font-size" : "16px",
 										"border-bottom-style" : "none",
+										"font-family" : "푸른전남",
 										"background-image" : "none",
 										"border-top-style" : "none"
 									});
@@ -827,6 +857,12 @@
 						})(tabFolder_1);
 						tabFolder_1.addTabItem(tabItem_2);
 						tabFolder_1.setSelectedTabItem(tabItem_1);
+						if(typeof onTabFolderTabheaderClick == "function") {
+							tabFolder_1.addEventListener("tabheader-click", onTabFolderTabheaderClick);
+						}
+						if(typeof onTabSelectionChange == "function") {
+							tabFolder_1.addEventListener("selection-change", onTabSelectionChange);
+						}
 						container.addChild(tabFolder_1, {
 							"width": "880px",
 							"height": "610px"

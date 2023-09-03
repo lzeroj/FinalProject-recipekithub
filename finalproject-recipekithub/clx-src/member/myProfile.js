@@ -5,19 +5,28 @@
  * @author kjoon
  ************************************************/
 
+// sessionStorage에서 저장된 데이터를 찾는 데 사용되는 함수. key(회원 로그인 Email 정보)을 인수로 받는다.
 function getTimedSessionData(key) {
+	// storedData는 제공된 key(회원 로그인 Email 정보) 를 사용하여 sessionStorage에서 검색한 값을 저장.
 	var storedData = sessionStorage.getItem(key);
 	
+	// storedData가 존재하는지 확인
 	if (storedData) {
+		// 저장된 JSON 문자열(회원 로그인 Email 정보)을 JavaScript 객체로 파싱하고 data에 저장
 		var data = JSON.parse(storedData);
+		//currentTime은 현재 시간을 밀리초 단위로 저장.
 		var currentTime = new Date().getTime();
 		
+		// 현재 시간이 data에 저장된 만료 시간보다 작은지 확인
 		if (currentTime < data.expirationTime) {
+			// 데이터가 만료되지 않았다면 data.value에 저장된 값을 반환
 			return data.value;
 		} else {
+			// 데이터가 만료되었다면 sessionStorage에서 해당 항목을 제거
 			sessionStorage.removeItem(key);
 		}
 	}
+	// storedData가 존재하지 않거나 만료되었다면 함수는 null을 반환. 만료된 경우에는 sessionStorage에서도 제거
 	return null;
 }
 
@@ -35,6 +44,7 @@ function onBodyLoad(e) {
  * 서브미션에서 submit-success 이벤트 발생 시 호출.
  * 통신이 성공하면 발생합니다.
  */
+// 화면 로드시 서브미션을 전송한 후, 통신이 성공적이면 프로필 화면에 정보를 출력
 function onSub_profileSubmitSuccess(e) {
 	var sub_profile = e.control;
 	var dsProfile = app.lookup("ds_profile");
@@ -42,11 +52,10 @@ function onSub_profileSubmitSuccess(e) {
 	app.lookup("ipbPassword1").text = dsProfile.getValue(0, "memberPassword");
 	app.lookup("ipbName").text = dsProfile.getValue(0, "memberName");
 	app.lookup("ipbNick").text = dsProfile.getValue(0, "memberNick");
-	console.log(app.lookup("ipbNick").text);
 	app.lookup("address").text = dsProfile.getValue(0, "memberAddress");
-	app.lookup("postCode").text = dsProfile.getValue(0, "memberPostcode");
+	app.lookup("postCode").mask = dsProfile.getValue(0, "memberPostcode");
 	app.lookup("detailAddress").text = dsProfile.getValue(0, "memberAddressDetail");
-	app.lookup("ipbPhone").mask = dsProfile.getValue(0, "memberPhone");
+	app.lookup("ipbPhone").text = dsProfile.getValue(0, "memberPhone");
 	app.lookup("ipbBirthday").value = dsProfile.getValue(0, "memberBirthday");
 	app.lookup("profileImg").src = "/upload/profile/" + dsProfile.getValue(0, "memberImage");
 }
@@ -180,7 +189,7 @@ function onSub_check_nickSubmitSuccess(e) {
 	var metadataOk = sub_check_nick.getMetadata("ok"); 			// Controller측에서 닉네임 중복 여부를 체크하여 ok(사용 가능)인 경우
 	var metadataFail = sub_check_nick.getMetadata("fail"); 		// Controller측에서 닉네임 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우
 	
-	var ipbNick = app.lookup("ipbNick"); 										// 닉네임 입력 input-box
+	var ipbNick = app.lookup("ipbNick"); 											// 닉네임 입력 input-box
 	var opbCheckNickResult = app.lookup("opbCheckNick"); 			// 닉네임 유효성 검사 결과가 출력되는 output-box
 	var imgNick = app.lookup("imgNickChk"); 									// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
 	
@@ -317,8 +326,10 @@ function onSub_updateSubmitSuccess(e) {
 			dialogApp.initValue = initValue;
 		});
 	}).then(function(returnValue) {
-		var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-		httpPostMethod.submit();
+		cpr.core.App.load("index", function(newapp){
+			app.close();
+			newapp.createNewInstance().run();
+		});
 	});
 }
 
@@ -360,8 +371,10 @@ function onSub_deleteSubmitSuccess(e) {
 			dialogApp.initValue = initValue;
 		});
 	}).then(function(returnValue) {
-		var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-		httpPostMethod.submit();
+		cpr.core.App.load("index", function(newapp){
+			app.close();
+			newapp.createNewInstance().run();
+		});
 	});
 }
 
@@ -371,7 +384,10 @@ function onSub_deleteSubmitSuccess(e) {
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
 function onBtnCancelClick(e) {
-	window.location.href = "index.clx";
+	cpr.core.App.load("index", function(newapp){
+		app.close();
+		newapp.createNewInstance().run();
+	});
 }
 
 
@@ -421,8 +437,9 @@ function onSub_delete_imageSubmitSuccess(e){
 	}).then(function(returnValue) {
 		fileInput.clear();
 		image.src = "";
-		var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
-		httpPostMethod.submit();
+		image.redraw();
+		//var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+		//httpPostMethod.submit();
 	});
 }
 
@@ -448,9 +465,6 @@ function onBodyInit(e){
  * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
  */
 function onBtnPostcodeClick(e){
-	//var btnPostcode = e.control;
-	//app.lookup("btnPostcode").click();
-	
 	postCode();
 }
 
@@ -519,5 +533,4 @@ function onBodyUnload(e){
 	var appConf = cpr.core.AppConfig.INSTANCE;
 	appConf.getEnvConfig().setValue("appcache", false);
 }
-
 

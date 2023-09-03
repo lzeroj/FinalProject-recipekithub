@@ -20,19 +20,28 @@
 			 * @author kjoon
 			 ************************************************/
 
+			// sessionStorage에서 저장된 데이터를 찾는 데 사용되는 함수. key(회원 로그인 Email 정보)을 인수로 받는다.
 			function getTimedSessionData(key) {
+				// storedData는 제공된 key(회원 로그인 Email 정보) 를 사용하여 sessionStorage에서 검색한 값을 저장.
 				var storedData = sessionStorage.getItem(key);
 				
+				// storedData가 존재하는지 확인
 				if (storedData) {
+					// 저장된 JSON 문자열(회원 로그인 Email 정보)을 JavaScript 객체로 파싱하고 data에 저장
 					var data = JSON.parse(storedData);
+					//currentTime은 현재 시간을 밀리초 단위로 저장.
 					var currentTime = new Date().getTime();
 					
+					// 현재 시간이 data에 저장된 만료 시간보다 작은지 확인
 					if (currentTime < data.expirationTime) {
+						// 데이터가 만료되지 않았다면 data.value에 저장된 값을 반환
 						return data.value;
 					} else {
+						// 데이터가 만료되었다면 sessionStorage에서 해당 항목을 제거
 						sessionStorage.removeItem(key);
 					}
 				}
+				// storedData가 존재하지 않거나 만료되었다면 함수는 null을 반환. 만료된 경우에는 sessionStorage에서도 제거
 				return null;
 			}
 
@@ -50,6 +59,7 @@
 			 * 서브미션에서 submit-success 이벤트 발생 시 호출.
 			 * 통신이 성공하면 발생합니다.
 			 */
+			// 화면 로드시 서브미션을 전송한 후, 통신이 성공적이면 프로필 화면에 정보를 출력
 			function onSub_profileSubmitSuccess(e) {
 				var sub_profile = e.control;
 				var dsProfile = app.lookup("ds_profile");
@@ -57,11 +67,10 @@
 				app.lookup("ipbPassword1").text = dsProfile.getValue(0, "memberPassword");
 				app.lookup("ipbName").text = dsProfile.getValue(0, "memberName");
 				app.lookup("ipbNick").text = dsProfile.getValue(0, "memberNick");
-				console.log(app.lookup("ipbNick").text);
 				app.lookup("address").text = dsProfile.getValue(0, "memberAddress");
-				app.lookup("postCode").text = dsProfile.getValue(0, "memberPostcode");
+				app.lookup("postCode").mask = dsProfile.getValue(0, "memberPostcode");
 				app.lookup("detailAddress").text = dsProfile.getValue(0, "memberAddressDetail");
-				app.lookup("ipbPhone").mask = dsProfile.getValue(0, "memberPhone");
+				app.lookup("ipbPhone").text = dsProfile.getValue(0, "memberPhone");
 				app.lookup("ipbBirthday").value = dsProfile.getValue(0, "memberBirthday");
 				app.lookup("profileImg").src = "/upload/profile/" + dsProfile.getValue(0, "memberImage");
 			}
@@ -195,7 +204,7 @@
 				var metadataOk = sub_check_nick.getMetadata("ok"); 			// Controller측에서 닉네임 중복 여부를 체크하여 ok(사용 가능)인 경우
 				var metadataFail = sub_check_nick.getMetadata("fail"); 		// Controller측에서 닉네임 중복 여부를 체크하여 fail(중복되어 사용 불가)인 경우
 				
-				var ipbNick = app.lookup("ipbNick"); 										// 닉네임 입력 input-box
+				var ipbNick = app.lookup("ipbNick"); 											// 닉네임 입력 input-box
 				var opbCheckNickResult = app.lookup("opbCheckNick"); 			// 닉네임 유효성 검사 결과가 출력되는 output-box
 				var imgNick = app.lookup("imgNickChk"); 									// 사용가능한 Email인지 시각적으로 표현해주는 O/X 이미지가 출력되는 image-box
 				
@@ -332,8 +341,10 @@
 						dialogApp.initValue = initValue;
 					});
 				}).then(function(returnValue) {
-					var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-					httpPostMethod.submit();
+					cpr.core.App.load("index", function(newapp){
+						app.close();
+						newapp.createNewInstance().run();
+					});
 				});
 			}
 
@@ -375,8 +386,10 @@
 						dialogApp.initValue = initValue;
 					});
 				}).then(function(returnValue) {
-					var httpPostMethod = new cpr.protocols.HttpPostMethod("index.clx");
-					httpPostMethod.submit();
+					cpr.core.App.load("index", function(newapp){
+						app.close();
+						newapp.createNewInstance().run();
+					});
 				});
 			}
 
@@ -386,7 +399,10 @@
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
 			function onBtnCancelClick(e) {
-				window.location.href = "index.clx";
+				cpr.core.App.load("index", function(newapp){
+					app.close();
+					newapp.createNewInstance().run();
+				});
 			}
 
 
@@ -436,8 +452,9 @@
 				}).then(function(returnValue) {
 					fileInput.clear();
 					image.src = "";
-					var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
-					httpPostMethod.submit();
+					image.redraw();
+					//var httpPostMethod = new cpr.protocols.HttpPostMethod("member/myProfile.clx");
+					//httpPostMethod.submit();
 				});
 			}
 
@@ -463,9 +480,6 @@
 			 * 사용자가 컨트롤을 클릭할 때 발생하는 이벤트.
 			 */
 			function onBtnPostcodeClick(e){
-				//var btnPostcode = e.control;
-				//app.lookup("btnPostcode").click();
-				
 				postCode();
 			}
 
@@ -780,13 +794,6 @@
 			var xYLayout_1 = new cpr.controls.layouts.XYLayout();
 			group_1.setLayout(xYLayout_1);
 			(function(container){
-				var userDefinedControl_1 = new udc.header3();
-				container.addChild(userDefinedControl_1, {
-					"top": "0px",
-					"right": "0px",
-					"left": "0px",
-					"height": "205px"
-				});
 				var group_2 = new cpr.controls.Container();
 				group_2.style.css({
 					"background-color" : "#F4FAEC",
@@ -871,7 +878,8 @@
 											"background-color" : "#F0F0F0",
 											"border-radius" : "5px",
 											"font-weight" : "bolder",
-											"font-size" : "15px"
+											"font-size" : "15px",
+											"font-family" : "푸른전남 Medium"
 										});
 										container.addChild(output_1, {
 											"colIndex": 0,
@@ -929,7 +937,8 @@
 											"background-color" : "#F0F0F0",
 											"border-radius" : "5px",
 											"font-weight" : "bolder",
-											"font-size" : "15px"
+											"font-size" : "15px",
+											"font-family" : "푸른전남 Medium"
 										});
 										container.addChild(output_2, {
 											"colIndex": 0,
@@ -1068,6 +1077,7 @@
 											"background-color" : "none",
 											"border-radius" : "10px",
 											"text-shadow" : "none",
+											"font-family" : "푸른전남",
 											"background-image" : "none"
 										});
 										if(typeof onBtnDeleteProfileImgClick == "function") {
@@ -1084,7 +1094,8 @@
 											"border-bottom-color" : "#a0a0a0",
 											"border-left-color" : "#a0a0a0",
 											"border-top-color" : "#a0a0a0",
-											"border-right-color" : "#a0a0a0"
+											"border-right-color" : "#a0a0a0",
+											"font-family" : "푸른전남"
 										});
 										if(typeof onFi1ValueChange == "function") {
 											fileInput_1.addEventListener("value-change", onFi1ValueChange);
@@ -1141,7 +1152,8 @@
 											"background-color" : "#F0F0F0",
 											"border-radius" : "5px",
 											"font-weight" : "bolder",
-											"font-size" : "15px"
+											"font-size" : "15px",
+											"font-family" : "푸른전남 Medium"
 										});
 										container.addChild(output_3, {
 											"colIndex": 0,
@@ -1175,6 +1187,9 @@
 										});
 										var output_4 = new cpr.controls.Output("opbCheckPassword");
 										output_4.value = "";
+										output_4.style.css({
+											"font-family" : "푸른전남"
+										});
 										container.addChild(output_4, {
 											"colIndex": 1,
 											"rowIndex": 1,
@@ -1182,9 +1197,10 @@
 											"rowSpan": 1
 										});
 										var output_5 = new cpr.controls.Output();
-										output_5.value = "❈ 8자 이상~25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
+										output_5.value = "❈ 8자 이상 ~ 25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
 										output_5.style.css({
-											"font-size" : "12px"
+											"font-size" : "12px",
+											"font-family" : "푸른전남"
 										});
 										container.addChild(output_5, {
 											"colIndex": 1,
@@ -1218,7 +1234,8 @@
 											"background-color" : "#F0F0F0",
 											"border-radius" : "5px",
 											"font-weight" : "bolder",
-											"font-size" : "15px"
+											"font-size" : "15px",
+											"font-family" : "푸른전남 Medium"
 										});
 										container.addChild(output_6, {
 											"colIndex": 0,
@@ -1250,6 +1267,9 @@
 										});
 										var output_7 = new cpr.controls.Output("opbCheckPassword2");
 										output_7.value = "";
+										output_7.style.css({
+											"font-family" : "푸른전남"
+										});
 										container.addChild(output_7, {
 											"colIndex": 1,
 											"rowIndex": 1,
@@ -1257,9 +1277,10 @@
 											"rowSpan": 1
 										});
 										var output_8 = new cpr.controls.Output();
-										output_8.value = "❈ 8자 이상~25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
+										output_8.value = "❈ 8자 이상 ~ 25자 이하 \r\n(숫자, 대소문자, 특수 문자 모두 포함)";
 										output_8.style.css({
-											"font-size" : "12px"
+											"font-size" : "12px",
+											"font-family" : "푸른전남"
 										});
 										container.addChild(output_8, {
 											"colIndex": 1,
@@ -1293,6 +1314,7 @@
 											"background-color" : "#F0F0F0",
 											"font-weight" : "bolder",
 											"font-size" : "15px",
+											"font-family" : "푸른전남 Medium",
 											"border-top-style" : "none"
 										});
 										container.addChild(output_9, {
@@ -1309,7 +1331,8 @@
 										inputBox_5.style.css({
 											"border-radius" : "5px",
 											"padding-left" : "10px",
-											"font-size" : "15px"
+											"font-size" : "15px",
+											"font-family" : "푸른전남"
 										});
 										inputBox_5.bind("value").toDataSet(app.lookup("ds_profile"), "memberNick", 0);
 										if(typeof onIpbNickBlur == "function") {
@@ -1321,6 +1344,9 @@
 										});
 										var output_10 = new cpr.controls.Output("opbCheckNick");
 										output_10.value = "";
+										output_10.style.css({
+											"font-family" : "푸른전남"
+										});
 										container.addChild(output_10, {
 											"colIndex": 1,
 											"rowIndex": 1,
@@ -1330,7 +1356,8 @@
 										var output_11 = new cpr.controls.Output();
 										output_11.value = "❈ 중복 불가, 1자 이상~8자 이하.";
 										output_11.style.css({
-											"font-size" : "14px"
+											"font-size" : "14px",
+											"font-family" : "푸른전남"
 										});
 										container.addChild(output_11, {
 											"colIndex": 1,
@@ -1356,7 +1383,8 @@
 										"background-color" : "#F0F0F0",
 										"border-radius" : "5px",
 										"font-weight" : "bolder",
-										"font-size" : "15px"
+										"font-size" : "15px",
+										"font-family" : "푸른전남 Medium"
 									});
 									container.addChild(output_12, {
 										"colIndex": 0,
@@ -1368,7 +1396,8 @@
 										"background-color" : "#F0F0F0",
 										"border-radius" : "5px",
 										"font-weight" : "bolder",
-										"font-size" : "15px"
+										"font-size" : "15px",
+										"font-family" : "푸른전남 Medium"
 									});
 									container.addChild(output_13, {
 										"colIndex": 0,
@@ -1381,7 +1410,7 @@
 										"border-radius" : "5px",
 										"font-weight" : "bolder",
 										"font-size" : "15px",
-										"font-family" : "'fonts/PureunJeonnam.ttf' , 'Malgun Gothic' , sans-serif"
+										"font-family" : "푸른전남 Medium"
 									});
 									container.addChild(output_14, {
 										"colIndex": 0,
@@ -1393,25 +1422,13 @@
 									dateInput_1.style.setClasses(["cl-dateinput-register", "single-datepicker"]);
 									dateInput_1.style.css({
 										"border-radius" : "5px",
-										"font-size" : "15px"
+										"font-size" : "15px",
+										"font-family" : "푸른전남"
 									});
 									dateInput_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberBirthday", 0);
 									container.addChild(dateInput_1, {
 										"colIndex": 1,
 										"rowIndex": 3
-									});
-									var maskEditor_1 = new cpr.controls.MaskEditor("ipbPhone");
-									maskEditor_1.mask = "000-0000-0000";
-									maskEditor_1.showClearButton = true;
-									maskEditor_1.style.css({
-										"border-radius" : "5px",
-										"padding-left" : "10px",
-										"font-size" : "15px"
-									});
-									maskEditor_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberPhone", 0);
-									container.addChild(maskEditor_1, {
-										"colIndex": 1,
-										"rowIndex": 4
 									});
 									var group_14 = new cpr.controls.Container();
 									var formLayout_11 = new cpr.controls.layouts.FormLayout();
@@ -1429,7 +1446,8 @@
 										var button_5 = new cpr.controls.Button("btnPostcode");
 										button_5.value = "주소 검색";
 										button_5.style.css({
-											"font-size" : "15px"
+											"font-size" : "15px",
+											"font-family" : "푸른전남"
 										});
 										if(typeof onBtnPostcodeClick == "function") {
 											button_5.addEventListener("click", onBtnPostcodeClick);
@@ -1438,14 +1456,15 @@
 											"colIndex": 1,
 											"rowIndex": 0
 										});
-										var maskEditor_2 = new cpr.controls.MaskEditor("postCode");
-										maskEditor_2.mask = "00000";
-										maskEditor_2.style.css({
+										var maskEditor_1 = new cpr.controls.MaskEditor("postCode");
+										maskEditor_1.mask = "XXXXX";
+										maskEditor_1.style.css({
 											"border-radius" : "5px",
-											"padding-left" : "10px"
+											"padding-left" : "10px",
+											"font-family" : "푸른전남"
 										});
-										maskEditor_2.bind("value").toDataSet(app.lookup("ds_profile"), "memberPostcode", 0);
-										container.addChild(maskEditor_2, {
+										maskEditor_1.bind("value").toDataSet(app.lookup("ds_profile"), "memberPostcode", 0);
+										container.addChild(maskEditor_1, {
 											"colIndex": 0,
 											"rowIndex": 0
 										});
@@ -1455,7 +1474,8 @@
 										inputBox_6.spellCheck = false;
 										inputBox_6.style.css({
 											"border-radius" : "5px",
-											"padding-left" : "10px"
+											"padding-left" : "10px",
+											"font-family" : "푸른전남"
 										});
 										inputBox_6.bind("value").toDataSet(app.lookup("ds_profile"), "memberAddress", 0);
 										container.addChild(inputBox_6, {
@@ -1470,7 +1490,8 @@
 										inputBox_7.spellCheck = false;
 										inputBox_7.style.css({
 											"border-radius" : "5px",
-											"padding-left" : "10px"
+											"padding-left" : "10px",
+											"font-family" : "푸른전남"
 										});
 										inputBox_7.bind("value").toDataSet(app.lookup("ds_profile"), "memberAddressDetail", 0);
 										container.addChild(inputBox_7, {
@@ -1483,6 +1504,22 @@
 									container.addChild(group_14, {
 										"colIndex": 1,
 										"rowIndex": 5
+									});
+									var inputBox_8 = new cpr.controls.InputBox("ipbPhone");
+									inputBox_8.secret = false;
+									inputBox_8.showClearButton = true;
+									inputBox_8.maxLength = 11;
+									inputBox_8.spellCheck = false;
+									inputBox_8.style.css({
+										"border-radius" : "5px",
+										"padding-left" : "10px",
+										"font-size" : "15px",
+										"font-family" : "푸른전남"
+									});
+									inputBox_8.bind("value").toDataSet(app.lookup("ds_profile"), "memberPhone", 0);
+									container.addChild(inputBox_8, {
+										"colIndex": 1,
+										"rowIndex": 4
 									});
 								})(group_10);
 								container.addChild(group_10, {
@@ -1510,17 +1547,24 @@
 					});
 				})(group_2);
 				container.addChild(group_2, {
-					"top": "200px",
-					"bottom": "100px",
+					"top": "205px",
+					"bottom": "103px",
 					"width": "1920px",
 					"left": "calc(50% - 960px)"
 				});
-				var userDefinedControl_2 = new udc.footer();
-				container.addChild(userDefinedControl_2, {
+				var userDefinedControl_1 = new udc.footer();
+				container.addChild(userDefinedControl_1, {
 					"right": "0px",
 					"bottom": "0px",
 					"left": "0px",
 					"height": "100px"
+				});
+				var userDefinedControl_2 = new udc.myPageHeader();
+				container.addChild(userDefinedControl_2, {
+					"top": "0px",
+					"right": "0px",
+					"left": "0px",
+					"height": "205px"
 				});
 			})(group_1);
 			container.addChild(group_1, {

@@ -39,8 +39,7 @@ public class MemberController {
 
 	// ---[ 전체 회원 정보 조회 ]---//
 	@RequestMapping("/memberlist")
-	public View findMemberList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View findMemberList(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		// 전체 회원 정보 저장
 		List<MemberVO> findMemberList = memberService.findMemberList();
 		dataRequest.setResponse("ds_member", findMemberList);
@@ -49,8 +48,7 @@ public class MemberController {
 
 	// ---[ 로그인 ]---//
 	@RequestMapping("/login")
-	public View login(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View login(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) 	throws Exception {
 		// `DataRequest`: 서브미션 통신에 대한 데이터
 		// `ParameterGroup` : 서브미션 request 데이터를 받음
 		// login-form.clx에서 서브미션(sub_login)을 통해 요청 데이터(데이터맵 : dm_login)을 전달 받음
@@ -84,7 +82,7 @@ public class MemberController {
 					return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 				}
 
-				// 사용자가 입력한 이메일과 비밀번호에 대응하는 회원정보가 존재하는 경우, 세션에 정보 저장
+				// 사용자가 입력한 이메일과 비밀번호에 대응하는 회원정보가 DB에 존재하는 경우, 세션 정보 저장
 				session = request.getSession(true);
 				session.setAttribute("member", member);
 				loginSuccess = true;
@@ -93,15 +91,13 @@ public class MemberController {
 			}
 		}
 		dataRequest.setMetadata(loginSuccess, message);
-		return new JSONDataView(); // 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
+		return new JSONDataView(); 	// 'JSONDataView : eXbuilder6의 clx로 데이터를 통신하기 위해 JSON형태로 넘겨주는 부분
 	}
 
 	// ---[ 회원가입 ]---//
 	@RequestMapping("/register")
-	public View registerMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
-		// register-form.clx에서 서브미션(sub_register)을 통해 요청 데이터(데이터맵 : dm_register_member)을
-		// 전달 받음
+	public View registerMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+		// register-form.clx에서 서브미션(sub_register)을 통해 요청 데이터(데이터맵 : dm_register_member)을 전달 받음
 		ParameterGroup param = dataRequest.getParameterGroup("dm_register_member");
 		String memberEmail = param.getValue("member_email");
 
@@ -142,8 +138,7 @@ public class MemberController {
 	// ---[ 회원가입시 이메일 중복 체크 ]---//
 	@RequestMapping("/checkEmail")
 	@ResponseBody
-	public View checkEmail(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View checkEmail(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_check_email");
 		String memberEmail = param.getValue("member_email");
 		int checkResult = memberService.checkDuplicateEmail(memberEmail);
@@ -162,8 +157,7 @@ public class MemberController {
 	// ---[ 회원가입시 닉네임 중복 체크 ]---//
 	@RequestMapping("/checkNick")
 	@ResponseBody
-	public View checkNick(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View checkNick(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		ParameterGroup param = dataRequest.getParameterGroup("dm_check_nick");
 		String memberNick = param.getValue("member_nick");
 		int checkResult = memberService.checkDuplicateNick(memberNick);
@@ -180,17 +174,16 @@ public class MemberController {
 
 	// ---[ 회원 프로필 조회 ]---//
 	@RequestMapping("/profileInfo")
-	public View viewMyProfile(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View viewMyProfile(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		// 로그인 여부 확인
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
-			System.out.println("---[로그인 상태가 아니므로 회원 정보 조회가 불가합니다.]---");
+			log.debug("---[로그인 상태가 아니므로 회원 정보 조회가 불가합니다.]---");
 			return new UIView("ui/member/login-form.clx");
 		}
 
 		MemberVO member = (MemberVO) session.getAttribute("member"); // 현재 session에 담겨있는 회원 정보 가져오기
-		System.out.println(member);
+		log.debug("member 프로필 정보 : {}", member);
 
 		List<MemberVO> myProfile = new ArrayList<>();
 		myProfile.add(member);
@@ -200,86 +193,82 @@ public class MemberController {
 	}
 
 	// ---[ 회원정보 수정 ]---//
-		@RequestMapping("/updateMember")
-		public View updateMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest,
-				String cartDetailQuantity, String mealkitName) throws Exception {
-			HttpSession session = request.getSession(false);
-			if (session == null || session.getAttribute("member") == null) {
-				System.out.println("---[로그인 상태가 아니므로 회원 정보 수정이 불가합니다.]---");
-				return new UIView("ui/member/login-form.clx");
-			}
-			
-			MemberVO member = (MemberVO) session.getAttribute("member");
-			
-			// myProfile.clx에서 서브미션(sub_update)을 통해 요청 데이터(데이터맵 : dm_update)을 전달 받음
-			ParameterGroup param = dataRequest.getParameterGroup("dm_update");
-			String memberEmail = param.getValue("memberEmail");
-			String memberPassword = param.getValue("memberPassword");
-			String memberName = param.getValue("memberName");
-			String memberNick = param.getValue("memberNick");			
-			String memberBirthday = param.getValue("memberBirthday");
-			String memberPhone = param.getValue("memberPhone");
-			String memberPostcode = param.getValue("memberPostcode");
-			String memberAddress = param.getValue("memberAddress");
-			String memberAddressDetail = param.getValue("memberAddressDetail");
-			String memberImage = param.getValue("memberImage");
-
-			
-			
-			
-			// 새로운 이미지가 업로드 되었는지 확인
-			Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
-			if (uploadFiles != null && uploadFiles.containsKey("memberImage")) {
-			    UploadFile[] uploadFile = uploadFiles.get("memberImage");
-	
-			    // uploadFile 이 null이 아닌지 확인
-			    if (uploadFile != null && uploadFile.length > 0) {
-			        // 기존에 이미지가 있는 경우 삭제
-			        if (memberImage != null) {
-			            File existImageFile = new File("C:\\upload\\profile\\" + memberImage);
-			             System.out.println(existImageFile);
-			            if (existImageFile.exists()) {
-			                existImageFile.delete();
-			            }
-			        }
-	
-			        // 새로운 이미지 업로드
-			        File orgName = uploadFile[0].getFile();
-			        String saveName = uploadFile[0].getFileName();
-			        String savePath = "C:\\upload\\profile\\";
-			        String uuid = UUID.randomUUID().toString();
-
-			        // 새로운 파일을 디렉토리에 저장
-			        FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
-
-			        // 이미지 업데이트
-			        member.setMemberImage(uuid + "_" + saveName);
-			        memberImage = member.getMemberImage();
-			    }
-			}
-			
-			MemberVO memberVO = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode,
-					memberAddress, memberAddressDetail, memberPhone, memberBirthday, null, null, null, memberImage);
-			log.debug("member 정보 : {}", memberVO);
-
-			if (memberVO != null) {
-				int result = memberService.updateMember(memberVO);
-				log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
-				session.setAttribute("member", memberVO);
-				System.out.println(session.getAttribute("member"));
-			}
-			
-			dataRequest.setResponse("ds_profile", memberVO);
-			return new JSONDataView();
+	@RequestMapping("/updateMember")
+	public View updateMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+		// 로그인 상태 여부 확인
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("member") == null) {
+			log.debug("---[로그인 상태가 아니므로 회원 정보 수정이 불가합니다.]---");
+			return new UIView("ui/member/login-form.clx");
 		}
+
+		MemberVO member = (MemberVO) session.getAttribute("member");
+
+		// myProfile.clx에서 서브미션(sub_update)을 통해 요청 데이터(데이터맵 : dm_update)을 전달 받음
+		ParameterGroup param = dataRequest.getParameterGroup("dm_update");
+		String memberEmail = param.getValue("memberEmail");
+		String memberPassword = param.getValue("memberPassword");
+		String memberName = param.getValue("memberName");
+		String memberNick = param.getValue("memberNick");
+		String memberBirthday = param.getValue("memberBirthday");
+		String memberPhone = param.getValue("memberPhone");
+		String memberPostcode = param.getValue("memberPostcode");
+		String memberAddress = param.getValue("memberAddress");
+		String memberAddressDetail = param.getValue("memberAddressDetail");
+		String memberImage = param.getValue("memberImage");
+
+		// 새로운 이미지가 업로드 되었는지 확인
+		Map<String, UploadFile[]> uploadFiles = dataRequest.getUploadFiles();
+		if (uploadFiles != null && uploadFiles.containsKey("memberImage")) {
+			UploadFile[] uploadFile = uploadFiles.get("memberImage");
+
+			// uploadFile 이 null이 아닌지 확인
+			if (uploadFile != null && uploadFile.length > 0) {
+				// 기존에 이미지가 있는 경우 삭제
+				if (memberImage != null) {
+					File existImageFile = new File("C:\\upload\\profile\\" + memberImage);
+					if (existImageFile.exists()) {
+						existImageFile.delete();
+					}
+				}
+
+				// 새로운 이미지 업로드
+				File orgName = uploadFile[0].getFile();
+				String saveName = uploadFile[0].getFileName();
+				String savePath = "C:\\upload\\profile\\";
+				String uuid = UUID.randomUUID().toString();
+
+				// 새로운 파일을 디렉토리에 저장
+				FileCopyUtils.copy(orgName, new File(savePath + uuid + "_" + saveName));
+
+				// 이미지 업데이트
+				member.setMemberImage(uuid + "_" + saveName);
+				memberImage = member.getMemberImage();
+			}
+		}
+
+		// 변경된 회원 객체 정보를 생성 
+		MemberVO memberVO = new MemberVO(memberEmail, memberPassword, memberName, memberNick, memberPostcode,
+				memberAddress, memberAddressDetail, memberPhone, memberBirthday, null, null, null, memberImage);
+
+		// 변경된 회원 객체 정보가 존재하는 경우, 회원정보 업데이트 메서드 호출 및 변경된 정보에 따른 새로운 세션 정보 설정
+		if (memberVO != null) {
+			int result = memberService.updateMember(memberVO);
+			log.debug("member 회원정보 수정 성공여부(if '1' succes) : {}", result);
+			session.setAttribute("member", memberVO);
+			log.debug("member update 정보 : {}", memberVO);
+		}
+
+		dataRequest.setResponse("ds_profile", memberVO);
+		return new JSONDataView();
+	}
 
 	// ---[ 회원 탈퇴 ]---//
 	@RequestMapping("/deleteMember")
-	public View deleteMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View deleteMember(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
-			System.out.println("---[로그인 상태가 아니므로 회원 탈퇴가 불가합니다.]---");
+			log.debug("---[로그인 상태가 아니므로 회원 탈퇴가 불가합니다.]---");
 			return new UIView("ui/member/login-form.clx");
 		}
 
@@ -293,8 +282,7 @@ public class MemberController {
 
 	// ---[ 관리자 : 회원 강퇴 ]---//
 	@RequestMapping("/deleteMembers")
-	public View deleteMembers(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View deleteMembers(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
 			log.debug("---[로그인 상태가 아니므로 회원 관리가 불가합니다.]---");
@@ -317,7 +305,7 @@ public class MemberController {
 		return new JSONDataView();
 	}
 
-	// ---[ 로그아웃 -> 메인 화면으로 이동 ]---//
+	// ---[ 로그아웃 ]---//
 	@RequestMapping("/logout")
 	public View logout(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
@@ -330,8 +318,7 @@ public class MemberController {
 
 	// ---[ 회원 이메일 찾기 ]---//
 	@RequestMapping("/findEmail")
-	public View findEmailByNamePhoneBirthday(HttpServletRequest request, HttpServletResponse response,
-			DataRequest dataRequest) throws Exception {
+	public View findEmailByNamePhoneBirthday(HttpServletRequest request, HttpServletResponse response, 	DataRequest dataRequest) throws Exception {
 		// find-email-pswd.clx에서 서브미션(sub_findEmail)을 통해 요청 데이터(데이터맵 : dm_find_email)을 전달 받음
 		ParameterGroup param = dataRequest.getParameterGroup("dm_find_email");
 		String memberName = param.getValue("member_name");
@@ -358,10 +345,8 @@ public class MemberController {
 
 	// ---[ 회원 비밀번호 찾기 ]---//
 	@RequestMapping("/findPassword")
-	public View findPswdByEmailNamePhone(HttpServletRequest request, HttpServletResponse response,
-			DataRequest dataRequest) throws Exception {
-		// find-email-pswd.clx에서 서브미션(sub_findPswd)을 통해 요청 데이터(데이터맵 : dm_find_pswd)을 전달
-		// 받음
+	public View findPswdByEmailNamePhone(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
+		// find-email-pswd.clx에서 서브미션(sub_findPswd)을 통해 요청 데이터(데이터맵 : dm_find_pswd)을 전달 받음
 		ParameterGroup param = dataRequest.getParameterGroup("dm_find_pswd");
 		String memberEmail = param.getValue("member_email");
 		String memberName = param.getValue("member_name");
@@ -387,11 +372,10 @@ public class MemberController {
 
 	// ---[ 프로필 조회 화면 : 프로필 사진 삭제 ]---//
 	@RequestMapping("/deleteProfileImage")
-	public View deleteProfileImg(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest)
-			throws Exception {
+	public View deleteProfileImg(HttpServletRequest request, HttpServletResponse response, DataRequest dataRequest) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
-			System.out.println("---[로그인 상태가 아니므로 프로필 사진 삭제가 불가합니다.]---");
+			log.debug("---[로그인 상태가 아니므로 프로필 사진 삭제가 불가합니다.]---");
 			return new UIView("ui/member/login-form.clx");
 		}
 

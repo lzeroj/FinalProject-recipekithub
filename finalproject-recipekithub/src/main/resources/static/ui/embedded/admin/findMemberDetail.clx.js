@@ -61,11 +61,9 @@
 				// 사용자가 체크한 행을 찾는다
 				var checkRowIndices = grdMem.getCheckRowIndices();
 				
-				//var memberEmail = null;
 				var memberEmails = [];
 				
 				if (selectedRowIndex != -1) {
-			        //memberEmail = grdMem.getCellValue(selectedRowIndex, "memberEmail");
 			        var memberEmail = grdMem.getCellValue(selectedRowIndex, "memberEmail");
 			        memberEmails.push(memberEmail);
 			        
@@ -73,11 +71,9 @@
 				}
 				
 				if (checkRowIndices.length > 0) { 
-					//grdMem.deleteRow(checkRowIndices);
-					
 					checkRowIndices.sort(function(a, b) { return b - a; });
 
-			        // Loop through the sorted array and delete rows
+			        // 정렬된 배열을 기반으로 행 삭제
 			        for (var i = 0; i < checkRowIndices.length; i++) {
 			            var rowIndex = checkRowIndices[i];
 			            var memberEmail = grdMem.getCellValue(rowIndex, "memberEmail");
@@ -85,10 +81,6 @@
 			            grdMem.deleteRow(rowIndex);
 			        }
 				}
-				
-				//var cellIndex = grdMem.getCellIndex("memberEmail");
-				//grdMem.getSelectedIndices()[0].rowIndex;
-				//grdMem.get
 				
 				if (selectedRowIndex == null || checkRowIndices == null) {
 					var initValue = "선택한 회원이 없습니다.\n다시 한번 확인해주세요.";
@@ -108,18 +100,8 @@
 							dialogApp.initValue = initValue;
 						});
 					}).then(function(returnValue) {
-						 var dataSet = app.lookup("ds_member");
-						
-						/*
-						dataMap.setValue("memberEmail", app.lookup("opbEmail").value);
-						
-						if (memberEmail !== null) {
-			                dataMap.setValue("memberEmail", memberEmail);
-			            }
-			            */
-						
+						var dataSet = app.lookup("ds_member");
 			            dataSet.setValue("memberEmail", memberEmail);
-						
 						var submission = app.lookup("sub_delete");
 						submission.send();
 					});
@@ -140,6 +122,7 @@
 						dialogApp.initValue = initValue;
 					});
 				}).then(function(returnValue) {
+					app.lookup("sub_findMemberList").send();
 					var grid = app.lookup("grd_member");
 					grid.clearSelection();
 					grid.redraw();
@@ -290,6 +273,7 @@
 					"padding-left" : "50px",
 					"padding-bottom" : "10px",
 					"font-size" : "30px",
+					"font-family" : "푸른전남 Medium",
 					"padding-right" : "50px"
 				});
 				tabFolder_1.style.body.css({
@@ -365,7 +349,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -380,7 +365,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -395,7 +381,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -410,7 +397,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -425,7 +413,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -440,7 +429,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -455,7 +445,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -470,7 +461,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -485,7 +477,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -500,7 +493,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -515,7 +509,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -530,7 +525,8 @@
 												"background-color" : "#86D2A7",
 												"color" : "black",
 												"font-weight" : "bolder",
-												"font-size" : "18px"
+												"font-size" : "18px",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									}
@@ -549,12 +545,18 @@
 										"constraint": {"rowIndex": 0, "colIndex": 1},
 										"configurator": function(cell){
 											cell.columnType = "rowindex";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 										}
 									},
 									{
 										"constraint": {"rowIndex": 0, "colIndex": 2},
 										"configurator": function(cell){
 											cell.columnName = "memberEmail";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var output_1 = new cpr.controls.Output("opbEmail");
 												output_1.style.css({
@@ -570,6 +572,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 3},
 										"configurator": function(cell){
 											cell.columnName = "memberNick";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var inputBox_1 = new cpr.controls.InputBox("ipb2");
 												inputBox_1.bind("value").toDataColumn("memberNick");
@@ -582,6 +587,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 4},
 										"configurator": function(cell){
 											cell.columnName = "memberName";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var inputBox_2 = new cpr.controls.InputBox("ipb3");
 												inputBox_2.bind("value").toDataColumn("memberName");
@@ -594,6 +602,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 5},
 										"configurator": function(cell){
 											cell.columnName = "memberBirthday";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var dateInput_1 = new cpr.controls.DateInput("dti1");
 												dateInput_1.bind("value").toDataColumn("memberBirthday");
@@ -606,6 +617,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 6},
 										"configurator": function(cell){
 											cell.columnName = "memberPhone";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var maskEditor_1 = new cpr.controls.MaskEditor("mse1");
 												maskEditor_1.mask = "000-0000-0000";
@@ -619,6 +633,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 7},
 										"configurator": function(cell){
 											cell.columnName = "memberPostcode";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var inputBox_3 = new cpr.controls.InputBox("ipb4");
 												inputBox_3.bind("value").toDataColumn("memberPostcode");
@@ -631,6 +648,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 8},
 										"configurator": function(cell){
 											cell.columnName = "memberAddress";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var inputBox_4 = new cpr.controls.InputBox("ipb5");
 												inputBox_4.bind("value").toDataColumn("memberAddress");
@@ -643,6 +663,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 9},
 										"configurator": function(cell){
 											cell.columnName = "memberAddressDetail";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var inputBox_5 = new cpr.controls.InputBox("ipb6");
 												inputBox_5.bind("value").toDataColumn("memberAddressDetail");
@@ -655,6 +678,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 10},
 										"configurator": function(cell){
 											cell.columnName = "memberType";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var inputBox_6 = new cpr.controls.InputBox("ipb7");
 												inputBox_6.bind("value").toDataColumn("memberType");
@@ -667,6 +693,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 11},
 										"configurator": function(cell){
 											cell.columnName = "memberStatus";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var inputBox_7 = new cpr.controls.InputBox("ipb8");
 												inputBox_7.bind("value").toDataColumn("memberStatus");
@@ -679,6 +708,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 12},
 										"configurator": function(cell){
 											cell.columnName = "memberRegDate";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var maskEditor_2 = new cpr.controls.MaskEditor("mse2");
 												maskEditor_2.readOnly = true;
@@ -692,6 +724,9 @@
 										"constraint": {"rowIndex": 0, "colIndex": 13},
 										"configurator": function(cell){
 											cell.columnName = "memberImage";
+											cell.style.css({
+												"font-family" : "푸른전남"
+											});
 											cell.control = (function(){
 												var inputBox_8 = new cpr.controls.InputBox("ipb9");
 												inputBox_8.bind("value").toDataColumn("memberImage");
@@ -704,7 +739,8 @@
 							}
 						});
 						grid_1.style.css({
-							"border-radius" : "10px"
+							"border-radius" : "10px",
+							"font-family" : "푸른전남"
 						});
 						if(typeof onGrd_memberSelectionChange == "function") {
 							grid_1.addEventListener("selection-change", onGrd_memberSelectionChange);
@@ -737,6 +773,7 @@
 								"font-size" : "18px",
 								"border-top-color" : "#d11a1a",
 								"border-right-color" : "#d11a1a",
+								"font-family" : "푸른전남 Medium",
 								"background-image" : "none"
 							});
 							if(typeof onBtnDeleteRowClick == "function") {
@@ -744,6 +781,12 @@
 							}
 							container.addChild(button_1, {
 								"colIndex": 3,
+								"rowIndex": 0
+							});
+							var output_2 = new cpr.controls.Output();
+							output_2.value = "❈ 제목행 각 열의 \" v \" 를 클릭하면 검색창을 열 수 있습니다. ";
+							container.addChild(output_2, {
+								"colIndex": 0,
 								"rowIndex": 0
 							});
 						})(group_3);

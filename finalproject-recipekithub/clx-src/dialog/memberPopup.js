@@ -11,15 +11,6 @@
  */
 function onBodyLoad(/* cpr.events.CEvent */ e){
 	var host = app.getHost(); // 해당 앱이 누군가로부터 불렸는지 (부모가 있는지) 확인
-
-/*
-	if (vcDialog){
-		var voInitValue = app.getHostProperty("initValue"); // 다이얼로그의 initValue 가져오기
-		if (!ValueUtil.isNull(voInitValue)){
-			app.lookup("opbMessage").value = voInitValue["msg"]; // initValue 내의 msg 값을 아웃풋에 표시
-		}
-	}
-*/
 	if(host){
 		// 부모화면에서 보낸값을 팝업창에서 확인
 		var hostProperty = app.getHostProperty("initValue");

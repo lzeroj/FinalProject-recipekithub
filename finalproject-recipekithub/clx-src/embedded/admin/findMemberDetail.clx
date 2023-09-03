@@ -57,7 +57,7 @@
             <std:metadata>
               <std:property key="locked" value="true"/>
             </std:metadata>
-            <cl:grid std:sid="grid-2a889cff" id="grd_member" style="border-radius:10px;" datasetid="ds_member" resizablecolumns="all" columnMovable="true">
+            <cl:grid std:sid="grid-2a889cff" id="grd_member" style="border-radius:10px; font-family:푸른전남;" datasetid="ds_member" resizablecolumns="all" columnMovable="true">
               <cl:listener std:sid="listener-6f39eee9" name="selection-change" handler="onGrd_memberSelectionChange"/>
               <cl:xylayoutdata std:sid="xyl-data-780750fa" top="20px" right="20px" left="20px" height="500px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
               <cl:gridcolumn std:sid="g-column-0e0936b4" width="25px"/>
@@ -78,79 +78,79 @@
                 <cl:gridrow std:sid="g-row-a3689fd6" height="50px"/>
                 <cl:gridcell std:sid="gh-cell-966035ff" rowindex="0" colindex="0" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" sortable="false" filterable="false" columntype="checkbox"/>
                 <cl:gridcell std:sid="gh-cell-a41d79c6" rowindex="0" colindex="1" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" sortable="false" filterable="false"/>
-                <cl:gridcell std:sid="gh-cell-69ce68fc" rowindex="0" colindex="2" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberEmail" sortable="true" filterable="true" text="이메일"/>
-                <cl:gridcell std:sid="gh-cell-a82b1751" rowindex="0" colindex="3" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberNick" sortable="true" filterable="true" text="닉네임"/>
-                <cl:gridcell std:sid="gh-cell-cb28e286" rowindex="0" colindex="4" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberName" sortable="true" filterable="true" text="이름"/>
-                <cl:gridcell std:sid="gh-cell-03908d0e" rowindex="0" colindex="5" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberBirthday" sortable="true" filterable="true" text="생년월일"/>
-                <cl:gridcell std:sid="gh-cell-684d13d8" rowindex="0" colindex="6" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberPhone" sortable="true" filterable="true" text="연락처"/>
-                <cl:gridcell std:sid="gh-cell-7d3d0a6b" rowindex="0" colindex="7" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberPostcode" sortable="true" filterable="true" text="우편번호"/>
-                <cl:gridcell std:sid="gh-cell-4b15e39d" rowindex="0" colindex="8" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberAddress" sortable="true" filterable="true" text="주소"/>
-                <cl:gridcell std:sid="gh-cell-4aa5151e" rowindex="0" colindex="9" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberAddressDetail" sortable="true" filterable="true" text="상세주소"/>
-                <cl:gridcell std:sid="gh-cell-1f9158f7" rowindex="0" colindex="10" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberType" sortable="true" filterable="true" text="회원분류"/>
-                <cl:gridcell std:sid="gh-cell-18a00d7d" rowindex="0" colindex="11" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberStatus" sortable="true" filterable="true" text="회원상태"/>
-                <cl:gridcell std:sid="gh-cell-de6e67f5" rowindex="0" colindex="12" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberRegDate" sortable="true" filterable="true" text="가입일"/>
-                <cl:gridcell std:sid="gh-cell-5060be5a" rowindex="0" colindex="13" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px;" targetcolumnname="memberImage" sortable="true" filterable="true" text="프로필 사진"/>
+                <cl:gridcell std:sid="gh-cell-69ce68fc" rowindex="0" colindex="2" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberEmail" sortable="true" filterable="true" text="이메일"/>
+                <cl:gridcell std:sid="gh-cell-a82b1751" rowindex="0" colindex="3" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberNick" sortable="true" filterable="true" text="닉네임"/>
+                <cl:gridcell std:sid="gh-cell-cb28e286" rowindex="0" colindex="4" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberName" sortable="true" filterable="true" text="이름"/>
+                <cl:gridcell std:sid="gh-cell-03908d0e" rowindex="0" colindex="5" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberBirthday" sortable="true" filterable="true" text="생년월일"/>
+                <cl:gridcell std:sid="gh-cell-684d13d8" rowindex="0" colindex="6" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberPhone" sortable="true" filterable="true" text="연락처"/>
+                <cl:gridcell std:sid="gh-cell-7d3d0a6b" rowindex="0" colindex="7" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberPostcode" sortable="true" filterable="true" text="우편번호"/>
+                <cl:gridcell std:sid="gh-cell-4b15e39d" rowindex="0" colindex="8" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberAddress" sortable="true" filterable="true" text="주소"/>
+                <cl:gridcell std:sid="gh-cell-4aa5151e" rowindex="0" colindex="9" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberAddressDetail" sortable="true" filterable="true" text="상세주소"/>
+                <cl:gridcell std:sid="gh-cell-1f9158f7" rowindex="0" colindex="10" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberType" sortable="true" filterable="true" text="회원분류"/>
+                <cl:gridcell std:sid="gh-cell-18a00d7d" rowindex="0" colindex="11" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberStatus" sortable="true" filterable="true" text="회원상태"/>
+                <cl:gridcell std:sid="gh-cell-de6e67f5" rowindex="0" colindex="12" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberRegDate" sortable="true" filterable="true" text="가입일"/>
+                <cl:gridcell std:sid="gh-cell-5060be5a" rowindex="0" colindex="13" style="background-color:#86D2A7; color:black; font-weight:bolder; font-size:18px; font-family:푸른전남 Medium;" targetcolumnname="memberImage" sortable="true" filterable="true" text="프로필 사진"/>
               </cl:gridheader>
               <cl:griddetail std:sid="gd-band-8e35ea40">
                 <cl:gridrow std:sid="g-row-2a42fcc2" height="40px"/>
                 <cl:gridcell std:sid="gd-cell-d5eb809d" rowindex="0" colindex="0" columntype="checkbox"/>
-                <cl:gridcell std:sid="gd-cell-a7fb9500" rowindex="0" colindex="1" columntype="rowindex"/>
-                <cl:gridcell std:sid="gd-cell-f344f27b" rowindex="0" colindex="2" columnname="memberEmail">
+                <cl:gridcell std:sid="gd-cell-a7fb9500" rowindex="0" colindex="1" style="font-family:푸른전남;" columntype="rowindex"/>
+                <cl:gridcell std:sid="gd-cell-f344f27b" rowindex="0" colindex="2" style="font-family:푸른전남;" columnname="memberEmail">
                   <cl:output std:sid="output-9c7ec49c" id="opbEmail" style="background-color:#F0F0F0;">
                     <cl:celldata std:sid="c-data-99190223"/>
                   </cl:output>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-e20ce352" rowindex="0" colindex="3" columnname="memberNick">
+                <cl:gridcell std:sid="gd-cell-e20ce352" rowindex="0" colindex="3" style="font-family:푸른전남;" columnname="memberNick">
                   <cl:inputbox std:sid="i-box-c1ba11fc" id="ipb2">
                     <cl:celldata std:sid="c-data-f357af28"/>
                   </cl:inputbox>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-cc3cdb2b" rowindex="0" colindex="4" columnname="memberName">
+                <cl:gridcell std:sid="gd-cell-cc3cdb2b" rowindex="0" colindex="4" style="font-family:푸른전남;" columnname="memberName">
                   <cl:inputbox std:sid="i-box-8719a3a9" id="ipb3">
                     <cl:celldata std:sid="c-data-1ca9c443"/>
                   </cl:inputbox>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-91d0bbff" rowindex="0" colindex="5" columnname="memberBirthday">
+                <cl:gridcell std:sid="gd-cell-91d0bbff" rowindex="0" colindex="5" style="font-family:푸른전남;" columnname="memberBirthday">
                   <cl:dateinput std:sid="d-input-e7ed2507" id="dti1">
                     <cl:celldata std:sid="c-data-b6b9ecb5"/>
                   </cl:dateinput>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-50d05435" rowindex="0" colindex="6" columnname="memberPhone">
+                <cl:gridcell std:sid="gd-cell-50d05435" rowindex="0" colindex="6" style="font-family:푸른전남;" columnname="memberPhone">
                   <cl:maskeditor std:sid="m-editor-3c51eb9b" id="mse1" mask="000-0000-0000">
                     <cl:celldata std:sid="c-data-59f972e0"/>
                   </cl:maskeditor>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-65a98746" rowindex="0" colindex="7" columnname="memberPostcode">
+                <cl:gridcell std:sid="gd-cell-65a98746" rowindex="0" colindex="7" style="font-family:푸른전남;" columnname="memberPostcode">
                   <cl:inputbox std:sid="i-box-7fbda9f6" id="ipb4">
                     <cl:celldata std:sid="c-data-4bf0cb6e"/>
                   </cl:inputbox>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-407f08c1" rowindex="0" colindex="8" columnname="memberAddress">
+                <cl:gridcell std:sid="gd-cell-407f08c1" rowindex="0" colindex="8" style="font-family:푸른전남;" columnname="memberAddress">
                   <cl:inputbox std:sid="i-box-5a042ba0" id="ipb5">
                     <cl:celldata std:sid="c-data-acc214d5"/>
                   </cl:inputbox>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-b22d44a6" rowindex="0" colindex="9" columnname="memberAddressDetail">
+                <cl:gridcell std:sid="gd-cell-b22d44a6" rowindex="0" colindex="9" style="font-family:푸른전남;" columnname="memberAddressDetail">
                   <cl:inputbox std:sid="i-box-4e04bc3d" id="ipb6">
                     <cl:celldata std:sid="c-data-9e5fd40d"/>
                   </cl:inputbox>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-34ad319b" rowindex="0" colindex="10" columnname="memberType">
+                <cl:gridcell std:sid="gd-cell-34ad319b" rowindex="0" colindex="10" style="font-family:푸른전남;" columnname="memberType">
                   <cl:inputbox std:sid="i-box-8d2cafc1" id="ipb7">
                     <cl:celldata std:sid="c-data-5bc20708"/>
                   </cl:inputbox>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-0efeb0cb" rowindex="0" colindex="11" columnname="memberStatus">
+                <cl:gridcell std:sid="gd-cell-0efeb0cb" rowindex="0" colindex="11" style="font-family:푸른전남;" columnname="memberStatus">
                   <cl:inputbox std:sid="i-box-b70f77ef" id="ipb8">
                     <cl:celldata std:sid="c-data-f6f3a11b"/>
                   </cl:inputbox>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-f114786d" rowindex="0" colindex="12" columnname="memberRegDate">
+                <cl:gridcell std:sid="gd-cell-f114786d" rowindex="0" colindex="12" style="font-family:푸른전남;" columnname="memberRegDate">
                   <cl:maskeditor std:sid="m-editor-f1ba3373" id="mse2" readonly="true">
                     <cl:celldata std:sid="c-data-497cba99"/>
                   </cl:maskeditor>
                 </cl:gridcell>
-                <cl:gridcell std:sid="gd-cell-7caca146" rowindex="0" colindex="13" columnname="memberImage">
+                <cl:gridcell std:sid="gd-cell-7caca146" rowindex="0" colindex="13" style="font-family:푸른전남;" columnname="memberImage">
                   <cl:inputbox std:sid="i-box-2d0cbd60" id="ipb9">
                     <cl:celldata std:sid="c-data-6346897e"/>
                   </cl:inputbox>
@@ -159,10 +159,13 @@
             </cl:grid>
             <cl:group std:sid="group-99759c9c">
               <cl:xylayoutdata std:sid="xyl-data-54b787d4" right="20px" bottom="20px" left="20px" height="40px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
-              <cl:button std:sid="button-b036e8d5" id="btnDeleteRow" style="border-bottom-color:#d11a1a; border-left-color:#d11a1a; font-size:18px; border-top-color:#d11a1a; border-right-color:#d11a1a; background-image:none;" class="btn-dim btn-danger" value="삭제">
+              <cl:button std:sid="button-b036e8d5" id="btnDeleteRow" style="border-bottom-color:#d11a1a; border-left-color:#d11a1a; font-size:18px; border-top-color:#d11a1a; border-right-color:#d11a1a; font-family:푸른전남 Medium; background-image:none;" class="btn-dim btn-danger" value="삭제">
                 <cl:listener std:sid="listener-6fee63f6" name="click" handler="onBtnDeleteRowClick"/>
                 <cl:formdata std:sid="f-data-96f45ed6" row="0" col="3"/>
               </cl:button>
+              <cl:output std:sid="output-dc34ca0e" value="❈ 제목행 각 열의 &quot; v &quot; 를 클릭하면 검색창을 열 수 있습니다. ">
+                <cl:formdata std:sid="f-data-8e459f23" row="0" col="0"/>
+              </cl:output>
               <cl:formlayout std:sid="f-layout-1d210b0b" scrollable="false" hspace="20px" vspace="20px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
                 <cl:rows length="1" unit="FRACTION"/>
                 <cl:columns length="1" unit="FRACTION"/>
@@ -175,7 +178,7 @@
           </cl:group>
         </cl:tabitem>
         <cl:header-style style="font-size:24px;"/>
-        <cl:item-style style="border-radius:20px 20px 0px 0px; background-color:rgba(40, 165, 94, 1.0); padding-top:10px; color:white; font-weight:bolder; padding-left:50px; padding-bottom:10px; font-size:30px; padding-right:50px;"/>
+        <cl:item-style style="border-radius:20px 20px 0px 0px; background-color:rgba(40, 165, 94, 1.0); padding-top:10px; color:white; font-weight:bolder; padding-left:50px; padding-bottom:10px; font-size:30px; font-family:푸른전남 Medium; padding-right:50px;"/>
         <cl:body-style style="border-radius:0px 10px 20px 20px;"/>
       </cl:tabfolder>
       <cl:xylayout std:sid="xylayout-962db348"/>

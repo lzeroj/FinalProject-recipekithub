@@ -41,6 +41,7 @@ function onBtnFindEmailClick(e){
 				dialogApp.initValue = initValue;
 			});
 		});
+		
 	// 2. Email 찾기 양식이 전부 유효하게 작성되어 있는 경우, Email 찾기 서브미션 전송	
 	} else {		
 		initValue = "Email을 조회 하시겠습니까?";
@@ -79,10 +80,13 @@ function onSub_findEmailSubmitSuccess(e){
 	var metadataOk = sub_findEmail.getMetadata("ok"); 	// Controller측에서 입력한 정보에 따른 이메일을 조회하여 ok(조회 성공)인 경우
 	var metadataFail = sub_findEmail.getMetadata("fail"); 	// Controller측에서 입력한 정보에 따른 이메일을 조회하여 fail(조회 불가)인 경우
 
-	if (metadataFail) {		//---> 1. 입력한 정보에 따른 이메일을 조회할 수 없는 경우
+	// 1. 입력한 정보에 따른 이메일을 조회할 수 없는 경우
+	if (metadataFail) {		
 		opbFindEmailNotice.style.css("color", "red");
 		opbFindEmailNotice.text = "등록된 정보가 없습니다. 입력하신 정보를 다시 확인해주세요.";
-	} else {						//---> 2. 입력한 정보에 따른 이메일을 조회하는데 성공한 경우
+	
+	// 2. 입력한 정보에 따른 이메일을 조회하는데 성공한 경우
+	} else {						
 		opbFindEmailNotice.style.css("color", "black");
 		opbFindEmailNotice.text = "입력하신 회원정보에 해당하는 Email 정보는 다음과 같습니다."
 		app.lookup("opbFindEmailResult").text = metadataOk;
@@ -127,6 +131,7 @@ function onBtnFindPswdClick(e){
 				dialogApp.initValue = initValue;
 			});
 		});
+		
 	// 2. 비밀번호 찾기 양식이 전부 유효하게 작성되어 있는 경우, 비밀번호 찾기 서브미션 전송	
 	} else {		
 		initValue = "비밀번호를 조회 하시겠습니까?";
@@ -162,13 +167,16 @@ function onSub_findPswdSubmitSuccess(e){
 	var sub_findPswd = e.control;
 	var opbFindPswdNotice = app.lookup("opbFindPswdNotice");
 	
-	var metadataOk = sub_findPswd.getMetadata("ok"); 	// Controller측에서 입력한 정보에 따른 비밀번호를 조회하여 ok(조회 성공)인 경우
+	var metadataOk = sub_findPswd.getMetadata("ok"); 		// Controller측에서 입력한 정보에 따른 비밀번호를 조회하여 ok(조회 성공)인 경우
 	var metadataFail = sub_findPswd.getMetadata("fail"); 	// Controller측에서 입력한 정보에 따른 비밀번호를 조회하여 fail(조회 불가)인 경우
 
-	if (metadataFail) {		//---> 1. 입력한 정보에 따른 비밀번호를 조회할 수 없는 경우
+	// 1. 입력한 정보에 따른 비밀번호를 조회할 수 없는 경우
+	if (metadataFail) {		
 		opbFindPswdNotice.style.css("color", "red");
 		opbFindPswdNotice.text = "등록된 정보가 없습니다. 입력하신 정보를 다시 확인해주세요.";
-	} else {						//---> 2. 입력한 정보에 따른 비밀번호를 조회하는데 성공한 경우
+	
+	// 2. 입력한 정보에 따른 비밀번호를 조회하는데 성공한 경우
+	} else {						
 		opbFindPswdNotice.style.css("color", "black");
 		opbFindPswdNotice.text = "입력하신 회원정보에 해당하는 비밀번호 정보는 다음과 같습니다.\n보안을 위해 비밀번호를 수정해주시길 바랍니다."
 		app.lookup("opbFindPswdResult").text = metadataOk;

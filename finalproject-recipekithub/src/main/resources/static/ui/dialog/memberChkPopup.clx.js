@@ -25,7 +25,6 @@
 			 */
 			function onBodyLoad(/* cpr.events.CEvent */ e){
 				var host = app.getHost(); // 해당 앱이 누군가로부터 불렸는지 (부모가 있는지) 확인
-
 				if(host){
 					// 부모화면에서 보낸값을 팝업창에서 확인
 					var hostProperty = app.getHostProperty("initValue");
@@ -93,6 +92,7 @@
 					"font-weight" : "bolder",
 					"font-size" : "20px",
 					"border-bottom-style" : "none",
+					"font-family" : "푸른전남 Medium",
 					"background-image" : "none",
 					"border-top-style" : "none"
 				});
@@ -114,8 +114,10 @@
 			var output_1 = new cpr.controls.Output("opbMessage");
 			output_1.value = "";
 			output_1.style.css({
+				"font-weight" : "bolder",
 				"font-size" : "20px",
 				"line-height" : "2.0",
+				"font-family" : "푸른전남 Medium",
 				"text-align" : "center"
 			});
 			container.addChild(output_1, {

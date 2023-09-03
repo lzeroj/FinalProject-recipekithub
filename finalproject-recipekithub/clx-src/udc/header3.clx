@@ -32,13 +32,13 @@
           <cl:formdata std:sid="f-data-970d69c9" row="0" col="1" rowspan="1" colspan="1"/>
           <cl:group std:sid="group-7180dd82" style="border-right-style:solid; border-bottom-color:#b4b4b4; border-top-width:2px; border-right-width:2px; border-left-color:#b4b4b4; border-right-color:#b4b4b4; border-left-width:2px; border-top-style:solid; border-radius:15px; border-left-style:solid; border-bottom-width:2px; border-top-color:#b4b4b4; border-bottom-style:solid;" class="cl-form-group">
             <cl:formdata std:sid="f-data-4d984b76" row="0" col="0"/>
-            <cl:searchinput std:sid="s-input-ff13a668" id="searchInput" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; padding-left:10px; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; border-top-style:solid;" searchbuttonimage="../theme/images/com/main/icon-search-line.svg">
+            <cl:searchinput std:sid="s-input-ff13a668" id="searchInput" style="border-right-style:solid; border-bottom-color:#ffffff; border-left-style:solid; padding-left:10px; border-left-color:#ffffff; border-top-color:#ffffff; border-bottom-style:solid; border-right-color:#ffffff; font-family:푸른전남 Medium; border-top-style:solid;" searchbuttonimage="../theme/images/com/main/icon-search-line.svg">
               <cl:listener std:sid="listener-89ad9453" name="search" handler="onSearchInputSearch"/>
               <cl:formdata std:sid="f-data-00802766" row="0" col="1" rowspan="1" colspan="2"/>
               <cl:searchstyle style="width:30px; padding-right:15px;"/>
               <cl:clearstyle style="width:20px; padding-right:10px;"/>
             </cl:searchinput>
-            <cl:combobox std:sid="c-box-6246d40e" id="category" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:combobox std:sid="c-box-6246d40e" id="category" style="border-right-style:none; border-left-style:none; border-bottom-style:none; font-family:푸른전남 Medium; border-top-style:none;" preventinput="true">
               <cl:formdata std:sid="f-data-74e6790f" row="0" col="0"/>
               <cl:item std:sid="t-item-86ed32a7" label="레시피" value="레시피" icon=""/>
               <cl:item std:sid="t-item-e0af8fd8" label="밀키트" value="밀키트"/>
@@ -76,10 +76,10 @@
             <cl:listener std:sid="listener-004ce1a5" name="selection-change" handler="onCmb1SelectionChange"/>
             <cl:listener std:sid="listener-2c042a1b" name="open" handler="onCmb1Open"/>
             <cl:formdata std:sid="f-data-0a5f2441" row="0" col="4"/>
-            <cl:liststyle style="border-radius:10px; padding-top:10px; box-shadow:3px 3px 5px 5px gray; padding-left:10px; vertical-align:middle; padding-bottom:10px; padding-right:10px; text-align:left;"/>
+            <cl:liststyle style="border-radius:10px; padding-top:10px; box-shadow:3px 3px 5px 5px gray; padding-left:10px; vertical-align:middle; padding-bottom:10px; font-family:푸른전남 Medium; padding-right:10px; text-align:left;"/>
             <cl:itemstyle style="border-radius:10px; padding-top:20px; font-weight:bolder; padding-left:20px; padding-bottom:20px; font-size:18px; font-family:푸른전남 Medium; text-align:left; padding-right:20px;"/>
           </cl:combobox>
-          <cl:output std:sid="output-33b374ed" id="opbLoginStatus" style="font-weight:bold; font-size:16px; line-height:2.0;" value="">
+          <cl:output std:sid="output-33b374ed" id="opbLoginStatus" style="font-weight:bold; font-size:16px; line-height:2.0; font-family:푸른전남;" value="">
             <cl:formdata std:sid="f-data-af665947" row="0" col="0" rowspan="1" colspan="1" ignore-layout-spacing="true"/>
           </cl:output>
           <cl:formlayout std:sid="f-layout-2bec6cb4" scrollable="false" hspace="50px" vspace="20px" top-margin="30px" right-margin="30px" bottom-margin="30px" left-margin="30px">

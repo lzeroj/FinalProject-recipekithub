@@ -11,7 +11,6 @@
  */
 function onBodyLoad(/* cpr.events.CEvent */ e){
 	var host = app.getHost(); // 해당 앱이 누군가로부터 불렸는지 (부모가 있는지) 확인
-
 	if(host){
 		// 부모화면에서 보낸값을 팝업창에서 확인
 		var hostProperty = app.getHostProperty("initValue");
