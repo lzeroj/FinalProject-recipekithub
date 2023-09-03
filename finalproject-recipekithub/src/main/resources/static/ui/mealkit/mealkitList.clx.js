@@ -484,7 +484,7 @@
 				container.addChild(group_6, {
 					"autoSize": "height",
 					"width": "968px",
-					"height": "932px"
+					"height": "358px"
 				});
 				var pageIndexer_1 = new cpr.controls.PageIndexer("page");
 				pageIndexer_1.pageRowCount = 12;
@@ -500,7 +500,7 @@
 			})(group_1);
 			container.addChild(group_1, {
 				"width": "1920px",
-				"height": "720px"
+				"height": "984px"
 			});
 			
 			var userDefinedControl_2 = new udc.footer();
