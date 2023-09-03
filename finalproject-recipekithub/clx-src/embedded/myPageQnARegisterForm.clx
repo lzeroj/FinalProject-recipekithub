@@ -29,22 +29,22 @@
   <body std:sid="body-f8ec525e">
     <cl:group std:sid="group-4fd6728f" style="background-color:#FFFFFF;">
       <cl:xylayoutdata std:sid="xyl-data-421ab148" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="Q &amp; A">
+      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남 Medium; text-align:center;" value="Q &amp; A">
         <cl:xylayoutdata std:sid="xyl-data-1929d772" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:output>
       <cl:group std:sid="group-050bca7e">
         <cl:xylayoutdata std:sid="xyl-data-23cae908" top="50px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-        <cl:inputbox std:sid="i-box-38573462" id="ipb1" style="border-radius:10px;" placeholder="제목">
+        <cl:inputbox std:sid="i-box-38573462" id="ipb1" style="border-radius:10px; font-family:푸른전남;" placeholder="제목">
           <cl:xylayoutdata std:sid="xyl-data-ce51ed4f" top="5px" right="0px" left="0px" height="40px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         </cl:inputbox>
-        <cl:textarea std:sid="t-area-2f7d60e6" id="txa1" style="border-radius:10px;" value="이메일 :&#xD;&#xA;전화번호 :&#xD;&#xA;---------------------------------------------------------------------------------------&#xD;&#xA;문의내용 :">
+        <cl:textarea std:sid="t-area-2f7d60e6" id="txa1" style="border-radius:10px; font-family:푸른전남;" value="이메일 :&#xD;&#xA;전화번호 :&#xD;&#xA;---------------------------------------------------------------------------------------&#xD;&#xA;문의내용 :">
           <cl:xylayoutdata std:sid="xyl-data-9377620e" top="50px" right="0px" left="0px" height="248px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         </cl:textarea>
-        <cl:button std:sid="button-6e95866d" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="등록하기">
+        <cl:button std:sid="button-6e95866d" style="background-color:#0ebc59; color:#FFFFFF; font-family:푸른전남 Medium; background-image:none;" value="등록하기">
           <cl:listener std:sid="listener-92baf7a1" name="click" handler="onButtonClick"/>
           <cl:xylayoutdata std:sid="xyl-data-cc0b5325" right="170px" bottom="20px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
         </cl:button>
-        <cl:button std:sid="button-d2f92148" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="취소">
+        <cl:button std:sid="button-d2f92148" style="background-color:#0ebc59; color:#FFFFFF; font-family:푸른전남 Medium; background-image:none;" value="취소">
           <cl:listener std:sid="listener-2e56f19f" name="click" handler="onButtonClick2"/>
           <cl:xylayoutdata std:sid="xyl-data-c482bf46" right="20px" bottom="20px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
         </cl:button>

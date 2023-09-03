@@ -11,16 +11,16 @@
     <cl:listener std:sid="listener-a760bcdf" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-407541d4" style="background-color:#F6F6F6; border-radius:10px;">
       <cl:xylayoutdata std:sid="xyl-data-2bebfcbb" top="80px" right="20px" bottom="30px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:output std:sid="output-10d91d5f" style="font-weight:bold; font-family:푸른전남;" value="제목">
+      <cl:output std:sid="output-10d91d5f" style="font-weight:bold; font-family:푸른전남 Medium;" value="제목">
         <cl:formdata std:sid="f-data-f8edafb6" row="1" col="0"/>
       </cl:output>
-      <cl:output std:sid="output-5bd26b5a" style="font-weight:bold; font-family:푸른전남;" value="내용">
+      <cl:output std:sid="output-5bd26b5a" style="font-weight:bold; font-family:푸른전남 Medium;" value="내용">
         <cl:formdata std:sid="f-data-fe7bd1df" row="8" col="0"/>
       </cl:output>
-      <cl:output std:sid="output-99f0ba6b" style="font-weight:bold; font-family:푸른전남;" value="신고 유형">
+      <cl:output std:sid="output-99f0ba6b" style="font-weight:bold; font-family:푸른전남 Medium;" value="신고 유형">
         <cl:formdata std:sid="f-data-d9b35187" row="3" col="0" rowspan="4" colspan="1"/>
       </cl:output>
-      <cl:radiobutton std:sid="r-button-180413f1" id="rdb1" readonly="true" colcount="1">
+      <cl:radiobutton std:sid="r-button-180413f1" id="rdb1" style="font-family:푸른전남;" readonly="true" colcount="1">
         <cl:formdata std:sid="f-data-50db43ed" row="3" col="1" rowspan="4" colspan="1"/>
         <cl:item std:sid="item-013773c8" label="적절하지 않은 내용" value="적절하지 않은 내용"/>
         <cl:item std:sid="item-a8613e85" label="광고 목적의 컨텐츠" value="광고 목적의 컨텐츠"/>
@@ -59,7 +59,7 @@
       <cl:img std:sid="image-545f00bb" src="../theme/images/mealkit/alarm.png">
         <cl:formdata std:sid="f-data-f898baf2" halign="CENTER" valign="CENTER" width="40" height="40" row="0" col="0"/>
       </cl:img>
-      <cl:output std:sid="output-89042f0b" style="font-weight:bold; font-size:20px; font-family:푸른전남; text-align:center;" value="신고하기">
+      <cl:output std:sid="output-89042f0b" style="font-weight:bold; font-size:20px; font-family:푸른전남 Medium; text-align:center;" value="신고하기">
         <cl:formdata std:sid="f-data-cf2c16f9" row="0" col="1" rowspan="1" colspan="1"/>
       </cl:output>
       <cl:formlayout std:sid="f-layout-2492aa1d" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">

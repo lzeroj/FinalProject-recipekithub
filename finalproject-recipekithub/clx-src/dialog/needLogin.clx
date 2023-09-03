@@ -9,10 +9,10 @@
   </head>
   <body std:sid="body-3bd18880">
     <cl:listener std:sid="listener-ef189633" name="load" handler="onBodyLoad"/>
-    <cl:output std:sid="output-f1383ede" id="message" style="background-color:#FFFFFF; font-weight:bold; font-size:16px; text-align:center;" value="로그인이 필요한 작업입니다">
+    <cl:output std:sid="output-f1383ede" id="message" style="background-color:#FFFFFF; font-weight:bold; font-size:16px; font-family:푸른전남 Medium; text-align:center;" value="로그인이 필요한 작업입니다">
       <cl:xylayoutdata std:sid="xyl-data-144b024f" top="0px" right="0px" bottom="50px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
     </cl:output>
-    <cl:button std:sid="button-35082e2e" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; background-image:none;" value="확인">
+    <cl:button std:sid="button-35082e2e" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium; background-image:none;" value="확인">
       <cl:listener std:sid="listener-76dbc24e" name="click" handler="onButtonClick"/>
       <cl:xylayoutdata std:sid="xyl-data-45aad12f" top="200px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
     </cl:button>

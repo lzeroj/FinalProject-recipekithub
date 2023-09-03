@@ -51,18 +51,18 @@
           <cl:gridcolumn std:sid="g-column-e5c2aa16" width="42px"/>
           <cl:gridheader std:sid="gh-band-548dfad2">
             <cl:gridrow std:sid="g-row-7591f77c"/>
-            <cl:gridcell std:sid="gh-cell-544fc2d5" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
-            <cl:gridcell std:sid="gh-cell-d08d52cc" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="mealkitName" sortable="false" filterable="false" text="밀키트명"/>
-            <cl:gridcell std:sid="gh-cell-fce6aec0" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="mealkitCategory" sortable="false" filterable="false" text="카테고리"/>
-            <cl:gridcell std:sid="gh-cell-37fa085d" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="밀키트 등록자"/>
+            <cl:gridcell std:sid="gh-cell-544fc2d5" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-d08d52cc" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="mealkitName" sortable="false" filterable="false" text="밀키트명"/>
+            <cl:gridcell std:sid="gh-cell-fce6aec0" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="mealkitCategory" sortable="false" filterable="false" text="카테고리"/>
+            <cl:gridcell std:sid="gh-cell-37fa085d" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="밀키트 등록자"/>
             <cl:gridcell std:sid="gh-cell-d7b220bb" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-ca15c3d7">
             <cl:gridrow std:sid="g-row-c85a221d" height="42px"/>
-            <cl:gridcell std:sid="gd-cell-6a63e263" rowindex="0" colindex="0" columntype="rowindex"/>
-            <cl:gridcell std:sid="gd-cell-28f906dc" rowindex="0" colindex="1" columnname="mealkitName"/>
-            <cl:gridcell std:sid="gd-cell-e0477cb3" rowindex="0" colindex="2" columnname="mealkitCategory"/>
-            <cl:gridcell std:sid="gd-cell-adf78a2c" rowindex="0" colindex="3" columnname="memberEmail"/>
+            <cl:gridcell std:sid="gd-cell-6a63e263" rowindex="0" colindex="0" style="font-family:푸른전남;" columntype="rowindex"/>
+            <cl:gridcell std:sid="gd-cell-28f906dc" rowindex="0" colindex="1" style="font-family:푸른전남;" columnname="mealkitName"/>
+            <cl:gridcell std:sid="gd-cell-e0477cb3" rowindex="0" colindex="2" style="font-family:푸른전남;" columnname="mealkitCategory"/>
+            <cl:gridcell std:sid="gd-cell-adf78a2c" rowindex="0" colindex="3" style="font-family:푸른전남;" columnname="memberEmail"/>
             <cl:gridcell std:sid="gd-cell-abb048f4" rowindex="0" colindex="4">
               <cl:img std:sid="image-d6dce196" id="likeimg" style="cursor:pointer;">
                 <cl:relativebind property="src" columnname="likeYN"/>
@@ -71,7 +71,7 @@
             </cl:gridcell>
           </cl:griddetail>
         </cl:grid>
-        <cl:button std:sid="button-ba44be39" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="해당 밀키트 확인">
+        <cl:button std:sid="button-ba44be39" style="background-color:#0ebc59; color:#FFFFFF; font-family:푸른전남 Medium; background-image:none;" value="해당 밀키트 확인">
           <cl:listener std:sid="listener-dea8e1c8" name="click" handler="onButtonClick"/>
           <cl:xylayoutdata std:sid="xyl-data-8bfafebf" right="15px" bottom="10px" width="120px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
         </cl:button>

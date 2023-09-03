@@ -259,6 +259,9 @@
 						var comboBox_1 = new cpr.controls.ComboBox("cmb1");
 						comboBox_1.showIcon = true;
 						comboBox_1.preventInput = true;
+						comboBox_1.style.css({
+							"font-family" : "푸른전남"
+						});
 						(function(comboBox_1){
 							comboBox_1.addItem(new cpr.controls.Item("----------", "a"));
 							comboBox_1.addItem(new cpr.controls.Item("결제일자", "paymentDate"));
@@ -272,6 +275,9 @@
 							"rowIndex": 0
 						});
 						var inputBox_1 = new cpr.controls.InputBox("ipb1");
+						inputBox_1.style.css({
+							"font-family" : "푸른전남"
+						});
 						inputBox_1.bind("value").toDataMap(app.lookup("searchparam"), "inputvalue");
 						container.addChild(inputBox_1, {
 							"colIndex": 2,
@@ -282,6 +288,7 @@
 						button_1.style.css({
 							"background-color" : "#0ebc59",
 							"color" : "#FFFFFF",
+							"font-family" : "푸른전남 Medium",
 							"background-image" : "none"
 						});
 						if(typeof onButtonClick == "function") {
@@ -322,6 +329,7 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
+											"font-family" : "푸른전남 Medium",
 											"background-image" : "none"
 										});
 									}
@@ -336,6 +344,7 @@
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
 											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium",
 											"background-image" : "none"
 										});
 									}
@@ -351,6 +360,7 @@
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
 											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium",
 											"background-image" : "none"
 										});
 									}
@@ -366,6 +376,7 @@
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
 											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium",
 											"background-image" : "none"
 										});
 									}
@@ -379,12 +390,18 @@
 									"constraint": {"rowIndex": 0, "colIndex": 0},
 									"configurator": function(cell){
 										cell.columnType = "rowindex";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 1},
 									"configurator": function(cell){
 										cell.columnName = "mealkitName";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
@@ -393,6 +410,9 @@
 										cell.columnName = "paymentDate";
 										cell.suppressRef = 3;
 										cell.suppressible = true;
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 										cell.control = (function(){
 											var dateInput_1 = new cpr.controls.DateInput("dti1");
 											dateInput_1.style.css({
@@ -410,6 +430,9 @@
 										cell.columnName = "paymentTotal";
 										cell.suppressRef = -1;
 										cell.suppressible = true;
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								}
 							]
@@ -486,6 +509,7 @@
 							"background-color" : "#0ebc59",
 							"color" : "#FFFFFF",
 							"font-weight" : "300",
+							"font-family" : "푸른전남 Medium",
 							"background-image" : "none",
 							"text-align" : "center"
 						});
@@ -499,6 +523,7 @@
 							"background-color" : "#0ebc59",
 							"color" : "#FFFFFF",
 							"font-weight" : "300",
+							"font-family" : "푸른전남 Medium",
 							"background-image" : "none",
 							"text-align" : "center"
 						});
@@ -508,6 +533,7 @@
 						});
 						var output_5 = new cpr.controls.Output();
 						output_5.style.css({
+							"font-family" : "푸른전남",
 							"text-align" : "center"
 						});
 						output_5.bind("value").toDataColumn("paymentId");
@@ -517,6 +543,7 @@
 						});
 						var output_6 = new cpr.controls.Output();
 						output_6.style.css({
+							"font-family" : "푸른전남",
 							"text-align" : "center"
 						});
 						output_6.bind("value").toDataColumn("mealkitName");
@@ -528,6 +555,7 @@
 						});
 						var output_7 = new cpr.controls.Output();
 						output_7.style.css({
+							"font-family" : "푸른전남",
 							"text-align" : "center"
 						});
 						output_7.bind("value").toDataColumn("paymentDate");
@@ -543,6 +571,7 @@
 							"background-color" : "#0ebc59",
 							"color" : "#FFFFFF",
 							"font-weight" : "300",
+							"font-family" : "푸른전남 Medium",
 							"background-image" : "none",
 							"text-align" : "center"
 						});
@@ -556,6 +585,7 @@
 							"background-color" : "#0ebc59",
 							"color" : "#FFFFFF",
 							"font-weight" : "300",
+							"font-family" : "푸른전남 Medium",
 							"background-image" : "none",
 							"text-align" : "center"
 						});
@@ -565,6 +595,7 @@
 						});
 						var output_10 = new cpr.controls.Output();
 						output_10.style.css({
+							"font-family" : "푸른전남",
 							"text-align" : "center"
 						});
 						output_10.bind("value").toDataColumn("paymentTotal");
@@ -580,6 +611,7 @@
 							"background-color" : "#0ebc59",
 							"color" : "#FFFFFF",
 							"font-weight" : "300",
+							"font-family" : "푸른전남 Medium",
 							"background-image" : "none",
 							"text-align" : "center"
 						});
@@ -591,6 +623,7 @@
 						});
 						var output_12 = new cpr.controls.Output();
 						output_12.style.css({
+							"font-family" : "푸른전남",
 							"text-align" : "center"
 						});
 						output_12.bind("value").toDataColumn("mealkitdetailinfo");

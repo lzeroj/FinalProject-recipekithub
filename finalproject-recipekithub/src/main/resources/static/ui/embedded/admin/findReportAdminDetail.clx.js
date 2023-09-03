@@ -166,6 +166,7 @@
 					"background-color" : "#0ebc59",
 					"color" : "#FFFFFF",
 					"font-size" : "16px",
+					"font-family" : "푸른전남 Medium",
 					"background-image" : "none"
 				});
 				if(typeof onButtonClick == "function") {
@@ -216,7 +217,8 @@
 									cell.style.css({
 										"background-color" : "#0ebc59",
 										"color" : "#FFFFFF",
-										"font-weight" : "bold"
+										"font-weight" : "bold",
+										"font-family" : "푸른전남 Medium"
 									});
 								}
 							},
@@ -230,7 +232,8 @@
 									cell.style.css({
 										"background-color" : "#0ebc59",
 										"color" : "#FFFFFF",
-										"font-weight" : "bold"
+										"font-weight" : "bold",
+										"font-family" : "푸른전남 Medium"
 									});
 								}
 							},
@@ -244,7 +247,8 @@
 									cell.style.css({
 										"background-color" : "#0ebc59",
 										"color" : "#FFFFFF",
-										"font-weight" : "bold"
+										"font-weight" : "bold",
+										"font-family" : "푸른전남 Medium"
 									});
 								}
 							},
@@ -258,7 +262,8 @@
 									cell.style.css({
 										"background-color" : "#0ebc59",
 										"color" : "#FFFFFF",
-										"font-weight" : "bold"
+										"font-weight" : "bold",
+										"font-family" : "푸른전남 Medium"
 									});
 								}
 							},
@@ -272,7 +277,8 @@
 									cell.style.css({
 										"background-color" : "#0ebc59",
 										"color" : "#FFFFFF",
-										"font-weight" : "bold"
+										"font-weight" : "bold",
+										"font-family" : "푸른전남 Medium"
 									});
 								}
 							},
@@ -286,7 +292,8 @@
 									cell.style.css({
 										"background-color" : "#0ebc59",
 										"color" : "#FFFFFF",
-										"font-weight" : "bold"
+										"font-weight" : "bold",
+										"font-family" : "푸른전남 Medium"
 									});
 								}
 							}
@@ -299,12 +306,18 @@
 								"constraint": {"rowIndex": 0, "colIndex": 0},
 								"configurator": function(cell){
 									cell.columnType = "rowindex";
+									cell.style.css({
+										"font-family" : "푸른전남"
+									});
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 1},
 								"configurator": function(cell){
 									cell.columnName = "recipeBoardId";
+									cell.style.css({
+										"font-family" : "푸른전남"
+									});
 								}
 							},
 							{
@@ -312,7 +325,8 @@
 								"configurator": function(cell){
 									cell.columnName = "reportTitle";
 									cell.style.css({
-										"font-weight" : "bold"
+										"font-weight" : "bold",
+										"font-family" : "푸른전남"
 									});
 								}
 							},
@@ -320,12 +334,18 @@
 								"constraint": {"rowIndex": 0, "colIndex": 3},
 								"configurator": function(cell){
 									cell.columnName = "memberEmail";
+									cell.style.css({
+										"font-family" : "푸른전남"
+									});
 								}
 							},
 							{
 								"constraint": {"rowIndex": 0, "colIndex": 4},
 								"configurator": function(cell){
 									cell.columnName = "reportDate";
+									cell.style.css({
+										"font-family" : "푸른전남"
+									});
 									cell.control = (function(){
 										var dateInput_1 = new cpr.controls.DateInput("dti1");
 										dateInput_1.mask = "YYYY-MM-DD HH:mm:ss";
@@ -344,6 +364,9 @@
 								"constraint": {"rowIndex": 0, "colIndex": 5},
 								"configurator": function(cell){
 									cell.columnName = "declarationType";
+									cell.style.css({
+										"font-family" : "푸른전남"
+									});
 								}
 							}
 						]
@@ -371,6 +394,7 @@
 					"background-color" : "#0ebc59",
 					"color" : "#FFFFFF",
 					"font-size" : "16px",
+					"font-family" : "푸른전남 Medium",
 					"background-image" : "none"
 				});
 				if(typeof onButtonClick2 == "function") {

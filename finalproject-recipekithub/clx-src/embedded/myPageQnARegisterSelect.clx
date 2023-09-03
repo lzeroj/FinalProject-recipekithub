@@ -39,7 +39,7 @@
     <cl:listener std:sid="listener-01388302" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-4fd6728f" id="grp1" style="background-color:#FFFFFF;">
       <cl:verticaldata std:sid="v-data-d93a7f70" width="709px" height="710px" autosize="height"/>
-      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="Q &amp; A">
+      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남 Medium; text-align:center;" value="Q &amp; A">
         <cl:verticaldata std:sid="v-data-accb3108" width="709px" height="50px"/>
       </cl:output>
       <cl:group std:sid="group-050bca7e" id="rootgrp">
@@ -56,11 +56,11 @@
         </cl:group>
         <cl:group std:sid="group-1c50a8c6" id="buttongrp">
           <cl:verticaldata std:sid="v-data-dbf174af" width="709px" height="50px" autosize="none"/>
-          <cl:button std:sid="button-6e95866d" id="updatebtn" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="수정하기">
+          <cl:button std:sid="button-6e95866d" id="updatebtn" style="background-color:#0ebc59; color:#FFFFFF; font-family:푸른전남 Medium; background-image:none;" value="수정하기">
             <cl:listener std:sid="listener-eb9bf78a" name="click" handler="onButtonClick"/>
             <cl:xylayoutdata std:sid="xyl-data-d6d371ee" right="150px" bottom="10px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
           </cl:button>
-          <cl:button std:sid="button-d2f92148" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="뒤로가기">
+          <cl:button std:sid="button-d2f92148" style="background-color:#0ebc59; color:#FFFFFF; font-family:푸른전남 Medium; background-image:none;" value="뒤로가기">
             <cl:listener std:sid="listener-e134faf8" name="click" handler="onButtonClick2"/>
             <cl:xylayoutdata std:sid="xyl-data-dac85209" right="0px" bottom="10px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
           </cl:button>

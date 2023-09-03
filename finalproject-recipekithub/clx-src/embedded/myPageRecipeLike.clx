@@ -36,7 +36,7 @@
     <cl:listener std:sid="listener-a6563308" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-30cd9745" style="background-color:#FFFFFF;">
       <cl:xylayoutdata std:sid="xyl-data-3b630b72" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="레시피 좋아요 목록">
+      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남 Medium; text-align:center;" value="레시피 좋아요 목록">
         <cl:xylayoutdata std:sid="xyl-data-d40823b2" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:output>
       <cl:group std:sid="group-33d5e94e" style="border-radius:20px; background-color:#F7F7F7;">
@@ -54,26 +54,26 @@
           <cl:gridcolumn std:sid="g-column-762ae4ea" width="53px"/>
           <cl:gridheader std:sid="gh-band-66502553">
             <cl:gridrow std:sid="g-row-a54e4e33"/>
-            <cl:gridcell std:sid="gh-cell-3d90bad8" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
-            <cl:gridcell std:sid="gh-cell-4ac74973" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
-            <cl:gridcell std:sid="gh-cell-6fae05e1" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardImage" sortable="false" filterable="false" text="이미지"/>
-            <cl:gridcell std:sid="gh-cell-a7109569" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardTitle" sortable="false" filterable="false" text="제목"/>
-            <cl:gridcell std:sid="gh-cell-0669df4a" rowindex="0" colindex="4" rowspan="1" colspan="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="categoryType" sortable="false" filterable="false" text="카테고리"/>
-            <cl:gridcell std:sid="gh-cell-66be3e1a" rowindex="0" colindex="7" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" text="좋아요"/>
+            <cl:gridcell std:sid="gh-cell-3d90bad8" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-4ac74973" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
+            <cl:gridcell std:sid="gh-cell-6fae05e1" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="recipeBoardImage" sortable="false" filterable="false" text="이미지"/>
+            <cl:gridcell std:sid="gh-cell-a7109569" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="recipeBoardTitle" sortable="false" filterable="false" text="제목"/>
+            <cl:gridcell std:sid="gh-cell-0669df4a" rowindex="0" colindex="4" rowspan="1" colspan="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="categoryType" sortable="false" filterable="false" text="카테고리"/>
+            <cl:gridcell std:sid="gh-cell-66be3e1a" rowindex="0" colindex="7" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" text="좋아요"/>
           </cl:gridheader>
           <cl:griddetail std:sid="gd-band-96a29bfa">
             <cl:gridrow std:sid="g-row-0c79f617" height="61px"/>
-            <cl:gridcell std:sid="gd-cell-dfbffcb1" rowindex="0" colindex="0" columntype="rowindex"/>
-            <cl:gridcell std:sid="gd-cell-4f1a064d" rowindex="0" colindex="1" columnname="recipeBoardId"/>
-            <cl:gridcell std:sid="gd-cell-4984bf10" rowindex="0" colindex="2" columnname="recipeBoardImage">
+            <cl:gridcell std:sid="gd-cell-dfbffcb1" rowindex="0" colindex="0" style="font-family:푸른전남;" columntype="rowindex"/>
+            <cl:gridcell std:sid="gd-cell-4f1a064d" rowindex="0" colindex="1" style="font-family:푸른전남;" columnname="recipeBoardId"/>
+            <cl:gridcell std:sid="gd-cell-4984bf10" rowindex="0" colindex="2" style="font-family:푸른전남;" columnname="recipeBoardImage">
               <cl:img std:sid="image-145f6358">
                 <cl:celldata std:sid="c-data-76386092" halign="CENTER" valign="CENTER" width="60" height="50"/>
               </cl:img>
             </cl:gridcell>
-            <cl:gridcell std:sid="gd-cell-c50002b3" rowindex="0" colindex="3" columnname="recipeBoardTitle"/>
-            <cl:gridcell std:sid="gd-cell-70dd80e6" rowindex="0" colindex="4" columnname="categoryType"/>
-            <cl:gridcell std:sid="gd-cell-cf2b4920" rowindex="0" colindex="5" columnname="categoryIngredients"/>
-            <cl:gridcell std:sid="gd-cell-1ab84948" rowindex="0" colindex="6" columnname="categoryMethod"/>
+            <cl:gridcell std:sid="gd-cell-c50002b3" rowindex="0" colindex="3" style="font-family:푸른전남;" columnname="recipeBoardTitle"/>
+            <cl:gridcell std:sid="gd-cell-70dd80e6" rowindex="0" colindex="4" style="font-family:푸른전남;" columnname="categoryType"/>
+            <cl:gridcell std:sid="gd-cell-cf2b4920" rowindex="0" colindex="5" style="font-family:푸른전남;" columnname="categoryIngredients"/>
+            <cl:gridcell std:sid="gd-cell-1ab84948" rowindex="0" colindex="6" style="font-family:푸른전남;" columnname="categoryMethod"/>
             <cl:gridcell std:sid="gd-cell-a1ced44f" rowindex="0" colindex="7">
               <cl:img std:sid="image-c17244d0" id="likeimg" style="cursor:pointer;" src="../theme/images/mealkit/heart_fill.png">
                 <cl:celldata std:sid="c-data-4cf5cba7" halign="CENTER" valign="CENTER" width="30" height="30"/>
@@ -81,7 +81,7 @@
             </cl:gridcell>
           </cl:griddetail>
         </cl:grid>
-        <cl:button std:sid="button-ba44be39" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="레시피로 가기">
+        <cl:button std:sid="button-ba44be39" style="background-color:#0ebc59; color:#FFFFFF; font-family:푸른전남 Medium; background-image:none;" value="레시피로 가기">
           <cl:listener std:sid="listener-26c1c685" name="click" handler="onButtonClick"/>
           <cl:xylayoutdata std:sid="xyl-data-1f687f4e" right="15px" bottom="10px" width="120px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
         </cl:button>

@@ -29,7 +29,7 @@
       <cl:output std:sid="output-5bd26b5a" style="font-weight:bold; font-family:푸른전남;" value="내용">
         <cl:formdata std:sid="f-data-96d1d116" row="7" col="0"/>
       </cl:output>
-      <cl:radiobutton std:sid="r-button-180413f1" id="rdb1" colcount="1">
+      <cl:radiobutton std:sid="r-button-180413f1" id="rdb1" style="font-family:푸른전남;" colcount="1">
         <cl:formdata std:sid="f-data-e46b9944" row="2" col="1" rowspan="4" colspan="1"/>
         <cl:item std:sid="item-013773c8" label="적절하지 않은 내용" value="적절하지 않은 내용"/>
         <cl:item std:sid="item-a8613e85" label="광고 목적의 컨텐츠" value="광고 목적의 컨텐츠"/>
@@ -66,7 +66,7 @@
       <cl:img std:sid="image-545f00bb" src="../theme/images/mealkit/alarm.png">
         <cl:formdata std:sid="f-data-f898baf2" halign="CENTER" valign="CENTER" width="40" height="40" row="0" col="0"/>
       </cl:img>
-      <cl:output std:sid="output-89042f0b" style="font-weight:bold; font-size:20px; font-family:푸른전남; text-align:center;" value="신고하기">
+      <cl:output std:sid="output-89042f0b" style="font-weight:bold; font-size:20px; font-family:푸른전남 Medium; text-align:center;" value="신고하기">
         <cl:formdata std:sid="f-data-cf2c16f9" row="0" col="1" rowspan="1" colspan="1"/>
       </cl:output>
       <cl:formlayout std:sid="f-layout-2492aa1d" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">

@@ -233,7 +233,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								},
@@ -247,7 +248,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								},
@@ -261,7 +263,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								},
@@ -275,7 +278,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								},
@@ -298,24 +302,36 @@
 									"constraint": {"rowIndex": 0, "colIndex": 0},
 									"configurator": function(cell){
 										cell.columnType = "rowindex";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 1},
 									"configurator": function(cell){
 										cell.columnName = "mealkitName";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 2},
 									"configurator": function(cell){
 										cell.columnName = "mealkitCategory";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 3},
 									"configurator": function(cell){
 										cell.columnName = "memberEmail";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
@@ -354,6 +370,7 @@
 					button_1.style.css({
 						"background-color" : "#0ebc59",
 						"color" : "#FFFFFF",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick == "function") {

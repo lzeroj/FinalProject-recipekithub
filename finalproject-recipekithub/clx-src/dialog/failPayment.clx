@@ -7,10 +7,10 @@
   </head>
   <body std:sid="body-39f24d1b">
     <cl:listener std:sid="listener-73cc6da4" name="load" handler="onBodyLoad"/>
-    <cl:output std:sid="output-485050e6" style="background-color:#FFFFFF; font-weight:bold; font-size:18px; text-align:center;" value="결제를 실패 하였습니다">
+    <cl:output std:sid="output-485050e6" style="background-color:#FFFFFF; font-weight:bold; font-size:18px; font-family:푸른전남 Medium; text-align:center;" value="결제를 실패 하였습니다">
       <cl:xylayoutdata std:sid="xyl-data-8f020686" top="50px" right="20px" left="20px" height="100px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:button std:sid="button-d2ed04fc" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; font-size:20px; background-image:none;" value="확인">
+    <cl:button std:sid="button-d2ed04fc" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; font-size:20px; font-family:푸른전남 Medium; background-image:none;" value="확인">
       <cl:listener std:sid="listener-d6e4f70f" name="click" handler="onButtonClick"/>
       <cl:xylayoutdata std:sid="xyl-data-d6204e41" right="20px" bottom="21px" left="20px" height="50px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
     </cl:button>

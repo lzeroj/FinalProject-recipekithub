@@ -9,10 +9,10 @@
   </head>
   <body std:sid="body-56b16488">
     <cl:listener std:sid="listener-5130e4d4" name="load" handler="onBodyLoad"/>
-    <cl:output std:sid="output-b06ba398" id="message" style="background-color:#FFFFFF; font-weight:bold; font-size:16px; text-align:center;" value="Output">
+    <cl:output std:sid="output-b06ba398" id="message" style="background-color:#FFFFFF; font-weight:bold; font-size:16px; font-family:푸른전남 Medium; text-align:center;" value="Output">
       <cl:xylayoutdata std:sid="xyl-data-bbb8e90c" top="0px" right="0px" left="0px" height="200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:button std:sid="button-ac60542c" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; background-image:none;" value="확인">
+    <cl:button std:sid="button-ac60542c" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium; background-image:none;" value="확인">
       <cl:xylayoutdata std:sid="xyl-data-09e676d8" right="0px" bottom="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
     </cl:button>
     <cl:xylayout std:sid="xylayout-63b43d35"/>

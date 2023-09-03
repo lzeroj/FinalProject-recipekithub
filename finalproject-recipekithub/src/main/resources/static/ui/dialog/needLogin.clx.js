@@ -59,6 +59,7 @@
 				"background-color" : "#FFFFFF",
 				"font-weight" : "bold",
 				"font-size" : "16px",
+				"font-family" : "푸른전남 Medium",
 				"text-align" : "center"
 			});
 			container.addChild(output_1, {
@@ -74,6 +75,7 @@
 				"background-color" : "#0ca44e",
 				"color" : "#FFFFFF",
 				"font-weight" : "bold",
+				"font-family" : "푸른전남 Medium",
 				"background-image" : "none"
 			});
 			if(typeof onButtonClick == "function") {

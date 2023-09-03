@@ -8,10 +8,10 @@
     <cl:appspec/>
   </head>
   <body std:sid="body-aefb7ad5">
-    <cl:output std:sid="output-b0da289e" style="background-color:#FFFFFF; font-weight:bold; font-size:16px; text-align:center;" value="등록에 성공하였습니다">
+    <cl:output std:sid="output-b0da289e" style="background-color:#FFFFFF; font-weight:bold; font-size:16px; font-family:푸른전남 Medium; text-align:center;" value="등록에 성공하였습니다">
       <cl:xylayoutdata std:sid="xyl-data-af7e9f42" top="0px" left="0px" width="400px" height="200px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
-    <cl:button std:sid="button-fb05210b" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; background-image:none;" value="확인">
+    <cl:button std:sid="button-fb05210b" style="background-color:#0ca44e; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium; background-image:none;" value="확인">
       <cl:listener std:sid="listener-fb07fc16" name="click" handler="onButtonClick"/>
       <cl:xylayoutdata std:sid="xyl-data-ec88a9dc" right="0px" bottom="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
     </cl:button>

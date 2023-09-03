@@ -65,6 +65,7 @@
 				"background-color" : "#FFFFFF",
 				"font-weight" : "bold",
 				"font-size" : "18px",
+				"font-family" : "푸른전남 Medium",
 				"text-align" : "center"
 			});
 			container.addChild(output_1, {
@@ -79,6 +80,7 @@
 			button_1.style.css({
 				"background-color" : "#0ca44e",
 				"color" : "#FFFFFF",
+				"font-family" : "푸른전남 Medium",
 				"background-image" : "none"
 			});
 			if(typeof onButtonClick == "function") {

@@ -259,6 +259,7 @@
 					output_1.style.css({
 						"font-weight" : "bold",
 						"font-size" : "20px",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					container.addChild(output_1, {
@@ -273,7 +274,8 @@
 					output_2.style.css({
 						"color" : "#0ca44e",
 						"font-weight" : "bold",
-						"font-size" : "20px"
+						"font-size" : "20px",
+						"font-family" : "푸른전남 Medium"
 					});
 					container.addChild(output_2, {
 						"top": "18px",
@@ -329,6 +331,7 @@
 					output_3.style.css({
 						"font-weight" : "bold",
 						"font-size" : "20px",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					container.addChild(output_3, {
@@ -343,7 +346,8 @@
 					output_4.style.css({
 						"color" : "#0ca44e",
 						"font-weight" : "bold",
-						"font-size" : "20px"
+						"font-size" : "20px",
+						"font-family" : "푸른전남 Medium"
 					});
 					container.addChild(output_4, {
 						"top": "18px",
@@ -398,6 +402,7 @@
 					output_5.style.css({
 						"font-weight" : "bold",
 						"font-size" : "20px",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					container.addChild(output_5, {
@@ -412,7 +417,8 @@
 					output_6.style.css({
 						"color" : "#0ca44e",
 						"font-weight" : "bold",
-						"font-size" : "20px"
+						"font-size" : "20px",
+						"font-family" : "푸른전남 Medium"
 					});
 					container.addChild(output_6, {
 						"top": "18px",

@@ -176,7 +176,7 @@
 					"border-bottom-width" : "1px",
 					"font-size" : "18px",
 					"border-bottom-style" : "solid",
-					"font-family" : "푸른전남",
+					"font-family" : "푸른전남 Medium",
 					"text-align" : "center"
 				});
 				container.addChild(output_1, {
@@ -219,7 +219,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								},
@@ -233,7 +234,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								},
@@ -247,7 +249,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								},
@@ -261,7 +264,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								},
@@ -275,7 +279,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								},
@@ -286,7 +291,8 @@
 										cell.style.css({
 											"background-color" : "#0ebc59",
 											"color" : "#FFFFFF",
-											"font-weight" : "bold"
+											"font-weight" : "bold",
+											"font-family" : "푸른전남 Medium"
 										});
 									}
 								}
@@ -299,18 +305,27 @@
 									"constraint": {"rowIndex": 0, "colIndex": 0},
 									"configurator": function(cell){
 										cell.columnType = "rowindex";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 1},
 									"configurator": function(cell){
 										cell.columnName = "recipeBoardId";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 2},
 									"configurator": function(cell){
 										cell.columnName = "recipeBoardImage";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 										cell.control = (function(){
 											var image_1 = new cpr.controls.Image();
 											image_1.bind("value").toDataColumn("recipeBoardImage");
@@ -328,24 +343,36 @@
 									"constraint": {"rowIndex": 0, "colIndex": 3},
 									"configurator": function(cell){
 										cell.columnName = "recipeBoardTitle";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 4},
 									"configurator": function(cell){
 										cell.columnName = "categoryType";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 5},
 									"configurator": function(cell){
 										cell.columnName = "categoryIngredients";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
 									"constraint": {"rowIndex": 0, "colIndex": 6},
 									"configurator": function(cell){
 										cell.columnName = "categoryMethod";
+										cell.style.css({
+											"font-family" : "푸른전남"
+										});
 									}
 								},
 								{
@@ -384,6 +411,7 @@
 					button_1.style.css({
 						"background-color" : "#0ebc59",
 						"color" : "#FFFFFF",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick == "function") {

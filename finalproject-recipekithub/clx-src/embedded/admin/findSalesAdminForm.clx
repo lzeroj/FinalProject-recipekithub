@@ -55,21 +55,21 @@
       </cl:group>
       <cl:group std:sid="group-c1e3a473">
         <cl:verticaldata std:sid="v-data-226477ae" width="400px" height="250px"/>
-        <cl:group std:sid="group-f5842947" style="background-color:#FFFFFF; border-radius:20px;" class="cl-form-group">
+        <cl:group std:sid="group-f5842947" style="background-color:#FFFFFF; border-radius:20px; font-family:푸른전남 Medium;" class="cl-form-group">
           <cl:xylayoutdata std:sid="xyl-data-242ff24b" top="100px" right="630px" bottom="5px" left="630px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-          <cl:output std:sid="output-9e51d3be" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-size:18px; background-image:none; text-align:center;" value="확인하고 싶은 정보">
+          <cl:output std:sid="output-9e51d3be" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-size:18px; font-family:푸른전남 Medium; background-image:none; text-align:center;" value="확인하고 싶은 정보">
             <cl:formdata std:sid="f-data-6ba63ec0" row="0" col="0"/>
           </cl:output>
-          <cl:output std:sid="output-e0027c1d" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-size:18px; background-image:none; text-align:center;" value="확인하기">
+          <cl:output std:sid="output-e0027c1d" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-size:18px; font-family:푸른전남 Medium; background-image:none; text-align:center;" value="확인하기">
             <cl:formdata std:sid="f-data-23ded4b6" row="0" col="1"/>
           </cl:output>
-          <cl:combobox std:sid="c-box-72fbbf5f" id="cmb1" readonly="false" preventinput="true">
+          <cl:combobox std:sid="c-box-72fbbf5f" id="cmb1" style="font-family:푸른전남 Medium;" readonly="false" preventinput="true">
             <cl:formdata std:sid="f-data-f1512ba0" halign="CENTER" valign="CENTER" width="300" height="50" row="1" col="0"/>
             <cl:item std:sid="t-item-ae98cfa0" label="밀키트별 매출 정보" value="salesMealkit"/>
             <cl:item std:sid="t-item-9c3e297a" label="좋아요가 많은 레시피" value="totalLikeRecipe"/>
             <cl:item std:sid="t-item-a5789170" label="찜이 많은 밀키트" value="totalLikeMealkit"/>
           </cl:combobox>
-          <cl:button std:sid="button-1d165926" style="background-color:#0ebc59; font-size:16px;" value="실행">
+          <cl:button std:sid="button-1d165926" style="background-color:#0ebc59; font-size:16px; font-family:푸른전남 Medium;" value="실행">
             <cl:listener std:sid="listener-799707d5" name="click" handler="onButtonClick"/>
             <cl:formdata std:sid="f-data-45798d6a" halign="CENTER" valign="CENTER" width="130" height="50" row="1" col="1"/>
           </cl:button>

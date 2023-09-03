@@ -141,7 +141,7 @@
 					"border-bottom-width" : "1px",
 					"font-size" : "18px",
 					"border-bottom-style" : "solid",
-					"font-family" : "푸른전남",
+					"font-family" : "푸른전남 Medium",
 					"text-align" : "center"
 				});
 				container.addChild(output_1, {
@@ -157,7 +157,8 @@
 					var inputBox_1 = new cpr.controls.InputBox("ipb1");
 					inputBox_1.placeholder = "제목";
 					inputBox_1.style.css({
-						"border-radius" : "10px"
+						"border-radius" : "10px",
+						"font-family" : "푸른전남"
 					});
 					container.addChild(inputBox_1, {
 						"top": "5px",
@@ -168,7 +169,8 @@
 					var textArea_1 = new cpr.controls.TextArea("txa1");
 					textArea_1.value = "이메일 :\r\n전화번호 :\r\n---------------------------------------------------------------------------------------\r\n문의내용 :";
 					textArea_1.style.css({
-						"border-radius" : "10px"
+						"border-radius" : "10px",
+						"font-family" : "푸른전남"
 					});
 					container.addChild(textArea_1, {
 						"top": "50px",
@@ -181,6 +183,7 @@
 					button_1.style.css({
 						"background-color" : "#0ebc59",
 						"color" : "#FFFFFF",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick == "function") {
@@ -197,6 +200,7 @@
 					button_2.style.css({
 						"background-color" : "#0ebc59",
 						"color" : "#FFFFFF",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick2 == "function") {

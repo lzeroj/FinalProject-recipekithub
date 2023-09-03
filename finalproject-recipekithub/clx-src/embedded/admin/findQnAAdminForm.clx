@@ -42,7 +42,7 @@
       <cl:xylayoutdata std:sid="xyl-data-01dc0c93" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
       <cl:group std:sid="group-67002643" style="background-color:#FFFFFF; border-radius:20px;">
         <cl:xylayoutdata std:sid="xyl-data-8c30d336" top="30px" bottom="30px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
-        <cl:output std:sid="output-dfed24b2" style="background-color:#FFFFFF; color:#0fd465; border-bottom-color:#0ebc59; font-weight:bold; border-bottom-width:1px; font-size:18px; font-family:푸른전남; border-bottom-style:solid; text-align:center;" value="Q &amp; A 리스트">
+        <cl:output std:sid="output-dfed24b2" style="background-color:#FFFFFF; color:#0fd465; border-bottom-color:#0ebc59; font-weight:bold; border-bottom-width:1px; font-size:18px; font-family:푸른전남 Medium; border-bottom-style:solid; text-align:center;" value="Q &amp; A 리스트">
           <cl:formdata std:sid="f-data-ce7e57a0" row="0" col="0" rowspan="1" colspan="3"/>
         </cl:output>
         <cl:grid std:sid="grid-6b88455a" id="grd1" style="background-color:#FFFFFF; border-right-style:solid; border-top-width:0px; border-left-style:solid; border-right-width:0px; border-bottom-width:0px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" readonly="true" datasetid="qnalistadmin">
@@ -73,7 +73,7 @@
             </cl:gridcell>
           </cl:griddetail>
         </cl:grid>
-        <cl:button std:sid="button-d88ae865" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; background-image:none;" value="선택 열기">
+        <cl:button std:sid="button-d88ae865" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; font-family:푸른전남 Medium; background-image:none;" value="선택 열기">
           <cl:listener std:sid="listener-33bfa1a7" name="click" handler="onButtonClick"/>
           <cl:formdata std:sid="f-data-165374cd" row="4" col="1"/>
         </cl:button>

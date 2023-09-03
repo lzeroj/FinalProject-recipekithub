@@ -33,7 +33,7 @@
     <cl:listener std:sid="listener-5177884c" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-cde6200b" style="background-color:#FFFFFF; border-radius:20px;">
       <cl:xylayoutdata std:sid="xyl-data-d8a2b994" top="30px" bottom="30px" width="860px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
-      <cl:button std:sid="button-3f3ec088" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; background-image:none;" value="자세히 보기">
+      <cl:button std:sid="button-3f3ec088" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; font-family:푸른전남 Medium; background-image:none;" value="자세히 보기">
         <cl:listener std:sid="listener-1fe5b925" name="click" handler="onButtonClick"/>
         <cl:formdata std:sid="f-data-0c57a9b7" row="4" col="2"/>
       </cl:button>
@@ -50,28 +50,28 @@
         <cl:gridcolumn std:sid="g-column-bea8c623" width="111px"/>
         <cl:gridheader std:sid="gh-band-a56b0acf">
           <cl:gridrow std:sid="g-row-b2854aab"/>
-          <cl:gridcell std:sid="gh-cell-614f0cb5" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" sortable="false" filterable="false"/>
-          <cl:gridcell std:sid="gh-cell-1223a89b" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
-          <cl:gridcell std:sid="gh-cell-eff16e22" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="reportTitle" sortable="false" filterable="false" text="신고 제목"/>
-          <cl:gridcell std:sid="gh-cell-f93665d4" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="작성자 이름"/>
-          <cl:gridcell std:sid="gh-cell-24c9077e" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="reportDate" sortable="false" filterable="false" text="신고 일자"/>
-          <cl:gridcell std:sid="gh-cell-85895411" rowindex="0" colindex="5" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold;" targetcolumnname="declarationType" sortable="false" filterable="false" text="신고 타입"/>
+          <cl:gridcell std:sid="gh-cell-614f0cb5" rowindex="0" colindex="0" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-1223a89b" rowindex="0" colindex="1" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="recipeBoardId" sortable="false" filterable="false" text="레시피 번호"/>
+          <cl:gridcell std:sid="gh-cell-eff16e22" rowindex="0" colindex="2" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="reportTitle" sortable="false" filterable="false" text="신고 제목"/>
+          <cl:gridcell std:sid="gh-cell-f93665d4" rowindex="0" colindex="3" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="memberEmail" sortable="false" filterable="false" text="작성자 이름"/>
+          <cl:gridcell std:sid="gh-cell-24c9077e" rowindex="0" colindex="4" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="reportDate" sortable="false" filterable="false" text="신고 일자"/>
+          <cl:gridcell std:sid="gh-cell-85895411" rowindex="0" colindex="5" style="background-color:#0ebc59; color:#FFFFFF; font-weight:bold; font-family:푸른전남 Medium;" targetcolumnname="declarationType" sortable="false" filterable="false" text="신고 타입"/>
         </cl:gridheader>
         <cl:griddetail std:sid="gd-band-28b51e4f">
           <cl:gridrow std:sid="g-row-83f28c07"/>
-          <cl:gridcell std:sid="gd-cell-831a61ab" rowindex="0" colindex="0" columntype="rowindex"/>
-          <cl:gridcell std:sid="gd-cell-9ce465ee" rowindex="0" colindex="1" columnname="recipeBoardId"/>
-          <cl:gridcell std:sid="gd-cell-3c1eef7c" rowindex="0" colindex="2" style="font-weight:bold;" columnname="reportTitle"/>
-          <cl:gridcell std:sid="gd-cell-73cdf910" rowindex="0" colindex="3" columnname="memberEmail"/>
-          <cl:gridcell std:sid="gd-cell-c559217e" rowindex="0" colindex="4" columnname="reportDate">
+          <cl:gridcell std:sid="gd-cell-831a61ab" rowindex="0" colindex="0" style="font-family:푸른전남;" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-9ce465ee" rowindex="0" colindex="1" style="font-family:푸른전남;" columnname="recipeBoardId"/>
+          <cl:gridcell std:sid="gd-cell-3c1eef7c" rowindex="0" colindex="2" style="font-weight:bold; font-family:푸른전남;" columnname="reportTitle"/>
+          <cl:gridcell std:sid="gd-cell-73cdf910" rowindex="0" colindex="3" style="font-family:푸른전남;" columnname="memberEmail"/>
+          <cl:gridcell std:sid="gd-cell-c559217e" rowindex="0" colindex="4" style="font-family:푸른전남;" columnname="reportDate">
             <cl:dateinput std:sid="d-input-f156db15" id="dti1" style="text-align:center;" mask="YYYY-MM-DD HH:mm:ss" format="YYYYMMDDHHmmss" enabledinputmask="false">
               <cl:celldata std:sid="c-data-0ffca273"/>
             </cl:dateinput>
           </cl:gridcell>
-          <cl:gridcell std:sid="gd-cell-bcbf7f17" rowindex="0" colindex="5" columnname="declarationType"/>
+          <cl:gridcell std:sid="gd-cell-bcbf7f17" rowindex="0" colindex="5" style="font-family:푸른전남;" columnname="declarationType"/>
         </cl:griddetail>
       </cl:grid>
-      <cl:button std:sid="button-d9b02fb5" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; background-image:none;" value="뒤로가기">
+      <cl:button std:sid="button-d9b02fb5" style="background-color:#0ebc59; color:#FFFFFF; font-size:16px; font-family:푸른전남 Medium; background-image:none;" value="뒤로가기">
         <cl:listener std:sid="listener-ddb41f96" name="click" handler="onButtonClick2"/>
         <cl:formdata std:sid="f-data-a555b14f" row="4" col="4"/>
       </cl:button>

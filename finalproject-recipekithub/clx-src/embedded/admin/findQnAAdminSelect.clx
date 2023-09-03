@@ -46,7 +46,7 @@
       <cl:verticaldata std:sid="v-data-c4d7d1aa" width="1860px" height="739px" autosize="height"/>
       <cl:group std:sid="group-4364fe1b" style="background-color:#FFFFFF;">
         <cl:verticaldata std:sid="v-data-9a3df3cf" width="860px" height="719px" autosize="height"/>
-        <cl:output std:sid="output-062cce4d" style="background-color:#FFFFFF; color:#0fd465; font-weight:bold; font-size:18px; font-family:푸른전남; text-align:center;" value="Q &amp; A 답변">
+        <cl:output std:sid="output-062cce4d" style="background-color:#FFFFFF; color:#0fd465; font-weight:bold; font-size:18px; font-family:푸른전남 Medium; text-align:center;" value="Q &amp; A 답변">
           <cl:verticaldata std:sid="v-data-3de4fa28" width="860px" height="50px"/>
         </cl:output>
         <cl:group std:sid="group-199b7c29" id="grp1" style="background-color:#FFFFFF;">
@@ -61,7 +61,7 @@
           </cl:textarea>
           <cl:group std:sid="group-54a7ce2d" id="btngrp">
             <cl:verticaldata std:sid="v-data-91ed95c2" width="820px" height="30px"/>
-            <cl:button std:sid="button-87ed44c2" id="btn1" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="답변 달기">
+            <cl:button std:sid="button-87ed44c2" id="btn1" style="background-color:#0ebc59; color:#FFFFFF; font-family:푸른전남 Medium; background-image:none;" value="답변 달기">
               <cl:listener std:sid="listener-a53ba729" name="click" handler="onButtonClick"/>
               <cl:xylayoutdata std:sid="xyl-data-74639305" right="0px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="CENTER"/>
             </cl:button>

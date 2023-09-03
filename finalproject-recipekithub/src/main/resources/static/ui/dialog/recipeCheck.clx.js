@@ -99,6 +99,7 @@
 					"font-weight" : "bold",
 					"font-size" : "20px",
 					"border-bottom-style" : "none",
+					"font-family" : "푸른전남 Medium",
 					"background-image" : "none",
 					"border-top-style" : "none"
 				});
@@ -121,6 +122,7 @@
 					"font-weight" : "bold",
 					"font-size" : "20px",
 					"border-bottom-style" : "none",
+					"font-family" : "푸른전남 Medium",
 					"background-image" : "none",
 					"border-top-style" : "none"
 				});
@@ -143,6 +145,7 @@
 				"font-weight" : "bold",
 				"font-size" : "20px",
 				"line-height" : "2.0",
+				"font-family" : "푸른전남 Medium",
 				"text-align" : "center"
 			});
 			container.addChild(output_1, {

@@ -648,7 +648,8 @@
 					group_4.style.setClasses(["cl-form-group"]);
 					group_4.style.css({
 						"background-color" : "#FFFFFF",
-						"border-radius" : "20px"
+						"border-radius" : "20px",
+						"font-family" : "푸른전남 Medium"
 					});
 					var formLayout_1 = new cpr.controls.layouts.FormLayout();
 					formLayout_1.scrollable = false;
@@ -671,6 +672,7 @@
 							"color" : "#FFFFFF",
 							"font-weight" : "bold",
 							"font-size" : "18px",
+							"font-family" : "푸른전남 Medium",
 							"background-image" : "none",
 							"text-align" : "center"
 						});
@@ -685,6 +687,7 @@
 							"color" : "#FFFFFF",
 							"font-weight" : "bold",
 							"font-size" : "18px",
+							"font-family" : "푸른전남 Medium",
 							"background-image" : "none",
 							"text-align" : "center"
 						});
@@ -695,6 +698,9 @@
 						var comboBox_1 = new cpr.controls.ComboBox("cmb1");
 						comboBox_1.readOnly = false;
 						comboBox_1.preventInput = true;
+						comboBox_1.style.css({
+							"font-family" : "푸른전남 Medium"
+						});
 						(function(comboBox_1){
 							comboBox_1.addItem(new cpr.controls.Item("밀키트별 매출 정보", "salesMealkit"));
 							comboBox_1.addItem(new cpr.controls.Item("좋아요가 많은 레시피", "totalLikeRecipe"));
@@ -712,7 +718,8 @@
 						button_1.value = "실행";
 						button_1.style.css({
 							"background-color" : "#0ebc59",
-							"font-size" : "16px"
+							"font-size" : "16px",
+							"font-family" : "푸른전남 Medium"
 						});
 						if(typeof onButtonClick == "function") {
 							button_1.addEventListener("click", onButtonClick);

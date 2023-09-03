@@ -85,7 +85,7 @@
 				output_1.value = "제목";
 				output_1.style.css({
 					"font-weight" : "bold",
-					"font-family" : "푸른전남"
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_1, {
 					"colIndex": 0,
@@ -95,7 +95,7 @@
 				output_2.value = "내용";
 				output_2.style.css({
 					"font-weight" : "bold",
-					"font-family" : "푸른전남"
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_2, {
 					"colIndex": 0,
@@ -105,7 +105,7 @@
 				output_3.value = "신고 유형";
 				output_3.style.css({
 					"font-weight" : "bold",
-					"font-family" : "푸른전남"
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_3, {
 					"colIndex": 0,
@@ -116,6 +116,9 @@
 				var radioButton_1 = new cpr.controls.RadioButton("rdb1");
 				radioButton_1.readOnly = true;
 				radioButton_1.colCount = 1;
+				radioButton_1.style.css({
+					"font-family" : "푸른전남"
+				});
 				(function(radioButton_1){
 					radioButton_1.addItem(new cpr.controls.Item("적절하지 않은 내용", "적절하지 않은 내용"));
 					radioButton_1.addItem(new cpr.controls.Item("광고 목적의 컨텐츠", "광고 목적의 컨텐츠"));
@@ -215,7 +218,7 @@
 				output_4.style.css({
 					"font-weight" : "bold",
 					"font-size" : "20px",
-					"font-family" : "푸른전남",
+					"font-family" : "푸른전남 Medium",
 					"text-align" : "center"
 				});
 				container.addChild(output_4, {

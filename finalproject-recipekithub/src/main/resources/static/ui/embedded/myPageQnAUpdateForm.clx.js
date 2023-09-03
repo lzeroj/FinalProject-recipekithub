@@ -143,7 +143,7 @@
 					"border-bottom-width" : "1px",
 					"font-size" : "18px",
 					"border-bottom-style" : "solid",
-					"font-family" : "푸른전남",
+					"font-family" : "푸른전남 Medium",
 					"text-align" : "center"
 				});
 				container.addChild(output_1, {
@@ -185,6 +185,7 @@
 					button_1.style.css({
 						"background-color" : "#0ebc59",
 						"color" : "#FFFFFF",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick == "function") {
@@ -201,6 +202,7 @@
 					button_2.style.css({
 						"background-color" : "#0ebc59",
 						"color" : "#FFFFFF",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick2 == "function") {

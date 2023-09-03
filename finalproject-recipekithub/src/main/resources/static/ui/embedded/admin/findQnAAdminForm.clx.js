@@ -172,7 +172,7 @@
 						"font-weight" : "bold",
 						"border-bottom-width" : "1px",
 						"font-size" : "18px",
-						"font-family" : "푸른전남",
+						"font-family" : "푸른전남 Medium",
 						"border-bottom-style" : "solid",
 						"text-align" : "center"
 					});
@@ -336,6 +336,7 @@
 						"background-color" : "#0ebc59",
 						"color" : "#FFFFFF",
 						"font-size" : "16px",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick == "function") {

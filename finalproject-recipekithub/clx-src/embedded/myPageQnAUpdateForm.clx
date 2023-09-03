@@ -23,7 +23,7 @@
     <cl:listener std:sid="listener-9f27ea00" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-4fd6728f" style="background-color:#FFFFFF;">
       <cl:xylayoutdata std:sid="xyl-data-3efaa6fc" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
-      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남; text-align:center;" value="Q &amp; A">
+      <cl:output std:sid="output-1f1b4944" style="padding-top:5px; border-bottom-color:darkGrey; color:#0fd465; font-weight:bold; border-bottom-width:1px; font-size:18px; border-bottom-style:solid; font-family:푸른전남 Medium; text-align:center;" value="Q &amp; A">
         <cl:xylayoutdata std:sid="xyl-data-1929d772" top="0px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
       </cl:output>
       <cl:group std:sid="group-050bca7e">
@@ -34,11 +34,11 @@
         <cl:textarea std:sid="t-area-2f7d60e6" id="txa1" style="border-radius:10px;" readonly="false" value="이메일 :&#xD;&#xA;전화번호 :&#xD;&#xA;---------------------------------------------------------------------------------------&#xD;&#xA;문의내용 :">
           <cl:xylayoutdata std:sid="xyl-data-9377620e" top="50px" right="0px" left="0px" height="248px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
         </cl:textarea>
-        <cl:button std:sid="button-6e95866d" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="수정">
+        <cl:button std:sid="button-6e95866d" style="background-color:#0ebc59; color:#FFFFFF; font-family:푸른전남 Medium; background-image:none;" value="수정">
           <cl:listener std:sid="listener-c44347ef" name="click" handler="onButtonClick"/>
           <cl:xylayoutdata std:sid="xyl-data-cc0b5325" right="150px" bottom="20px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
         </cl:button>
-        <cl:button std:sid="button-d2f92148" style="background-color:#0ebc59; color:#FFFFFF; background-image:none;" value="뒤로가기">
+        <cl:button std:sid="button-d2f92148" style="background-color:#0ebc59; color:#FFFFFF; font-family:푸른전남 Medium; background-image:none;" value="뒤로가기">
           <cl:listener std:sid="listener-a00607a9" name="click" handler="onButtonClick2"/>
           <cl:xylayoutdata std:sid="xyl-data-c482bf46" right="0px" bottom="20px" width="140px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
         </cl:button>

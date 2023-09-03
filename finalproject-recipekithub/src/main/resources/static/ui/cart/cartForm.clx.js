@@ -527,9 +527,9 @@
 					output_1.style.css({
 						"background-color" : "#FFFFFF",
 						"color" : "#0ebc59",
-						"font-weight" : "bold",
+						"font-weight" : "bolder",
 						"font-size" : "25px",
-						"font-family" : "'Noto Sans KR' , 'Malgun Gothic' , sans-serif"
+						"font-family" : "푸른전남 Medium"
 					});
 					container.addChild(output_1, {
 						"colIndex": 1,
@@ -543,7 +543,8 @@
 					checkBox_1.style.css({
 						"background-color" : "#e5e5e5",
 						"color" : "#0ebc59",
-						"font-weight" : "700"
+						"font-weight" : "700",
+						"font-family" : "푸른전남 Medium"
 					});
 					if(typeof onCbx1ValueChange == "function") {
 						checkBox_1.addEventListener("value-change", onCbx1ValueChange);
@@ -567,7 +568,8 @@
 					output_3.style.css({
 						"border-right-style" : "solid",
 						"cursor" : "pointer",
-						"border-right-color" : "white"
+						"border-right-color" : "white",
+						"font-family" : "푸른전남"
 					});
 					if(typeof onOutputClick == "function") {
 						output_3.addEventListener("click", onOutputClick);
@@ -608,6 +610,7 @@
 						"border-left-color" : "#0ebc59",
 						"border-top-color" : "#0ebc59",
 						"border-right-color" : "#0ebc59",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick3 == "function") {
@@ -674,7 +677,8 @@
 											cell.text = "상품 정보";
 											cell.style.css({
 												"background-color" : "#e5e5e5",
-												"font-weight" : "400"
+												"font-weight" : "400",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -687,7 +691,8 @@
 											cell.text = "가격";
 											cell.style.css({
 												"background-color" : "#e5e5e5",
-												"font-weight" : "400"
+												"font-weight" : "400",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -700,7 +705,8 @@
 											cell.text = "상품 수량";
 											cell.style.css({
 												"background-color" : "#e5e5e5",
-												"font-weight" : "400"
+												"font-weight" : "400",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									},
@@ -710,7 +716,8 @@
 											cell.text = "총 가격";
 											cell.style.css({
 												"background-color" : "#e5e5e5",
-												"font-weight" : "400"
+												"font-weight" : "400",
+												"font-family" : "푸른전남 Medium"
 											});
 										}
 									}
@@ -792,6 +799,7 @@
 						});
 						grid_1.style.css({
 							"background-color" : "#FFFFFF",
+							"font-family" : "푸른전남",
 							"background-image" : "none"
 						});
 						if(typeof onGrd1RowUncheck == "function") {
@@ -847,6 +855,7 @@
 						"border-bottom-width" : "3px",
 						"border-top-color" : "#e5e5e5",
 						"border-bottom-style" : "solid",
+						"font-family" : "푸른전남",
 						"background-image" : "none",
 						"border-top-style" : "solid",
 						"text-align" : "right"
@@ -860,17 +869,18 @@
 					var output_7 = new cpr.controls.Output();
 					output_7.value = "총 결제할 금액은 ";
 					output_7.style.css({
-						"background-color" : "#FFFFFF",
 						"border-top-width" : "3px",
 						"border-bottom-color" : "#e5e5e5",
-						"border-left-style" : "solid",
 						"border-left-color" : "#e5e5e5",
+						"border-left-width" : "3px",
+						"border-top-style" : "solid",
+						"background-color" : "#FFFFFF",
+						"border-left-style" : "solid",
 						"border-bottom-width" : "3px",
 						"border-top-color" : "#e5e5e5",
 						"border-bottom-style" : "solid",
+						"font-family" : "푸른전남",
 						"background-image" : "none",
-						"border-left-width" : "3px",
-						"border-top-style" : "solid",
 						"text-align" : "right"
 					});
 					container.addChild(output_7, {
@@ -889,6 +899,7 @@
 						"border-top-color" : "#e5e5e5",
 						"border-right-color" : "#e5e5e5",
 						"border-bottom-style" : "solid",
+						"font-family" : "푸른전남",
 						"background-image" : "none",
 						"border-top-style" : "solid"
 					});
@@ -908,18 +919,19 @@
 					var button_2 = new cpr.controls.Button();
 					button_2.value = "선택 상품 주문";
 					button_2.style.css({
-						"background-color" : "#0ebc59",
 						"border-right-style" : "solid",
 						"color" : "#FFFFFF",
 						"border-bottom-color" : "#ffffff",
-						"border-left-style" : "solid",
 						"font-weight" : "bold",
 						"border-left-color" : "#ffffff",
+						"border-right-color" : "#ffffff",
+						"border-top-style" : "solid",
+						"background-color" : "#0ebc59",
+						"border-left-style" : "solid",
 						"border-top-color" : "#ffffff",
 						"border-bottom-style" : "solid",
-						"border-right-color" : "#ffffff",
-						"background-image" : "none",
-						"border-top-style" : "solid"
+						"font-family" : "푸른전남 Medium",
+						"background-image" : "none"
 					});
 					if(typeof onButtonClick2 == "function") {
 						button_2.addEventListener("click", onButtonClick2);
@@ -937,6 +949,7 @@
 						"color" : "#FFFFFF",
 						"white-space" : "normal",
 						"font-weight" : "bold",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick == "function") {

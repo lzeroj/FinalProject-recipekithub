@@ -162,7 +162,8 @@
 				output_1.value = "Output";
 				output_1.style.css({
 					"font-weight" : "bold",
-					"font-size" : "20px"
+					"font-size" : "20px",
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_1, {
 					"colIndex": 3,

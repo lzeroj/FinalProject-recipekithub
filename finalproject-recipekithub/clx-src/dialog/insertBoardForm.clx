@@ -19,19 +19,19 @@
     <cl:appspec/>
   </head>
   <body std:sid="body-ed510222">
-    <cl:inputbox std:sid="i-box-0742c146" id="ipb1">
+    <cl:inputbox std:sid="i-box-0742c146" id="ipb1" style="font-family:푸른전남 Medium;">
       <cl:datamapbind property="value" datacontrolid="boardInfo" columnname="boardTitle"/>
       <cl:xylayoutdata std:sid="xyl-data-9eb766dc" top="20px" left="130px" width="450px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:inputbox>
-    <cl:output std:sid="output-f20839c2" style="text-align:center;" value="제목">
+    <cl:output std:sid="output-f20839c2" style="font-family:푸른전남 Medium; text-align:center;" value="제목">
       <cl:xylayoutdata std:sid="xyl-data-6005a275" top="20px" left="20px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
     </cl:output>
     <cl:group std:sid="group-7d0cb284" class="cl-form-group">
       <cl:xylayoutdata std:sid="xyl-data-6b9b2e17" top="50px" left="20px" width="560px" height="300px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-      <cl:output std:sid="output-7a974d78" style="text-align:center;" value="글 내용">
+      <cl:output std:sid="output-7a974d78" style="font-family:푸른전남 Medium; text-align:center;" value="글 내용">
         <cl:formdata std:sid="f-data-c870525d" row="0" col="0" rowspan="1" colspan="1"/>
       </cl:output>
-      <cl:inputbox std:sid="i-box-80bda541" id="ipb2">
+      <cl:inputbox std:sid="i-box-80bda541" id="ipb2" style="font-family:푸른전남;">
         <cl:datamapbind property="value" datacontrolid="boardInfo" columnname="boardContent"/>
         <cl:formdata std:sid="f-data-ffef6600" row="0" col="1" rowspan="1" colspan="1"/>
       </cl:inputbox>

@@ -72,6 +72,9 @@
 			
 			// UI Configuration
 			var inputBox_1 = new cpr.controls.InputBox("ipb1");
+			inputBox_1.style.css({
+				"font-family" : "푸른전남 Medium"
+			});
 			inputBox_1.bind("value").toDataMap(app.lookup("boardInfo"), "boardTitle");
 			container.addChild(inputBox_1, {
 				"top": "20px",
@@ -83,6 +86,7 @@
 			var output_1 = new cpr.controls.Output();
 			output_1.value = "제목";
 			output_1.style.css({
+				"font-family" : "푸른전남 Medium",
 				"text-align" : "center"
 			});
 			container.addChild(output_1, {
@@ -112,6 +116,7 @@
 				var output_2 = new cpr.controls.Output();
 				output_2.value = "글 내용";
 				output_2.style.css({
+					"font-family" : "푸른전남 Medium",
 					"text-align" : "center"
 				});
 				container.addChild(output_2, {
@@ -121,6 +126,9 @@
 					"rowSpan": 1
 				});
 				var inputBox_2 = new cpr.controls.InputBox("ipb2");
+				inputBox_2.style.css({
+					"font-family" : "푸른전남"
+				});
 				inputBox_2.bind("value").toDataMap(app.lookup("boardInfo"), "boardContent");
 				container.addChild(inputBox_2, {
 					"colIndex": 1,
