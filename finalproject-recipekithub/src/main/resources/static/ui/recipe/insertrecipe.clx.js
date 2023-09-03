@@ -279,7 +279,7 @@
 				uIControlShell_1.addEventListener("load", onShl1Load);
 			}
 			container.addChild(uIControlShell_1, {
-				"top": "510px",
+				"top": "515px",
 				"width": "1200px",
 				"height": "450px",
 				"left": "calc(50% - 600px)"
@@ -298,7 +298,7 @@
 				output_1.style.css({
 					"font-weight" : "bold",
 					"font-size" : "20px",
-					"font-family" : "@HY엽서L"
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_1, {
 					"top": "0px",
@@ -308,7 +308,7 @@
 				});
 			})(group_1);
 			container.addChild(group_1, {
-				"top": "199px",
+				"top": "210px",
 				"width": "1200px",
 				"height": "52px",
 				"left": "calc(50% - 600px)"
@@ -333,6 +333,7 @@
 					"background-color" : "#0ca44e",
 					"color" : "#FFFFFF",
 					"font-weight" : "bold",
+					"font-family" : "푸른전남 Medium",
 					"background-image" : "none"
 				});
 				if(typeof onButtonClick == "function") {
@@ -348,6 +349,7 @@
 					"background-color" : "#0ca44e",
 					"color" : "#FFFFFF",
 					"font-weight" : "bold",
+					"font-family" : "푸른전남 Medium",
 					"background-image" : "none"
 				});
 				if(typeof onButtonClick2 == "function") {
@@ -551,7 +553,7 @@
 				});
 			})(group_3);
 			container.addChild(group_3, {
-				"top": "260px",
+				"top": "270px",
 				"width": "1200px",
 				"height": "228px",
 				"left": "calc(50% - 600px)"
@@ -562,7 +564,7 @@
 				"top": "0px",
 				"right": "0px",
 				"left": "0px",
-				"height": "200px"
+				"height": "205px"
 			});
 			
 			var userDefinedControl_2 = new udc.footer();

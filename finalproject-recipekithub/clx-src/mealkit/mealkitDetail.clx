@@ -105,7 +105,7 @@
     <cl:group std:sid="group-1cda49b1" style="background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
       <cl:verticaldata std:sid="v-data-695100a0" width="1920px" height="1620px"/>
       <cl:udc std:sid="ud-control-ff679508" type="udc.myPageHeader">
-        <cl:verticaldata std:sid="v-data-78d9bc79" width="1920px" height="200px"/>
+        <cl:verticaldata std:sid="v-data-78d9bc79" width="1920px" height="205px"/>
       </cl:udc>
       <cl:group std:sid="group-2d0b8c58" style="color:black;">
         <cl:verticaldata std:sid="v-data-30666102" width="988px" height="515px"/>
@@ -253,42 +253,42 @@
       </cl:group>
       <cl:group std:sid="group-5155607d" id="impInfo">
         <cl:verticaldata std:sid="v-data-23299db5" width="998px" height="179px"/>
-        <cl:output std:sid="output-69e941d9" style="background-color:#f9f9f9; text-align:center;" value="제품명">
+        <cl:output std:sid="output-69e941d9" style="background-color:#f9f9f9; font-family:푸른전남; text-align:center;" value="제품명">
           <cl:formdata std:sid="f-data-952d349b" row="0" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-bfa4893b" style="background-color:#f9f9f9; text-align:center;" value="생산자 및 소재지">
+        <cl:output std:sid="output-bfa4893b" style="background-color:#f9f9f9; font-family:푸른전남; text-align:center;" value="생산자 및 소재지">
           <cl:formdata std:sid="f-data-0ac5e2b2" row="1" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-9c856ace" style="background-color:#f9f9f9; text-align:center;" value="재고">
+        <cl:output std:sid="output-9c856ace" style="background-color:#f9f9f9; font-family:푸른전남; text-align:center;" value="재고">
           <cl:formdata std:sid="f-data-0f3e14f6" row="2" col="0"/>
         </cl:output>
-        <cl:output std:sid="output-ed60bb62" style="background-color:#f9f9f9; text-align:center;" value="제조연월일, 소비기한 또는 품질유지기한">
+        <cl:output std:sid="output-ed60bb62" style="background-color:#f9f9f9; font-family:푸른전남; text-align:center;" value="제조연월일, 소비기한 또는 품질유지기한">
           <cl:formdata std:sid="f-data-2ee27fce" row="1" col="2"/>
         </cl:output>
-        <cl:output std:sid="output-10a3af38" style="background-color:#f9f9f9; text-align:center;" value="원재료명 및 함량">
+        <cl:output std:sid="output-10a3af38" style="background-color:#f9f9f9; font-family:푸른전남; text-align:center;" value="원재료명 및 함량">
           <cl:formdata std:sid="f-data-a1706060" row="2" col="2"/>
         </cl:output>
-        <cl:output std:sid="output-38a590f7" style="background-color:#f9f9f9; text-align:center;" value="종류/재료/전체">
+        <cl:output std:sid="output-38a590f7" style="background-color:#f9f9f9; font-family:푸른전남; text-align:center;" value="종류/재료/전체">
           <cl:formdata std:sid="f-data-e62570c3" row="0" col="2"/>
         </cl:output>
-        <cl:output std:sid="output-8b916f65" style="font-weight:bold; text-align:left;" value="컨텐츠 참조">
+        <cl:output std:sid="output-8b916f65" style="font-weight:bold; font-family:푸른전남; text-align:left;" value="컨텐츠 참조">
           <cl:formdata std:sid="f-data-a6541833" row="1" col="1"/>
         </cl:output>
-        <cl:output std:sid="output-53854fe0" style="font-weight:bold;">
+        <cl:output std:sid="output-53854fe0" style="font-weight:bold; font-family:푸른전남;">
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitInventory"/>
           <cl:formdata std:sid="f-data-77c00cbc" row="2" col="1"/>
         </cl:output>
-        <cl:output std:sid="output-3e91dd1c" style="font-weight:bold;">
+        <cl:output std:sid="output-3e91dd1c" style="font-weight:bold; font-family:푸른전남;">
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitCategory"/>
           <cl:formdata std:sid="f-data-5f05c861" row="0" col="3"/>
         </cl:output>
-        <cl:output std:sid="output-b6399b7b" style="font-weight:bold;" value="제조일로 3개월">
+        <cl:output std:sid="output-b6399b7b" style="font-weight:bold; font-family:푸른전남;" value="제조일로 3개월">
           <cl:formdata std:sid="f-data-6f105ebe" row="1" col="3"/>
         </cl:output>
-        <cl:output std:sid="output-8743aae8" style="font-weight:bold;" value="컨텐츠 참조">
+        <cl:output std:sid="output-8743aae8" style="font-weight:bold; font-family:푸른전남;" value="컨텐츠 참조">
           <cl:formdata std:sid="f-data-4dbf331a" row="2" col="3"/>
         </cl:output>
-        <cl:output std:sid="output-f0bfb16a" style="font-weight:bold;">
+        <cl:output std:sid="output-f0bfb16a" style="font-weight:bold; font-family:푸른전남;">
           <cl:datamapbind property="value" datacontrolid="mealkit" columnname="mealkitName"/>
           <cl:formdata std:sid="f-data-9a2cc1ed" row="0" col="1"/>
         </cl:output>
@@ -308,15 +308,15 @@
       </cl:group>
       <cl:group std:sid="group-cd052328" id="writeComment" style="text-align:center;" visible="false">
         <cl:verticaldata std:sid="v-data-ae5694b1" width="998px" height="57px"/>
-        <cl:button std:sid="button-bba067fa" style="background-color:#0ca44e; color:white; font-size:16px; background-image:none;" value="등록">
+        <cl:button std:sid="button-bba067fa" style="background-color:#0ca44e; color:white; font-size:16px; font-family:푸른전남 Medium; background-image:none;" value="등록">
           <cl:listener std:sid="listener-ecd299cb" name="click" handler="onButtonClick5"/>
           <cl:formdata std:sid="f-data-74d6857c" row="0" col="2" rowspan="1" colspan="1"/>
         </cl:button>
-        <cl:inputbox std:sid="i-box-8bf69832" id="comment" style="text-align:left;" placeholder="욕설 및 타인을 비방하는 댓글을 삼가해주세요.">
+        <cl:inputbox std:sid="i-box-8bf69832" id="comment" style="font-family:푸른전남; text-align:left;" placeholder="욕설 및 타인을 비방하는 댓글을 삼가해주세요.">
           <cl:listener std:sid="listener-2dca2f5a" name="value-change" handler="onIpb1ValueChange"/>
           <cl:formdata std:sid="f-data-559525e5" row="0" col="0"/>
         </cl:inputbox>
-        <cl:combobox std:sid="c-box-b3d1e4a9" id="starpoint" style="font-size:14px;" placeholder="별점 선택" preventinput="true">
+        <cl:combobox std:sid="c-box-b3d1e4a9" id="starpoint" style="font-size:14px; font-family:푸른전남;" placeholder="별점 선택" preventinput="true">
           <cl:formdata std:sid="f-data-da3c264f" row="0" col="1" rowspan="1" colspan="1"/>
           <cl:item std:sid="t-item-cc08e9d2" label="1" value="1"/>
           <cl:item std:sid="t-item-85bf3ab0" label="2" value="2"/>
@@ -333,10 +333,10 @@
       </cl:group>
       <cl:group std:sid="group-25b8d42b">
         <cl:verticaldata std:sid="v-data-fee8b81d" width="998px" height="24px"/>
-        <cl:output std:sid="output-e8c32823" value="댓글">
+        <cl:output std:sid="output-e8c32823" style="font-family:푸른전남 Medium;" value="댓글">
           <cl:xylayoutdata std:sid="xyl-data-a40e8c71" top="2px" left="12px" width="31px" height="17px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:output std:sid="output-65ecc615" id="cnt" style="color:#0ca44e; font-weight:bold; font-size:17px;" value="개수">
+        <cl:output std:sid="output-65ecc615" id="cnt" style="color:#0ca44e; font-weight:bold; font-size:17px; font-family:푸른전남 Medium;" value="개수">
           <cl:xylayoutdata std:sid="xyl-data-ffa7b83f" top="-1px" left="42px" width="34px" height="23px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
         <cl:xylayout std:sid="xylayout-47c32e3b"/>

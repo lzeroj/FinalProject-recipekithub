@@ -471,7 +471,7 @@
 			container.addChild(userDefinedControl_1, {
 				"autoSize": "none",
 				"width": "1920px",
-				"height": "200px"
+				"height": "205px"
 			});
 			
 			var group_1 = new cpr.controls.Container();
@@ -494,6 +494,7 @@
 					"color" : "#0CA44E",
 					"font-weight" : "lighter",
 					"font-size" : "18px",
+					"font-family" : "푸른전남 Medium",
 					"text-align" : "center"
 				});
 				container.addChild(output_1, {
@@ -507,6 +508,7 @@
 				output_2.style.css({
 					"font-weight" : "bold",
 					"font-size" : "20px",
+					"font-family" : "푸른전남 Medium",
 					"text-align" : "center"
 				});
 				container.addChild(output_2, {
@@ -518,7 +520,8 @@
 				var output_3 = new cpr.controls.Output("opt1");
 				output_3.value = "좋아요 갯수";
 				output_3.style.css({
-					"font-size" : "20px"
+					"font-size" : "20px",
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_3, {
 					"top": "335px",
@@ -557,7 +560,8 @@
 				var image_4 = new cpr.controls.Image("memberProfile");
 				image_4.fallbackSrc = "theme/images/icon/chefimg.png";
 				image_4.style.css({
-					"border-radius" : "100px"
+					"border-radius" : "100px",
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(image_4, {
 					"top": "267px",
@@ -673,7 +677,8 @@
 				var output_8 = new cpr.controls.Output();
 				output_8.value = "댓글";
 				output_8.style.css({
-					"font-size" : "25px"
+					"font-size" : "25px",
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_8, {
 					"top": "11px",
@@ -685,7 +690,8 @@
 				output_9.value = "댓글개수";
 				output_9.style.css({
 					"color" : "#15820C",
-					"font-size" : "25px"
+					"font-size" : "25px",
+					"font-family" : "푸른전남 Medium"
 				});
 				container.addChild(output_9, {
 					"top": "11px",
@@ -698,6 +704,7 @@
 				button_2.style.css({
 					"background-color" : "#0CA44E",
 					"color" : "white",
+					"font-family" : "푸른전남 Medium",
 					"background-image" : "none"
 				});
 				if(typeof onButtonClick2 == "function") {
@@ -712,6 +719,9 @@
 				var textArea_1 = new cpr.controls.TextArea("commentInput");
 				textArea_1.placeholder = "50자 내로 작성해 주세요";
 				textArea_1.maxLength = 50;
+				textArea_1.style.css({
+					"font-family" : "푸른전남"
+				});
 				textArea_1.bind("value").toDataMap(app.lookup("dmInsertValue"), "recipeCommentContent");
 				container.addChild(textArea_1, {
 					"top": "46px",

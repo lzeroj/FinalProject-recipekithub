@@ -142,7 +142,7 @@
 			formLayout_1.scrollable = false;
 			formLayout_1.topMargin = "0px";
 			formLayout_1.rightMargin = "0px";
-			formLayout_1.bottomMargin = "0px";
+			formLayout_1.bottomMargin = "20px";
 			formLayout_1.leftMargin = "0px";
 			formLayout_1.horizontalSpacing = "0px";
 			formLayout_1.verticalSpacing = "0px";
@@ -189,7 +189,8 @@
 						"background-color" : "#FFFFFF",
 						"color" : "#0a8c43",
 						"font-weight" : "bold",
-						"font-size" : "25px"
+						"font-size" : "25px",
+						"font-family" : "푸른전남 Medium"
 					});
 					container.addChild(output_1, {
 						"colIndex": 0,

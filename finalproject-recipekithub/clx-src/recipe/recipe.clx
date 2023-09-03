@@ -56,7 +56,7 @@
     <cl:listener std:sid="listener-e680d378" name="load" handler="onBodyLoad"/>
     <cl:listener std:sid="listener-2f51f4b3" name="init" handler="onBodyInit"/>
     <cl:udc std:sid="ud-control-8a3475f2" id="headerUdc" type="udc.header3">
-      <cl:verticaldata std:sid="v-data-f66792c5" width="1920px" height="200px" syncminwidth="true" autosize="none"/>
+      <cl:verticaldata std:sid="v-data-f66792c5" width="1920px" height="205px" syncminwidth="true" autosize="none"/>
     </cl:udc>
     <cl:group std:sid="group-d5d70a1d" style="background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
       <cl:verticaldata std:sid="v-data-0ccbc8b6" width="1920px" height="765px"/>
@@ -75,8 +75,9 @@
           <cl:menuitem std:sid="m-item-efc36dbd" label="샐러드" value="샐러드"/>
           <cl:menuitem std:sid="m-item-b56a3f4f" label="음료" value="음료"/>
           <cl:menuitem std:sid="m-item-1aaab860" label="기타" value="기타"/>
+          <cl:barstyle style="font-family:푸른전남 Medium;"/>
         </cl:navigationbar>
-        <cl:navigationbar std:sid="n-bar-92ff7ec1" id="ingredients" style="border-right-style:none; border-left-style:none; border-bottom-style:none; font-family:'푸른 전남' , 'Malgun Gothic' , sans-serif; border-top-style:none;">
+        <cl:navigationbar std:sid="n-bar-92ff7ec1" id="ingredients" style="border-right-style:none; border-left-style:none; border-bottom-style:none; font-family:푸른전남 Medium; border-top-style:none;">
           <cl:listener std:sid="listener-a44ee853" name="selection-change" handler="onIngredientsSelectionChange"/>
           <cl:datamapbind property="value" datacontrolid="dmCategory" columnname="ingredients"/>
           <cl:xylayoutdata std:sid="xyl-data-d03b956e" top="80px" left="110px" width="854px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -89,7 +90,7 @@
           <cl:menuitem std:sid="m-item-584296fd" label="과일류" value="과일류"/>
           <cl:menuitem std:sid="m-item-7da4fcc2" label="기타" value="기타"/>
         </cl:navigationbar>
-        <cl:navigationbar std:sid="n-bar-5fbda7e7" id="method" style="border-right-style:none; border-left-style:none; border-bottom-style:none; font-family:'푸른 전남' , 'Malgun Gothic' , sans-serif; border-top-style:none;">
+        <cl:navigationbar std:sid="n-bar-5fbda7e7" id="method" style="border-right-style:none; border-left-style:none; border-bottom-style:none; font-family:푸른전남 Medium; border-top-style:none;">
           <cl:listener std:sid="listener-e9cadd9a" name="selection-change" handler="onMethodSelectionChange"/>
           <cl:datamapbind property="value" datacontrolid="dmCategory" columnname="method"/>
           <cl:xylayoutdata std:sid="xyl-data-439ef08d" top="150px" left="110px" width="854px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -104,13 +105,13 @@
         </cl:navigationbar>
         <cl:group std:sid="group-9765b2d8" style="border-right-style:solid; border-right-color:#F9F9F9;">
           <cl:xylayoutdata std:sid="xyl-data-39b07e75" top="0px" left="10px" width="95px" height="219px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
-          <cl:output std:sid="output-eb1e8c36" style="color:#90be70; font-weight:bold; text-align:center;" value="종류별">
+          <cl:output std:sid="output-eb1e8c36" style="color:#90be70; font-weight:bold; font-family:푸른전남 Medium; text-align:center;" value="종류별">
             <cl:xylayoutdata std:sid="xyl-data-2360f117" top="9px" left="0px" width="92px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
           </cl:output>
-          <cl:output std:sid="output-d01ca22e" style="color:#90be70; font-weight:bold; text-align:center;" value="재료별">
+          <cl:output std:sid="output-d01ca22e" style="color:#90be70; font-weight:bold; font-family:푸른전남 Medium; text-align:center;" value="재료별">
             <cl:xylayoutdata std:sid="xyl-data-11a928bd" top="80px" left="0px" width="92px" height="60px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
           </cl:output>
-          <cl:output std:sid="output-56ba7f12" style="color:#90be70; font-weight:bold; text-align:center;" value="방법별">
+          <cl:output std:sid="output-56ba7f12" style="color:#90be70; font-weight:bold; font-family:푸른전남 Medium; text-align:center;" value="방법별">
             <cl:xylayoutdata std:sid="xyl-data-a618069c" top="150px" left="0px" width="92px" height="59px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
           </cl:output>
           <cl:xylayout std:sid="xylayout-63790750"/>
@@ -119,16 +120,16 @@
       </cl:group>
       <cl:group std:sid="group-2c062443" style="background-color:#FFFFFF;">
         <cl:verticaldata std:sid="v-data-d8a42786" width="1262px" height="90px"/>
-        <cl:output std:sid="output-2eed6e9b" style="font-weight:bold;" value="총">
+        <cl:output std:sid="output-2eed6e9b" style="font-weight:bold; font-family:푸른전남 Medium;" value="총">
           <cl:xylayoutdata std:sid="xyl-data-c504d9b3" top="50px" left="45px" width="18px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:output std:sid="output-44acfea4" id="recipeCount" style="color:#0CA44E; font-size:30px;" value="">
+        <cl:output std:sid="output-44acfea4" id="recipeCount" style="color:#0CA44E; font-size:30px; font-family:푸른전남 Medium;" value="">
           <cl:xylayoutdata std:sid="xyl-data-811fe71b" top="32px" left="62px" width="49px" height="38px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:output std:sid="output-1f066570" style="font-weight:bold;" value="개의 맛있는 레시피가 있습니다.">
+        <cl:output std:sid="output-1f066570" style="font-weight:bold; font-family:푸른전남 Medium;" value="개의 맛있는 레시피가 있습니다.">
           <cl:xylayoutdata std:sid="xyl-data-d1d49fe5" top="50px" left="110px" width="247px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
         </cl:output>
-        <cl:navigationbar std:sid="n-bar-4802a97f" id="sort" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+        <cl:navigationbar std:sid="n-bar-4802a97f" id="sort" style="border-right-style:none; border-left-style:none; border-bottom-style:none; font-family:푸른전남 Medium; border-top-style:none;">
           <cl:listener std:sid="listener-eb9faefb" name="selection-change" handler="onSortSelectionChange"/>
           <cl:datamapbind property="value" datacontrolid="dmSort" columnname="sort"/>
           <cl:xylayoutdata std:sid="xyl-data-dc2f8eb5" top="40px" left="1038px" width="204px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>

@@ -433,16 +433,17 @@
 					(function(container){
 						var output_1 = new cpr.controls.Output();
 						output_1.value = "밀키트 수정";
+						output_1.style.setClasses(["emphasis"]);
 						output_1.style.css({
 							"color" : "#0CA44E",
 							"font-weight" : "bolder",
-							"font-size" : "20px",
+							"font-size" : "24px",
 							"font-style" : "normal"
 						});
 						container.addChild(output_1, {
 							"top": "30px",
 							"left": "20px",
-							"width": "122px",
+							"width": "131px",
 							"height": "31px"
 						});
 					})(group_3);
@@ -461,6 +462,7 @@
 						output_2.style.css({
 							"color" : "#0CA44E",
 							"font-size" : "15px",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_2, {
@@ -471,7 +473,8 @@
 						});
 						var inputBox_1 = new cpr.controls.InputBox("ipb1");
 						inputBox_1.style.css({
-							"background-color" : "#F9F9F9"
+							"background-color" : "#F9F9F9",
+							"font-family" : "푸른전남 Medium"
 						});
 						inputBox_1.bind("value").toDataMap(app.lookup("updateMealkit"), "mealkitName");
 						container.addChild(inputBox_1, {
@@ -496,6 +499,7 @@
 						output_3.style.css({
 							"color" : "#0CA44E",
 							"font-size" : "15px",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_3, {
@@ -505,6 +509,9 @@
 							"height": "20px"
 						});
 						var textArea_1 = new cpr.controls.TextArea("ipb2");
+						textArea_1.style.css({
+							"font-family" : "푸른전남"
+						});
 						textArea_1.bind("value").toDataMap(app.lookup("updateMealkit"), "mealkitIngredients");
 						container.addChild(textArea_1, {
 							"top": "9px",
@@ -528,6 +535,7 @@
 						output_4.style.css({
 							"color" : "#0CA44E",
 							"font-size" : "15px",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_4, {
@@ -540,6 +548,7 @@
 						comboBox_1.placeholder = "-종류-";
 						comboBox_1.style.css({
 							"background-color" : "#F9F9F9",
+							"font-family" : "푸른전남",
 							"text-align" : "center"
 						});
 						(function(comboBox_1){
@@ -573,6 +582,7 @@
 						comboBox_2.placeholder = "-재료-";
 						comboBox_2.style.css({
 							"background-color" : "#F9F9F9",
+							"font-family" : "푸른전남",
 							"text-align" : "center"
 						});
 						(function(comboBox_2){
@@ -603,6 +613,7 @@
 						comboBox_3.placeholder = "-방법-";
 						comboBox_3.style.css({
 							"background-color" : "#F9F9F9",
+							"font-family" : "푸른전남",
 							"text-align" : "center"
 						});
 						(function(comboBox_3){
@@ -630,6 +641,7 @@
 						var comboBox_4 = new cpr.controls.ComboBox("type");
 						comboBox_4.placeholder = "-선택-";
 						comboBox_4.style.css({
+							"font-family" : "푸른전남",
 							"text-align" : "center"
 						});
 						(function(comboBox_4){
@@ -661,6 +673,7 @@
 						output_5.style.css({
 							"color" : "#0CA44E",
 							"font-size" : "15px",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_5, {
@@ -674,6 +687,7 @@
 						output_6.style.css({
 							"color" : "#0CA44E",
 							"font-size" : "15px",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_6, {
@@ -684,7 +698,8 @@
 						});
 						var inputBox_2 = new cpr.controls.InputBox("ipb3");
 						inputBox_2.style.css({
-							"background-color" : "#F9F9F9"
+							"background-color" : "#F9F9F9",
+							"font-family" : "푸른전남 Medium"
 						});
 						inputBox_2.bind("value").toDataMap(app.lookup("updateMealkit"), "mealkitPrice");
 						container.addChild(inputBox_2, {
@@ -695,7 +710,8 @@
 						});
 						var inputBox_3 = new cpr.controls.InputBox("ipb4");
 						inputBox_3.style.css({
-							"background-color" : "#F9F9F9"
+							"background-color" : "#F9F9F9",
+							"font-family" : "푸른전남"
 						});
 						inputBox_3.bind("value").toDataMap(app.lookup("updateMealkit"), "mealkitInventory");
 						container.addChild(inputBox_3, {
@@ -720,6 +736,7 @@
 						output_7.style.css({
 							"color" : "#0CA44E",
 							"font-size" : "15px",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_7, {
@@ -752,6 +769,7 @@
 						"background-color" : "#0ca44e",
 						"color" : "white",
 						"font-size" : "17px",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick2 == "function") {
@@ -770,6 +788,7 @@
 						"background-color" : "#0ca44e",
 						"color" : "white",
 						"font-size" : "17px",
+						"font-family" : "푸른전남 Medium",
 						"background-image" : "none"
 					});
 					if(typeof onButtonClick == "function") {
@@ -810,6 +829,7 @@
 						output_8.value = "파일";
 						output_8.style.css({
 							"color" : "#0CA44E",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_8, {
@@ -875,10 +895,10 @@
 			
 			var userDefinedControl_2 = new udc.myPageHeader();
 			container.addChild(userDefinedControl_2, {
-				"top": "6px",
-				"width": "1920px",
-				"height": "200px",
-				"left": "calc(50% - 960px)"
+				"top": "0px",
+				"right": "0px",
+				"left": "0px",
+				"height": "205px"
 			});
 			if(typeof onBodyInit2 == "function"){
 				app.addEventListener("init", onBodyInit2);

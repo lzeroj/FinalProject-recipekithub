@@ -35,7 +35,7 @@
       </cl:img>
       <cl:group std:sid="group-6a15b6bf">
         <cl:formdata std:sid="f-data-7fd773e5" row="1" col="3"/>
-        <cl:output std:sid="output-9a9f18f0" style="background-color:#FFFFFF; color:#0a8c43; font-weight:bold; font-size:25px;" class="emphasis" value="쉐프 랭킹">
+        <cl:output std:sid="output-9a9f18f0" style="background-color:#FFFFFF; color:#0a8c43; font-weight:bold; font-size:25px; font-family:푸른전남 Medium;" class="emphasis" value="쉐프 랭킹">
           <cl:formdata std:sid="f-data-09b98a4f" row="1" col="0"/>
         </cl:output>
         <cl:formlayout std:sid="f-layout-c698ee94" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
@@ -45,7 +45,7 @@
           <cl:columns length="110" unit="PIXEL"/>
         </cl:formlayout>
       </cl:group>
-      <cl:formlayout std:sid="f-layout-a6ace469" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+      <cl:formlayout std:sid="f-layout-a6ace469" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="20px" left-margin="0px">
         <cl:rows length="20" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         <cl:rows length="80" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
         <cl:rows length="50" unit="PIXEL"/>

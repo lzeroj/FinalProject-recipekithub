@@ -222,7 +222,7 @@
 			container.addChild(userDefinedControl_1, {
 				"autoSize": "none",
 				"width": "1920px",
-				"height": "200px"
+				"height": "205px"
 			});
 			
 			var group_1 = new cpr.controls.Container();
@@ -250,6 +250,9 @@
 						"font-family" : "'푸른 전남' , 'Malgun Gothic' , sans-serif",
 						"border-top-style" : "none"
 					});
+					navigationBar_1.style.bar.css({
+						"font-family" : "푸른전남 Medium"
+					});
 					navigationBar_1.bind("value").toDataMap(app.lookup("dmCategory"), "type");
 					(function(navigationBar_1){
 						navigationBar_1.addItem(new cpr.controls.MenuItem("전체", "전체", null));
@@ -276,7 +279,7 @@
 						"border-right-style" : "none",
 						"border-left-style" : "none",
 						"border-bottom-style" : "none",
-						"font-family" : "'푸른 전남' , 'Malgun Gothic' , sans-serif",
+						"font-family" : "푸른전남 Medium",
 						"border-top-style" : "none"
 					});
 					navigationBar_2.bind("value").toDataMap(app.lookup("dmCategory"), "ingredients");
@@ -304,7 +307,7 @@
 						"border-right-style" : "none",
 						"border-left-style" : "none",
 						"border-bottom-style" : "none",
-						"font-family" : "'푸른 전남' , 'Malgun Gothic' , sans-serif",
+						"font-family" : "푸른전남 Medium",
 						"border-top-style" : "none"
 					});
 					navigationBar_3.bind("value").toDataMap(app.lookup("dmCategory"), "method");
@@ -340,6 +343,7 @@
 						output_1.style.css({
 							"color" : "#90be70",
 							"font-weight" : "bold",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_1, {
@@ -353,6 +357,7 @@
 						output_2.style.css({
 							"color" : "#90be70",
 							"font-weight" : "bold",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_2, {
@@ -366,6 +371,7 @@
 						output_3.style.css({
 							"color" : "#90be70",
 							"font-weight" : "bold",
+							"font-family" : "푸른전남 Medium",
 							"text-align" : "center"
 						});
 						container.addChild(output_3, {
@@ -396,7 +402,8 @@
 					var output_4 = new cpr.controls.Output();
 					output_4.value = "총";
 					output_4.style.css({
-						"font-weight" : "bold"
+						"font-weight" : "bold",
+						"font-family" : "푸른전남 Medium"
 					});
 					container.addChild(output_4, {
 						"top": "50px",
@@ -408,7 +415,8 @@
 					output_5.value = "";
 					output_5.style.css({
 						"color" : "#0CA44E",
-						"font-size" : "30px"
+						"font-size" : "30px",
+						"font-family" : "푸른전남 Medium"
 					});
 					container.addChild(output_5, {
 						"top": "32px",
@@ -419,7 +427,8 @@
 					var output_6 = new cpr.controls.Output();
 					output_6.value = "개의 맛있는 레시피가 있습니다.";
 					output_6.style.css({
-						"font-weight" : "bold"
+						"font-weight" : "bold",
+						"font-family" : "푸른전남 Medium"
 					});
 					container.addChild(output_6, {
 						"top": "50px",
@@ -432,6 +441,7 @@
 						"border-right-style" : "none",
 						"border-left-style" : "none",
 						"border-bottom-style" : "none",
+						"font-family" : "푸른전남 Medium",
 						"border-top-style" : "none"
 					});
 					navigationBar_4.bind("value").toDataMap(app.lookup("dmSort"), "sort");

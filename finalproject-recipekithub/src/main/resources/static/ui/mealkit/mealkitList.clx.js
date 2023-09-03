@@ -300,7 +300,7 @@
 				var userDefinedControl_1 = new udc.myPageHeader();
 				container.addChild(userDefinedControl_1, {
 					"width": "1920px",
-					"height": "200px"
+					"height": "205px"
 				});
 				var group_2 = new cpr.controls.Container();
 				var xYLayout_1 = new cpr.controls.layouts.XYLayout();
@@ -311,7 +311,8 @@
 					navigationBar_1.menuType = "fullmenu";
 					navigationBar_1.style.css({
 						"padding-top" : "0px",
-						"font-weight" : "16.0",
+						"font-weight" : "bolder",
+						"font-size" : "16px",
 						"font-family" : "푸른전남 Medium",
 						"padding-right" : "0px"
 					});
@@ -394,6 +395,7 @@
 						});
 						var navigationBar_2 = new cpr.controls.NavigationBar("sort");
 						navigationBar_2.style.css({
+							"font-weight" : "bolder",
 							"font-family" : "푸른전남 Medium"
 						});
 						navigationBar_2.bind("value").toDataMap(app.lookup("meSort"), "sort");
@@ -439,7 +441,7 @@
 					var xYLayout_4 = new cpr.controls.layouts.XYLayout();
 					group_5.setLayout(xYLayout_4);
 					container.addChild(group_5, {
-						"top": "274px",
+						"top": "257px",
 						"width": "974px",
 						"height": "15px",
 						"left": "calc(50% - 487px)"

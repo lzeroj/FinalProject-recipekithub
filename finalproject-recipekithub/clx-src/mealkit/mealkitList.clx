@@ -44,11 +44,11 @@
     <cl:group std:sid="group-3f997db2" style="background-color:#f4faec; background-size:cover; background-image:url('../theme/images/common/bgimg3_1920.png'); background-position:center;">
       <cl:verticaldata std:sid="v-data-a527450e" width="1920px" height="984px"/>
       <cl:udc std:sid="ud-control-042752ca" type="udc.myPageHeader">
-        <cl:verticaldata std:sid="v-data-d264594f" width="1920px" height="200px"/>
+        <cl:verticaldata std:sid="v-data-d264594f" width="1920px" height="205px"/>
       </cl:udc>
       <cl:group std:sid="group-f7dd2b85">
         <cl:verticaldata std:sid="v-data-ddb86633" width="1114px" height="345px"/>
-        <cl:navigationbar std:sid="n-bar-2cf3bfa1" id="mealkitType" style="padding-top:0px; font-weight:16.0; font-family:푸른전남 Medium; padding-right:0px;" menutype="fullmenu">
+        <cl:navigationbar std:sid="n-bar-2cf3bfa1" id="mealkitType" style="padding-top:0px; font-weight:bolder; font-size:16px; font-family:푸른전남 Medium; padding-right:0px;" menutype="fullmenu">
           <cl:listener std:sid="listener-49c7e2a9" name="selection-change" handler="onSortSelectionChange"/>
           <cl:datamapbind property="value" datacontrolid="meCategory" columnname="mealkitType"/>
           <cl:xylayoutdata std:sid="xyl-data-15947996" top="67px" right="10px" left="10px" height="75px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
@@ -73,7 +73,7 @@
           <cl:output std:sid="output-b46e1f83" id="mealkitCnt" style="color:#0CA44E; font-weight:bold; font-size:18px; font-family:푸른전남 Medium; text-align:center;" value="">
             <cl:xylayoutdata std:sid="xyl-data-de5ed657" top="20px" left="62px" width="49px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
           </cl:output>
-          <cl:navigationbar std:sid="n-bar-ddc0642f" id="sort" style="font-family:푸른전남 Medium;">
+          <cl:navigationbar std:sid="n-bar-ddc0642f" id="sort" style="font-weight:bolder; font-family:푸른전남 Medium;">
             <cl:listener std:sid="listener-6d572d33" name="selection-change" handler="onCategorySelectionChange"/>
             <cl:datamapbind property="value" datacontrolid="meSort" columnname="sort"/>
             <cl:xylayoutdata std:sid="xyl-data-a2669396" top="20px" left="775px" width="202px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
@@ -88,7 +88,7 @@
           <cl:xylayout std:sid="xylayout-6664e312"/>
         </cl:group>
         <cl:group std:sid="group-f63e3ec2" style="background-color:#f9f9f9; background-image:none;">
-          <cl:xylayoutdata std:sid="xyl-data-72364993" top="274px" width="974px" height="15px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+          <cl:xylayoutdata std:sid="xyl-data-72364993" top="257px" width="974px" height="15px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
           <cl:xylayout std:sid="xylayout-27b0cb22"/>
         </cl:group>
         <cl:button std:sid="button-068ac482" id="insertBtn" style="background-color:#0ca44e; color:white; font-weight:16; font-family:푸른전남 Medium; background-image:none;" class=".cl-button mealkitbtn" visible="false" value="밀키트 등록">

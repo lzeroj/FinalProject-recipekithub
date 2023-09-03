@@ -80,20 +80,20 @@
   <body std:sid="body-6931a0a1" style="background-color:#F4FAEC; font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-aad71981" name="load" handler="onBodyLoad"/>
     <cl:udc std:sid="ud-control-2ab9e418" type="udc.header3">
-      <cl:verticaldata std:sid="v-data-f1832feb" width="1920px" height="200px" syncminwidth="true" autosize="none"/>
+      <cl:verticaldata std:sid="v-data-f1832feb" width="1920px" height="205px" syncminwidth="true" autosize="none"/>
     </cl:udc>
     <cl:group std:sid="group-331f46c0" style="background-color:#FFFFFF;">
       <cl:verticaldata std:sid="v-data-699de27c" width="1200px" height="396px"/>
       <cl:img std:sid="image-a93fe2b5" id="recipeBoardImage">
         <cl:xylayoutdata std:sid="xyl-data-f2fbe13b" top="42px" width="642px" height="251px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:img>
-      <cl:output std:sid="output-4175a2ee" id="memberNick" style="color:#0CA44E; font-weight:lighter; font-size:18px; text-align:center;" value="닉네임">
+      <cl:output std:sid="output-4175a2ee" id="memberNick" style="color:#0CA44E; font-weight:lighter; font-size:18px; font-family:푸른전남 Medium; text-align:center;" value="닉네임">
         <cl:xylayoutdata std:sid="xyl-data-f7c51adc" top="343px" width="128px" height="34px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:output std:sid="output-10e92904" id="recipeBoardTitle" style="font-weight:bold; font-size:20px; text-align:center;" value="타이틀">
+      <cl:output std:sid="output-10e92904" id="recipeBoardTitle" style="font-weight:bold; font-size:20px; font-family:푸른전남 Medium; text-align:center;" value="타이틀">
         <cl:xylayoutdata std:sid="xyl-data-75d8834d" top="317px" left="95px" width="384px" height="58px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:output std:sid="output-2592074b" id="opt1" style="font-size:20px;" value="좋아요 갯수">
+      <cl:output std:sid="output-2592074b" id="opt1" style="font-size:20px; font-family:푸른전남 Medium;" value="좋아요 갯수">
         <cl:xylayoutdata std:sid="xyl-data-607cfe7e" top="335px" left="1039px" width="82px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
       <cl:img std:sid="image-98b0d895" id="likeimg" style="cursor:pointer; background-image:none;">
@@ -104,7 +104,7 @@
         <cl:listener std:sid="listener-fff7ab39" name="click" handler="onImageClick"/>
         <cl:xylayoutdata std:sid="xyl-data-0eac82ec" top="325px" left="939px" width="40px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:img>
-      <cl:img std:sid="image-6d843c03" id="memberProfile" style="border-radius:100px;" fallbacksrc="../theme/images/icon/chefimg.png">
+      <cl:img std:sid="image-6d843c03" id="memberProfile" style="border-radius:100px; font-family:푸른전남 Medium;" fallbacksrc="../theme/images/icon/chefimg.png">
         <cl:xylayoutdata std:sid="xyl-data-2f8fcd36" top="267px" width="146px" height="77px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
       </cl:img>
       <cl:group std:sid="group-3511dc92" style="background-color:#FFFFFF;">
@@ -134,17 +134,17 @@
     </cl:htmlsnippet>
     <cl:group std:sid="group-a32172ec" style="background-color:#FFFFFF;">
       <cl:verticaldata std:sid="v-data-b7452cd6" width="1200px" height="125px"/>
-      <cl:output std:sid="output-e8c32823" style="font-size:25px;" value="댓글">
+      <cl:output std:sid="output-e8c32823" style="font-size:25px; font-family:푸른전남 Medium;" value="댓글">
         <cl:xylayoutdata std:sid="xyl-data-dda329cb" top="11px" left="4px" width="58px" height="36px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:output std:sid="output-cc11ff80" id="commentCount" style="color:#15820C; font-size:25px;" value="댓글개수">
+      <cl:output std:sid="output-cc11ff80" id="commentCount" style="color:#15820C; font-size:25px; font-family:푸른전남 Medium;" value="댓글개수">
         <cl:xylayoutdata std:sid="xyl-data-1fc0e257" top="11px" left="61px" width="129px" height="36px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:output>
-      <cl:button std:sid="button-037313b9" id="commentBtn" style="background-color:#0CA44E; color:white; background-image:none;" value="등록">
+      <cl:button std:sid="button-037313b9" id="commentBtn" style="background-color:#0CA44E; color:white; font-family:푸른전남 Medium; background-image:none;" value="등록">
         <cl:listener std:sid="listener-1dcc942f" name="click" handler="onButtonClick2"/>
         <cl:xylayoutdata std:sid="xyl-data-3792c2b3" top="46px" left="1094px" width="100px" height="77px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:button>
-      <cl:textarea std:sid="t-area-b0a35dda" id="commentInput" placeholder="50자 내로 작성해 주세요" maxlength="50">
+      <cl:textarea std:sid="t-area-b0a35dda" id="commentInput" style="font-family:푸른전남;" placeholder="50자 내로 작성해 주세요" maxlength="50">
         <cl:datamapbind property="value" datacontrolid="dmInsertValue" columnname="recipeCommentContent"/>
         <cl:xylayoutdata std:sid="xyl-data-860d4f6f" top="46px" left="4px" width="1080px" height="77px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
       </cl:textarea>
