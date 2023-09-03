@@ -103,7 +103,7 @@
   <body std:sid="body-4920d61b" style="background-color:#F4FAEC; font-family:푸른전남 Medium;">
     <cl:listener std:sid="listener-4de5ada1" name="load" handler="onBodyLoad"/>
     <cl:group std:sid="group-1cda49b1" style="background-size:cover; background-image:url(../theme/images/common/bgimgfinal.png); background-position:center;">
-      <cl:verticaldata std:sid="v-data-695100a0" width="1920px" height="720px"/>
+      <cl:verticaldata std:sid="v-data-695100a0" width="1920px" height="1620px"/>
       <cl:udc std:sid="ud-control-ff679508" type="udc.myPageHeader">
         <cl:verticaldata std:sid="v-data-78d9bc79" width="1920px" height="200px"/>
       </cl:udc>
@@ -342,7 +342,7 @@
         <cl:xylayout std:sid="xylayout-47c32e3b"/>
       </cl:group>
       <cl:group std:sid="group-b075a8c4" id="commentgrp">
-        <cl:verticaldata std:sid="v-data-8fa7f0ed" width="998px" height="324px" autosize="height"/>
+        <cl:verticaldata std:sid="v-data-8fa7f0ed" width="998px" height="230px" syncminheight="true" autosize="none"/>
         <cl:verticallayout std:sid="v-layout-03904eea" scrollable="false"/>
       </cl:group>
       <cl:pageindexer std:sid="p-indexer-0a8df5c6" id="page" pagerowcount="10">
@@ -352,8 +352,8 @@
       </cl:pageindexer>
       <cl:verticallayout std:sid="v-layout-8c0b712f" distribution="center"/>
     </cl:group>
-    <cl:udc std:sid="ud-control-fc6b8f46" type="udc.footer">
-      <cl:verticaldata std:sid="v-data-a77b6eed" width="1920px" height="100px"/>
+    <cl:udc std:sid="ud-control-a35dee66" type="udc.footer">
+      <cl:verticaldata std:sid="v-data-6f352567" width="1920px" height="100px"/>
     </cl:udc>
     <cl:verticallayout std:sid="v-layout-dd510d24" distribution="center"/>
   </body>

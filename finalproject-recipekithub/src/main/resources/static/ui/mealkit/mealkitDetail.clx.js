@@ -1455,9 +1455,9 @@
 				verticalLayout_3.scrollable = false;
 				group_16.setLayout(verticalLayout_3);
 				container.addChild(group_16, {
-					"autoSize": "height",
+					"autoSize": "none",
 					"width": "998px",
-					"height": "324px"
+					"height": "230px"
 				});
 				var pageIndexer_1 = new cpr.controls.PageIndexer("page");
 				pageIndexer_1.pageRowCount = 10;
@@ -1473,7 +1473,7 @@
 			})(group_1);
 			container.addChild(group_1, {
 				"width": "1920px",
-				"height": "720px"
+				"height": "1620px"
 			});
 			
 			var userDefinedControl_2 = new udc.footer();
